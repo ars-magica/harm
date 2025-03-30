@@ -17,14 +17,22 @@ experimenting with different approaches.
     1. [[CLI with Swish]]
 2. [[CLI using JSON]]
 
-+ github repoes and branches
-	+ https://github.com/lokegamer/armchar-swish
++ [ars-magica at github](https://github.com/ars-magica) is the organisation owning the relevant repoes.
+	+ https://github.com/ars-magica/harm
 		+ main - stable
 		+ develop - development
-		+ swish - branched before the old client/server and swish code was purged
+	+ https://github.com/ars-magica/hibernia
+		+ showcase saga
+	+ https://github.com/ars-magica/ars-magica.github.io
+		+ top-level github pages site
++ Older versions are hosted by hgeorgsch at githun
 	+ git@github.com:hgeorgsch/armchar-swish.git
 		+ old repo, focusing on the client/server architecture
 		+ Note that these two repoes share a root
+	+ git@github.com:hgeorgsch/armchar.git
+		+ java server
+	+ git@github.com:hgeorgsch/armchar-client.git
+		+ client for the java server
 
 ## Ars Magica  Notes
 
