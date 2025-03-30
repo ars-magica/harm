@@ -40,8 +40,6 @@ aliases:
 	+ [ ] Validate missing seasons
 	+ [ ] Image for characters
 		+ [ ] Generate image Eogan
-		+ [ ] Image for Cieran
-		+ [ ] Image file in Character obnject
 	+ [ ] Step 3. Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
 		+ [ ] Handle multiple instances of the same virtue/flaw

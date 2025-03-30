@@ -198,7 +198,7 @@ instance Markdown Character where
 
 instance Markdown CharacterConcept where
    printMD c = OList
-               [ OString ("# " ++ fullConceptName c )
+               [ OString ("# " ++ nm )
                , OString ""
                , img
                , OString $ show (charType c)
@@ -223,7 +223,8 @@ instance Markdown CharacterConcept where
                     | otherwise = ": " ++ (show $ fromJust $ born c)
                 img | isNothing (portrait c) = OList []
                     | otherwise = OList [ OString imgfn, OString "" ]
-                imgfn = ("![[/images/" ++ fromJust (portrait c) ++ "]]")
+                imgfn = ("![" ++ nm ++ "](/images/" ++ fromJust (portrait c) ++ ")")
+                nm = fullConceptName c
 
 
 
