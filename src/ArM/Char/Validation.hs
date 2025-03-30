@@ -22,6 +22,7 @@ module ArM.Char.Validation (validate,validateXP) where
 import ArM.Char.Types.Advancement
 import ArM.Char.Trait
 import ArM.GameRules
+import ArM.Helper
 
 import Data.Maybe (fromMaybe,isJust)
 
