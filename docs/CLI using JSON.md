@@ -25,16 +25,12 @@ aliases:
 ## Roadmap
 + [ ] Phase 1. Review and bugfix
 	+ [ ] Review
+		+ [ ] Fix Cieran's vis
 		+ [ ] Print and Double-Check Cieran
 		+ [ ] Print and Double-Check Eogan
-	+ [ ] Finishing touches
-		+ [ ] Vis accounting
-		+ [ ] Speciality in combat totals
+	+ [ ] Speciality in combat totals
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Change character names in test JSON files
-	+ [ ] JSON syntax check
-		+ [x] Run json syntax check on github workflow
-		+ [ ] Link error log on front page
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
