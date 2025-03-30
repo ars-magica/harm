@@ -4,9 +4,8 @@ tags:
 aliases:
   - "#armchar/json/cli"
 ---
-+ Main file: `ArmChar.hs`
-+ Dedicated Libraries: `ArM/Char`
-+ Also reuses some libraries from the swish model
++ Main file: `harm.hs`
++ Libraries: `ArM`
 + Design notes
 	+ [[Character Generation Process]]
 	+ [[JSON Char Gen Process.canvas|JSON Char Gen Process]] (canvas)
@@ -33,7 +32,7 @@ aliases:
 		+ [ ] Speciality in combat totals
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Change character names in test JSON files
-	+ [ ] Clone armchar repo into organisation and rename to ... harm?
+	+ [x] Clone armchar repo into organisation and rename to ... harm?
 	+ [ ] Run json syntax check on github workflow
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list

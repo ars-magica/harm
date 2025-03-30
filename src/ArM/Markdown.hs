@@ -200,6 +200,7 @@ instance Markdown CharacterConcept where
    printMD c = OList
                [ OString ("# " ++ fullConceptName c )
                , OString ""
+               , img
                , OString $ show (charType c)
                , OString $ ": " ++ ( fromMaybe "-" $ briefConcept c )
                , OString ""
@@ -220,6 +221,9 @@ instance Markdown CharacterConcept where
                ]
           where brn | born c == Nothing = ": ??" 
                     | otherwise = ": " ++ (show $ fromJust $ born c)
+                img | isNothing (portrait c) = OList []
+                    | otherwise = OList [ OString imgfn, OString "" ]
+                imgfn = ("![[/images/" ++ fromJust (portrait c) ++ "]]")
 
 
 

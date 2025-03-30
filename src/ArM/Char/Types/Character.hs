@@ -144,9 +144,10 @@ data CharacterConcept = CharacterConcept
          , briefConcept :: Maybe String
          , quirk :: Maybe String
          , appearance :: Maybe String
-         , born :: Maybe Int
-         , player :: Maybe String
-         , house :: Maybe String
+         , born :: Maybe Int             -- ^ Year of Birth
+         , player :: Maybe String        -- ^ player responsible for the character
+         , house :: Maybe String         -- ^ Hermetic House or similar affiliation
+         , portrait :: Maybe String      -- ^ image file name (portrait)
          , charGlance :: KeyPairList
          , charData :: KeyPairList
        }  deriving (Eq,Generic)
@@ -179,6 +180,7 @@ instance FromJSON CharacterConcept where
         <*> v .:? "born"
         <*> v .:? "player"
         <*> v .:? "house"
+        <*> v .:? "portrait"
         <*> v .: "charGlance"
         <*> v .: "charData"
 
