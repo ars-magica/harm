@@ -575,6 +575,8 @@ instance Markdown Saga where
         [ OList [ OString $ "# " ++ sagaTitle saga
                 , OString "" ]
         , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- sagaStates saga ]
+        , OString "" 
+        , OString "+ [JSON Syntax Errors](pages/syntaxcheck.txt) in the character files"
         ]
 
 instance Markdown SagaState where

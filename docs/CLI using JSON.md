@@ -32,8 +32,9 @@ aliases:
 		+ [ ] Speciality in combat totals
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Change character names in test JSON files
-	+ [x] Clone armchar repo into organisation and rename to ... harm?
-	+ [ ] Run json syntax check on github workflow
+	+ [ ] JSON syntax check
+		+ [x] Run json syntax check on github workflow
+		+ [ ] Link error log on front page
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
