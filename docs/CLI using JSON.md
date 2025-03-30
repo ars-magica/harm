@@ -46,7 +46,7 @@ aliases:
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
-	+ [ ] Covenant data model - analogous to Character
+	+ [ ] Make Covenant Page (Markdown)
 	+ [ ] Step 1. Covenant
 		+ [ ] Book resource
 		+ [ ] Library
