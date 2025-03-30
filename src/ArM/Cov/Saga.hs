@@ -18,6 +18,7 @@ module ArM.Cov.Saga ( Saga(..)
                     , advanceSaga
                     , sagaStateName
                     , characterIndex
+                    , covenantIndex
                     , advancementErrors
                     , advancementErrorsLimit
                     ) where
@@ -203,6 +204,14 @@ characterIndexLine c = OString $ "+ " ++ pagesLink (characterStateName c)
 -- | Write a bullet list of links for a list of characters
 characterIndex :: [Character] -> OList
 characterIndex = OList . map characterIndexLine 
+
+-- | Write a single item for `covenantIndex`
+covenantIndexLine :: Covenant -> OList
+covenantIndexLine c = OString $ "+ " ++ pagesLink (covenantStateName c) 
+
+-- | Write a bullet list of links for a list of characters
+covenantIndex :: [Covenant] -> OList
+covenantIndex = OList . map covenantIndexLine 
 
 -- |
 -- = Advancement

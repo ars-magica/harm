@@ -25,7 +25,7 @@ import ArM.Char.Character
 -- import ArM.Types.Character
 -- import ArM.Types.Advancement
 -- import ArM.Types.KeyPair
-import ArM.Helper
+-- import ArM.Helper
 
 -- import ArM.Debug.Trace
 
@@ -37,7 +37,7 @@ import ArM.Helper
 -- lists of advancement which define the evolution of states
 data Covenant = Covenant 
          { covenantConcept :: CovenantConcept
-         , covenantState :: CovenantState
+         , covenantState :: Maybe CovenantState
          , pastCovAdvancement :: [ CovAdvancement ]
          , futureCovAdvancement :: [ CovAdvancement ]
        }  deriving (Eq,Generic,Show)
@@ -63,13 +63,17 @@ covenantName :: Covenant -> String
 covenantName = covName . covenantConcept
 
 -- | Get a string identifying the covenant and state, i.e. name and season
-covenantSeason :: Covenant -> String
-covenantSeason = show . covTime . covenantState
+covenantSeason :: Covenant -> SeasonTime
+covenantSeason c | isNothing st = NoTime
+                 | otherwise = covTime $ fromJust st
+           where st = covenantState c
 
+{-
 -- | Get the markdown for a link to the covenant
 covenantLink :: Covenant -> String
 covenantLink cov = wikiLink txt 
-   where txt = covenantName cov ++ " " ++ covenantSeason cov
+   where txt = covenantName cov ++ " " ++ show (covenantSeason cov)
+-}
 
 -- |
 -- = CovenantConcept Object
@@ -170,3 +174,10 @@ instance Advance Covenant where
    advance _ = id
    step = id
    nextSeason _ = NoTime
+
+-- | Character name with state identifier (current season)
+covenantStateName :: Covenant -> String
+covenantStateName c = nm ++ " - " ++ t
+   where t | isNothing $ covenantState c = "raw"
+           | otherwise = show ( covTime $ fromJust $ covenantState c )
+         nm  = covName $ covenantConcept c

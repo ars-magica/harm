@@ -586,6 +586,8 @@ instance Markdown SagaState where
         , OString ""
         , characterIndex $ characters saga
         , OString ""
+        , covenantIndex $ covenants saga
+        , OString ""
         , OString "## Advancement Errors"
         , OString ""
         , indentOList $ foldOList $  advancementErrors saga
