@@ -46,9 +46,9 @@ validateXP a | sq > xpsum = a { validation = und:validation a }
              | otherwise = a { validation = val:validation a }
     where xpsum = calculateXP $ advancement a
           sq = fromMaybe 0 $ effectiveSQ a
-          val = Validated $ "Correctly spent " ++ show sq ++ " xp."
-          over = ValidationError $ "Overspent " ++ show xpsum ++ "xp of " ++ show sq ++ "."
-          und = ValidationError $ "Underspent " ++ show xpsum ++ "xp of " ++ show sq ++ "."
+          val = Validated $ "Correctly spent " ++ showNum sq ++ " xp."
+          over = ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
+          und = ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
 
 -- | Count regular XP (excluding reputation) from an Advancement
 calculateXP :: Advancement -> XPType

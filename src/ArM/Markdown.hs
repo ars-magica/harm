@@ -201,6 +201,7 @@ instance Markdown CharacterConcept where
    printMDaug saga = conceptPrintMD dir
       where dir = fromMaybe "../images/" (baseURL saga)
 
+conceptPrintMD :: String -> CharacterConcept -> OList
 conceptPrintMD dir c = OList
                [ OString ("# " ++ nm )
                , OString ""

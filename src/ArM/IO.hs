@@ -67,6 +67,7 @@ loadSaga saga = do
               , characters = filterNothing cs  
               , seasonTime = GameStart
               }:[]
+           , baseURL = Nothing
            , sagaTitle = title saga
            , spells = fromJust db 
            , weapons = fromJust wdb
