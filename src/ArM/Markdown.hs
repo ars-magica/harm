@@ -18,8 +18,8 @@ module ArM.Markdown ( Markdown(..)
                     , LongSheet(..)
                     , gameStartSheet
                     , currentSheet
-		    , artMD
-		    , artVisMD
+                    , artMD
+                    , artVisMD
                     ) where
 
 import Data.Maybe 
