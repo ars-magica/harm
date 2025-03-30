@@ -46,6 +46,7 @@ data Saga = Saga
          { sagaTitle :: String
          , sagaStates :: [ SagaState ]
          , rootDir :: String
+         , baseURL :: Maybe String
          , spells :: SpellDB
          , weapons :: WeaponDB
          , armour :: ArmourDB

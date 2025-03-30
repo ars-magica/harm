@@ -197,7 +197,11 @@ instance Markdown Character where
 
 
 instance Markdown CharacterConcept where
-   printMD c = OList
+   printMD = conceptPrintMD "../images/"
+   printMDaug saga = conceptPrintMD dir
+      where dir = fromMaybe "../images/" (baseURL saga)
+
+conceptPrintMD dir c = OList
                [ OString ("# " ++ nm )
                , OString ""
                , img
@@ -223,9 +227,8 @@ instance Markdown CharacterConcept where
                     | otherwise = ": " ++ (show $ fromJust $ born c)
                 img | isNothing (portrait c) = OList []
                     | otherwise = OList [ OString imgfn, OString "" ]
-                imgfn = ("![" ++ nm ++ "](/images/" ++ fromJust (portrait c) ++ ")")
+                imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
                 nm = fullConceptName c
-
 
 
 instance Markdown CharacterSheet where
