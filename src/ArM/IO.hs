@@ -20,7 +20,7 @@ module ArM.IO where
 
 -- import qualified System.IO as IO -- for file IO
 import Data.Maybe 
-import Data.Aeson (decode)
+import Data.Aeson 
 -- import qualified Data.CSV as CSV
 import qualified Data.ByteString.Lazy as LB
 
@@ -30,12 +30,13 @@ import System.Directory
 import ArM.Char.Character
 import ArM.Markdown
 import ArM.Cov.Saga
+import ArM.Cov.Covenant
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.BasicIO
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- = Read Saga Files
@@ -57,13 +58,14 @@ loadSaga saga = do
    db <- readDB $ spellFile saga
    wdb <- readDB $ weaponFile saga
    adb <- readDB $ armourFile saga
-   cs <- mapM readCharacter $ characterFiles saga
+   cs <- mapM readArM $ characterFiles saga
+   cov <- mapM readArM $ covenantFiles saga
    return
      $ advanceSaga saga
      $ Saga { rootDir = fromMaybe "/tmp/" $ rootDirectory saga
            , sagaStates = SagaState
               { stateTitle = title saga
-              , covenants = []  
+              , covenants =  filterNothing cov  
               , characters = filterNothing cs  
               , seasonTime = GameStart
               }:[]
@@ -94,16 +96,21 @@ writeSaga saga = do
    return () 
 
 -- |
--- == Read Character Data
+-- == Read Character and Covenant Data
 
--- | Read a character from JSON.  Return Maybe Character
-readCharacter :: String -- ^ Filename
-              -> IO (Maybe Character)
-readCharacter fn = LB.readFile fn 
-            >>= return . prepMaybe . decode
-   where prepMaybe Nothing = Nothing
-         prepMaybe (Just x) = Just $ prepareCharacter x
+class FromJSON c => ArMRead c where
+   -- | Read a character from JSON.  Return Maybe Character
+   readArM :: String -- ^ Filename
+              -> IO (Maybe c)
+   readArM fn = LB.readFile fn >>= return . prepMaybe . decode
+      where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
+            prepMaybe (Just x) = Just $ prepare x
+   prepare :: c -> c
 
+instance ArMRead Character where
+   prepare = prepareCharacter
+instance ArMRead Covenant where
+   prepare = id
 
 -- |
 -- = Write Character Sheets

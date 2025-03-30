@@ -155,7 +155,7 @@ instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement
 
 data Book = Book
-         { title :: String
+         { bookTitle :: String
          , topic :: TraitKey
          , quality :: Int
          , bookLevel :: Maybe Int
