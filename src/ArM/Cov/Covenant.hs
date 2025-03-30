@@ -42,7 +42,12 @@ data Covenant = Covenant
          , futureCovAdvancement :: [ CovAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance ToJSON Covenant 
-instance FromJSON Covenant 
+instance FromJSON Covenant where
+    parseJSON = withObject "Covenant" $ \v -> Covenant
+        <$> v .: "concept"
+        <*> v .:? "state"
+        <*> v .:? "history" .!= []
+        <*> v .:? "plan" .!= []
 
 -- | ID of a Covenant.
 -- This is currently implemented as the name.
