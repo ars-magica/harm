@@ -79,6 +79,7 @@ data CovenantConcept = CovenantConcept
          , covConcept :: Maybe String
          , covFounded :: Maybe Int
          , covAppearance :: Maybe String
+         , covTribunal :: Maybe String
          , covData :: KeyPairList
        }  deriving (Eq,Generic)
 
@@ -88,13 +89,21 @@ defaultCovConcept = CovenantConcept { covName = "Player Covenant"
                                   , covConcept = Nothing
                                   , covFounded = Nothing
                                   , covAppearance = Nothing
+                                  , covTribunal = Nothing
                                   , covData = KeyPairList []
        }  
 
 instance ToJSON CovenantConcept where
     toEncoding = genericToEncoding defaultOptions
 
-instance FromJSON CovenantConcept 
+instance FromJSON CovenantConcept where
+    parseJSON = withObject "CovenantConcept" $ \v -> CovenantConcept
+        <$> v .: "name"
+        <*> v .:? "concept"
+        <*> v .:? "founded"
+        <*> v .:? "appearance"
+        <*> v .:? "tribunal"
+        <*> v .:? "data" .!= KeyPairList []
 
 instance Show CovenantConcept where
    show c = covName c ++ " covenant (est. " ++ sf (covFounded c) ++ ") "
