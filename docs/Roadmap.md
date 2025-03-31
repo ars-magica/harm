@@ -38,6 +38,8 @@ tags:
 		+ [ ] Covenant advancement
 		+ [ ] Covenant members
 + [ ] Phase 4. Polish
+	+ [ ] Refactor 
+		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code
 	+ [ ] Comment field on traits
 	+ [ ]  P/G Char Gen
