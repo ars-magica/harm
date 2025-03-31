@@ -46,7 +46,8 @@ import Data.Text.Lazy                            ( fromStrict, unpack )
 -- ```
 -- (*>) = (>=)
 -- ```
-(*>) = (>)
+(>*) :: Ord a => a -> a -> Bool
+(>*) = (>)
 
 -- | Season of the year.
 -- ```
