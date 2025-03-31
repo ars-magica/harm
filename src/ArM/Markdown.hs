@@ -201,6 +201,7 @@ instance Markdown CharacterConcept where
    printMDaug saga = conceptPrintMD dir
       where dir = fromMaybe "../images/" (baseURL saga)
 
+conceptPrintMD :: String -> CharacterConcept -> OList
 conceptPrintMD dir c = OList
                [ OString ("# " ++ nm )
                , OString ""
@@ -576,7 +577,7 @@ instance Markdown Saga where
                 , OString "" ]
         , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- sagaStates saga ]
         , OString "" 
-        , OString "+ [JSON Syntax Errors](pages/syntaxcheck.txt) in the character files"
+        , OString "+ [JSON Syntax Errors](syntaxcheck.txt) in the character files"
         ]
 
 instance Markdown SagaState where

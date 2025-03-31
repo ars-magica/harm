@@ -162,6 +162,7 @@ defaultConcept = CharacterConcept { name = "John Doe"
                                   , born = Nothing
                                   , player = Nothing
                                   , house = Nothing
+                                  , portrait = Nothing
                                   , charGlance = KeyPairList []
                                   , charData = KeyPairList []
        }  
