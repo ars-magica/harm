@@ -12,18 +12,19 @@ tags:
 		+ [ ] Print and Double-Check Eogan
 	+ [ ] Speciality in combat totals
 	+ [ ] More spell descriptions in CSV file
-	+ [ ] Change character names in test JSON files
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
 	+ [ ] Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
+			+ [ ] Infer a characteristic trait with bonus
+			+ [ ] Use the bonus the next time the score is set
+			+ [ ] Check bonus application
+			+ [ ] Check multiplicity
 		+ [ ] Handle multiple instances of the same virtue/flaw
-	+ [ ] Decrepitude
-		+ [ ] advance tessa until 1255 with more aging
-		+ [ ] verify
-		+ [ ] Aging points on characteristics
+	+ [ ] Infer decrepitude from aging points
+	+ [ ] advance tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
