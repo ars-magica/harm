@@ -36,7 +36,7 @@ data Options = Options
 } deriving (Show)
 defaultOptions :: Options
 defaultOptions = Options 
-  { sagaFile = Just "Test/saga.ttl"
+  { sagaFile = Just "Data/hibernia.json"
   , charFile = Nothing
   , outFile  = Nothing
   , jsonFile  = Nothing
