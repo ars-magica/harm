@@ -392,7 +392,7 @@ class TraitType t where
 
 instance TraitType Characteristic where
     computeTrait p
-       | characteristic p == Nothing = Nothing
+       | isNothing (characteristic p) = Nothing 
        | otherwise = Just $
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
@@ -400,6 +400,22 @@ instance TraitType Characteristic where
     advanceTrait a =  agingChar apts . newCharScore newscore
        where newscore = score a
              apts = agingPts a
+
+-- | Add aging points to a characteristic and reduce it if necessary
+agingChar  :: Maybe Int -> Characteristic -> Characteristic
+agingChar  Nothing x = x
+agingChar  (Just pt) x 
+      | newpoints > sc = x { charScore = sc-1, agingPoints = newpoints - (asc-1) }
+      | otherwise = x { agingPoints = newpoints }
+    where newpoints = pt + agingPoints x
+          sc = charScore x
+          asc = abs sc
+
+-- | Change the score of a characteristic.
+-- This applies typically as a result of CrMe/CrCo rituals.
+newCharScore  :: Maybe Int -> Characteristic -> Characteristic
+newCharScore  Nothing x = x
+newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
     computeTrait p 
@@ -660,18 +676,3 @@ updateArtBonus :: Maybe Int -> Art -> Art
 updateArtBonus Nothing a = a 
 updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
--- | Add aging points to a characteristic and reduce it if necessary
-agingChar  :: Maybe Int -> Characteristic -> Characteristic
-agingChar  Nothing x = x
-agingChar  (Just pt) x 
-      | newpoints > sc = x { charScore = sc-1, agingPoints = newpoints - (asc-1) }
-      | otherwise = x { agingPoints = newpoints }
-    where newpoints = pt + agingPoints x
-          sc = charScore x
-          asc = abs sc
-
--- | Change the score of a characteristic.
--- This applies typically as a result of CrMe/CrCo rituals.
-newCharScore  :: Maybe Int -> Characteristic -> Characteristic
-newCharScore  Nothing x = x
-newCharScore  (Just s) x = x { charScore = s }
