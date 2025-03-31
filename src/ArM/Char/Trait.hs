@@ -86,6 +86,7 @@ data ProtoTrait = ProtoTrait
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
+    , protoTraitKey :: TraitKey
     , spec :: Maybe String        -- ^ specialisation of an ability
     , detail :: Maybe String      -- ^ detail (options) for a virtue or flaw
     , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
@@ -105,6 +106,7 @@ data ProtoTrait = ProtoTrait
     , points :: Maybe Int        -- ^ points for confidence/true faith/etc (additive)
     , xp :: Maybe XPType         -- ^ XP to be added to the trait
     , agingPts :: Maybe Int      -- ^ aging points for characteristicds (additive)
+    , charBonus :: Maybe (Int,Int) -- ^ bonuses from virtues to apply to a characteristic
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
@@ -128,6 +130,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , aging = Nothing
                              , possession = Nothing
                              , combat = Nothing
+                             , protoTraitKey = NoTrait
                              , spec = Nothing
                              , detail = Nothing
                              , appliesTo = Nothing
@@ -144,6 +147,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , points = Nothing
                              , xp = Nothing
                              , agingPts = Nothing
+                             , charBonus = Nothing
                              , multiplicity = Nothing
                              , comment = Nothing
                              }
@@ -165,6 +169,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "aging"
         <*> v .:?  "possession"
         <*> v .:?  "combat"
+        <*> return NoTrait
         <*> v .:?  "spec"
         <*> v .:?  "detail"
         <*> v .:?  "appliesTo"
@@ -181,6 +186,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "points"
         <*> v .:?  "xp"
         <*> v .:?  "agingPts"
+        <*> v .:?  "charBonus"  
         <*> v .:?  "multiplicity"
         <*> v .:?  "comment"
 
@@ -396,10 +402,15 @@ instance TraitType Characteristic where
        | otherwise = Just $
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
-                , agingPoints = fromMaybe 0 (agingPts p) }
-    advanceTrait a =  agingChar apts . newCharScore newscore
+                , agingPoints = fromMaybe 0 (agingPts p)
+                , charBonusList = cbl }
+       where cbl | isNothing (charBonus p) = []
+                 | otherwise = [ fromJust $ charBonus p ]
+    advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonus a) 
        where newscore = score a
              apts = agingPts a
+             ncb Nothing  x = x
+             ncb (Just b) x = x { charBonusList = b:charBonusList x }
 
 -- | Add aging points to a characteristic and reduce it if necessary
 agingChar  :: Maybe Int -> Characteristic -> Characteristic
@@ -415,7 +426,10 @@ agingChar  (Just pt) x
 -- This applies typically as a result of CrMe/CrCo rituals.
 newCharScore  :: Maybe Int -> Characteristic -> Characteristic
 newCharScore  Nothing x = x
-newCharScore  (Just s) x = x { charScore = s }
+newCharScore  (Just s) x = f cbl $ x { charScore = s, charBonusList = [] }
+      where cbl = sort $ charBonusList x
+            f [] z = z
+            f (y:ys) z = f ys $ z { charScore = min (fst y) (snd y + charScore z) }
 
 instance TraitType VF where
     computeTrait p 

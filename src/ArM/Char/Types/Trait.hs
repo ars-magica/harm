@@ -66,7 +66,8 @@ data Ability = Ability { abilityName :: String
            deriving (Ord, Eq, Generic)
 data Characteristic = Characteristic { characteristicName :: String
                                      , charScore :: Int
-                                     , agingPoints :: Int }
+                                     , agingPoints :: Int 
+                                     , charBonusList :: [(Int,Int)] }
            deriving (Eq, Generic)
 instance Ord Characteristic where
      compare x y = compare (traitKey x) (traitKey y)
