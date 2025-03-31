@@ -19,12 +19,13 @@ tags:
 	+ [ ] Validate missing seasons
 	+ [ ] Image for characters
 		+ [ ] Generate image Eogan
-	+ [ ] Step 3. Characteristics
+	+ [ ] Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
 		+ [ ] Handle multiple instances of the same virtue/flaw
-	+ [ ] Step 6. Decrepitude
-		+ [ ] make old grog test file
+	+ [ ] Decrepitude
+		+ [ ] advance tessa until 1255 with more aging
 		+ [ ] verify
+		+ [ ] Aging points on characteristics
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
