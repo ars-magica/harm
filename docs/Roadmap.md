@@ -17,12 +17,13 @@ tags:
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
-	+ [ ] Step 3. Characteristics
+	+ [ ] Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
 		+ [ ] Handle multiple instances of the same virtue/flaw
-	+ [ ] Step 6. Decrepitude
-		+ [ ] make old grog test file
+	+ [ ] Decrepitude
+		+ [ ] advance tessa until 1255 with more aging
 		+ [ ] verify
+		+ [ ] Aging points on characteristics
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
@@ -35,6 +36,8 @@ tags:
 		+ [ ] Covenant advancement
 		+ [ ] Covenant members
 + [ ] Phase 4. Polish
+	+ [ ] Refactor 
+		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code
 	+ [ ] Comment field on traits
 	+ [ ]  P/G Char Gen

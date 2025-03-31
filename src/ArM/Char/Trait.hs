@@ -392,7 +392,7 @@ class TraitType t where
 
 instance TraitType Characteristic where
     computeTrait p
-       | characteristic p == Nothing = Nothing
+       | isNothing (characteristic p) = Nothing 
        | otherwise = Just $
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
@@ -400,6 +400,22 @@ instance TraitType Characteristic where
     advanceTrait a =  agingChar apts . newCharScore newscore
        where newscore = score a
              apts = agingPts a
+
+-- | Add aging points to a characteristic and reduce it if necessary
+agingChar  :: Maybe Int -> Characteristic -> Characteristic
+agingChar  Nothing x = x
+agingChar  (Just pt) x 
+      | newpoints > asc = x { charScore = sc-1, agingPoints = 0 }
+      | otherwise = x { agingPoints = newpoints }
+    where newpoints = pt + agingPoints x
+          sc = charScore x
+          asc = abs sc
+
+-- | Change the score of a characteristic.
+-- This applies typically as a result of CrMe/CrCo rituals.
+newCharScore  :: Maybe Int -> Characteristic -> Characteristic
+newCharScore  Nothing x = x
+newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
     computeTrait p 
@@ -518,16 +534,26 @@ instance TraitType Confidence where
              updateCScore (Just y) x = x { cscore = y }
              updateCPoints Nothing x = x
              updateCPoints (Just y) x = x { cpoints = y + cpoints x }
+
 instance TraitType OtherTrait where
-    computeTrait p 
-       | other p /= Nothing = Just $ OtherTrait 
-                           { trait = fromJust ( other p )
-                           , otherScore = fromMaybe 0 (score p) 
-                           , otherExcess = fromMaybe 0 (points p) 
-                           }
-       | otherwise = Nothing
+    computeTrait p | isNothing (other p) = Nothing
+                   | otherwise = Just $ updateOther xpts df
+       where df = OtherTrait { trait = fromJust ( other p )
+                             , otherScore = fromMaybe 0 (score p) 
+                             , otherExcess = 0 }
+             xpts = fromMaybe 0 (points p) 
     advanceTrait a x = updateOther y x
       where y = otherExcess x + (fromMaybe 0 $ points a)
+
+-- | Auxiliary for `TraitType` instance  `OtherTrait`
+updateOther :: Int -> OtherTrait -> OtherTrait
+updateOther x ab
+    | x < tr = ab { otherExcess = x }
+    | otherwise = updateOther (x-tr) 
+                $ ab { otherScore = sc+1, otherExcess = 0 }
+    where sc = otherScore ab
+          tr = (sc+1)*5
+
 instance TraitType SpecialTrait where
     computeTrait p 
        | strait p /= Nothing = Just $ SpecialTrait 
@@ -641,13 +667,6 @@ updateSpellXP x ab | x < tr = ab { spellExcessXP = x }
 updateSpellMastery :: [String] -> Spell -> Spell
 updateSpellMastery ms t = t { masteryOptions = (masteryOptions t) ++ ms }
 
-updateOther :: Int -> OtherTrait -> OtherTrait
-updateOther x ab
-    | x < tr = ab { otherExcess = x }
-    | otherwise = updateOther (x-tr) 
-                $ ab { otherScore = sc+1, otherExcess = 0 }
-    where sc = otherScore ab
-          tr = (sc+1)*5
 
 updateBonus :: Maybe Int -> Ability -> Ability
 updateBonus Nothing a = a 
@@ -657,18 +676,3 @@ updateArtBonus :: Maybe Int -> Art -> Art
 updateArtBonus Nothing a = a 
 updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
--- | Add aging points to a characteristic and reduce it if necessary
-agingChar  :: Maybe Int -> Characteristic -> Characteristic
-agingChar  Nothing x = x
-agingChar  (Just pt) x 
-      | newpoints > sc = x { charScore = sc-1, agingPoints = newpoints - (asc-1) }
-      | otherwise = x { agingPoints = newpoints }
-    where newpoints = pt + agingPoints x
-          sc = charScore x
-          asc = abs sc
-
--- | Change the score of a characteristic.
--- This applies typically as a result of CrMe/CrCo rituals.
-newCharScore  :: Maybe Int -> Characteristic -> Characteristic
-newCharScore  Nothing x = x
-newCharScore  (Just s) x = x { charScore = s }

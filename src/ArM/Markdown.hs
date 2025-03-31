@@ -260,7 +260,7 @@ instance Markdown CharacterState where
        ]
 
 -- |
--- == Markdown for Age, Confidence, Warping, and Decreptitude
+-- == Markdown for Age, Confidence, Warping, and Decrepitude
 
 -- | Print age, confidence, warping, and decrepitude as bullet points
 briefTraits :: CharacterSheet -> OList

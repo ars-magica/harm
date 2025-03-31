@@ -31,13 +31,36 @@ import Data.Text.Lazy                            ( fromStrict, unpack )
 
 -- type CharTime = Maybe String
 
+-- |
+-- = Calendar
+--
+-- The software assumes the Hibernian calendar, with Winter being the first season of the year.
+-- Several things may have to change for the standard calendar with Winter as the last season
+-- of the year.  We have tried to collect these definitions here.
+
+-- |
+-- == Hibernian Calendar
+
+-- | This comparison is used to check if a character is past the age limit where
+-- aging rolls are required.
+-- ```
+-- (*>) = (>=)
+-- ```
+(>*) :: Ord a => a -> a -> Bool
+(>*) = (>)
+
 -- | Season of the year.
--- This is currently defined using the Hibernian calendar,
--- with Winter being the first season of the year.
--- This must be changed for the standard calendare.
+-- ```
 -- data Season = Spring | Summer | Autumn | Winter | NoSeason
+-- ```
 data Season = Winter | Spring | Summer | Autumn  | NoSeason
      deriving (Show,Ord,Eq,Read,Generic)
+
+
+-- |
+-- == Generic definitions 
+
+data SeasonTime = SeasonTime Season Int | GameStart | NoTime deriving (Eq,Generic)
 
 instance ToJSON SeasonTime where
    toJSON = toJSON . show
@@ -52,7 +75,6 @@ instance FromJSON SeasonTime where
     parseJSON (String t) = pure $ parseST (unpack (fromStrict t))
     parseJSON _ = mzero
 
-data SeasonTime = SeasonTime Season Int | GameStart | NoTime deriving (Eq,Generic)
 isWinter :: SeasonTime -> Bool
 isWinter (SeasonTime Winter _) = True
 isWinter _ = False
