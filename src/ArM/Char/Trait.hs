@@ -405,7 +405,7 @@ instance TraitType Characteristic where
 agingChar  :: Maybe Int -> Characteristic -> Characteristic
 agingChar  Nothing x = x
 agingChar  (Just pt) x 
-      | newpoints > sc = x { charScore = sc-1, agingPoints = newpoints - (asc-1) }
+      | newpoints > asc = x { charScore = sc-1, agingPoints = 0 }
       | otherwise = x { agingPoints = newpoints }
     where newpoints = pt + agingPoints x
           sc = charScore x
