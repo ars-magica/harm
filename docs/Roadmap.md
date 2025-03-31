@@ -17,8 +17,6 @@ tags:
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
-	+ [ ] Image for characters
-		+ [ ] Generate image Eogan
 	+ [ ] Step 3. Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
 		+ [ ] Handle multiple instances of the same virtue/flaw
