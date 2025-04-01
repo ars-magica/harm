@@ -17,7 +17,6 @@ tags:
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
 	+ [ ] [[Characteristics]]
-	+ [ ] Handle multiple instances of the same virtue/flaw
 	+ [ ] Infer decrepitude from aging points
 	+ [ ] advance tessa until 1255 with more aging
 	+ [ ] Error control
