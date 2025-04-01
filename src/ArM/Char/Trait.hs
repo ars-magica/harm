@@ -106,7 +106,7 @@ data ProtoTrait = ProtoTrait
     , points :: Maybe Int        -- ^ points for confidence/true faith/etc (additive)
     , xp :: Maybe XPType         -- ^ XP to be added to the trait
     , agingPts :: Maybe Int      -- ^ aging points for characteristicds (additive)
-    , charBonus :: Maybe (Int,Int) -- ^ bonuses from virtues to apply to a characteristic
+    , charBonuses :: [(Int,Int)] -- ^ bonuses from virtues to apply to a characteristic
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
@@ -147,7 +147,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , points = Nothing
                              , xp = Nothing
                              , agingPts = Nothing
-                             , charBonus = Nothing
+                             , charBonuses = []
                              , multiplicity = Nothing
                              , comment = Nothing
                              }
@@ -186,7 +186,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "points"
         <*> v .:?  "xp"
         <*> v .:?  "agingPts"
-        <*> v .:?  "charBonus"  
+        <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
         <*> v .:?  "comment"
 
@@ -403,15 +403,24 @@ instance TraitType Characteristic where
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
                 , agingPoints = fromMaybe 0 (agingPts p)
-                , charBonusList = cbl }
-       where cbl | isNothing (charBonus p) = []
-                 | otherwise = [ fromJust $ charBonus p ]
-    advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonus a) 
+                , charBonusList = charBonuses p
+                , processed = False }
+    advanceTrait a =  processChar . agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
-             ncb Nothing  x = x
-             ncb (Just b) x = x { charBonusList = b:charBonusList x }
+             ncb b x = x { charBonusList = b ++ charBonusList x }
 
+processChar :: Characteristic -> Characteristic 
+processChar c | charBonusList c == [] = c
+              | processed c = processChar' $ c { charBonusList = sort $ charBonusList c }
+              | otherwise = c
+
+processChar' :: Characteristic -> Characteristic 
+processChar' c | charBonusList c == [] = c
+               | otherwise  = c { charScore = sc, charBonusList = xs }
+          where x:xs = charBonusList c
+                sc | fst x < 0 = max (charScore c + snd x) (fst x)
+                   | otherwise = min (charScore c + snd x) (fst x)
 -- | Add aging points to a characteristic and reduce it if necessary
 agingChar  :: Maybe Int -> Characteristic -> Characteristic
 agingChar  Nothing x = x
@@ -426,10 +435,7 @@ agingChar  (Just pt) x
 -- This applies typically as a result of CrMe/CrCo rituals.
 newCharScore  :: Maybe Int -> Characteristic -> Characteristic
 newCharScore  Nothing x = x
-newCharScore  (Just s) x = f cbl $ x { charScore = s, charBonusList = [] }
-      where cbl = sort $ charBonusList x
-            f [] z = z
-            f (y:ys) z = f ys $ z { charScore = min (fst y) (snd y + charScore z) }
+newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
     computeTrait p 

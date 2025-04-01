@@ -131,21 +131,11 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
 -- | 
 -- == Characteristics
 
-chLookup:: String -> Int
+chLookup :: String -> Int
 chLookup "Improved Characteristics" = 3
 chLookup "Weak Characteristics" = -3
 chLookup _  = 0
 
 getCharAllowance :: [ VF ] -> Int
 getCharAllowance = (+7) . sum . map ( chLookup . vfname )
-
-cbLookup:: VF -> Maybe (String,Int,Int)
-cbLookup v | vfname v == "Great Characteristic" = Just (vv,5,1*m)
-           | vfname v == "Poor Characteristic" = Just (vv,5,-1*m)
-           where vv = vfDetail v
-                 m = vfMultiplicity v
-cbLookup _  = Nothing
-
-charIncrease :: [VF] -> [(String,Int,Int)]
-charIncrease = map fromJust . filter isJust . map cbLookup 
 
