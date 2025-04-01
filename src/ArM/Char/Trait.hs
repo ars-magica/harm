@@ -412,9 +412,9 @@ instance TraitType Characteristic where
 
 processChar :: Characteristic -> Characteristic 
 processChar c | charBonusList c == [] = c
-              | processed c = processChar' $ c { charBonusList = sort $ charBonusList c }
+              | processed c = processChar' $ c { charBonusList = sortOn f $ charBonusList c }
               | otherwise = c
-
+       where f = abs . fst
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c
                | otherwise  = c { charScore = sc, charBonusList = xs }

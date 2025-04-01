@@ -16,13 +16,8 @@ tags:
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
-	+ [ ] Characteristics
-		+ [ ] Great/Poor Characteristic (current warning)
-			+ [ ] Infer a characteristic trait with bonus
-			+ [ ] Use the bonus the next time the score is set
-			+ [ ] Check bonus application
-			+ [ ] Check multiplicity
-		+ [ ] Handle multiple instances of the same virtue/flaw
+	+ [ ] [[Characteristics]]
+	+ [ ] Handle multiple instances of the same virtue/flaw
 	+ [ ] Infer decrepitude from aging points
 	+ [ ] advance tessa until 1255 with more aging
 	+ [ ] Error control

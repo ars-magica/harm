@@ -48,6 +48,12 @@ vl2 = [ ( "Puissant (art)",
               \ _ -> defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } )
      , ( "Faerie Blood",
               \ _ -> defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } )
+     , ( "Great Characteristic",
+              \ x -> defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(5,vfMultiplicity x)]  } )
+     , ( "Poor Characteristic",
+              \ x -> defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(-5,0-vfMultiplicity x)]  } )
      ]
 
 
