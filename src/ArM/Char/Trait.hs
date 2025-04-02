@@ -699,7 +699,7 @@ processChar' c | charBonusList c == [] = c
        where f = abs . fst
 processChar'' :: Characteristic -> Characteristic 
 processChar'' c | charBonusList c == [] = c
-               | otherwise  = c { charScore = sc, charBonusList = xs }
+               | otherwise  = processChar'' $ c { charScore = sc, charBonusList = xs }
           where x:xs = charBonusList c
                 sc | fst x < 0 = max (charScore c + snd x) (fst x)
                    | otherwise = min (charScore c + snd x) (fst x)
