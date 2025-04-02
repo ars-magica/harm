@@ -16,9 +16,8 @@ tags:
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
-	+ [ ] [[Characteristics]]
 	+ [ ] Infer decrepitude from aging points
-	+ [ ] advance tessa until 1255 with more aging
+	+ [ ] advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
@@ -35,7 +34,7 @@ tags:
 		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code
 	+ [ ] Comment field on traits
-	+ [ ]  P/G Char Gen
+	+ [ ] P/G Char Gen
 	+ [ ] Remove trait when advancing
 	+ [ ] More user friendly sheets
 		+ [ ] More compact character sheets
@@ -45,8 +44,9 @@ tags:
 		+ [ ] Inventive Genius
 		+ [ ] Infer Second Sight from Strong Faerie Blood
 		+ [ ] Unaging
-	+ [ ] Count xp total (ingame) for validationparallel
+	+ [ ] Count xp total (ingame) for validation
 	+ [ ] Print weapon tables etc
+	+ [ ] More [[Validation Rules]]
 + [ ] Phase 5. Performance
 	+ [ ] Step 1.  CharacterState in JSON
 		+ [ ] Remove null entries from JSON output
