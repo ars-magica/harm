@@ -12,10 +12,11 @@ tags:
 		+ [ ] Print and Double-Check Eogan
 	+ [ ] Speciality in combat totals
 	+ [ ] More spell descriptions in CSV file
+	+ [ ] Web pages
+		+ [ ] Make Covenant Page (Markdown)
+		+ [ ] Narrative section on saga fron tpage
+	+ [ ] Infer decrepitude from aging points
 + [ ] Phase 2. Improvements
-	+ [ ] Remove dead and retired characters from main list
-		+ [ ] Retired property in Aging type
-	+ [ ] Validate missing seasons
 	+ [ ] Characteristics
 		+ [ ] Great/Poor Characteristic (current warning)
 			+ [ ] Infer a characteristic trait with bonus
@@ -23,12 +24,13 @@ tags:
 			+ [ ] Check bonus application
 			+ [ ] Check multiplicity
 		+ [ ] Handle multiple instances of the same virtue/flaw
-	+ [ ] Infer decrepitude from aging points
 	+ [ ] advance tessa until 1255 with more aging
+	+ [ ] Remove dead and retired characters from main list
+		+ [ ] Retired property in Aging type
+	+ [ ] Validate missing seasons
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
-	+ [ ] Make Covenant Page (Markdown)
 	+ [ ] Step 1. Covenant
 		+ [ ] Book resource
 		+ [ ] Library
@@ -50,8 +52,10 @@ tags:
 		+ [ ] Linguist
 		+ [ ] Inventive Genius
 		+ [ ] Infer Second Sight from Strong Faerie Blood
+			+ [ ] Inference from inferred traits (ability)
+			+ [ ] Second Sight
 		+ [ ] Unaging
-	+ [ ] Count xp total (ingame) for validationparallel
+	+ [ ] Count xp total (ingame) for validation parallel
 	+ [ ] Print weapon tables etc
 + [ ] Phase 5. Performance
 	+ [ ] Step 1.  CharacterState in JSON
