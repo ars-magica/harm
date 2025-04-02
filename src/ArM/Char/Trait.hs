@@ -404,8 +404,7 @@ instance TraitType Characteristic where
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
                 , agingPoints = fromMaybe 0 (agingPts p)
-                , charBonusList = charBonuses p
-                , processed = False }
+                , charBonusList = charBonuses p }
     advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
@@ -690,13 +689,13 @@ updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 -- == Postprocessing of traits
 
 processChar :: Trait -> Trait 
-processChar (CharacteristicTrait c) = CharacteristicTrait $ processChar' c
-processChar c = c
+processChar (CharacteristicTrait c) = trace (show c) $ CharacteristicTrait $ processChar' c
+processChar c = trace "Other trait" c
+
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c
      | charBonusList c == [] = c
-     | processed c = processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
-     | otherwise = c
+     | otherwise = trace (">> " ++  show (charBonusList c)) $ processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
        where f = abs . fst
 processChar'' :: Characteristic -> Characteristic 
 processChar'' c | charBonusList c == [] = c
