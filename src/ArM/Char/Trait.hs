@@ -35,6 +35,7 @@ module ArM.Char.Trait ( module ArM.Char.Types.Trait
                       , Weapon(..)
                       , Armour(..)
                       , findTrait
+                      , processChar
                       ) where
 
 import ArM.GameRules
@@ -688,13 +689,17 @@ updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 -- |
 -- == Postprocessing of traits
 
-processChar :: Characteristic -> Characteristic 
-processChar c | charBonusList c == [] = c
-              | processed c = processChar' $ c { charBonusList = sortOn f $ charBonusList c }
-              | otherwise = c
-       where f = abs . fst
+processChar :: Trait -> Trait 
+processChar (CharacteristicTrait c) = CharacteristicTrait $ processChar' c
+processChar c = c
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c
+     | charBonusList c == [] = c
+     | processed c = processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
+     | otherwise = c
+       where f = abs . fst
+processChar'' :: Characteristic -> Characteristic 
+processChar'' c | charBonusList c == [] = c
                | otherwise  = c { charScore = sc, charBonusList = xs }
           where x:xs = charBonusList c
                 sc | fst x < 0 = max (charScore c + snd x) (fst x)

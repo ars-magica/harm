@@ -66,7 +66,11 @@ calculateXP = sum . map regXP . changes
 
 -- | Validate points spent on characterics.
 validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateChar sheet a | m /= "Characteristics" = a
+validateChar sheet = f . validateChar' sheet
+     where f x = x { postProcessTrait = PostProcessor processChar }
+
+validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateChar' sheet a | m /= "Characteristics" = a
              | ex < lim = a { validation = ValidationError und:validation a }
              | ex > lim = a { validation = ValidationError over:validation a }
              | otherwise = a { validation = Validated val:validation a }

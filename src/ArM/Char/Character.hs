@@ -207,7 +207,10 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 
 -- | Apply CharGen advancement
 applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
-applyCharGenAdv a cs = applyAdvancement ( prepareCharGen cs a ) cs
+applyCharGenAdv a cs = (a',f cs')
+   where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
+         (PostProcessor g) = postProcessTrait a'
+         f x = x { traits = map g $ traits x }
 
 -- | Apply a list of advancements
 applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
