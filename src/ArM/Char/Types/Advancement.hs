@@ -185,18 +185,20 @@ data AugmentedAdvancement = Adv
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
      , augYears :: Maybe Int    -- ^ number of years advanced
      , validation :: [Validation] -- ^ Report from validation
-     , postProcessTrait :: Trait -> Trait 
+     , postProcessTrait :: PostProcessor 
         -- ^ extra postprocessing for traits at a given stage 
      }
-   deriving (Generic)
-instance Eq AugmentedAdvancement where
-   (==) a b = advancement a == advancement b
-           && inferredTraits a == inferredTraits b
-           && validation a == validation b
-           && augYears a == augYears b
-           && spentXP a == spentXP b
-instance Show AugmentedAdvancement where
-   show aa = show aa ++ ". " ++ show (inferredTraits aa) ++ ". " ++ show (validation aa)
+   deriving (Eq,Show,Generic)
+data PostProcessor = PostProcessor (Trait -> Trait)
+
+instance Eq PostProcessor where
+   (==) _ _ = True
+instance Show PostProcessor where
+   show _ = ""
+instance FromJSON PostProcessor where
+   parseJSON _ = return $ PostProcessor id
+instance ToJSON PostProcessor where
+   toJSON _ = "{}"
 
 
 defaultAA :: AugmentedAdvancement
@@ -208,7 +210,7 @@ defaultAA = Adv
      , inferredTraits = [ ] 
      , augYears = Nothing
      , validation = []
-     , postProcessTrait = id
+     , postProcessTrait = PostProcessor id
      }
 
 instance AdvancementLike Advancement where
@@ -229,8 +231,8 @@ instance AdvancementLike AugmentedAdvancement where
 instance ToJSON Validation
 instance FromJSON Validation
 
--- instance ToJSON AugmentedAdvancement where
-    -- toEncoding = genericToEncoding defaultOptions
+instance ToJSON AugmentedAdvancement where
+    toEncoding = genericToEncoding defaultOptions
 instance ToJSON Advancement where
     toEncoding = genericToEncoding defaultOptions
 
@@ -254,5 +256,5 @@ instance FromJSON AugmentedAdvancement where
         <*> fmap maybeList ( v .:? "inferredTraits" )
         <*> v .:? "augYears"
         <*> fmap maybeList ( v .:?  "validation")
-        <*> return id
+        <*> v .:? "postProcessTrait" .!= PostProcessor id
 

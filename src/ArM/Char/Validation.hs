@@ -27,7 +27,6 @@ import ArM.GameRules
 import ArM.Helper
 
 import Data.Maybe (fromMaybe,isJust)
-import Data.List
 
 import ArM.Debug.Trace
 
@@ -66,6 +65,7 @@ calculateXP = sum . map regXP . changes
 -- = Validation of Characteristics
 
 -- | Validate points spent on characterics.
+validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateChar sheet a | m /= "Characteristics" = a
              | ex < lim = a { validation = ValidationError und:validation a }
              | ex > lim = a { validation = ValidationError over:validation a }
