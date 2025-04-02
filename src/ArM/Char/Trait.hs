@@ -405,22 +405,11 @@ instance TraitType Characteristic where
                 , agingPoints = fromMaybe 0 (agingPts p)
                 , charBonusList = charBonuses p
                 , processed = False }
-    advanceTrait a =  processChar . agingChar apts . newCharScore newscore . ncb (charBonuses a) 
+    advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
              ncb b x = x { charBonusList = b ++ charBonusList x }
 
-processChar :: Characteristic -> Characteristic 
-processChar c | charBonusList c == [] = c
-              | processed c = processChar' $ c { charBonusList = sortOn f $ charBonusList c }
-              | otherwise = c
-       where f = abs . fst
-processChar' :: Characteristic -> Characteristic 
-processChar' c | charBonusList c == [] = c
-               | otherwise  = c { charScore = sc, charBonusList = xs }
-          where x:xs = charBonusList c
-                sc | fst x < 0 = max (charScore c + snd x) (fst x)
-                   | otherwise = min (charScore c + snd x) (fst x)
 -- | Add aging points to a characteristic and reduce it if necessary
 agingChar  :: Maybe Int -> Characteristic -> Characteristic
 agingChar  Nothing x = x
@@ -696,3 +685,17 @@ updateArtBonus :: Maybe Int -> Art -> Art
 updateArtBonus Nothing a = a 
 updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
+-- |
+-- == Postprocessing of traits
+
+processChar :: Characteristic -> Characteristic 
+processChar c | charBonusList c == [] = c
+              | processed c = processChar' $ c { charBonusList = sortOn f $ charBonusList c }
+              | otherwise = c
+       where f = abs . fst
+processChar' :: Characteristic -> Characteristic 
+processChar' c | charBonusList c == [] = c
+               | otherwise  = c { charScore = sc, charBonusList = xs }
+          where x:xs = charBonusList c
+                sc | fst x < 0 = max (charScore c + snd x) (fst x)
+                   | otherwise = min (charScore c + snd x) (fst x)

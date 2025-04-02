@@ -185,8 +185,18 @@ data AugmentedAdvancement = Adv
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
      , augYears :: Maybe Int    -- ^ number of years advanced
      , validation :: [Validation] -- ^ Report from validation
+     , postProcessTrait :: Trait -> Trait 
+        -- ^ extra postprocessing for traits at a given stage 
      }
-   deriving (Eq,Generic,Show)
+   deriving (Generic)
+instance Eq AugmentedAdvancement where
+   (==) a b = advancement a == advancement b
+           && inferredTraits a == inferredTraits b
+           && validation a == validation b
+           && augYears a == augYears b
+           && spentXP a == spentXP b
+instance Show AugmentedAdvancement where
+   show aa = show aa ++ ". " ++ show (inferredTraits aa) ++ ". " ++ show (validation aa)
 
 
 defaultAA :: AugmentedAdvancement
@@ -198,6 +208,7 @@ defaultAA = Adv
      , inferredTraits = [ ] 
      , augYears = Nothing
      , validation = []
+     , postProcessTrait = id
      }
 
 instance AdvancementLike Advancement where
@@ -218,8 +229,8 @@ instance AdvancementLike AugmentedAdvancement where
 instance ToJSON Validation
 instance FromJSON Validation
 
-instance ToJSON AugmentedAdvancement where
-    toEncoding = genericToEncoding defaultOptions
+-- instance ToJSON AugmentedAdvancement where
+    -- toEncoding = genericToEncoding defaultOptions
 instance ToJSON Advancement where
     toEncoding = genericToEncoding defaultOptions
 
@@ -243,4 +254,5 @@ instance FromJSON AugmentedAdvancement where
         <*> fmap maybeList ( v .:? "inferredTraits" )
         <*> v .:? "augYears"
         <*> fmap maybeList ( v .:?  "validation")
+        <*> return id
 
