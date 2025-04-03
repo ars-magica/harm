@@ -66,11 +66,14 @@ vl3 = [ ("Self-Confidence", \ _ -> confTrait 2 5 )
       ]
 
 snab :: [ String ]
-snab = [ "Second Sight", "Enchanting Music", "Dowsing",
-         "Magic Sensitivity", "Animal Ken", "Wilderness Sense",
-         "Sense Holiness and Unholiness",
-         "Entrancement", "Premonitions",
-         "Shapeshifter" ]
+snab = [ "Second Sight", "Enchanting Music"
+       , "Dowsing"
+       , "Magic Sensitivity", "Animal Ken"
+       , "Wilderness Sense"
+       , "Sense Holiness and Unholiness"
+       , "Entrancement", "Premonitions"
+       , "Heartbeast"
+       , "Shapeshifter" ]
 
 virtueMap :: Map.Map String ( VF -> ProtoTrait ) 
 virtueMap = Map.fromList $ vl1 ++ vl2
