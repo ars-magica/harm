@@ -28,6 +28,7 @@ A large and critical part of the logic is concerned with the individual characte
 + Constituent types
 	+ `ProtoTrait` represents advancement of a trait
 	+ `Trait` represents a trait with computed scores
+		+ [[Characteristics]]
 	+ `Advancement` represents advancement of a character or covenant
 		+ includes a list of `ProtoTrait` advancing individual traits
 		+ includes a time (season) or a stage (pregame)

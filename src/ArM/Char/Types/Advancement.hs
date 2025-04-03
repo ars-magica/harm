@@ -185,8 +185,20 @@ data AugmentedAdvancement = Adv
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
      , augYears :: Maybe Int    -- ^ number of years advanced
      , validation :: [Validation] -- ^ Report from validation
+     , postProcessTrait :: PostProcessor 
+        -- ^ extra postprocessing for traits at a given stage 
      }
-   deriving (Eq,Generic,Show)
+   deriving (Eq,Show,Generic)
+data PostProcessor = PostProcessor (Trait -> Trait)
+
+instance Eq PostProcessor where
+   (==) _ _ = True
+instance Show PostProcessor where
+   show _ = ""
+instance FromJSON PostProcessor where
+   parseJSON _ = return $ PostProcessor id
+instance ToJSON PostProcessor where
+   toJSON _ = "{}"
 
 
 defaultAA :: AugmentedAdvancement
@@ -198,6 +210,7 @@ defaultAA = Adv
      , inferredTraits = [ ] 
      , augYears = Nothing
      , validation = []
+     , postProcessTrait = PostProcessor id
      }
 
 instance AdvancementLike Advancement where
@@ -243,4 +256,5 @@ instance FromJSON AugmentedAdvancement where
         <*> fmap maybeList ( v .:? "inferredTraits" )
         <*> v .:? "augYears"
         <*> fmap maybeList ( v .:?  "validation")
+        <*> v .:? "postProcessTrait" .!= PostProcessor id
 

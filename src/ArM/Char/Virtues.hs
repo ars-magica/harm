@@ -48,6 +48,12 @@ vl2 = [ ( "Puissant (art)",
               \ _ -> defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } )
      , ( "Faerie Blood",
               \ _ -> defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } )
+     , ( "Great Characteristic",
+              \ x -> defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(5,vfMultiplicity x)]  } )
+     , ( "Poor Characteristic",
+              \ x -> defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(-5,0-vfMultiplicity x)]  } )
      ]
 
 
@@ -60,11 +66,14 @@ vl3 = [ ("Self-Confidence", \ _ -> confTrait 2 5 )
       ]
 
 snab :: [ String ]
-snab = [ "Second Sight", "Enchanting Music", "Dowsing",
-         "Magic Sensitivity", "Animal Ken", "Wilderness Sense",
-         "Sense Holiness and Unholiness",
-         "Entrancement", "Premonitions",
-         "Shapeshifter" ]
+snab = [ "Second Sight", "Enchanting Music"
+       , "Dowsing"
+       , "Magic Sensitivity", "Animal Ken"
+       , "Wilderness Sense"
+       , "Sense Holiness and Unholiness"
+       , "Entrancement", "Premonitions"
+       , "Heartbeast"
+       , "Shapeshifter" ]
 
 virtueMap :: Map.Map String ( VF -> ProtoTrait ) 
 virtueMap = Map.fromList $ vl1 ++ vl2
@@ -131,21 +140,11 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
 -- | 
 -- == Characteristics
 
-chLookup:: String -> Int
+chLookup :: String -> Int
 chLookup "Improved Characteristics" = 3
 chLookup "Weak Characteristics" = -3
 chLookup _  = 0
 
 getCharAllowance :: [ VF ] -> Int
 getCharAllowance = (+7) . sum . map ( chLookup . vfname )
-
-cbLookup:: VF -> Maybe (String,Int,Int)
-cbLookup v | vfname v == "Great Characteristic" = Just (vv,5,1*m)
-           | vfname v == "Poor Characteristic" = Just (vv,5,-1*m)
-           where vv = vfDetail v
-                 m = vfMultiplicity v
-cbLookup _  = Nothing
-
-charIncrease :: [VF] -> [(String,Int,Int)]
-charIncrease = map fromJust . filter isJust . map cbLookup 
 

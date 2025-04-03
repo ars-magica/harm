@@ -242,9 +242,9 @@ advanceSaga' (x:xs) = trace ("adv> " ++ show x) $ advanceSaga' xs . advance x
 
 instance Advance SagaState where
    advance t saga 
-      | NoTime == ns = trace ("SagaState NoTime "++show t) saga 
-      | t < ns = trace ("SagaState t>=ns "++show (t,ns)) saga 
-      | otherwise = trace (show (t, ns)) $ advance t $ step saga
+      | NoTime == ns = saga 
+      | t < ns = saga 
+      | otherwise = advance t $ step saga
      where ns = nextSeason saga
 
    step saga = saga { stateTitle = stateTitle saga 

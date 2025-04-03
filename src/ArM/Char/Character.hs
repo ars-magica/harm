@@ -42,7 +42,6 @@ import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
 import ArM.Char.Virtues
-import ArM.GameRules
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -208,7 +207,10 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 
 -- | Apply CharGen advancement
 applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
-applyCharGenAdv a cs = applyAdvancement ( prepareCharGen cs a ) cs
+applyCharGenAdv a cs = (a',f cs')
+   where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
+         (PostProcessor g) = postProcessTrait a'
+         f x = x { traits = map g $ traits x }
 
 -- | Apply a list of advancements
 applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
@@ -267,31 +269,6 @@ regCost p | isJust (virtue p) = m p * f p
           | otherwise = 0
         where f = fromMaybe 0 . cost 
               m = fromMaybe 1 . multiplicity
-
--- | Validate points spent on characterics.
-validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateChar sheet a | m /= "Characteristics" = a
-             | ex < lim = a { validation = ValidationError und:validation a }
-             | ex > lim = a { validation = ValidationError over:validation a }
-             | otherwise = a { validation = Validated val:validation a }
-           where m = fromMaybe "" $ mode a
-                 lim = getCharAllowance $ vfList sheet
-                 ex = calculateCharPoints $ advancement a
-                 und = "Underspent " ++ (show ex) ++ " points out of "
-                     ++ show lim ++ " on characteristics."  
-                 over = "Overspent " ++ (show ex) ++ " points out of "
-                     ++ show lim ++ " on characteristics."  
-                 val = "Correctly spent " ++ (show ex) ++ " points on characteristics."  
-
--- | Count characterics points spent in an Advancement
-calculateCharPoints :: Advancement -> Int
-calculateCharPoints = sum . map cScore . changes
-
--- | Count characterics points spent on a trait
-cScore :: ProtoTrait -> Int
-cScore p | isJust (characteristic p) = f p
-         | otherwise = 0
-        where f = pyramidScore . fromMaybe 0 . score 
 
 -- | Calculate initial XP limits on Char Gen Advancements
 initialLimits :: [ VF ] -> AugmentedAdvancement -> AugmentedAdvancement

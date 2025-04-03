@@ -17,17 +17,11 @@ tags:
 		+ [ ] Narrative section on saga fron tpage
 	+ [ ] Infer decrepitude from aging points
 + [ ] Phase 2. Improvements
-	+ [ ] Characteristics
-		+ [ ] Great/Poor Characteristic (current warning)
-			+ [ ] Infer a characteristic trait with bonus
-			+ [ ] Use the bonus the next time the score is set
-			+ [ ] Check bonus application
-			+ [ ] Check multiplicity
-		+ [ ] Handle multiple instances of the same virtue/flaw
-	+ [ ] advance tessa until 1255 with more aging
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
+	+ [ ] Infer decrepitude from aging points
+	+ [ ] advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
@@ -43,7 +37,7 @@ tags:
 		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code
 	+ [ ] Comment field on traits
-	+ [ ]  P/G Char Gen
+	+ [ ] P/G Char Gen
 	+ [ ] Remove trait when advancing
 	+ [ ] More user friendly sheets
 		+ [ ] More compact character sheets
@@ -55,8 +49,9 @@ tags:
 			+ [ ] Inference from inferred traits (ability)
 			+ [ ] Second Sight
 		+ [ ] Unaging
-	+ [ ] Count xp total (ingame) for validation parallel
+	+ [ ] Count xp total (ingame) for validation
 	+ [ ] Print weapon tables etc
+	+ [ ] More [[Validation Rules]]
 + [ ] Phase 5. Performance
 	+ [ ] Step 1.  CharacterState in JSON
 		+ [ ] Remove null entries from JSON output

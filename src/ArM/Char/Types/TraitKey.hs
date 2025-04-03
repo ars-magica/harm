@@ -28,6 +28,7 @@ data TraitKey = AbilityKey String
            | PossessionKey String
            | CombatKey String
            | AgeKey
+           | NoTrait
            deriving (Show, Eq,Generic )
 instance Ord TraitKey where
    compare (AbilityKey x) (AbilityKey y) = compare x y
@@ -43,6 +44,7 @@ instance Ord TraitKey where
    compare (PossessionKey x) (PossessionKey y) = compare x y
    compare (CombatKey x) (CombatKey y) = compare x y
    compare AgeKey AgeKey = EQ
+   compare NoTrait NoTrait = EQ
    compare (AbilityKey _) _ = LT
    compare _ (AbilityKey _) = GT
    compare (CharacteristicKey _) _ = LT
@@ -67,6 +69,8 @@ instance Ord TraitKey where
    compare _ (PossessionKey _) = GT
    compare (CombatKey _) _ = LT
    compare _ (CombatKey _) = GT
+   compare AgeKey _ = LT
+   compare _ AgeKey = GT
    -- compare AgeKey _ = GT
    -- compare _ AgeKey = LT
 

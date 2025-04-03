@@ -35,6 +35,7 @@ module ArM.Char.Trait ( module ArM.Char.Types.Trait
                       , Weapon(..)
                       , Armour(..)
                       , findTrait
+                      , processChar
                       ) where
 
 import ArM.GameRules
@@ -86,6 +87,7 @@ data ProtoTrait = ProtoTrait
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
+    , protoTraitKey :: TraitKey
     , spec :: Maybe String        -- ^ specialisation of an ability
     , detail :: Maybe String      -- ^ detail (options) for a virtue or flaw
     , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
@@ -105,6 +107,7 @@ data ProtoTrait = ProtoTrait
     , points :: Maybe Int        -- ^ points for confidence/true faith/etc (additive)
     , xp :: Maybe XPType         -- ^ XP to be added to the trait
     , agingPts :: Maybe Int      -- ^ aging points for characteristicds (additive)
+    , charBonuses :: [(Int,Int)] -- ^ bonuses from virtues to apply to a characteristic
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
@@ -128,6 +131,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , aging = Nothing
                              , possession = Nothing
                              , combat = Nothing
+                             , protoTraitKey = NoTrait
                              , spec = Nothing
                              , detail = Nothing
                              , appliesTo = Nothing
@@ -144,6 +148,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , points = Nothing
                              , xp = Nothing
                              , agingPts = Nothing
+                             , charBonuses = []
                              , multiplicity = Nothing
                              , comment = Nothing
                              }
@@ -165,6 +170,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "aging"
         <*> v .:?  "possession"
         <*> v .:?  "combat"
+        <*> return NoTrait
         <*> v .:?  "spec"
         <*> v .:?  "detail"
         <*> v .:?  "appliesTo"
@@ -181,6 +187,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "points"
         <*> v .:?  "xp"
         <*> v .:?  "agingPts"
+        <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
         <*> v .:?  "comment"
 
@@ -396,10 +403,12 @@ instance TraitType Characteristic where
        | otherwise = Just $
           Characteristic { characteristicName = fromJust ( characteristic p ) 
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
-                , agingPoints = fromMaybe 0 (agingPts p) }
-    advanceTrait a =  agingChar apts . newCharScore newscore
+                , agingPoints = fromMaybe 0 (agingPts p)
+                , charBonusList = charBonuses p }
+    advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
+             ncb b x = x { charBonusList = b ++ charBonusList x }
 
 -- | Add aging points to a characteristic and reduce it if necessary
 agingChar  :: Maybe Int -> Characteristic -> Characteristic
@@ -676,3 +685,21 @@ updateArtBonus :: Maybe Int -> Art -> Art
 updateArtBonus Nothing a = a 
 updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
+-- |
+-- == Postprocessing of traits
+
+processChar :: Trait -> Trait 
+processChar (CharacteristicTrait c) = trace (show c) $ CharacteristicTrait $ processChar' c
+processChar c = trace "Other trait" c
+
+processChar' :: Characteristic -> Characteristic 
+processChar' c | charBonusList c == [] = c
+     | charBonusList c == [] = c
+     | otherwise = trace (">> " ++  show (charBonusList c)) $ processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
+       where f = abs . fst
+processChar'' :: Characteristic -> Characteristic 
+processChar'' c | charBonusList c == [] = c
+               | otherwise  = processChar'' $ c { charScore = sc, charBonusList = xs }
+          where x:xs = charBonusList c
+                sc | fst x < 0 = max (charScore c + snd x) (fst x)
+                   | otherwise = min (charScore c + snd x) (fst x)
