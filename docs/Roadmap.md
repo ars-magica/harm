@@ -10,8 +10,8 @@ tags:
 		+ [ ] Fix Cieran's vis
 		+ [ ] Print and Double-Check Cieran
 		+ [ ] Print and Double-Check Eogan
+		+ [ ] More spell descriptions in CSV file
 	+ [ ] Speciality in combat totals
-	+ [ ] More spell descriptions in CSV file
 	+ [ ] Web pages
 		+ [ ] Make Covenant Page (Markdown)
 		+ [ ] Narrative section on saga fron tpage
