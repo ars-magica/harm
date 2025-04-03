@@ -47,6 +47,7 @@ data Saga = Saga
          { sagaTitle :: String
          , sagaStates :: [ SagaState ]
          , rootDir :: String
+         , sagaDesc :: String
          , baseURL :: Maybe String
          , spells :: SpellDB
          , weapons :: WeaponDB
@@ -86,6 +87,7 @@ data SagaFile = SagaFile
          , seasons :: [ SeasonTime ]
          , currentSeason :: SeasonTime
          , rootDirectory :: Maybe String
+         , sagaDescription :: String
          , covenantFiles :: [String]
          , characterFiles :: [String]
          , spellFile :: String
@@ -100,6 +102,7 @@ instance FromJSON SagaFile where
        <*> v .:? "seasons" .!= []
        <*> v .:? "currentSeason" .!= NoTime
        <*> v .:? "rootDirectory" 
+       <*> v .:? "description"  .!= ""
        <*> v .:? "covenantFiles" .!= []
        <*> v .:? "characterFiles" .!= []
        <*> v .:? "spellFile" .!= "spells.csv"
