@@ -574,7 +574,10 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
 instance Markdown Saga where
     printMD saga = OList 
         [ OList [ OString $ "# " ++ sagaTitle saga
-                , OString "" ]
+                , OString ""
+                , OString $ sagaDesc saga
+                , OString ""
+                ]
         , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- sagaStates saga ]
         , OString "" 
         , OString "+ [JSON Syntax Errors](syntaxcheck.txt) in the character files"

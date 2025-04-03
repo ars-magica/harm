@@ -12,9 +12,6 @@ tags:
 		+ [ ] Print and Double-Check Eogan
 		+ [ ] More spell descriptions in CSV file
 	+ [ ] Speciality in combat totals
-	+ [ ] Web pages
-		+ [ ] Make Covenant Page (Markdown)
-		+ [ ] Narrative section on saga front page
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type

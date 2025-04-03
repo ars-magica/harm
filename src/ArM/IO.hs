@@ -81,7 +81,8 @@ writeSagaState :: Saga -> SagaState -> IO ()
 writeSagaState saga st = 
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
-   writeCharacters dir saga (characters st)
+   writeObjects dir saga (characters st) >>
+   writeObjects dir saga (covenants st)
        where dir = rootDir saga ++ fn ++ "/"
              fn = show $ seasonTime st
 
@@ -116,14 +117,20 @@ instance ArMRead Covenant where
 -- |
 -- = Write Character Sheets
 
-
--- | Write charactersheets at Game Start in MarkDown
--- File name is derived from the character name.
-writeCharacters :: String  -- ^ Directory for the output files
-               -> Saga        -- ^ Saga whose characters are written
-               -> [ Character ]  -- ^ List of characters to write
+class LongSheet h => HarmObject h where
+    -- | Write charactersheets at Game Start in MarkDown
+    -- File name is derived from the character name.
+    writeObjects :: String  -- ^ Directory for the output files
+               -> Saga     -- ^ Saga whose objects are written
+               -> [ h ]    -- ^ List of objects to write
                -> IO ()
-writeCharacters dir saga cs = mapM wf  cs >> return ()
-     where wf c = (writeOList (fn c) $ printSheetMD saga c)
-           fn c = dir ++ "/" ++ characterStateName c ++ ".md"
+    writeObjects dir saga cs = mapM wf  cs >> return ()
+         where wf c = (writeOList (fn c) $ printSheetMD saga c)
+               fn c = dir ++ "/" ++ stateName c ++ ".md"
+    stateName :: h -> String
+
+instance HarmObject Character where
+    stateName = characterStateName
+instance HarmObject Covenant where
+    stateName = covenantStateName
 
