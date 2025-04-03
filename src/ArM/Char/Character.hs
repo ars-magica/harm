@@ -305,9 +305,6 @@ calculateLevels = sum . map ( fromMaybe 0 . level ) . changes
 -- == Advancement in Game
 
 
--- | Apply advancement
-applyInGameAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
-applyInGameAdv a cs = applyAdvancement ( prepareAdvancement cs a ) cs
 
 
 -- | Augment and amend the advancements based on current virtues and flaws.
@@ -385,7 +382,8 @@ instance Advance Character where
               }
             where (y:ys) = futureAdvancement c
                   xs = pastAdvancement c
-                  (a,cs) = applyInGameAdv y (fromJust $ state c)
+                  (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
+                  cstate = fromJust $ state c
 
    nextSeason = f . futureAdvancement
        where f [] = NoTime
