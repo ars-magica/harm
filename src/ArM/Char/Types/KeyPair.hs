@@ -9,7 +9,10 @@
 -- Description :  Generic type for Key/Value pairs.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Types.KeyPair where
+module ArM.Char.Types.KeyPair ( FieldValue(..)
+                              , KeyPair(..)
+                              , KeyPairList(..)
+                              ) where
 
 import Data.Aeson
 import Data.Aeson.Key

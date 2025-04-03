@@ -689,13 +689,13 @@ updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 -- == Postprocessing of traits
 
 processChar :: Trait -> Trait 
-processChar (CharacteristicTrait c) = trace (show c) $ CharacteristicTrait $ processChar' c
+processChar (CharacteristicTrait c) = CharacteristicTrait $ processChar' c
 processChar c = c
 
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c
      | charBonusList c == [] = c
-     | otherwise = trace (">> " ++  show (charBonusList c)) $ processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
+     | otherwise = processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
        where f = abs . fst
 processChar'' :: Characteristic -> Characteristic 
 processChar'' c | charBonusList c == [] = c
