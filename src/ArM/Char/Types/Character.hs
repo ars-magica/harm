@@ -93,15 +93,11 @@ instance FromJSON CharacterID
 characterID :: Character -> CharacterID
 characterID = CharacterID . charID
 
--- | Return the name of the character as a string, including house affiliation
--- if defined.
-fullName :: Character -> String
-fullName = fullConceptName . concept
 
 -- | Return the name of the character as a string, including house affiliation
 -- if defined.
 fullConceptName :: CharacterConcept -> String
-fullConceptName c = name c ++ (f $ house c)
+fullConceptName c = charName c ++ (f $ house c)
       where f Nothing = ""
             f (Just x) | take 2 x == "ex" = " " ++ x
                        | otherwise  = " ex " ++ x
@@ -139,7 +135,7 @@ instance CharacterLike Character where
 
 -- | The CharacterConcept is the timeless information about the character.
 data CharacterConcept = CharacterConcept 
-         { name :: String
+         { charName :: String
          , charType :: CharacterType
          , briefConcept :: Maybe String
          , quirk :: Maybe String
@@ -154,7 +150,7 @@ data CharacterConcept = CharacterConcept
 
 -- | Default (empty) character concept object.
 defaultConcept :: CharacterConcept 
-defaultConcept = CharacterConcept { name = "John Doe"
+defaultConcept = CharacterConcept { charName = "John Doe"
                                   , charType = Magus
                                   , briefConcept = Nothing
                                   , quirk = Nothing
@@ -182,8 +178,8 @@ instance FromJSON CharacterConcept where
         <*> v .:? "player"
         <*> v .:? "house"
         <*> v .:? "portrait"
-        <*> v .: "charGlance"
-        <*> v .: "charData"
+        <*> v .:? "charGlance" .!= KeyPairList []
+        <*> v .:? "charData"   .!= KeyPairList []
 
 instance Show CharacterConcept where
    show c = fullConceptName c ++ "\n"

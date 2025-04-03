@@ -101,36 +101,47 @@ writeSaga saga = do
 -- == Read Character and Covenant Data
 
 class FromJSON c => ArMRead c where
-   -- | Read a character from JSON.  Return Maybe Character
-   readArM :: String -- ^ Filename
-              -> IO (Maybe c)
-   readArM fn = LB.readFile fn >>= return . prepMaybe . decode
+-- | Read a character from JSON.  Return Maybe Character
+readArM :: (HarmObject c, FromJSON c)
+        => String -- ^ Filename
+        -> IO (Maybe c)
+readArM fn = LB.readFile fn >>= return . prepMaybe . decode
       where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
             prepMaybe (Just x) = Just $ prepare x
-   prepare :: c -> c
 
-instance ArMRead Character where
-   prepare = prepareCharacter
-instance ArMRead Covenant where
-   prepare = id
 
 -- |
 -- = Write Character Sheets
 
-class LongSheet h => HarmObject h where
-    -- | Write charactersheets at Game Start in MarkDown
-    -- File name is derived from the character name.
-    writeObjects :: String  -- ^ Directory for the output files
-               -> Saga     -- ^ Saga whose objects are written
-               -> [ h ]    -- ^ List of objects to write
-               -> IO ()
-    writeObjects dir saga cs = mapM wf  cs >> return ()
+-- | Write charactersheets in MarkDown
+-- File name is derived from the character name.
+writeObjects :: (HarmObject h, LongSheet h) 
+             => String  -- ^ Directory for the output files
+             -> Saga    -- ^ Saga whose objects are written
+             -> [ h ]   -- ^ List of objects to write
+             -> IO ()
+writeObjects dir saga cs = mapM wf  cs >> return ()
          where wf c = (writeOList (fn c) $ printSheetMD saga c)
                fn c = dir ++ "/" ++ stateName c ++ ".md"
+
+class HarmObject h where
+    name :: h -> String
+    stateSeason :: h -> SeasonTime
+
     stateName :: h -> String
+    stateName x = name x ++ " (" ++ show (stateSeason x) ++ ")"
+
+    -- | The prepare function is applied when the object is read from file
+    prepare :: h -> h
+    prepare = id
 
 instance HarmObject Character where
+    name = fullConceptName . concept
     stateName = characterStateName
+    stateSeason = characterSeason
+    prepare = prepareCharacter
 instance HarmObject Covenant where
+    name = covenantName
     stateName = covenantStateName
+    stateSeason = covenantSeason
 
