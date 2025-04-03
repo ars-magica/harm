@@ -180,9 +180,3 @@ instance Advance Covenant where
    step = id
    nextSeason _ = NoTime
 
--- | Character name with state identifier (current season)
-covenantStateName :: Covenant -> String
-covenantStateName c = nm ++ " - " ++ t
-   where t | isNothing $ covenantState c = "raw"
-           | otherwise = show ( covTime $ fromJust $ covenantState c )
-         nm  = covName $ covenantConcept c

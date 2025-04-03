@@ -18,22 +18,19 @@
 -----------------------------------------------------------------------------
 module ArM.IO where
 
--- import qualified System.IO as IO -- for file IO
 import Data.Maybe 
 import Data.Aeson 
--- import qualified Data.CSV as CSV
 import qualified Data.ByteString.Lazy as LB
 
--- import Text.ParserCombinators.Parsec
 import System.Directory
 
 import ArM.Char.Character
 import ArM.Markdown
 import ArM.Cov.Saga
-import ArM.Cov.Covenant
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.BasicIO
+import ArM.Types.HarmObject
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -123,25 +120,3 @@ writeObjects :: (HarmObject h, LongSheet h)
 writeObjects dir saga cs = mapM wf  cs >> return ()
          where wf c = (writeOList (fn c) $ printSheetMD saga c)
                fn c = dir ++ "/" ++ stateName c ++ ".md"
-
-class HarmObject h where
-    name :: h -> String
-    stateSeason :: h -> SeasonTime
-
-    stateName :: h -> String
-    stateName x = name x ++ " (" ++ show (stateSeason x) ++ ")"
-
-    -- | The prepare function is applied when the object is read from file
-    prepare :: h -> h
-    prepare = id
-
-instance HarmObject Character where
-    name = fullConceptName . concept
-    stateName = characterStateName
-    stateSeason = characterSeason
-    prepare = prepareCharacter
-instance HarmObject Covenant where
-    name = covenantName
-    stateName = covenantStateName
-    stateSeason = covenantSeason
-

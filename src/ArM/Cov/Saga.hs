@@ -32,6 +32,7 @@ import ArM.Char.Character
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Cov.Covenant
+import ArM.Types.HarmObject
 import ArM.BasicIO
 import ArM.Helper
 
@@ -201,7 +202,7 @@ augHead' x (Just z) = (show x  ++ " " ++ z)
 
 -- | Write a single item for `characterIndex`
 characterIndexLine :: Character -> OList
-characterIndexLine c = OString $ "+ " ++ pagesLink (characterStateName c) 
+characterIndexLine c = OString $ "+ " ++ pagesLink (stateName c) 
 
 -- | Write a bullet list of links for a list of characters
 characterIndex :: [Character] -> OList
@@ -209,7 +210,7 @@ characterIndex = OList . map characterIndexLine
 
 -- | Write a single item for `covenantIndex`
 covenantIndexLine :: Covenant -> OList
-covenantIndexLine c = OString $ "+ " ++ pagesLink (covenantStateName c) 
+covenantIndexLine c = OString $ "+ " ++ pagesLink (stateName c) 
 
 -- | Write a bullet list of links for a list of characters
 covenantIndex :: [Covenant] -> OList
