@@ -14,14 +14,13 @@ tags:
 	+ [ ] Speciality in combat totals
 	+ [ ] Web pages
 		+ [ ] Make Covenant Page (Markdown)
-		+ [ ] Narrative section on saga fron tpage
-	+ [ ] Infer decrepitude from aging points
+		+ [ ] Narrative section on saga front page
 + [ ] Phase 2. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
 	+ [ ] Infer decrepitude from aging points
-	+ [ ] advance Tessa until 1255 with more aging
+	+ [ ] Advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 3. Covenant
