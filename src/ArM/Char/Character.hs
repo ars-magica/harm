@@ -15,15 +15,11 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Character ( module ArM.Char.Types.Character
-                          , KeyPairList(..)
-                          , KeyPair(..)
-                          , FieldValue(..)
+                          , module ArM.Char.Types.KeyPair
+                          , module ArM.Char.Types.Advancement
                           , characterStateName
                           , characterStartName
-                          , parseSeasonTime
                           , Advancement(..)
-                          , AugmentedAdvancement(..)
-                          , AdvancementLike(..)
                           , prepareCharacter
                           , Advance(..)
                           , Season(..)
@@ -45,6 +41,53 @@ import ArM.Char.Virtues
 import ArM.Helper
 
 import ArM.Debug.Trace
+
+-- |
+-- = Character Advancement
+
+-- | The Advance class represents object which change state from
+-- season to season.
+class Advance a where
+    -- | Advance the character until after the given time.
+    advance :: SeasonTime -> a -> a
+    -- | Advance the character one season forward
+    step :: a -> a
+    -- | Time of the next advancement of the character.
+    nextSeason :: a -> SeasonTime
+
+-- |
+-- The implementation of character advancement depends on three auxiliary functions.
+-- + `prepareCharacter` advances the character from a Nothing state to Game Start.
+-- + `prepareAdvancement` augments the advancement object with limits and inference
+-- + `applyAdvancement` applies an advancement to advance the character a single step.
+--
+-- Additional inference should be added to one of these functions.
+-- + `prepareCharacter` (see below) if it applies to Character Generation only
+-- + `prepareAdvancement` if it modifies the advancement only
+-- + `applyAdvancement` if it modifies the CharacterState
+instance Advance Character where
+   advance ct c | futureAdvancement c == [] = c
+                      | isNothing (state c) = advance ct $ prepareCharacter c
+                      | ct < ct' = c
+                      | otherwise =  advance ct $ step c 
+            where y =  head $ futureAdvancement c
+                  ct' =  season y
+
+   step c = c { state = Just cs 
+              , pastAdvancement = (a:xs)
+              , futureAdvancement = ys 
+              }
+            where (y:ys) = futureAdvancement c
+                  xs = pastAdvancement c
+                  (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
+                  cstate = fromJust $ state c
+
+   nextSeason = f . futureAdvancement
+       where f [] = NoTime
+             f (x:_) = season x
+
+-- |
+-- = Convenience Functions for Character Properties
 
 -- | Character name with state identifier (current season)
 characterStateName :: Character -> String
@@ -75,6 +118,9 @@ isGameStart = (==GameStart) . characterCurrentTime
 -- |
 -- = Advancements
 
+-- |
+-- == Application of the Advancement
+
 -- | Apply advancement
 -- This function is generic, and used for both chargen and ingame 
 -- advancement.  The AugmentedAdvancement has to be prepared differently,
@@ -92,59 +138,9 @@ applyAdvancement a' cs = (a',cs')
           -- ag = fromMaybe 0 (augYears a') + age cs
 
 
--- | Infer traits from new virtues and flaws and add them to the advancement.
--- This typically applies to virtues providing supernatural abilities.
--- The ability is inferred and should not be added manually.
-addInferredTraits :: Advancement -> AugmentedAdvancement
-addInferredTraits a = defaultAA { inferredTraits = f a
-                                , advancement = a
-                                , augYears = yf }
-     where f = inferTraits . getVF . changes 
-           yf | Nothing /= advYears a = advYears a
-              | isWinter $ season a = Just 1
-              | otherwise = Nothing
-
--- | Inferred spell traits if Flawless Magic applies
-flawlessSpells :: Bool -> AugmentedAdvancement -> AugmentedAdvancement
-flawlessSpells False x = x
-flawlessSpells True  x = x { inferredTraits = a ++ b }
-     where a = flawlessSpells' $ changes $ advancement x
-           b = inferredTraits x
-          
-
--- | Inferred spell traits implementing Flawless Magic.
--- Auxiliary for `flawlessSpells`
-flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
-flawlessSpells' [] = []
-flawlessSpells' (x:xs) | isNothing (spell x) = ys
-                       | otherwise = y:ys
-    where ys = flawlessSpells' xs
-          y = defaultPT { spell = spell x, level = level x
-                                      , tefo = tefo x
-                                      , flawless = Just True
-                                      }
-
--- | Does the character have Flawless Magic?
-hasFlawless :: CharacterState -> Bool
-hasFlawless c | fms == [] = False
-              | otherwise = True
-    where ts = vfList $ filterCS c
-          fms = filter ((=="Flawless Magic") . vfname ) ts
 
 
--- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
--- VF objects
-getVF :: [ ProtoTrait ] -> [ VF ]
-getVF [] = []
-getVF (p:ps) | isJust (virtue p) = g p:getVF ps
-             | isJust (flaw p) = g p:getVF ps
-             | otherwise = getVF ps
-    where g = fromJust . computeTrait
 
-
--- | Sort the `inferredTraits` field of an `AugmentedAdvancement`
-sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
-sortInferredTraits x = x { inferredTraits = sortTraits $ inferredTraits x }
 
 -- |
 -- == Char Gen
@@ -190,10 +186,6 @@ agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
              | otherwise = x
    where y = fromMaybe 0 $ augYears x
 
--- | Return a `ProtoTrait` for aging advancing a number of years.
-agePT :: Int -- ^ Number of years
-      ->  ProtoTrait -- ^ Resulting ProtoTrait
-agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Add the Confidence trait to the character state, using 
 addConfidence :: CharacterState -> CharacterState
@@ -302,10 +294,7 @@ calculateLevels :: Advancement -> Int
 calculateLevels = sum . map ( fromMaybe 0 . level ) . changes
 
 -- |
--- == Advancement in Game
-
-
-
+-- == Preparing the Advancement
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
@@ -315,6 +304,10 @@ prepareAdvancement c = validate
                      . winterEvents c 
                      . flawlessSpells (hasFlawless c)
                      . addInferredTraits
+
+-- | Sort the `inferredTraits` field of an `AugmentedAdvancement`
+sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
+sortInferredTraits x = x { inferredTraits = sortTraits $ inferredTraits x }
 
 
 -- | Handle aging and some warping for Winter advancements.
@@ -354,37 +347,62 @@ winterEvents c a | isWinter $ season a
               err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
               val = Validated $ "Aging roll made"
 
+-- | Return a `ProtoTrait` for aging advancing a number of years.
+agePT :: Int -- ^ Number of years
+      ->  ProtoTrait -- ^ Resulting ProtoTrait
+agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
+
 -- | Calculate initial XP limits on Advancements
 inferSQ :: AugmentedAdvancement -> AugmentedAdvancement
 inferSQ ad = ad { effectiveSQ = esq }
         where esq = maybeAdd (sourceQuality ad') (advBonus ad')
               ad' = advancement ad
 
-class Advance a where
-    -- | Advance the character until after the given time.
-    advance :: SeasonTime -> a -> a
-    -- | Advance the character one season forward
-    step :: a -> a
-    -- | Time of the next advancement of the character.
-    nextSeason :: a -> SeasonTime
 
-instance Advance Character where
-   advance ct c | futureAdvancement c == [] = c
-                      | isNothing (state c) = advance ct $ prepareCharacter c
-                      | ct < ct' = c
-                      | otherwise =  advance ct $ step c 
-            where y =  head $ futureAdvancement c
-                  ct' =  season y
+-- | Infer traits from new virtues and flaws and add them to the advancement.
+-- This typically applies to virtues providing supernatural abilities.
+-- The ability is inferred and should not be added manually.
+addInferredTraits :: Advancement -> AugmentedAdvancement
+addInferredTraits a = defaultAA { inferredTraits = f a
+                                , advancement = a
+                                , augYears = yf }
+     where f = inferTraits . getVF . changes 
+           yf | Nothing /= advYears a = advYears a
+              | isWinter $ season a = Just 1
+              | otherwise = Nothing
 
-   step c = c { state = Just cs 
-              , pastAdvancement = (a:xs)
-              , futureAdvancement = ys 
-              }
-            where (y:ys) = futureAdvancement c
-                  xs = pastAdvancement c
-                  (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
-                  cstate = fromJust $ state c
+-- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
+-- VF objects
+getVF :: [ ProtoTrait ] -> [ VF ]
+getVF [] = []
+getVF (p:ps) | isJust (virtue p) = g p:getVF ps
+             | isJust (flaw p) = g p:getVF ps
+             | otherwise = getVF ps
+    where g = fromJust . computeTrait
 
-   nextSeason = f . futureAdvancement
-       where f [] = NoTime
-             f (x:_) = season x
+-- | Inferred spell traits if Flawless Magic applies
+flawlessSpells :: Bool -> AugmentedAdvancement -> AugmentedAdvancement
+flawlessSpells False x = x
+flawlessSpells True  x = x { inferredTraits = a ++ b }
+     where a = flawlessSpells' $ changes $ advancement x
+           b = inferredTraits x
+
+-- | Inferred spell traits implementing Flawless Magic.
+-- Auxiliary for `flawlessSpells`
+flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
+flawlessSpells' [] = []
+flawlessSpells' (x:xs) | isNothing (spell x) = ys
+                       | otherwise = y:ys
+    where ys = flawlessSpells' xs
+          y = defaultPT { spell = spell x, level = level x
+                                      , tefo = tefo x
+                                      , flawless = Just True
+                                      }
+
+-- | Does the character have Flawless Magic?
+hasFlawless :: CharacterState -> Bool
+hasFlawless c | fms == [] = False
+              | otherwise = True
+    where ts = vfList $ filterCS c
+          fms = filter ((=="Flawless Magic") . vfname ) ts
+

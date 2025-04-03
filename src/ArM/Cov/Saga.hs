@@ -29,7 +29,6 @@ import Data.List
 import GHC.Generics
 
 import ArM.Char.Character
-import ArM.Char.Types.Advancement
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Cov.Covenant
