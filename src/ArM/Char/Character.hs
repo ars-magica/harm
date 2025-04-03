@@ -132,13 +132,19 @@ applyAdvancement a' cs = (a',cs')
     where cs' = cs { charTime = season a', traits = new }
           new = advanceTraitList change tmp
           tmp = sortTraits $ advanceTraitList inferred old 
-          change = sortTraits $ changes a'
+          change = sortTraits $ inferDecrepitude $ changes a'
           inferred = inferredTraits a'
           old = sortTraits $ traits cs
           -- ag = fromMaybe 0 (augYears a') + age cs
 
 
-
+inferDecrepitude :: [ ProtoTrait ] -> [ ProtoTrait ]
+inferDecrepitude [] = []
+inferDecrepitude (x:xs) 
+   | apts == 0 = x:inferDecrepitude xs
+   | otherwise = x:d:inferDecrepitude xs
+   where d = defaultPT { other = Just "Decrepitude",  points = Just apts }
+         apts = fromMaybe 0 $ agingPts x
 
 
 
