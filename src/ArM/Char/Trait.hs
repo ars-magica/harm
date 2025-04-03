@@ -690,7 +690,7 @@ updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
 processChar :: Trait -> Trait 
 processChar (CharacteristicTrait c) = trace (show c) $ CharacteristicTrait $ processChar' c
-processChar c = trace "Other trait" c
+processChar c = c
 
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c

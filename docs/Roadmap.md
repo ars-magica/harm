@@ -45,9 +45,6 @@ tags:
 	+ [ ] Step 3. Virtues and Flaws - Special cases
 		+ [ ] Linguist
 		+ [ ] Inventive Genius
-		+ [ ] Infer Second Sight from Strong Faerie Blood
-			+ [ ] Inference from inferred traits (ability)
-			+ [ ] Second Sight
 		+ [ ] Unaging
 	+ [ ] Count xp total (ingame) for validation
 	+ [ ] Print weapon tables etc

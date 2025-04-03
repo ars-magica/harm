@@ -10,7 +10,7 @@
 --
 -----------------------------------------------------------------------------
 
-module ArM.Char.Virtues (inferTraits
+module ArM.Char.Virtues ( inferTraits
                         , laterLifeSQ
                         , getCharAllowance
                         , inferConfidence
@@ -35,30 +35,34 @@ import Data.Maybe
 -- giving bonuses to regular abilities, and virtues which grant supernatural
 -- abilities.
 
-vl2 :: [ ( String, VF -> ProtoTrait ) ]
+vl2 :: [ ( String, VF -> [ ProtoTrait ] ) ]
 vl2 = [ ( "Puissant (art)",
-         \ x -> defaultPT { art = Just $ vfDetail x, bonusScore = Just 3 } )
+         \ x -> [ defaultPT { art = Just $ vfDetail x, bonusScore = Just 3 } ] )
      , ( "Puissant (ability)",
-              \ x -> defaultPT { ability = Just $ vfDetail x, bonusScore = Just 2 } )
+              \ x -> [ defaultPT { ability = Just $ vfDetail x, bonusScore = Just 2 } ] )
      , ( "Affinity with (art)",
-              \ x -> defaultPT { art = Just $ vfDetail x, multiplyXP = Just 1.5 } )
+              \ x -> [ defaultPT { art = Just $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Affinity with (ability)",
-              \ x -> defaultPT { ability = Just $ vfDetail x, multiplyXP = Just 1.5 } )
+              \ x -> [ defaultPT { ability = Just $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Strong Faerie Blood",
-              \ _ -> defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } )
+              \ _ -> [ defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } 
+                     , defaultPT { ability = Just "Second Sight", xp = Just 5 } 
+                     , defaultPT { virtue = Just "Second Sight", cost = Just 0
+                                 , comment = Just "from Strong Faerie Blood" } 
+                     ] )
      , ( "Faerie Blood",
-              \ _ -> defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } )
+              \ _ -> [ defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } ] )
      , ( "Great Characteristic",
-              \ x -> defaultPT { characteristic = Just $ vfDetail x
-                               , charBonuses = [(5,vfMultiplicity x)]  } )
+              \ x -> [ defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(5,vfMultiplicity x)]  } ] )
      , ( "Poor Characteristic",
-              \ x -> defaultPT { characteristic = Just $ vfDetail x
-                               , charBonuses = [(-5,0-vfMultiplicity x)]  } )
+              \ x -> [ defaultPT { characteristic = Just $ vfDetail x
+                               , charBonuses = [(-5,0-vfMultiplicity x)]  } ] )
      ]
 
 
-vl1 :: [ ( String, VF -> ProtoTrait ) ]
-vl1 = [ (ab, \ _ -> defaultPT { ability = Just $ ab, xp = Just 5 } ) | ab <- snab ]
+vl1 :: [ ( String, VF -> [ ProtoTrait ] ) ]
+vl1 = [ (ab, \ _ -> [ defaultPT { ability = Just $ ab, xp = Just 5 } ] ) | ab <- snab ]
 
 vl3 :: [ ( String, VF -> Trait ) ]
 vl3 = [ ("Self-Confidence", \ _ -> confTrait 2 5 )
@@ -75,7 +79,7 @@ snab = [ "Second Sight", "Enchanting Music"
        , "Heartbeast"
        , "Shapeshifter" ]
 
-virtueMap :: Map.Map String ( VF -> ProtoTrait ) 
+virtueMap :: Map.Map String ( VF -> [ ProtoTrait ] ) 
 virtueMap = Map.fromList $ vl1 ++ vl2
 
 -- |
@@ -95,7 +99,7 @@ confMap = Map.fromList $ vl3
 
 -- | Add ProtoTrait objects infered by current virtues and flaws
 inferTraits :: [VF] -> [ProtoTrait]
-inferTraits vfs = sortTraits rs
+inferTraits vfs = sortTraits $ foldl (++) [] rs
     where vf = [ Map.lookup (vfname x) virtueMap | x <- vfs ]
           app Nothing _ = Nothing
           app (Just f) x = Just $ f x
