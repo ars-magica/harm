@@ -64,7 +64,7 @@ common harm-deps
                        , ArM.Char.Types.Advancement
                        , ArM.Char.Trait
                        , ArM.Char.Types.Trait
-                       , ArM.Char.Types.TraitKey
+                       , ArM.Types.TraitKey
                        , ArM.Char.Combat
                        , ArM.DB.CSV
                        , ArM.DB.Spell

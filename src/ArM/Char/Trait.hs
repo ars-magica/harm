@@ -40,14 +40,13 @@ module ArM.Char.Trait ( module ArM.Char.Types.Trait
 
 import ArM.GameRules
 import ArM.Helper
+import ArM.Char.Types.Trait
 
 import GHC.Generics
 import Data.Aeson
 import Data.Maybe 
 import Data.List
 
-import ArM.Char.Types.Trait
-import ArM.Char.Types.TraitKey
 import ArM.Debug.Trace
 import ArM.DB.Weapon
 

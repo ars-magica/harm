@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Types.TraitKey
+-- Module      :  ArM.Types.TraitKey
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -9,12 +9,19 @@
 -- 
 -- Description :  TraitKey type used to index and sort traits.
 --
+-- The `TraitKey` is conceptually simple, but the ordering takes some
+-- coding to handle all the different kinds of traits.  To avoid
+-- cluttering, it is kept as a separate module.
+--
 -----------------------------------------------------------------------------
-module ArM.Char.Types.TraitKey where
+module ArM.Types.TraitKey where
 
 import Data.Aeson
 import GHC.Generics
 
+-- | A unique identifier for traits.
+-- It implement the `Ord` class, with canonical ordering on characteristics
+-- and arts.
 data TraitKey = AbilityKey String
            | CharacteristicKey String
            | ArtKey String
@@ -29,7 +36,7 @@ data TraitKey = AbilityKey String
            | CombatKey String
            | AgeKey
            | NoTrait
-           deriving (Show, Eq,Generic )
+           deriving ( Show, Eq, Generic )
 instance Ord TraitKey where
    compare (AbilityKey x) (AbilityKey y) = compare x y
    compare (CharacteristicKey x) (CharacteristicKey y) = compare (charIdx x) (charIdx y)

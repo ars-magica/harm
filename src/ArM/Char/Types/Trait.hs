@@ -17,11 +17,30 @@
 -- for `show`, sorting, and JSON.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Char.Types.Trait where
+module ArM.Char.Types.Trait ( TraitKey(..)
+                            , Trait(..)
+                            , Ability(..)
+                            , Characteristic(..)
+                            , Art(..)
+                            , VF(..)
+                            , Spell(..)
+                            , PTrait(..)
+                            , SpecialTrait(..)
+                            , OtherTrait(..)
+                            , Possession(..)
+                            , CombatOption(..)
+                            , Confidence(..)
+                            , Reputation(..)
+                            , Age(..)
+                            , TraitClass(..)
+                            , (<:)
+                            , fote
+                            , sortTraits
+                            ) where
 
 import ArM.GameRules
 import ArM.Helper
-import ArM.Char.Types.TraitKey
+import ArM.Types.TraitKey
 import ArM.DB.Weapon
 
 import GHC.Generics

@@ -22,7 +22,6 @@ module ArM.Char.Combat where
 -- import ArM.Helper
 import ArM.Char.CharacterSheet
 import ArM.Char.Types.Trait
-import ArM.Char.Types.TraitKey
 import ArM.DB.Weapon
 import ArM.Helper
 
