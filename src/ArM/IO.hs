@@ -25,7 +25,6 @@ import qualified Data.ByteString.Lazy as LB
 import System.Directory
 
 import ArM.Char.Character
-import ArM.Types.HarmObject
 import ArM.Markdown
 import ArM.Cov.Saga
 import ArM.DB.CSV

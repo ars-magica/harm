@@ -22,7 +22,6 @@ import Data.Maybe
 
 import ArM.Char.Trait
 import ArM.Char.Character
-import ArM.Types.HarmObject
 -- import ArM.Types.HarmObject
 -- import ArM.Types.Advancement
 -- import ArM.Types.KeyPair

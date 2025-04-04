@@ -74,7 +74,6 @@ common harm-deps
                        , ArM.Markdown
                        , ArM.Cov.Covenant
                        , ArM.Cov.Saga
-                       , ArM.Types.HarmObject
                        , ArM.IO
                        , ArM.Helper
   build-depends:       cassava >= 0.5.3

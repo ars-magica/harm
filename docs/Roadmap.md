@@ -26,6 +26,9 @@ tags:
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 4. Polish
+	+ [ ] Comment on warping «from LR»
+	+ [ ] Display aging bonus etc
+	+ [ ] Mark house virtues, mysteries etc
 	+ [ ] Refactor 
 		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code

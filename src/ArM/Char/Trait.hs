@@ -240,7 +240,7 @@ instance Show ProtoTrait  where
     -- , reputation :: Maybe String  -- ^ reputation contents
        | reputation p /= Nothing = 
               "Reputation: " ++ fromJust (reputation p) ++
-              " [" ++ maybeShow (locale p) ++ "]" ++ showXP p
+              " [" ++ (fromMaybe "--" $ locale p) ++ "]" ++ showXP p
     -- , virtue :: Maybe String   -- ^ virtue name
        | virtue p /= Nothing = 
               "Virtue: " ++ fromJust (virtue p) ++ " ("
