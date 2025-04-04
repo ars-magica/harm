@@ -24,12 +24,12 @@ import ArM.Types.TraitKey
 
 data BookOriginal = BookOriginal
          { bookTitle :: String
-         , bookStats :: BookStats
+         , bookStats :: [ BookStats ]
          , bookAuthor :: String
          , bookYear :: Int
          , bookLocation :: String
          , bookAnnotation :: String
-       }  deriving (Eq,Generic,Show)
+         }  deriving (Eq,Generic,Show)
 instance ToJSON BookOriginal
 instance FromJSON BookOriginal
 
@@ -46,13 +46,13 @@ bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
 
 data BookCopy = BookCopy
          { copyTitle :: String
-         , copyStats :: BookStats
+         , copyStats :: [ BookStats ]
          , copyist :: String
          , copyYear :: Int
          , copyLocation :: String
          , copyAnnotation :: String
          , original :: BookKey
-       }  deriving (Eq,Generic,Show)
+         }  deriving (Eq,Generic,Show)
 instance ToJSON BookCopy
 instance FromJSON BookCopy
 
