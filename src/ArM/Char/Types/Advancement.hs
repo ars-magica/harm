@@ -18,7 +18,6 @@ import ArM.Char.Trait
 import ArM.GameRules
 
 import Data.Aeson 
--- import Data.Aeson.Types                          ( Parser )
 import Control.Monad
 
 import GHC.Generics
@@ -26,10 +25,6 @@ import Data.List.Split
 import Text.Read             (readMaybe)
 
 import Data.Text.Lazy                            ( fromStrict, unpack )
-
--- import Control.Applicative                       ( empty, pure, (<$>), (<*>) )
-
--- type CharTime = Maybe String
 
 -- |
 -- = Calendar
@@ -60,6 +55,7 @@ data Season = Winter | Spring | Summer | Autumn  | NoSeason
 -- |
 -- == Generic definitions 
 
+-- | A `SeasonTime` is a point in the narrative time, or `NoTime` for undefined.
 data SeasonTime = SeasonTime Season Int | GameStart | NoTime deriving (Eq,Generic)
 
 instance ToJSON SeasonTime where
@@ -68,17 +64,18 @@ instance ToJSON SeasonTime where
 instance ToJSON Season
 
 
-
 instance FromJSON SeasonTime where
 
     parseJSON (Number n) = pure $ SeasonTime NoSeason $ round n
     parseJSON (String t) = pure $ parseST (unpack (fromStrict t))
     parseJSON _ = mzero
 
+-- | Is the Season Winter?
 isWinter :: SeasonTime -> Bool
 isWinter (SeasonTime Winter _) = True
 isWinter _ = False
 
+-- | Parse SeasonTime from String
 parseST :: String -> SeasonTime
 parseST  "GameStart" = GameStart
 parseST  "Game Start" = GameStart
@@ -97,6 +94,7 @@ parseST  s = fy ys
           fy [] = NoTime
           fy (Nothing:rest) = fy rest
           fy (Just r:_) = SeasonTime st r
+-- | Parse SeasonTime from `Maybe String`
 parseSeasonTime :: Maybe String -> SeasonTime
 parseSeasonTime Nothing = NoTime
 parseSeasonTime (Just s) = parseST s
@@ -116,6 +114,8 @@ instance Ord SeasonTime where
         | otherwise = y1 <= y2
 
 
+-- |
+-- = Advancement
 
 
 data AdvancementType = Practice | Exposure | Adventure 
