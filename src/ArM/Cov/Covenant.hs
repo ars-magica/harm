@@ -22,6 +22,7 @@ import Data.Maybe
 
 import ArM.Char.Trait
 import ArM.Char.Character
+import ArM.Types.HarmObject
 -- import ArM.Types.HarmObject
 -- import ArM.Types.Advancement
 -- import ArM.Types.KeyPair
@@ -61,24 +62,12 @@ instance FromJSON CovenantID
 
 -- | get the ID of a character.
 covenantID :: Covenant -> CovenantID
-covenantID = CovenantID . covenantName
+covenantID = CovenantID . name
 
--- | Get the name of the covenant
-covenantName :: Covenant -> String
-covenantName = covName . covenantConcept
 
--- | Get a string identifying the covenant and state, i.e. name and season
-covenantSeason :: Covenant -> SeasonTime
-covenantSeason c | isNothing st = NoTime
-                 | otherwise = covTime $ fromJust st
-           where st = covenantState c
-
-{-
--- | Get the markdown for a link to the covenant
-covenantLink :: Covenant -> String
-covenantLink cov = wikiLink txt 
-   where txt = covenantName cov ++ " " ++ show (covenantSeason cov)
--}
+instance HarmObject Covenant where
+    name = covName . covenantConcept
+    stateSeason = fromMaybe NoTime . fmap covTime . covenantState
 
 -- |
 -- = CovenantConcept Object

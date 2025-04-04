@@ -14,7 +14,6 @@
 -----------------------------------------------------------------------------
 module ArM.Types.HarmObject where
 
-import ArM.Cov.Covenant
 import ArM.Char.Character
 
 -- | The `HarmObject` class establishes a common interface for `Covenant` and
@@ -39,7 +38,4 @@ instance HarmObject Character where
     stateSeason = characterSeason
     prepare = prepareCharacter
 
-instance HarmObject Covenant where
-    name = covenantName
-    stateSeason = covenantSeason
 
