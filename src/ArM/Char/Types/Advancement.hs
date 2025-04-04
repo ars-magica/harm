@@ -82,6 +82,7 @@ parseST  "Game Start" = GameStart
 parseST  "Start" = GameStart
 parseST  "Notime" = NoTime
 parseST  "NoTime" = NoTime
+parseST  "No Time" = NoTime
 parseST  "N/A" = NoTime
 parseST  s = fy ys
     where xs = splitOn " " s
@@ -102,7 +103,7 @@ parseSeasonTime (Just s) = parseST s
 instance Show SeasonTime where
    show GameStart = "Game Start"
    show (SeasonTime s y) = show s ++ " " ++ show y
-   show NoTime =  "N/A"
+   show NoTime =  "No Time"
 
 instance Ord SeasonTime where
     (<=) NoTime _ = False

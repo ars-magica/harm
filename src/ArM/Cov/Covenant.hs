@@ -20,7 +20,6 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
-import ArM.Char.Trait
 import ArM.Char.Character
 import ArM.Types.Library
 -- import ArM.Helper
