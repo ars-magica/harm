@@ -30,7 +30,10 @@ data BookOriginal = BookOriginal
 instance ToJSON Book
 instance FromJSON Book
 
+-- | Type for the unique identifier of an original book
 data BookKey = BookKey String
+
+-- | Get the unique identifier of an original book
 bookKey :: BookOriginal -> BookKey
 bookKey b = show (bookStats b) ++ ":" ++ (bookTitle b)
 
