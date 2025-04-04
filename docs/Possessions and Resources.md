@@ -15,3 +15,4 @@ tags:
 + `BookOriginal` with stats and key
 + `BookCopy` with stats and reference to original key
 	+ **note** the key is not a `TraitKey` since different copies need to be treated as different possessions but the same book
++ Is the original manuscript a `BookCopy` or are they two constructors for the same type?

@@ -11,8 +11,7 @@ tags:
 	+ [ ] Print and Double-Check Eogan
 	+ [ ] More spell descriptions in CSV file
 + [ ] Phase 1. Covenant
-	+ [ ] Book resource
-	+ [ ] Library
+	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
 	+ [ ] Covenant advancement
 	+ [ ] Covenant members
