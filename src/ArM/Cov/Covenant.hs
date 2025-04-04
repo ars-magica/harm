@@ -20,11 +20,8 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
-import ArM.Char.Trait
 import ArM.Char.Character
--- import ArM.Types.HarmObject
--- import ArM.Types.Advancement
--- import ArM.Types.KeyPair
+import ArM.Types.Library
 -- import ArM.Helper
 
 -- import ArM.Debug.Trace
@@ -117,7 +114,7 @@ data CovenantState = CovenantState
          { covTime :: SeasonTime
          , covenFolkID :: [ CharacterID ]
          , covenFolk :: [ Character ]
-         , library :: [ Book ]
+         , library :: [ BookCopy ]
        }  deriving (Eq,Generic,Show)
 
 
@@ -134,8 +131,8 @@ data CovAdvancement = CovAdvancement
      , caNarrative :: Maybe String -- ^ freeform description of the activities
      , joining :: [ CharacterID ]
      , leaving :: [ CharacterID ]
-     , acquired :: [ Book ]
-     , lost :: [ Book ]
+     , acquired :: [ BookCopy ]
+     , lost :: [ BookCopy ]
      }
    deriving (Eq,Generic,Show)
 
