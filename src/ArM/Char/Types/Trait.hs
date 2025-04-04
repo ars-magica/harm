@@ -243,7 +243,7 @@ data CombatOption = CombatOption
      }  deriving (Eq,Ord,Generic)
 
 instance Show CombatOption where
-   show co = combatName co ++ ab ++ " " ++ (combatWeapon co) ++ sh
+   show co = "Combat Option: " ++ combatName co ++ ab ++ " " ++ (combatWeapon co) ++ sh
       where ab | isNothing (combatAbility co) = ""
                | otherwise = " (" ++ (fromJust $ combatAbility co) ++ ")"
             sh | isNothing (combatShield co) = ""
