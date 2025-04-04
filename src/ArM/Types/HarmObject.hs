@@ -1,3 +1,17 @@
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  ArM.Char.Types.HarmObject
+-- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
+-- License     :  see LICENSE
+--
+-- Maintainer  :  hg+gamer@schaathun.net
+--
+-- Description :  Generic interface for covenants and characters
+--
+-- These definitions may have to be moved, since they easily creates 
+-- circular dependencies.
+--
+-----------------------------------------------------------------------------
 module ArM.Types.HarmObject where
 
 import ArM.Cov.Covenant

@@ -22,7 +22,7 @@ import Data.Maybe
 
 import ArM.Char.Trait
 import ArM.Char.Types.Advancement
-import ArM.Char.Types.KeyPair
+import ArM.Types.KeyPair
 -- import ArM.Debug.Trace
 import ArM.Helper
 

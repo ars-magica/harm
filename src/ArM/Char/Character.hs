@@ -15,7 +15,7 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Character ( module ArM.Char.Types.Character
-                          , module ArM.Char.Types.KeyPair
+                          , module ArM.Types.KeyPair
                           , module ArM.Char.Types.Advancement
                           , Advancement(..)
                           , prepareCharacter
@@ -31,7 +31,7 @@ import Data.List
 
 import ArM.Char.Trait
 import ArM.Char.Types.Advancement
-import ArM.Char.Types.KeyPair
+import ArM.Types.KeyPair
 import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
