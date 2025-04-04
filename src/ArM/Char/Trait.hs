@@ -215,57 +215,43 @@ showMastery (Just (x:xs)) = ' ':(foldl (++) x $ map (", "++) xs)
 
 instance Show ProtoTrait  where
    show p 
-    -- { ability :: Maybe String  -- ^ ability name 
        | ability p /= Nothing = 
            "Ability: " ++ fromJust ( ability p )  ++ showSpec p
            ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
-    -- , characteristic :: Maybe String  -- ^ characteristic name
        | characteristic p /= Nothing =
            "Characteristic: " ++ fromJust ( characteristic p )  ++
            " " ++ show ( fromMaybe 0 (score p) ) ++ showAging p 
-    -- , art :: Maybe String  -- ^ art name
        | art p /= Nothing = 
            "Art: " ++ fromJust ( art p ) ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
-    -- , spell :: Maybe String  -- ^ spell name
        | spell p /= Nothing =
               "Spell: " ++ fromJust (spell p) ++ showXP p
                     ++ showMastery (mastery p) ++ showMult p
                     ++ showFlawless p
-    -- , ptrait :: Maybe String  -- ^ personality trait name
        | ptrait p /= Nothing = 
               "Personality Trait: " ++ fromJust (ptrait p)
                      ++ " " ++ maybeShow (score p)
-    -- , reputation :: Maybe String  -- ^ reputation contents
        | reputation p /= Nothing = 
               "Reputation: " ++ fromJust (reputation p) ++
               " [" ++ (fromMaybe "--" $ locale p) ++ "]" ++ showXP p
-    -- , virtue :: Maybe String   -- ^ virtue name
        | virtue p /= Nothing = 
               "Virtue: " ++ fromJust (virtue p) ++ " ("
               ++ show ( fromMaybe 0 (cost p) ) 
               ++ mul (multiplicity p)
               ++ ")"
-    -- , flaw :: Maybe String     -- ^ flaw name
        | flaw p /= Nothing = 
               "Flaw: " ++ fromJust (flaw p) ++ " ("
               ++ mul (multiplicity p)
               ++ show ( fromMaybe 0 (cost p) ) ++ ")"
-    -- , confidence :: Maybe String  -- ^ confidence, true faith, or similar
        | confidence p /= Nothing = 
               fromMaybe "Confidence" (confidence p) ++ ": " ++ show (fromMaybe 0 (score p)) ++ " (" ++
               show ( fromMaybe 0 (points p) ) ++ ")"
-    -- , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
        | possession p /= Nothing = "Possession: " ++ show (fromJust $ possession p)
-    -- , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
        | combat p /= Nothing = show (fromJust $ combat p)
-    -- , aging :: Maybe Aging        -- ^ Aging object 
        | aging p /= Nothing = show (fromJust $ aging p)
-    -- , other :: Maybe String       -- ^ other trait, e.g. warping or decrepitude
        | other p /= Nothing = 
                fromJust (other p) ++ " " ++ show ( fromMaybe 0 ( points p ) )
-    -- , strait :: Maybe String      -- ^ special trait, like Longevity Potion
        | strait p /= Nothing = fromJust (strait p) 
        | otherwise  = error $ "No Trait for this ProtoTrait" 
      where mul Nothing = ""
@@ -687,9 +673,14 @@ updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 -- |
 -- == Postprocessing of traits
 
+
+-- | Process bonuses to characteristics, typically granted by virtues.
+-- THis has to be applied after validation of the points expenditure at
+-- char gen.
 processChar :: Trait -> Trait 
 processChar (CharacteristicTrait c) = CharacteristicTrait $ processChar' c
 processChar c = c
+
 
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c

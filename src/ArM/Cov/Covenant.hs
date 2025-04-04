@@ -151,17 +151,6 @@ defaultAdv = CovAdvancement
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement
 
-data Book = Book
-         { bookTitle :: String
-         , topic :: TraitKey
-         , quality :: Int
-         , bookLevel :: Maybe Int
-         , author :: String
-         , year :: Int
-         , annotation :: String
-       }  deriving (Eq,Generic,Show)
-instance ToJSON Book
-instance FromJSON Book
 
 instance Advance Covenant where
    advance _ = id
