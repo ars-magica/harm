@@ -95,13 +95,10 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
            f [] = tm
            f (x:_) = season x
 
--- | The current season of the character 
-characterCurrentTime :: Character -> SeasonTime
-characterCurrentTime = fromMaybe NoTime . fmap charTime . state
 
 -- | The first season the character is played
 isGameStart :: Character -> Bool
-isGameStart = (==GameStart) . characterCurrentTime
+isGameStart = (==GameStart) . characterSeason
 
 -- |
 -- = Advancements

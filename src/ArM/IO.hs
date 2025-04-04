@@ -25,12 +25,12 @@ import qualified Data.ByteString.Lazy as LB
 import System.Directory
 
 import ArM.Char.Character
+import ArM.Types.HarmObject
 import ArM.Markdown
 import ArM.Cov.Saga
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.BasicIO
-import ArM.Types.HarmObject
 import ArM.Helper
 
 import ArM.Debug.Trace

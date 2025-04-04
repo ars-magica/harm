@@ -26,6 +26,7 @@ import ArM.Char.Types.KeyPair
 -- import ArM.Debug.Trace
 import ArM.Helper
 
+
 -- |
 -- = Character
 
@@ -103,9 +104,7 @@ fullConceptName c = charName c ++ (f $ house c)
                        | otherwise  = " ex " ++ x
 
 characterSeason :: Character -> SeasonTime
-characterSeason c | isNothing st = NoTime
-                  | otherwise = charTime $ fromJust st
-           where st = state c
+characterSeason = fromMaybe NoTime . fmap charTime . state
 
 -- |
 -- = CharacterConcept
