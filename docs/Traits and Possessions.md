@@ -3,6 +3,9 @@ tags:
    - armchar/domain/model
 ---
 
++ **Note** Type references here refer to the Swish implementation #armchar/swish/model .
++ However, the principles apply to the JSON model #armchar/json too
+
 
 + Common Framework for Possessions and Trait
 	+ same function `advanceTraitList`
@@ -16,7 +19,7 @@ tags:
 	+ Spells
 	+ Arts
 	+ CombatOption 
-	+ Natural Weapns
+	+ Natural Weapons
 + Possessions include
 	+ Equipment (including regular weapons)
 	+ Vis
