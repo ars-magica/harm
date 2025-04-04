@@ -17,7 +17,10 @@
 module ArM.Types.Library where
 
 import Data.Aeson
+import GHC.Generics
 import Data.Maybe
+
+import ArM.Types.TraitKey
 
 data BookOriginal = BookOriginal
          { bookTitle :: String
@@ -27,12 +30,15 @@ data BookOriginal = BookOriginal
          , bookLocation :: String
          , bookAnnotation :: String
        }  deriving (Eq,Generic,Show)
-instance ToJSON Book
-instance FromJSON Book
+instance ToJSON BookOriginal
+instance FromJSON BookOriginal
 
 data BookKey = BookKey String
+   deriving (Show,Eq,Generic)
+instance ToJSON BookKey
+instance FromJSON BookKey
 bookKey :: BookOriginal -> BookKey
-bookKey b = show (bookStats b) ++ ":" ++ (bookTitle b)
+bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
 
 data BookCopy = BookCopy
          { copyTitle :: String
@@ -41,21 +47,22 @@ data BookCopy = BookCopy
          , copyYear :: Int
          , copyLocation :: String
          , copyAnnotation :: String
-	 , original :: BookKey
+         , original :: BookKey
        }  deriving (Eq,Generic,Show)
-instance ToJSON Book
-instance FromJSON Book
+instance ToJSON BookCopy
+instance FromJSON BookCopy
 
 data BookStats = BookStats
          { topic :: TraitKey
          , quality :: Int
          , bookLevel :: Maybe Int
        }  deriving (Eq,Generic)
-instance ToJSON Book
-instance FromJSON Book
+instance ToJSON BookStats
+instance FromJSON BookStats
 
 instance Ord BookOriginal where
     compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
+                | otherwise = compare (bookTitle a) (bookTitle b)
 instance Ord BookCopy where
     compare a b | copyStats a /= copyStats b = compare (copyStats a) (copyStats b)
                 | otherwise  = compare (copyTitle a) (copyTitle b)
@@ -65,8 +72,8 @@ instance Ord BookStats where
                 | otherwise  = compare (quality a) (quality b)
 instance Show BookStats where
     show b = k ++ l ++ q
-        where (TraitKey k) = topic b
-	      q = show $ quality b
-	      l | isNothing (bookLevel b) = ""
-	        | otherwise = 'L':show (fromJust $ bookLevel b)
+        where k = show $ topic b
+              q = show $ quality b
+              l | isNothing (bookLevel b) = ""
+                | otherwise = 'L':show (fromJust $ bookLevel b)
 

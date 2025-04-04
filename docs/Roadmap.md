@@ -17,7 +17,6 @@ tags:
 	+ [ ] Covenant advancement
 	+ [ ] Covenant members
 + [ ] Phase 2. Improvements
-	+ [ ] HarmObject class for a consistent API
 	+ [ ] Speciality in combat totals
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type

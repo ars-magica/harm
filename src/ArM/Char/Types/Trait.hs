@@ -116,9 +116,11 @@ data Spell = Spell { spellName :: String
                    }
            deriving (Ord, Eq, Generic)
 
+{-
 -- | Return a string of Technique/Form/Level classifying the Spell.
 spellTeFoLe :: Spell -> String
 spellTeFoLe sp = spellTeFo sp ++ show (spellLevel sp)
+-}
 
 -- | Return a string of Form/Technique for sorting
 spellFoTe :: Spell -> String
@@ -238,7 +240,14 @@ data CombatOption = CombatOption
      , combatWeapon :: String        -- ^ The main weapon
      , combatShield :: Maybe String  -- ^ A Shield is optional
      , combatAbility :: Maybe String
-     }  deriving (Eq,Ord,Show,Generic)
+     }  deriving (Eq,Ord,Generic)
+
+instance Show CombatOption where
+   show co = combatName co ++ ab ++ " " ++ (combatWeapon co) ++ sh
+      where ab | isNothing (combatAbility co) = ""
+               | otherwise = " (" ++ (fromJust $ combatAbility co) ++ ")"
+            sh | isNothing (combatShield co) = ""
+               | otherwise = "/" ++ (fromJust $ combatShield co) 
 
 instance ToJSON CombatOption
 instance FromJSON CombatOption where
