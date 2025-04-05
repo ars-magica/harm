@@ -19,12 +19,13 @@ module ArM.Cov.Covenant where
 import GHC.Generics
 import Data.Aeson
 import Data.Maybe
+import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
 -- import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 
 -- |
@@ -64,6 +65,9 @@ covenantID = CovenantID . name
 instance HarmObject Covenant where
     name = covName . covenantConcept
     stateSeason = fromMaybe NoTime . fmap covTime . covenantState
+    prepare x = trace "prepare Covenant" $ f x
+        where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
+                  | otherwise = ttrace y 
 
 -- |
 -- = CovenantConcept Object
@@ -113,9 +117,15 @@ instance Show CovenantConcept where
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ CharacterID ]
-         , covenFolk :: [ Character ]
          , library :: [ BookCopy ]
        }  deriving (Eq,Generic,Show)
+
+defaultCovState :: CovenantState 
+defaultCovState = CovenantState 
+         { covTime = GameStart
+         , covenFolkID = []
+         , library = []
+       }  
 
 
 instance ToJSON CovenantState
@@ -128,7 +138,7 @@ instance FromJSON CovenantState
 -- | Advancement (changes) to a covenant.
 data CovAdvancement = CovAdvancement 
      { caSeason :: SeasonTime    -- ^ season or development stage
-     , caNarrative :: Maybe String -- ^ freeform description of the activities
+     , caNarrative :: String     -- ^ freeform description of the activities
      , joining :: [ CharacterID ]
      , leaving :: [ CharacterID ]
      , acquired :: [ BookCopy ]
@@ -139,18 +149,47 @@ data CovAdvancement = CovAdvancement
 defaultAdv :: CovAdvancement 
 defaultAdv = CovAdvancement 
      { caSeason = NoTime
-     , caNarrative = Nothing
+     , caNarrative = ""
      , joining = []
      , leaving = []
      , acquired = []
      , lost = []
      }
 instance ToJSON CovAdvancement
-instance FromJSON CovAdvancement
+instance FromJSON CovAdvancement where
+    parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
+        <$> fmap parseSeasonTime ( v .:? "season" )
+        <*> v .:? "narrative" .!= ""
+        <*> v .:? "joining" .!= []
+        <*> v .:? "leaving" .!= []
+        <*> v .:? "acquired" .!= []
+        <*> v .:? "lost" .!= []
 
 
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
 instance Advance Covenant where
-   advance _ = id
-   step = id
-   nextSeason _ = NoTime
+   advance ct c | isNothing (covenantState c) = trace "need prepare" $ advance ct $ prepare c
+                | ct < ct' = trace "covenant advancement done" c
+                | otherwise =  trace "need step" $ advance ct $ step c 
+            where ct' =  nextSeason c
+   step c = c { covenantState = Just cs 
+              , pastCovAdvancement = (a:xs)
+              , futureCovAdvancement = ys 
+              }
+            where (y:ys) = futureCovAdvancement c
+                  xs = pastCovAdvancement c
+                  (a,cs) = applyCovAdvancement y cstate
+                  cstate = fromJust $ covenantState c
+   nextSeason = f . futureCovAdvancement
+       where f [] = NoTime
+             f (x:_) = ttrace $ caSeason x
 
+-- | Apply advancement
+applyCovAdvancement :: CovAdvancement
+                 -> CovenantState 
+                 -> (CovAdvancement,CovenantState)
+applyCovAdvancement a cs = trace ("covadv> "++show a) $ trace (show $ covenFolkID cs') $ (a,cs')
+    where cs' = cs { covTime = caSeason a
+                   , covenFolkID = sort $ joining a ++ covenFolkID cs }

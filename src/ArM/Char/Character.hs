@@ -23,7 +23,6 @@ module ArM.Char.Character ( module ArM.Char.Types.Character
                           , Season(..)
                           , SeasonTime(..)
                           , characterEntryTime
-                          , isGameStart
                           , HarmObject(..)
                           ) where
 
@@ -44,7 +43,8 @@ import ArM.Debug.Trace
 -- |
 -- = The Harm Object
 
--- | The `HarmObject` class establishes a common interface for `Covenant` and
+-- |
+-- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
 class HarmObject h where
     -- | Full name of the entity
@@ -61,17 +61,21 @@ class HarmObject h where
     prepare :: h -> h
     prepare = id
 
+    -- | Is the character state still at Game Start?
+    isGameStart :: h -> Bool
+    isGameStart = (==GameStart) . stateSeason
+
 instance HarmObject Character where
     name = fullConceptName . concept
     stateSeason = characterSeason
     prepare = prepareCharacter
 
 
-
 -- |
 -- = Character Advancement
 
--- | The Advance class represents object which change state from
+-- |
+-- The Advance class represents object which change state from
 -- season to season.
 class Advance a where
     -- | Advance the character until after the given time.
@@ -92,10 +96,10 @@ class Advance a where
 -- + `prepareAdvancement` if it modifies the advancement only
 -- + `applyAdvancement` if it modifies the CharacterState
 instance Advance Character where
-   advance ct c | futureAdvancement c == [] = c
-                      | isNothing (state c) = advance ct $ prepareCharacter c
-                      | ct < ct' = c
-                      | otherwise =  advance ct $ step c 
+   advance ct c | isNothing (state c) = advance ct $ prepare c
+                | futureAdvancement c == [] = c
+                | ct < ct' = c
+                | otherwise =  advance ct $ step c 
             where y =  head $ futureAdvancement c
                   ct' =  season y
 
@@ -124,9 +128,6 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
            f (x:_) = season x
 
 
--- | The first season the character is played
-isGameStart :: Character -> Bool
-isGameStart = (==GameStart) . characterSeason
 
 -- |
 -- = Advancements
@@ -165,7 +166,6 @@ inferDecrepitude (x:xs)
 -- == Char Gen
 
 -- | Compute the initial state if no state is recorded.
---
 -- The function uses `applyCGA` to process all of the pregame advancements.
 -- It then calls `addConfidence` to add the confidence trait to the state
 -- for the returned `Character` object
@@ -363,7 +363,7 @@ winterEvents c a | isWinter $ season a
               validateAging False _ x =  x
               validateAging True Nothing x = trace ("No aging> "++show a) $ x { validation = err:validation x }
               validateAging True (Just ob) x
-                   | isNothing (agingRoll ob) = trace ("No roll> "++show x) $ x { validation = err:validation x }
+                   | isNothing (agingRoll ob) = x { validation = err:validation x }
                    | otherwise =  x { validation = val:validation x }
               err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
               val = Validated $ "Aging roll made"

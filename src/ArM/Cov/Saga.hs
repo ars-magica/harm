@@ -21,6 +21,7 @@ module ArM.Cov.Saga ( Saga(..)
                     , covenantIndex
                     , advancementErrors
                     , advancementErrorsLimit
+                    , covenFolk
                     ) where
 
 -- import Data.Maybe 
@@ -218,6 +219,10 @@ covenantIndex = OList . map covenantIndexLine
 -- |
 -- = Advancement
 
+
+-- | The saga can be advanced with the same class methods as
+-- characters and covenants.  When the saga advances, all its
+-- characters and covenants advance accordingly.
 instance Advance Saga where
    -- advance :: SeasonTime -> a -> a
    advance t saga = saga { sagaStates = x:sagaStates saga }
@@ -258,3 +263,22 @@ instance Advance SagaState where
 
    nextSeason saga = foldl min NoTime ss
       where ss = [ nextSeason x | x <- characters saga ]
+
+-- |
+-- == Covenant support
+
+covenFolk :: Saga -> CovenantState -> [ Character ]
+covenFolk saga cov = trace "covenFolk: " $ lookupCharacters s $ f cov
+   where f = trace "xs" $ covenFolkID 
+         s = ttrace saga
+
+lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
+lookupCharacters saga is = trace "lookupCharacters" $ lkup is cs
+    where cs = sortOn characterID $ characters $ sagaState saga
+
+lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
+lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
+                   | x > characterID y = trace "lkup1 " $ lkup (x:xs) ys
+                   | otherwise = trace "lkup2 " $ y:lkup xs ys
+lkup (_:_)  _ = trace "Character not found in saga" []
+lkup _ _ = []
