@@ -218,6 +218,10 @@ covenantIndex = OList . map covenantIndexLine
 -- |
 -- = Advancement
 
+
+-- | The saga can be advanced with the same class methods as
+-- characters and covenants.  When the saga advances, all its
+-- characters and covenants advance accordingly.
 instance Advance Saga where
    -- advance :: SeasonTime -> a -> a
    advance t saga = saga { sagaStates = x:sagaStates saga }

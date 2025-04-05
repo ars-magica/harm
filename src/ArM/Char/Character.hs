@@ -67,11 +67,11 @@ instance HarmObject Character where
     prepare = prepareCharacter
 
 
-
 -- |
 -- = Character Advancement
 
--- | The Advance class represents object which change state from
+-- |
+-- The Advance class represents object which change state from
 -- season to season.
 class Advance a where
     -- | Advance the character until after the given time.
@@ -165,7 +165,6 @@ inferDecrepitude (x:xs)
 -- == Char Gen
 
 -- | Compute the initial state if no state is recorded.
---
 -- The function uses `applyCGA` to process all of the pregame advancements.
 -- It then calls `addConfidence` to add the confidence trait to the state
 -- for the returned `Character` object
