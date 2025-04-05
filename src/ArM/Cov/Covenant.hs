@@ -193,9 +193,3 @@ applyCovAdvancement :: CovAdvancement
 applyCovAdvancement a cs = trace ("covadv> "++show a) $ trace (show $ covenFolkID cs') $ (a,cs')
     where cs' = cs { covTime = caSeason a
                    , covenFolkID = sort $ joining a ++ covenFolkID cs }
-{-
-          new = advanceTraitList change tmp
-          tmp = sortTraits $ advanceTraitList inferred old 
-          change = sortTraits $ inferDecrepitude $ changes a'
-          old = sortTraits $ traits cs
--}
