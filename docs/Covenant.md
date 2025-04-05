@@ -16,7 +16,7 @@ tags:
 + [ ] Covenant members
 	+ [ ] Link by name or ID.
 	+ [ ] Validation: check that the character is in game
-	+ [ ] List members and covenfolk on page
+	+ [x] List members and covenfolk on page
 + [ ] Advancement
 	+ [ ] Members coming and going
 	+ [ ] Books acquired

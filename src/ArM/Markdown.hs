@@ -613,9 +613,7 @@ instance Markdown Covenant where
         , OString ""
         , printMD $ covenantConcept cov
         , OString ""
-        , printMD $ covenantState cov
-        , OString ""
-        , trace "covenFolk index " $ characterIndex $ ttrace $ covenFolk saga cov
+        , printMDaug saga $ covenantState cov
         ]
 
 instance LongSheet CovenantConcept
@@ -634,5 +632,10 @@ instance LongSheet CovenantState
 instance Markdown CovenantState where
     printMD cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
+        ]
+    printMDaug saga cov = OList  
+        [ OString $ "## " ++ (show $ covTime cov)
+        , OString ""
+        , trace "covenFolk index " $ characterIndex $ covenFolk saga cov
         ]
 

@@ -10,11 +10,9 @@ tags:
 	+ [ ] Print and Double-Check Cieran
 	+ [ ] Print and Double-Check Eogan
 	+ [ ] More spell descriptions in CSV file
-+ [ ] Phase 1. Covenant
++ [ ] Phase 1. [[Covenant]]
 	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
-	+ [ ] Covenant advancement
-	+ [ ] [[Covenant]] members
 + [ ] Phase 2. Improvements
 	+ [ ] Speciality in combat totals
 	+ [ ] Remove dead and retired characters from main list

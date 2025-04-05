@@ -26,7 +26,6 @@ module ArM.Cov.Saga ( Saga(..)
 
 -- import Data.Maybe 
 import Data.Aeson 
-import Data.Maybe 
 import Data.List 
 import GHC.Generics
 
@@ -268,16 +267,18 @@ instance Advance SagaState where
 -- |
 -- == Covenant support
 
-covenFolk :: Saga -> Covenant -> [ Character ]
-covenFolk saga = lookupCharacters saga . fromMaybe [] . fmap covenFolkID . covenantState
+covenFolk :: Saga -> CovenantState -> [ Character ]
+covenFolk saga cov = trace "covenFolk: " $ lookupCharacters s $ f cov
+   where f = trace "xs" $ covenFolkID 
+         s = ttrace saga
 
 lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
-lookupCharacters saga is = trace (show is) $ lkup is cs
+lookupCharacters saga is = trace "lookupCharacters" $ lkup is cs
     where cs = sortOn characterID $ characters $ sagaState saga
 
 lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
 lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
-                   | x > characterID y = lkup (x:xs) ys
-                   | otherwise = y:lkup xs ys
+                   | x > characterID y = trace "lkup1 " $ lkup (x:xs) ys
+                   | otherwise = trace "lkup2 " $ y:lkup xs ys
 lkup (_:_)  _ = trace "Character not found in saga" []
 lkup _ _ = []
