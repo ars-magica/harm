@@ -272,7 +272,7 @@ covenFolk :: Saga -> Covenant -> [ Character ]
 covenFolk saga = lookupCharacters saga . fromMaybe [] . fmap covenFolkID . covenantState
 
 lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
-lookupCharacters saga is = lkup is cs
+lookupCharacters saga is = trace (show is) $ lkup is cs
     where cs = sortOn characterID $ characters $ sagaState saga
 
 lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 

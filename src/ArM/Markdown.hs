@@ -35,7 +35,7 @@ import ArM.GameRules
 import ArM.BasicIO
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- = Rendering the Character Sheet
@@ -607,6 +607,15 @@ instance Markdown Covenant where
         , printMD $ covenantConcept cov
         , OString ""
         , printMD $ covenantState cov
+        ]
+    printMDaug saga cov = OList 
+        [ OString $ "# " ++ (covName $ covenantConcept cov )
+        , OString ""
+        , printMD $ covenantConcept cov
+        , OString ""
+        , printMD $ covenantState cov
+        , OString ""
+        , trace "covenFolk index " $ characterIndex $ ttrace $ covenFolk saga cov
         ]
 
 instance LongSheet CovenantConcept

@@ -363,7 +363,7 @@ winterEvents c a | isWinter $ season a
               validateAging False _ x =  x
               validateAging True Nothing x = trace ("No aging> "++show a) $ x { validation = err:validation x }
               validateAging True (Just ob) x
-                   | isNothing (agingRoll ob) = trace ("No roll> "++show x) $ x { validation = err:validation x }
+                   | isNothing (agingRoll ob) = x { validation = err:validation x }
                    | otherwise =  x { validation = val:validation x }
               err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
               val = Validated $ "Aging roll made"
