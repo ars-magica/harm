@@ -22,6 +22,22 @@ import Data.Maybe
 
 import ArM.Types.TraitKey
 
+-- | The stats of a book as required for advancement mechanics.
+data BookStats = BookStats
+         { topic :: TraitKey
+         , quality :: Int
+         , bookLevel :: Maybe Int
+       }  deriving (Eq,Generic)
+instance ToJSON BookStats
+instance FromJSON BookStats
+instance Show BookStats where
+    show b = k ++ l ++ q
+        where k = show $ topic b
+              q = show $ quality b
+              l | isNothing (bookLevel b) = ""
+                | otherwise = 'L':show (fromJust $ bookLevel b)
+
+-- | An original manuscript with title, author, and stats.
 data BookOriginal = BookOriginal
          { bookTitle :: String
          , bookStats :: [ BookStats ]
@@ -44,6 +60,8 @@ instance FromJSON BookKey
 bookKey :: BookOriginal -> BookKey
 bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
 
+-- | A copy of a book, whose stats may or may not deviate from the original
+-- manuscript.
 data BookCopy = BookCopy
          { copyTitle :: String
          , copyStats :: [ BookStats ]
@@ -56,13 +74,9 @@ data BookCopy = BookCopy
 instance ToJSON BookCopy
 instance FromJSON BookCopy
 
-data BookStats = BookStats
-         { topic :: TraitKey
-         , quality :: Int
-         , bookLevel :: Maybe Int
-       }  deriving (Eq,Generic)
-instance ToJSON BookStats
-instance FromJSON BookStats
+
+-- |
+-- = Other instances
 
 instance Ord BookOriginal where
     compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
@@ -74,10 +88,4 @@ instance Ord BookStats where
     compare a b | topic a /= topic b = compare (topic a) (topic b)
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
                 | otherwise  = compare (quality a) (quality b)
-instance Show BookStats where
-    show b = k ++ l ++ q
-        where k = show $ topic b
-              q = show $ quality b
-              l | isNothing (bookLevel b) = ""
-                | otherwise = 'L':show (fromJust $ bookLevel b)
 
