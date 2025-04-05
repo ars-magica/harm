@@ -23,7 +23,6 @@ module ArM.Char.Character ( module ArM.Char.Types.Character
                           , Season(..)
                           , SeasonTime(..)
                           , characterEntryTime
-                          , isGameStart
                           , HarmObject(..)
                           ) where
 
@@ -44,7 +43,8 @@ import ArM.Debug.Trace
 -- |
 -- = The Harm Object
 
--- | The `HarmObject` class establishes a common interface for `Covenant` and
+-- |
+-- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
 class HarmObject h where
     -- | Full name of the entity
@@ -60,6 +60,10 @@ class HarmObject h where
     -- | The prepare function is applied when the object is read from file
     prepare :: h -> h
     prepare = id
+
+    -- | Is the character state still at Game Start?
+    isGameStart :: h -> Bool
+    isGameStart = (==GameStart) . stateSeason
 
 instance HarmObject Character where
     name = fullConceptName . concept
@@ -124,9 +128,6 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
            f (x:_) = season x
 
 
--- | The first season the character is played
-isGameStart :: Character -> Bool
-isGameStart = (==GameStart) . characterSeason
 
 -- |
 -- = Advancements
