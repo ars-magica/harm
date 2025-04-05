@@ -117,7 +117,7 @@ instance Show CovenantConcept where
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ CharacterID ]
-         , library :: [ BookCopy ]
+         , library :: [ Book ]
        }  deriving (Eq,Generic,Show)
 
 defaultCovState :: CovenantState 
@@ -141,8 +141,8 @@ data CovAdvancement = CovAdvancement
      , caNarrative :: String     -- ^ freeform description of the activities
      , joining :: [ CharacterID ]
      , leaving :: [ CharacterID ]
-     , acquired :: [ BookCopy ]
-     , lost :: [ BookCopy ]
+     , acquired :: [ Book ]
+     , lost :: [ Book ]
      }
    deriving (Eq,Generic,Show)
 

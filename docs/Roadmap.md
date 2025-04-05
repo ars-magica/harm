@@ -24,9 +24,9 @@ tags:
 + [ ] Phase 4. Polish
 	+ [ ] Display aging bonus etc
 	+ [ ] Mark house virtues, mysteries etc
-	+ [ ] Refactor 
-		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 	+ [ ] Refactor and document code
+		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
+		+ [ ] Draw a flow chart of the character and covenant processing
 	+ [ ] Comment field on traits
 	+ [ ] P/G Char Gen
 	+ [ ] Remove trait when advancing

@@ -21,6 +21,7 @@ import GHC.Generics
 import Data.Maybe
 
 import ArM.Types.TraitKey
+import ArM.Char.Types.Advancement
 
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
@@ -37,17 +38,18 @@ instance Show BookStats where
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
 
--- | An original manuscript with title, author, and stats.
-data BookOriginal = BookOriginal
-         { bookTitle :: String
-         , bookStats :: [ BookStats ]
-         , bookAuthor :: String
-         , bookYear :: Int
-         , bookLocation :: String
-         , bookAnnotation :: String
-         }  deriving (Eq,Generic,Show)
-instance ToJSON BookOriginal
-instance FromJSON BookOriginal
+-- | A book may be an original manuscript or a copy.
+data Book = Book
+     { bookTitle :: String
+     , bookStats :: [ BookStats ]
+     , bookCreator :: String      -- ^ Creator of the copy or manuscript
+     , bookDate :: SeasonTime     -- ^ Time the copy was made            
+     , copiedFrom :: Maybe Book   -- ^ Book copied or Nothing for an original manuscript
+     , bookLocation :: String     -- ^ Location whre the book was written or copied
+     , bookAnnotation :: String
+     } deriving (Eq,Generic,Show)
+instance ToJSON Book
+instance FromJSON Book
 
 -- | Type for the unique identifier of an original book
 data BookKey = BookKey String
@@ -56,34 +58,30 @@ data BookKey = BookKey String
 instance ToJSON BookKey
 instance FromJSON BookKey
 
+-- | The original of a given book
+originalBook :: Book -> Book
+originalBook b
+   | isNothing (copiedFrom b) = b
+   | otherwise = originalBook (fromJust $ copiedFrom b)
+
+-- | The original date the book was authored
+originalDate :: Book -> SeasonTime
+originalDate = bookDate . originalBook
+
+-- | The original author of a given book
+originalAuthor :: Book -> String
+originalAuthor = bookCreator . originalBook
+
 -- | Get the unique identifier of an original book
-bookKey :: BookOriginal -> BookKey
+bookKey :: Book -> BookKey
 bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
-
--- | A copy of a book, whose stats may or may not deviate from the original
--- manuscript.
-data BookCopy = BookCopy
-         { copyTitle :: String
-         , copyStats :: [ BookStats ]
-         , copyist :: String
-         , copyYear :: Int
-         , copyLocation :: String
-         , copyAnnotation :: String
-         , original :: BookKey
-         }  deriving (Eq,Generic,Show)
-instance ToJSON BookCopy
-instance FromJSON BookCopy
-
 
 -- |
 -- = Other instances
 
-instance Ord BookOriginal where
+instance Ord Book where
     compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
                 | otherwise = compare (bookTitle a) (bookTitle b)
-instance Ord BookCopy where
-    compare a b | copyStats a /= copyStats b = compare (copyStats a) (copyStats b)
-                | otherwise  = compare (copyTitle a) (copyTitle b)
 instance Ord BookStats where
     compare a b | topic a /= topic b = compare (topic a) (topic b)
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
