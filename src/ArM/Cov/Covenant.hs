@@ -175,9 +175,10 @@ instance Advance Covenant where
 applyCovAdvancement :: CovAdvancement
                  -> CovenantState 
                  -> (CovAdvancement,CovenantState)
-applyCovAdvancement a' cs = (a',cs)
+applyCovAdvancement a cs = (a,cs')
+    where cs' = cs { covTime = caSeason a
+                   , covenFolkID = joining a ++ covenFolkID cs' }
 {-
-    where cs' = cs { charTime = season a', traits = new }
           new = advanceTraitList change tmp
           tmp = sortTraits $ advanceTraitList inferred old 
           change = sortTraits $ inferDecrepitude $ changes a'
