@@ -110,6 +110,8 @@ sheetWeapon1 db cs w = fromMaybe [] sw
           sw = fmap (weaponStat db) sw'
 
 
+-- |
+-- Compute the CombatLine from a CombatOption without explicit ability
 implicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine -> CombatLine
 implicitAbility db cs co df
   | ws == [] = df { combatComment = "No weapon" }
