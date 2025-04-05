@@ -149,8 +149,37 @@ instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement
 
 
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
 instance Advance Covenant where
-   advance _ = id
-   step = id
-   nextSeason _ = NoTime
+   advance ct c | futureCovAdvancement c == [] = c
+                | isNothing (covenantState c) = advance ct $ prepare c
+                | ct < ct' = c
+                | otherwise =  advance ct $ step c 
+            where y =  head $ futureCovAdvancement c
+                  ct' =  caSeason y
+   step c = c { covenantState = Just cs 
+              , pastCovAdvancement = (a:xs)
+              , futureCovAdvancement = ys 
+              }
+            where (y:ys) = futureCovAdvancement c
+                  xs = pastCovAdvancement c
+                  (a,cs) = applyCovAdvancement y cstate
+                  cstate = fromJust $ covenantState c
+   nextSeason = f . futureCovAdvancement
+       where f [] = NoTime
+             f (x:_) = caSeason x
 
+-- | Apply advancement
+applyCovAdvancement :: CovAdvancement
+                 -> CovenantState 
+                 -> (CovAdvancement,CovenantState)
+applyCovAdvancement a' cs = (a',cs)
+{-
+    where cs' = cs { charTime = season a', traits = new }
+          new = advanceTraitList change tmp
+          tmp = sortTraits $ advanceTraitList inferred old 
+          change = sortTraits $ inferDecrepitude $ changes a'
+          old = sortTraits $ traits cs
+-}

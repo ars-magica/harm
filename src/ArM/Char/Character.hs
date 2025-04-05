@@ -96,10 +96,10 @@ class Advance a where
 -- + `prepareAdvancement` if it modifies the advancement only
 -- + `applyAdvancement` if it modifies the CharacterState
 instance Advance Character where
-   advance ct c | futureAdvancement c == [] = c
-                      | isNothing (state c) = advance ct $ prepareCharacter c
-                      | ct < ct' = c
-                      | otherwise =  advance ct $ step c 
+   advance ct c | isNothing (state c) = advance ct $ prepare c
+                | futureAdvancement c == [] = c
+                | ct < ct' = c
+                | otherwise =  advance ct $ step c 
             where y =  head $ futureAdvancement c
                   ct' =  season y
 

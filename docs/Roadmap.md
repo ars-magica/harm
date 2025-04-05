@@ -14,7 +14,7 @@ tags:
 	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
 	+ [ ] Covenant advancement
-	+ [ ] Covenant members
+	+ [ ] [[Covenant]] members
 + [ ] Phase 2. Improvements
 	+ [ ] Speciality in combat totals
 	+ [ ] Remove dead and retired characters from main list
