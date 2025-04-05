@@ -25,7 +25,6 @@ tags:
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 	+ [ ] Consider a list of narrative items in advancements
 + [ ] Phase 4. Polish
-	+ [ ] Comment on warping «from LR»
 	+ [ ] Display aging bonus etc
 	+ [ ] Mark house virtues, mysteries etc
 	+ [ ] Refactor 
@@ -44,6 +43,10 @@ tags:
 	+ [ ] Count xp total (ingame) for validation
 	+ [ ] Print weapon tables etc
 	+ [ ] More [[Validation Rules]]
++ [ ] Laboratory
++ [ ] Familiar
++ [ ] Talisman (and other enchanted devices)
+	+ [ ] Greater Enchanted Devices have a state - powers may be added
 + [ ] Phase 5. Performance
 	+ [ ] Step 1.  CharacterState in JSON
 		+ [ ] Remove null entries from JSON output
