@@ -21,10 +21,12 @@ module ArM.Cov.Saga ( Saga(..)
                     , covenantIndex
                     , advancementErrors
                     , advancementErrorsLimit
+                    , covenFolk
                     ) where
 
 -- import Data.Maybe 
 import Data.Aeson 
+import Data.Maybe 
 import Data.List 
 import GHC.Generics
 
@@ -262,3 +264,20 @@ instance Advance SagaState where
 
    nextSeason saga = foldl min NoTime ss
       where ss = [ nextSeason x | x <- characters saga ]
+
+-- |
+-- == Covenant support
+
+covenFolk :: Saga -> Covenant -> [ Character ]
+covenFolk saga = lookupCharacters saga . fromMaybe [] . fmap covenFolkID . covenantState
+
+lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
+lookupCharacters saga is = lkup is cs
+    where cs = sortOn characterID $ characters $ sagaState saga
+
+lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
+lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
+                   | x > characterID y = lkup (x:xs) ys
+                   | otherwise = y:lkup xs ys
+lkup (_:_)  _ = trace "Character not found in saga" []
+lkup _ _ = []

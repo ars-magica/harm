@@ -19,6 +19,7 @@ module ArM.Cov.Covenant where
 import GHC.Generics
 import Data.Aeson
 import Data.Maybe
+import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
@@ -113,7 +114,6 @@ instance Show CovenantConcept where
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ CharacterID ]
-         , covenFolk :: [ Character ]
          , library :: [ BookCopy ]
        }  deriving (Eq,Generic,Show)
 
@@ -177,7 +177,7 @@ applyCovAdvancement :: CovAdvancement
                  -> (CovAdvancement,CovenantState)
 applyCovAdvancement a cs = (a,cs')
     where cs' = cs { covTime = caSeason a
-                   , covenFolkID = joining a ++ covenFolkID cs' }
+                   , covenFolkID = sort $ joining a ++ covenFolkID cs' }
 {-
           new = advanceTraitList change tmp
           tmp = sortTraits $ advanceTraitList inferred old 
