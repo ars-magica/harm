@@ -14,7 +14,6 @@ tags:
 	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
 + [ ] Phase 2. Improvements
-	+ [ ] Speciality in combat totals
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons

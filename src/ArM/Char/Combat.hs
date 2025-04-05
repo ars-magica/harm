@@ -63,10 +63,6 @@ data SoakLine = SoakLine
     } deriving (Show, Eq, Generic)
 
 
--- | Look up weapon stats for a possession.
-
-
-
 -- | Compute a single line for the Combat Stats table
 computeCombatLine :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine
 computeCombatLine db cs co
@@ -117,20 +113,8 @@ sheetWeapon1 db cs w = fromMaybe [] sw
 implicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine -> CombatLine
 implicitAbility db cs co df
   | ws == [] = df { combatComment = "No weapon" }
-  | otherwise = addShield db cs ab sstr $ df
-        { combatInit  = weaponInit w 
-        , combatAtk   = fmap (+abscore) $ atk w 
-        , combatDef   = fmap (+abscore) $ def w  
-        , combatDam   = dam w 
-        , combatRange = range w
-        , combatLoad  = load w 
-        , combatComment = absp
-        } 
-   where (abscore,abspec) =  sheetAbilityScore cs $ AbilityKey ab
-         absp | isNothing abspec = ""
-              | otherwise = "Speciality " ++ fromJust abspec
-         wstr = combatWeapon co
-         sstr = combatShield co
+  | otherwise = explicitAbility db cs co ab df
+   where wstr = combatWeapon co
          ws = sheetWeapon db cs wstr
          w:_ = ws
          ab = weaponAbility w
@@ -149,6 +133,9 @@ addShield db cs ab (Just sstr) df
     where shs = sheetWeapon db cs sstr
           sh' = find ( (ab==) . weaponAbility ) shs
           sh = fromJust sh'
+
+-- |
+-- Compute the CombatLine from a CombatOption with explicit ability
 explicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> String -> CombatLine -> CombatLine
 explicitAbility db cs co ab df
   | isNothing w' = df { combatComment = "No weapon" }
@@ -161,9 +148,14 @@ explicitAbility db cs co ab df
         , combatLoad  = load w 
         , combatComment = absp
         } 
-   where (abscore,abspec) = sheetAbilityScore cs $ AbilityKey ab
-         absp | isNothing abspec = ""
-              | otherwise = "Speciality " ++ fromJust abspec
+   where (absc,abspec) = sheetAbilityScore cs $ AbilityKey ab
+         (abscore,absp)
+             | isNothing abspec = (absc,"")
+             | absp' == wstr = (absc+1,"Speciality applied")
+             | abspec == sstr = (absc+1,"Speciality applied")
+             | absp' == combatName co = (absc+1,"Speciality applied")
+             | otherwise = (absc,"Spec. "++absp'++" not applied")
+             where absp' = fromJust abspec
          wstr = combatWeapon co
          sstr = combatShield co
          ws = sheetWeapon db cs wstr
