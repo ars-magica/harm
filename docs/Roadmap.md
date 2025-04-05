@@ -11,8 +11,7 @@ tags:
 	+ [ ] Print and Double-Check Eogan
 	+ [ ] More spell descriptions in CSV file
 + [ ] Phase 1. Covenant
-	+ [ ] Book resource
-	+ [ ] Library
+	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
 	+ [ ] Covenant advancement
 	+ [ ] Covenant members
@@ -24,6 +23,7 @@ tags:
 	+ [ ] Advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
+	+ [ ] Consider a list of narrative items in advancements
 + [ ] Phase 4. Polish
 	+ [ ] Comment on warping «from LR»
 	+ [ ] Display aging bonus etc

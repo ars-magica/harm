@@ -214,7 +214,14 @@ showMastery (Just []) = ""
 showMastery (Just (x:xs)) = ' ':(foldl (++) x $ map (", "++) xs)
 
 instance Show ProtoTrait  where
-   show p 
+   show p = showPT p ++ cms
+      where cmt = (comment p)
+            cms | isNothing cmt = ""
+                | otherwise = " (" ++ fromJust cmt ++ ")"
+
+-- | Auxiliary for show
+showPT :: ProtoTrait -> String
+showPT p 
        | ability p /= Nothing = 
            "Ability: " ++ fromJust ( ability p )  ++ showSpec p
            ++ showXP p
