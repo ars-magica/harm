@@ -13,6 +13,11 @@ aliases:
 	+ [[Combat Stats]]
 	+ [[Types for JSON]]
 
++ The CLI performs one operation in two steps, both defined in `ArM.IO`
+	+ `readSaga` reads the saga file and all the dependent files it requires, and computes every state requested in the file
+		+ [[Saga Advancement Visualised.canvas|Saga Advancement Visualised]]
+	+ `writeSaga` writes all the markdown files needed for saga website
++ 
 
 + Web pages
 	+ Character sheet

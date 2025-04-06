@@ -93,14 +93,6 @@ main = do
 
      main' opt
 
-advChar :: Maybe String -> Maybe String -> Character -> IO ()
-advChar Nothing _ _ = return ()
-advChar sn fn cs0 = do
-     writeMaybeOList fn $ printMD cs
-     return ()
-   where seasn = parseSeasonTime sn
-         cs = advance seasn cs0
-
 main' :: Options -> IO ()
 main' opts | sagaFile opts /= Nothing = do 
      saga <- readSaga $ fromJust $ sagaFile opts
