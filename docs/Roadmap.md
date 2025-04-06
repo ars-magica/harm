@@ -3,22 +3,41 @@ tags:
   - armchar/json/cli
 ---
 
++ [[Visual Roadmap.canvas|Visual Roadmap]]
+
 # Roadmap
 
-+ [ ] **Review**
++ [ ] **Review** Hibernia Saga
 	+ [ ] Fix Cieran's vis
 	+ [ ] Print and Double-Check Cieran
 	+ [ ] Print and Double-Check Eogan
 	+ [ ] More spell descriptions in CSV file
+	+ [ ] Session notes from Hibernia
 + [ ] Phase 1. [[Covenant]]
 	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
+		+ [x] draft
+		+ [ ] test
+		+ [ ] review use of ID
 	+ [ ] Reading and copying advancements
 		+ [ ] using library books
 		+ [ ] calculate book quality from author
 		+ [ ] adding library books
-+ [ ] Phase 2. Improvements
 	+ [ ] Season page, showing all activity in a season 
+	+ [ ] Grimoire
++ [ ] Phase 2. Advancement 
+	+ [ ] Reading
+	+ [ ] Author books
+		+ [ ] Author
+		+ [ ] Add book to library
+	+ [ ] Teaching/.Taught
+	+ [ ] Training
+	+ [ ] Lab Total
+	+ [ ] Enchantments
+		+ [ ] Create Lesser Enchantments
+		+ [ ] Create Greater Enchanted Devices with state
+	+ [ ] Lab assistance
++ [ ] Phase 3. Improvements
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
@@ -26,7 +45,12 @@ tags:
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 	+ [ ] Consider a list of narrative items in advancements
+	+ [ ] Covenant Advancement with list of stories with SQ
 + [ ] Phase 4. Polish
+	+ [ ] Break up possession
+		+ [ ] different constructors for weapon and item
+		+ [ ] parse JSON with different constructors
+		+ [ ] support book possession
 	+ [ ] Display aging bonus etc
 	+ [ ] Mark house virtues, mysteries etc
 	+ [ ] Refactor and document code

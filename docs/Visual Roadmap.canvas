@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"id":"66e169c2a9c320d6","x":180,"y":-280,"width":290,"height":500,"type":"group","label":"Features"},
+		{"id":"aa1415a589c2dba7","type":"group","x":-220,"y":-220,"width":290,"height":380,"label":"Documentation"},
+		{"id":"b26eecf3335a0502","type":"group","x":-620,"y":-280,"width":290,"height":280,"label":"Refactoring"},
+		{"id":"831e1d7e4f9a59ff","type":"text","text":"Streamlining","x":-600,"y":-260,"width":250,"height":60},
+		{"id":"0d24b301a5f169ae","type":"text","text":"Encapsulate Modules","x":-600,"y":-80,"width":250,"height":60},
+		{"id":"317e2d92471643e4","type":"text","text":"Flow Chart of Transformations","x":-200,"y":-200,"width":250,"height":60},
+		{"id":"93cf0a3456d58407","type":"text","text":"Identify Critical Objects","x":-200,"y":80,"width":250,"height":60},
+		{"id":"f55f75310ad8edf5","x":200,"y":-260,"width":250,"height":60,"type":"text","text":"Library Interdependence"},
+		{"id":"f7d4237a7f586220","x":200,"y":-50,"width":250,"height":60,"type":"text","text":"Validation"},
+		{"id":"e27bace34fee805d","x":200,"y":140,"width":250,"height":60,"type":"text","text":"Output\n"}
+	],
+	"edges":[
+		{"id":"a93e0ffa83fbd691","fromNode":"831e1d7e4f9a59ff","fromSide":"right","toNode":"317e2d92471643e4","toSide":"left"},
+		{"id":"54e597362fa8a1cc","fromNode":"317e2d92471643e4","fromSide":"left","toNode":"0d24b301a5f169ae","toSide":"right"},
+		{"id":"87501ef681c91b5b","fromNode":"0d24b301a5f169ae","fromSide":"right","toNode":"93cf0a3456d58407","toSide":"left"},
+		{"id":"9d0bd855f9b102b7","fromNode":"93cf0a3456d58407","fromSide":"right","toNode":"f7d4237a7f586220","toSide":"left"},
+		{"id":"0506db8c803cf383","fromNode":"317e2d92471643e4","fromSide":"right","toNode":"f7d4237a7f586220","toSide":"left"},
+		{"id":"0d4650d142a991bb","fromNode":"93cf0a3456d58407","fromSide":"right","toNode":"e27bace34fee805d","toSide":"left"}
+	]
+}
