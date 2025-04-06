@@ -647,6 +647,7 @@ instance Markdown Book where
                  , cnt
                  , lns
                  , ans
+                 , OString $ "Key: " ++ bookID book ++ " (" ++ originalID book ++")"
                  ]
          ]
          where ann = trim $ bookAnnotation book

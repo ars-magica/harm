@@ -24,6 +24,7 @@ tags:
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
 	+ [ ] group and  sort books in library
+	+ [ ] Handle Antologies
 + [ ] Phase 2. Advancement 
 	+ [ ] Reading
 	+ [ ] Author books

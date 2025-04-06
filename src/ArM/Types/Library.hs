@@ -72,6 +72,10 @@ originalBook b
    | isNothing (copiedFrom b) = b
    | otherwise = originalBook (fromJust $ copiedFrom b)
 
+-- | The ID used to avoid rereading of tractatus
+originalID :: Book -> String
+originalID = bookID . originalBook
+
 -- | The original date the book was authored
 originalDate :: Book -> SeasonTime
 originalDate = bookDate . originalBook
@@ -130,7 +134,7 @@ makeBookStats x y z = BookStats
 
 
 instance ArMCSV Book where
-   fromCSVline (x1:x2:x3':x4:x5:x6:x7:x8:_) =
+   fromCSVline (x0:x1:x2:x3':x4:x5:x6:x7:x8:_) =
       defaultObject { bookID = y 
                 , bookTitle = x4
                 , bookStats = [ makeBookStats x1 x2 x3 ]
@@ -139,7 +143,9 @@ instance ArMCSV Book where
                 , bookCount = fromMaybe 1 $ readMaybe x7
                 , bookLanguage = lng
                 }
-                where y = trim x2 ++ x3 ++ trim x4
+                where y | xid == "" = trim x2 ++ x3 ++ " " ++ trim x4
+                        | otherwise = xid
+                      xid = trim x0
                       x3 = trim x3'
                       lng' = trim x8
                       lng | lng' == "" = Nothing
