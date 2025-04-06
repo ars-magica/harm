@@ -269,8 +269,8 @@ instance Advance SagaState where
 
 covenFolk :: Saga -> CovenantState -> [ Character ]
 covenFolk saga cov = trace "covenFolk: " $ lookupCharacters s $ f cov
-   where f = trace "xs" $ covenFolkID 
-         s = ttrace saga
+   where f = covenFolkID 
+         s = saga
 
 lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
 lookupCharacters saga is = trace "lookupCharacters" $ lkup is cs
@@ -278,7 +278,7 @@ lookupCharacters saga is = trace "lookupCharacters" $ lkup is cs
 
 lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
 lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
-                   | x > characterID y = trace "lkup1 " $ lkup (x:xs) ys
-                   | otherwise = trace "lkup2 " $ y:lkup xs ys
+                   | x > characterID y = lkup (x:xs) ys
+                   | otherwise = y:lkup xs ys
 lkup (_:_)  _ = trace "Character not found in saga" []
 lkup _ _ = []

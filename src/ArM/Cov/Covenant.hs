@@ -67,7 +67,7 @@ instance HarmObject Covenant where
     stateSeason = fromMaybe NoTime . fmap covTime . covenantState
     prepare x = trace "prepare Covenant" $ f x
         where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
-                  | otherwise = ttrace y 
+                  | otherwise = y 
 
 -- |
 -- = CovenantConcept Object
@@ -186,7 +186,7 @@ instance Advance Covenant where
                   cstate = fromJust $ covenantState c
    nextSeason = f . futureCovAdvancement
        where f [] = NoTime
-             f (x:_) = ttrace $ caSeason x
+             f (x:_) = caSeason x
 
 -- | Apply advancement
 applyCovAdvancement :: CovAdvancement
