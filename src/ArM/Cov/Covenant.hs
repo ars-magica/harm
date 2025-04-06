@@ -171,8 +171,8 @@ instance FromJSON CovAdvancement where
 -- be implemented separately to account for different advancement classes.
 instance Advance Covenant where
    advance ct c | isNothing (covenantState c) = trace "need prepare" $ advance ct $ prepare c
-                | ct < ct' = trace "covenant advancement done" c
-                | otherwise =  trace "need step" $ advance ct $ step c 
+                | ct < ct' =  c
+                | otherwise =  advance ct $ step c 
             where ct' =  nextSeason c
    step c = c { covenantState = Just cs 
               , pastCovAdvancement = (a:xs)
