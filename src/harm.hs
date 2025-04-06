@@ -16,9 +16,6 @@ import System.Console.GetOpt
 import ArM.BasicIO
 import ArM.Debug.Time
 import ArM.IO
-import ArM.Char.Character
-import ArM.Markdown
-
 
 import Data.Maybe (fromJust)
 
