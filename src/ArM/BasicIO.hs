@@ -49,6 +49,15 @@ indentOList' :: String -> OList -> OList
 indentOList' s (OString x) = OString $ s ++ x
 indentOList' s (OList xs) = OList $ map (indentOList' ("    "++s)) xs
 
+-- | Render an OList as a hierarchical markdown list
+indentOList1 :: OList -> OList
+indentOList1 (OString x) = OString $ '+':' ':x
+indentOList1 (OList xs) = OList $ map (indentOList' "+ ") xs
+
+indentOList1' :: String -> OList -> OList
+indentOList1' s (OString x) = OString $ s ++ x
+indentOList1' s (OList xs) = OList $ map (indentOList' ("    "++s)) xs
+
 -- | 
 -- == Writing OList to file
 

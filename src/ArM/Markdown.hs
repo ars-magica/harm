@@ -631,7 +631,7 @@ instance Markdown CovenantConcept where
 
 formatTitle :: Book -> String
 formatTitle book = tis ++ aus ++ dat
-     where aut = originalAuthor book
+     where aut = trim $ originalAuthor book
            aus | aut == "" = ""
                | otherwise = " by " ++ aut
            tit = originalTitle book
@@ -644,12 +644,16 @@ instance Markdown Book where
     printMD book = OList  
          [ OString $ formatTitle book
          , OList [ OString $ show (bookStats book) 
+                 , lns
                  , ans
                  ]
          ]
-         where ann = bookAnnotation book
+         where ann = trim $ bookAnnotation book
                ans | ann == "" = OList []
-                   | otherwise = OString ann
+                   | otherwise = OString $ ann
+               lng = trim $ fromMaybe "" $ bookLanguage book
+               lns | lng == "" = OList []
+                   | otherwise = OString $ "in " ++ lng
 
 instance LongSheet CovenantState
 instance Markdown CovenantState where
@@ -658,7 +662,7 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Library"
         , OString ""
-        , indentOList $ OList $ map printMD $ library cov
+        , OList $ map indentOList $ map printMD $ library cov
         ]
     printMDaug saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
@@ -667,6 +671,6 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Library"
         , OString ""
-        , indentOList $ OList $ map (printMDaug saga) $ library cov
+        , OList $ map indentOList $ map (printMDaug saga) $ library cov
         ]
 

@@ -13,16 +13,13 @@ tags:
 	+ [ ] Print and Double-Check Eogan
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Session notes from Hibernia
+	+ [ ] Review library
 + [ ] Phase 1. [[Covenant]]
-	+ [ ] Library  see [[Possessions and Resources]]
-	+ [ ] Read books from CSV
-		+ [x] draft
-		+ [ ] test
-		+ [ ] review use of ID
 	+ [ ] Reading and copying advancements
 		+ [ ] using library books
 		+ [ ] calculate book quality from author
 		+ [ ] adding library books
+		+ [ ] review use of ID
 	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
 + [ ] Phase 2. Advancement 

@@ -20,11 +20,13 @@ import Data.Aeson
 import GHC.Generics
 import Data.Maybe
 import Data.Text  (splitOn,unpack,pack)
+import Text.Read 
 
 import ArM.DB.CSV
 import ArM.Types.TraitKey
 import ArM.Char.Types.Advancement
 import ArM.Helper
+import ArM.Debug.Trace
 
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
@@ -51,6 +53,7 @@ data Book = Book
      , copiedFrom :: Maybe Book   -- ^ Book copied or Nothing for an original manuscript
      , bookLocation :: String     -- ^ Location whre the book was written or copied
      , bookAnnotation :: String   -- ^ Additional information in free text
+     , bookLanguage  :: Maybe String  -- ^ Language of the book
      , bookCount :: Int               -- ^ Number of copies 
      } deriving (Eq,Generic,Show)
 instance ToJSON Book
@@ -100,12 +103,15 @@ instance Ord BookStats where
 -- == CSV
 
 readStats :: String -> (Maybe Int, Int)
-readStats [] = error "no parse"
+readStats "" = trace "empty book stats" (Nothing, (-1))
 readStats (' ':xs) = readStats xs
-readStats ('Q':xs) = (Nothing, read xs)
-readStats ('L':xs) = (Just $ read y, read z)
+readStats ('Q':xs) = (Nothing, readMaybeInt xs)
+readStats ('L':xs) = (Just $ readMaybeInt y, readMaybeInt z)
         where y:z:_ = map unpack $ splitOn "Q" $ pack xs
-readStats _ = error "no parse"
+readStats x = trace ( "no parse: " ++ x ) (Nothing, (-1))
+
+readMaybeInt :: String -> Int
+readMaybeInt = fromMaybe (-1) . readMaybe
 
 readTopic :: String -> String -> TraitKey
 readTopic x = readTopic' (trim x)
@@ -124,16 +130,20 @@ makeBookStats x y z = BookStats
 
 
 instance ArMCSV Book where
-   fromCSVline (x1:x2:x3':x4:x5:x6:x7:_) =
+   fromCSVline (x1:x2:x3':x4:x5:x6:x7:x8:_) =
       defaultObject { bookID = y 
                 , bookTitle = x4
                 , bookStats = [ makeBookStats x1 x2 x3 ]
                 , bookCreator = x5
                 , bookAnnotation = x6
-                , bookCount = read x7
+                , bookCount = fromMaybe 1 $ readMaybe x7
+                , bookLanguage = lng
                 }
                 where y = trim x2 ++ x3 ++ trim x4
                       x3 = trim x3'
+                      lng' = trim x8
+                      lng | lng' == "" = Nothing
+                          | otherwise = Just lng'
    fromCSVline _ = defaultObject
    defaultObject = Book
      { bookID = ""
@@ -144,5 +154,6 @@ instance ArMCSV Book where
      , copiedFrom = Nothing
      , bookLocation = ""
      , bookAnnotation = ""
+     , bookLanguage = Nothing
      , bookCount = 1 }
    getID = bookID
