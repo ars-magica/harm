@@ -23,6 +23,7 @@ tags:
 	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
+	+ [ ] group and  sort books in library
 + [ ] Phase 2. Advancement 
 	+ [ ] Reading
 	+ [ ] Author books
