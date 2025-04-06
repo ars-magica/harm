@@ -17,7 +17,7 @@
 -- or written to file.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Validation (validate,validateXP,validateChar) where
+module ArM.Char.Validation (validate,validateCharGen,validateChar) where
 
 import ArM.Char.Types.Advancement
 import ArM.Char.Trait
@@ -30,12 +30,19 @@ import Data.Maybe (fromMaybe,isJust)
 
 import ArM.Debug.Trace
 
--- | validate an advancement, adding results to the validation field
+-- |
+-- = In-game Validation
+-- In-game validation is relatively simple, depending only on the
+-- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
+
+
+-- |
+-- Validate an in-game advancement, adding results to the validation field.
 validate :: AugmentedAdvancement -> AugmentedAdvancement
 validate a | otherwise = validateXP a
 
 -- |
--- = XP Validation
+-- == XP Validation
 
 -- | Count regular XP (excluding reputation) from a ProtoTrait
 regXP :: ProtoTrait -> XPType
@@ -62,7 +69,14 @@ calculateXP :: Advancement -> XPType
 calculateXP = sum . map regXP . changes
 
 -- |
--- = Validation of Characteristics
+-- = CharGen Validation
+-- 
+-- CharGen validation is tricky, often depending on virtues and flaws.
+-- Therefore, most functions depend also on the `CharacterSheet` in addition
+-- to the `AugmentedAdvancement`.
+
+-- |
+-- == Validation of Characteristics
 
 -- | Validate points spent on characterics.
 validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
