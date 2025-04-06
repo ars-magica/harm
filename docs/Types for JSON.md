@@ -2,7 +2,23 @@
 tags:
   - armchar/json
 ---
+
++ There are three core types of domain objects in the model
+	+ `Saga` 
+	+ `Character`
+	+ `Covenant`
++ The `Saga` is the top level of the data structure, maintaining lists of all characters and covenants in play.
++ Sagas, Characters, and Covenants are time dependent object, which change from one season to the next.
+	+ All the state dependent information is kept in a separate field (as a `SagaState`, `CharacterState`, or `CovenantState` respectively)
+	+ They are instances of the `Advance` class, with function to advance to new seasons in time
++ A saga is loaded by the `readSaga` function from `ArM.IO`, which also loads all constituent files as specified in the main file
+	+ hArM uses both CSV and JSON files
+	+ JSON is used for saga, characters, and covenants
+	+ CSV is used for lists of books, spells, and weapons
+
 A large and critical part of the logic is concerned with the individual character. We will therefore discuss that first, before we go into the management of covenants and sagas.
+
+
 ## The Character
 
 + The `Character Type` is provided by `ArM.Char.Character`.  It is a composite type, comprising

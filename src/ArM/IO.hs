@@ -16,7 +16,7 @@
 -- in JSON, including Character and Covenant.
 --
 -----------------------------------------------------------------------------
-module ArM.IO where
+module ArM.IO (readSaga,writeSaga) where
 
 import Data.Maybe 
 import Data.Aeson 
