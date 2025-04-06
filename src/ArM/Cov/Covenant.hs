@@ -131,7 +131,12 @@ defaultCovState = CovenantState
 
 
 instance ToJSON CovenantState
-instance FromJSON CovenantState
+instance FromJSON CovenantState where
+    parseJSON = withObject "CovenantState" $ \v -> CovenantState
+        <$> v .:? "season" .!= GameStart
+        <*> v .:? "covenfolk" .!= []
+        <*> v .:? "library" .!= []
+        <*> v .:? "librarycsv"
 
 
 -- |
