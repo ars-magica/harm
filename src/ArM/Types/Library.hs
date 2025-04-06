@@ -72,6 +72,10 @@ originalDate = bookDate . originalBook
 originalAuthor :: Book -> String
 originalAuthor = bookCreator . originalBook
 
+-- | The original author of a given book
+originalTitle :: Book -> String
+originalTitle = bookTitle . originalBook
+
 -- | Get the unique identifier of an original book
 bookKey :: Book -> BookKey
 bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)

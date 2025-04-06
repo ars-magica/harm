@@ -30,6 +30,7 @@ import ArM.Char.Trait
 import ArM.Char.Combat
 import ArM.Cov.Saga
 import ArM.Cov.Covenant
+import ArM.Types.Library
 import ArM.DB.Spell
 import ArM.GameRules
 import ArM.BasicIO
@@ -628,14 +629,44 @@ instance Markdown CovenantConcept where
        where app | isNothing (covAppearance cov) = ""
                  | otherwise = "**Appearance** " ++ (fromJust $ covAppearance cov)
 
+formatTitle :: Book -> String
+formatTitle book = tis ++ aus ++ dat
+     where aut = originalAuthor book
+           aus | aut == "" = ""
+               | otherwise = " by " ++ aut
+           tit = originalTitle book
+           tis | tit == "" = ""
+               | otherwise = " *" ++ tit ++ "*"
+           dat = " (" ++ show (originalDate book) ++ ")"
+
+instance LongSheet Book
+instance Markdown Book where
+    printMD book = OList  
+         [ OString $ formatTitle book
+         , OList [ OString $ show (bookStats book) 
+                 , ans
+                 ]
+         ]
+         where ann = bookAnnotation book
+               ans | ann == "" = OList []
+                   | otherwise = OString ann
+
 instance LongSheet CovenantState
 instance Markdown CovenantState where
     printMD cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
+        , OString ""
+        , OString "### Library"
+        , OString ""
+        , indentOList $ OList $ map printMD $ library cov
         ]
     printMDaug saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
         , OString ""
         , trace "covenFolk index " $ characterIndex $ covenFolk saga cov
+        , OString ""
+        , OString "### Library"
+        , OString ""
+        , indentOList $ OList $ map (printMDaug saga) $ library cov
         ]
 
