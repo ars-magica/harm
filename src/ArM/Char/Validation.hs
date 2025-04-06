@@ -17,25 +17,33 @@
 -- or written to file.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Validation (validate,validateXP,validateChar) where
+module ArM.Char.Validation (validate,validateCharGen) where
 
 import ArM.Char.Types.Advancement
 import ArM.Char.Trait
+import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
 import ArM.GameRules
 import ArM.Helper
 
-import Data.Maybe (fromMaybe,isJust)
+import Data.Maybe 
 
 import ArM.Debug.Trace
 
--- | validate an advancement, adding results to the validation field
+-- |
+-- = In-game Validation
+-- In-game validation is relatively simple, depending only on the
+-- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
+
+
+-- |
+-- Validate an in-game advancement, adding results to the validation field.
 validate :: AugmentedAdvancement -> AugmentedAdvancement
 validate a | otherwise = validateXP a
 
 -- |
--- = XP Validation
+-- == XP Validation
 
 -- | Count regular XP (excluding reputation) from a ProtoTrait
 regXP :: ProtoTrait -> XPType
@@ -62,7 +70,93 @@ calculateXP :: Advancement -> XPType
 calculateXP = sum . map regXP . changes
 
 -- |
--- = Validation of Characteristics
+-- = CharGen Validation
+-- 
+-- CharGen validation is tricky, often depending on virtues and flaws.
+-- Therefore, most functions depend also on the `CharacterSheet` in addition
+-- to the `AugmentedAdvancement`.
+
+-- | validate an advancement, adding results to the validation field
+validateCharGen :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateCharGen sheet = validateCharGen' sheet . initialLimits sheet
+
+validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateCharGen' cs a 
+           | m == "Virtues and Flaws" = validateVF cs a
+           | m == "Characteristics" = validateChar cs a
+           | otherwise = validateLevels $ validateXP a
+           where m = fromMaybe "" $ mode a
+
+-- | Validate allocation of virtues and flaws.
+validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateVF sheet a 
+             | m /= "Virtues and Flaws" = a
+             | 0 /= f + v = a { validation = ValidationError imb:validation a }
+             | v > lim = a { validation = ValidationError over:validation a }
+             | otherwise = a { validation = Validated val:validation a }
+           where m = fromMaybe "" $ mode a
+                 (f,v) = calculateVFCost $ advancement a
+                 imb = "Virtues and flaws are imbalanced: "
+                     ++ show v ++ " points of virtues and"
+                     ++ show (-f) ++ " points of flaws."
+                 over = "Exceeds limit on virtues; " ++ show v ++ suf
+                 val = "Virtues and flaws balance at " ++ show v ++ suf
+                 suf = " of " ++ show lim ++ " points."
+                 lim = vfLimit sheet
+
+-- | Return the limit on flaw points, i.e. 3 for grogs and 10 for others.
+vfLimit :: CharacterSheet -> Int
+vfLimit sheet | Grog == csType sheet = 3
+              | otherwise = 10
+
+-- | Count virtue and flaw costs from an Advancement
+calculateVFCost :: Advancement -> (Int,Int)
+calculateVFCost a = ( sum $ filter (<0) rs, sum $ filter (>0) rs )
+   where rs = map regCost $ changes a
+
+
+-- | Extract the virtue/flaw cost from a ProtoType; zero for other types of traits.
+regCost :: ProtoTrait -> Int
+regCost p | isJust (virtue p) = m p * f p
+          | isJust (flaw p) = m p * f p
+          | otherwise = 0
+        where f = fromMaybe 0 . cost 
+              m = fromMaybe 1 . multiplicity
+
+-- | Calculate initial XP limits on Char Gen Advancements
+initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits sheet ad
+            | m == "Early Childhood" = ( f ad 45 ) { augYears = Just 5 }
+            | m == "Apprenticeship" = app ad
+            | m == "Characteristics" = f ad 0
+            | m == "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
+            | otherwise = ad { effectiveSQ = sourceQuality $ advancement ad  }
+           where m = fromMaybe "" $ mode ad
+                 f a x | isJust t = a { effectiveSQ = t }
+                       | otherwise = a { effectiveSQ = Just x }
+                 t = sourceQuality $ advancement ad
+                 (app1,app2) = appSQ vfs
+                 app a = a { effectiveSQ = Just app1, levelLimit = Just app2, augYears = Just 15 }
+                 vfs = vfList sheet
+
+-- | Validate allocation of Spell Levels.
+validateLevels :: AugmentedAdvancement -> AugmentedAdvancement
+validateLevels a | isNothing (levelLimit a) = a
+                 | sq > lsum = a { validation = und:validation a }
+                 | sq < lsum = a { validation = over:validation a }
+                 | otherwise = a { validation = val:validation a }
+    where lsum = calculateLevels $ advancement a
+          sq = fromMaybe 0 $ levelLimit a
+          val = Validated $ "Correctly spent " ++ show sq ++ " spell levels."
+          over = ValidationError $ "Overspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
+          und = ValidationError $ "Underspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
+
+-- | Count spell levels from an Advancement
+calculateLevels :: Advancement -> Int
+calculateLevels = sum . map ( fromMaybe 0 . level ) . changes
+
+-- |
+-- == Validation of Characteristics
 
 -- | Validate points spent on characterics.
 validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement

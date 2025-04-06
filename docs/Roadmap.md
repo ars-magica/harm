@@ -19,6 +19,9 @@ tags:
 		+ [ ] using library books
 		+ [ ] calculate book quality from author
 		+ [ ] adding library books
+			+ [ ] covenant advancement may depend on character advancement
+			+ [ ] character advancement depends on previous covenant state for book availability
+			+ [ ] new books are created by characters and may propagate into the covenant advancement, augmenting the library
 		+ [ ] review use of ID
 	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
@@ -28,7 +31,9 @@ tags:
 + [ ] Phase 2. Advancement 
 	+ [ ] Reading
 	+ [ ] Author books
-	+ [ ] Teaching/.Taught
+	+ [ ] Teaching/Taught
+		+ [ ] Difficult to derive SQ from the teacher
+		+ [ ] Could potentially augment advancement and advance in multiple steps
 	+ [ ] Training
 	+ [ ] Lab Total
 	+ [ ] Enchantments
