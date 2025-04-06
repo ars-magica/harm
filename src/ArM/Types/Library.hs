@@ -19,10 +19,12 @@ module ArM.Types.Library where
 import Data.Aeson
 import GHC.Generics
 import Data.Maybe
+import Data.Text  (splitOn,unpack,pack)
 
 import ArM.DB.CSV
 import ArM.Types.TraitKey
 import ArM.Char.Types.Advancement
+import ArM.Helper
 
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
@@ -90,18 +92,42 @@ instance Ord BookStats where
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
                 | otherwise  = compare (quality a) (quality b)
 
+-- |
+-- == CSV
 
-instance ArMCSV SpellRecord where
+readStats :: String -> (Maybe Int, Int)
+readStats [] = error "no parse"
+readStats (' ':xs) = readStats xs
+readStats ('Q':xs) = (Nothing, read xs)
+readStats ('L':xs) = (Just $ read y, read z)
+        where y:z:_ = map unpack $ splitOn "Q" $ pack xs
+readStats _ = error "no parse"
+
+readTopic :: String -> String -> TraitKey
+readTopic x = readTopic' (trim x)
+readTopic' :: String -> String -> TraitKey
+readTopic' "Art" y  = ArtKey $ trim y
+readTopic' "Ability" y  = AbilityKey $ trim y
+-- readTopic' "Spell" y  = SpellKey $ trim y
+readTopic' _ y  = AbilityKey $ trim y
+
+makeBookStats :: String -> String -> String -> BookStats
+makeBookStats x y z = BookStats 
+         { topic = readTopic x y
+         , quality = q
+         , bookLevel = l
+         } where (l,q) = readStats z
+
+
+instance ArMCSV Book where
    fromCSVline (x1:x2:x3:x4:x5:x6:x7:x8:x9:x10:x11:x12:_) =
       defaultObject { bookID = x1 
                 , bookTitle = x2
-                , bookStats = [ makeBookStats x3 x4 x5 x6 ]
+                , bookStats = [ makeBookStats x3 x4 x5 ]
                 , bookCreator = x7
-                , bookDate = x8
-                , bookTime = x9
-                , bookLocation = x10
+                , bookDate = parseST x8
                 , bookAnnotation = x11
-                , bookCount = x12
+                , bookCount = read x12
                 }
    fromCSVline _ = defaultObject
    defaultObject = Book
@@ -114,4 +140,4 @@ instance ArMCSV SpellRecord where
      , bookLocation = ""
      , bookAnnotation = ""
      , bookCount = 1 }
-   getID = spellRecordName
+   getID = bookID

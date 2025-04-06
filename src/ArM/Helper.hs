@@ -16,6 +16,12 @@ import Data.Maybe (fromMaybe)
 import Data.List (sort)
 import qualified Network.URI.Encode as URI
 import ArM.BasicIO
+import Data.Char
+
+
+trim :: String -> String
+trim = f . f
+   where f = reverse . dropWhile isSpace
 
 -- |
 -- = Convenience functions for Maybe
