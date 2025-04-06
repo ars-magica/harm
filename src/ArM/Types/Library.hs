@@ -20,6 +20,7 @@ import Data.Aeson
 import GHC.Generics
 import Data.Maybe
 
+import ArM.DB.CSV
 import ArM.Types.TraitKey
 import ArM.Char.Types.Advancement
 
@@ -40,13 +41,15 @@ instance Show BookStats where
 
 -- | A book may be an original manuscript or a copy.
 data Book = Book
-     { bookTitle :: String
-     , bookStats :: [ BookStats ]
+     { bookID :: String
+     , bookTitle :: String
+     , bookStats :: [ BookStats ] -- ^ list of stats per topic covered
      , bookCreator :: String      -- ^ Creator of the copy or manuscript
      , bookDate :: SeasonTime     -- ^ Time the copy was made            
      , copiedFrom :: Maybe Book   -- ^ Book copied or Nothing for an original manuscript
      , bookLocation :: String     -- ^ Location whre the book was written or copied
-     , bookAnnotation :: String
+     , bookAnnotation :: String   -- ^ Additional information in free text
+     , bookCount :: Int               -- ^ Number of copies 
      } deriving (Eq,Generic,Show)
 instance ToJSON Book
 instance FromJSON Book
@@ -87,3 +90,28 @@ instance Ord BookStats where
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
                 | otherwise  = compare (quality a) (quality b)
 
+
+instance ArMCSV SpellRecord where
+   fromCSVline (x1:x2:x3:x4:x5:x6:x7:x8:x9:x10:x11:x12:_) =
+      defaultObject { bookID = x1 
+                , bookTitle = x2
+                , bookStats = [ makeBookStats x3 x4 x5 x6 ]
+                , bookCreator = x7
+                , bookDate = x8
+                , bookTime = x9
+                , bookLocation = x10
+                , bookAnnotation = x11
+                , bookCount = x12
+                }
+   fromCSVline _ = defaultObject
+   defaultObject = Book
+     { bookID = ""
+     , bookTitle = ""
+     , bookStats = [ ] 
+     , bookCreator = ""
+     , bookDate = NoTime
+     , copiedFrom = Nothing
+     , bookLocation = ""
+     , bookAnnotation = ""
+     , bookCount = 1 }
+   getID = spellRecordName
