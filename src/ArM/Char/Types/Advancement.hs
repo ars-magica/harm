@@ -135,7 +135,7 @@ class AdvancementLike a where
      mode :: a -> Maybe String  -- ^ mode of study
      season :: a -> SeasonTime    -- ^ season or development stage
      narrative :: a -> Maybe String -- ^ freeform description of the activities
-     uses :: a -> Maybe [ Resource ] -- ^ Books and other resources used exclusively by the character
+     usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
      -- effectiveSQ :: Maybe Int   -- ^ SQ modified by virtues and flaws
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
@@ -151,7 +151,7 @@ data Advancement = Advancement
      , advSeason :: SeasonTime    -- ^ season or development stage
      , advYears :: Maybe Int    -- ^ number of years advanced
      , advNarrative :: Maybe String -- ^ freeform description of the activities
-     , advUses :: Maybe [ Resource ] -- ^ Books and other resources used exclusively by the character
+     , advUses :: [ String ] -- ^ Books used exclusively by the character
      , advSQ :: Maybe XPType -- ^ Source Quality (SQ) This should be the common SQ for adventures; individual variation should be recorded as `advBonus`
      , advBonus :: Maybe XPType -- ^ Bonus to Source Quality (SQ)
      , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
@@ -164,7 +164,7 @@ defaultAdv = Advancement
      , advSeason = NoTime
      , advYears = Nothing
      , advNarrative = Nothing
-     , advUses = Nothing
+     , advUses = []
      , advSQ = Nothing
      , advBonus = Nothing
      , advChanges = [ ]  
@@ -218,14 +218,14 @@ instance AdvancementLike Advancement where
      mode = advMode
      season  = advSeason
      narrative  = advNarrative
-     uses  = advUses
+     usesBook = advUses
      sourceQuality  = advSQ
      changes = advChanges
 instance AdvancementLike AugmentedAdvancement where
      mode a = advMode  $ advancement a
      season  = advSeason  .  advancement 
      narrative  a = advNarrative  $ advancement  a
-     uses  a = advUses  $ advancement a
+     usesBook  a = advUses  $ advancement a
      sourceQuality  a =  advSQ  $ advancement a
      changes  a = advChanges  $ advancement  a
 
@@ -244,7 +244,7 @@ instance FromJSON Advancement where
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"
         <*> v .:? "narrative"
-        <*> v .:? "uses"
+        <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "bonusQuality"
         <*> fmap maybeList ( v .:? "changes" )

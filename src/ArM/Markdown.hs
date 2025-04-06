@@ -317,6 +317,7 @@ instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 
        , OList [ stringMD $ narrative a ]
+       , usesString a
        , OList $ map printMD $ changes a
        , infl
        , OList $ map (OString . show) $ validation a
@@ -326,6 +327,11 @@ instance Markdown AugmentedAdvancement where
             inf = inferredTraits a
             infl | inf == [] = OList []
                  | otherwise = OList [ OString "Inferred traits", OList $ map printMD inf ]
+
+usesString :: AdvancementLike a => a -> OList
+usesString a | u == [] = OList []
+             | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
+         where u = usesBook a
 
 
 -- | Render the season and mode of an advancement
@@ -344,6 +350,7 @@ instance Markdown Advancement where
    printMD a = indentOList $ OList
          [ OString $ showTime xps (season a) (mode a) y 
          , OList [ stringMD $ narrative a ]
+         , usesString a
          , OList $ map printMD $ changes a
          ]
       where xps | sx == Nothing = ""
