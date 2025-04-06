@@ -22,6 +22,7 @@ tags:
 		+ [ ] review use of ID
 	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
+	+ [ ] Initiation scripts
 + [ ] Phase 2. Advancement 
 	+ [ ] Reading
 	+ [ ] Author books
