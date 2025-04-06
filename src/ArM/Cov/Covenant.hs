@@ -118,6 +118,7 @@ data CovenantState = CovenantState
          { covTime :: SeasonTime
          , covenFolkID :: [ CharacterID ]
          , library :: [ Book ]
+         , librarycsv :: Maybe String
        }  deriving (Eq,Generic,Show)
 
 defaultCovState :: CovenantState 
@@ -125,6 +126,7 @@ defaultCovState = CovenantState
          { covTime = GameStart
          , covenFolkID = []
          , library = []
+         , librarycsv = Nothing
        }  
 
 

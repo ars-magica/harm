@@ -21,12 +21,15 @@ module ArM.IO where
 import Data.Maybe 
 import Data.Aeson 
 import qualified Data.ByteString.Lazy as LB
+import qualified Data.CSV as CSV
+import Text.ParserCombinators.Parsec
 
 import System.Directory
 
 import ArM.Char.Character
 import ArM.Markdown
 import ArM.Cov.Saga
+import ArM.Cov.Covenant
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.BasicIO
@@ -96,7 +99,8 @@ writeSaga saga = do
 -- |
 -- == Read Character and Covenant Data
 
-class FromJSON c => ArMRead c where
+-- class FromJSON c => ArMRead c where
+
 -- | Read a character from JSON.  Return Maybe Character
 readArM :: (HarmObject c, FromJSON c)
         => String -- ^ Filename
@@ -105,6 +109,19 @@ readArM fn = LB.readFile fn >>= return . prepMaybe . decode
       where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
             prepMaybe (Just x) = Just $ prepare x
 
+
+loadCovenant :: Maybe Covenant -> IO (Maybe Covenant)
+loadCovenant Nothing  = return  Nothing
+loadCovenant (Just c)
+    | isNothing st' = return $ Just c
+    | isNothing fn = return $ Just c
+    | otherwise = parseFromFile CSV.csvFile (fromJust fn) >>=
+       ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = g lib } } )
+       where fn = librarycsv st
+             st = fromJust st'
+             st' = covenantState c
+             g (Left _) = []
+             g (Right x) = map fromCSVline x
 
 -- |
 -- = Write Character Sheets

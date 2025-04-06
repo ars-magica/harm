@@ -13,7 +13,12 @@ tags:
 + [ ] Phase 1. [[Covenant]]
 	+ [ ] Library  see [[Possessions and Resources]]
 	+ [ ] Read books from CSV
+	+ [ ] Reading and copying advancements
+		+ [ ] using library books
+		+ [ ] calculate book quality from author
+		+ [ ] adding library books
 + [ ] Phase 2. Improvements
+	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
