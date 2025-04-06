@@ -120,15 +120,16 @@ makeBookStats x y z = BookStats
 
 
 instance ArMCSV Book where
-   fromCSVline (x1:x2:x3:x4:x5:x6:x7:x8:x9:x10:x11:x12:_) =
-      defaultObject { bookID = x1 
-                , bookTitle = x2
-                , bookStats = [ makeBookStats x3 x4 x5 ]
-                , bookCreator = x7
-                , bookDate = parseST x8
-                , bookAnnotation = x11
-                , bookCount = read x12
+   fromCSVline (x1:x2:x3':x4:x5:x6:x7:_) =
+      defaultObject { bookID = y 
+                , bookTitle = x4
+                , bookStats = [ makeBookStats x1 x2 x3 ]
+                , bookCreator = x5
+                , bookAnnotation = x6
+                , bookCount = read x7
                 }
+                where y = trim x2 ++ x3 ++ trim x4
+                      x3 = trim x3'
    fromCSVline _ = defaultObject
    defaultObject = Book
      { bookID = ""
