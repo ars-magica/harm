@@ -634,7 +634,7 @@ formatTitle book = tis ++ aus ++ dat
      where aut = trim $ originalAuthor book
            aus | aut == "" = ""
                | otherwise = " by " ++ aut
-           tit = originalTitle book
+           tit = trim $ originalTitle book
            tis | tit == "" = ""
                | otherwise = " *" ++ tit ++ "*"
            dat = " (" ++ show (originalDate book) ++ ")"
@@ -643,7 +643,8 @@ instance LongSheet Book
 instance Markdown Book where
     printMD book = OList  
          [ OString $ formatTitle book
-         , OList [ OString $ show (bookStats book) 
+         , OList [ OString $ showStrList $ map show (bookStats book) 
+                 , cnt
                  , lns
                  , ans
                  ]
@@ -654,6 +655,8 @@ instance Markdown Book where
                lng = trim $ fromMaybe "" $ bookLanguage book
                lns | lng == "" = OList []
                    | otherwise = OString $ "in " ++ lng
+               cnt | bookCount book == 1 = OList []
+                   | otherwise = OString $ show (bookCount book) ++ " copies"
 
 instance LongSheet CovenantState
 instance Markdown CovenantState where

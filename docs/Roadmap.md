@@ -26,8 +26,6 @@ tags:
 + [ ] Phase 2. Advancement 
 	+ [ ] Reading
 	+ [ ] Author books
-		+ [ ] Author
-		+ [ ] Add book to library
 	+ [ ] Teaching/.Taught
 	+ [ ] Training
 	+ [ ] Lab Total

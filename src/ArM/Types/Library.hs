@@ -37,9 +37,9 @@ data BookStats = BookStats
 instance ToJSON BookStats
 instance FromJSON BookStats
 instance Show BookStats where
-    show b = k ++ l ++ q
+    show b = k ++ ' ':l ++ q
         where k = show $ topic b
-              q = show $ quality b
+              q = 'Q':(show $ quality b)
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
 

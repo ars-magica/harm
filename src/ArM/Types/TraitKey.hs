@@ -36,7 +36,23 @@ data TraitKey = AbilityKey String
            | CombatKey String
            | AgeKey
            | NoTrait
-           deriving ( Show, Eq, Generic )
+           deriving ( Eq, Generic )
+
+instance Show TraitKey where
+           show (CharacteristicKey x) = x
+           show (AbilityKey x) = x
+           show (ArtKey x) = x
+           show (SpellKey x y z) = z ++ show y ++ " " ++ x
+           show (PTraitKey x) = "Personality Trait: " ++ x
+           show (ReputationKey x y) = x ++ " [" ++ y ++ "]"
+           show (VFKey x y) = x ++ " [" ++ y ++ "]"
+           show (ConfidenceKey x) = x
+           show (OtherTraitKey x) = x
+           show (SpecialKey x) = x ++ " (special)"
+           show (PossessionKey x) = "Possession: " ++ x
+           show (CombatKey x) = "Combat Option: " ++ x
+           show AgeKey = "Age Trait"
+           show NoTrait = "No Trait"
 instance Ord TraitKey where
    compare (AbilityKey x) (AbilityKey y) = compare x y
    compare (CharacteristicKey x) (CharacteristicKey y) = compare (charIdx x) (charIdx y)
