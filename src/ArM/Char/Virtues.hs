@@ -6,7 +6,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Validation of advancement (XP allocation etc.)
+-- Description :  Code depending on specific virtues and flaws.
 --
 -----------------------------------------------------------------------------
 

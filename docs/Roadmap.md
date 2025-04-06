@@ -29,6 +29,7 @@ tags:
 	+ [ ] group and  sort books in library
 	+ [ ] Handle Antologies
 + [ ] Phase 2. Advancement 
+	+ [ ] Gather all trait inference into one function
 	+ [ ] Reading
 	+ [ ] Author books
 	+ [ ] Teaching/Taught

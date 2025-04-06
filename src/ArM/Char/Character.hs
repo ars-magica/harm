@@ -75,7 +75,7 @@ instance HarmObject Character where
 -- = Character Advancement
 
 -- |
--- The Advance class represents object which change state from
+-- The Advance class represents objects which change state from
 -- season to season.
 class Advance a where
     -- | Advance the character until after the given time.
