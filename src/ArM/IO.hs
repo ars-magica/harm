@@ -58,7 +58,8 @@ loadSaga saga = do
    wdb <- readDB $ weaponFile saga
    adb <- readDB $ armourFile saga
    cs <- mapM readArM $ characterFiles saga
-   cov <- mapM readArM $ covenantFiles saga
+   cov <- ( mapM readArM ( covenantFiles saga )
+            >>= mapM loadCovenant )
    return
      $ advanceSaga saga
      $ Saga { rootDir = fromMaybe "/tmp/" $ rootDirectory saga
@@ -111,14 +112,14 @@ readArM fn = LB.readFile fn >>= return . prepMaybe . decode
 
 
 loadCovenant :: Maybe Covenant -> IO (Maybe Covenant)
-loadCovenant Nothing  = return  Nothing
+loadCovenant Nothing  = trace "loadCovenant -> Nothing" $ return Nothing
 loadCovenant (Just c)
-    | isNothing st' = return $ Just c
-    | isNothing fn = return $ Just c
+    | isNothing st' = trace "loadCovenant -> Nothing to load" $ return $ Just c
+    | isNothing fn = trace "loadCovenant -> Nothing to load" $ return $ Just c
     | otherwise = parseFromFile CSV.csvFile (fromJust fn) >>=
        ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = g lib } } )
-       where fn = librarycsv st
-             st = fromJust st'
+       where fn = ttrace $ librarycsv st
+             st = ttrace $ fromJust st'
              st' = covenantState c
              g (Left _) = []
              g (Right x) = map fromCSVline x
