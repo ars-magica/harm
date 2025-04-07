@@ -71,6 +71,7 @@ common harm-deps
                        , ArM.DB.Spell
                        , ArM.DB.Weapon
                        , ArM.Char.Validation
+                       , ArM.Char.Inference
                        , ArM.Char.Virtues
                        , ArM.Markdown
                        , ArM.Cov.Covenant
