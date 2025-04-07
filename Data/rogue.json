@@ -1,0 +1,69 @@
+{
+   "charID" : "Rowan",
+   "concept" : {
+      "name" : "Rowan",
+      "charType" : "Grog",
+      "concept" : "The ugly Rogue",
+      "quirk" : ".",
+      "appearance" : ""
+      , "born" : 1235
+      , "player" : "George"
+      , "charGlance" : { }
+      , "charData" : {
+         "Size" : -1
+	 , "Background" : ""
+      }
+   },
+   "pregameAdvancement" : [
+      { "mode" : "Virtues and Flaws"
+      , "changes" : [
+         { "ability" : "Native Language: Irish"
+         , "spec" : "Munster"
+         , "xp" : 75
+         }
+         , { "flaw" : "Poor Characteristic", "detail" : "Pre", "cost" : 1 }
+         , { "virtue" : "Warrior", "cost" : 1 }
+         , { "flaw" : "Poor Characteristic", "detail" : "Pre", "cost" : 1 }
+         , { "ptrait" : "Trustful" , "score" : -3 }
+         , { "ptrait" : "Brave" , "score" : -1 }
+         , { "ptrait" : "Curious" , "score" : 3 }
+      ] },
+      { "mode" : "Characteristics"
+      , "changes" : 
+         [ { "characteristic" : "Int", "score" : 1 }
+         , { "characteristic" : "Per", "score" : 1 }
+         , { "characteristic" : "Pre", "score" : -3 }
+         , { "characteristic" : "Com", "score" : -2 }
+         , { "characteristic" : "Str", "score" : 1 }
+         , { "characteristic" : "Sta", "score" : 1 }
+         , { "characteristic" : "Dex", "score" : 3 }
+         , { "characteristic" : "Qik", "score" : 3 }
+      ] },
+      { "mode" : "Early Childhood"
+      , "changes" : 
+         [ { "ability" : "Stealth", "spec" : "Sneak", "xp" : 15 }
+         , { "ability" : "Awareness" , "spec" : "Good ears" , "xp" : 15 }
+         , { "ability" : "Killaloe Lore" , "spec" : "Hiding places" , "xp" : 15 }
+         ] 
+      },
+      { "mode" : "Later Life"
+      , "years" : 19
+      , "changes" : 
+         [ { "ability" : "Athletics", "spec": "streets", "xp": 75 }
+         , { "ability" : "Awareness", "xp": 35 }
+         , { "ability" : "Brawl", "spec" : "Dodge", "xp" : 30 }
+         , { "ability" : "Munster Lore", "spec" : "Hiding places", "xp" : 5 }
+         , { "ability" : "Single Weapon", "spec": "spear", "xp": 5 }
+         , { "ability" : "Stealth",  "xp": 35 }
+         , { "ability" : "Throw", "spec": "spear", "xp": 75 }
+         , { "possession" : { "weapon" : [ "Dagger" ] } }
+         , { "possession" : { "weapon" : [ "Sling" ] } }
+         , { "combat" : { "weapon" : "Fist" } }
+         , { "combat" : { "weapon" : "Dagger" } }
+         , { "combat" : { "weapon" : "Sling" } }
+         , { "combat" : { "weapon" : "Thrown Knife" } }
+         ] 
+      }
+   ],
+   "futureAdvancement" : [ ]
+}

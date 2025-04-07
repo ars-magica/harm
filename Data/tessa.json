@@ -1,0 +1,146 @@
+{
+   "charID" : "Tessa Tanagh",
+   "concept" : {
+      "name" : "Tessa Tanagh",
+      "charType" : "Grog",
+      "concept" : "Rogue",
+      "quirk" : "Speaks in half sentences, often disrupting herself and jerking her head.",
+      "appearance" : "Small frame, a ltttle stocky but agile.  Half-long, brown, straight hair."
+      , "born" : 1212
+      , "player" : "George"
+      , "charGlance" : { }
+      , "charData" : {
+         "Size" : 0
+      }
+   },
+   "pregameAdvancement" : [
+      { "mode" : "Virtues and Flaws"
+      , "changes" : [
+         { "ability" : "Native Language: Irish"
+         , "spec" : "Munster"
+         , "xp" : 75
+         }
+         , { "virtue" : "Warrior", "cost" : 1 }
+         , { "virtue" : "Great Characteristic", "detail" : "Dex", "multiplicity" : 2, "cost" : 1 }
+         , { "flaw" : "Small Frame", "cost" : -1 }
+         , { "flaw" : "Social handicap", "detail" : "Easily stressed and evasive in social contact", "cost" : -1 }
+         , { "flaw" : "Overconfident", "cost" : -1 }
+         , { "ptrait" : "Curious" , "score" : 3 }
+         , { "ptrait" : "Helpful" , "score" : 1 }
+      ] },
+      { "mode" : "Characteristics"
+      , "changes" : 
+         [ { "characteristic" : "Int", "score" : 0 }
+         , { "characteristic" : "Per", "score" : 2 }
+         , { "characteristic" : "Pre", "score" : 0 }
+         , { "characteristic" : "Com", "score" : -2 }
+         , { "characteristic" : "Str", "score" : -1 }
+         , { "characteristic" : "Sta", "score" : 1 }
+         , { "characteristic" : "Dex", "score" : 3 }
+         , { "characteristic" : "Qik", "score" : 1 }
+      ] },
+      { "mode" : "Early Childhood"
+      , "changes" : 
+         [ { "ability" : "Stealth", "spec" : "Hiding", "xp" : 15 }
+         , { "ability" : "Awareness" , "spec" : "Good ears" , "xp" : 15 }
+         , { "ability" : "Survival", "spec": "Hills", "xp": 5 }
+         , { "ability" : "Munster Lore" , "spec" : "Outback" , "xp" : 5 }
+         , { "ability" : "Brawl" , "spec" : "Dodge" , "xp" : 5 }
+         ] 
+      },
+      { "mode" : "Later Life"
+      , "years" : 30
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "spec": "Dogs", "xp": 50 }
+         , { "ability" : "Animal Ken", "spec": "Canine", "xp": 45 }
+         , { "ability" : "Athletics", "spec": "obstacle race", "xp": 30 }
+         , { "ability" : "Awareness", "spec": "Keen sight", "xp": 35 }
+         , { "ability" : "Carouse", "spec": "Hold liquor", "xp": 5 }
+         , { "ability" : "Chirurgy", "spec": "First aid", "xp": 5 }
+         , { "ability" : "Bargain", "spec": "Avoid cheats", "xp": 5 }
+         , { "ability" : "Folk ken", "spec": "Judge of character", "xp": 5 }
+         , { "ability" : "Ride", "spec": "Horse training", "xp": 5 }
+         , { "ability" : "Survival", "spec": "Hills", "xp": 45 }
+         , { "ability" : "Hunt", "spec": "Track", "xp": 75 }
+         , { "ability" : "Legerdemain", "spec": "pickpocket", "xp": 50 }
+         , { "ability" : "Stealth", "spec": "with dogs", "xp": 35 }
+         , { "ability" : "Swim", "spec": "survival", "xp": 5 }
+         , { "ability" : "Single Weapon", "spec": "spear", "xp": 30 }
+         , { "ability" : "Thrown", "spec" : "Shortbow", "xp" : 75 }
+         ] 
+      }
+   ],
+   "futureAdvancement" : [
+      { "mode" : "Adventure"
+      , "season" : "Winter 1247"
+      , "sourceQuality" : 10
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "xp": 5 }
+         , { "ability" : "Animal Ken", "xp": 5 }
+         ] 
+      },
+      { "mode" : "Practice"
+      , "season" : "Spring 1247"
+      , "sourceQuality" : 4
+      , "changes" : 
+         [ { "ability" : "Music", "xp": 4 }
+         ] 
+      },
+      { "mode" : "Exposure"
+      , "season" : "Summer 1247"
+      , "sourceQuality" : 2
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Practice"
+      , "season" : "Autumn 1247"
+      , "sourceQuality" : 4
+      , "changes" : 
+         [ { "ability" : "Music", "xp": 4 }
+         ] 
+      },
+      { "mode" : "Adventure"
+      , "season" : "Winter 1248"
+      , "sourceQuality" : 10
+      , "changes" : 
+         [ { "ability" : "Swim", "xp": 5 }
+         , { "ability" : "Animal Ken", "xp": 5 }
+         , { "aging" : { "agingRollDie" : 9, "agingROll" : 13 } }
+         , { "characteristic" : "Int", "agingPts" : 2 }
+         , { "characteristic" : "Com", "agingPts" : 2 }
+         , { "characteristic" : "Pre", "agingPts" : 1 }
+         ] 
+      },
+      { "mode" : "Practice"
+      , "season" : "Spring 1248"
+      , "sourceQuality" : 4
+      , "changes" : 
+         [ { "ability" : "Legerdemain", "xp": 4 }
+         ] 
+      },
+      { "mode" : "Exposure"
+      , "season" : "Summer 1248"
+      , "sourceQuality" : 2
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Practice"
+      , "season" : "Autumn 1248"
+      , "sourceQuality" : 4
+      , "changes" : 
+         [ { "ability" : "Legerdemain", "xp": 4 }
+         ] 
+      },
+      { "mode" : "Exposure"
+      , "season" : "Winter 1249"
+      , "sourceQuality" : 2
+      , "changes" : 
+         [ { "ability" : "Awareness", "xp": 2 }
+         , { "aging" : { "agingRollDie" : 6, "agingROll" : 13 } }
+         , { "characteristic" : "Pre", "agingPts" : 1 }
+         ] 
+      }
+   ]
+}

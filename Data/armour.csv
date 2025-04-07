@@ -1,0 +1,11 @@
+Material,Prot,Load,Cost
+Quilted/Fur (partial), 1, 2, Inexp.
+Heavy Leather (partial), 2, 3, Inexp.
+Metal Reinf Leather (partial), 2, 2, Std.
+Metal Reinf Leather (full), 4, 4, Std.
+Leather Scale (partial), 3, 3, Std.
+Leather Scale (full), 5, 5, Std.
+Metal Scale (partial), 4, 4, Std.
+Metal Scale (full), 7, 7, Std.
+Chain Mail (partial), 6, 4, Exp
+Chain Mail (full), 9, 6, Exp

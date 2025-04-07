@@ -1,0 +1,40 @@
+Weapon,Ability,Init,Atk,Dfn, Dam,Range, Str, Load, Cost,Comment
+Dodge,Brawl,0, Nothing,0, Nothing,, Nothing,0, Nothing,
+Fist,Brawl,0,0,0,0,, Nothing,0, Nothing,
+Kick,Brawl, -1,0, -1,3,, Nothing,0, Nothing,
+Gauntlet,Brawl,0,0,1,2,, -3,0, Inexp.,
+Bludgeon,Brawl,0,2,0,2,, -2,1, Inexp.,"Any improvised bashing weapon such as a rock or hand tool,"
+Dagger,Brawl,0,2,0,3,, -3,0, Inexp.,
+Knife,Brawl,0,1,0,2,, -6,0, Inexp.,
+Axe,Single Weapon,1,4,0,6,,0,1, Std.,
+Club,Single Weapon,1,2,1,3,, -2,1, Inexp.,
+Hatchet,Single Weapon,0,3,0,4,, -2,1, Inexp.,
+Lance,Single Weapon,2,4,0,5,,0,2, Std.,
+Mace,Single Weapon,1,3,0,8,,0,2, Std.,"Includes spiked clubs, military hammers, and other bashing weapons,"
+Mace and Chain,Single Weapon,2,3,0,7,,0,2, Std.,
+"Spear, Short",Single Weapon,2,2,0,5,, -1,1, Inexp.,
+Shortspear,Single Weapon,2,2,0,5,, -1,1, Inexp.,
+"Sword, Short",Single Weapon,1,3,1,5,, -1,1, Std.,
+"Sword, Long",Single Weapon,2,4,1,6,,0,1, Exp.,
+"Shield, Buckler",Single Weapon,0,0,1,0,, -2,1, Std.,
+"Shield, Round",Single Weapon,0,0,2,0,, -1,2, Inexp.,
+Round Shield,Single Weapon,0,0,2,0,, -1,2, Inexp.,
+"Shield, Heater",Single Weapon,0,0,3,0,,0,2, Std.,
+Cudgel,Great Weapon,1,4,1,7,,1,2, Inexp.,
+Farm Implement,Great Weapon,1,3,1,5,,0,2, Inexp.,
+Flail,Great Weapon,1,3,1,8,,0,2, Inexp.,
+Pole Arm,Great Weapon,3,4,1,8,,0,2, Std.,
+Pole Axe,Great Weapon,1,5,0,11,,1,2, Std.,
+"Spear, Long",Great Weapon,3,3,1,7,,0,3, Inexp.,"Includes the lance, if used dismounted."
+"Sword, Great",Great Weapon,2,5,2,9,,1,2, Exp.,
+Staff,Great Weapon,2,3,3,2,, -1,2, Inexp.,
+Warhammer,Great Weapon,0,6,0,12,,2,3, Std.,
+"Axe, Throwing",Thrown Weapon,0,2,0,6,5,0,1, Std.,
+Javelin,Thrown Weapon,0,2,0,5,10,0,1, Std.,
+Thrown Knife,Thrown Weapon,0,1,0,2,5, -2,0, Inexp.,
+Sling,Thrown Weapon, -3,1,0,4,20, -3,0, Inexp.,Requires two free hands to load and fire.
+Stone,Thrown Weapon,0,1,0,2,5, -1,1, Inexp.,
+"Bow, Long",Bows, -2,4,0,8,30,2,2, Exp.,Requires two free hands to load and fire.
+Longbow,Bows, -2,4,0,8,30,2,2, Exp.,Requires two free hands to load and fire.
+"Bow, Short",Bows, -1,3,0,6,15, -1,2, Std.,Requires two free hands to load and fire.
+Shortbow,Bows, -1,3,0,6,15, -1,2, Std.,Requires two free hands to load and fire.

@@ -1,0 +1,115 @@
+{
+   "charID" : "Eogan mac Eogan",
+   "concept" : {
+      "name" : "Eogan mac Eogan",
+      "charType" : "Companion",
+      "concept" : "Kennel Master",
+      "quirk" : "Avoids danger, particularly heights.",
+      "appearance" : "Slender, charming guy with dark hair. The clothes are clean, but smell of dog."
+      , "born" : 1230
+      , "portrait" : "eogan.jpeg"
+      , "player" : "George"
+      , "charGlance" : { }
+      , "charData" : {
+         "Size" : 0
+	 , "Prophecy" : "*He shall live like his father; die like his father.*  (Astrið. spoken at the Autumn fair 1230)"
+	 , "Background" : "Born after his fathers death in Winter 1230. Astrið read a death prophecy for the newborn Eogan at the fair in 1230.  The covenant has always treated him well, in honour of his father. However, he cannot free himself from his father's fate and has never been able to trust the magi. His mother remarried and he has a couple of half-siblings in the village He has always found himself a bit of an outsider, but found refuge at the kennel when Una was not there. Seeing his aptitude with dogs, Una's mundane assistants trained him."
+      }
+   },
+   "pregameAdvancement" : [
+      { "mode" : "Virtues and Flaws"
+      , "changes" : [
+         { "ability" : "Native Language: Irish"
+         , "spec" : "Munster"
+         , "xp" : 75
+         }
+         , { "virtue" : "Warrior", "cost" : 1 }
+         , { "virtue" : "Independent Study", "cost" : 1 }
+         , { "virtue" : "Affinity with (ability)"
+            , "detail" : "Animal Handling", "cost" : 1 }
+         , { "virtue" : "Puissant (ability)"
+            , "detail" : "Animal Handling", "cost" : 1 }
+         , { "virtue" : "Unaging", "cost" : 1 }
+         , { "virtue" : "Animal Ken", "cost" : 1 }
+         , { "virtue" : "Alluring to Magical Beings", "cost" : 1 }
+         , { "virtue" : "Death Prophecy", "cost" : 3 }
+         , { "virtue" : "Covenfolk", "cost" : 0 }
+         , { "flaw" : "Black Sheep at the Covenant", "cost" : -3 }
+         , { "reputation" : "Disloyal", 
+             "locale" : "Covenant and allies", "xp" : 15 }
+         , { "flaw" : "Ambitious",
+             "detail": "train the greatest hounds of Ireland",
+             "cost" : -3 }
+         , { "flaw" : "Weakness", "detail": "for Dogs", "cost" : -1 }
+         , { "flaw" : "Lesser Malediction: Vertigo", "cost" : -1 }
+         , { "flaw" : "Ability Block", "detail" : "for Letters", "cost" : -1 }
+         , { "flaw" : "Uncertain Faith", "cost" : -1 }
+         , { "ptrait" : "Obedient" , "score" : -3 }
+         , { "ptrait" : "Loyal" , "score" : 1 }
+         , { "ptrait" : "Uncertain Faith" , "score" : 1 }
+      ] },
+      { "mode" : "Characteristics"
+      , "changes" : 
+         [ { "characteristic" : "Int", "score" : 2 }
+         , { "characteristic" : "Per", "score" : 0 }
+         , { "characteristic" : "Pre", "score" : 3 }
+         , { "characteristic" : "Com", "score" : 1 }
+         , { "characteristic" : "Str", "score" : -1 }
+         , { "characteristic" : "Sta", "score" : 1 }
+         , { "characteristic" : "Dex", "score" : 0 }
+         , { "characteristic" : "Qik", "score" : -2 }
+      ] },
+      { "mode" : "Early Childhood"
+      , "changes" : 
+         [ { "ability" : "Stealth", "spec" : "Hiding", "xp" : 5 }
+         , { "ability" : "Awareness" , "spec" : "Good ears" , "xp" : 5 }
+         , { "ability" : "Survival", "spec": "Hills", "xp": 5 }
+         , { "ability" : "Munster Lore" , "spec" : "Outback" , "xp" : 5 }
+         , { "ability" : "Covenant Lore" , "spec" : "Hierarchies" , "xp" : 15 }
+         , { "ability" : "Brawl", "spec": "Dirty fighting", "xp": 5 }
+         , { "ability" : "Charm", "spec": "Animals", "xp": 5 }
+         ] 
+      },
+      { "mode" : "Later Life"
+      , "years" : 19
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "spec": "Dogs", "xp": 50 }
+         , { "ability" : "Animal Ken", "spec": "Canine", "xp": 45 }
+         , { "ability" : "Athletics", "spec": "obstacle race", "xp": 15 }
+         , { "ability" : "Bargain", "spec": "Livestock", "xp": 15 }
+         , { "ability" : "Guile" , "spec" : "Fast talk" , "xp" : 5 }
+         , { "ability" : "Ride", "spec": "Horse training", "xp": 50 }
+         , { "ability" : "Hunt", "spec": "with dogs", "xp": 75 }
+         , { "ability" : "Leadership", "spec": "in the field", "xp": 15 }
+         , { "ability" : "Single Weapon", "spec": "spear", "xp": 5 }
+         , { "ability" : "Bows", "spec" : "Shortbow", "xp" : 50 }
+         , { "ability" : "Survival", "spec": "Hills", "xp": 10 }
+         , { "possession" : { "weapon" : [ "Shortbow" ] } }
+         , { "possession" : { "weapon" : [ "Shortspear" ] } }
+         , { "possession" : { "weapon" : [ "Round Shield" ] } }
+         , { "combat" : { "weapon" : "Fist" } }
+         , { "combat" : { "weapon" : "Shortspear" } }
+         , { "combat" : { "weapon" : "Shortbow" } }
+         , { "combat" : { "name" : "Spear and Shield"
+	                , "weapon" : "Shortspear"
+			, "shield" : "Round Shield"
+			, "ability" : "Single Weapon"
+	                }
+	 }
+         ] 
+      }
+   ],
+   "futureAdvancement" : [
+      { "mode" : "Adventure"
+      , "season" : "Summer 1254"
+      , "sourceQuality" : 13
+      , "narrative" : "The Unicorn.  SQ10 + Independent Study"
+      , "changes" : 
+         [ { "ability" : "Faerie Lore", "spec" : "Dark Fae", "xp": 5 }
+         , { "ability" : "Magic Lore", "spec" : "Ancient Myth", "xp": 5 }
+	 , { "ability" : "Animal Ken", "xp": 3 }
+         , { "confidence" : "Confidence", "points" : 2 }
+         ] 
+      }
+   ]
+}
