@@ -82,19 +82,19 @@ validateCharGen sheet = validateCharGen' sheet . initialLimits sheet
 
 validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateCharGen' cs a 
-           | m == "Virtues and Flaws" = validateVF cs a
-           | m == "Characteristics" = validateChar cs a
+           | m == CharGen "Virtues and Flaws" = validateVF cs a
+           | m == CharGen "Characteristics" = validateChar cs a
            | otherwise = validateLevels $ validateXP a
-           where m = fromMaybe "" $ mode a
+           where m = mode a
 
 -- | Validate allocation of virtues and flaws.
 validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateVF sheet a 
-             | m /= "Virtues and Flaws" = a
+             | m /= CharGen "Virtues and Flaws" = a
              | 0 /= f + v = a { validation = ValidationError imb:validation a }
              | v > lim = a { validation = ValidationError over:validation a }
              | otherwise = a { validation = Validated val:validation a }
-           where m = fromMaybe "" $ mode a
+           where m = mode a
                  (f,v) = calculateVFCost $ advancement a
                  imb = "Virtues and flaws are imbalanced: "
                      ++ show v ++ " points of virtues and"
@@ -126,12 +126,12 @@ regCost p | isJust (virtue p) = m p * f p
 -- | Calculate initial XP limits on Char Gen Advancements
 initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 initialLimits sheet ad
-            | m == "Early Childhood" = ( f ad 45 ) { augYears = Just 5 }
-            | m == "Apprenticeship" = app ad
-            | m == "Characteristics" = f ad 0
-            | m == "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
+            | m == CharGen "Early Childhood" = ( f ad 45 ) { augYears = Just 5 }
+            | m == CharGen "Apprenticeship" = app ad
+            | m == CharGen "Characteristics" = f ad 0
+            | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
             | otherwise = ad { effectiveSQ = sourceQuality $ advancement ad  }
-           where m = fromMaybe "" $ mode ad
+           where m = mode ad
                  f a x | isJust t = a { effectiveSQ = t }
                        | otherwise = a { effectiveSQ = Just x }
                  t = sourceQuality $ advancement ad
@@ -164,11 +164,11 @@ validateChar sheet = f . validateChar' sheet
      where f x = x { postProcessTrait = PostProcessor processChar }
 
 validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateChar' sheet a | m /= "Characteristics" = a
+validateChar' sheet a | m /= CharGen "Characteristics" = a
              | ex < lim = a { validation = ValidationError und:validation a }
              | ex > lim = a { validation = ValidationError over:validation a }
              | otherwise = a { validation = Validated val:validation a }
-           where m = fromMaybe "" $ mode a
+           where m = mode a
                  lim = getCharAllowance $ vfList sheet
                  ex = calculateCharPoints $ advancement a
                  und = "Underspent " ++ (show ex) ++ " points out of "

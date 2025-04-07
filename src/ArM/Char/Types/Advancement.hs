@@ -21,12 +21,12 @@ import ArM.GameRules
 import Data.Char 
 import Data.Aeson 
 import GHC.Generics
-
+import Data.Text.Lazy                            ( fromStrict, unpack )
+import Control.Monad
 
 
 -- |
 -- = Advancement
-
 
 data AdvancementType = Practice  | Adventure | Taught
                      | Trained | Reading | VisStudy
@@ -38,6 +38,13 @@ data ExposureType = LabWork | Teaching | Training
                   | Initiation | OpeningArts | Work
                   | OtherExposure String
    deriving (Show,Ord,Eq)
+
+instance ToJSON AdvancementType where
+   toJSON = toJSON . show
+instance FromJSON AdvancementType where
+
+    parseJSON (String t) = pure $ parseAT (unpack (fromStrict t))
+    parseJSON _ = mzero
 
 
 parseET :: String -> ExposureType
@@ -83,7 +90,7 @@ instance FromJSON Resource
 -}
 
 class AdvancementLike a where
-     mode :: a -> Maybe String  -- ^ mode of study
+     mode :: a -> AdvancementType  -- ^ mode of study
      season :: a -> SeasonTime    -- ^ season or development stage
      narrative :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
@@ -98,7 +105,7 @@ class AdvancementLike a where
 -- It can also hold additional field inferred by virtues and flaws.
 -- One may consider splitting these two functions into two types.
 data Advancement = Advancement 
-     { advMode :: Maybe String  -- ^ mode of study
+     { advMode :: AdvancementType -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
      , advYears :: Maybe Int    -- ^ number of years advanced
      , advNarrative :: Maybe String -- ^ freeform description of the activities
@@ -111,7 +118,7 @@ data Advancement = Advancement
 
 defaultAdv :: Advancement 
 defaultAdv = Advancement 
-     { advMode = Nothing
+     { advMode = CharGen "Nothing"
      , advSeason = NoTime
      , advYears = Nothing
      , advNarrative = Nothing
@@ -190,7 +197,7 @@ instance ToJSON Advancement where
 
 instance FromJSON Advancement where
     parseJSON = withObject "Advancement" $ \v -> Advancement
-        <$> v .:? "mode"
+        <$> v .:? "mode" .!= CharGen "Nothing"
         -- <*> v .:? "season"
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"

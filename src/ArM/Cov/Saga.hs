@@ -190,11 +190,9 @@ cErrors c = map (aaErrors c) as
 augHead :: AugmentedAdvancement -> String
 augHead a = augHead' (season a) (mode a)
 -- | Format a header for `renderCharErrors`
-augHead' :: SeasonTime -> Maybe String -> String
-augHead' NoTime Nothing = ("??" )
-augHead' x Nothing = (show x )
-augHead' NoTime (Just x) = x
-augHead' x (Just z) = (show x  ++ " " ++ z)
+augHead' :: SeasonTime -> AdvancementType -> String
+augHead' NoTime tp = show tp
+augHead' x tp = (show x  ++ " " ++ show tp)
 
 
 -- | Character Index

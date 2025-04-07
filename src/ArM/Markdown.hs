@@ -335,11 +335,9 @@ usesString a | u == [] = OList []
 
 
 -- | Render the season and mode of an advancement
-showTime :: String -> SeasonTime -> Maybe String -> Maybe Int -> String
-showTime xps NoTime Nothing y = ("?? " ++ xps ++ showYears y)
-showTime xps  x Nothing y = (show x ++ xps ++ showYears y)
-showTime xps NoTime (Just x) y = (x ++ xps ++ showYears y)
-showTime xps x (Just z) y = (show x ++ xps ++ showYears y ++ " " ++ z)
+showTime :: String -> SeasonTime -> AdvancementType -> Maybe Int -> String
+showTime xps NoTime tp y = (show tp ++ xps ++ showYears y)
+showTime xps x tp y = (show x ++ xps ++ showYears y ++ " " ++ show tp)
 
 -- | Render the duration of an advancement
 showYears :: Maybe Int -> String
