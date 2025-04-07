@@ -48,34 +48,35 @@ instance FromJSON AdvancementType where
 
 
 parseET :: String -> ExposureType
-parseET = f . map toLower . trim
-  where f x | take 3 x == "lab" = LabWork
-            | take 3 x == "tea" = Teaching
-            | take 3 x == "tra" = Training
-            | take 3 x == "wri" = Authoring
-            | take 3 x == "aui" = Authoring
-            | take 3 x == "cop" = Copying
-            | take 3 x == "ini" = Initiation
-            | take 3 x == "ope" = OpeningArts
-            | take 3 x == "wor" = Work
-            | take 3 x == "oth" = OtherExposure $ dropWord $ trim x
-            | otherwise = OtherExposure x
+parseET x' = f $  trim x
+  where f y | take 3 y == "lab" = LabWork
+            | take 3 y == "tea" = Teaching
+            | take 3 y == "tra" = Training
+            | take 3 y == "wri" = Authoring
+            | take 3 y == "aut" = Authoring
+            | take 3 y == "cop" = Copying
+            | take 3 y == "ini" = Initiation
+            | take 3 y == "ope" = OpeningArts
+            | take 3 y == "wor" = Work
+            | take 3 y == "oth" = OtherExposure $ dropWord $ trim x'
+            | otherwise = OtherExposure x'
+        x = map toLower x'
 parseAT :: String -> AdvancementType
-parseAT = f . map toLower . trim
-  where f x | take 3 x == "pra" = Practice
-            | take 3 x == "adv" = Adventure
-            | take 3 x == "tau" = Taught
-            | take 3 x == "tea" = Taught
-            | take 3 x == "tra" = Trained
-            | take 3 x == "rea" = Reading
-            | take 3 x == "vis" = VisStudy
-            | take 3 x == "cha" = CharGen $ dropWord $ trim x
-            | take 3 x == "exp" = Exposure $ parseET $ dropWord $ trim x
-            | g (ex x) = Exposure (ex x)
-            | otherwise = CharGen x 
-        ex x = parseET x
+parseAT x' = f $ trim x
+  where f y | take 3 y == "pra" = Practice
+            | take 3 y == "adv" = Adventure
+            | take 3 y == "tau" = Taught
+            | take 3 y == "tra" = Trained
+            | take 3 y == "rea" = Reading
+            | take 3 y == "vis" = VisStudy
+            | take 7 y == "chargen" = CharGen $ dropWord $ trim x'
+            | take 3 y == "exp" = Exposure $ parseET $ dropWord $ trim x'
+            | g (ex y) = Exposure (ex x')
+            | otherwise = CharGen x'
+        ex y = parseET y
         g (OtherExposure _) = False
         g _ = True
+        x = map toLower x'
 dropWord :: String -> String
 dropWord "" = ""
 dropWord (x:xs) | isSpace x = trim xs
