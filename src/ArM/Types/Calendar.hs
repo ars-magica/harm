@@ -11,7 +11,12 @@
 -- Description :  Narrative time, incl. SeasonTime type
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Calendar where
+module ArM.Types.Calendar ( SeasonTime(..)
+                          , Season(..)
+                          , parseSeasonTime
+                          , isWinter
+                          , (>*)
+                          ) where
 
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Data.List.Split
