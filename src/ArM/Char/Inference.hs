@@ -37,10 +37,11 @@ addInference cs = flawlessSpells cs . addInferredTraits
 -- This typically applies to virtues providing supernatural abilities.
 -- The ability is inferred and should not be added manually.
 addInferredTraits :: Advancement -> AugmentedAdvancement
-addInferredTraits a = defaultAA { inferredTraits = f a
+addInferredTraits a = defaultAA { inferredTraits = g a ++ f a
                                 , advancement = a
                                 , augYears = yf }
      where f = inferTraits . getVF . changes 
+           g = inferDecrepitude . changes
            yf | Nothing /= advYears a = advYears a
               | isWinter $ season a = Just 1
               | otherwise = Nothing
@@ -53,6 +54,17 @@ getVF (p:ps) | isJust (virtue p) = g p:getVF ps
              | isJust (flaw p) = g p:getVF ps
              | otherwise = getVF ps
     where g = fromJust . computeTrait
+
+-- |
+-- Infer Decrepitude points from aging points on characteristics
+inferDecrepitude :: [ ProtoTrait ] -> [ ProtoTrait ]
+inferDecrepitude [] = []
+inferDecrepitude (x:xs) 
+   | apts == 0 = inferDecrepitude xs
+   | otherwise = d:inferDecrepitude xs
+   where d = defaultPT { other = Just "Decrepitude",  points = Just apts }
+         apts = fromMaybe 0 $ agingPts x
+
 
 -- | Inferred spell traits if Flawless Magic applies
 flawlessSpells :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement

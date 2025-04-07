@@ -72,6 +72,7 @@ Warrior (1),
     + Aging  No roll. 
     + Characteristic: Pre 0
     + Inferred traits
+        + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1248 (4xp) Practice
@@ -91,6 +92,9 @@ Warrior (1),
     + Characteristic: Com 0
     + Characteristic: Pre 0
     + Inferred traits
+        + Decrepitude 2
+        + Decrepitude 2
+        + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 10 xp.
 + Autumn 1247 (4xp) Practice
