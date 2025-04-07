@@ -28,7 +28,7 @@ tags:
 	+ [[CLI Workflow.canvas|CLI Workflow]] 
 		+ **Outdated**
 		+ This is rather crude, but contains some more low level detail than the above.
-	+ [[Advancement]]
+	+ [[Advancement in the RDF model]]
 + Basic principls, common for all user interfaces.
 	+ Business [[Logic]]
 	+ [[Swish-vs-Jena]]

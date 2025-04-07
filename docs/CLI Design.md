@@ -27,7 +27,7 @@ This is not prioritised in version 1.0, but low-hanging fruits may still be incl
 	+ [ ] Persist game start state - faster startup
 	+ [ ] how do we deal with characters entering later in the game?
 	+ [ ] Do we have to import everything into one graph?  Could it even be faster?
-+ [ ] [[Advancement]] by reading #cli/backlog 
++ [ ] [[Advancement in the RDF model]] by reading #cli/backlog 
 	+ [x] Covenant as a character
 	+ [x] Covenant hasBook property to define library
 	+ [x] Book as RDF resources with stats
@@ -38,7 +38,7 @@ This is not prioritised in version 1.0, but low-hanging fruits may still be incl
 		+ [ ] study bonus
 		+ [ ] affinity
 + [ ] Hierarchical sort traits in chargen log #cli/selected 
-+ [ ] [[Advancement]] validation #cli/backlog 
++ [ ] [[Advancement in the RDF model]] validation #cli/backlog 
 	+ [ ] XP validation
 	+ [ ] Spell level validation
 	+ [ ] Virtue/Flaw balance/limit
@@ -154,7 +154,7 @@ The first version of CLI will solve one simple problem; take a character descrip
 	+ [x] Infer labels for books (labels not used)
 	+ [x] Display all stats for books
 	+ [x] Show virtues and flaws as boons and hooks on covenants
-+ [x] [[Advancement]] totals in advancement log #cli/selected 
++ [x] [[Advancement in the RDF model]] totals in advancement log #cli/selected 
 	+ [x] calculate total
 	+ [x] awards on pregame advancements
 	+ [x] XP on later life

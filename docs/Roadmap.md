@@ -42,7 +42,6 @@ tags:
 		+ [ ] Create Greater Enchanted Devices with state
 	+ [ ] Lab assistance
 + [ ] Phase 3. Improvements
-	+ [ ]  Move `inferDecrepitude` into Inference module
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
