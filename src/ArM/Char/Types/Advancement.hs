@@ -28,11 +28,20 @@ import Control.Monad
 -- |
 -- = Advancement
 
+-- |
+-- == Advancement Types
+
+-- |
+-- Main advancement modes as defined in the core rules [ArM]
 data AdvancementType = Practice  | Adventure | Taught
                      | Trained | Reading | VisStudy
                      | Exposure ExposureType
                      | CharGen String
    deriving (Ord,Eq)
+
+-- |
+-- Different activities that grant Exposure but may require different
+-- processing in advancement and validation.
 data ExposureType = LabWork | Teaching | Training
                   | Writing | Copying | Authoring
                   | Initiation | OpeningArts | Work
@@ -57,7 +66,8 @@ instance FromJSON AdvancementType where
     parseJSON (String t) = pure $ parseAT (unpack (fromStrict t))
     parseJSON _ = mzero
 
-
+-- |
+-- Parse an ExposureType from a String, auxiliary for `FromJSON`
 parseET :: String -> ExposureType
 parseET x' = f $  trim x
   where f y | take 3 y == "lab" = LabWork
@@ -73,6 +83,9 @@ parseET x' = f $  trim x
             | take 3 y == "oth" = OtherExposure $ dropWord $ trim x'
             | otherwise = OtherExposure x'
         x = map toLower x'
+
+-- |
+-- Parse an AdvancementType from a String, auxiliary for `FromJSON`
 parseAT :: String -> AdvancementType
 parseAT x' = f $ trim x
   where f y | take 3 y == "pra" = Practice
@@ -89,19 +102,21 @@ parseAT x' = f $ trim x
         g (OtherExposure _) = False
         g _ = True
         x = map toLower x'
+
+-- |
+-- Drop the first word from a string.  
 dropWord :: String -> String
 dropWord "" = ""
 dropWord (x:xs) | isSpace x = trim xs
                 | otherwise = dropWord xs
 
 
-{-
-data Resource = Resource String
-   deriving (Eq,Show,Ord,Generic)
-instance ToJSON Resource
-instance FromJSON Resource
--}
+-- |
+-- == AdvancementLike Class
 
+-- |
+-- The AdvancementLike class gives a common API to Advancement and
+-- AugmentedAdvanceemnt
 class AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
      season :: a -> SeasonTime    -- ^ season or development stage
@@ -141,12 +156,38 @@ defaultAdv = Advancement
      , advChanges = [ ]  
      }
 
+instance ToJSON Advancement where
+    toEncoding = genericToEncoding defaultOptions
+
+instance FromJSON Advancement where
+    parseJSON = withObject "Advancement" $ \v -> Advancement
+        <$> v .:? "mode" .!= CharGen "Nothing"
+        -- <*> v .:? "season"
+        <*> fmap parseSeasonTime ( v .:? "season" )
+        <*> v .:? "years"
+        <*> v .:? "narrative"
+        <*> v .:? "usesBook"    .!= []
+        <*> v .:? "sourceQuality"
+        <*> v .:? "bonusQuality"
+        <*> fmap maybeList ( v .:? "changes" )
+
+-- |
+-- == Validation
+
+-- |
+-- A Validation is a message reporting either an error or a successful test.
 data Validation = ValidationError String | Validated String
    deriving (Eq,Generic)
 
 instance Show Validation where
     show (ValidationError x) = "ERROR: " ++ x
     show (Validated x) = "Validated: " ++ x
+
+instance ToJSON Validation
+instance FromJSON Validation
+
+-- |
+-- == The Augmented Advancement
 
 -- | Advancement with additional inferred fields
 data AugmentedAdvancement = Adv
@@ -161,6 +202,9 @@ data AugmentedAdvancement = Adv
         -- ^ extra postprocessing for traits at a given stage 
      }
    deriving (Eq,Show,Generic)
+
+-- |
+-- Type of function used to post-process traits after advancement.
 data PostProcessor = PostProcessor (Trait -> Trait)
 
 instance Eq PostProcessor where
@@ -200,25 +244,8 @@ instance AdvancementLike AugmentedAdvancement where
      sourceQuality  a =  advSQ  $ advancement a
      changes  a = advChanges  $ advancement  a
 
-instance ToJSON Validation
-instance FromJSON Validation
-
 instance ToJSON AugmentedAdvancement where
     toEncoding = genericToEncoding defaultOptions
-instance ToJSON Advancement where
-    toEncoding = genericToEncoding defaultOptions
-
-instance FromJSON Advancement where
-    parseJSON = withObject "Advancement" $ \v -> Advancement
-        <$> v .:? "mode" .!= CharGen "Nothing"
-        -- <*> v .:? "season"
-        <*> fmap parseSeasonTime ( v .:? "season" )
-        <*> v .:? "years"
-        <*> v .:? "narrative"
-        <*> v .:? "usesBook"    .!= []
-        <*> v .:? "sourceQuality"
-        <*> v .:? "bonusQuality"
-        <*> fmap maybeList ( v .:? "changes" )
 instance FromJSON AugmentedAdvancement where
     parseJSON = withObject "AugmentedAdvancement" $ \v -> Adv
         <$> v .: "advancement"
