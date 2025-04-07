@@ -73,6 +73,16 @@ instance HarmObject Character where
     stateSeason = characterSeason
     prepare = prepareCharacter
 
+-- |
+-- = Convenience Functions for Character Properties
+
+-- | The first season the character is played
+characterEntryTime :: Character -> SeasonTime
+characterEntryTime c | tm == NoTime = f $ futureAdvancement c
+                     | otherwise = tm
+     where tm = entryTime c
+           f [] = tm
+           f (x:_) = season x
 
 -- |
 -- = Character Advancement
@@ -118,24 +128,6 @@ instance Advance Character where
    nextSeason = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
-
--- |
--- = Convenience Functions for Character Properties
-
--- | The first season the character is played
-characterEntryTime :: Character -> SeasonTime
-characterEntryTime c | tm == NoTime = f $ futureAdvancement c
-                     | otherwise = tm
-     where tm = entryTime c
-           f [] = tm
-           f (x:_) = season x
-
-
--- |
--- = Advancements
-
--- |
--- == Application of the Advancement
 
 -- | Apply advancement
 -- This function is generic, and used for both chargen and ingame 
