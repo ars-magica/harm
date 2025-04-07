@@ -35,6 +35,7 @@ import ArM.Types.KeyPair
 import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
+import ArM.Char.Inference
 import ArM.Char.Virtues
 import ArM.Helper
 
@@ -192,8 +193,7 @@ prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
                   . sortInferredTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
-                  . flawlessSpells (hasFlawless cs)
-                  . addInferredTraits       -- infer traits from virtues and flaws
+                  . addInference cs         -- infer additional traits 
           where sheet = filterCS cs
 
 -- | Infer an aging trait advancing the age according to the advancement
@@ -241,8 +241,7 @@ prepareAdvancement c = validate
                      . sortInferredTraits   -- sort inferred traits
                      . inferSQ
                      . winterEvents c 
-                     . flawlessSpells (hasFlawless c)
-                     . addInferredTraits
+                     . addInference c
 
 -- | Sort the `inferredTraits` field of an `AugmentedAdvancement`
 sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
@@ -299,51 +298,4 @@ inferSQ ad = ad { effectiveSQ = esq }
         where esq = maybeAdd (sourceQuality ad') (advBonus ad')
               ad' = advancement ad
 
-
--- | Infer traits from new virtues and flaws and add them to the advancement.
--- This typically applies to virtues providing supernatural abilities.
--- The ability is inferred and should not be added manually.
-addInferredTraits :: Advancement -> AugmentedAdvancement
-addInferredTraits a = defaultAA { inferredTraits = f a
-                                , advancement = a
-                                , augYears = yf }
-     where f = inferTraits . getVF . changes 
-           yf | Nothing /= advYears a = advYears a
-              | isWinter $ season a = Just 1
-              | otherwise = Nothing
-
--- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
--- VF objects
-getVF :: [ ProtoTrait ] -> [ VF ]
-getVF [] = []
-getVF (p:ps) | isJust (virtue p) = g p:getVF ps
-             | isJust (flaw p) = g p:getVF ps
-             | otherwise = getVF ps
-    where g = fromJust . computeTrait
-
--- | Inferred spell traits if Flawless Magic applies
-flawlessSpells :: Bool -> AugmentedAdvancement -> AugmentedAdvancement
-flawlessSpells False x = x
-flawlessSpells True  x = x { inferredTraits = a ++ b }
-     where a = flawlessSpells' $ changes $ advancement x
-           b = inferredTraits x
-
--- | Inferred spell traits implementing Flawless Magic.
--- Auxiliary for `flawlessSpells`
-flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
-flawlessSpells' [] = []
-flawlessSpells' (x:xs) | isNothing (spell x) = ys
-                       | otherwise = y:ys
-    where ys = flawlessSpells' xs
-          y = defaultPT { spell = spell x, level = level x
-                                      , tefo = tefo x
-                                      , flawless = Just True
-                                      }
-
--- | Does the character have Flawless Magic?
-hasFlawless :: CharacterState -> Bool
-hasFlawless c | fms == [] = False
-              | otherwise = True
-    where ts = vfList $ filterCS c
-          fms = filter ((=="Flawless Magic") . vfname ) ts
 
