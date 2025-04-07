@@ -421,7 +421,7 @@
          }
       ]
       },
-      { "mode" : "Exposure", "season" : "Autumn 1227"
+      { "mode" : "Copying", "season" : "Autumn 1227"
       , "sourceQuality" : 2
       , "narrative" : "Copy spells (covenant service) "
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
@@ -471,7 +471,7 @@
                     } 
       ]
       },
-      { "mode" : "Exposure", "season" : "Summer 1229"
+      { "mode" : "Exposure SpellInstruction", "season" : "Summer 1229"
       , "sourceQuality" : 2
       , "narrative" : "Teaching Spells to Hiccup"
       , "changes" : [ { "ability" : "Teaching", "spec" : "apprentices", "xp" : 2 } ]
@@ -517,7 +517,7 @@
 		        , "comment" : "gift to the fox-man" } }
       ]
       },
-      { "mode" : "Exposure", "season" : "Autumn 1230"
+      { "mode" : "Exposure Assistance", "season" : "Autumn 1230"
       , "sourceQuality" : 2
       , "narrative" : "Help Maine "
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } ]
@@ -580,7 +580,7 @@
          }
       ]
       },
-      { "mode" : "Teaching", "season" : "Winter 1233"
+      { "mode" : "Taught", "season" : "Winter 1233"
       , "sourceQuality" : 15
       , "narrative" : "Hired teacher for £1. "
       , "changes" : [ { "ability" : "Craft: Rope.", "xp" : 15 } 
@@ -591,7 +591,7 @@
            , "comment" : "Gift of Perception Ritual Twice" }
       ]
       },
-      { "mode" : "Exposure", "season" : "Spring 1233"
+      { "mode" : "Teaching", "season" : "Spring 1233"
       , "sourceQuality" : 2
       , "narrative" : "Hiccup "
       , "changes" : [ { "ability" : "Teaching", "xp" : 2 } ]
@@ -625,7 +625,7 @@
       , "narrative" : " *Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
-      { "mode" : "Exposure", "season" : "Spring 1234"
+      { "mode" : "Teaching", "season" : "Spring 1234"
       , "sourceQuality" : 2
       , "narrative" : "Hiccup "
       , "changes" : [ { "ability" : "Teaching", "xp" : 2 } 
@@ -858,7 +858,7 @@
                     , { "virtue" : "Cautious Sorcerer" }
       ]
       },
-      { "mode" : "Exposure", "season" : "Winter 1241"
+      { "mode" : "Exposure Fixate AC", "season" : "Winter 1241"
       , "sourceQuality" : 2
       , "narrative" : "Fixate AC"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
@@ -872,7 +872,7 @@
          , { "possession" : { "art" : "Au", "count" : -2, "comment" : "for the enchantment" } }
       ]
       },
-      { "mode" : "Exposure", "season" : "Summer 1241"
+      { "mode" : "Copying", "season" : "Summer 1241"
       , "sourceQuality" : 2
       , "narrative" : "Copy lab tests (covenant service)  "
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
@@ -907,7 +907,7 @@
          }
       ]
       },
-      { "mode" : "Exposure", "season" : "Summer 1242"
+      { "mode" : "Exposure Assistance", "season" : "Summer 1242"
       , "sourceQuality" : 2
       , "narrative" : "Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
@@ -1038,7 +1038,7 @@
       , "changes" : [ { "art" : "Imaginem", "xp" : 12, "levelCap" : 19 } 
                     , { "art" : "Imaginem", "xp" : 1 } ]
       },
-      { "mode" : "Copy", "season" : "Autumn 1245"
+      { "mode" : "Copying", "season" : "Autumn 1245"
       , "sourceQuality" : 2
       , "narrative" : "Copy spell texts; 2xp Latin; see below"
       , "changes" : [ { "ability" : "Latin", "xp" : 2} ]

@@ -32,13 +32,24 @@ data AdvancementType = Practice  | Adventure | Taught
                      | Trained | Reading | VisStudy
                      | Exposure ExposureType
                      | CharGen String
-   deriving (Show,Ord,Eq)
+   deriving (Ord,Eq)
 data ExposureType = LabWork | Teaching | Training
                   | Writing | Copying | Authoring
                   | Initiation | OpeningArts | Work
+                  | SpellInstruction
                   | OtherExposure String
    deriving (Show,Ord,Eq)
 
+instance Show AdvancementType where
+   show Practice   = "Practice"
+   show Adventure  = "Adventure"
+   show Taught = "Taught"
+   show Trained  = "Trained"
+   show Reading  = "Reading"
+   show VisStudy = "Vis Study"
+   show (Exposure (OtherExposure x)) = show x ++ " (Other Exposure)"
+   show (Exposure x) = show x ++ " (Exposure)"
+   show (CharGen x) = x 
 instance ToJSON AdvancementType where
    toJSON = toJSON . show
 instance FromJSON AdvancementType where
@@ -57,6 +68,7 @@ parseET x' = f $  trim x
             | take 3 y == "cop" = Copying
             | take 3 y == "ini" = Initiation
             | take 3 y == "ope" = OpeningArts
+            | take 3 y == "spe" = SpellInstruction
             | take 3 y == "wor" = Work
             | take 3 y == "oth" = OtherExposure $ dropWord $ trim x'
             | otherwise = OtherExposure x'
