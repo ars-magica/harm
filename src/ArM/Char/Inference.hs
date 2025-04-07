@@ -20,6 +20,7 @@ import ArM.Char.Types.Advancement
 import ArM.Char.Trait
 import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
+import ArM.Types.Calendar
 import ArM.Char.Virtues
 -- import ArM.GameRules
 -- import ArM.Helper

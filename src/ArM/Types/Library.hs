@@ -24,7 +24,7 @@ import Text.Read
 
 import ArM.DB.CSV
 import ArM.Types.TraitKey
-import ArM.Char.Types.Advancement
+import ArM.Types.Calendar
 import ArM.Helper
 import ArM.Debug.Trace
 

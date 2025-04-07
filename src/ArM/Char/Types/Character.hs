@@ -22,6 +22,7 @@ import Data.Maybe
 
 import ArM.Char.Trait
 import ArM.Char.Types.Advancement
+import ArM.Types.Calendar
 import ArM.Types.KeyPair
 -- import ArM.Debug.Trace
 import ArM.Helper

@@ -15,6 +15,11 @@ tags:
 	+ [ ] Session notes from Hibernia
 	+ [ ] Review library
 + [ ] Phase 1. [[Covenant]]
+	+ [ ] Covenant membership in CharacterState
+	+ [ ] Process advancements with saga object
+		+ [ ] Pass saga object
+		+ [ ] Get book from covenant
+		+ [ ] Get book from own CharacterState - when Possession supports book
 	+ [ ] Reading and copying advancements
 		+ [ ] using library books
 		+ [ ] calculate book quality from author
@@ -29,7 +34,6 @@ tags:
 	+ [ ] group and  sort books in library
 	+ [ ] Handle Antologies
 + [ ] Phase 2. Advancement 
-	+ [ ] Gather all trait inference into one function
 	+ [ ] Reading
 	+ [ ] Author books
 	+ [ ] Teaching/Taught
@@ -73,6 +77,7 @@ tags:
 	+ [ ] Count xp total (ingame) for validation
 	+ [ ] Print weapon tables etc
 	+ [ ] More [[Validation Rules]]
++ [ ] Characters staying at a foreign covenant
 + [ ] Laboratory
 + [ ] Familiar
 + [ ] Talisman (and other enchanted devices)

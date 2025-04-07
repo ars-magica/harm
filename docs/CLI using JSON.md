@@ -13,6 +13,7 @@ aliases:
 	+ [[Combat Stats]]
 	+ [[Types for JSON]]
 	+ [[Advancement in the JSON Model]]
+	+ [[Validation Rules]]
 
 + The CLI performs one operation in two steps, both defined in `ArM.IO`
 	+ `readSaga` reads the saga file and all the dependent files it requires, and computes every state requested in the file
