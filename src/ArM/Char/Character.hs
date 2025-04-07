@@ -149,7 +149,6 @@ applyAdvancement a' cs = (a',cs')
           change = sortTraits $ inferDecrepitude $ changes a'
           inferred = inferredTraits a'
           old = sortTraits $ traits cs
-          -- ag = fromMaybe 0 (augYears a') + age cs
 
 
 inferDecrepitude :: [ ProtoTrait ] -> [ ProtoTrait ]
