@@ -120,7 +120,7 @@ instance Advance Character where
             where y =  head $ futureAdvancement c
                   ct' =  season y
 
-   stepIf ns = completeAdv . applyAdv . nextAdv ns
+   stepIf ns = trace ("stepIf: "++show ns) $ completeAdv . applyAdv . nextAdv ns
 
    step c = c { state = Just cs
               , pastAdvancement = (a:xs)
@@ -146,21 +146,23 @@ applyAdvancement :: AugmentedAdvancement
 applyAdvancement a cs = (a,cs')
     where cs' = cs { charTime = season a, traits = new }
           new = advanceTraitList change tmp
-          tmp = advanceTraitList inferred old 
+          tmp = advanceTraitList inferred old
           change = sortTraits $ changes a
           inferred = sortTraits $ inferredTraits a
           old = sortTraits $ traits cs
 
-applyAdv :: (Character,AugmentedAdvancement)
-         -> (Character,AugmentedAdvancement)
-applyAdv (c,a) = (c',a')
+applyAdv :: (Character,Maybe AugmentedAdvancement)
+         -> (Character,Maybe AugmentedAdvancement)
+applyAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
+applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (season a)) $ (c',Just a')
     where (a',st') = applyAdvancement a st
           c' = c { state = Just st' }
           st = trace (show $ characterSeason c ) $ fromMaybe defaultCS $ state c
 
-completeAdv :: (Character,AugmentedAdvancement)
+completeAdv :: (Character,Maybe AugmentedAdvancement)
                  -> Character
-completeAdv (c,a) = c { pastAdvancement = a:pastAdvancement c }
+completeAdv (c,Nothing) = c 
+completeAdv (c,Just a) = c { pastAdvancement = a:pastAdvancement c }
 
 -- |
 -- == Char Gen
@@ -237,10 +239,10 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 
 -- |
 -- Get the next augmented advancement.
-nextAdv :: SeasonTime -> Character -> (Character,AugmentedAdvancement)
-nextAdv ns ch | fs == [] = (ch,defaultAA)
-              | season adv > ns = trace (show (ns,season adv,characterID ch)) $ (ch,defaultAA)
-              | otherwise = (new,a)
+nextAdv :: SeasonTime -> Character -> (Character,Maybe AugmentedAdvancement)
+nextAdv ns ch | fs == [] = (ch,Nothing)
+              | season adv > ns = trace (show (ns,season adv,characterID ch)) $ (ch,Nothing)
+              | otherwise = (new,Just a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
               (adv:as) = fs
