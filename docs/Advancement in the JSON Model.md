@@ -29,6 +29,15 @@
 		+ tricky!  Inter-dependency between advancements
 	+ Add book to covenant library
 		+ process characters first, then covenants
++ Process
+	+ Current - three functions applied by `stepIf`
+		+ nextAdv -> (Object,Augmented Advancement) pair
+		+ applyAdv -> advances, (O,AA) pair in and out
+		+ completeAdv -> completes and returns the Object
+	+ Note, same function names for Covenant and Character - this may have to change
+	+ Other functions could be interleaved between nextAdv and applyAdv
+		+ possibly using lists of O/AA pairs
+	
 + Advancement Types
 	+ Ingame Season
 		+ Adventure - fixed SQ + Independent study
