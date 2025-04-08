@@ -67,7 +67,7 @@ Warrior (1),
 
 ## Past Advancement
 
-+ Winter 1249 (2xp) (1 years) Exposure
++ Winter 1249 (2xp) (1 years) "" (Other Exposure)
     + Ability: Awareness 2xp; 
     + Aging  No roll. 
     + Characteristic: Pre 0
@@ -78,7 +78,7 @@ Warrior (1),
 + Autumn 1248 (4xp) Practice
     + Ability: Legerdemain 4xp; 
     + Validated: Correctly spent 4 xp.
-+ Summer 1248 (2xp) Exposure
++ Summer 1248 (2xp) "" (Other Exposure)
     + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1248 (4xp) Practice
@@ -100,7 +100,7 @@ Warrior (1),
 + Autumn 1247 (4xp) Practice
     + Ability: Music 4xp; 
     + Validated: Correctly spent 4 xp.
-+ Summer 1247 (2xp) Exposure
++ Summer 1247 (2xp) "" (Other Exposure)
     + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1247 (4xp) Practice

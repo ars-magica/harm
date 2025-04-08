@@ -73,6 +73,7 @@ instance HarmObject Character where
     stateSeason = characterSeason
     prepare = prepareCharacter
 
+
 -- |
 -- = Convenience Functions for Character Properties
 
@@ -143,6 +144,14 @@ applyAdvancement a cs = (a,cs')
           change = sortTraits $ changes a
           inferred = sortTraits $ inferredTraits a
           old = sortTraits $ traits cs
+
+applyAdv :: (Character,AugmentedAdvancement)
+                 -> (Character,AugmentedAdvancement)
+applyAdv (c,a) = (c',a')
+    where (a',st') = applyAdvancement a st
+          c' = c { state = Just st' }
+          st = fromMaybe defaultCS $ state c
+
 
 -- |
 -- == Char Gen
@@ -216,6 +225,17 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 
 -- |
 -- == Preparing the Advancement
+
+-- |
+-- Get the next augmented advancement.
+nextAdvancement :: SeasonTime -> Character -> (Character,AugmentedAdvancement)
+nextAdvancement ns ch | fs == [] = (ch,defaultAA)
+                      | season adv >* ns = (ch,defaultAA)
+                      | otherwise = (ch,a)
+        where a = prepareAdvancement (fromJust st) adv
+              st = state ch
+              (adv:_) = fs
+              fs = futureAdvancement ch
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement

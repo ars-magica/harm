@@ -550,7 +550,7 @@ Total: 1309 levels of spells.
 
 ## Past Advancement
 
-+ Spring 1255 (3xp) Lab Work
++ Spring 1255 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
@@ -561,7 +561,7 @@ Total: 1309 levels of spells.
         + Spell: Book of Images 0xp with flawless magic
         + Spell: The Shadow of Human Life 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
-+ Winter 1255 (2xp) (1 years) Lab Work
++ Winter 1255 (2xp) (1 years) LabWork (Exposure)
     +   ReVi Spells; No Aging (rolled 0)
     + Ability: Magic Theory 2xp; 
     + Spell: Circular Ward Against Demons 0xp Penetration
@@ -575,17 +575,17 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1254 (14xp) Vis study
++ Autumn 1254 (14xp) Vis Study
     +   (371½xp)
     + Art: Imaginem 14xp; 
     + Possession: Im vis (-5)
     + Validated: Correctly spent 14 xp.
-+ Summer 1254 (21xp) Vis study
++ Summer 1254 (21xp) Vis Study
     +  (350½xp)
     + Art: Imaginem 21xp; 
     + Possession: Im vis (-5)
     + Validated: Correctly spent 21 xp.
-+ Spring 1254 (16xp) Vis study
++ Spring 1254 (16xp) Vis Study
     +  (319xp)
     + Art: Imaginem 16xp; 
     + Possession: Im vis (-5)
@@ -601,12 +601,12 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 7 xp.
-+ Autumn 1253 (2xp) Author
++ Autumn 1253 (2xp) Authoring (Exposure)
     + Rego Tracatus (62xp)
     + Ability: Latin 2xp; 
     + Possession: Im vis (4)
     + Validated: Correctly spent 2 xp.
-+ Summer 1253 (2xp) Lab Work
++ Summer 1253 (2xp) LabWork (Exposure)
     + Intangible Tunnel ReVi20; diam version ReVi5 (144xp)
     + Ability: Magic Theory 2xp; 
     + Spell: Opening the Intangible Tunnel 0xp Quiet Casting
@@ -645,7 +645,7 @@ Total: 1309 levels of spells.
     + To 83xp
     + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Spring 1252 (3xp) Lab Work
++ Spring 1252 (3xp) LabWork (Exposure)
     + ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)
     + Art: Imaginem 3xp; 
     + Spell: Confusion of the Insane Vibrations 0xp Penetration
@@ -660,14 +660,14 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 12 xp.
-+ Autumn 1251 (2xp) Author Book
++ Autumn 1251 (2xp) Authoring (Exposure)
     + *Imaginary Horrors*
     + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
 + Summer 1251 (12xp) Reading
     + Art: Rego 12xp; 
     + Validated: Correctly spent 12 xp.
-+ Spring 1251 (3xp) Lab Work
++ Spring 1251 (3xp) LabWork (Exposure)
     + InIm spells below ->  281½.  Lab total 71
     + Art: Imaginem 3xp; 
     + Spell: Palm of Seeing (Sun duration) 0xp Penetration
@@ -698,7 +698,7 @@ Total: 1309 levels of spells.
     + Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity
     + Art: Imaginem 15xp; 
     + Validated: Correctly spent 15 xp.
-+ Winter 1250 (2xp) (1 years) Lab Work
++ Winter 1250 (2xp) (1 years) LabWork (Exposure)
     + no aging (-18); invent InHe25 Converse with Plant and Tree
     + Ability: Parma Magica 2xp; 
     + Spell: Converse with Plant and Tree 0xp Penetration
@@ -709,7 +709,7 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1249 (2xp) Author
++ Autumn 1249 (2xp) Authoring (Exposure)
     + Tractatus on Imaginem Q14
     + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -721,7 +721,7 @@ Total: 1309 levels of spells.
     + Summa L15Q13 (to 80xp: 12) 
     + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Winter 1249 (3xp) (1 years) Lab Work
++ Winter 1249 (3xp) (1 years) LabWork (Exposure)
     +  254½xp Invisibility Quartz for Sean; see below ; no aging (-18)
     + Art: Imaginem 3xp; 
     + Aging Rolled -18 (0) No aging. Die not recorded
@@ -730,7 +730,7 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 3 xp.
-+ Autumn 1248 (3xp) Lab Work
++ Autumn 1248 (3xp) LabWork (Exposure)
     +  250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3
     + Art: Imaginem 3xp; 
     + Spell: Ogre's Stench 0xp Quiet Casting
@@ -755,7 +755,7 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 15 xp.
-+ Autumn 1247 (2xp) Author
++ Autumn 1247 (2xp) Authoring (Exposure)
     + CrMe rituals x3 for Com to +5; (58xp) Tractatus on Corpus Q14 
     + Ability: Latin 2xp; 
     + Characteristic: Com 5
@@ -804,7 +804,7 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
-+ Autumn 1245 (2xp) Copy
++ Autumn 1245 (2xp) Copying (Exposure)
     + Copy spell texts; 2xp Latin; see below
     + Ability: Latin 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -823,7 +823,7 @@ Total: 1309 levels of spells.
     + Possession: Me vis (12)
     + Possession: Vi vis (-4)
     + Validated: Correctly spent 15 xp.
-+ Winter 1245 (2xp) (1 years) Lab Work
++ Winter 1245 (2xp) (1 years) LabWork (Exposure)
     + PeVi Spells; Parma Magica to 64xp; Rolls 28-24=4 Apparent Age increases.  lab total 51. Lab text for Break the Shield.
     + Ability: Parma Magica 2xp; 
     + Spell: Fist of Fey Oblivion 0xp Penetration
@@ -850,7 +850,7 @@ Total: 1309 levels of spells.
     + Confidence: 0 (1)
     + Possession: Vi vis (18)
     + Validated: Correctly spent 10 xp.
-+ Spring 1244 (2xp) Lab Work
++ Spring 1244 (2xp) LabWork (Exposure)
     + CrIg Attack Spell. Parma to 57xp 
     + Ability: Parma Magica 2xp; 
     + Spell: Arrow of Fiery Ribbons 0xp Penetration
@@ -886,11 +886,11 @@ Total: 1309 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
-+ Autumn 1242 (2xp) Lab work
++ Autumn 1242 (2xp) LabWork (Exposure)
     + Horror Cabinet Item  2xp Exposure Magic Theory
     + Ability: Magic Theory 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Summer 1242 (2xp) Exposure
++ Summer 1242 (2xp) "Assistance" (Other Exposure)
     + Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)
     + Ability: Magic Theory 2xp; 
     + Aging  LR 22;  No roll. 
@@ -898,7 +898,7 @@ Total: 1309 levels of spells.
     + Possession: Pe vis
     + Possession: Te vis
     + Validated: Correctly spent 2 xp.
-+ Spring 1242 (2xp) Lab Work
++ Spring 1242 (2xp) LabWork (Exposure)
     + Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14).
     + Ability: Magic Theory 2xp; 
     + Spell: Horror Cabinet 0xp Quiet Casting
@@ -909,7 +909,7 @@ Total: 1309 levels of spells.
         + Spell: Smoke of Escaping 0xp with flawless magic
         + Spell: Horror Cabinet 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Winter 1242 (2xp) (1 years) Lab Work
++ Winter 1242 (2xp) (1 years) LabWork (Exposure)
     + Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points.
     + Ability: Magic Theory 2xp; 
     + Warping 1 (One botch some time before 1242.)
@@ -920,39 +920,39 @@ Total: 1309 levels of spells.
     + 17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)
     + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Summer 1241 (2xp) Exposure
++ Summer 1241 (2xp) Copying (Exposure)
     + Copy lab tests (covenant service)  
     + Ability: Latin 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Spring 1241 (2xp) Lab Work
++ Spring 1241 (2xp) LabWork (Exposure)
     + Fan of Summer Breezes CrAu(Ig)19
     + Ability: Magic Theory 2xp; 
     + Possession: Au vis (-2)
     + Validated: Correctly spent 2 xp.
-+ Winter 1241 (2xp) (1 years) Exposure
++ Winter 1241 (2xp) (1 years) "Fixate AC" (Other Exposure)
     + Fixate AC
     + Ability: Magic Theory 2xp; 
     + Possession: Vi vis (-6)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1240 (2xp) Initiation
++ Autumn 1240 (2xp) Initiation (Exposure)
     + Cautious Sorcerer 
     + Ability: SOCP Lore 2xp; 
     + Virtue: Cautious Sorcerer (0)
     + Validated: Correctly spent 2 xp.
-+ Summer 1240 (2xp) Lab Work
++ Summer 1240 (2xp) LabWork (Exposure)
     + Gift of Com. Magic Theory to 130xp 
     + Ability: Magic Theory 2xp; 
     + Spell: Gift of Communication 0xp Safe Casting
     + Inferred traits
         + Spell: Gift of Communication 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1240 (2xp) Teaching
++ Spring 1240 (2xp) Teaching (Exposure)
     +  (23xp) Hiccup.
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1240 (2xp) (1 years) Lab Work
++ Winter 1240 (2xp) (1 years) LabWork (Exposure)
     + MuIm spells with help from Hiccup and Jimeny  (without text). MuIm 50 + 12 = 62. Magic Theory to 128xp.
     + Ability: Magic Theory 2xp; 
     + Spell: Sight of the Warm Surface 0xp Quiet Casting
@@ -969,21 +969,21 @@ Total: 1309 levels of spells.
         + Spell: Sight of the Warm Surface 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1239 (17xp) Lab Work
++ Autumn 1239 (17xp) LabWork (Exposure)
     + Gift of Quickness. Experimentation. Discovery (15xp in MT). Magi Theory to 126xp
     + Ability: Magic Theory 17xp; 
     + Spell: Gift of Quickness (personal range) 0xp Safe Casting
     + Inferred traits
         + Spell: Gift of Quickness (personal range) 0xp with flawless magic
     + Validated: Correctly spent 17 xp.
-+ Summer 1239 (2xp) Lab Work
++ Summer 1239 (2xp) LabWork (Exposure)
     + Com of the Heroes from text with help from Hiccup and Jimeny (CrMe 47 + Hiccup 8 [spec Creo] + Jimeny 4 = 59; with text +2 = 61) MT to 109xp
     + Ability: Magic Theory 2xp; 
     + Spell: Communication of the Heroes 0xp Safe Casting
     + Inferred traits
         + Spell: Communication of the Heroes 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1239 (2xp) Teaching
++ Spring 1239 (2xp) Teaching (Exposure)
     +  (21xp) Hiccup.  SOCP Lore
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -994,7 +994,7 @@ Total: 1309 levels of spells.
         + Spell: Aegis of the Hearth 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 6 xp.
-+ Autumn 1238 (2xp) Lab Work
++ Autumn 1238 (2xp) LabWork (Exposure)
     + Invent ReVi spells with help from Hiccup and Jimeny and lab text.  Lab total (ReVi) 47 + 11 (Hiccup + Jimeny) +2 text = 60.  Exposure 2xp Magic Theory (-> 107xp)
     + Ability: Magic Theory 2xp; 
     + Spell: Aegis of the Hearth 0xp Penetration
@@ -1009,11 +1009,11 @@ Total: 1309 levels of spells.
     + Ability: Second Sight 4xp; 
     + Reputation: Monster hunter [Village in Provence] 5xp
     + Validated: Correctly spent 8 xp.
-+ Spring 1238 (2xp) Teaching
++ Spring 1238 (2xp) Teaching (Exposure)
     +  (19xp) Hiccup 
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1238 (2xp) (1 years) Lab Work
++ Winter 1238 (2xp) (1 years) LabWork (Exposure)
     + Leap of Homecoming Touch (continued) 
     + Ability: Magic Theory 2xp; 
     + Spell: Leap of Homecoming (touch) 0xp Still Casting
@@ -1025,22 +1025,22 @@ Total: 1309 levels of spells.
         + Spell: Leap of Homecoming (touch) 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1237 (2xp) Lab Work
++ Autumn 1237 (2xp) LabWork (Exposure)
     + Leap of Homecoming Touch (starting, not completed)
     + Ability: Magic Theory 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Summer 1237 (2xp) Lab Work
++ Summer 1237 (2xp) LabWork (Exposure)
     +  (101xp) Eyes of the Eagle at touch InIm30 
     + Ability: Magic Theory 2xp; 
     + Spell: Eyes of the Eagle (touch) 0xp Quiet Casting
     + Inferred traits
         + Spell: Eyes of the Eagle (touch) 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1237 (2xp) Teaching
++ Spring 1237 (2xp) Teaching (Exposure)
     +  (17xp) Hiccup 
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1237 (2xp) (1 years) Lab Work
++ Winter 1237 (2xp) (1 years) LabWork (Exposure)
     + IMAGE FROM THE WIZARD TORN: Lab total InIm 50 + 10 (Hiccup/Jimeny) + 1 read imaginem
     + Ability: Magic Theory 2xp; 
     + Spell: Image from the Wizard Torn 0xp Quiet Casting
@@ -1052,14 +1052,14 @@ Total: 1309 levels of spells.
     +  65xp score 10 
     + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Summer 1236 (2xp) Lab Work
++ Summer 1236 (2xp) LabWork (Exposure)
     + Miner's Keen Eye (covenant service)  InTe lab total 52 (incl. Hiccup +7, Jimeny +3)
     + Ability: Magic Theory 2xp; 
     + Spell: Miner's Keen Eye (touch) 0xp Penetration
     + Inferred traits
         + Spell: Miner's Keen Eye (touch) 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1236 (2xp) Teaching
++ Spring 1236 (2xp) Teaching (Exposure)
     + Hiccup 13->15
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1075,7 +1075,7 @@ Total: 1309 levels of spells.
     + Possession: Weightless Chain (Protection 9, Load 2)
     + Possession: Te vis (-5)
     + Validated: Correctly spent 12 xp.
-+ Summer 1235 (2xp) Lab Work
++ Summer 1235 (2xp) LabWork (Exposure)
     +  93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
     + Ability: Magic Theory 2xp; 
     + Spell: Posing the Silent Question 0xp Quiet Casting
@@ -1084,7 +1084,7 @@ Total: 1309 levels of spells.
         + Spell: Sight of Conflicting Motives 0xp with flawless magic
         + Spell: Posing the Silent Question 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1235 (2xp) Teaching
++ Spring 1235 (2xp) Teaching (Exposure)
     + Hiccup 11->13
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1104,7 +1104,7 @@ Total: 1309 levels of spells.
     +  *Magic Companion* L15Q13 
     + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Spring 1234 (2xp) Exposure
++ Spring 1234 (2xp) Teaching (Exposure)
     + Hiccup 
     + Ability: Teaching 2xp; 
     + Possession: Stone-Cutting Knife
@@ -1116,14 +1116,14 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
-+ Autumn 1233 (2xp) Lab Work
++ Autumn 1233 (2xp) LabWork (Exposure)
     + Ward against Heat and Flames Parma to 51xp ; Lab Total 42 + Hiccup (6) + Familiar (4) = 52
     + Ability: Parma Magica 2xp; 
     + Spell: Ward against Heat and Flames 0xp Fast Casting
     + Inferred traits
         + Spell: Ward against Heat and Flames 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Summer 1233 (2xp) Lab Work
++ Summer 1233 (2xp) LabWork (Exposure)
     + Gift of Perception ++ Lab total 50 incl Hiccup
     + Ability: Parma Magica 2xp; 
     + Spell: Gift of Perception 0xp Quiet Casting
@@ -1132,11 +1132,11 @@ Total: 1309 levels of spells.
         + Spell: By His Works 0xp with flawless magic
         + Spell: Gift of Perception 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1233 (2xp) Exposure
++ Spring 1233 (2xp) Teaching (Exposure)
     + Hiccup 
     + Ability: Teaching 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1233 (15xp) (1 years) Teaching
++ Winter 1233 (15xp) (1 years) Taught
     + Hired teacher for £1. 
     + Ability: Craft: Rope. 15xp; 
     + Possession: Me vis (8)
@@ -1146,7 +1146,7 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 15 xp.
-+ Autumn 1232 (2xp) Lab Work
++ Autumn 1232 (2xp) LabWork (Exposure)
     + Circle of Demon's Oblivion.  Invent both level 5 and level 15 versions. Train familiar
     + Ability: Parma Magica 2xp; 
     + Spell: Circle of Demon's Oblivion 0xp Penetration (PeVi 5 [Base 10 (generic), -1 touch]: Range: Touch, Duration: Mom, Target: Circle. Destroys ten points of might to any infernal being inside the circle.  Lab Total 42 including similar spell L15 (+6 with Hiccup).  Casting Total 27 within covenant aura (Pen +44 w/o die).)
@@ -1155,16 +1155,16 @@ Total: 1309 levels of spells.
         + Spell: Circle of Demon's Oblivion 0xp with flawless magic
         + Spell: Circle of Demon's Oblivion 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Summer 1232 (2xp) Teaching
++ Summer 1232 (2xp) Teaching (Exposure)
     + Train Hiccup. Parma to 45xp
     + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Spring 1232 (2xp) Initiation
++ Spring 1232 (2xp) Initiation (Exposure)
     + Good Teacher.
     + Ability: Parma Magica 2xp; 
     + Virtue: Good Teacher (0)
     + Validated: Correctly spent 2 xp.
-+ Winter 1232 (2xp) (1 years) Initiation
++ Winter 1232 (2xp) (1 years) Initiation (Exposure)
     + Puissant SOCP Lore.
     + Ability: Parma Magica 2xp; 
     + Virtue: Puissant (ability) (0)
@@ -1180,18 +1180,18 @@ Total: 1309 levels of spells.
 + Summer 1231 (17xp) Reading
     + Ability: SOCP Lore 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Spring 1231 (2xp) Teaching
++ Spring 1231 (2xp) Teaching (Exposure)
     + Teach Hiccup. Parma to 39xp
     + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1231 (2xp) (1 years) Lab Work
++ Winter 1231 (2xp) (1 years) LabWork (Exposure)
     + Enchanting Familiar 
     + Ability: Parma Magica 2xp; 
     + Possession: Im vis (-9)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1230 (2xp) Exposure
++ Autumn 1230 (2xp) "Assistance" (Other Exposure)
     + Help Maine 
     + Ability: Magic Theory 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1206,7 +1206,7 @@ Total: 1309 levels of spells.
     + L6Q12
     + Ability: Area Lore: Ireland 15xp; 
     + Validated: Correctly spent 15 xp.
-+ Winter 1230 (2xp) (1 years) Lab work
++ Winter 1230 (2xp) (1 years) LabWork (Exposure)
     + CrCo spells.  Lab total 43 + Hiccup + bookstand = 51.
     + Ability: Magic Theory 2xp; 
     + Spell: Restoration of the Defiled Body 0xp Penetration
@@ -1216,7 +1216,7 @@ Total: 1309 levels of spells.
         + Spell: Restoration of the Defiled Body 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1229 (2xp) Lab work
++ Autumn 1229 (2xp) LabWork (Exposure)
     + ReCo 43 + Hiccup + bookstand = 51. Leap of Homecoming + Frog's Legs
     + Ability: Magic Theory 2xp; 
     + Spell: Leap of Homecoming 0xp Still Casting
@@ -1225,11 +1225,11 @@ Total: 1309 levels of spells.
         + Spell: Gift of the Frog's Legs 0xp with flawless magic
         + Spell: Leap of Homecoming 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Summer 1229 (2xp) Exposure
++ Summer 1229 (2xp) SpellInstruction (Exposure)
     + Teaching Spells to Hiccup
     + Ability: Teaching [apprentices] 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Spring 1229 (3xp) Lab Work
++ Spring 1229 (3xp) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore
     + Ability: Magic Theory 2xp; 
     + Ability: Hermes Lore 1xp; 
@@ -1252,7 +1252,7 @@ Total: 1309 levels of spells.
     + Art: Imaginem 13xp; 
     + Possession: Vi vis (3)
     + Validated: Correctly spent 13 xp.
-+ Spring 1228 (2xp) Lab Work
++ Spring 1228 (2xp) LabWork (Exposure)
     + Learn Sense of the lingering magic from lab text.  Using Bookstand of Hespera. Train Hiccup in Magic Theory. Exposure 2xp Magic Theory (-> 85xp)
     + Ability: Magic Theory 2xp; 
     + Spell: Sense of the Lingering Magic 0xp Penetration
@@ -1264,11 +1264,11 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
-+ Autumn 1227 (2xp) Exposure
++ Autumn 1227 (2xp) Copying (Exposure)
     + Copy spells (covenant service) 
     + Ability: Latin 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Summer 1227 (2xp) Lab Work
++ Summer 1227 (2xp) LabWork (Exposure)
     + Learn Wizard's Communion (MuVi 10) - Magic Theory exposure 2 using Bookstand of Hespera
     + Ability: Magic Theory 2xp; 
     + Spell: Wizard's Communion 0xp Fast Casting
@@ -1278,7 +1278,7 @@ Total: 1309 levels of spells.
 + Spring 1227 (17xp) Reading
     + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Winter 1227 (2xp) (1 years) Lab Work
++ Winter 1227 (2xp) (1 years) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera
     + Ability: Magic Theory 2xp; 
     + Possession: Cr vis (-3)
@@ -1292,7 +1292,7 @@ Total: 1309 levels of spells.
     + Art: Creo 17xp; 
     + Possession: Im vis (10)
     + Validated: Correctly spent 17 xp.
-+ Spring 1226 (2xp) Open Arts
++ Spring 1226 (2xp) OpeningArts (Exposure)
     + Open arts for Hiccup.
     + Ability: Magic Theory 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1310,7 +1310,7 @@ Total: 1309 levels of spells.
     + Made Potions of Demon's Oblivion 
     + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Summer 1225 (2xp) Lab Work
++ Summer 1225 (2xp) LabWork (Exposure)
     + Lab work. Touch version of Pit of Gaping Earth PeTe15. Exposure 2xp Magic Theory. Lab Total 30.
     + Ability: Magic Theory 2xp; 
     + Spell: Arrow of Gaping Earth 0xp Quiet Casting
@@ -1320,7 +1320,7 @@ Total: 1309 levels of spells.
 + Spring 1225 (15xp) Reading
     + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
-+ Winter 1225 (2xp) (1 years) Lab Work
++ Winter 1225 (2xp) (1 years) LabWork (Exposure)
     + Invent a touch version of Unravelling the Fabric of Imaginem lvl 13.  Exposure 2xp Second Sight. Lab Total 26.
     + Ability: Second Sight 2xp; 
     + Spell: Tearing the Fabric of Imaginem 0xp Quiet Casting
@@ -1346,7 +1346,7 @@ Total: 1309 levels of spells.
 + Autumn 1223 (17xp) Reading
     + Art: Animal 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Summer 1223 (2xp) Lab Work
++ Summer 1223 (2xp) LabWork (Exposure)
     + Parma to 30xp.  Story (2conf pts) Lab work: InVi5 Spot the Vis + InVi5 Scales of M W + InVi20 Piercing the faerie veil (from texts) (lab total InVi 14 + Int 3 + MT 4 + Aura 5 + similar spell 4 = 30) + 2xp parma
     + Ability: Parma Magica 2xp; 
     + Confidence: 0 (2)
@@ -1358,7 +1358,7 @@ Total: 1309 levels of spells.
         + Spell: Spot the Presence of Vis 0xp with flawless magic
         + Spell: Piercing the Faerie Veil 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1223 (2xp) Lab Work
++ Spring 1223 (2xp) LabWork (Exposure)
     + Stone Tell of Mind that Sits 
     + Ability: Parma Magica 2xp; 
     + Spell: Stone Tell of the Mind that Sits 0xp Penetration
@@ -1366,7 +1366,7 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Spell: Stone Tell of the Mind that Sits 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Winter 1223 (2xp) (1 years) Lab Work
++ Winter 1223 (2xp) (1 years) LabWork (Exposure)
     + Lab work: InVi5 Sense the Nature of Vis + InVi20 Piercing the magic veil (from texts) + 2xp parma
     + Ability: Parma Magica 2xp; 
     + Spell: Sense the Nature of Vis 0xp Quiet Casting
@@ -1380,7 +1380,7 @@ Total: 1309 levels of spells.
 + Autumn 1222 (16xp) Reading
     + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Summer 1222 (2xp) Lab Work
++ Summer 1222 (2xp) LabWork (Exposure)
     + ReTe items (covenant service) Parma to 24xp
     + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1419,7 +1419,7 @@ Total: 1309 levels of spells.
     + Jerome's Tower.  Parma to 17xp
     + Ability: Parma Magica 5xp; 
     + Validated: Correctly spent 5 xp.
-+ Winter 1220 (2xp) (1 years) Lab Work
++ Winter 1220 (2xp) (1 years) LabWork (Exposure)
     + Learn fist of demon's Oblivion
     + Ability: Latin 2xp; 
     + Spell: Fist of Demon's Oblivion 0xp Penetration
@@ -1444,7 +1444,7 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
-+ Autumn 1218 (2xp) Exposure: Lab Work
++ Autumn 1218 (2xp) LabWork (Exposure)
     + Enchant Bookstand of Hespera
     + Ability: Parma Magica 2xp; 
     + Possession: Te vis (3)
