@@ -254,13 +254,19 @@ instance Advance SagaState where
 
    step saga = saga { stateTitle = stateTitle saga 
                     , seasonTime = ns
-                    , covenants = map (advance ns) $ covenants saga
-                    , characters = map (advance ns) $ characters saga 
+                    , covenants = cov
+                    , characters = ch
                     }
      where ns = nextSeason saga
+           (cov,ch) = jointAdvance ns ((covenants saga),(characters saga))
 
    nextSeason saga = foldl min NoTime ss
       where ss = [ nextSeason x | x <- characters saga ]
+
+jointAdvance :: SeasonTime -> ([Covenant],[Character]) -> ([Covenant],[Character])
+jointAdvance ns (cov',ch') = (cov,ch)
+     where cov = map (advance ns) cov'
+           ch =  map (advance ns) ch'
 
 -- |
 -- == Covenant support
