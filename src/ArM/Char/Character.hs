@@ -96,6 +96,9 @@ class Advance a where
     advance :: SeasonTime -> a -> a
     -- | Advance the character one season forward
     step :: a -> a
+    -- | Advance the character one season forward
+    stepIf :: SeasonTime -> a -> a
+    stepIf _ = step
     -- | Time of the next advancement of the character.
     nextSeason :: a -> SeasonTime
 
@@ -117,7 +120,7 @@ instance Advance Character where
             where y =  head $ futureAdvancement c
                   ct' =  season y
 
-   -- step = completeAdv . applyAdv . nextAdv
+   stepIf ns = completeAdv . applyAdv . nextAdv ns
 
    step c = c { state = Just cs
               , pastAdvancement = (a:xs)
@@ -149,16 +152,15 @@ applyAdvancement a cs = (a,cs')
           old = sortTraits $ traits cs
 
 applyAdv :: (Character,AugmentedAdvancement)
-                 -> (Character,AugmentedAdvancement)
+         -> (Character,AugmentedAdvancement)
 applyAdv (c,a) = (c',a')
     where (a',st') = applyAdvancement a st
           c' = c { state = Just st' }
-          st = fromMaybe defaultCS $ state c
+          st = trace (show $ characterSeason c ) $ fromMaybe defaultCS $ state c
 
 completeAdv :: (Character,AugmentedAdvancement)
                  -> Character
 completeAdv (c,a) = c { pastAdvancement = a:pastAdvancement c }
-
 
 -- |
 -- == Char Gen
@@ -237,13 +239,13 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 -- Get the next augmented advancement.
 nextAdv :: SeasonTime -> Character -> (Character,AugmentedAdvancement)
 nextAdv ns ch | fs == [] = (ch,defaultAA)
-              | season adv >* ns = (ch,defaultAA)
+              | season adv > ns = trace (show (ns,season adv,characterID ch)) $ (ch,defaultAA)
               | otherwise = (new,a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
               (adv:as) = fs
               fs = futureAdvancement ch
-	      new = ch { futureAdvancement = as }
+              new = ch { futureAdvancement = as }
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
@@ -253,10 +255,9 @@ prepareAdvancement c = validate
                      . winterEvents c 
                      . addInference c
 
--- | Sort the `inferredTraits` field of an `AugmentedAdvancement`
+-- | Sort the `inferredTraits` field of an `AugmentedAdvancement`.
 sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
 sortInferredTraits x = x { inferredTraits = sortTraits $ inferredTraits x }
-
 
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
