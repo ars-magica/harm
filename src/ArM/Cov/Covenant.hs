@@ -152,14 +152,6 @@ data CovAdvancement = CovAdvancement
      , lost :: [ Book ]
      }
    deriving (Eq,Generic,Show)
-data AugCovAdvancement = AugCovAdvancement 
-     { explicit :: Maybe CovAdvancement
-     , inferred :: Maybe CovAdvancement
-     }
-   deriving (Eq,Generic,Show)
-instance ToJSON AugCovAdvancement
-instance FromJSON AugCovAdvancement where
-
 defaultAdv :: CovAdvancement 
 defaultAdv = CovAdvancement 
      { caSeason = NoTime
@@ -181,6 +173,19 @@ instance FromJSON CovAdvancement where
 
 
 -- |
+-- Augmented advancement for covenants.  This comprises changes inferred
+-- from the advancements of characters (and possibly other covenants)
+-- as well as the advancement from the input file.
+data AugCovAdvancement = AugCovAdvancement 
+     { explicit :: Maybe CovAdvancement
+     , inferred :: Maybe CovAdvancement
+     }
+   deriving (Eq,Generic,Show)
+instance ToJSON AugCovAdvancement
+instance FromJSON AugCovAdvancement where
+
+
+-- |
 -- The `Advance` instance is very similar to that of `Character`, but has to
 -- be implemented separately to account for different advancement classes.
 instance Advance Covenant where
@@ -191,43 +196,40 @@ instance Advance Covenant where
 
    stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeAdv . applyAdv . nextAdv ns
 
-   step c = c { covenantState = Just cs 
-              , pastCovAdvancement = (a:xs)
-              , futureCovAdvancement = ys 
-              }
-            where (y:ys) = futureCovAdvancement c
+   step cov = completeAdv $ applyAdv (new,Just y')
+            where (y:ys) = futureCovAdvancement cov
                   y' = prepareAdvancement y
-                  xs = pastCovAdvancement c
-                  (a,cs) = applyCovAdvancement y' cstate
-                  cstate = fromJust $ covenantState c
+                  new = cov { futureCovAdvancement = ys }
    nextSeason = f . futureCovAdvancement
        where f [] = NoTime
              f (x:_) = caSeason x
 
--- | Apply advancement
-applyCovAdvancement :: AugCovAdvancement
-                 -> CovenantState 
-                 -> (AugCovAdvancement,CovenantState)
-applyCovAdvancement a cs = (a,cs')
-    where cs' = cs { covTime = caSeasonAug a
-                   , covenFolkID = sort $ joiningAug a ++ covenFolkID cs }
-
+-- | CovenFolk joining according to the augmented covenant advancement.
 joiningAug :: AugCovAdvancement -> [CharacterID]
 joiningAug (AugCovAdvancement a b) = a' ++ b'
     where a' = fromMaybe [] $ fmap joining a
           b' = fromMaybe [] $ fmap joining b
+
+-- | Get the season of the augmented covenant advancement.
+-- This is taken from the explicit advancement if available, and
+-- the inferred advancement otherwise.
 caSeasonAug :: AugCovAdvancement -> SeasonTime
 caSeasonAug (AugCovAdvancement a b) = fromMaybe b' $ fmap caSeason a
     where b' = fromMaybe NoTime $ fmap caSeason b
 
+-- | Apply covenant advancement
 applyAdv :: (Covenant,Maybe AugCovAdvancement)
          -> (Covenant,Maybe AugCovAdvancement)
 applyAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
-applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a')
-    where (a',st') = applyCovAdvancement a st
+applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a)
+    -- where (a',st') = applyCovAdvancement a st
+    where st' = st { covTime = caSeasonAug a
+                   , covenFolkID = sort $ joiningAug a ++ covenFolkID st }
           c' = c { covenantState = Just st' }
           st = fromMaybe defaultCovState $ covenantState c
 
+-- | Complete the advancement procedure to return the new Covenant with
+-- the updated state.
 completeAdv :: (Covenant,Maybe AugCovAdvancement)
                  -> Covenant
 completeAdv (c,Nothing) = c
