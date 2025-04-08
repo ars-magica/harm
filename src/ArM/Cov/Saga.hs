@@ -265,7 +265,7 @@ instance Advance SagaState where
 
 jointAdvance :: SeasonTime -> ([Covenant],[Character]) -> ([Covenant],[Character])
 jointAdvance ns (cov',ch') = (cov,ch)
-     where cov = map (advance ns) cov'
+     where cov = map (stepIf ns) cov'
            ch =  map (stepIf ns) ch'
 
 -- |
