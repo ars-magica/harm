@@ -94,7 +94,8 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
 class Advance a where
     -- | Advance the character until after the given time.
     advance :: SeasonTime -> a -> a
-    -- | Advance the character one season forward
+    -- | Advance the character forward by the first advancement in
+    -- the plan, regardless of the season.
     step :: a -> a
     -- | Advance the character one season forward
     stepIf :: SeasonTime -> a -> a

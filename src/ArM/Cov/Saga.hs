@@ -257,29 +257,38 @@ instance Advance SagaState where
                     , covenants = cov
                     , characters = ch
                     }
-     where ns = nextSeason saga
-           (cov,ch) = jointAdvance ns ((covenants saga),(characters saga))
+     where (cov,ch) = jointAdvance saga ((covenants saga),(characters saga))
 
    nextSeason saga = foldl min NoTime ss
       where ss = [ nextSeason x | x <- characters saga ]
 
-jointAdvance :: SeasonTime -> ([Covenant],[Character]) -> ([Covenant],[Character])
+-- |
+-- Advance listed covenants and characters one season forward.
+jointAdvance :: Saga              -- ^ Saga reference, passed to know what the next season is
+             -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
+	     -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
 jointAdvance ns (cov',ch') = (cov,ch)
      where cov = map (stepIf ns) cov'
            ch =  map (stepIf ns) ch'
+           ns = nextSeason saga
 
 -- |
 -- == Covenant support
 
+-- |
+-- List of covenFolk as `Character` objects at the covenant
 covenFolk :: Saga -> CovenantState -> [ Character ]
-covenFolk saga cov = trace "covenFolk: " $ lookupCharacters s $ f cov
+covenFolk saga cov = lookupCharacters s $ f cov
    where f = covenFolkID 
          s = saga
 
+-- |
+-- Find `Character` objects for a list of character IDs, from the given `Saga`.
 lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
-lookupCharacters saga is = trace "lookupCharacters" $ lkup is cs
+lookupCharacters saga is = lkup is cs
     where cs = sortOn characterID $ characters $ sagaState saga
 
+-- | Auxiliary `lookupCharacters`
 lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
 lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
                    | x > characterID y = lkup (x:xs) ys

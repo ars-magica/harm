@@ -16,8 +16,7 @@ tags:
 	+ [ ] Review library
 + [ ] Phase 1. [[Covenant]]
 	+ [ ] Covenant membership in CharacterState
-	+ [ ] Process advancements with saga object
-		+ [ ] Pass `SagaState` object
+	+ [ ] Interdependencies in advancements 
 		+ [ ] Get book from covenant
 		+ [ ] Get book from own CharacterState - when Possession supports book
 	+ [ ] Reading and copying advancements
