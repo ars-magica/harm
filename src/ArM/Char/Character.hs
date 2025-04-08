@@ -117,14 +117,17 @@ instance Advance Character where
             where y =  head $ futureAdvancement c
                   ct' =  season y
 
-   step c = c { state = Just cs 
+   -- step = completeAdv . applyAdv . nextAdv
+
+   step c = c { state = Just cs
               , pastAdvancement = (a:xs)
-              , futureAdvancement = ys 
+              , futureAdvancement = ys
               }
             where (y:ys) = futureAdvancement c
                   xs = pastAdvancement c
                   (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
                   cstate = fromJust $ state c
+
 
    nextSeason = f . futureAdvancement
        where f [] = NoTime
@@ -151,6 +154,10 @@ applyAdv (c,a) = (c',a')
     where (a',st') = applyAdvancement a st
           c' = c { state = Just st' }
           st = fromMaybe defaultCS $ state c
+
+completeAdv :: (Character,AugmentedAdvancement)
+                 -> Character
+completeAdv (c,a) = c { pastAdvancement = a:pastAdvancement c }
 
 
 -- |
@@ -228,14 +235,15 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 
 -- |
 -- Get the next augmented advancement.
-nextAdvancement :: SeasonTime -> Character -> (Character,AugmentedAdvancement)
-nextAdvancement ns ch | fs == [] = (ch,defaultAA)
-                      | season adv >* ns = (ch,defaultAA)
-                      | otherwise = (ch,a)
+nextAdv :: SeasonTime -> Character -> (Character,AugmentedAdvancement)
+nextAdv ns ch | fs == [] = (ch,defaultAA)
+              | season adv >* ns = (ch,defaultAA)
+              | otherwise = (new,a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
-              (adv:_) = fs
+              (adv:as) = fs
               fs = futureAdvancement ch
+	      new = ch { futureAdvancement = as }
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
