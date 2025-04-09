@@ -61,6 +61,8 @@ instance FromJSON CovenantID
 covenantID :: Covenant -> CovenantID
 covenantID = CovenantID . name
 
+covenant :: CharacterState -> Maybe CovenantID
+covenant = fmap CovenantID . memberOf 
 
 instance HarmObject Covenant where
     name = covName . covenantConcept

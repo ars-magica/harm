@@ -195,6 +195,7 @@ instance Show CharacterConcept where
 data CharacterState = CharacterState 
          { charTime :: SeasonTime
          , charSType :: CharacterType
+         , memberOf :: Maybe String
          , traits :: [ Trait ]
          }  deriving (Eq,Generic,Show)
 
@@ -204,6 +205,7 @@ defaultCS :: CharacterState
 defaultCS = CharacterState 
          { charTime = NoTime
          , charSType = Magus
+         , memberOf = Nothing
          , traits = [ ]
          }  
 
@@ -215,5 +217,6 @@ instance FromJSON CharacterState where
         -- <$> v .:? "charTime"
         <$> fmap parseSeasonTime ( v .:? "charTime" )
         <*> v .: "charType" 
+        <*> v .:? "memberOf" 
         <*> fmap maybeList ( v .:? "traits" )
 
