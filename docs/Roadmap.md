@@ -16,12 +16,11 @@ tags:
 	+ [ ] Review library
 + [ ] Phase 1. [[Covenant]]
 	+ [ ] Covenant membership in CharacterState
-	+ [ ] Interdependencies in advancements 
-		+ [ ] Get book from covenant
-		+ [ ] Get book from own CharacterState - when Possession supports book
 	+ [ ] Reading and copying advancements
-		+ [ ] using library books
+		+ [ ] SQ from book
 		+ [ ] calculate book quality from author
+		+ [ ] check for rereading of tractatus
+		+ [ ] check for collisions on books
 		+ [ ] adding library books
 			+ [ ] covenant advancement may depend on character advancement
 			+ [ ] character advancement depends on previous covenant state for book availability
@@ -33,12 +32,11 @@ tags:
 	+ [ ] group and  sort books in library
 	+ [ ] Handle Antologies
 + [ ] Phase 2. Advancement 
-	+ [ ] Reading
 	+ [ ] Author books
 	+ [ ] Teaching/Taught
 		+ [ ] Difficult to derive SQ from the teacher
 		+ [ ] Could potentially augment advancement and advance in multiple steps
-	+ [ ] Training
+		+ [ ] Training
 	+ [ ] Lab Total
 	+ [ ] Enchantments
 		+ [ ] Create Lesser Enchantments
@@ -58,6 +56,7 @@ tags:
 		+ [ ] different constructors for weapon and item
 		+ [ ] parse JSON with different constructors
 		+ [ ] support book possession
+		+ [ ] Get book from own CharacterState - when Possession supports book
 	+ [ ] Display aging bonus etc
 	+ [ ] Mark house virtues, mysteries etc
 	+ [ ] Refactor and document code
