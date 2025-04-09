@@ -212,6 +212,12 @@ joiningAug (AugCovAdvancement a b) = a' ++ b'
     where a' = fromMaybe [] $ fmap joining a
           b' = fromMaybe [] $ fmap joining b
 
+-- | CovenFolk leaving according to the augmented covenant advancement.
+leavingAug :: AugCovAdvancement -> [CharacterID]
+leavingAug (AugCovAdvancement a b) = a' ++ b'
+    where a' = fromMaybe [] $ fmap leaving a
+          b' = fromMaybe [] $ fmap leaving b
+
 -- | Get the season of the augmented covenant advancement.
 -- This is taken from the explicit advancement if available, and
 -- the inferred advancement otherwise.
@@ -225,10 +231,18 @@ applyCovAdv :: (Covenant,Maybe AugCovAdvancement)
 applyCovAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
 applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a)
     -- where (a',st') = applyCovAdvancement a st
-    where st' = st { covTime = caSeasonAug a
-                   , covenFolkID = sort $ joiningAug a ++ covenFolkID st }
+    where st' = st { covTime = caSeasonAug a, covenFolkID = cid }
           c' = c { covenantState = Just st' }
           st = fromMaybe defaultCovState $ covenantState c
+          cid1 = sort $ joiningAug a ++ covenFolkID st 
+          cid = cid1 -= ( sort $ leavingAug a )
+
+(-=) :: Ord a => [a] -> [a] -> [a] 
+(-=) [] _ = []
+(-=) xs [] = xs
+(-=) (x:xs) (y:ys) | x < y = x:(xs -= (y:ys))
+                   | x > y = (x:xs) -= ys
+                   | otherwise = xs -= ys
 
 -- | Complete the advancement procedure to return the new Covenant with
 -- the updated state.
