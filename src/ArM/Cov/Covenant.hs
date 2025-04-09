@@ -194,9 +194,9 @@ instance Advance Covenant where
                 | otherwise =  advance ct $ step c 
             where ct' =  nextSeason c
 
-   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeAdv . applyAdv . nextCovAdv ns
+   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeCovAdv . applyCovAdv . nextCovAdv ns
 
-   step cov = completeAdv $ applyAdv (new,Just y')
+   step cov = completeCovAdv $ applyCovAdv (new,Just y')
             where (y:ys) = futureCovAdvancement cov
                   y' = prepareAdvancement y
                   new = cov { futureCovAdvancement = ys }
@@ -218,10 +218,10 @@ caSeasonAug (AugCovAdvancement a b) = fromMaybe b' $ fmap caSeason a
     where b' = fromMaybe NoTime $ fmap caSeason b
 
 -- | Apply covenant advancement
-applyAdv :: (Covenant,Maybe AugCovAdvancement)
+applyCovAdv :: (Covenant,Maybe AugCovAdvancement)
          -> (Covenant,Maybe AugCovAdvancement)
-applyAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
-applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a)
+applyCovAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
+applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a)
     -- where (a',st') = applyCovAdvancement a st
     where st' = st { covTime = caSeasonAug a
                    , covenFolkID = sort $ joiningAug a ++ covenFolkID st }
@@ -230,10 +230,10 @@ applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c'
 
 -- | Complete the advancement procedure to return the new Covenant with
 -- the updated state.
-completeAdv :: (Covenant,Maybe AugCovAdvancement)
+completeCovAdv :: (Covenant,Maybe AugCovAdvancement)
                  -> Covenant
-completeAdv (c,Nothing) = c
-completeAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
+completeCovAdv (c,Nothing) = c
+completeCovAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
 
 -- |
 -- Get the next augmented advancement.

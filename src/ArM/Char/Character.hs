@@ -26,6 +26,8 @@ module ArM.Char.Character ( module ArM.Char.Types.Character
                           , characterEntryTime
                           , HarmObject(..)
                           , nextAdv
+                          , applyAdv
+                          , completeAdv
                           ) where
 
 import Data.Maybe 

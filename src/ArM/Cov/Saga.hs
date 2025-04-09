@@ -268,16 +268,17 @@ instance Advance SagaState where
 jointAdvance :: SagaState         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance saga (cov',ch') = (cov,ch)
-     where cov = map (stepIf ns) cov'
-           ch =  map (stepIf ns) ch'
-           ns = nextSeason saga
+jointAdvance saga = completeJoint . advJoint . nextJoint saga
 
 type CovAA = (Covenant,Maybe AugCovAdvancement)
 type ChaAA = (Character,Maybe AugmentedAdvancement)
 nextJoint :: SagaState -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
 nextJoint saga (xs,ys) = (map (nextCovAdv ns) xs,map (nextAdv ns) ys)
            where ns = nextSeason saga
+completeJoint :: ([CovAA],[ChaAA]) -> ([Covenant],[Character])
+completeJoint (xs,ys) = (map completeCovAdv xs,map completeAdv ys)
+advJoint :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
+advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
 
 -- |
 -- == Covenant support
