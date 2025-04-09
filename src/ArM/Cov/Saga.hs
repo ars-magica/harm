@@ -217,7 +217,6 @@ covenantIndex = OList . map covenantIndexLine
 -- |
 -- = Advancement
 
-
 -- | The saga can be advanced with the same class methods as
 -- characters and covenants.  When the saga advances, all its
 -- characters and covenants advance accordingly.
@@ -234,7 +233,6 @@ instance Advance Saga where
    nextSeason = f . sagaStates
        where f [] = NoTime
              f (x:_) = nextSeason x
-
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: SagaFile -> Saga -> Saga
@@ -265,20 +263,53 @@ instance Advance SagaState where
 
 -- |
 -- Advance listed covenants and characters one season forward.
+-- The advancement happens jointly, with several passes, to resolve
+-- inter-dependencies.
 jointAdvance :: SagaState         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance saga = completeJoint . advJoint . nextJoint saga
+jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
 
+-- | Convenience type for joint advancement
 type CovAA = (Covenant,Maybe AugCovAdvancement)
+-- | Convenience type for joint advancement
 type ChaAA = (Character,Maybe AugmentedAdvancement)
+
+-- |
+-- Get the next advancements, preparing for joint advancement
 nextJoint :: SagaState -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
 nextJoint saga (xs,ys) = (map (nextCovAdv ns) xs,map (nextAdv ns) ys)
            where ns = nextSeason saga
+
+-- |
+-- Complete the joint advancement of characters and covenants.
 completeJoint :: ([CovAA],[ChaAA]) -> ([Covenant],[Character])
 completeJoint (xs,ys) = (map completeCovAdv xs,map completeAdv ys)
+
+-- |
+-- Jointly advance characters and covenants.
 advJoint :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
 advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
+
+-- |
+-- Find books in the covenants and add to the advancements for characters
+-- who use them.
+addBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
+addBooks (xs,ys) = (xs,map (addBook xs') ys)
+   where xs' = map fst xs
+
+-- |
+-- Find books in the covenants and add to the advancement of the given
+-- character if they use the book.
+addBook :: [Covenant] -> ChaAA -> ChaAA
+addBook cov (x,y) = (x,fmap (addBook' cov) y)
+
+-- |
+-- Find and add books with stats to add to the character advancement.
+-- Not implemented yet.
+addBook' :: [Covenant] -> AugmentedAdvancement -> AugmentedAdvancement
+addBook' cov y | mode y /= Reading = y
+               | otherwise = y
 
 -- |
 -- == Covenant support
