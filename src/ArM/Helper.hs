@@ -19,9 +19,21 @@ import ArM.BasicIO
 import Data.Char
 
 
+-- |
+-- Trim away whitespace from the head and tail of the string.
 trim :: String -> String
 trim = f . f
    where f = reverse . dropWhile isSpace
+
+-- |
+-- Remove elements from the second list from the first.
+-- Both lists have to be sorted.
+(-=) :: Ord a => [a] -> [a] -> [a] 
+(-=) [] _ = []
+(-=) xs [] = xs
+(-=) (x:xs) (y:ys) | x < y = x:(xs -= (y:ys))
+                   | x > y = (x:xs) -= ys
+                   | otherwise = xs -= ys
 
 -- |
 -- = Convenience functions for Maybe

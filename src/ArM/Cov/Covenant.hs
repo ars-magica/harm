@@ -23,7 +23,7 @@ import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
--- import ArM.Helper
+import ArM.Helper
 
 import ArM.Debug.Trace
 
@@ -237,12 +237,16 @@ applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ 
           cid1 = sort $ joiningAug a ++ covenFolkID st 
           cid = cid1 -= ( sort $ leavingAug a )
 
-(-=) :: Ord a => [a] -> [a] -> [a] 
-(-=) [] _ = []
-(-=) xs [] = xs
-(-=) (x:xs) (y:ys) | x < y = x:(xs -= (y:ys))
-                   | x > y = (x:xs) -= ys
-                   | otherwise = xs -= ys
+findCov :: Character -> [Covenant] -> Maybe Covenant
+findCov ch cs | xs == [] = Nothing
+              | otherwise = Just $ head xs
+    where xs = filter (`hasMember` ch) cs
+
+hasMember :: Covenant -> Character -> Bool
+hasMember cov ch = cid `elem` chs
+   where cid = characterID ch
+         chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
+
 
 -- | Complete the advancement procedure to return the new Covenant with
 -- the updated state.
