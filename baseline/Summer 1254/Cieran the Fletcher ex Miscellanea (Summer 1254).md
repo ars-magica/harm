@@ -554,12 +554,12 @@ Total: 1183 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Spring 1253 (9+4xp) Reading
     + Bonus SQ +4 from Book Learner and Correspondent (101->114)
-    + Uses: RegoL20Q9
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Art: Rego 13xp; 
     + Validated: Correctly spent 13 xp.
 + Winter 1253 (9+4xp) (1 years) Reading
     + Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21
-    + Uses: RegoL20Q9
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Art: Rego 13xp; 
     + Aging Rolled -21 (-1) No aging.
     + Inferred traits

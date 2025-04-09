@@ -317,7 +317,8 @@ instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 
        , OList [ stringMD $ narrative a ]
-       , usesString a
+       -- , usesString a
+       , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
        , OList $ map printMD $ changes a
        , infl
        , OList $ map (OString . show) $ validation a
@@ -641,7 +642,7 @@ formatTitle book = tis ++ aus ++ dat
                | otherwise = " by " ++ aut
            tit = trim $ originalTitle book
            tis | tit == "" = ""
-               | otherwise = " *" ++ tit ++ "*"
+               | otherwise = "*" ++ tit ++ "*"
            dat = " (" ++ show (originalDate book) ++ ")"
 
 instance LongSheet Book
