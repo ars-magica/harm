@@ -237,11 +237,17 @@ applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ 
           cid1 = sort $ joiningAug a ++ covenFolkID st 
           cid = cid1 -= ( sort $ leavingAug a )
 
+-- |
+-- Find the character's covenant from a list.
+-- The covenant is identified by checking if the character is
+-- listed as a member (covenFolkID).
 findCov :: Character -> [Covenant] -> Maybe Covenant
 findCov ch cs | xs == [] = Nothing
               | otherwise = Just $ head xs
     where xs = filter (`hasMember` ch) cs
 
+-- |
+-- Does the covenant have the character as a member?
 hasMember :: Covenant -> Character -> Bool
 hasMember cov ch = cid `elem` chs
    where cid = characterID ch

@@ -310,6 +310,7 @@ addBook cov (x,y) = (x,fmap (addBook' cov) y)
 addBook' :: [Covenant] -> AugmentedAdvancement -> AugmentedAdvancement
 addBook' cov y | mode y /= Reading = y
                | otherwise = y
+   -- where book = 
 
 -- |
 -- == Covenant support
