@@ -17,6 +17,7 @@ import ArM.Helper
 import ArM.Char.Trait
 import ArM.Types.Calendar
 import ArM.GameRules
+import ArM.Types.Library
 
 import Data.Char 
 import Data.Aeson 
@@ -200,6 +201,7 @@ data AugmentedAdvancement = Adv
      , validation :: [Validation] -- ^ Report from validation
      , postProcessTrait :: PostProcessor 
         -- ^ extra postprocessing for traits at a given stage 
+     , bookUsed :: [Book]
      }
    deriving (Eq,Show,Generic)
 
@@ -227,6 +229,7 @@ defaultAA = Adv
      , augYears = Nothing
      , validation = []
      , postProcessTrait = PostProcessor id
+     , bookUsed = []
      }
 
 instance AdvancementLike Advancement where
@@ -256,4 +259,5 @@ instance FromJSON AugmentedAdvancement where
         <*> v .:? "augYears"
         <*> fmap maybeList ( v .:?  "validation")
         <*> v .:? "postProcessTrait" .!= PostProcessor id
+        <*> v .:? "bookUsed"  .!= []
 

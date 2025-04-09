@@ -24,7 +24,7 @@ module ArM.Cov.Saga ( Saga(..)
                     , covenFolk
                     ) where
 
--- import Data.Maybe 
+import Data.Maybe 
 import Data.Aeson 
 import Data.List 
 import GHC.Generics
@@ -310,9 +310,16 @@ addBook cvs (x,y) = (x,fmap (addBook' cov) y)
 -- Not implemented yet.
 addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
 addBook' Nothing y  = y
-addBook' (Just cov) y | mode y /= Reading = y
-               | otherwise = y
-
+addBook' (Just cov) y = f bs y
+    where u = usesBook y
+          bk | isNothing st = [ Nothing | _ <- u ]
+             | otherwise = map (findBook (fromJust st)) u
+          bs = zip u bk
+          st = covenantState cov
+          f [] aa = aa
+          f ((bid,Nothing):xs) aa = f xs $ aa { validation = nobk bid:validation aa }
+          f ((_,Just b):xs) aa = f xs $ aa { bookUsed = b:bookUsed aa }
+          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 -- |
 -- == Covenant support
 
