@@ -11,7 +11,7 @@
 		+ Then applies the advancement
 	    + In both cases it depends on the State from previous season and Advancement from current season.
 	        + The State includes virtues and flaws which may modify behaviour.
-+ Possible extension of `Saga` `advance`
++ Joint advancement, as implemented in `Saga`''s `advance`
 	+ Parse 1.  Compute providing characters
 		+ Teacher SQ
 		+ Possessions given away
@@ -19,7 +19,6 @@
 		+ Taught student SQ
 			+ do we infer XP gain from SQ, or just validate?
 		+ Possessions received
-	+ This is not worth it at the moment
 + How do we augment the advancements using information from the covenant and other characters?
 	+ Books from CovenantState
 		+ pass joint state to advancement augmentation

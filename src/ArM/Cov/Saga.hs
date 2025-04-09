@@ -302,15 +302,16 @@ addBooks (xs,ys) = (xs,map (addBook xs') ys)
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.
 addBook :: [Covenant] -> ChaAA -> ChaAA
-addBook cov (x,y) = (x,fmap (addBook' cov) y)
+addBook cvs (x,y) = (x,fmap (addBook' cov) y)
+   where cov =  findCov x cvs
 
 -- |
 -- Find and add books with stats to add to the character advancement.
 -- Not implemented yet.
-addBook' :: [Covenant] -> AugmentedAdvancement -> AugmentedAdvancement
-addBook' cov y | mode y /= Reading = y
+addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
+addBook' Nothing y  = y
+addBook' (Just cov) y | mode y /= Reading = y
                | otherwise = y
-   -- where book = 
 
 -- |
 -- == Covenant support

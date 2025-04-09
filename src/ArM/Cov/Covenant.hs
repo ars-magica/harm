@@ -242,9 +242,12 @@ applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ 
 -- The covenant is identified by checking if the character is
 -- listed as a member (covenFolkID).
 findCov :: Character -> [Covenant] -> Maybe Covenant
-findCov ch cs | xs == [] = Nothing
-              | otherwise = Just $ head xs
+findCov ch cs = maybeHead xs
     where xs = filter (`hasMember` ch) cs
+
+findBook ::  CovenantState -> String -> Maybe Book
+findBook cov bs = maybeHead xs
+    where xs = filter ( (==bs) . bookID ) ( library cov )
 
 -- |
 -- Does the covenant have the character as a member?
