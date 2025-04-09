@@ -258,19 +258,26 @@ instance Advance SagaState where
                     , characters = ch
                     }
      where (cov,ch) = jointAdvance saga ((covenants saga),(characters saga))
+           ns = nextSeason saga
 
    nextSeason saga = foldl min NoTime ss
       where ss = [ nextSeason x | x <- characters saga ]
 
 -- |
 -- Advance listed covenants and characters one season forward.
-jointAdvance :: Saga              -- ^ Saga reference, passed to know what the next season is
+jointAdvance :: SagaState         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
-	     -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance ns (cov',ch') = (cov,ch)
+             -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
+jointAdvance saga (cov',ch') = (cov,ch)
      where cov = map (stepIf ns) cov'
            ch =  map (stepIf ns) ch'
            ns = nextSeason saga
+
+type CovAA = (Covenant,Maybe AugCovAdvancement)
+type ChaAA = (Character,Maybe AugmentedAdvancement)
+nextJoint :: SagaState -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
+nextJoint saga (xs,ys) = (map (nextCovAdv ns) xs,map (nextAdv ns) ys)
+           where ns = nextSeason saga
 
 -- |
 -- == Covenant support

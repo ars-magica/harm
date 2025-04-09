@@ -25,6 +25,7 @@ module ArM.Char.Character ( module ArM.Char.Types.Character
                           , SeasonTime(..)
                           , characterEntryTime
                           , HarmObject(..)
+                          , nextAdv
                           ) where
 
 import Data.Maybe 

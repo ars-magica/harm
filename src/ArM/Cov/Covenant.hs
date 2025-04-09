@@ -194,7 +194,7 @@ instance Advance Covenant where
                 | otherwise =  advance ct $ step c 
             where ct' =  nextSeason c
 
-   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeAdv . applyAdv . nextAdv ns
+   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeAdv . applyAdv . nextCovAdv ns
 
    step cov = completeAdv $ applyAdv (new,Just y')
             where (y:ys) = futureCovAdvancement cov
@@ -237,8 +237,8 @@ completeAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
 
 -- |
 -- Get the next augmented advancement.
-nextAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
-nextAdv ns cov | fs == [] = (cov,Nothing)
+nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
+nextCovAdv ns cov | fs == [] = (cov,Nothing)
               | caSeason adv > ns = trace (show (ns,caSeason adv,covenantID cov)) $ (cov,Nothing)
               | otherwise = (new,Just a)
         where a = prepareAdvancement adv
