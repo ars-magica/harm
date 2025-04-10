@@ -324,7 +324,7 @@ charTeacherSQ :: CharacterState -> Int
 charTeacherSQ cs = 3 + com + tch
     where sheet = filterCS cs
           com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          tch = sheetAbilityScore sheet (CharacteristicKey "Teaching")
+          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
           -- add good teacher
           -- subtract flaws
           -- add speciality

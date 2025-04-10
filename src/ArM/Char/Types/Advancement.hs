@@ -268,4 +268,5 @@ instance FromJSON AugmentedAdvancement where
         <*> fmap maybeList ( v .:?  "validation")
         <*> v .:? "postProcessTrait" .!= PostProcessor id
         <*> v .:? "bookUsed"  .!= []
+        <*> v .:? "teacherSQ"  
 
