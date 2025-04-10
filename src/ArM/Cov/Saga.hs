@@ -33,6 +33,7 @@ import ArM.Char.Character
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Cov.Covenant
+import ArM.Types.Library
 import ArM.BasicIO
 import ArM.Helper
 
@@ -297,6 +298,38 @@ advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
 addBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
 addBooks (xs,ys) = (xs,map (addBook xs') ys)
    where xs' = map fst xs
+
+-- |
+-- Validate the use of books.
+validateBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
+validateBooks (xs,ys) = (xs, ys)
+
+valGBU :: (Book,[Character]) -> (Book,Validation)
+valGBU (b,cs) | bookCount b <= length cs = (b,Validated $ "No oversubscription of book " ++ bookID b)
+              | otherwise = (b,Validated $ "Oversubscription " ++ show (bookCount b) ++ " copies of " ++ bookID b
+                           ++ ". Used by " ++ showStrList (map name cs) ++ "." 
+                           )
+
+
+-- |
+-- Get a list of book uses for validation.
+getBookUse :: [ChaAA] -> [ ( Book, [Character] ) ]
+getBookUse = f5 . f4 . gbu
+   where f4 = map ( \ (x,y) -> ( x, [y] ) )
+         f5 [] = []
+         f5 (x:[]) = x:[]
+         f5 ((x1,y1):(x2,y2):s) 
+             | x1 == x2 = f5 ((x1,y1++y2):s)
+             | otherwise = (x1,y1):f5 ((x2,y2):s)
+
+gbu :: [ChaAA] -> [ (Book, Character ) ]
+gbu = f3 . f2 . f1
+   where f1 = map  ( \ (ch,aa) -> ( bu aa, ch ) )
+         f2 = map ( \ (bs, ch) -> [ (b,ch) | b <- bs ] ) 
+         f3 = sortOn fst . foldl (++) [] 
+         bu = fromMaybe [] . fmap bookUsed
+
+    
 
 -- |
 -- Find books in the covenants and add to the advancement of the given
