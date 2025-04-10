@@ -295,8 +295,16 @@ advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
 addBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
-addBooks (xs,ys) = (xs,map (addBook xs') ys)
-   where xs' = map fst xs
+addBooks (cvs,chs) = (cvs,chs')
+   where cvst = map fst cvs
+         chs' = map (addBook cvst) chs
+         bs = f $ sort $ foldl (++) [] $ map pk chs'
+         pk = fromMaybe [] . fmap bookUsed . snd
+         f [] = []
+         f (x:[]) = []
+         f (x:y:xs) = x:f (y:xs)
+
+-- validateBooks :: [ChaAA] -> [ChaAA]
 
 -- |
 -- Find books in the covenants and add to the advancement of the given
