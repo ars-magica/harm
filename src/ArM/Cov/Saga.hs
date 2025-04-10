@@ -32,7 +32,7 @@ import GHC.Generics
 import ArM.Char.Character
 import ArM.DB.Spell
 import ArM.DB.Weapon
-import ArM.Cov.Covenant
+import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.BasicIO
 import ArM.Helper

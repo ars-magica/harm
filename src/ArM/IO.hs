@@ -29,7 +29,7 @@ import System.Directory
 import ArM.Char.Character
 import ArM.Markdown
 import ArM.Cov.Saga
-import ArM.Cov.Covenant
+import ArM.Types.Covenant
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.BasicIO

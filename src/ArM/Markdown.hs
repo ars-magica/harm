@@ -29,7 +29,7 @@ import ArM.Char.CharacterSheet
 import ArM.Char.Trait
 import ArM.Char.Combat
 import ArM.Cov.Saga
-import ArM.Cov.Covenant
+import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.DB.Spell
 import ArM.GameRules

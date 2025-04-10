@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.Covenant
+-- Module      :  ArM.Types.Covenant
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -14,7 +14,7 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.Covenant where
+module ArM.Types.Covenant where
 
 import GHC.Generics
 import Data.Aeson

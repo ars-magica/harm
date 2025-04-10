@@ -75,7 +75,7 @@ common harm-deps
                        , ArM.Char.Inference
                        , ArM.Char.Virtues
                        , ArM.Markdown
-                       , ArM.Cov.Covenant
+                       , ArM.Types.Covenant
                        , ArM.Cov.Saga
                        , ArM.IO
                        , ArM.Helper
