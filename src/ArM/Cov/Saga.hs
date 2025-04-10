@@ -296,20 +296,29 @@ advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
 addBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
-addBooks (xs,ys) = (xs,map (addBook xs') ys)
+addBooks (xs,ys) = validateBooks (xs,map (addBook xs') ys)
    where xs' = map fst xs
 
 -- |
 -- Validate the use of books.
 validateBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
-validateBooks (xs,ys) = (xs, ys)
+validateBooks (xs,ys) = (xs, f ys)
+   where vs = map valGBU $ getBookUse ys
+         f [] = []
+         f ((ch,aa):s) 
+            | isNothing aa = (ch,aa):s
+            | bookUsed (fromJust aa) == [] = (ch,aa):s
+            | otherwise = (ch,Just $ g (fromJust aa) vs):s
+         g aa [] = aa
+         g aa ((x,v):s) 
+           | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
+           | otherwise = g aa s
 
 valGBU :: (Book,[Character]) -> (Book,Validation)
-valGBU (b,cs) | bookCount b <= length cs = (b,Validated $ "No oversubscription of book " ++ bookID b)
-              | otherwise = (b,Validated $ "Oversubscription " ++ show (bookCount b) ++ " copies of " ++ bookID b
-                           ++ ". Used by " ++ showStrList (map name cs) ++ "." 
-                           )
-
+valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
+              | otherwise = (b,Validated $ "Book " ++ bookID b ++ " is available.")
+    where err = "Oversubscription " ++ show (bookCount b) ++ " copies of " ++ (bookID b)
+                    ++ ". Used by " ++ showStrList (map name cs) ++ "." 
 
 -- |
 -- Get a list of book uses for validation.
