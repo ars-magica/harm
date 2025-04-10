@@ -60,6 +60,8 @@ instance Show AdvancementType where
    show (Exposure (OtherExposure x)) = show x ++ " (Other Exposure)"
    show (Exposure x) = show x ++ " (Exposure)"
    show (CharGen x) = x 
+
+
 instance ToJSON AdvancementType where
    toJSON = toJSON . show
 instance FromJSON AdvancementType where
@@ -127,6 +129,10 @@ class AdvancementLike a where
      -- effectiveSQ :: Maybe Int   -- ^ SQ modified by virtues and flaws
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
      -- inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
+     isExposure :: a -> Bool
+     isExposure = f . mode
+        where f (Exposure _) = True
+              f _ = False
 
 -- | The advancement object has two roles.
 -- It can hold the advancemet from one season or chargen stage,
@@ -202,6 +208,7 @@ data AugmentedAdvancement = Adv
      , postProcessTrait :: PostProcessor 
         -- ^ extra postprocessing for traits at a given stage 
      , bookUsed :: [Book]
+     , teacherSQ :: Maybe Int
      }
    deriving (Eq,Show,Generic)
 
@@ -230,6 +237,7 @@ defaultAA = Adv
      , validation = []
      , postProcessTrait = PostProcessor id
      , bookUsed = []
+     , teacherSQ = Nothing
      }
 
 instance AdvancementLike Advancement where

@@ -243,7 +243,6 @@ advanceSaga' :: [SeasonTime] -> Saga -> Saga
 advanceSaga' [] = id
 advanceSaga' (x:xs) = trace ("adv> " ++ show x) $ advanceSaga' xs . advance x 
 
-
 instance Advance SagaState where
    advance t saga 
       | NoTime == ns = saga 
@@ -314,6 +313,8 @@ validateBooks (xs,ys) = (xs, f ys)
            | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
            | otherwise = g aa s
 
+-- | Validate use of a single book.
+-- This is an auxiliary for `validateBooks` which applies it with `map`.
 valGBU :: (Book,[Character]) -> (Book,Validation)
 valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
               | otherwise = (b,Validated $ "Book " ++ bookID b ++ " is available.")
@@ -323,23 +324,19 @@ valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
 -- |
 -- Get a list of book uses for validation.
 getBookUse :: [ChaAA] -> [ ( Book, [Character] ) ]
-getBookUse = f5 . f4 . gbu
-   where f4 = map ( \ (x,y) -> ( x, [y] ) )
+getBookUse = f5 . f4 . f3 . f2 . f1
+   where f1 = map  ( \ (ch,aa) -> ( bu aa, ch ) )
+         f2 = map ( \ (bs, ch) -> [ (b,ch) | b <- bs ] ) 
+         f3 = sortOn fst . foldl (++) [] 
+         bu = fromMaybe [] . fmap bookUsed
+         f4 = map ( \ (x,y) -> ( x, [y] ) )
          f5 [] = []
          f5 (x:[]) = x:[]
          f5 ((x1,y1):(x2,y2):s) 
              | x1 == x2 = f5 ((x1,y1++y2):s)
              | otherwise = (x1,y1):f5 ((x2,y2):s)
 
-gbu :: [ChaAA] -> [ (Book, Character ) ]
-gbu = f3 . f2 . f1
-   where f1 = map  ( \ (ch,aa) -> ( bu aa, ch ) )
-         f2 = map ( \ (bs, ch) -> [ (b,ch) | b <- bs ] ) 
-         f3 = sortOn fst . foldl (++) [] 
-         bu = fromMaybe [] . fmap bookUsed
-
     
-
 -- |
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.
@@ -362,6 +359,7 @@ addBook' (Just cov) y = f bs y
           f ((bid,Nothing):xs) aa = f xs $ aa { validation = nobk bid:validation aa }
           f ((_,Just b):xs) aa = f xs $ aa { bookUsed = b:bookUsed aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+
 -- |
 -- == Covenant support
 

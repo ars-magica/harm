@@ -314,5 +314,20 @@ inferSQ :: AugmentedAdvancement -> AugmentedAdvancement
 inferSQ ad = ad { effectiveSQ = esq }
         where esq = maybeAdd (sourceQuality ad') (advBonus ad')
               ad' = advancement ad
+-- Infer SQ for Exposure = 2
+-- Infer SQ for reading from book
+-- Infer SQ for taught from teacher
+-- Infer SQ for adventure from covenant
 
+
+charTeacherSQ :: CharacterState -> Int
+charTeacherSQ cs = 3 + com + tch
+    where sheet = filterCS cs
+          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
+          tch = sheetAbilityScore sheet (CharacteristicKey "Teaching")
+          -- add good teacher
+          -- subtract flaws
+          -- add speciality
+          -- add one/two student bonus
+-- Teacher SQ +
 
