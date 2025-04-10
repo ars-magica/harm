@@ -141,14 +141,28 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
              | otherwise = appSQ xs
 
 
+bonusSQ :: AdvancementLike a => VF -> a -> Int
+bonusSQ vf m = f (vfname vf) (mode m)
+    where  f "Apt Student" Taught = 5
+           f "Apt Student" Trained = 5
+           f "Poor Student" Taught = -3
+           f "Poor Student" Reading = -3
+           f "Book Learner" Reading = 3
+           f "Independent Study" Practice = 2
+           f "Independent Study" Adventure = 3
+           f "Free Study" VisStudy = 3
+           f _ _ = 0
+
+
 -- | 
 -- == Characteristics
 
-chLookup :: String -> Int
-chLookup "Improved Characteristics" = 3
-chLookup "Weak Characteristics" = -3
-chLookup _  = 0
 
+-- | Get the point allowance for characteristics purchase,
+-- which is seven points adjusted by virtues and flaws.
 getCharAllowance :: [ VF ] -> Int
 getCharAllowance = (+7) . sum . map ( chLookup . vfname )
+     where chLookup "Improved Characteristics" = 3
+           chLookup "Weak Characteristics" = -3
+           chLookup _  = 0
 

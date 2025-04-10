@@ -43,6 +43,8 @@ tags:
 		+ [ ] Create Greater Enchanted Devices with state
 	+ [ ] Lab assistance
 + [ ] Phase 3. Improvements
+	+ [ ] Distinguish between comment and narrative
+	+ [ ] Virtue/Flaw descriptions
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Validate missing seasons
