@@ -257,7 +257,7 @@ nextAdv ns ch | fs == [] = (ch,Nothing)
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareAdvancement c = validate 
                      . sortInferredTraits   -- sort inferred traits
-                     . inferSQ
+                     . inferSQ c
                      . winterEvents c 
                      . addInference c
 
@@ -310,10 +310,12 @@ agePT :: Int -- ^ Number of years
 agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Calculate initial XP limits on Advancements
-inferSQ :: AugmentedAdvancement -> AugmentedAdvancement
-inferSQ ad = ad { effectiveSQ = esq }
+inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
+inferSQ cs ad = ad { effectiveSQ = esq }
         where esq = maybeAdd (sourceQuality ad') (advBonus ad')
               ad' = advancement ad
+              vf = vfList $ filterCS cs
+              bsq = bonusSQ vf ad
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
 -- Infer SQ for taught from teacher

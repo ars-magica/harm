@@ -263,9 +263,9 @@ instance FromJSON AugmentedAdvancement where
         <*> v .:? "effectiveSQ"
         <*> v .:? "levels"
         <*> v .:? "spentXP"
-        <*> fmap maybeList ( v .:? "inferredTraits" )
+        <*> v .:? "inferredTraits"  .!= []
         <*> v .:? "augYears"
-        <*> fmap maybeList ( v .:?  "validation")
+        <*> v .:?  "validation" .!= []
         <*> v .:? "postProcessTrait" .!= PostProcessor id
         <*> v .:? "bookUsed"  .!= []
         <*> v .:? "teacherSQ"  

@@ -15,6 +15,7 @@ module ArM.Char.Virtues ( inferTraits
                         , getCharAllowance
                         , inferConfidence
                         , appSQ
+                        , bonusSQ
                         ) where
 
 import ArM.Char.Types.Advancement
@@ -141,8 +142,11 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
              | otherwise = appSQ xs
 
 
-bonusSQ :: AdvancementLike a => VF -> a -> Int
-bonusSQ vf m = f (vfname vf) (mode m)
+bonusSQ :: AdvancementLike a => [VF] -> a -> Int
+bonusSQ vs a = sum $ map (bonusSQ' a) vs
+
+bonusSQ' :: AdvancementLike a => a ->  VF ->Int
+bonusSQ' m vf = f (vfname vf) (mode m)
     where  f "Apt Student" Taught = 5
            f "Apt Student" Trained = 5
            f "Poor Student" Taught = -3
