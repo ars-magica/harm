@@ -8,14 +8,10 @@ tags:
 # Roadmap
 
 + [ ] **Review** Hibernia Saga
-	+ [ ] Fix Cieran's vis
-	+ [ ] Print and Double-Check Cieran
-	+ [ ] Print and Double-Check Eogan
+	+ [ ] Review character sheet design (Cieran)
 	+ [ ] More spell descriptions in CSV file
-	+ [ ] Session notes from Hibernia
-	+ [ ] Review library
+	+ [ ] Review covenant sheet and library
 + [ ] Phase 1. [[Covenant]]
-	+ [ ] Covenant membership in CharacterState
 	+ [ ] Reading and copying advancements
 		+ [ ] SQ from book
 		+ [ ] calculate book quality from author
