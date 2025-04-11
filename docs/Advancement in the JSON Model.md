@@ -36,23 +36,25 @@
 	+ Note, same function names for Covenant and Character - this may have to change
 	+ Other functions could be interleaved between nextAdv and applyAdv
 		+ possibly using lists of O/AA pairs
-	
-+ Advancement Types
-	+ Ingame Season
-		+ Adventure - fixed SQ + Independent study
-		+ Practice - fixed SQ + Independent study
-		+ Teaching - validate SQ against teacher
-		+ Training - validate SQ against trainer
-		+ Reading - get SQ from book
-		+ Vis study - fixed SQ + free study
-		+ Exposure - fixed SQ
-			+ Copying
-			+ Authoring
-			+ Teaching
-			+ Training
-			+ Lab work
-			+ Opening Arts
-			+ Initiation
-	+ SQ bonuses which require human judgment
-		+ correspondent
-		+ study bonus
+
+## Source Quality Calculation
+
+| Mode      | Base       | Virtue            | Other                               |
+| :-------- | ---------- | ----------------- | ----------------------------------- |
+| Adventure | Covenant   | Independent study |                                     |
+| Practice  | Individual | Independent study |                                     |
+| Teaching  | Teacher    | Apt Student       | Specialitiy, one/two students, lab? |
+| Training  | Teacher    | Apt Student       |                                     |
+| Reading   | Book       | Book Learner      |                                     |
+| Vis study | Die roll   | Free study        |                                     |
+| Exposure  | 2          |                   |                                     |
++ Advancement
+	+ sourceQuality (base)
+	+ bonusQuality covers virtue
++ AugmentedAdvancement
+	+ computedSQ
+
++ Other
+    + correspondent ??
+    + study bonus - Manual !
+    + custom virtues

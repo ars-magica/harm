@@ -619,6 +619,7 @@ Total: 1309 levels of spells.
     + Bonus SQ +4 from Book Learner and Correspondent (101->114)
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Art: Rego 13xp; 
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
 + Winter 1253 (9+4xp) (1 years) Reading
     + Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21
@@ -628,6 +629,7 @@ Total: 1309 levels of spells.
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
 + Autumn 1252 (15+1xp) Adventure
     + Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11
