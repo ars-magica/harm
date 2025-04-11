@@ -42,6 +42,7 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.DB.Weapon
+-- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
@@ -223,7 +224,7 @@ instance Show Art  where
           ++ f (artMultiplier a)
       where f 1 = ""
             f x = " [xp x" ++ show x ++  "]"
-instance Show Reputation  where
+instance Show Reputation where
    show a = reputationName a ++ " [" ++ (repLocale a) ++ "] "
           ++ show (repScore a) ++ " (" ++ showNum (repExcessXP a) ++ ") "
 

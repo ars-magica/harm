@@ -583,8 +583,10 @@ instance TraitType Trait where
     computeTrait = Just . toTrait
 
 instance TraitType Possession where
-    advanceTrait p x = x { itemCount = itemCount x + (fromMaybe 1 $ multiplicity p) }
-    computeTrait = possession
+    advanceTrait p x = trace "advance possession" $ ttrace 
+            $ x { itemCount = itemCount x + fromMaybe 1 m }
+        where  m = fmap itemCount $ possession  p
+    computeTrait = ttrace . possession
 
 instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ computeTrait p

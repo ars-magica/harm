@@ -199,6 +199,7 @@ prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
                   . sortInferredTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
+                  . initialLimits (filterCS cs)        -- infer additional properties on the advancement
                   . addInference cs         -- infer additional traits 
           where sheet = filterCS cs
 

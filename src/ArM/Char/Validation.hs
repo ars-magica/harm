@@ -17,7 +17,7 @@
 -- or written to file.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Validation (validate,validateCharGen) where
+module ArM.Char.Validation (validate,validateCharGen,initialLimits) where
 
 import ArM.Char.Types.Advancement
 import ArM.Char.Trait
@@ -78,7 +78,7 @@ calculateXP = sum . map regXP . changes
 
 -- | validate an advancement, adding results to the validation field
 validateCharGen :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateCharGen sheet = validateCharGen' sheet . initialLimits sheet
+validateCharGen sheet = validateCharGen' sheet 
 
 validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateCharGen' cs a 
