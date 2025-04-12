@@ -186,6 +186,10 @@ data AugCovAdvancement = AugCovAdvancement
 instance ToJSON AugCovAdvancement
 instance FromJSON AugCovAdvancement where
 
+instance Timed AugCovAdvancement where
+   season = fromMaybe NoTime . fmap caSeason . explicit
+instance Timed CovAdvancement where
+   season = caSeason
 
 -- |
 -- The `Advance` instance is very similar to that of `Character`, but has to

@@ -37,6 +37,11 @@
 	+ Other functions could be interleaved between nextAdv and applyAdv
 		+ possibly using lists of O/AA pairs
 
++ P/G advancement
+	+ P/G season
+	+ P/G year
+	+ P/G part-year ?  20 xp and 10 xp
+
 ## Source Quality Calculation
 
 | Mode      | Base       | Virtue            | Other                               |
@@ -58,3 +63,15 @@
     + correspondent ??
     + study bonus - Manual !
     + custom virtues
+
+
++ Advancement
+	+ Manual `sourceQuality` - required for Practice (or may default to 4 if missing), otherwise discouraged
+	+ Manual `bonusSQ` - required for correspondent and study bonus, and possibly custom virtues/flaws
++ AugmentedAdvancement
+	+ `sourceQuality` derived from either book, teacher, advancement `sourceQuality` or advncement mode
+	+ bonuses from virtues
+	+ manual bonuses from `Advancement`
++ Bonuses may be lists, including justifications
++ `effectiveSQ` is the sum of the above
++ Validation - compare standard SQ to autocomputed SQ

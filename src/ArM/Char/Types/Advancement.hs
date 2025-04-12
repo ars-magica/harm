@@ -117,12 +117,14 @@ dropWord (x:xs) | isSpace x = trim xs
 -- |
 -- == AdvancementLike Class
 
+class Timed a where
+   season :: a -> SeasonTime -- ^ season or development stage
+
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- AugmentedAdvanceemnt
 class AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
-     season :: a -> SeasonTime    -- ^ season or development stage
      narrative :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
@@ -240,16 +242,18 @@ defaultAA = Adv
      , teacherSQ = Nothing
      }
 
+instance Timed Advancement where
+     season  = advSeason
 instance AdvancementLike Advancement where
      mode = advMode
-     season  = advSeason
      narrative  = advNarrative
      usesBook = advUses
      sourceQuality  = advSQ
      changes = advChanges
+instance Timed AugmentedAdvancement where
+     season  = advSeason  .  advancement 
 instance AdvancementLike AugmentedAdvancement where
      mode a = advMode  $ advancement a
-     season  = advSeason  .  advancement 
      narrative  a = advNarrative  $ advancement  a
      usesBook  a = advUses  $ advancement a
      sourceQuality  a =  advSQ  $ advancement a
