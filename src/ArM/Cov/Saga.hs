@@ -73,6 +73,8 @@ data SagaState = SagaState
          , characters :: [Character]
          }  deriving (Eq,Show)
 
+instance Timed SagaState where
+    season = seasonTime
 
 -- | Get the name of the Saga as recorded in the SagaState
 sagaStateName :: SagaState -> String

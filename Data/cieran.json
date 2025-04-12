@@ -401,9 +401,10 @@
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
-      , "sourceQuality" : 2
+      , "sourceQuality" : 2, "bonusQuality" : 1
       , "narrative" : "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
+                    , { "ability" : "Hermes Lore", "xp" : 1 } 
                     , { "possession" : { "art" : "Cr", "count" : -3
 		        , "comment" : "for the Safe Cauldron" } } ]
       },
@@ -746,9 +747,9 @@
             , "tefo": "ReCo", "level" : 40
          }
          , { "possession" : { "art" : "In", "count" : 16, "comment" : "From the Wyrm in Provence.  Not sure about the art." } }
-         , { "possession" : { "art" : "In", "count" : 5, "comment" : "paid for the initiation script" } }
-         , { "possession" : { "art" : "In", "count" : 3, "comment" : "reward to Hiccup" } }
-         , { "possession" : { "art" : "In", "count" : 1, "comment" : "paid for faerie ingredients" } }
+         , { "possession" : { "art" : "In", "count" : -5, "comment" : "paid for the initiation script" } }
+         , { "possession" : { "art" : "In", "count" : -3, "comment" : "reward to Hiccup" } }
+         , { "possession" : { "art" : "In", "count" : -1, "comment" : "paid for faerie ingredients" } }
       ]
       },
       { "mode" : "Teaching", "season" : "Spring 1238"
@@ -869,7 +870,8 @@
       , "sourceQuality" : 2
       , "narrative" : "Fan of Summer Breezes CrAu(Ig)19"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
-         , { "possession" : { "art" : "Au", "count" : -2, "comment" : "for the enchantment" } }
+         , { "possession" : { "art" : "Au", "count" : -2
+              , "comment" : "for the enchantment" } }
       ]
       },
       { "mode" : "Copying", "season" : "Summer 1241"
@@ -886,7 +888,14 @@
       , "sourceQuality" : 2
       , "narrative" : "Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points."
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
-         , { "other" : "Warping", "points" : 1, "comment" : "One botch some time before 1242." }
+         , { "other" : "Warping", "points" : 1
+              , "comment" : "One botch some time before 1242."  }
+         , { "possession" : { "art" : "Cr", "count" : 2 } }
+         , { "possession" : { "art" : "An", "count" : 1 } }
+         , { "possession" : { "art" : "An", "count" : -1, 
+             "comment" : "faerie rituals" } }
+         , { "possession" : { "art" : "Ig", "count" : 3 } }
+         , { "possession" : { "art" : "Me", "count" : 8 } }
       ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1242"
@@ -912,11 +921,11 @@
       , "narrative" : "Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
          , { "aging" : { "longevity" : 22 } } 
-         , { "possession" : { "art" : "Vi", "count" : 2
+         , { "possession" : { "art" : "Vi", "count" : -2
                             , "comment" : "payment to Main for the LR" } }
-         , { "possession" : { "art" : "Pe", "count" : 1
+         , { "possession" : { "art" : "Pe", "count" : -1
                             , "comment" : "payment to Main for the LR" } }
-         , { "possession" : { "art" : "Te", "count" : 1
+         , { "possession" : { "art" : "Te", "count" : -1
                             , "comment" : "payment to Main for the LR" } }
       ]
       },
@@ -1253,6 +1262,8 @@
                , "agingComment" : "No aging."
 	    }
 	    }
+        , { "possession" : { "art" : "Im", "count" : 12
+		        , "comment" : "Allowance" } } 
       ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1252"
@@ -1278,8 +1289,8 @@
                     , { "ability" : "Latin", "xp" : 2 }
                     , { "ability" : "Hermes Lore", "xp" : 4 }
                     , { "confidence" : "Confidence", "points" : 5 }
-                    , { "possession" : { "art" : "Me", "count" : 5
-		        , "comment" : "from the dark faerie in Provence" } } 
+                    , { "possession" : { "art" : "Me", "count" : 2
+		        , "comment" : "from the dark faerie in Provence, net reimbursed 3p to Tiou" } } 
                     , { "possession" : { "art" : "Im", "count" : 4
 		        , "comment" : "from the dark faerie in Provence" } } 
                     , { "possession" : { "art" : "Te", "count" : 3
@@ -1364,9 +1375,28 @@
                     , { "possession" : { "art" : "Im", "count" : -5
 		        , "comment" : "vis study" } } ]
       },
-      { "mode" : "Lab Work", "season" : "Winter 1255"
+      { "mode" : "Opening Arts", "season" : "Winter 1255"
       , "sourceQuality" : 2
-      , "narrative" : "  ReVi Spells; No Aging (rolled 0)"
+      , "narrative" : "Open arts for Luciu"
+      , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
+        , { "possession" : { "art" : "In", "count" : -3
+		        , "comment" : "Correction" } } 
+        , { "possession" : { "art" : "Mu", "count" : 2
+		        , "comment" : "Correction" } } 
+        , { "possession" : { "art" : "An", "count" : -1
+		        , "comment" : "Correction" } } 
+        , { "possession" : { "art" : "Vi", "count" : 2
+		        , "comment" : "Correction" } } 
+            , { "aging" : { "deltaYounger" : 1
+               , "agingRollDie" : 0
+               , "agingRoll" : -1
+               , "agingComment" : "No aging."
+	    } }
+      ]
+      },
+      { "mode" : "Lab Work", "season" : "Spring 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15)."
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
          , { "spell" : "Circular Ward Against Demons",
             "tefo" : "ReVi", "level" : 25 
@@ -1380,14 +1410,9 @@
             , "tefo" : "ReVi", "level" : 20 
             , "mastery" : [ "Quiet Casting" ]
          }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 0
-               , "agingRoll" : -1
-               , "agingComment" : "No aging."
-	    } }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Spring 1255"
+      { "mode" : "Lab Work", "season" : "Summer 1255"
       , "sourceQuality" : 3
       , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text."
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
@@ -1403,6 +1428,17 @@
             , "tefo" : "CrIm", "level" : 5
             , "mastery" : [ "Quiet Casting" ]
          }
+      ]
+      },
+      { "mode" : "Teaching", "season" : "Winter 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "Teaching Luciu"
+      , "changes" : [ 
+           { "ability" : "Teaching", "xp" : 2 }
+            , { "aging" : { "deltaYounger" : 1
+               , "agingRollDie" : 10
+               , "agingComment" : "No aging."
+	    } }
       ]
       }
    ]

@@ -113,7 +113,7 @@
       },
       { "mode" : "Taming"
       , "season" : "Autumn 1254"
-      , "sourceQuality" : 2, 
+      , "sourceQuality" : 2
       , "narrative" : "Train three lymers and a greyhound to Loyal +1."
       , "changes" : 
          [ { "ability" : "Animal Handling", "xp": 2 }
@@ -121,7 +121,7 @@
       },
       { "mode" : "Training"
       , "season" : "Winter 1255"
-      , "sourceQuality" : 2, 
+      , "sourceQuality" : 2
       , "narrative" : "Train one lymer in hunt +8 xp."
       , "changes" : 
          [ { "ability" : "Hunt", "xp": 2 }

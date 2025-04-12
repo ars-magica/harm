@@ -27,30 +27,43 @@ printAnnals :: Saga -> [ ( SeasonTime, OList ) ]
 printAnnals = printStateHistory . sagaState
 
 printStateHistory :: SagaState -> [ ( SeasonTime, OList ) ]
-printStateHistory st = printAdvHistory ( chrh, covh )
+printStateHistory st = printAdvHistory t ( chrh, covh )
     where covh = map pastCovAdvancement $ covenants st
           chrh = map pastAdvancement $ characters st
+          t = season st
 
-printAdvHistory :: ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) -> [ ( SeasonTime, OList ) ]
-printAdvHistory = printAdvHistory' . sortAdvHistory
+printAdvHistory :: SeasonTime
+                -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
+                -> [ ( SeasonTime, OList ) ]
+printAdvHistory t = printAdvHistory' . sortAdvHistory t
 
-sortAdvHistory :: ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
+printAdvHistory' :: [ ( [ AugmentedAdvancement ], [ AugCovAdvancement ] ) ] 
+                 -> [ ( SeasonTime, OList ) ]
+printAdvHistory' = map printOneSeason
+
+printOneSeason :: ( [ AugmentedAdvancement ], [ AugCovAdvancement ] )
+                 -> (SeasonTime,OList)
+printOneSeason (xs,ys) = (t,OList $ map printMD ys ++ map printMD xs )
+     where t | xs /= [] = season $ head xs
+             | ys /= [] = season $ head ys
+             | otherwise = NoTime
+
+sortAdvHistory :: SeasonTime
+               -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
                -> [ ( [ AugmentedAdvancement ], [ AugCovAdvancement ] ) ] 
-sortAdvHistory _ = []
+sortAdvHistory t (xs,ys) = zip chs cvs
+   where chs = stripAdvs t xs
+         cvs = stripAdvs t ys
 
 stripAdv :: Timed a => SeasonTime -> [ a ] -> (Maybe a,[a])
 stripAdv _ [] = (Nothing, [])
 stripAdv t (x:xs) | season x < t = (Nothing, xs)
                   | otherwise = (Just x, xs)
 
-stripAdvs' :: Timed a => SeasonTime -> [[ a ]] -> [(Maybe a,[a])]
-stripAdvs' t = map (stripAdv t)
-
-stripAdvs :: Timed a => SeasonTime -> [(Maybe a,[a])] -> [[a]]
-stripAdvs t xs = cur: ( stripAdvs t . stripAdvs' t ) ltr
+stripAdvs :: Timed a => SeasonTime -> [[a]] -> [[a]]
+stripAdvs t as = cur: stripAdvs (seasonNext t) ltr
     where cur = filterNothing $ map fst xs
           ltr = map snd xs
+          xs = map (stripAdv t) as
 
 
-printAdvHistory' :: [ ( [ AugmentedAdvancement ], [ AugCovAdvancement ] ) ] -> [ ( SeasonTime, OList ) ]
-printAdvHistory' _ = []

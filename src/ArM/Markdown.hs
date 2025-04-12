@@ -313,6 +313,10 @@ showSQ (Just x) (Just y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
     where f 0 = ""
           f z = "+" ++ showNum z
 
+instance Markdown AugCovAdvancement where
+   printMD a = indentOList $ OList []
+instance Markdown CovAdvancement where
+   printMD a = indentOList $ OList []
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 

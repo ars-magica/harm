@@ -15,6 +15,8 @@ module ArM.Types.Calendar ( SeasonTime(..)
                           , Season(..)
                           , parseSeasonTime
                           , isWinter
+                          , seasonNext
+                          , seasonPrev
                           , (>*)
                           ) where
 
@@ -49,6 +51,24 @@ import Text.Read             (readMaybe)
 -- ```
 data Season = Winter | Spring | Summer | Autumn  | NoSeason
      deriving (Show,Ord,Eq,Read,Generic)
+
+seasonNext :: SeasonTime -> SeasonTime
+seasonNext GameStart = NoTime
+seasonNext NoTime = NoTime
+seasonNext (SeasonTime Winter y) = SeasonTime Spring y
+seasonNext (SeasonTime Spring y) = SeasonTime Summer y
+seasonNext (SeasonTime Summer y) = SeasonTime Autumn y
+seasonNext (SeasonTime Autumn y) = SeasonTime Winter (y+1)
+seasonNext (SeasonTime NoSeason y) = SeasonTime NoSeason (y+1)
+
+seasonPrev :: SeasonTime -> SeasonTime
+seasonPrev GameStart = NoTime
+seasonPrev NoTime = NoTime
+seasonPrev (SeasonTime Winter y) = SeasonTime Autumn (y-1)
+seasonPrev (SeasonTime Spring y) = SeasonTime Winter y
+seasonPrev (SeasonTime Summer y) = SeasonTime Spring y
+seasonPrev (SeasonTime Autumn y) = SeasonTime Summer y
+seasonPrev (SeasonTime NoSeason y) = SeasonTime NoSeason (y-1)
 
 
 -- |
