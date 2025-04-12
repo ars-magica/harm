@@ -90,11 +90,15 @@ writeSagaStates :: Saga -> [SagaState] -> IO ()
 writeSagaStates _ [] = return ()
 writeSagaStates saga (x:xs) = writeSagaState saga x >> writeSagaStates saga xs
 
+writeSagaAnnals :: Saga -> IO ()
+writeSagaAnnals _ = return ()
+
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
    writeOList (rootDir saga ++ "/index.md") $ printMD saga
 
    writeSagaStates saga (sagaStates saga)
+   writeSagaAnnals saga 
    return () 
 
 -- |
