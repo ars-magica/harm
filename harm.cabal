@@ -75,6 +75,7 @@ common harm-deps
                        , ArM.Char.Inference
                        , ArM.Char.Virtues
                        , ArM.Markdown
+                       , ArM.SeasonDisplay
                        , ArM.Types.Covenant
                        , ArM.Cov.Saga
                        , ArM.IO

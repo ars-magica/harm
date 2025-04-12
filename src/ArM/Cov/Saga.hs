@@ -22,6 +22,7 @@ module ArM.Cov.Saga ( Saga(..)
                     , advancementErrors
                     , advancementErrorsLimit
                     , covenFolk
+                    , sagaState
                     ) where
 
 import Data.Maybe 

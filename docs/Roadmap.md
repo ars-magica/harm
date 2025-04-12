@@ -9,6 +9,12 @@ tags:
 
 + [ ] **Review** Hibernia Saga
 	+ [ ] Review character sheet design (Cieran)
+		+ [ ] Spell view
+		+ [ ] Advancement view
+		+ [ ] Aging view
+			+ [ ] Aging roll total
+		+ [ ] Comments on advancing traits (possession in particular)
+		+ [ ] Sort possessions
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Review covenant sheet and library
 + [ ] Phase 1. [[Covenant]]
@@ -22,7 +28,6 @@ tags:
 			+ [ ] character advancement depends on previous covenant state for book availability
 			+ [ ] new books are created by characters and may propagate into the covenant advancement, augmenting the library
 		+ [ ] review use of ID
-	+ [ ] Comments on advancements and new traits and possessions
 	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
