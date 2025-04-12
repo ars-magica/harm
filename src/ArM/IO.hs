@@ -32,6 +32,7 @@ import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.DB.CSV
 import ArM.DB.Weapon()
+import ArM.SeasonDisplay
 import ArM.BasicIO
 import ArM.Helper
 
@@ -91,7 +92,15 @@ writeSagaStates _ [] = return ()
 writeSagaStates saga (x:xs) = writeSagaState saga x >> writeSagaStates saga xs
 
 writeSagaAnnals :: Saga -> IO ()
-writeSagaAnnals _ = return ()
+writeSagaAnnals saga = writeOList fn $ pAnnals saga
+    where fn = rootDir saga ++ "/Annals.md"
+
+pAnnals :: Saga -> OList
+pAnnals = OList . f . printAnnals
+   where f [] = []
+         f (x:xs) = b:h x:b:snd x:f xs
+         b = OString ""
+         h x = OString $ "## " ++ show (fst x)
 
 writeSaga :: Saga -> IO ()
 writeSaga saga = do

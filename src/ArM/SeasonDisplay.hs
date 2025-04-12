@@ -21,15 +21,15 @@ import ArM.Markdown
 import ArM.BasicIO
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 printAnnals :: Saga -> [ ( SeasonTime, OList ) ]
-printAnnals = printStateHistory . sagaState
+printAnnals = trace "printAnnals" . printStateHistory . sagaState
 
 printStateHistory :: SagaState -> [ ( SeasonTime, OList ) ]
 printStateHistory st = printAdvHistory t ( chrh, covh )
-    where covh = map pastCovAdvancement $ covenants st
-          chrh = map pastAdvancement $ characters st
+    where covh = map pastCovAdvancement $ trace "Cov" $ covenants st
+          chrh = map pastAdvancement $ trace "Char" $ characters st
           t = season st
 
 printAdvHistory :: SeasonTime
@@ -43,7 +43,7 @@ printAdvHistory' = map printOneSeason
 
 printOneSeason :: ( [ AugmentedAdvancement ], [ AugCovAdvancement ] )
                  -> (SeasonTime,OList)
-printOneSeason (xs,ys) = (t,OList $ map printMD ys ++ map printMD xs )
+printOneSeason (xs,ys) = trace ("One "++show t) (t,OList $ map printMD ys ++ map printMD xs )
      where t | xs /= [] = season $ head xs
              | ys /= [] = season $ head ys
              | otherwise = NoTime
@@ -60,10 +60,11 @@ stripAdv _ [] = (Nothing, [])
 stripAdv t (x:xs) | season x < t = (Nothing, xs)
                   | otherwise = (Just x, xs)
 
-stripAdvs :: Timed a => SeasonTime -> [[a]] -> [[a]]
-stripAdvs t as = cur: stripAdvs (seasonNext t) ltr
+stripAdvs :: (Eq a,Timed a) => SeasonTime -> [[a]] -> [[a]]
+stripAdvs _ [] = []
+stripAdvs t as = trace ("strip "++show t) $ cur: stripAdvs (seasonPrev t) ltr
     where cur = filterNothing $ map fst xs
           ltr = map snd xs
-          xs = map (stripAdv t) as
+          xs = filter (/=(Nothing,[])) $ map (stripAdv t) as
 
 
