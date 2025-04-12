@@ -39,11 +39,11 @@ printAdvHistory t = printAdvHistory' . sortAdvHistory t
 
 printAdvHistory' :: [ ( [ AugmentedAdvancement ], [ AugCovAdvancement ] ) ] 
                  -> [ ( SeasonTime, OList ) ]
-printAdvHistory' = map printOneSeason
+printAdvHistory' xs = trace ("AH "++ show (length xs)) $ map printOneSeason xs
 
 printOneSeason :: ( [ AugmentedAdvancement ], [ AugCovAdvancement ] )
                  -> (SeasonTime,OList)
-printOneSeason (xs,ys) = trace ("One "++show t) (t,OList $ map printMD ys ++ map printMD xs )
+printOneSeason (xs,ys) = trace ("One "++show xs) (t,OList $ map printMD ys ++ map printMD xs )
      where t | xs /= [] = season $ head xs
              | ys /= [] = season $ head ys
              | otherwise = NoTime
@@ -51,20 +51,24 @@ printOneSeason (xs,ys) = trace ("One "++show t) (t,OList $ map printMD ys ++ map
 sortAdvHistory :: SeasonTime
                -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
                -> [ ( [ AugmentedAdvancement ], [ AugCovAdvancement ] ) ] 
-sortAdvHistory t (xs,ys) = zip chs cvs
+sortAdvHistory t (xs,ys) = zzip chs cvs
    where chs = stripAdvs t xs
          cvs = stripAdvs t ys
+	 zzip [] [] = []
+	 zzip (x:xs) [] = (x,[]):zzip xs []
+	 zzip [] (x:xs) = ([],x):zzip [] xs 
+	 zzip (x:xs) (y:ys) = (x,y):zzip xs ys
 
-stripAdv :: Timed a => SeasonTime -> [ a ] -> (Maybe a,[a])
+stripAdv :: (Show a,Timed a) => SeasonTime -> [ a ] -> (Maybe a,[a])
 stripAdv _ [] = (Nothing, [])
-stripAdv t (x:xs) | season x < t = (Nothing, xs)
-                  | otherwise = (Just x, xs)
+stripAdv t (x:xs) | season x < t = trace "strip Nothing" (Nothing, xs)
+                  | otherwise = trace (show x) (Just x, xs)
 
-stripAdvs :: (Eq a,Timed a) => SeasonTime -> [[a]] -> [[a]]
+stripAdvs :: (Eq a,Show a,Timed a) => SeasonTime -> [[a]] -> [[a]]
 stripAdvs _ [] = []
 stripAdvs t as = trace ("strip "++show t) $ cur: stripAdvs (seasonPrev t) ltr
     where cur = filterNothing $ map fst xs
-          ltr = map snd xs
-          xs = filter (/=(Nothing,[])) $ map (stripAdv t) as
+          ltr = filter (/=[]) $ map snd xs
+          xs = map (stripAdv t) as
 
 

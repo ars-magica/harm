@@ -96,7 +96,7 @@ writeSagaAnnals saga = writeOList fn $ pAnnals saga
     where fn = rootDir saga ++ "/Annals.md"
 
 pAnnals :: Saga -> OList
-pAnnals = OList . f . printAnnals
+pAnnals = OList . (OString "# Annals":) . f . printAnnals
    where f [] = []
          f (x:xs) = b:h x:b:snd x:f xs
          b = OString ""
