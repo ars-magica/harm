@@ -17,6 +17,12 @@ tags:
 		+ [ ] Sort possessions
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Review covenant sheet and library
+	+ [ ] Revise advancement display in annals
+	+ [ ] Review object structure
+		+ [ ] AnnalSeason 
+		+ [ ] Character with State
+		+ [ ] Covenant with State
+		+ [ ] SagaState
 + [ ] Phase 1. [[Covenant]]
 	+ [ ] Reading and copying advancements
 		+ [ ] SQ from book
@@ -28,7 +34,6 @@ tags:
 			+ [ ] character advancement depends on previous covenant state for book availability
 			+ [ ] new books are created by characters and may propagate into the covenant advancement, augmenting the library
 		+ [ ] review use of ID
-	+ [ ] Season page, showing all activity in a season 
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
 	+ [ ] group and  sort books in library
