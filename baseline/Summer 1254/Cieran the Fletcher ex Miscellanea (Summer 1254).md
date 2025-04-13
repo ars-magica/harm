@@ -34,7 +34,7 @@ Size
 
 ## Summer 1254
 
-+ **Age:** 42 years (apparent age 31) Longevity Ritual: 22
++ **Age:** 62 years (apparent age 51) Longevity Ritual: 22
 + **Confidence**: 1 (32)
 + **Warping**: 1 (8)
 + **Characteristics:** 
@@ -90,7 +90,7 @@ Weak Spontaneous Magic (0),
     + Finesse [Precision] 1 (0xp)
     + Folk Ken [Villagers] 1 (5xp)
     + Hermes Code [Stonehenge] 1 (0xp)
-    + Hermes Lore [Hibernia] 1 (5xp)
+    + Hermes Lore [Hibernia] 1 (6xp)
     + Infernal Lore [Undead] 1 (0xp)
     + Latin [Hermetic Usage] 4 (12xp)
     + Leadership [  --  ] 1 (0xp)
@@ -106,26 +106,27 @@ Weak Spontaneous Magic (0),
     + Teaching [apprentices] 2 (8xp)
     + Thrown Weapon [Dart] 1 (0xp)
 + **Possessions:**
-    + An vis (-1)
-    + Au vis (3)
+    + An vis
+    + Au vis (0)
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
-    + Cr vis (6)
+    + Cr vis (2)
     + Dagger
-    + Im vis (16)
-    + In vis (20)
+    + Ig vis (3)
+    + Im vis (10)
+    + In vis (3)
     + Lantern
     + Longbow
-    + Me vis (16)
+    + Me vis (6)
     + Mu vis (-2)
-    + Pe vis (3)
+    + Pe vis (-1)
     + Perdo Vis from Jerome's body
     + Porter’s Glove
     + Quarterstaff
     + Re vis (-1)
     + Rego Vis from Jerome's body (3)
     + Stone-Cutting Knife
-    + Te vis (10)
-    + Vi vis (9)
+    + Te vis (3)
+    + Vi vis (-2)
     + Weightless Chain (Protection 9, Load 2)
     + Writing Materials
 
@@ -138,21 +139,21 @@ Weak Spontaneous Magic (0),
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
-| Creo | 17 | 10 | 6 |
-| Intellego | 14 | 7 | 20 |
+| Creo | 17 | 10 | 2 |
+| Intellego | 14 | 7 | 3 |
 | Muto | 8 | 0 | -2 |
-| Perdo | 8 | 0 | 4 |
+| Perdo | 8 | 0 | 0 |
 | Rego | 14 | 9 | 2 |
-| Animal | 5 | 2 | -1 |
+| Animal | 5 | 2 | 1 |
 | Aquam | 6 | 0 | 0 |
-| Auram | 6 | 0 | 3 |
+| Auram | 6 | 0 | 0 |
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
-| Ignem | 8 | 0 | 0 |
-| Imaginem | 25 | 25.5 | 16 |
-| Mentem | 17 | 0 | 16 |
-| Terram | 9 | 1 | 10 |
-| Vim | 12 | 5 | 9 |
+| Ignem | 8 | 0 | 3 |
+| Imaginem | 25 | 25.5 | 10 |
+| Mentem | 17 | 0 | 6 |
+| Terram | 9 | 1 | 3 |
+| Vim | 12 | 5 | -2 |
 
 ## Grimoire
 
@@ -538,6 +539,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 7 xp.
+    + Validated: Aging roll made
 + Autumn 1253 (2xp) Authoring (Exposure)
     + Rego Tracatus (62xp)
     + Ability: Latin 2xp; 
@@ -568,6 +570,7 @@ Total: 1183 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
+    + Validated: Aging roll made
 + Autumn 1252 (15+1xp) Adventure
     + Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11
     + Art: Imaginem 6xp; 
@@ -575,7 +578,7 @@ Total: 1183 levels of spells.
     + Ability: Latin 2xp; 
     + Ability: Hermes Lore 4xp; 
     + Confidence: 0 (5)
-    + Possession: Me vis (5)
+    + Possession: Me vis (2)
     + Possession: Im vis (4)
     + Possession: Te vis (3)
     + Possession: Cr vis (2)
@@ -595,10 +598,12 @@ Total: 1183 levels of spells.
     + no aging -16
     + Art: Rego 12xp; 
     + Aging Rolled -16 (-1) No aging.
+    + Possession: Im vis (12)
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 12 xp.
+    + Validated: Aging roll made
 + Autumn 1251 (2xp) Authoring (Exposure)
     + *Imaginary Horrors*
     + Ability: Parma Magica 2xp; 
@@ -625,6 +630,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Aging roll made
 + Autumn 1250 (16xp) Reading
     + Summa L15Q13 + Book Learner 80 -> 96
     + Art: Intellego 16xp; 
@@ -648,6 +654,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
+    + Validated: Aging roll made
 + Autumn 1249 (2xp) Authoring (Exposure)
     + Tractatus on Imaginem Q14
     + Ability: Parma Magica 2xp; 
@@ -669,6 +676,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 3 xp.
+    + Validated: Aging roll made
 + Autumn 1248 (3xp) LabWork (Exposure)
     +  250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3
     + Art: Imaginem 3xp; 
@@ -694,6 +702,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 15 xp.
+    + Validated: Aging roll made
 + Autumn 1247 (2xp) Authoring (Exposure)
     + CrMe rituals x3 for Com to +5; (58xp) Tractatus on Corpus Q14 
     + Ability: Latin 2xp; 
@@ -723,6 +732,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 17 xp.
+    + Validated: Aging roll made
 + Autumn 1246 (13xp) Reading
     + 13 (capped) Mentem L16Q13 to 16 
     + Art: Mentem 13xp; 
@@ -743,6 +753,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Aging roll made
 + Autumn 1245 (2xp) Copying (Exposure)
     + Copy spell texts; 2xp Latin; see below
     + Ability: Latin 2xp; 
@@ -778,6 +789,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
+    + Validated: Aging roll made
 + Autumn 1244 (11xp) Reading
     +  *Dark Fey of the East* 
     + Ability: Faerie Lore [Dark fey] 11xp; 
@@ -804,6 +816,7 @@ Total: 1183 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 17 xp.
+    + Validated: Aging roll made
 + Autumn 1243 (14xp) Reading
     +  *Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp 
     + Art: Creo 14xp; 
@@ -833,9 +846,9 @@ Total: 1183 levels of spells.
     + Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)
     + Ability: Magic Theory 2xp; 
     + Aging  LR 22;  No roll. 
-    + Possession: Vi vis (2)
-    + Possession: Pe vis
-    + Possession: Te vis
+    + Possession: Vi vis (-2)
+    + Possession: Pe vis (-1)
+    + Possession: Te vis (-1)
     + Validated: Correctly spent 2 xp.
 + Spring 1242 (2xp) LabWork (Exposure)
     + Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14).
@@ -852,6 +865,11 @@ Total: 1183 levels of spells.
     + Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points.
     + Ability: Magic Theory 2xp; 
     + Warping 1 (One botch some time before 1242.)
+    + Possession: Cr vis (2)
+    + Possession: An vis
+    + Possession: An vis (-1)
+    + Possession: Ig vis (3)
+    + Possession: Me vis (8)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
@@ -957,9 +975,9 @@ Total: 1183 levels of spells.
     + Ability: Magic Theory 2xp; 
     + Spell: Leap of Homecoming (touch) 0xp Still Casting
     + Possession: In vis (16)
-    + Possession: In vis (5)
-    + Possession: In vis (3)
-    + Possession: In vis
+    + Possession: In vis (-5)
+    + Possession: In vis (-3)
+    + Possession: In vis (-1)
     + Inferred traits
         + Spell: Leap of Homecoming (touch) 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1217,13 +1235,14 @@ Total: 1183 levels of spells.
 + Spring 1227 (17xp) Reading
     + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Winter 1227 (2xp) (1 years) LabWork (Exposure)
++ Winter 1227 (2+1xp) (1 years) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera
     + Ability: Magic Theory 2xp; 
+    + Ability: Hermes Lore 1xp; 
     + Possession: Cr vis (-3)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 2 xp.
+    + Validated: Correctly spent 3 xp.
 + Autumn 1226 (16xp) Reading
     + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
@@ -1421,17 +1440,28 @@ Total: 1183 levels of spells.
     +   (371½xp)
     + Art: Imaginem 14xp; 
     + Possession: Im vis (-5)
-+ Winter 1255 (2.0xp) LabWork (Exposure)
-    +   ReVi Spells; No Aging (rolled 0)
++ Winter 1255 (2.0xp) OpeningArts (Exposure)
+    + Open arts for Luciu
+    + Ability: Magic Theory 2xp; 
+    + Possession: In vis (-3)
+    + Possession: Mu vis (2)
+    + Possession: An vis (-1)
+    + Possession: Vi vis (2)
+    + Aging Rolled -1 (0) No aging.
++ Spring 1255 (2.0xp) LabWork (Exposure)
+    + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
     + Ability: Magic Theory 2xp; 
     + Spell: Circular Ward Against Demons 0xp Penetration
     + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
     + Spell: Watching Ward 0xp Quiet Casting
-    + Aging Rolled -1 (0) No aging.
-+ Spring 1255 (3.0xp) LabWork (Exposure)
++ Summer 1255 (3.0xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
     + Spell: The Shadow of Human Life 0xp Quiet Casting
     + Spell: The Studious Doppleganger 0xp Quiet Casting
++ Winter 1256 (2.0xp) Teaching (Exposure)
+    + Teaching Luciu
+    + Ability: Teaching 2xp; 
+    + Aging  No roll. No aging.
 

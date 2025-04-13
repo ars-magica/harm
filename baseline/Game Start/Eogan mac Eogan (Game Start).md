@@ -28,7 +28,7 @@ Size
 
 ## Game Start
 
-+ **Age:** 19 years (apparent age 19)
++ **Age:** 24 years (apparent age 24)
 + **Confidence**: 1 (3)
 + **Characteristics:** 
 Int +2, 
@@ -124,6 +124,8 @@ Weakness [for Dogs] (-1),
     + Ability: Covenant Lore [Hierarchies] 15xp; 
     + Ability: Brawl [Dirty fighting] 5xp; 
     + Ability: Charm [Animals] 5xp; 
+    + Inferred traits
+        + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
     + Characteristic: Int 2

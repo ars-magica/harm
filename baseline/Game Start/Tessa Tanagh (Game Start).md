@@ -20,7 +20,7 @@ Size
 
 ## Game Start
 
-+ **Age:** 30 years (apparent age 30)
++ **Age:** 35 years (apparent age 35)
 + **Confidence**: 0 (0)
 + **Characteristics:** 
 Int 0, 
@@ -91,6 +91,8 @@ Warrior (1),
     + Ability: Survival [Hills] 5xp; 
     + Ability: Munster Lore [Outback] 5xp; 
     + Ability: Brawl [Dodge] 5xp; 
+    + Inferred traits
+        + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
     + Characteristic: Int 0

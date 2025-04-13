@@ -1,7 +1,6 @@
 # Hibernia Saga (Contested Lands) - Spring 1255
 
 + [Cieran the Fletcher ex Miscellanea (Spring 1255)](Cieran the Fletcher ex Miscellanea (Spring 1255))
-+ [Eogan mac Eogan (Summer 1254)](Eogan mac Eogan (Summer 1254))
 + [Tessa Tanagh (Winter 1249)](Tessa Tanagh (Winter 1249))
 + [Rowan (Game Start)](Rowan (Game Start))
 
@@ -9,6 +8,10 @@
 
 ## Advancement Errors
 
++ Tessa Tanagh: Winter 1248 Adventure
+    + Older than 35. Aging roll required.
++ Tessa Tanagh: Winter 1249 "" (Other Exposure)
+    + Older than 35. Aging roll required.
 + Rowan: Later Life
     + Underspent 260xp of 335.
 + Rowan: Virtues and Flaws

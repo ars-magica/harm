@@ -23,7 +23,7 @@ Size
 
 ## Game Start
 
-+ **Age:** 19 years (apparent age 19)
++ **Age:** 24 years (apparent age 24)
 + **Confidence**: 0 (0)
 + **Characteristics:** 
 Int +1, 
@@ -85,6 +85,8 @@ Warrior (1),
     + Ability: Stealth [Sneak] 15xp; 
     + Ability: Awareness [Good ears] 15xp; 
     + Ability: Killaloe Lore [Hiding places] 15xp; 
+    + Inferred traits
+        + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
     + Characteristic: Int 1

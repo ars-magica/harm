@@ -20,7 +20,7 @@ Size
 
 ## Winter 1249
 
-+ **Age:** 33 years (apparent age 33)
++ **Age:** 38 years (apparent age 38)
 + **Confidence**: 0 (0)
 + **Decrepitude**: 1 (1)
 + **Characteristics:** 
@@ -75,6 +75,7 @@ Warrior (1),
         + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
+    + ERROR: Older than 35. Aging roll required.
 + Autumn 1248 (4xp) Practice
     + Ability: Legerdemain 4xp; 
     + Validated: Correctly spent 4 xp.
@@ -97,6 +98,7 @@ Warrior (1),
         + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 10 xp.
+    + ERROR: Older than 35. Aging roll required.
 + Autumn 1247 (4xp) Practice
     + Ability: Music 4xp; 
     + Validated: Correctly spent 4 xp.

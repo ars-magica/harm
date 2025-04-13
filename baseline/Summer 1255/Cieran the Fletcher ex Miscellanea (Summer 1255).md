@@ -32,7 +32,7 @@ Saga
 Size
 : 0
 
-## Spring 1255
+## Summer 1255
 
 + **Age:** 63 years (apparent age 51) Longevity Ritual: 22
 + **Confidence**: 1 (32)
@@ -90,12 +90,12 @@ Weak Spontaneous Magic (0),
     + Finesse [Precision] 1 (0xp)
     + Folk Ken [Villagers] 1 (5xp)
     + Hermes Code [Stonehenge] 1 (0xp)
-    + Hermes Lore [Hibernia] 1 (5xp)
+    + Hermes Lore [Hibernia] 1 (6xp)
     + Infernal Lore [Undead] 1 (0xp)
     + Latin [Hermetic Usage] 4 (12xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
-    + Magic Theory [Spells] 7 (6xp)
+    + Magic Theory [Spells] 7 (8xp)
     + Native Language: Irish [Leinster] 5 (0xp)
     + Parma Magica [Mentem] 5 (0xp)
     + Penetration [Rego] 1 (0xp)
@@ -106,26 +106,27 @@ Weak Spontaneous Magic (0),
     + Teaching [apprentices] 2 (8xp)
     + Thrown Weapon [Dart] 1 (0xp)
 + **Possessions:**
-    + An vis
+    + An vis (0)
     + Au vis (0)
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
-    + Cr vis (0)
+    + Cr vis (2)
     + Dagger
-    + Im vis (-7)
-    + In vis (21)
+    + Ig vis (3)
+    + Im vis (5)
+    + In vis (0)
     + Lantern
     + Longbow
-    + Me vis
-    + Mu vis (-2)
-    + Pe vis
+    + Me vis (6)
+    + Mu vis (0)
+    + Pe vis (-1)
     + Perdo Vis from Jerome's body
     + Porter’s Glove
     + Quarterstaff
     + Re vis (-1)
     + Rego Vis from Jerome's body (3)
     + Stone-Cutting Knife
-    + Te vis (5)
-    + Vi vis (2)
+    + Te vis (3)
+    + Vi vis (0)
     + Weightless Chain (Protection 9, Load 2)
     + Writing Materials
 
@@ -138,21 +139,21 @@ Weak Spontaneous Magic (0),
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
-| Creo | 17 | 10 | 0 |
-| Intellego | 14 | 7 | 21 |
-| Muto | 8 | 0 | -2 |
-| Perdo | 8 | 0 | 2 |
+| Creo | 17 | 10 | 2 |
+| Intellego | 14 | 7 | 0 |
+| Muto | 8 | 0 | 0 |
+| Perdo | 8 | 0 | 0 |
 | Rego | 14 | 9 | 2 |
-| Animal | 5 | 2 | 1 |
+| Animal | 5 | 2 | 0 |
 | Aquam | 6 | 0 | 0 |
 | Auram | 6 | 0 | 0 |
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
-| Ignem | 8 | 0 | 0 |
-| Imaginem | 26 | 25 | -7 |
-| Mentem | 17 | 0 | 1 |
-| Terram | 9 | 1 | 5 |
-| Vim | 12 | 5 | 2 |
+| Ignem | 8 | 0 | 3 |
+| Imaginem | 26 | 25 | 5 |
+| Mentem | 17 | 0 | 6 |
+| Terram | 9 | 1 | 3 |
+| Vim | 12 | 5 | 0 |
 
 ## Grimoire
 
@@ -550,7 +551,7 @@ Total: 1309 levels of spells.
 
 ## Past Advancement
 
-+ Spring 1255 (3xp) LabWork (Exposure)
++ Summer 1255 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
@@ -561,17 +562,26 @@ Total: 1309 levels of spells.
         + Spell: Book of Images 0xp with flawless magic
         + Spell: The Shadow of Human Life 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
-+ Winter 1255 (2xp) (1 years) LabWork (Exposure)
-    +   ReVi Spells; No Aging (rolled 0)
++ Spring 1255 (2xp) LabWork (Exposure)
+    + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
     + Ability: Magic Theory 2xp; 
     + Spell: Circular Ward Against Demons 0xp Penetration
     + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
     + Spell: Watching Ward 0xp Quiet Casting
-    + Aging Rolled -1 (0) No aging.
     + Inferred traits
         + Spell: Watching Ward 0xp with flawless magic
         + Spell: Maintaining the Demanding Spell 0xp with flawless magic
         + Spell: Circular Ward Against Demons 0xp with flawless magic
+    + Validated: Correctly spent 2 xp.
++ Winter 1255 (2xp) (1 years) OpeningArts (Exposure)
+    + Open arts for Luciu
+    + Ability: Magic Theory 2xp; 
+    + Possession: In vis (-3)
+    + Possession: Mu vis (2)
+    + Possession: An vis (-1)
+    + Possession: Vi vis (2)
+    + Aging Rolled -1 (0) No aging.
+    + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
@@ -641,7 +651,7 @@ Total: 1309 levels of spells.
     + Ability: Latin 2xp; 
     + Ability: Hermes Lore 4xp; 
     + Confidence: 0 (5)
-    + Possession: Me vis (5)
+    + Possession: Me vis (2)
     + Possession: Im vis (4)
     + Possession: Te vis (3)
     + Possession: Cr vis (2)
@@ -661,6 +671,7 @@ Total: 1309 levels of spells.
     + no aging -16
     + Art: Rego 12xp; 
     + Aging Rolled -16 (-1) No aging.
+    + Possession: Im vis (12)
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -908,9 +919,9 @@ Total: 1309 levels of spells.
     + Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)
     + Ability: Magic Theory 2xp; 
     + Aging  LR 22;  No roll. 
-    + Possession: Vi vis (2)
-    + Possession: Pe vis
-    + Possession: Te vis
+    + Possession: Vi vis (-2)
+    + Possession: Pe vis (-1)
+    + Possession: Te vis (-1)
     + Validated: Correctly spent 2 xp.
 + Spring 1242 (2xp) LabWork (Exposure)
     + Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14).
@@ -927,6 +938,11 @@ Total: 1309 levels of spells.
     + Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points.
     + Ability: Magic Theory 2xp; 
     + Warping 1 (One botch some time before 1242.)
+    + Possession: Cr vis (2)
+    + Possession: An vis
+    + Possession: An vis (-1)
+    + Possession: Ig vis (3)
+    + Possession: Me vis (8)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
@@ -1032,9 +1048,9 @@ Total: 1309 levels of spells.
     + Ability: Magic Theory 2xp; 
     + Spell: Leap of Homecoming (touch) 0xp Still Casting
     + Possession: In vis (16)
-    + Possession: In vis (5)
-    + Possession: In vis (3)
-    + Possession: In vis
+    + Possession: In vis (-5)
+    + Possession: In vis (-3)
+    + Possession: In vis (-1)
     + Inferred traits
         + Spell: Leap of Homecoming (touch) 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1292,13 +1308,14 @@ Total: 1309 levels of spells.
 + Spring 1227 (17xp) Reading
     + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
-+ Winter 1227 (2xp) (1 years) LabWork (Exposure)
++ Winter 1227 (2+1xp) (1 years) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera
     + Ability: Magic Theory 2xp; 
+    + Ability: Hermes Lore 1xp; 
     + Possession: Cr vis (-3)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 2 xp.
+    + Validated: Correctly spent 3 xp.
 + Autumn 1226 (16xp) Reading
     + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
@@ -1489,4 +1506,11 @@ Total: 1309 levels of spells.
     + Studies *Root of Herbam* L6 Q21 +3
     + Art: Herbam 21xp; 
     + Validated: Correctly spent 21 xp.
+
+## Future Advancement
+
++ Winter 1256 (2.0xp) Teaching (Exposure)
+    + Teaching Luciu
+    + Ability: Teaching 2xp; 
+    + Aging  No roll. No aging.
 

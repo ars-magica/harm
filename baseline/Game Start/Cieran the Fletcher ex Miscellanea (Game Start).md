@@ -34,7 +34,7 @@ Size
 
 ## Game Start
 
-+ **Age:** 5 years (apparent age 5)
++ **Age:** 25 years (apparent age 25)
 + **Confidence**: 1 (3)
 + **Characteristics:** 
 Int +3, 
@@ -261,6 +261,7 @@ Total: 150 levels of spells.
         + Spell: Arrow of Peaceful Slumber 0xp with flawless magic
         + Spell: End of the Mighty Castle 0xp with flawless magic
         + Spell: Obliteration of the Metallic Barrier 0xp with flawless magic
+        + Aging 15 years; apparent 15 years. No roll. 
     + Validated: Correctly spent 150 spell levels.
     + Validated: Correctly spent 300 xp.
 + Later Life (75xp) (5 years)
@@ -279,6 +280,8 @@ Total: 150 levels of spells.
     + Ability: Folk Ken [Villagers] 5xp; 
     + Ability: Stealth [Hiding] 5xp; 
     + Ability: Second Sight [Faerie Illusions] 0xp; 
+    + Inferred traits
+        + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
     + Characteristic: Int 3
