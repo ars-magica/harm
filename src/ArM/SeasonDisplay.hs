@@ -56,7 +56,7 @@ printOneSeason (xs,ys) = trace ("One "++show xs) (t,OList $ map printMD ys ++ ma
              | otherwise = NoTime
 
 type CharAdv = (Character,AugmentedAdvancement)
-type CovAdv = (Covenant,AugAdvancement)
+type CovAdv = (Covenant,AugCovAdvancement)
 
 sortAdvHistory :: SeasonTime
                -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
