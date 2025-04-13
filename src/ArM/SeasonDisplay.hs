@@ -32,6 +32,13 @@ printStateHistory st = printAdvHistory t ( chrh, covh )
           chrh = map pastAdvancement $ trace "Char" $ characters st
           t = season st
 
+data CharAugList = CharAugList Character [AugmentedAdvancement]
+data CovAugList = CovAugList Covenant [AugCovAdvancement]
+covAdv :: Covenant -> CovAugList
+covAdv c = CovAugList c $ pastCovAdvancement c
+chAdv :: Character -> CharAugList
+chAdv c = CharAugList c $ pastAdvancement c
+
 printAdvHistory :: SeasonTime
                 -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 
                 -> [ ( SeasonTime, OList ) ]
@@ -47,6 +54,9 @@ printOneSeason (xs,ys) = trace ("One "++show xs) (t,OList $ map printMD ys ++ ma
      where t | xs /= [] = season $ head xs
              | ys /= [] = season $ head ys
              | otherwise = NoTime
+
+type CharAdv = (Character,AugmentedAdvancement)
+type CovAdv = (Covenant,AugAdvancement)
 
 sortAdvHistory :: SeasonTime
                -> ( [[ AugmentedAdvancement ]], [[ AugCovAdvancement ]] ) 

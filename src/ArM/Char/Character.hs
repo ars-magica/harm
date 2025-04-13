@@ -135,7 +135,6 @@ instance Advance Character where
                   (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
                   cstate = fromJust $ state c
 
-
    nextSeason = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
