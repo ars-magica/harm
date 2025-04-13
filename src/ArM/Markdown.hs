@@ -305,11 +305,11 @@ instance Markdown OtherTrait where
 -- = Advancements
 
 -- | Render the source quality of an advancement
-showSQ :: Maybe XPType -> Maybe XPType -> String
-showSQ Nothing Nothing = ""
-showSQ (Just x) Nothing = " (" ++ showNum x ++ "xp)"
-showSQ Nothing (Just x) = " (" ++ showNum x ++ "xp)"
-showSQ (Just x) (Just y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
+showSQ :: Maybe XPType -> XPType -> String
+showSQ Nothing 0 = ""
+showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
+showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
+showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
     where f 0 = ""
           f z = "+" ++ showNum z
 

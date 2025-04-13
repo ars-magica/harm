@@ -60,7 +60,7 @@ validateXP a | sq > xpsum = a { validation = und:validation a }
              | sq < xpsum = trace ("Overspent> "++ show (advancement a)) $ a { validation = over:validation a }
              | otherwise = a { validation = val:validation a }
     where xpsum = calculateXP $ advancement a
-          sq = fromMaybe 0 $ effectiveSQ a
+          sq = effectiveSQ a
           val = Validated $ "Correctly spent " ++ showNum sq ++ " xp."
           over = ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
           und = ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
@@ -130,13 +130,13 @@ initialLimits sheet ad
             | m == CharGen "Apprenticeship" = app ad
             | m == CharGen "Characteristics" = f ad 0
             | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
-            | otherwise = ad { effectiveSQ = sourceQuality $ advancement ad  }
+            | otherwise = ad 
            where m = mode ad
-                 f a x | isJust t = a { effectiveSQ = t }
-                       | otherwise = a { effectiveSQ = Just x }
+                 f a x | isJust t = a { baseSQ = t }
+                       | otherwise = a { baseSQ = Just x }
                  t = sourceQuality $ advancement ad
                  (app1,app2) = appSQ vfs
-                 app a = a { effectiveSQ = Just app1, levelLimit = Just app2, augYears = Just 15 }
+                 app a = a { baseSQ = Just app1, levelLimit = Just app2, augYears = Just 15 }
                  vfs = vfList sheet
 
 -- | Validate allocation of Spell Levels.

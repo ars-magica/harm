@@ -164,11 +164,6 @@ explicitAbility db cs co ab df
          w' = find ( (ab==) . weaponAbility ) ws
          w =  fromJust w'
 
--- | Collapse a neste Maybe Maybe object to a single Maybe
-join :: Maybe (Maybe a) -> Maybe a
-join Nothing = Nothing
-join (Just Nothing) = Nothing
-join (Just (Just x)) = Just x
 
 -- | Compute the table of combat stas from a list of `CombatOption` objects
 computeCombatLines :: WeaponDB -> CharacterSheet -> [CombatOption] -> [CombatLine]

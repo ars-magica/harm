@@ -38,6 +38,14 @@ trim = f . f
 -- |
 -- = Convenience functions for Maybe
 
+{-
+-- | Collapse a neste Maybe Maybe object to a single Maybe
+join :: Maybe (Maybe a) -> Maybe a
+join Nothing = Nothing
+join (Just Nothing) = Nothing
+join (Just (Just x)) = Just x
+-}
+
 -- | Show a number or «N/A»
 showstat :: Show a => Maybe a -> String
 showstat Nothing = "N/A"

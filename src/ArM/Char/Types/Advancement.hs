@@ -19,11 +19,11 @@ import ArM.Types.Calendar
 import ArM.GameRules
 import ArM.Types.Library
 
+import Data.Maybe 
 import Data.Char 
 import Data.Aeson 
 import GHC.Generics
 import Data.Text.Lazy                            ( fromStrict, unpack )
-import Data.Lists
 import Control.Monad
 
 
@@ -66,7 +66,6 @@ instance Show AdvancementType where
 instance ToJSON AdvancementType where
    toJSON = toJSON . show
 instance FromJSON AdvancementType where
-
     parseJSON (String t) = pure $ parseAT (unpack (fromStrict t))
     parseJSON _ = mzero
 
@@ -118,19 +117,6 @@ dropWord (x:xs) | isSpace x = trim xs
 -- |
 -- == AdvancementLike Class
 
-class Timed a where
-   season :: a -> SeasonTime -- ^ season or development stage
-   (<::) :: a -> a -> Bool 
-   (<::) x y = season x < season y
-   (>::) :: a -> a -> Bool 
-   (>::) x y = season x > season y
-   compareTimed :: a -> a -> Ordering
-   compareTimed x y = compare  (season y) (season x)
-   mergeByTime :: [a] -> [a] -> [ a ]
-   mergeByTime = mergeBy compareTimed
-   mergeTimed :: [ [a] ] -> [ a ]
-   mergeTimed = foldl mergeByTime []
-
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- AugmentedAdvanceemnt
@@ -139,9 +125,7 @@ class AdvancementLike a where
      narrative :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
-     -- effectiveSQ :: Maybe Int   -- ^ SQ modified by virtues and flaws
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
-     -- inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
      isExposure :: a -> Bool
      isExposure = f . mode
         where f (Exposure _) = True
@@ -152,13 +136,15 @@ class AdvancementLike a where
 -- as specified by the user.
 -- It can also hold additional field inferred by virtues and flaws.
 -- One may consider splitting these two functions into two types.
+-- Note that standard SQ should be recorded as `advSQ`, while individual
+-- variation may be recorded as `advBonus`.
 data Advancement = Advancement 
      { advMode :: AdvancementType -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
      , advYears :: Maybe Int    -- ^ number of years advanced
      , advNarrative :: Maybe String -- ^ freeform description of the activities
      , advUses :: [ String ] -- ^ Books used exclusively by the character
-     , advSQ :: Maybe XPType -- ^ Source Quality (SQ) This should be the common SQ for adventures; individual variation should be recorded as `advBonus`
+     , advSQ :: Maybe XPType -- ^ Source Quality (SQ) 
      , advBonus :: Maybe XPType -- ^ Bonus to Source Quality (SQ)
      , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
      }
@@ -182,45 +168,30 @@ instance ToJSON Advancement where
 instance FromJSON Advancement where
     parseJSON = withObject "Advancement" $ \v -> Advancement
         <$> v .:? "mode" .!= CharGen "Nothing"
-        -- <*> v .:? "season"
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"
         <*> v .:? "narrative"
         <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "bonusQuality"
-        <*> fmap maybeList ( v .:? "changes" )
-
--- |
--- == Validation
-
--- |
--- A Validation is a message reporting either an error or a successful test.
-data Validation = ValidationError String | Validated String
-   deriving (Eq,Generic)
-
-instance Show Validation where
-    show (ValidationError x) = "ERROR: " ++ x
-    show (Validated x) = "Validated: " ++ x
-
-instance ToJSON Validation
-instance FromJSON Validation
+        <*> v .:? "changes" .!= []
 
 -- |
 -- == The Augmented Advancement
 
 -- | Advancement with additional inferred fields
 data AugmentedAdvancement = Adv
-     { advancement :: Advancement -- ^ Base advancement as entered by the user
-     , effectiveSQ :: Maybe XPType   -- ^ SQ modified by virtues and flaws
-     , levelLimit :: Maybe Int   -- ^ spell level allowance
-     , spentXP  :: Maybe XPType   -- ^ Total XP spent on advancement
+     { advancement :: Advancement   -- ^ Base advancement as entered by the user
+     , baseSQ  :: Maybe XPType      -- ^ Base Source Quality
+     , bonusSQ  :: XPType     -- ^ Bonus to Source Quality from Virtues and Flaws
+     , levelLimit :: Maybe Int      -- ^ spell level allowance
+     , spentXP  :: Maybe XPType     -- ^ Total XP spent on advancement
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
-     , augYears :: Maybe Int    -- ^ number of years advanced
-     , validation :: [Validation] -- ^ Report from validation
+     , augYears :: Maybe Int        -- ^ number of years advanced
+     , validation :: [Validation]   -- ^ Report from validation
      , postProcessTrait :: PostProcessor 
-        -- ^ extra postprocessing for traits at a given stage 
-     , bookUsed :: [Book]
+        -- ^ Extra postprocessing for traits at the given stage 
+     , bookUsed :: [Book]    -- ^ Books required by the activity
      , teacherSQ :: Maybe Int
      }
    deriving (Eq,Show,Generic)
@@ -242,7 +213,8 @@ instance ToJSON PostProcessor where
 defaultAA :: AugmentedAdvancement
 defaultAA = Adv
      { advancement = defaultAdv
-     , effectiveSQ = Nothing
+     , baseSQ = Nothing
+     , bonusSQ = 0
      , levelLimit = Nothing 
      , spentXP = Nothing
      , inferredTraits = [ ] 
@@ -275,7 +247,8 @@ instance ToJSON AugmentedAdvancement where
 instance FromJSON AugmentedAdvancement where
     parseJSON = withObject "AugmentedAdvancement" $ \v -> Adv
         <$> v .: "advancement"
-        <*> v .:? "effectiveSQ"
+        <*> v .:? "baseSQ"
+        <*> v .:? "bonusSQ" .!= 0
         <*> v .:? "levels"
         <*> v .:? "spentXP"
         <*> v .:? "inferredTraits"  .!= []
@@ -285,3 +258,24 @@ instance FromJSON AugmentedAdvancement where
         <*> v .:? "bookUsed"  .!= []
         <*> v .:? "teacherSQ"  
 
+effectiveSQ :: AugmentedAdvancement -> XPType
+effectiveSQ aa = fromMaybe aasq adsq + vfb + inb
+    where ad = advancement aa
+          aasq = fromMaybe 0 $ baseSQ aa 
+          adsq = sourceQuality ad
+          vfb = bonusSQ aa
+          inb = fromMaybe 0 $ advBonus ad
+-- |
+-- == Validation
+
+-- |
+-- A Validation is a message reporting either an error or a successful test.
+data Validation = ValidationError String | Validated String
+   deriving (Eq,Generic)
+
+instance Show Validation where
+    show (ValidationError x) = "ERROR: " ++ x
+    show (Validated x) = "Validated: " ++ x
+
+instance ToJSON Validation
+instance FromJSON Validation

@@ -18,10 +18,12 @@ module ArM.Types.Calendar ( SeasonTime(..)
                           , seasonNext
                           , seasonPrev
                           , (>*)
+                          , Timed(..)
                           ) where
 
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Data.List.Split
+import Data.Lists
 import Data.Aeson 
 import Control.Monad
 import GHC.Generics
@@ -132,4 +134,20 @@ instance Ord SeasonTime where
     (<=) (SeasonTime s1 y1) (SeasonTime s2 y2) 
         | y1 == y2 = s1 <= s2
         | otherwise = y1 <= y2
+
+-- |
+-- == The Timed Class
+
+class Timed a where
+   season :: a -> SeasonTime -- ^ season or development stage
+   (<::) :: a -> a -> Bool 
+   (<::) x y = season x < season y
+   (>::) :: a -> a -> Bool 
+   (>::) x y = season x > season y
+   compareTimed :: a -> a -> Ordering
+   compareTimed x y = compare  (season y) (season x)
+   mergeByTime :: [a] -> [a] -> [ a ]
+   mergeByTime = mergeBy compareTimed
+   mergeTimed :: [ [a] ] -> [ a ]
+   mergeTimed = foldl mergeByTime []
 

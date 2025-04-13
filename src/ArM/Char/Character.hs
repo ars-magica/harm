@@ -311,11 +311,8 @@ agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Calculate initial XP limits on Advancements
 inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
-inferSQ cs ad = ad { effectiveSQ = esq }
-        where esq = maybeAdd (sourceQuality ad') (advBonus ad')
-              ad' = advancement ad
-              vf = vfList $ filterCS cs
-              bsq = bonusSQ vf ad
+inferSQ cs ad = ad { bonusSQ = vfBonusSQ vf ad }
+        where vf = vfList $ filterCS cs
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
 -- Infer SQ for taught from teacher
