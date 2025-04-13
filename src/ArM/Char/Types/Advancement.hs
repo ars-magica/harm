@@ -23,6 +23,7 @@ import Data.Char
 import Data.Aeson 
 import GHC.Generics
 import Data.Text.Lazy                            ( fromStrict, unpack )
+import Data.Lists
 import Control.Monad
 
 
@@ -119,6 +120,16 @@ dropWord (x:xs) | isSpace x = trim xs
 
 class Timed a where
    season :: a -> SeasonTime -- ^ season or development stage
+   (<::) :: a -> a -> Bool 
+   (<::) x y = season x < season y
+   (>::) :: a -> a -> Bool 
+   (>::) x y = season x > season y
+   compareTimed :: a -> a -> Ordering
+   compareTimed x y = compare  (season y) (season x)
+   mergeByTime :: [a] -> [a] -> [ a ]
+   mergeByTime = mergeBy compareTimed
+   mergeTimed :: [ [a] ] -> [ a ]
+   mergeTimed = foldl mergeByTime []
 
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
