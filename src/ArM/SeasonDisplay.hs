@@ -19,11 +19,10 @@ import ArM.Char.Character
 import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Markdown
--- import ArM.GameRules
 import ArM.BasicIO
 -- import ArM.Helper
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 sagaAnnals :: SagaState -> [ AnnalSeason ]
 sagaAnnals = getSeasonAnnals . getAugMerged
@@ -97,11 +96,11 @@ getAugMerged' st = ( mergeTimed xs, mergeTimed ys )
 
 getAug :: SagaState -> ( [ [ CharAug ] ], [ [ CovAug ] ] )
 getAug st = ( chrh, covh )
-    where covh = map covAdv $ trace "Cov" $ covenants st
-          chrh = map chAdv $ trace "Char" $ characters st
+    where covh = map covAdv $ covenants st
+          chrh = map chAdv  $ characters st
 
 covAdv :: Covenant -> [ CovAug ]
-covAdv c = trace ("covAdv: "++name c) $ map (CovAug c) $ pastCovAdvancement c
+covAdv c =  map (CovAug c) $ pastCovAdvancement c
 chAdv :: Character -> [ CharAug ]
-chAdv c = trace ("covAdv: "++name c) $ map (CharAug c) $ pastAdvancement c
+chAdv c =  map (CharAug c) $ pastAdvancement c
  
