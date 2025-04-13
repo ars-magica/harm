@@ -9,7 +9,9 @@
 -- Description :  Joint season logs for all characters and covenants.
 --
 -----------------------------------------------------------------------------
-module ArM.SeasonDisplay where
+module ArM.SeasonDisplay ( sagaAnnals
+                         , AnnalSeason(..)
+                         ) where
 
 -- import Data.Maybe 
 
@@ -23,24 +25,31 @@ import ArM.BasicIO
 
 import ArM.Debug.Trace
 
-printAnnals :: Saga -> [ ( SeasonTime, OList ) ]
-printAnnals = trace "printAnnals" . printStateHistory . sagaState
+sagaAnnals :: SagaState -> [ AnnalSeason ]
+sagaAnnals = getSeasonAnnals . getAugMerged
 
-printStateHistory :: SagaState -> [ ( SeasonTime, OList ) ]
-printStateHistory = printAugMerged . getAugMerged
+data AnnalSeason = AnnalSeason SeasonTime [EitherAug]
 
-printAugMerged :: [ EitherAug ] -> [ ( SeasonTime, OList ) ]
-printAugMerged [] = []
-printAugMerged (x:xs) = (t, OList zs):printAugMerged ys
+instance Timed AnnalSeason where
+   season (AnnalSeason t _) = t
+
+instance Markdown AnnalSeason where
+   printMD (AnnalSeason t xs) = OList [ b, h, b, (OList $ map printMD xs) ]
+      where b = OString ""
+            h = OString $ "## " ++ show t
+
+getSeasonAnnals :: [ EitherAug ] -> [ AnnalSeason ]
+getSeasonAnnals [] = []
+getSeasonAnnals (x:xs) = (AnnalSeason t zs):getSeasonAnnals ys
     where t = season x
-          (ys,zs) = printAugMerged' t ((x:xs),[])
+          (ys,zs) = getSeasonAnnals' t ((x:xs),[])
 
 
-printAugMerged' :: SeasonTime -> ([EitherAug],[OList]) -> ([EitherAug],[OList])
-printAugMerged' _ ([],x) = ([],x)
-printAugMerged' t (x:xs,ys) 
+getSeasonAnnals' :: SeasonTime -> ([EitherAug],[EitherAug]) -> ([EitherAug],[EitherAug])
+getSeasonAnnals' _ ([],x) = ([],x)
+getSeasonAnnals' t (x:xs,ys) 
     | season x /= t = (x:xs,ys)
-    | otherwise =  printAugMerged' t (xs,printMD x:ys)
+    | otherwise =  getSeasonAnnals' t (xs,x:ys)
 
 
 -- |
@@ -70,7 +79,7 @@ instance Markdown EitherAug where
    printMD (EChar x) = printMD x
 
 -- |
--- == Getting the merges list of advancements
+-- == Getting the merged list of advancements
 
 -- | Get a list of all past advancements in a SeasonState, sorted by time.
 -- If the merging, defined in `ArM.Char.Types.Advancement` using the lists
@@ -95,4 +104,4 @@ covAdv :: Covenant -> [ CovAug ]
 covAdv c = trace ("covAdv: "++name c) $ map (CovAug c) $ pastCovAdvancement c
 chAdv :: Character -> [ CharAug ]
 chAdv c = trace ("covAdv: "++name c) $ map (CharAug c) $ pastAdvancement c
-
+ 

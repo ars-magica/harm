@@ -92,15 +92,9 @@ writeSagaStates _ [] = return ()
 writeSagaStates saga (x:xs) = writeSagaState saga x >> writeSagaStates saga xs
 
 writeSagaAnnals :: Saga -> IO ()
-writeSagaAnnals saga = writeOList fn $ pAnnals saga
+writeSagaAnnals saga = writeOList fn $ ann saga
     where fn = rootDir saga ++ "/Annals.md"
-
-pAnnals :: Saga -> OList
-pAnnals = OList . (OString "# Annals":) . f . printAnnals
-   where f [] = []
-         f (x:xs) = b:h x:b:snd x:f xs
-         b = OString ""
-         h x = OString $ "## " ++ show (fst x)
+          ann = OList . (OString "# Annals":) . map printMD . sagaAnnals . sagaState
 
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
