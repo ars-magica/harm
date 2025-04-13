@@ -19,7 +19,7 @@ import ArM.Types.Covenant
 import ArM.Markdown
 -- import ArM.GameRules
 import ArM.BasicIO
-import ArM.Helper
+-- import ArM.Helper
 
 import ArM.Debug.Trace
 
@@ -77,7 +77,7 @@ instance Markdown EitherAug where
 -- library is stable, covenants should come first and the ordering of characters
 -- and covenants be the same in every season.
 getAugMerged :: SagaState -> [ EitherAug ]
-getAugMerged st = mergeByTime ys' xs' 
+getAugMerged st = mergeByTime xs'  ys' 
     where (xs,ys) = getAugMerged' st
           xs' = map EChar xs
           ys' = map ECov ys

@@ -125,7 +125,7 @@ class Timed a where
    (>::) :: a -> a -> Bool 
    (>::) x y = season x > season y
    compareTimed :: a -> a -> Ordering
-   compareTimed x y = compare (season x) (season y)
+   compareTimed x y = compare  (season y) (season x)
    mergeByTime :: [a] -> [a] -> [ a ]
    mergeByTime = mergeBy compareTimed
    mergeTimed :: [ [a] ] -> [ a ]
