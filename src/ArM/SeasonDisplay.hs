@@ -28,18 +28,27 @@ printAnnals = trace "printAnnals" . printStateHistory . sagaState
 
 printStateHistory :: SagaState -> [ ( SeasonTime, OList ) ]
 printStateHistory st = printAdvHistory t ( chrh, covh )
-    where covh = map pastCovAdvancement $ trace "Cov" $ covenants st
-          chrh = map pastAdvancement $ trace "Char" $ characters st
+    where covh = map covAdv $ trace "Cov" $ covenants st
+          chrh = map chAdv $ trace "Char" $ characters st
           t = season st
 
-data CharAugList = CharAugList Character [AugmentedAdvancement]
-data CovAugList = CovAugList Covenant [AugCovAdvancement]
 data CharAug = CharAug Character AugmentedAdvancement
+   deriving ( Show, Eq )
 data CovAug = CovAug Covenant AugCovAdvancement
-covAdv :: Covenant -> CovAugList
-covAdv c = CovAugList c $ pastCovAdvancement c
-chAdv :: Character -> CharAugList
-chAdv c = CharAugList c $ pastAdvancement c
+   deriving ( Show, Eq )
+
+instance Markdown CharAug where
+   printMD (CharAug c a) = OList [ OString ("+ " ++ name c)
+                                 , printMD a ]
+instance Markdown CovAug where
+   printMD (CovAug c a) = OList [ OString ("+ " ++ name c)
+                                 , printMD a ]
+
+covAdv :: Covenant -> [ CovAug ]
+covAdv c = map (CovAug c) $ pastCovAdvancement c
+chAdv :: Character -> [ CharAug ]
+chAdv c = map (CharAug c) $ pastAdvancement c
+
 
 instance Timed CharAug where
    season (CharAug _ a) = season a
@@ -47,7 +56,7 @@ instance Timed CovAug where
    season (CovAug _ a) = season a
 
 printAdvHistory :: SeasonTime
-                -> ( [ CharAugList ], [ CovAugList ] ) 
+                -> ( [ [ CharAug ] ], [ [ CovAug ] ] ) 
                 -> [ ( SeasonTime, OList ) ]
 printAdvHistory t = printAdvHistory' . sortAdvHistory t
 
@@ -63,15 +72,16 @@ printOneSeason (xs,ys) = trace ("One "++show xs) (t,OList $ map printMD ys ++ ma
              | otherwise = NoTime
 
 sortAdvHistory :: SeasonTime
-               -> ( [ CharAugList ], [ CovAugList ] ) 
+               -> ( [ [ CharAug ] ], [ [ CovAug ] ] ) 
                -> [ ( [ CharAug ], [ CovAug ] ) ] 
 sortAdvHistory t (xs,ys) = zzip chs cvs
    where chs = stripAdvs t xs
          cvs = stripAdvs t ys
-	 zzip [] [] = []
-	 zzip (x:xs) [] = (x,[]):zzip xs []
-	 zzip [] (x:xs) = ([],x):zzip [] xs 
-	 zzip (x:xs) (y:ys) = (x,y):zzip xs ys
+         zzip [] [] = []
+         zzip (x:xs) [] = (x,[]):zzip xs []
+         zzip [] (x:xs) = ([],x):zzip [] xs 
+         zzip (x:xs) (y:ys) = (x,y):zzip xs ys
+ 
 
 stripAdv :: (Show a,Timed a) => SeasonTime -> [ a ] -> (Maybe a,[a])
 stripAdv _ [] = (Nothing, [])
