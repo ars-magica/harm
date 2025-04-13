@@ -42,7 +42,7 @@ import ArM.Char.CharacterSheet
 import ArM.Char.Validation
 import ArM.Char.Inference
 import ArM.Char.Virtues
-import ArM.Helper
+-- import ArM.Helper
 
 import ArM.Debug.Trace
 

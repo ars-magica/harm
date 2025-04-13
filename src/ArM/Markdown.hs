@@ -306,7 +306,7 @@ instance Markdown OtherTrait where
 
 -- | Render the source quality of an advancement
 showSQ :: Maybe XPType -> XPType -> String
-showSQ Nothing 0 = ""
+showSQ Nothing 0 = " (0xp)"
 showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
 showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
 showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
@@ -314,9 +314,9 @@ showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
           f z = "+" ++ showNum z
 
 instance Markdown AugCovAdvancement where
-   printMD a = indentOList $ OList []
+   printMD _ = indentOList $ OList []
 instance Markdown CovAdvancement where
-   printMD a = indentOList $ OList []
+   printMD _ = indentOList $ OList []
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 
