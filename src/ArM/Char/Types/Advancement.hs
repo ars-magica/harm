@@ -47,6 +47,7 @@ import ArM.GameRules
 import ArM.Types.Library
 
 import Data.Maybe 
+import Data.List 
 import Data.Char 
 import Data.Aeson 
 import GHC.Generics
@@ -321,3 +322,9 @@ instance Show Validation where
 
 instance ToJSON Validation
 instance FromJSON Validation
+
+
+primaryXPTrait :: Advancement -> Maybe TraitKey
+primaryXPTrait a | f a == [] = Nothing
+                 | otherwise = Just $ traitKey $ head (f a)
+   where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
