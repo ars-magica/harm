@@ -122,7 +122,8 @@ dropWord (x:xs) | isSpace x = trim xs
 -- AugmentedAdvanceemnt
 class AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
-     narrative :: a -> Maybe String -- ^ freeform description of the activities
+     narrative :: a -> Maybe String -- ^ narrative description of the activities
+     seasonComment :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
@@ -142,7 +143,8 @@ data Advancement = Advancement
      { advMode :: AdvancementType -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
      , advYears :: Maybe Int    -- ^ number of years advanced
-     , advNarrative :: Maybe String -- ^ freeform description of the activities
+     , advNarrative :: Maybe String -- ^ narrative description of the activities
+     , advComment :: Maybe String -- ^ freeform description of the activities
      , advUses :: [ String ] -- ^ Books used exclusively by the character
      , advSQ :: Maybe XPType -- ^ Source Quality (SQ) 
      , advBonus :: Maybe XPType -- ^ Bonus to Source Quality (SQ)
@@ -156,6 +158,7 @@ defaultAdv = Advancement
      , advSeason = NoTime
      , advYears = Nothing
      , advNarrative = Nothing
+     , advComment = Nothing
      , advUses = []
      , advSQ = Nothing
      , advBonus = Nothing
@@ -171,6 +174,7 @@ instance FromJSON Advancement where
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"
         <*> v .:? "narrative"
+        <*> v .:? "comment"
         <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "bonusQuality"
@@ -230,6 +234,7 @@ instance Timed Advancement where
 instance AdvancementLike Advancement where
      mode = advMode
      narrative  = advNarrative
+     seasonComment  = advComment
      usesBook = advUses
      sourceQuality  = advSQ
      changes = advChanges
@@ -238,6 +243,7 @@ instance Timed AugmentedAdvancement where
 instance AdvancementLike AugmentedAdvancement where
      mode a = advMode  $ advancement a
      narrative  a = advNarrative  $ advancement  a
+     seasonComment  a = seasonComment  $ advancement  a
      usesBook  a = advUses  $ advancement a
      sourceQuality  a =  advSQ  $ advancement a
      changes  a = advChanges  $ advancement  a

@@ -20,7 +20,7 @@ import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Markdown
 import ArM.BasicIO
--- import ArM.Helper
+import ArM.Helper
 
 -- import ArM.Debug.Trace
 
@@ -68,11 +68,26 @@ instance Timed EitherAug where
    season (ECov x) = season x
 
 instance Markdown CharAug where
-   printMD (CharAug c a) = OList [ OString ("+ " ++ name c)
-                                 , printMD a ]
+   printMD (CharAug c a) = indentOList $ OList
+       [ OString ("+ " ++ name c ++ " (" ++ show (mode a) ++ ")")
+       , OList [ stringMD $ narrative a ]
+       , OList [ stringMD $ seasonComment a ]
+       , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
+       -- , chnl
+       -- , infl
+       , OList $ map (OString . show) $ validation a
+       ]
 instance Markdown CovAug where
-   printMD (CovAug c a) = OList [ OString ("+ " ++ name c)
-                                 , printMD a ]
+   printMD (CovAug c a') = OList [ OString ("+ " ++ name c), j, lv, acq, lst ]
+     where j | joining a == [] = OList []
+             | otherwise = OString $  "    + joining: " ++ showStrList (map show $ joining a)
+           lv | leaving a == [] = OList []
+             | otherwise = OString $  "    + leaving: " ++ showStrList (map show $ leaving a)
+           acq | acquired a == [] = OList []
+             | otherwise = OString $  "    + acquired: " ++ showStrList (map formatTitle $ acquired a)
+           lst | lost a == [] = OList []
+             | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
+           a = contractAdvancement a'
 instance Markdown EitherAug where
    printMD (ECov x) = printMD x
    printMD (EChar x) = printMD x

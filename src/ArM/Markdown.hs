@@ -20,6 +20,8 @@ module ArM.Markdown ( Markdown(..)
                     , currentSheet
                     , artMD
                     , artVisMD
+                    , stringMD
+                    , formatTitle
                     ) where
 
 import Data.Maybe 
@@ -321,15 +323,18 @@ instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 
        , OList [ stringMD $ narrative a ]
-       -- , usesString a
+       , OList [ stringMD $ seasonComment a ]
        , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
-       , OList $ map printMD $ changes a
+       , chnl
        , infl
        , OList $ map (OString . show) $ validation a
        ]
       where xps = showSQ (sourceQuality a) (effectiveSQ a)
             y = augYears a
             inf = inferredTraits a
+            chn = changes a
+            chnl | chn == [] = OList []
+                 | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
             infl | inf == [] = OList []
                  | otherwise = OList [ OString "Inferred traits", OList $ map printMD inf ]
 

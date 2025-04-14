@@ -86,7 +86,10 @@ instance FromJSON Character where
 -- The ID is used to refer to the character from other characters and
 -- covenants, independently of the current state.
 data CharacterID = CharacterID String
-    deriving ( Show, Ord, Eq, Generic )
+    deriving ( Ord, Eq, Generic )
+
+instance Show CharacterID where
+   show (CharacterID c) = c 
 
 instance ToJSON CharacterID
 instance FromJSON CharacterID

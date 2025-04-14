@@ -147,7 +147,7 @@ instance FromJSON CovenantState where
 -- | Advancement (changes) to a covenant.
 data CovAdvancement = CovAdvancement 
      { caSeason :: SeasonTime    -- ^ season or development stage
-     , caNarrative :: String     -- ^ freeform description of the activities
+     , caNarrative :: [String]   -- ^ freeform description of the activities
      , joining :: [ CharacterID ]
      , leaving :: [ CharacterID ]
      , acquired :: [ Book ]
@@ -157,7 +157,7 @@ data CovAdvancement = CovAdvancement
 defaultAdv :: CovAdvancement 
 defaultAdv = CovAdvancement 
      { caSeason = NoTime
-     , caNarrative = ""
+     , caNarrative = []
      , joining = []
      , leaving = []
      , acquired = []
@@ -167,7 +167,7 @@ instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
         <$> fmap parseSeasonTime ( v .:? "season" )
-        <*> v .:? "narrative" .!= ""
+        <*> v .:? "narrative" .!= []
         <*> v .:? "joining" .!= []
         <*> v .:? "leaving" .!= []
         <*> v .:? "acquired" .!= []
@@ -282,3 +282,17 @@ nextCovAdv ns cov | fs == [] = (cov,Nothing)
 
 prepareAdvancement :: CovAdvancement -> AugCovAdvancement
 prepareAdvancement a = AugCovAdvancement (Just a) Nothing
+
+contractAdvancement :: AugCovAdvancement -> CovAdvancement
+contractAdvancement aug  = CovAdvancement
+     { caSeason = season aug
+     , caNarrative = listFromMaybe caNarrative aa ++ listFromMaybe caNarrative ad
+     , joining = listFromMaybe joining aa ++ listFromMaybe joining ad
+     , leaving = listFromMaybe leaving aa ++ listFromMaybe leaving ad
+     , acquired = listFromMaybe acquired aa ++ listFromMaybe acquired ad
+     , lost = listFromMaybe lost aa ++ listFromMaybe lost ad
+     } 
+     where (AugCovAdvancement aa ad) = aug
+
+listFromMaybe :: ( a -> [b]) -> Maybe a -> [b]
+listFromMaybe f = fromMaybe [] . fmap f 
