@@ -32,17 +32,19 @@ module ArM.Char.Character ( module ArM.Char.Types.Character
 
 import Data.Maybe 
 import Data.List
+-- import Control.Monad
 
 import ArM.Char.Trait
 import ArM.Char.Types.Advancement
 import ArM.Types.KeyPair
 import ArM.Types.Calendar
+import ArM.Types.Library
 import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
 import ArM.Char.Inference
 import ArM.Char.Virtues
--- import ArM.Helper
+import ArM.GameRules
 
 import ArM.Debug.Trace
 
@@ -311,14 +313,25 @@ agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Calculate initial XP limits on Advancements
 inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
-inferSQ cs ad = ad { bonusSQ = vfBonusSQ vf ad }
+inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
         where vf = vfList $ filterCS cs
+              (sq,cap) = getSQ ad
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
 -- Infer SQ for taught from teacher
 -- Infer SQ for adventure from covenant
 
+getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
+getSQ a | isExposure ad = (Just 2,Nothing)
+        | mode ad == Reading = rd 
+        | otherwise = mstat
+   where ad = advancement a
+         mstat = (sourceQuality ad,sourceCap ad)
+         rd = (Just $ fromIntegral $ quality  bk,bookLevel bk)
+         bk = head $ bookStats $ head $ bookUsed a
 
+-- |
+-- Calculate the Source Quality the character generates as a teacher.
 charTeacherSQ :: CharacterState -> Int
 charTeacherSQ cs = 3 + com + tch
     where sheet = filterCS cs

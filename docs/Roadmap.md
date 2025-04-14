@@ -17,15 +17,17 @@ tags:
 		+ [ ] Sort possessions
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Review covenant sheet and library
-	+ [ ] Revise advancement display in annals
 	+ [ ] Review object structure
 		+ [ ] AnnalSeason 
 		+ [ ] Character with State
 		+ [ ] Covenant with State
 		+ [ ] SagaState
+	+ [ ] Specialists (copyists in particular)
 + [ ] Phase 1. [[Covenant]]
+	+ [ ] SQ from book
+		+ [ ] Validate Reading Advancement
+		+ [ ] levelCap on ProtoTrait - where should this go?
 	+ [ ] Reading and copying advancements
-		+ [ ] SQ from book
 		+ [ ] calculate book quality from author
 		+ [ ] check for rereading of tractatus
 		+ [ ] check for collisions on books

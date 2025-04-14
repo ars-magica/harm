@@ -8,7 +8,34 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  The Advancement types representing changes over a season.
+-- Description :  The Advancement types representing Character improvement.
+--
+-- Advancement is tricky because there are many different modes of study
+-- and many special cases.  The basic structure uses two main types:
+-- + Advancement is the changes defined by the user. 
+-- + AugmentedAdvancement comprises the `Advancement` object and additional
+--   inferred changes.
+--
+-- The Source Quality (SQ) is controled by several fields.
+-- + AugmentedAdvancement `baseSQ` is the base source quality inferred
+--   from other traits and general rules.
+-- + Advancement `sourceQuality` allows the user to enter the basic
+--   SQ manually.  This is required for Practice, and may be used to 
+--   override the `baseSQ`.  If it differs from `baseSQ`, a warning
+--   is issued.
+-- + AugmentedAdvancement `bonusSQ` includes modifications derived
+--   automatically from virtues and flaws, and other individual
+--   circumstances.
+-- + Advancement `bonusQuality` should be used for individual modifications
+--   that cannot be automatically inferred, such as correspondent and Study
+--   Bonus.
+--
+-- Also not the `scoreCap` or `sourceCap` that caps the score that can
+-- be acquired from the source. This applies to books, trainers, and teachers.
+--
+-- The `Advancement` object has a list of `changes` which is `ProtoTrait`
+-- objects modifying existing traits.  Similarly, `AugmentedAdvancement`
+-- has `inferredTraits` for additional implied changes.
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Types.Advancement where
@@ -126,6 +153,7 @@ class AdvancementLike a where
      seasonComment :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
+     sourceCap :: a -> Maybe Int -- ^ Level cap from the source of learning
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
      isExposure :: a -> Bool
      isExposure = f . mode
@@ -147,6 +175,7 @@ data Advancement = Advancement
      , advComment :: Maybe String -- ^ freeform description of the activities
      , advUses :: [ String ] -- ^ Books used exclusively by the character
      , advSQ :: Maybe XPType -- ^ Source Quality (SQ) 
+     , advCap :: Maybe Int   -- ^ Source Quality (SQ) 
      , advBonus :: Maybe XPType -- ^ Bonus to Source Quality (SQ)
      , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
      }
@@ -161,6 +190,7 @@ defaultAdv = Advancement
      , advComment = Nothing
      , advUses = []
      , advSQ = Nothing
+     , advCap = Nothing
      , advBonus = Nothing
      , advChanges = [ ]  
      }
@@ -177,6 +207,7 @@ instance FromJSON Advancement where
         <*> v .:? "comment"
         <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
+        <*> v .:? "sourceCap"
         <*> v .:? "bonusQuality"
         <*> v .:? "changes" .!= []
 
@@ -188,6 +219,7 @@ data AugmentedAdvancement = Adv
      { advancement :: Advancement   -- ^ Base advancement as entered by the user
      , baseSQ  :: Maybe XPType      -- ^ Base Source Quality
      , bonusSQ  :: XPType     -- ^ Bonus to Source Quality from Virtues and Flaws
+     , scoreCap :: Maybe Int
      , levelLimit :: Maybe Int      -- ^ spell level allowance
      , spentXP  :: Maybe XPType     -- ^ Total XP spent on advancement
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
@@ -219,6 +251,7 @@ defaultAA = Adv
      { advancement = defaultAdv
      , baseSQ = Nothing
      , bonusSQ = 0
+     , scoreCap = Nothing
      , levelLimit = Nothing 
      , spentXP = Nothing
      , inferredTraits = [ ] 
@@ -237,6 +270,7 @@ instance AdvancementLike Advancement where
      seasonComment  = advComment
      usesBook = advUses
      sourceQuality  = advSQ
+     sourceCap  = advCap
      changes = advChanges
 instance Timed AugmentedAdvancement where
      season  = advSeason  .  advancement 
@@ -246,6 +280,7 @@ instance AdvancementLike AugmentedAdvancement where
      seasonComment  a = seasonComment  $ advancement  a
      usesBook  a = advUses  $ advancement a
      sourceQuality  a =  advSQ  $ advancement a
+     sourceCap  = scoreCap
      changes  a = advChanges  $ advancement  a
 
 instance ToJSON AugmentedAdvancement where
@@ -255,6 +290,7 @@ instance FromJSON AugmentedAdvancement where
         <$> v .: "advancement"
         <*> v .:? "baseSQ"
         <*> v .:? "bonusSQ" .!= 0
+        <*> v .:? "cap"
         <*> v .:? "levels"
         <*> v .:? "spentXP"
         <*> v .:? "inferredTraits"  .!= []

@@ -44,34 +44,18 @@
 
 ## Source Quality Calculation
 
-| Mode      | Base       | Virtue            | Other                               |
-| :-------- | ---------- | ----------------- | ----------------------------------- |
-| Adventure | Covenant   | Independent study |                                     |
-| Practice  | Individual | Independent study |                                     |
-| Teaching  | Teacher    | Apt Student       | Specialitiy, one/two students, lab? |
-| Training  | Teacher    | Apt Student       |                                     |
-| Reading   | Book       | Book Learner      |                                     |
-| Vis study | Die roll   | Free study        |                                     |
-| Exposure  | 2          |                   |                                     |
-+ Advancement
-	+ sourceQuality (base)
-	+ bonusQuality covers virtue
-+ AugmentedAdvancement
-	+ computedSQ
+| Mode      | Base       | Virtue            | Other                               | Traits             |
+| :-------- | ---------- | ----------------- | ----------------------------------- | ------------------ |
+| Adventure | Covenant   | Independent study |                                     | Any (5xp limit)    |
+| Practice  | Individual | Independent study |                                     | Any (Usually One)  |
+| Teaching  | Teacher    | Apt Student       | Specialitiy, one/two students, lab? | Decided by Teacher |
+| Training  | Teacher    | Apt Student       |                                     | One                |
+| Reading   | Book       | Book Learner      |                                     | One + Folio        |
+| Vis study | Die roll   | Free study        |                                     | One                |
+| Exposure  | 2          |                   |                                     | Any                |
 
-+ Other
-    + correspondent ??
-    + study bonus - Manual !
-    + custom virtues
++ Reading
+	+ Defined Book + Ability + Extra
 
-
-+ Advancement
-	+ Manual `sourceQuality` - required for Practice (or may default to 4 if missing), otherwise discouraged
-	+ Manual `bonusSQ` - required for correspondent and study bonus, and possibly custom virtues/flaws
-+ AugmentedAdvancement
-	+ `sourceQuality` derived from either book, teacher, advancement `sourceQuality` or advncement mode
-	+ bonuses from virtues
-	+ manual bonuses from `Advancement`
 + Bonuses may be lists, including justifications
-+ `effectiveSQ` is the sum of the above
 + Validation - compare standard SQ to autocomputed SQ
