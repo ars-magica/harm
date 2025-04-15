@@ -38,7 +38,7 @@ import ArM.GameRules
 import ArM.BasicIO
 import ArM.Helper
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- |
 -- = Rendering the Character Sheet
@@ -690,7 +690,7 @@ instance Markdown CovenantState where
     printMDaug saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
         , OString ""
-        , trace "covenFolk index " $ characterIndex $ covenFolk saga cov
+        , characterIndex $ covenFolk saga cov
         , OString ""
         , OString "### Library"
         , OString ""

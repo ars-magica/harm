@@ -232,8 +232,8 @@ caSeasonAug (AugCovAdvancement a b) = fromMaybe b' $ fmap caSeason a
 -- | Apply covenant advancement
 applyCovAdv :: (Covenant,Maybe AugCovAdvancement)
          -> (Covenant,Maybe AugCovAdvancement)
-applyCovAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
-applyCovAdv (c,Just a) = trace (stateName c ++ " - " ++ show (caSeasonAug a)) $ (c',Just a)
+applyCovAdv (c,Nothing) = (c,Nothing)
+applyCovAdv (c,Just a) = (c',Just a)
     -- where (a',st') = applyCovAdvancement a st
     where st' = st { covTime = caSeasonAug a, covenFolkID = cid }
           c' = c { covenantState = Just st' }

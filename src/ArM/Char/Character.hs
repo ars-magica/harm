@@ -158,8 +158,8 @@ applyAdvancement a cs = (a,cs')
 
 applyAdv :: (Character,Maybe AugmentedAdvancement)
          -> (Character,Maybe AugmentedAdvancement)
-applyAdv (c,Nothing) = trace (stateName c ++ " - Nothing") $ (c,Nothing)
-applyAdv (c,Just a) = trace (stateName c ++ " - " ++ show (season a)) $ (c',Just a')
+applyAdv (c,Nothing) = (c,Nothing)
+applyAdv (c,Just a) = (c',Just a')
     where (a',st') = applyAdvancement a st
           c' = c { state = Just st' }
           st = trace (show $ characterSeason c ) $ fromMaybe defaultCS $ state c
@@ -247,7 +247,7 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 -- Get the next augmented advancement.
 nextAdv :: SeasonTime -> Character -> (Character,Maybe AugmentedAdvancement)
 nextAdv ns ch | fs == [] = (ch,Nothing)
-              | season adv > ns = trace (show (ns,season adv,characterID ch)) $ (ch,Nothing)
+              | season adv > ns = (ch,Nothing)
               | otherwise = (new,Just a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
@@ -320,6 +320,15 @@ inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
 -- Infer SQ for reading from book
 -- Infer SQ for taught from teacher
 -- Infer SQ for adventure from covenant
+
+bookSQ :: AugmentedAdvancement -> AugmentedAdvancement 
+bookSQ aa | isNothing stats = aa
+          | isNothing trait = aa
+          | otherwise = aa 
+    where trait = ttrace $ primaryXPTrait $ advancement aa
+          stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
+	  ctp =  (==(fromJust trait)) . topic 
+
 
 getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
 getSQ a | isExposure ad = (Just 2,Nothing)

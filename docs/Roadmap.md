@@ -8,6 +8,14 @@ tags:
 # Roadmap
 
 + [ ] **Review** Hibernia Saga
+	+ [ ] Fix ongoing
+		+ [ ] SQ from books
+		+ [ ] Check Exposure
+		+ [ ] Check Narrative + Comment
+		+ [ ] Narrative on Saga
+		+ [ ] Comment on ProtoTrait
+		+ [ ] Narrative and advancement on covenant
+		+ [ ] Validation: Compare SQ
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view
