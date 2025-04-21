@@ -9,7 +9,7 @@ tags:
 
 + [ ] **Review** Hibernia Saga
 	+ [ ] Fix ongoing
-		+ [ ] SQ from books
+		+ [ ] [[Reading and Books]]
 		+ [ ] Check Exposure
 		+ [ ] Check Narrative + Comment
 		+ [ ] Narrative on Saga
