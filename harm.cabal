@@ -69,6 +69,7 @@ common harm-deps
                        , ArM.Char.Types.Trait
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmKey
+                       , ArM.Cov.HarmSagaObject
                        , ArM.Char.Combat
                        , ArM.DB.CSV
                        , ArM.DB.Spell
