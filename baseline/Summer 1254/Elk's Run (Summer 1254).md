@@ -8,8 +8,8 @@ Player Covenant
 
 ## Summer 1254
 
-+ [Cieran the Fletcher ex Miscellanea (Summer 1255)](Cieran the Fletcher ex Miscellanea (Summer 1255))
-+ [Eogan mac Eogan (Winter 1255)](Eogan mac Eogan (Winter 1255))
++ [Cieran the Fletcher ex Miscellanea (Summer 1254)](Cieran the Fletcher ex Miscellanea (Summer 1254))
++ [Eogan mac Eogan (Summer 1254)](Eogan mac Eogan (Summer 1254))
 
 ### Library
 

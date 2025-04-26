@@ -595,7 +595,7 @@ instance Markdown Saga where
                 , OString $ sagaDesc saga
                 , OString ""
                 ]
-        , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- [ sagaState saga ] ]
+        , OList $ [ OString $ "+ " ++ pagesLink (show x) | x <- stateSeasons saga ] 
         , OList [
           OString "" 
           , OString $ "+ " ++ pagesLink "Annals"

@@ -15,11 +15,12 @@
 module ArM.Types.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
-		    , sagaState
-		    , sagaStateName
-		    , sagaTitle
-		    , sagaDesc
-		    , rootDir
+                    , sagaState
+                    , sagaStateName
+                    , sagaTitle
+                    , sagaDesc
+                    , rootDir
+                    , stateSeasons
                     ) where
 
 
@@ -59,6 +60,9 @@ sagaTitle :: Saga -> String
 sagaTitle = title . sagaFile
 rootDir :: Saga -> String
 rootDir = fromMaybe "" . rootDirectory . sagaFile
+
+stateSeasons :: Saga -> [ SeasonTime ]
+stateSeasons = reverse . (GameStart:) . seasons . sagaFile
 
 instance Show Saga where
    show saga = "Saga: " ++ sagaTitle saga

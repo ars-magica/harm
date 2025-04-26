@@ -164,7 +164,7 @@ instance Advance Saga where
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
-advanceSaga saga = advanceSaga' ts saga
+advanceSaga saga = reverse $ saga:advanceSaga' ts saga
    where ts = seasons $ sagaFile saga
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
