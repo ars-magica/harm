@@ -24,6 +24,7 @@ import ArM.Char.Trait
 import ArM.Char.Types.Advancement
 import ArM.Types.Calendar
 import ArM.Types.KeyPair
+import ArM.Types.HarmKey
 -- import ArM.Debug.Trace
 import ArM.Helper
 
@@ -81,22 +82,12 @@ instance FromJSON Character where
 -- | 
 -- == Name and identity
 
--- | ID of a character.
--- This is currently implemented as the name.
--- The ID is used to refer to the character from other characters and
--- covenants, independently of the current state.
-data CharacterID = CharacterID String
-    deriving ( Ord, Eq, Generic )
-
-instance Show CharacterID where
-   show (CharacterID c) = c 
-
-instance ToJSON CharacterID
-instance FromJSON CharacterID
-
 -- | get the ID of a character.
-characterID :: Character -> CharacterID
-characterID = CharacterID . charID
+characterID :: Character -> HarmKey
+characterID = harmKey 
+
+instance KeyObject Character where
+    harmKey = CharacterKey . charID
 
 
 -- | Return the name of the character as a string, including house affiliation

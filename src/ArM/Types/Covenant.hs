@@ -23,6 +23,7 @@ import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
+import ArM.Types.HarmKey
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -47,22 +48,16 @@ instance FromJSON Covenant where
         <*> v .:? "history" .!= []
         <*> v .:? "plan" .!= []
 
--- | ID of a Covenant.
--- This is currently implemented as the name.
--- It is used to reference the covenant, independtly of state, from other
--- objects.
-data CovenantID = CovenantID String
-    deriving ( Show, Ord, Eq, Generic )
-
-instance ToJSON CovenantID
-instance FromJSON CovenantID
 
 -- | get the ID of a character.
-covenantID :: Covenant -> CovenantID
-covenantID = CovenantID . name
+covenantID :: Covenant -> HarmKey
+covenantID = harmKey
 
-covenant :: CharacterState -> Maybe CovenantID
-covenant = fmap CovenantID . memberOf 
+instance KeyObject Covenant where
+    harmKey = CovenantKey . name
+
+covenant :: CharacterState -> Maybe HarmKey
+covenant = fmap CovenantKey . memberOf 
 
 instance HarmObject Covenant where
     name = covName . covenantConcept
@@ -118,7 +113,7 @@ instance Show CovenantConcept where
 
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
-         , covenFolkID :: [ CharacterID ]
+         , covenFolkID :: [ HarmKey ]
          , library :: [ Book ]
          , librarycsv :: Maybe String
        }  deriving (Eq,Generic,Show)
@@ -148,8 +143,8 @@ instance FromJSON CovenantState where
 data CovAdvancement = CovAdvancement 
      { caSeason :: SeasonTime    -- ^ season or development stage
      , caNarrative :: [String]   -- ^ freeform description of the activities
-     , joining :: [ CharacterID ]
-     , leaving :: [ CharacterID ]
+     , joining :: [ HarmKey ]
+     , leaving :: [ HarmKey ]
      , acquired :: [ Book ]
      , lost :: [ Book ]
      }
@@ -211,13 +206,13 @@ instance Advance Covenant where
              f (x:_) = caSeason x
 
 -- | CovenFolk joining according to the augmented covenant advancement.
-joiningAug :: AugCovAdvancement -> [CharacterID]
+joiningAug :: AugCovAdvancement -> [HarmKey]
 joiningAug (AugCovAdvancement a b) = a' ++ b'
     where a' = fromMaybe [] $ fmap joining a
           b' = fromMaybe [] $ fmap joining b
 
 -- | CovenFolk leaving according to the augmented covenant advancement.
-leavingAug :: AugCovAdvancement -> [CharacterID]
+leavingAug :: AugCovAdvancement -> [HarmKey]
 leavingAug (AugCovAdvancement a b) = a' ++ b'
     where a' = fromMaybe [] $ fmap leaving a
           b' = fromMaybe [] $ fmap leaving b

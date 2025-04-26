@@ -35,6 +35,7 @@ import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Types.Covenant
 import ArM.Types.Library
+import ArM.Types.HarmKey
 import ArM.BasicIO
 import ArM.Helper
 
@@ -375,14 +376,7 @@ covenFolk saga cov = lookupCharacters s $ f cov
 
 -- |
 -- Find `Character` objects for a list of character IDs, from the given `Saga`.
-lookupCharacters :: Saga -> [ CharacterID ] -> [ Character ]
-lookupCharacters saga is = lkup is cs
-    where cs = sortOn characterID $ characters $ sagaState saga
+lookupCharacters :: Saga -> [ HarmKey ] -> [ Character ]
+lookupCharacters saga is = harmLookup is cs
+    where cs = sortOnKey $ characters $ sagaState saga
 
--- | Auxiliary `lookupCharacters`
-lkup :: [ CharacterID ] -> [ Character ] -> [ Character ] 
-lkup (x:xs) (y:ys) | x < characterID y = trace "Character not found in saga" $ lkup xs (y:ys)
-                   | x > characterID y = lkup (x:xs) ys
-                   | otherwise = y:lkup xs ys
-lkup (_:_)  _ = trace "Character not found in saga" []
-lkup _ _ = []
