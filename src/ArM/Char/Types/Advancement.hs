@@ -175,6 +175,9 @@ data Advancement = Advancement
      , advNarrative :: Maybe String -- ^ narrative description of the activities
      , advComment :: Maybe String -- ^ freeform description of the activities
      , advUses :: [ String ] -- ^ Books used exclusively by the character
+     -- , advReadTome :: String -- ^ Tome studied
+     -- , advReadBook :: String -- ^ Partook studied
+     -- , advReadTrait :: String -- ^ Book studied
      , advSQ :: Maybe XPType -- ^ Source Quality (SQ) 
      , advCap :: Maybe Int   -- ^ Source Quality (SQ) 
      , advBonus :: Maybe XPType -- ^ Bonus to Source Quality (SQ)

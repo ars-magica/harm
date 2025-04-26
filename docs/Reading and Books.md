@@ -52,6 +52,14 @@ getCopy :: SagaState -> ReadingID -> Book
 getBookStats :: SagaState -> ReadingID -> Book 
 getOriginal :: SagaState -> ReadingID -> Book 
 ```
+
+```json
+"read" :
+  { "tome" : "title"
+  , "part" : "part title"
+  , "ability" : "Magic Theory"
+  }
+```
 + `Advancement` Object
 	+ `mode` = `Reading`
 	+ `usesBook` (ID)

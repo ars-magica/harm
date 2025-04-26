@@ -40,7 +40,8 @@ instance FromJSON BookStats
 instance Show BookStats where
     show b = k ++ ' ':l ++ q
         where k = show $ topic b
-              q = 'Q':(show $ quality b)
+              q | isNothing (quality b) = ""
+                | otherwise = 'Q':show (fromJust $ quality b)
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
 
@@ -175,3 +176,21 @@ instance ArMCSV Book where
      , bookLanguage = Nothing
      , bookCount = 1 }
    getID = bookID
+
+
+-- |
+-- == Descriptions of a reading season
+data ReadingID = ReadingID
+     { bookRead :: BookKey
+     , partRead :: Maybe BookKey
+     , topicRead :: TraitKey
+     } deriving (Eq,Show,Generic)
+instance ToJSON ReadingID
+instance FromJSON ReadingID {- where
+    parseJSON = withObject "ReadingID" $ \v -> ReadingID
+                    <$> v .:  "tome" 
+                    <*> v .:? "part"
+                    <*> fmap AbilityKey ( v .:? "ability" )
+                    <*> fmap ArtKey ( v .:? "art" )
+-}
+

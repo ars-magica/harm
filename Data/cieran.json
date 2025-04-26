@@ -145,23 +145,24 @@
       , "season" : "Summer 1217"
       , "sourceQuality" : 21
       , "changes" : 
-         [ { "art" : "Herbam", "xp": 21 }
+         [ { "art" : "Herbam", "xp": 24, "levelCap" : 6  }
          ] 
       , "narrative" : "Studies *Root of Herbam* L6 Q21 +3" 
       },
       { "mode" : "Reading"
       , "season" : "Autumn 1217"
-      , "sourceQuality" : 16
+      , "usesBook" : [ "The Mind's Eye" ]
+      , "sourceQuality" : 13
       , "changes" : 
-         [ { "art" : "Mentem", "xp": 16 }
+         [ { "art" : "Mentem", "xp": 16, "levelCap" : 16 }
          ] 
       , "narrative" : "Studies Mentem L16Q13 +3" 
       },
       { "mode" : "Reading"
       , "season" : "Winter 1218"
-      , "sourceQuality" : 18
+      , "sourceQuality" : 15
       , "changes" : 
-         [ { "art" : "Terram", "xp": 18 }
+         [ { "art" : "Terram", "xp": 18, "levelCap" : 8 }
          ] 
       , "narrative" : "Studies *Root of Terram* L8Q15 +3" 
       },
@@ -179,9 +180,11 @@
       },
       { "mode" : "Reading"
       , "season" : "Summer 1218"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "changes" : 
-         [ { "ability" : "SOCP Lore", "spec" : "Self initiation", "xp": 17 }
+         [ { "ability" : "SOCP Lore"
+	    , "spec" : "Self initiation"
+	    , "xp": 17, "levelCap" : 4 }
          ] 
       , "narrative" : "Studies book found in Jerome's Tower"
       },
@@ -196,22 +199,22 @@
       },
       { "mode" : "Reading"
       , "season" : "Winter 1219"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : 
-         [ { "art" : "Intellego", "xp": 16 }
+         [ { "art" : "Intellego", "xp": 16, "levelCap" : 15 }
          ] 
       , "narrative" : "Also a short story to Praesis."
       },
       { "mode" : "Reading", "season" : "Spring 1219"
-      , "sourceQuality" : 13
-      , "changes" : [ { "art" : "Terram", "xp" : 13 } ]
+      , "sourceQuality" : 10
+      , "changes" : [ { "art" : "Terram", "xp" : 13, "levelCap" : 11 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1219"
-      , "sourceQuality" : 16
-      , "changes" : [ { "art" : "Rego", "xp" : 16 } ]
+      , "sourceQuality" : 13
+      , "changes" : [ { "art" : "Rego", "xp" : 16, "levelCap" : 10 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1219"
-      , "sourceQuality" : 18
+      , "sourceQuality" : 15
       , "changes" : [ { "ability" : "Latin", "xp" : 18 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1220"
@@ -234,16 +237,16 @@
       , "changes" : [ { "ability" : "Parma Magica", "xp" : 5 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1220"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1220"
-      , "sourceQuality" : 21
-      , "changes" : [ { "art" : "Muto", "xp" : 21 } ]
+      , "sourceQuality" : 20
+      , "changes" : [ { "art" : "Muto", "xp" : 23, "levelCap" : 6 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1221"
-      , "sourceQuality" : 21
-      , "changes" : [ { "art" : "Aquam", "xp" : 21 } ]
+      , "sourceQuality" : 18
+      , "changes" : [ { "art" : "Aquam", "xp" : 21, "levelCap" : 7 } ]
       },
       { "mode" : "Adventure", "season" : "Spring 1221"
       , "sourceQuality" : 10
@@ -258,16 +261,16 @@
       , "changes" : [ { "ability" : "Philosophiæ", "spec" : "Rituals", "xp" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1221"
-      , "sourceQuality" : 21
-      , "changes" : [ { "art" : "Auram", "xp" : 21 } ]
+      , "sourceQuality" : 19
+      , "changes" : [ { "art" : "Auram", "xp" : 22, "levelCap" : 6 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1222"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Spring 1222"
-      , "sourceQuality" : 18
-      , "changes" : [ { "art" : "Ignem", "xp" : 18 } ]
+      , "sourceQuality" : 15
+      , "changes" : [ { "art" : "Ignem", "xp" : 18, "levelCap" : 8 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1222"
       , "sourceQuality" : 2
@@ -275,7 +278,7 @@
       , "changes" : [ { "ability" : "Parma Magica", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1222"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1223"
@@ -325,24 +328,24 @@
       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1223"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "changes" : [ { "art" : "Animal", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1224"
-      , "sourceQuality" : 18
-      , "changes" : [ { "art" : "Ignem", "xp" : 18 } ]
+      , "sourceQuality" : 15
+      , "changes" : [ { "art" : "Ignem", "xp" : 18, "levelCap" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Spring 1224"
-      , "sourceQuality" : 19
+      , "sourceQuality" : 16
       , "narrative" : " *Corpus Hermeticus*"
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1224"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1224"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1225"
@@ -356,7 +359,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1225"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1225"
@@ -370,7 +373,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1225"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Made Potions of Demon's Oblivion "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
@@ -390,14 +393,14 @@
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1226"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "changes" : [ { "art" : "Creo", "xp" : 17 } 
                     , { "possession" : { "art" : "Im", "count" : 10
 		        , "comment" : "payment for items sold at the Midsummer fair" } }
                     ]
       },
       { "mode" : "Reading", "season" : "Autumn 1226"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
@@ -409,7 +412,7 @@
 		        , "comment" : "for the Safe Cauldron" } } ]
       },
       { "mode" : "Reading", "season" : "Spring 1227"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1227"
@@ -428,7 +431,7 @@
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1228"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1228"
@@ -442,18 +445,18 @@
       ]
       },
       { "mode" : "Reading", "season" : "Summer 1228"
-      , "sourceQuality" : 13
-      , "changes" : [ { "art" : "Imaginem", "xp" : 13 } 
+      , "sourceQuality" : 10
+      , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
                     , { "possession" : { "art" : "Vi", "count" : 3
 		        , "comment" : "sales at the Grand tribunal" } } 
                       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1228"
-      , "sourceQuality" : 13
+      , "sourceQuality" : 10
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1229"
-      , "sourceQuality" : 19
+      , "sourceQuality" : 16
       , "narrative" : " *Corpus Hermeticum*"
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
@@ -504,7 +507,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1230"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "narrative" : "L6Q12"
       , "changes" : [ { "ability" : "Area Lore: Ireland", "xp" : 15 } ]
       },
@@ -537,13 +540,21 @@
       , "changes" : [ { "ability" : "Parma Magica", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1231"
-      , "sourceQuality" : 17
-      , "changes" : [ { "ability" : "SOCP Lore", "xp" : 17 } ]
+      , "sourceQuality" : 14
+      , "changes" : 
+         [ { "ability" : "SOCP Lore"
+	    , "spec" : "Self initiation"
+	    , "xp": 17, "levelCap" : 4 }
+         ] 
       },
       { "mode" : "Reading", "season" : "Autumn 1231"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 14
       , "narrative" : "SOCP Lore. Reaching 4. "
-      , "changes" : [ { "ability" : "SOCP Lore", "xp" : 16 } ]
+      , "changes" : 
+         [ { "ability" : "SOCP Lore"
+	    , "spec" : "Self initiation"
+	    , "xp": 17, "levelCap" : 4 }
+         ] 
       },
       { "mode" : "Initiation", "season" : "Winter 1232"
       , "sourceQuality" : 2
@@ -622,7 +633,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1234"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : " *Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
@@ -637,12 +648,12 @@
       ]
       },
       { "mode" : "Reading", "season" : "Summer 1234"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : " *Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1234"
-      , "sourceQuality" : 13
+      , "sourceQuality" : 10
       , "narrative" : "Maine's wedding in Clonmacnoise.  Reading  (13x1½) Imaginem."
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } 
          , { "reputation" : "Friendly druid", "locale" : "Lands of O'Sullivan", 
@@ -650,7 +661,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1235"
-      , "sourceQuality" : 13
+      , "sourceQuality" : 10
       , "narrative" : "13x1½ -> Imaginem 105x1½xp = 157½ -> 17 (4½)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } 
          , { "possession" : { "art" : "Te", "count" : 2, "comment" : "Allowance" } }
@@ -676,7 +687,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1235"
-      , "sourceQuality" : 12
+      , "sourceQuality" : 9
       , "narrative" : " 52->64 "
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
          , { "possession" : { "name" : "Weightless Chain (Protection 9, Load 2)"
@@ -685,7 +696,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1236"
-      , "sourceQuality" : 13
+      , "sourceQuality" : 10
       , "narrative" : "13x1½ -> Imaginem 118x1½xp = 177 -> 18 (6)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } ]
       },
@@ -704,7 +715,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1236"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : " 65xp score 10 "
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
@@ -787,7 +798,7 @@
           { "spell" : "Aegis of the Hearth"
             , "tefo" : "ReVi", "level" : 30 
             , "mastery" : [ "Safe Casting" ]
-            , "xp" : 6
+            , "xp" : 9
          }
       ]
       },
@@ -880,7 +891,7 @@
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1241"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "narrative" : "17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
@@ -935,7 +946,7 @@
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1243"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : " *The Mind's Eye* L16Q13 -> 81xp ; No aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } 
          , { "aging" : { "deltaYounger" : 1
@@ -949,22 +960,22 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1243"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 -> 89xp "
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1243"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 -> 106xp "
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1243"
       , "sourceQuality" : 14
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp "
-      , "changes" : [ { "art" : "Creo", "xp" : 14, "levelCap" : 15 } ]
+      , "changes" : [ { "art" : "Creo", "xp" : 17, "levelCap" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1244"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "narrative" : "Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } 
          , { "aging" : { "deltaYounger" : 1
@@ -995,7 +1006,7 @@
                     ]
       },
       { "mode" : "Reading", "season" : "Autumn 1244"
-      , "sourceQuality" : 11
+      , "sourceQuality" : 8
       , "narrative" : " *Dark Fey of the East* "
       , "changes" : [ { "ability" : "Faerie Lore", "spec" : "Dark fey", "xp" : 11 } ]
       },
@@ -1042,9 +1053,9 @@
 		    ]
       },
       { "mode" : "Reading", "season" : "Summer 1245"
-      , "sourceQuality" : 13
+      , "sourceQuality" : 10, "bonusQuality" : 1
       , "narrative" : "Summa; capped at 19 +1½xp for correspondent (191½xp) "
-      , "changes" : [ { "art" : "Imaginem", "xp" : 12, "levelCap" : 19 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
                     , { "art" : "Imaginem", "xp" : 1 } ]
       },
       { "mode" : "Copying", "season" : "Autumn 1245"
@@ -1053,7 +1064,7 @@
       , "changes" : [ { "ability" : "Latin", "xp" : 2} ]
       },
       { "mode" : "Reading", "season" : "Winter 1246"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } 
          , { "aging" : { "deltaYounger" : 1
@@ -1065,22 +1076,22 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1246"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1246"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1246"
       , "sourceQuality" : 13
       , "narrative" : "13 (capped) Mentem L16Q13 to 16 "
-      , "changes" : [ { "art" : "Mentem", "xp" : 13, "levelCap" : 16 } ]
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1247"
-      , "sourceQuality" : 17
+      , "sourceQuality" : 14
       , "narrative" : "Maine's Tractatus + Book Learner; 8-24=-16 no aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 17 }
          , { "aging" : { "deltaYounger" : 1
@@ -1092,13 +1103,13 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1247"
-      , "sourceQuality" : 14
+      , "sourceQuality" : 11
       , "narrative" : "Tractatus *On the Spark*"
       , "changes" : [ { "art" : "Creo", "xp" : 14 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1247"
-      , "sourceQuality" : 12
-      , "narrative" : "Tractatus *From nothing to everything*"
+      , "sourceQuality" : 9
+      , "usesBook" : [ "From nothing to everything" ]
       , "changes" : [ { "art" : "Creo", "xp" : 12 } ]
       },
       { "mode" : "Author", "season" : "Autumn 1247"
@@ -1117,7 +1128,7 @@
                     ]
       },
       { "mode" : "Reading", "season" : "Winter 1248"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "narrative" : "Summa L20Q12; no aging (-4) "
       , "changes" : [ { "art" : "Muto", "xp" : 15 } 
          , { "aging" : { "deltaYounger" : 1
@@ -1129,12 +1140,12 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1248"
-      , "sourceQuality" : 18
+      , "sourceQuality" : 14, "bonusQuality" : 1
       , "narrative" : "Oswald's tractatus Q14 + correspondent "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1248"
-      , "sourceQuality" : 18
+      , "sourceQuality" : 14, "bonusQuality" : 1
       , "narrative" : "Maine's tractatus Q14 + correspondent (245½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
@@ -1169,12 +1180,12 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1249"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Summa L15Q13 (to 80xp: 12) "
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1249"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Summa L15Q13"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
@@ -1202,22 +1213,22 @@
          ]
       },
       { "mode" : "Reading", "season" : "Spring 1250"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 11, "bonusQuality" : 1
       , "narrative" : "Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity"
       , "changes" : [ { "art" : "Imaginem", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1250"
-      , "sourceQuality" : 15
+      , "sourceQuality" : 12
       , "narrative" : "Summa L17Q12 + Book Learner 53 -> 68 "
       , "changes" : [ { "art" : "Corpus", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1250"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Summa L15Q13 + Book Learner 80 -> 96"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1251"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "Summa L15Q13 + Book Learner 96 -> 112; no aging -20"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } 
             , { "aging" : { "deltaYounger" : 1
@@ -1244,7 +1255,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Summer 1251"
-      , "sourceQuality" : 12
+      , "sourceQuality" : 9
       , "changes" : [ { "art" : "Rego", "xp" : 12 } ]
       },
       { "mode" : "Author Book", "season" : "Autumn 1251"
@@ -1253,7 +1264,7 @@
       , "changes" : [ { "ability" : "Parma Magica", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1252"
-      , "sourceQuality" : 12
+      , "sourceQuality" : 9
       , "narrative" : "no aging -16"
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
             , { "aging" : { "deltaYounger" : 1
@@ -1277,7 +1288,7 @@
                     ]
       },
       { "mode" : "Reading", "season" : "Summer 1252"
-      , "sourceQuality" : 16
+      , "sourceQuality" : 13
       , "narrative" : "To 83xp"
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
@@ -1300,7 +1311,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1253"
-      , "sourceQuality" : 9, "bonusQuality" : 4
+      , "sourceQuality" : 9, "bonusQuality" : 1
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 13 } 
@@ -1313,7 +1324,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1253"
-      , "sourceQuality" : 9, "bonusQuality" : 4
+      , "sourceQuality" : 9, "bonusQuality" : 1
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (101->114)"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 13 } ]
