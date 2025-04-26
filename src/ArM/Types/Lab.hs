@@ -20,7 +20,7 @@ import Data.Maybe
 import Data.List
 
 import ArM.Helper
-import ArM.Types.HarmKey
+import ArM.Types.HarmObject
 
 import ArM.Debug.Trace
 

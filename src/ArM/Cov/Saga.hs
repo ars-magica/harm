@@ -35,7 +35,7 @@ import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Types.Covenant
 import ArM.Types.Library
-import ArM.Types.HarmKey
+import ArM.Types.HarmObject
 import ArM.Types.Saga
 import ArM.BasicIO
 import ArM.Helper

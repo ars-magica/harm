@@ -39,6 +39,7 @@ import ArM.Char.Types.Advancement
 import ArM.Types.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.Library
+import ArM.Types.HarmObject
 import ArM.Char.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
@@ -51,27 +52,6 @@ import ArM.Debug.Trace
 -- |
 -- = The Harm Object
 
--- |
--- The `HarmObject` class establishes a common interface for `Covenant` and
--- `Character`.
-class HarmObject h where
-    -- | Full name of the entity
-    name :: h -> String
-
-    -- | Current season of the object's stateY
-    stateSeason :: h -> SeasonTime
-
-    -- | String identifying the object and its state
-    stateName :: h -> String
-    stateName x = name x ++ " (" ++ show (stateSeason x) ++ ")"
-
-    -- | The prepare function is applied when the object is read from file
-    prepare :: h -> h
-    prepare = id
-
-    -- | Is the character state still at Game Start?
-    isGameStart :: h -> Bool
-    isGameStart = (==GameStart) . stateSeason
 
 instance HarmObject Character where
     name = fullConceptName . concept

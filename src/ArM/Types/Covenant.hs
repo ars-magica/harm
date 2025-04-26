@@ -23,7 +23,7 @@ import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
-import ArM.Types.HarmKey
+import ArM.Types.HarmObject
 import ArM.Helper
 
 import ArM.Debug.Trace

@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.HarmKey
+-- Module      :  ArM.Types.HarmObject
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -10,12 +10,13 @@
 -- Description :  HarmKey type used to index arbitrary hArM objects.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.HarmKey where
+module ArM.Types.HarmObject where
 
 import Data.Aeson
 import Data.List
 import GHC.Generics
 import ArM.Debug.Trace
+import ArM.Types.Calendar
 
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
@@ -56,3 +57,25 @@ class KeyObject h where
    -- | Sorty objects by `HarmKey`
    sortOnKey :: [h] -> [h]
    sortOnKey = sortOn harmKey
+
+-- |
+-- The `HarmObject` class establishes a common interface for `Covenant` and
+-- `Character`.
+class HarmObject h where
+    -- | Full name of the entity
+    name :: h -> String
+
+    -- | Current season of the object's stateY
+    stateSeason :: h -> SeasonTime
+
+    -- | String identifying the object and its state
+    stateName :: h -> String
+    stateName x = name x ++ " (" ++ show (stateSeason x) ++ ")"
+
+    -- | The prepare function is applied when the object is read from file
+    prepare :: h -> h
+    prepare = id
+
+    -- | Is the character state still at Game Start?
+    isGameStart :: h -> Bool
+    isGameStart = (==GameStart) . stateSeason

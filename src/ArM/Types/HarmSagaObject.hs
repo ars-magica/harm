@@ -17,7 +17,7 @@ module ArM.Types.HarmSagaObject where
 -- import GHC.Generics
 -- import ArM.Debug.Trace
 import ArM.Types.Saga
-import ArM.Types.HarmKey
+import ArM.Types.HarmObject
 import ArM.Types.Covenant
 import ArM.Char.Types.Character
 
