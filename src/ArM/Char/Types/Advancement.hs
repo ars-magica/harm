@@ -228,7 +228,7 @@ data AugmentedAdvancement = Adv
      , validation :: [Validation]   -- ^ Report from validation
      , postProcessTrait :: PostProcessor 
         -- ^ Extra postprocessing for traits at the given stage 
-     , bookUsed :: [Book]    -- ^ Books required by the activity
+     , bookUsed :: [ Book ]    -- ^ Books required by the activity
      , teacherSQ :: Maybe Int
      }
    deriving (Eq,Show,Generic)

@@ -336,7 +336,7 @@ getSQ a | isExposure ad = (Just 2,Nothing)
         | otherwise = mstat
    where ad = advancement a
          mstat = (sourceQuality ad,sourceCap ad)
-         rd = (Just $ fromIntegral $ quality  bk,bookLevel bk)
+         rd = (fmap fromIntegral $ quality bk,bookLevel bk)
          bk = head $ bookStats $ head $ bookUsed a
 
 -- |

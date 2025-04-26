@@ -31,7 +31,7 @@ import ArM.Debug.Trace
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
          { topic :: TraitKey
-         , quality :: Int
+         , quality :: Maybe Int
          , bookLevel :: Maybe Int
        }  deriving (Eq,Generic)
 instance ToJSON BookStats
@@ -50,6 +50,7 @@ data Book = Book
      , bookStats :: [ BookStats ] -- ^ list of stats per topic covered
      , bookCreator :: String      -- ^ Creator of the copy or manuscript
      , bookDate :: SeasonTime     -- ^ Time the copy was made            
+     , antologyOf :: [ Book ]     -- ^ The book is an antology of multiple books
      , copiedFrom :: Maybe Book   -- ^ Book copied or Nothing for an original manuscript
      , bookLocation :: String     -- ^ Location whre the book was written or copied
      , bookAnnotation :: String   -- ^ Additional information in free text
@@ -106,13 +107,14 @@ instance Ord BookStats where
 -- |
 -- == CSV
 
-readStats :: String -> (Maybe Int, Int)
-readStats "" = trace "empty book stats" (Nothing, (-1))
+readStats :: String -> (Maybe Int, Maybe Int)
+readStats "" = trace "empty book stats" (Nothing, Nothing)
+readStats "Spell" = trace "empty book stats" (Nothing, Nothing)
 readStats (' ':xs) = readStats xs
-readStats ('Q':xs) = (Nothing, readMaybeInt xs)
-readStats ('L':xs) = (Just $ readMaybeInt y, readMaybeInt z)
+readStats ('Q':xs) = (Nothing, Just $ readMaybeInt xs)
+readStats ('L':xs) = (Just $ readMaybeInt y, Just $ readMaybeInt z)
         where y:z:_ = map unpack $ splitOn "Q" $ pack xs
-readStats x = trace ( "no parse: " ++ x ) (Nothing, (-1))
+readStats x = trace ( "no parse: " ++ x ) (Nothing, Nothing)
 
 readMaybeInt :: String -> Int
 readMaybeInt = fromMaybe (-1) . readMaybe
@@ -157,6 +159,7 @@ instance ArMCSV Book where
      , bookStats = [ ] 
      , bookCreator = ""
      , bookDate = NoTime
+     , antologyOf = []
      , copiedFrom = Nothing
      , bookLocation = ""
      , bookAnnotation = ""
