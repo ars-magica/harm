@@ -17,6 +17,9 @@ module ArM.Types.Saga ( Saga(..)
                     , SagaState(..)
 		    , sagaState
 		    , sagaStateName
+		    , sagaTitle
+		    , sagaDesc
+		    , rootDir
                     ) where
 
 
@@ -42,23 +45,27 @@ import ArM.Debug.Trace
 -- | A Saga as it is processed in memory.
 -- Multiple files have to be loaded to generate a Saga object from a `SagaFile`.
 data Saga = Saga 
-         { sagaTitle :: String
-         , sagaStates :: [ SagaState ]
-         , rootDir :: String
-         , sagaDesc :: String
+         { sagaFile :: SagaFile
+         , sagaState :: SagaState
          , baseURL :: Maybe String
          , spells :: SpellDB
          , weapons :: WeaponDB
          , armour :: ArmourDB
        }  deriving (Eq)
 
--- | Get the most recent SagaState
--- This is mainly for backward compatibility
-sagaState :: Saga -> SagaState
-sagaState = head . sagaStates
+sagaDesc :: Saga -> String
+sagaDesc = sagaDescription . sagaFile
+sagaTitle :: Saga -> String
+sagaTitle = title . sagaFile
+rootDir :: Saga -> String
+rootDir = fromMaybe "" . rootDirectory . sagaFile
 
 instance Show Saga where
    show saga = "Saga: " ++ sagaTitle saga
+
+instance HarmObject Saga where
+    name = sagaTitle
+    stateSeason = seasonTime . sagaState
 
 -- | Saga state at a particular point in time, comprising characters and
 -- covenants at that point.

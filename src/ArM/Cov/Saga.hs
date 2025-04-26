@@ -154,25 +154,23 @@ covenantIndex = OList . map covenantIndexLine
 -- characters and covenants advance accordingly.
 instance Advance Saga where
    -- advance :: SeasonTime -> a -> a
-   advance t saga = saga { sagaStates = x:sagaStates saga }
-      where x = advance t (sagaState saga)
+   advance t saga = saga { sagaState = advance t (sagaState saga) }
 
    -- step :: a -> a
-   step saga = saga { sagaStates = x:sagaStates saga }
-      where x = step (sagaState saga)
+   step saga = saga { sagaState = step (sagaState saga) }
 
    -- nextSeason :: a -> SeasonTime
-   nextSeason = f . sagaStates
-       where f [] = NoTime
-             f (x:_) = nextSeason x
+   nextSeason = nextSeason . sagaState
 
 -- | Advance the Saga according to timestamp in the SagaFile.
-advanceSaga :: SagaFile -> Saga -> Saga
-advanceSaga t saga = advanceSaga' (seasons t) saga
+advanceSaga :: Saga -> [ Saga ]
+advanceSaga saga = advanceSaga' ts saga
+   where ts = seasons $ sagaFile saga
 
-advanceSaga' :: [SeasonTime] -> Saga -> Saga
-advanceSaga' [] = id
-advanceSaga' (x:xs) = trace ("adv> " ++ show x) $ advanceSaga' xs . advance x 
+advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
+advanceSaga' [] _ = []
+advanceSaga' (t:ts) x = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
+    where n = advance t x
 
 instance Advance SagaState where
    advance t saga 

@@ -33,6 +33,7 @@ import ArM.Char.Combat
 import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types.Library
+import ArM.Types.Saga
 import ArM.DB.Spell
 import ArM.GameRules
 import ArM.BasicIO
@@ -594,7 +595,7 @@ instance Markdown Saga where
                 , OString $ sagaDesc saga
                 , OString ""
                 ]
-        , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- sagaStates saga ]
+        , OList $ [ OString $ "+ " ++ pagesLink (show $ seasonTime st) | st <- [ sagaState saga ] ]
         , OList [
           OString "" 
           , OString $ "+ " ++ pagesLink "Annals"

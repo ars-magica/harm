@@ -30,6 +30,7 @@ import ArM.Char.Character
 import ArM.Markdown
 import ArM.Cov.Saga
 import ArM.Types.Covenant
+import ArM.Types.Saga
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.SeasonDisplay
@@ -62,34 +63,32 @@ loadSaga saga = do
    cov <- ( mapM readArM ( covenantFiles saga )
             >>= mapM loadCovenant )
    return
-     $ advanceSaga saga
-     $ Saga { rootDir = fromMaybe "/tmp/" $ rootDirectory saga
-           , sagaStates = SagaState
+     $ Saga { sagaFile = saga
+           , sagaState = SagaState
               { stateTitle = title saga
               , covenants =  filterNothing cov  
               , characters = filterNothing cs  
               , seasonTime = GameStart
-              }:[]
-           , sagaDesc = sagaDescription saga
+              }
            , baseURL = Nothing
-           , sagaTitle = title saga
            , spells = fromJust db 
            , weapons = fromJust wdb
            , armour = fromJust adb
            }
 
-writeSagaState :: Saga -> SagaState -> IO ()
-writeSagaState saga st = 
+writeSagaState :: Saga -> IO ()
+writeSagaState saga = 
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
    writeObjects dir saga (characters st) >>
    writeObjects dir saga (covenants st)
        where dir = rootDir saga ++ fn ++ "/"
              fn = show $ seasonTime st
+             st = sagaState saga
 
-writeSagaStates :: Saga -> [SagaState] -> IO ()
-writeSagaStates _ [] = return ()
-writeSagaStates saga (x:xs) = writeSagaState saga x >> writeSagaStates saga xs
+writeSagaStates :: [Saga] -> IO ()
+writeSagaStates [] = return ()
+writeSagaStates (x:xs) = writeSagaState x >> writeSagaStates xs
 
 writeSagaAnnals :: Saga -> IO ()
 writeSagaAnnals saga = writeOList fn $ ann saga
@@ -100,8 +99,10 @@ writeSaga :: Saga -> IO ()
 writeSaga saga = do
    writeOList (rootDir saga ++ "/index.md") $ printMD saga
 
-   writeSagaStates saga (sagaStates saga)
-   writeSagaAnnals saga 
+   let sagas = advanceSaga saga
+
+   writeSagaStates sagas
+   writeSagaAnnals (head sagas)
    return () 
 
 -- |
