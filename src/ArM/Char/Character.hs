@@ -327,7 +327,7 @@ bookSQ aa | isNothing stats = aa
           | otherwise = aa 
     where trait = ttrace $ primaryXPTrait $ advancement aa
           stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
-	  ctp =  (==(fromJust trait)) . topic 
+          ctp =  (==(fromJust trait)) . topic 
 
 
 getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)

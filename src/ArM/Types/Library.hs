@@ -20,6 +20,7 @@ import Data.Aeson
 import GHC.Generics
 import Data.Maybe
 import Data.Text  (splitOn,unpack,pack)
+import Data.List
 import Text.Read 
 
 import ArM.DB.CSV
@@ -67,27 +68,35 @@ data BookKey = BookKey String
 instance ToJSON BookKey
 instance FromJSON BookKey
 
--- | The original of a given book
-originalBook :: Book -> Book
-originalBook b
+-- | The original of a given book (constituent book in the case of an anotology)
+originalBook :: Book -> Maybe BookKey -> Maybe Book
+originalBook b Nothing = Just $ originalTome b
+originalBook b (Just k) = fmap originalTome $ find ( (==k) . BookKey . bookID ) $ antologyOf b
+
+bookTraitStats :: Book -> TraitKey -> Maybe BookStats
+bookTraitStats b k = find ( (==k) . topic ) $ bookStats b
+
+-- | The original of a given tome
+originalTome :: Book -> Book
+originalTome b
    | isNothing (copiedFrom b) = b
-   | otherwise = originalBook (fromJust $ copiedFrom b)
+   | otherwise = originalTome (fromJust $ copiedFrom b)
 
 -- | The ID used to avoid rereading of tractatus
 originalID :: Book -> String
-originalID = bookID . originalBook
+originalID = bookID . originalTome
 
 -- | The original date the book was authored
 originalDate :: Book -> SeasonTime
-originalDate = bookDate . originalBook
+originalDate = bookDate . originalTome
 
 -- | The original author of a given book
 originalAuthor :: Book -> String
-originalAuthor = bookCreator . originalBook
+originalAuthor = bookCreator . originalTome
 
 -- | The original author of a given book
 originalTitle :: Book -> String
-originalTitle = bookTitle . originalBook
+originalTitle = bookTitle . originalTome
 
 -- | Get the unique identifier of an original book
 bookKey :: Book -> BookKey
