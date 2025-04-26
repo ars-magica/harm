@@ -61,6 +61,7 @@ common harm-deps
   other-modules:       ArM.Char.Character
                        , ArM.Char.CharacterSheet
                        , ArM.Types.Calendar
+                       , ArM.Types.Saga
                        , ArM.Types.KeyPair
                        , ArM.Types.Library
                        , ArM.Char.Types.Character
@@ -69,7 +70,7 @@ common harm-deps
                        , ArM.Char.Types.Trait
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmKey
-                       , ArM.Cov.HarmSagaObject
+                       , ArM.Types.HarmSagaObject
                        , ArM.Char.Combat
                        , ArM.DB.CSV
                        , ArM.DB.Spell

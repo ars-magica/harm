@@ -44,7 +44,7 @@ class KeyObject h where
    -- | Find an object by key in a list.
    harmFilter :: HarmKey -> [h] -> [h]
    harmFilter k = filter ( (==k) . harmKey )
-   -- | Find a list of objects by key in a list.
+   -- | Find a list of objects by key in a sorted list.
    harmLookup :: [HarmKey] -> [h] -> [h]
    harmLookup (x:xs) (y:ys) 
        | x < harmKey y = trace ("Object not found: "++show x) $ harmLookup xs (y:ys)

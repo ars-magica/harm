@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.HarmSagaObject
+-- Module      :  ArM.Types.HarmSagaObject
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -10,16 +10,23 @@
 -- Description :  Stateful objects that can be looked up in a SagaState
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.HarmSagaObject where
+module ArM.Types.HarmSagaObject where
 
 -- import Data.Aeson
 -- import Data.List
 -- import GHC.Generics
 -- import ArM.Debug.Trace
-import ArM.Cov.Saga
+import ArM.Types.Saga
 import ArM.Types.HarmKey
+import ArM.Types.Covenant
+import ArM.Char.Types.Character
 
 
 class KeyObject h => HarmSagaObject h where
    -- | Get an object by key from a `SagaState` object
    harmGet :: SagaState -> HarmKey -> Maybe h
+
+instance HarmSagaObject Covenant where
+   harmGet st k = harmFind k $ covenants st
+instance HarmSagaObject Character where
+   harmGet st k = harmFind k $ characters st
