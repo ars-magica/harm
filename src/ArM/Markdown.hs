@@ -590,7 +590,7 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
 
 instance Markdown Saga where
     printMD saga = OList 
-        [ OList [ OString $ "# " ++ sagaTitle saga
+        [ OList [ OString $ "# " ++ name saga
                 , OString ""
                 , OString $ sagaDesc saga
                 , OString ""
@@ -606,7 +606,7 @@ instance Markdown Saga where
 
 instance Markdown SagaState where
     printMD saga = OList 
-        [ OString $ "# " ++ sagaStateName saga 
+        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (seasonTime saga)
         , OString ""
         , characterIndex $ characters saga
         , OString ""

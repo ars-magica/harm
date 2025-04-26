@@ -16,8 +16,6 @@ module ArM.Types.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
                     , sagaState
-                    , sagaStateName
-                    , sagaTitle
                     , sagaDesc
                     , rootDir
                     , stateSeasons
@@ -70,6 +68,7 @@ instance Show Saga where
 instance HarmObject Saga where
     name = sagaTitle
     stateSeason = seasonTime . sagaState
+    stateName s = name s ++ " - " ++ (show $ season $ sagaState s)
 
 -- | Saga state at a particular point in time, comprising characters and
 -- covenants at that point.
@@ -82,10 +81,6 @@ data SagaState = SagaState
 
 instance Timed SagaState where
     season = seasonTime
-
--- | Get the name of the Saga as recorded in the SagaState
-sagaStateName :: SagaState -> String
-sagaStateName s = stateTitle s ++ " - " ++ (show $ seasonTime s)
 
 -- |
 -- == SagaFile object

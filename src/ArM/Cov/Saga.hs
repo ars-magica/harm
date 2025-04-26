@@ -16,7 +16,6 @@ module ArM.Cov.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
                     , advanceSaga
-                    , sagaStateName
                     , characterIndex
                     , covenantIndex
                     , advancementErrors
