@@ -82,10 +82,6 @@ instance FromJSON Character where
 -- | 
 -- == Name and identity
 
--- | get the ID of a character.
-characterID :: Character -> HarmKey
-characterID = harmKey 
-
 instance KeyObject Character where
     harmKey = CharacterKey . charID
 

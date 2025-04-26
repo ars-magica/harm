@@ -252,7 +252,7 @@ findBook cov bs = maybeHead xs
 -- Does the covenant have the character as a member?
 hasMember :: Covenant -> Character -> Bool
 hasMember cov ch = cid `elem` chs
-   where cid = characterID ch
+   where cid = harmKey ch
          chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
 
 
