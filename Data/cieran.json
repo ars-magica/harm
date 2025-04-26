@@ -432,7 +432,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1228"
       , "sourceQuality" : 13
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1228"
       , "sourceQuality" : 2
@@ -717,7 +717,7 @@
       { "mode" : "Reading", "season" : "Autumn 1236"
       , "sourceQuality" : 13
       , "narrative" : " 65xp score 10 "
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1237"
       , "sourceQuality" : 2
@@ -948,7 +948,7 @@
       { "mode" : "Reading", "season" : "Winter 1243"
       , "sourceQuality" : 13
       , "narrative" : " *The Mind's Eye* L16Q13 -> 81xp ; No aging"
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } 
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
          , { "aging" : { "deltaYounger" : 1
             , "agingRollDie" : 0
             , "agingRoll" : 0
@@ -1066,7 +1066,7 @@
       { "mode" : "Reading", "season" : "Winter 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging"
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } 
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
          , { "aging" : { "deltaYounger" : 1
             , "agingRollDie" : 0
             , "agingRoll" : 0
@@ -1078,12 +1078,12 @@
       { "mode" : "Reading", "season" : "Spring 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
-      , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
+      , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1246"
       , "sourceQuality" : 13

@@ -68,30 +68,35 @@ Warrior (1),
 ## Past Advancement
 
 + Winter 1249 (2xp) (1 years) "" (Other Exposure)
-    + Ability: Awareness 2xp; 
-    + Aging  No roll. 
-    + Characteristic: Pre 0
+    + Changing traits
+        + Ability: Awareness 2xp; 
+        + Aging  No roll. 
+        + Characteristic: Pre 0
     + Inferred traits
         + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
     + ERROR: Older than 35. Aging roll required.
 + Autumn 1248 (4xp) Practice
-    + Ability: Legerdemain 4xp; 
+    + Changing traits
+        + Ability: Legerdemain 4xp; 
     + Validated: Correctly spent 4 xp.
 + Summer 1248 (2xp) "" (Other Exposure)
-    + Ability: Hunt 2xp; 
+    + Changing traits
+        + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1248 (4xp) Practice
-    + Ability: Legerdemain 4xp; 
+    + Changing traits
+        + Ability: Legerdemain 4xp; 
     + Validated: Correctly spent 4 xp.
 + Winter 1248 (10xp) (1 years) Adventure
-    + Ability: Swim 5xp; 
-    + Ability: Animal Ken 5xp; 
-    + Aging  No roll. 
-    + Characteristic: Int 0
-    + Characteristic: Com 0
-    + Characteristic: Pre 0
+    + Changing traits
+        + Ability: Swim 5xp; 
+        + Ability: Animal Ken 5xp; 
+        + Aging  No roll. 
+        + Characteristic: Int 0
+        + Characteristic: Com 0
+        + Characteristic: Pre 0
     + Inferred traits
         + Decrepitude 2
         + Decrepitude 2
@@ -100,17 +105,21 @@ Warrior (1),
     + Validated: Correctly spent 10 xp.
     + ERROR: Older than 35. Aging roll required.
 + Autumn 1247 (4xp) Practice
-    + Ability: Music 4xp; 
+    + Changing traits
+        + Ability: Music 4xp; 
     + Validated: Correctly spent 4 xp.
 + Summer 1247 (2xp) "" (Other Exposure)
-    + Ability: Hunt 2xp; 
+    + Changing traits
+        + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1247 (4xp) Practice
-    + Ability: Music 4xp; 
+    + Changing traits
+        + Ability: Music 4xp; 
     + Validated: Correctly spent 4 xp.
 + Winter 1247 (10xp) (1 years) Adventure
-    + Ability: Animal Handling 5xp; 
-    + Ability: Animal Ken 5xp; 
+    + Changing traits
+        + Ability: Animal Handling 5xp; 
+        + Ability: Animal Ken 5xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 10 xp.

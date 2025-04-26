@@ -8,7 +8,7 @@ Player Covenant
 
 ## Summer 1254
 
-+ [Cieran the Fletcher ex Miscellanea (Winter 1255)](Cieran the Fletcher ex Miscellanea (Winter 1255))
++ [Cieran the Fletcher ex Miscellanea (Summer 1255)](Cieran the Fletcher ex Miscellanea (Summer 1255))
 + [Eogan mac Eogan (Winter 1255)](Eogan mac Eogan (Winter 1255))
 
 ### Library
@@ -155,7 +155,7 @@ Player Covenant
     + 2 copies
     + Key: AquamQ14 Hibernian Musings on the Hermetic Arts - Volume 2 Aquam (AquamQ14 Hibernian Musings on the Hermetic Arts - Volume 2 Aquam)
 +  (No Time)
-    + Auram Q-1
+    + Auram 
     + From Tolosa Partage
     + Key: Auram  (Auram )
 + *The Element of Air* by Tempestina of Merinita (No Time)
@@ -377,7 +377,7 @@ Player Covenant
     + Magic Theory Q12
     + Key: Magic TheoryQ12 Laboratories, Familiars and Apprentices (Magic TheoryQ12 Laboratories, Familiars and Apprentices)
 +  (No Time)
-    + Finesse Q-1
+    + Finesse 
     + Midsummer Fair 1244 for 19p vis (7 animal and 12 aquam). Stats TBD: L5Q12+D4
     + Key: Finesse  (Finesse )
 + *Fundamental Fast Casting* by Kallias of Tremere (No Time)

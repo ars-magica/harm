@@ -204,51 +204,52 @@ Total: 150 levels of spells.
 ## Game start design
 
 + Apprenticeship (300xp) (15 years)
-    + Art: Creo 21xp; 
-    + Art: Intellego 0xp; 
-    + Art: Muto 0xp; 
-    + Art: Perdo 36xp; 
-    + Art: Rego 36xp; 
-    + Art: Animal 0xp; 
-    + Art: Aquam 0xp; 
-    + Art: Auram 0xp; 
-    + Art: Corpus 15xp; 
-    + Art: Herbam 0xp; 
-    + Art: Ignem 0xp; 
-    + Art: Imaginem 53xp; 
-    + Art: Mentem 1xp; 
-    + Art: Terram 15xp; 
-    + Art: Vim 3xp; 
-    + Ability: Hermes Lore [Hibernia] 5xp; 
-    + Ability: Artes Liberales [Rituals] 5xp; 
-    + Ability: Latin [Hermetic Usage] 30xp; 
-    + Ability: Hermes Code [Stonehenge] 5xp; 
-    + Ability: Magic Theory [Spells] 30xp; 
-    + Ability: Parma Magica [Mentem] 5xp; 
-    + Ability: Penetration [Rego] 5xp; 
-    + Ability: Bows [Longbow] 30xp; 
-    + Ability: Thrown Weapon [Dart] 5xp; 
-    + Spell: Wound without Cause 0xp Penetration
-    + Spell: Spasms of the Uncontrolled Body 0xp Penetration
-    + Spell: Lamp till Morning without Flame 0xp Still Casting
-    + Spell: Veil of Invisibility 0xp Quite Casting
-    + Spell: Clarity of Public Speech 0xp Penetration
-    + Spell: Aura of Ennobled Presence 0xp Quiet Casting
-    + Spell: Trust of the Childlike Faith 0xp Penetration
-    + Spell: Arrow of Peaceful Slumber 0xp Penetration
-    + Spell: Touch of Slumber 0xp Penetration
-    + Spell: Obliteration of the Metallic Barrier 0xp Penetration
-    + Spell: End of the Mighty Castle 0xp Penetration
-    + Possession: Longbow
-    + Possession: Dagger
-    + Possession: Quarterstaff
-    + Possession: Writing Materials
-    + Combat Option: Longbow Longbow
-    + Combat Option: Dodge Dodge
-    + Combat Option: Fist Fist
-    + Combat Option: Knife Knife
-    + Possession: Lantern
-    + Possession: Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
+    + Changing traits
+        + Art: Creo 21xp; 
+        + Art: Intellego 0xp; 
+        + Art: Muto 0xp; 
+        + Art: Perdo 36xp; 
+        + Art: Rego 36xp; 
+        + Art: Animal 0xp; 
+        + Art: Aquam 0xp; 
+        + Art: Auram 0xp; 
+        + Art: Corpus 15xp; 
+        + Art: Herbam 0xp; 
+        + Art: Ignem 0xp; 
+        + Art: Imaginem 53xp; 
+        + Art: Mentem 1xp; 
+        + Art: Terram 15xp; 
+        + Art: Vim 3xp; 
+        + Ability: Hermes Lore [Hibernia] 5xp; 
+        + Ability: Artes Liberales [Rituals] 5xp; 
+        + Ability: Latin [Hermetic Usage] 30xp; 
+        + Ability: Hermes Code [Stonehenge] 5xp; 
+        + Ability: Magic Theory [Spells] 30xp; 
+        + Ability: Parma Magica [Mentem] 5xp; 
+        + Ability: Penetration [Rego] 5xp; 
+        + Ability: Bows [Longbow] 30xp; 
+        + Ability: Thrown Weapon [Dart] 5xp; 
+        + Spell: Wound without Cause 0xp Penetration
+        + Spell: Spasms of the Uncontrolled Body 0xp Penetration
+        + Spell: Lamp till Morning without Flame 0xp Still Casting
+        + Spell: Veil of Invisibility 0xp Quite Casting
+        + Spell: Clarity of Public Speech 0xp Penetration
+        + Spell: Aura of Ennobled Presence 0xp Quiet Casting
+        + Spell: Trust of the Childlike Faith 0xp Penetration
+        + Spell: Arrow of Peaceful Slumber 0xp Penetration
+        + Spell: Touch of Slumber 0xp Penetration
+        + Spell: Obliteration of the Metallic Barrier 0xp Penetration
+        + Spell: End of the Mighty Castle 0xp Penetration
+        + Possession: Longbow
+        + Possession: Dagger
+        + Possession: Quarterstaff
+        + Possession: Writing Materials
+        + Combat Option: Longbow Longbow
+        + Combat Option: Dodge Dodge
+        + Combat Option: Fist Fist
+        + Combat Option: Knife Knife
+        + Possession: Lantern
+        + Possession: Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Inferred traits
         + Spell: Wound without Cause 0xp with flawless magic
         + Spell: Spasms of the Uncontrolled Body 0xp with flawless magic
@@ -265,52 +266,56 @@ Total: 150 levels of spells.
     + Validated: Correctly spent 150 spell levels.
     + Validated: Correctly spent 300 xp.
 + Later Life (75xp) (5 years)
-    + Ability: Area Lore: Ireland [Legends] 5xp; 
-    + Ability: Bargain [] 5xp; 
-    + Ability: Concentration [Spell Concentration] 5xp; 
-    + Ability: Craft: Cooking [Cookies] 30xp; 
-    + Ability: Craft: Fletching [Arrows] 30xp; 
+    + Changing traits
+        + Ability: Area Lore: Ireland [Legends] 5xp; 
+        + Ability: Bargain [] 5xp; 
+        + Ability: Concentration [Spell Concentration] 5xp; 
+        + Ability: Craft: Cooking [Cookies] 30xp; 
+        + Ability: Craft: Fletching [Arrows] 30xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 75 xp.
 + Early Childhood (45xp) (5 years)
-    + Ability: Area Lore: Munster [Hiding Places] 5xp; 
-    + Ability: Awareness [Searching] 15xp; 
-    + Ability: Brawl [Dodge] 15xp; 
-    + Ability: Folk Ken [Villagers] 5xp; 
-    + Ability: Stealth [Hiding] 5xp; 
-    + Ability: Second Sight [Faerie Illusions] 0xp; 
+    + Changing traits
+        + Ability: Area Lore: Munster [Hiding Places] 5xp; 
+        + Ability: Awareness [Searching] 15xp; 
+        + Ability: Brawl [Dodge] 15xp; 
+        + Ability: Folk Ken [Villagers] 5xp; 
+        + Ability: Stealth [Hiding] 5xp; 
+        + Ability: Second Sight [Faerie Illusions] 0xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
-    + Characteristic: Int 3
-    + Characteristic: Per -1
-    + Characteristic: Pre 0
-    + Characteristic: Com -1
-    + Characteristic: Str 2
-    + Characteristic: Sta 2
-    + Characteristic: Dex 2
-    + Characteristic: Qik -3
+    + Changing traits
+        + Characteristic: Int 3
+        + Characteristic: Per -1
+        + Characteristic: Pre 0
+        + Characteristic: Com -1
+        + Characteristic: Str 2
+        + Characteristic: Sta 2
+        + Characteristic: Dex 2
+        + Characteristic: Qik -3
     + Validated: Correctly spent 7 points on characteristics.
-+ Virtues and Flaws
-    + Ability: Native Language: Irish [Leinster] 75xp; 
-    + Virtue: Craft Magic (0) (House Virtue)
-    + Virtue: Spell Foci (0) (House Virtue)
-    + Flaw: Meddler (major) (-3)
-    + Flaw: Carefree (-1)
-    + Flaw: Weak Spontaneous Magic (0) (House Flaw)
-    + Virtue: Minor Magical Focus (1)
-    + Virtue: Strong Faerie Blood (3) (Ettin Blood gives +1 to Stamina)
-    + Flaw: Mistaken Identity (-3) (Story flaw)
-    + Virtue: Flawless Magic (3)
-    + Flaw: Short-Range Magic (-3)
-    + Virtue: Book Learner (1)
-    + Virtue: Affinity with (art) (1)
-    + Virtue: Skilled Parens (1)
-    + Personality Trait: Villager 2
-    + Personality Trait: Carefree 3
-    + Personality Trait: Meddler 6
++ Virtues and Flaws (0xp)
+    + Changing traits
+        + Ability: Native Language: Irish [Leinster] 75xp; 
+        + Virtue: Craft Magic (0) (House Virtue)
+        + Virtue: Spell Foci (0) (House Virtue)
+        + Flaw: Meddler (major) (-3)
+        + Flaw: Carefree (-1)
+        + Flaw: Weak Spontaneous Magic (0) (House Flaw)
+        + Virtue: Minor Magical Focus (1)
+        + Virtue: Strong Faerie Blood (3) (Ettin Blood gives +1 to Stamina)
+        + Flaw: Mistaken Identity (-3) (Story flaw)
+        + Virtue: Flawless Magic (3)
+        + Flaw: Short-Range Magic (-3)
+        + Virtue: Book Learner (1)
+        + Virtue: Affinity with (art) (1)
+        + Virtue: Skilled Parens (1)
+        + Personality Trait: Villager 2
+        + Personality Trait: Carefree 3
+        + Personality Trait: Meddler 6
     + Inferred traits
         + Ability: Second Sight 5xp; 
         + Art: Imaginem 0xp;  x1.5xp

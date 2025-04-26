@@ -65,47 +65,51 @@ Warrior (1),
 ## Game start design
 
 + Later Life (335xp) (19 years)
-    + Ability: Athletics [streets] 75xp; 
-    + Ability: Awareness 35xp; 
-    + Ability: Brawl [Dodge] 30xp; 
-    + Ability: Munster Lore [Hiding places] 5xp; 
-    + Ability: Single Weapon [spear] 5xp; 
-    + Ability: Stealth 35xp; 
-    + Ability: Throw [spear] 75xp; 
-    + Possession: Dagger
-    + Possession: Sling
-    + Combat Option: Fist Fist
-    + Combat Option: Dagger Dagger
-    + Combat Option: Sling Sling
-    + Combat Option: Thrown Knife Thrown Knife
+    + Changing traits
+        + Ability: Athletics [streets] 75xp; 
+        + Ability: Awareness 35xp; 
+        + Ability: Brawl [Dodge] 30xp; 
+        + Ability: Munster Lore [Hiding places] 5xp; 
+        + Ability: Single Weapon [spear] 5xp; 
+        + Ability: Stealth 35xp; 
+        + Ability: Throw [spear] 75xp; 
+        + Possession: Dagger
+        + Possession: Sling
+        + Combat Option: Fist Fist
+        + Combat Option: Dagger Dagger
+        + Combat Option: Sling Sling
+        + Combat Option: Thrown Knife Thrown Knife
     + Inferred traits
         + Aging 19 years; apparent 19 years. No roll. 
     + ERROR: Underspent 260xp of 335.
 + Early Childhood (45xp) (5 years)
-    + Ability: Stealth [Sneak] 15xp; 
-    + Ability: Awareness [Good ears] 15xp; 
-    + Ability: Killaloe Lore [Hiding places] 15xp; 
+    + Changing traits
+        + Ability: Stealth [Sneak] 15xp; 
+        + Ability: Awareness [Good ears] 15xp; 
+        + Ability: Killaloe Lore [Hiding places] 15xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
-    + Characteristic: Int 1
-    + Characteristic: Per 1
-    + Characteristic: Pre -3
-    + Characteristic: Com -2
-    + Characteristic: Str 1
-    + Characteristic: Sta 1
-    + Characteristic: Dex 3
-    + Characteristic: Qik 3
+    + Changing traits
+        + Characteristic: Int 1
+        + Characteristic: Per 1
+        + Characteristic: Pre -3
+        + Characteristic: Com -2
+        + Characteristic: Str 1
+        + Characteristic: Sta 1
+        + Characteristic: Dex 3
+        + Characteristic: Qik 3
     + Validated: Correctly spent 7 points on characteristics.
-+ Virtues and Flaws
-    + Ability: Native Language: Irish [Munster] 75xp; 
-    + Flaw: Poor Characteristic (1)
-    + Virtue: Warrior (1)
-    + Flaw: Poor Characteristic (1)
-    + Personality Trait: Trustful -3
-    + Personality Trait: Brave -1
-    + Personality Trait: Curious 3
++ Virtues and Flaws (0xp)
+    + Changing traits
+        + Ability: Native Language: Irish [Munster] 75xp; 
+        + Flaw: Poor Characteristic (1)
+        + Virtue: Warrior (1)
+        + Flaw: Poor Characteristic (1)
+        + Personality Trait: Trustful -3
+        + Personality Trait: Brave -1
+        + Personality Trait: Curious 3
     + Inferred traits
         + Characteristic: Pre 0
         + Characteristic: Pre 0

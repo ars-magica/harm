@@ -98,19 +98,22 @@ Weakness [for Dogs] (-1),
 
 + Winter 1255 (2xp) (1 years) Trained
     + Train one lymer in hunt +8 xp.
-    + Ability: Hunt 2xp; 
+    + Changing traits
+        + Ability: Hunt 2xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1254 (2xp) Taming
     + Train three lymers and a greyhound to Loyal +1.
-    + Ability: Animal Handling 2xp; 
+    + Changing traits
+        + Ability: Animal Handling 2xp; 
     + Validated: Correctly spent 2 xp.
 + Summer 1254 (10+3xp) Adventure
     + The Unicorn (SQ10 + Independent Study).  Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
-    + Ability: Faerie Lore [Dark Fae] 5xp; 
-    + Ability: Magic Lore [Ancient Myth] 5xp; 
-    + Ability: Animal Ken 3xp; 
-    + Confidence: 0 (2)
+    + Changing traits
+        + Ability: Faerie Lore [Dark Fae] 5xp; 
+        + Ability: Magic Lore [Ancient Myth] 5xp; 
+        + Ability: Animal Ken 3xp; 
+        + Confidence: 0 (2)
     + Validated: Correctly spent 13 xp.
 

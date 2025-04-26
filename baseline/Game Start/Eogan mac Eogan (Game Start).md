@@ -95,69 +95,73 @@ Weakness [for Dogs] (-1),
 ## Game start design
 
 + Later Life (335xp) (19 years)
-    + Ability: Animal Handling [Dogs] 50xp; 
-    + Ability: Animal Ken [Canine] 45xp; 
-    + Ability: Athletics [obstacle race] 15xp; 
-    + Ability: Bargain [Livestock] 15xp; 
-    + Ability: Guile [Fast talk] 5xp; 
-    + Ability: Ride [Horse training] 50xp; 
-    + Ability: Hunt [with dogs] 75xp; 
-    + Ability: Leadership [in the field] 15xp; 
-    + Ability: Single Weapon [spear] 5xp; 
-    + Ability: Bows [Shortbow] 50xp; 
-    + Ability: Survival [Hills] 10xp; 
-    + Possession: Shortbow
-    + Possession: Shortspear
-    + Possession: Round Shield
-    + Combat Option: Fist Fist
-    + Combat Option: Shortspear Shortspear
-    + Combat Option: Shortbow Shortbow
-    + Combat Option: Spear and Shield (Single Weapon) Shortspear/Round Shield
+    + Changing traits
+        + Ability: Animal Handling [Dogs] 50xp; 
+        + Ability: Animal Ken [Canine] 45xp; 
+        + Ability: Athletics [obstacle race] 15xp; 
+        + Ability: Bargain [Livestock] 15xp; 
+        + Ability: Guile [Fast talk] 5xp; 
+        + Ability: Ride [Horse training] 50xp; 
+        + Ability: Hunt [with dogs] 75xp; 
+        + Ability: Leadership [in the field] 15xp; 
+        + Ability: Single Weapon [spear] 5xp; 
+        + Ability: Bows [Shortbow] 50xp; 
+        + Ability: Survival [Hills] 10xp; 
+        + Possession: Shortbow
+        + Possession: Shortspear
+        + Possession: Round Shield
+        + Combat Option: Fist Fist
+        + Combat Option: Shortspear Shortspear
+        + Combat Option: Shortbow Shortbow
+        + Combat Option: Spear and Shield (Single Weapon) Shortspear/Round Shield
     + Inferred traits
         + Aging 19 years; apparent 19 years. No roll. 
     + Validated: Correctly spent 335 xp.
 + Early Childhood (45xp) (5 years)
-    + Ability: Stealth [Hiding] 5xp; 
-    + Ability: Awareness [Good ears] 5xp; 
-    + Ability: Survival [Hills] 5xp; 
-    + Ability: Munster Lore [Outback] 5xp; 
-    + Ability: Covenant Lore [Hierarchies] 15xp; 
-    + Ability: Brawl [Dirty fighting] 5xp; 
-    + Ability: Charm [Animals] 5xp; 
+    + Changing traits
+        + Ability: Stealth [Hiding] 5xp; 
+        + Ability: Awareness [Good ears] 5xp; 
+        + Ability: Survival [Hills] 5xp; 
+        + Ability: Munster Lore [Outback] 5xp; 
+        + Ability: Covenant Lore [Hierarchies] 15xp; 
+        + Ability: Brawl [Dirty fighting] 5xp; 
+        + Ability: Charm [Animals] 5xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
 + Characteristics (0xp)
-    + Characteristic: Int 2
-    + Characteristic: Per 0
-    + Characteristic: Pre 3
-    + Characteristic: Com 1
-    + Characteristic: Str -1
-    + Characteristic: Sta 1
-    + Characteristic: Dex 0
-    + Characteristic: Qik -2
+    + Changing traits
+        + Characteristic: Int 2
+        + Characteristic: Per 0
+        + Characteristic: Pre 3
+        + Characteristic: Com 1
+        + Characteristic: Str -1
+        + Characteristic: Sta 1
+        + Characteristic: Dex 0
+        + Characteristic: Qik -2
     + Validated: Correctly spent 7 points on characteristics.
-+ Virtues and Flaws
-    + Ability: Native Language: Irish [Munster] 75xp; 
-    + Virtue: Warrior (1)
-    + Virtue: Independent Study (1)
-    + Virtue: Affinity with (ability) (1)
-    + Virtue: Puissant (ability) (1)
-    + Virtue: Unaging (1)
-    + Virtue: Animal Ken (1)
-    + Virtue: Alluring to Magical Beings (1)
-    + Virtue: Death Prophecy (3)
-    + Virtue: Covenfolk (0)
-    + Flaw: Black Sheep at the Covenant (-3)
-    + Reputation: Disloyal [Covenant and allies] 15xp
-    + Flaw: Ambitious (-3)
-    + Flaw: Weakness (-1)
-    + Flaw: Lesser Malediction: Vertigo (-1)
-    + Flaw: Ability Block (-1)
-    + Flaw: Uncertain Faith (-1)
-    + Personality Trait: Obedient -3
-    + Personality Trait: Loyal 1
-    + Personality Trait: Uncertain Faith 1
++ Virtues and Flaws (0xp)
+    + Changing traits
+        + Ability: Native Language: Irish [Munster] 75xp; 
+        + Virtue: Warrior (1)
+        + Virtue: Independent Study (1)
+        + Virtue: Affinity with (ability) (1)
+        + Virtue: Puissant (ability) (1)
+        + Virtue: Unaging (1)
+        + Virtue: Animal Ken (1)
+        + Virtue: Alluring to Magical Beings (1)
+        + Virtue: Death Prophecy (3)
+        + Virtue: Covenfolk (0)
+        + Flaw: Black Sheep at the Covenant (-3)
+        + Reputation: Disloyal [Covenant and allies] 15xp
+        + Flaw: Ambitious (-3)
+        + Flaw: Weakness (-1)
+        + Flaw: Lesser Malediction: Vertigo (-1)
+        + Flaw: Ability Block (-1)
+        + Flaw: Uncertain Faith (-1)
+        + Personality Trait: Obedient -3
+        + Personality Trait: Loyal 1
+        + Personality Trait: Uncertain Faith 1
     + Inferred traits
         + Ability: Animal Handling 0xp;  x1.5xp
         + Ability: Animal Handling 0xp Bonus +2; 
