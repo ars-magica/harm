@@ -32,7 +32,7 @@ instance FromJSON HarmKey
 instance Show HarmKey where
        show (BookKey ti au) = "Book: " ++ ti ++ " by " ++ au
        show (CharacterKey x) = "Character: " ++ x
-       show (CovenantKey x) = "Character: " ++ x
+       show (CovenantKey x) = "Covenant: " ++ x
        show (LabKey x) = "Lab: " ++ x
 
 class KeyObject h where

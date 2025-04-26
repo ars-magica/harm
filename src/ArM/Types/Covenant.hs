@@ -127,7 +127,7 @@ instance ToJSON CovenantState
 instance FromJSON CovenantState where
     parseJSON = withObject "CovenantState" $ \v -> CovenantState
         <$> v .:? "season" .!= GameStart
-        <*> fmap ( map CovenantKey ) ( v .:? "covenfolk" .!= [] )
+        <*> fmap ( map CharacterKey ) ( v .:? "covenfolk" .!= [] )
         <*> v .:? "library" .!= []
         <*> v .:? "librarycsv"
 
@@ -159,8 +159,8 @@ instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
         <$> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "narrative" .!= []
-        <*> fmap ( map CovenantKey ) ( v .:? "joining" .!= [] )
-        <*> fmap ( map CovenantKey ) ( v .:? "leaving" .!= [] )
+        <*> fmap ( map CharacterKey ) ( v .:? "joining" .!= [] )
+        <*> fmap ( map CharacterKey ) ( v .:? "leaving" .!= [] )
         <*> v .:? "acquired" .!= []
         <*> v .:? "lost" .!= []
 
