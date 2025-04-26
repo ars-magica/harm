@@ -49,10 +49,6 @@ instance FromJSON Covenant where
         <*> v .:? "plan" .!= []
 
 
--- | get the ID of a character.
-covenantID :: Covenant -> HarmKey
-covenantID = harmKey
-
 instance KeyObject Covenant where
     harmKey = CovenantKey . name
 
@@ -131,7 +127,7 @@ instance ToJSON CovenantState
 instance FromJSON CovenantState where
     parseJSON = withObject "CovenantState" $ \v -> CovenantState
         <$> v .:? "season" .!= GameStart
-        <*> v .:? "covenfolk" .!= []
+        <*> fmap ( map CovenantKey ) ( v .:? "covenfolk" .!= [] )
         <*> v .:? "library" .!= []
         <*> v .:? "librarycsv"
 
@@ -163,8 +159,8 @@ instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
         <$> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "narrative" .!= []
-        <*> v .:? "joining" .!= []
-        <*> v .:? "leaving" .!= []
+        <*> fmap ( map CovenantKey ) ( v .:? "joining" .!= [] )
+        <*> fmap ( map CovenantKey ) ( v .:? "leaving" .!= [] )
         <*> v .:? "acquired" .!= []
         <*> v .:? "lost" .!= []
 
@@ -267,7 +263,7 @@ completeCovAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
 -- Get the next augmented advancement.
 nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
 nextCovAdv ns cov | fs == [] = (cov,Nothing)
-              | caSeason adv > ns = trace (show (ns,caSeason adv,covenantID cov)) $ (cov,Nothing)
+              | caSeason adv > ns = trace (show (ns,caSeason adv,harmKey cov)) $ (cov,Nothing)
               | otherwise = (new,Just a)
         where a = prepareAdvancement adv
               (adv:as) = fs
