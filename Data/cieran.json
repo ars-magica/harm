@@ -1337,6 +1337,8 @@
       , "narrative" : "Rego Tracatus (62xp)"
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
                     , { "possession" : { "art" : "Im", "count" : 4
+		        , "comment" : "allowance/salary" } } 
+                    , { "possession" : { "art" : "Me", "count" : 4
 		        , "comment" : "allowance/salary" } } ]
       },
       { "mode" : "Adventure", "season" : "Winter 1254"
@@ -1430,6 +1432,13 @@
          }
       ]
       },
+      { "mode" : "Author", "season" : "Autumn 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "Auram Tracatus (64xp)"
+      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
+                    , { "possession" : { "art" : "Me", "count" : 4
+		        , "comment" : "allowance/salary TBC" } } ]
+      },
       { "mode" : "Teaching", "season" : "Winter 1256"
       , "sourceQuality" : 2
       , "narrative" : "Teaching Luciu"
@@ -1439,6 +1448,12 @@
                , "agingRollDie" : 10
                , "agingComment" : "No aging."
 	    } }
+      ]
+      },
+      { "mode" : "Reading", "season" : "Spring 1256"
+      , "narrative" : "New Tractatus from Vigil"
+      , "changes" : [ 
+           { "ability" : "Imaginem", "xp" : 15 }
       ]
       }
    ]
