@@ -20,15 +20,19 @@ module ArM.Char.Advancement ( module ArM.Types.Advancement
                             , agePT
                             ) where
 
+-- Module reexported
 import ArM.Types.Advancement
-import ArM.Types.Character
-import ArM.Types.ProtoTrait
--- import ArM.Types.Trait
-import ArM.Types.Library
-import ArM.Types
 import ArM.Char.Virtues
 import ArM.Char.Inference
 import ArM.Char.Validation
+
+-- Other Types
+import ArM.Types.Character
+import ArM.Types.ProtoTrait
+import ArM.Types.Library
+import ArM.Types
+
+-- Other modules
 import ArM.Char.CharacterSheet
 import ArM.GameRules
 
