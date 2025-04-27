@@ -45,9 +45,11 @@
        ]
        , "acquired" :
           [ { "bookID" : "Im-Vigil-Q8"
-	     , "stats" : { "quality" : 8 } 
+	     , "stats" : { "quality" : 8, "topic" : { "art" : "Imaginem" } }
 	  }, { "bookID" : "Im-Vigil-Q9"
+	     , "stats" : { "quality" : 9, "topic" : { "art" : "Imaginem" } }
 	  }, { "bookID" : "Im-Vigil-Q12"
+	     , "stats" : { "quality" : 12, "topic" : { "art" : "Imaginem" } }
 	  }
 	  ]
       }

@@ -12,9 +12,10 @@
     + Joseph's fiancé (SQ 8)
         + Joseph ex Miscellanea of Lambaird visits with his wife, Rhianna, and his brother Jacob, who is a horse trader.  They are fraternal twins. Joseph has been instrumental to healing the rift between Vigil and Lambaird.  It is not the first time they visit Elk's Run after the agreements of resiprocal reading hospitality were made.
         + Aedan MacCloud, an Irish lord, appears with his daughter, Deirdre, who is also betrothed to Joseph. It turns out that he has about eight wives, under old Brehon Law, often with faerie blessing. Aedan brother, a parish priest known as father Clint, is also part of the entourage.  They also bring two guards. Aedan's holdings are in the North of Ireland.
-        + Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8).
+        + Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8), as proposed by Rhianna.
         + One confidence point per character taking part.
 + + Changes
++     + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
 + + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
     + Validated: Correctly spent 2 xp.
