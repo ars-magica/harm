@@ -69,9 +69,6 @@ class Timed h => HarmObject h where
     stateName :: h -> String
     stateName x = name x ++ " (" ++ show (season x) ++ ")"
 
-    -- | The prepare function is applied when the object is read from file
-    prepare :: h -> h
-    prepare = id
 
     -- | Is the character state still at Game Start?
     isGameStart :: h -> Bool

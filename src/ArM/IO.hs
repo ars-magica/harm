@@ -112,7 +112,7 @@ writeSaga saga = do
 -- class FromJSON c => ArMRead c where
 
 -- | Read a character from JSON.  Return Maybe Character
-readArM :: (HarmObject c, FromJSON c)
+readArM :: (Advance c, FromJSON c)
         => String -- ^ Filename
         -> IO (Maybe c)
 readArM fn = LB.readFile fn >>= return . prepMaybe . decode

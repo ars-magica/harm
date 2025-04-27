@@ -46,6 +46,8 @@ data Character = Character
     , futureAdvancement :: [ Advancement ]         -- ^ future advancement (in game), next one firstk
     }  deriving (Eq,Generic)
 
+instance HarmObject Character where
+    name = fullConceptName . concept
 
 -- | Default (empty) character object.
 defaultCharacter :: Character 

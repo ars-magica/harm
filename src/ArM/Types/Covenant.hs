@@ -14,7 +14,20 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Covenant where
+module ArM.Types.Covenant ( Covenant(..)
+                          , CovenantConcept(..)
+                          , CovenantState(..)
+                          , CovAdvancement(..)
+                          , AugCovAdvancement(..)
+                          , nextCovAdv
+                          , prepareCovAdvancement
+                          , findCov
+                          , completeCovAdv
+                          , defaultCovState
+                          , findBook
+                          , contractAdvancement
+                          , covenant
+                          ) where
 
 import GHC.Generics
 import Data.Aeson
@@ -59,9 +72,6 @@ covenant = fmap CovenantKey . memberOf
 
 instance HarmObject Covenant where
     name = covName . covenantConcept
-    prepare x = trace "prepare Covenant" $ f x
-        where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
-                  | otherwise = y 
 
 -- |
 -- = CovenantConcept Object
@@ -75,6 +85,7 @@ data CovenantConcept = CovenantConcept
          , covData :: KeyPairList
        }  deriving (Eq,Generic)
 
+{-
 -- | Default (empty) covenant concept object.
 defaultCovConcept :: CovenantConcept 
 defaultCovConcept = CovenantConcept { covName = "Player Covenant"
@@ -84,6 +95,7 @@ defaultCovConcept = CovenantConcept { covName = "Player Covenant"
                                   , covTribunal = Nothing
                                   , covData = KeyPairList []
        }  
+-}
 
 instance ToJSON CovenantConcept where
     toEncoding = genericToEncoding defaultOptions
@@ -146,6 +158,8 @@ data CovAdvancement = CovAdvancement
      , lost :: [ Book ]
      }
    deriving (Eq,Generic,Show)
+
+{-
 defaultAdv :: CovAdvancement 
 defaultAdv = CovAdvancement 
      { caSeason = NoTime
@@ -155,6 +169,8 @@ defaultAdv = CovAdvancement
      , acquired = []
      , lost = []
      }
+-}
+
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
@@ -216,14 +232,14 @@ nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
 nextCovAdv ns cov | fs == [] = (cov,Nothing)
               | caSeason adv > ns = trace (show (ns,caSeason adv,harmKey cov)) $ (cov,Nothing)
               | otherwise = (new,Just a)
-        where a = prepareAdvancement adv
+        where a = prepareCovAdvancement adv
               (adv:as) = fs
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
 
 
-prepareAdvancement :: CovAdvancement -> AugCovAdvancement
-prepareAdvancement a = AugCovAdvancement (Just a) Nothing
+prepareCovAdvancement :: CovAdvancement -> AugCovAdvancement
+prepareCovAdvancement a = AugCovAdvancement (Just a) Nothing
 
 contractAdvancement :: AugCovAdvancement -> CovAdvancement
 contractAdvancement aug  = CovAdvancement
