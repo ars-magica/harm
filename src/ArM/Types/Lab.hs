@@ -44,9 +44,10 @@ instance FromJSON Lab
 instance KeyObject Lab where
     harmKey = CovenantKey . labName
 
+instance Timed Lab where
+    season = fromMaybe NoTime . fmap labTime . labState
 instance HarmObject Lab where
     name = labName 
-    stateSeason = fromMaybe NoTime . fmap labTime . labState
     prepare x = id
 
 -- |

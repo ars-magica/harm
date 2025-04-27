@@ -65,13 +65,9 @@ class Timed h => HarmObject h where
     -- | Full name of the entity
     name :: h -> String
 
-    -- | Current season of the object's stateY
-    stateSeason :: h -> SeasonTime
-    stateSeason = season
-
     -- | String identifying the object and its state
     stateName :: h -> String
-    stateName x = name x ++ " (" ++ show (stateSeason x) ++ ")"
+    stateName x = name x ++ " (" ++ show (season x) ++ ")"
 
     -- | The prepare function is applied when the object is read from file
     prepare :: h -> h
@@ -79,4 +75,4 @@ class Timed h => HarmObject h where
 
     -- | Is the character state still at Game Start?
     isGameStart :: h -> Bool
-    isGameStart = (==GameStart) . stateSeason
+    isGameStart = (==GameStart) . season
