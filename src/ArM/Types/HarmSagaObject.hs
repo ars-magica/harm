@@ -24,9 +24,9 @@ import ArM.Types.Character
 
 class KeyObject h => HarmSagaObject h where
    -- | Get an object by key from a `SagaState` object
-   harmGet :: SagaState -> HarmKey -> Maybe h
+   harmGet :: Saga -> HarmKey -> Maybe h
 
 instance HarmSagaObject Covenant where
-   harmGet st k = harmFind k $ covenants st
+   harmGet saga k = harmFind k $ covenants $ sagaState saga
 instance HarmSagaObject Character where
-   harmGet st k = harmFind k $ characters st
+   harmGet saga k = harmFind k $ characters $ sagaState saga
