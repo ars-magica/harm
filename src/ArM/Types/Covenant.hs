@@ -38,9 +38,6 @@ import ArM.Types.Character
 import ArM.Types
 import ArM.Helper
 
-import ArM.Debug.Trace
-
-
 -- |
 -- = Covenant Object
 
@@ -230,7 +227,7 @@ completeCovAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
 -- Get the next augmented advancement.
 nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
 nextCovAdv ns cov | fs == [] = (cov,Nothing)
-              | caSeason adv > ns = trace (show (ns,caSeason adv,harmKey cov)) $ (cov,Nothing)
+              | caSeason adv > ns = (cov,Nothing)
               | otherwise = (new,Just a)
         where a = prepareCovAdvancement adv
               (adv:as) = fs

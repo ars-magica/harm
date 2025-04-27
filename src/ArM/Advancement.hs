@@ -44,8 +44,11 @@ import ArM.Debug.Trace
 -- |
 -- The Advance class represents objects which change state from
 -- season to season.
+--
+-- Normally only Saga objects should be advanced explicitly.
+-- Other instances exist for internal use in the Saga instance.
 class Timed a => Advance a where
-    -- | Advance the character until after the given time.
+    -- | Advance the object until after the given time.
     advance :: SeasonTime -> a -> a
     -- | Advance the character forward by the first advancement in
     -- the plan, regardless of the season.
@@ -53,13 +56,15 @@ class Timed a => Advance a where
     -- | Advance the character one season forward
     stepIf :: SeasonTime -> a -> a
     stepIf _ = step
-    -- | Time of the next advancement of the character.
+    -- | Next season - if this is undefined (e.g. at GameStart), the time of the next
+    -- advancement is returned.
     nextSeason :: a -> SeasonTime
     nextSeason c | ssn == GameStart = ns
                  | ssn == NoTime = ns
                  | otherwise = seasonNext ssn
        where ssn = season c
              ns = nextAdvancement c
+    -- | Next season with an advancement defined
     nextAdvancement :: a -> SeasonTime
     -- | The prepare function is applied when the object is read from file
     prepare :: a -> a
@@ -73,14 +78,12 @@ class Timed a => Advance a where
 -- characters and covenants.  When the saga advances, all its
 -- characters and covenants advance accordingly.
 instance Advance Saga where
-   -- advance :: SeasonTime -> a -> a
    advance t saga 
       | NoTime == ns = saga 
       | t < ns = saga 
       | otherwise = advance t $ step saga
      where ns = nextSeason saga
 
-   -- step :: a -> a
    step saga = saga { sagaState = st' }
      where st' = st { stateTitle = stateTitle st 
                     , seasonTime = ns
