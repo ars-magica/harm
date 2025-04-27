@@ -48,14 +48,7 @@ import ArM.Debug.Trace
 -- Normally only Saga objects should be advanced explicitly.
 -- Other instances exist for internal use in the Saga instance.
 class Timed a => Advance a where
-    -- | Advance the object until after the given time.
-    advance :: SeasonTime -> a -> a
-    -- | Advance the character forward by the first advancement in
-    -- the plan, regardless of the season.
-    step :: a -> a
-    -- | Advance the character one season forward
-    stepIf :: SeasonTime -> a -> a
-    stepIf _ = step
+
     -- | Next season - if this is undefined (e.g. at GameStart), the time of the next
     -- advancement is returned.
     nextSeason :: a -> SeasonTime
@@ -78,13 +71,14 @@ class Timed a => Advance a where
 -- characters and covenants.  When the saga advances, all its
 -- characters and covenants advance accordingly.
 instance Advance Saga where
-   advance t saga 
-      | NoTime == ns = saga 
-      | t < ns = saga 
-      | otherwise = advance t $ step saga
-     where ns = nextSeason saga
+   nextAdvancement saga  = min charnext covnext 
+      where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
+            covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
+            st = sagaState saga
 
-   step saga = saga { sagaState = st' }
+-- | Advance the saga forward by one season.
+stepSaga :: Saga -> Saga
+stepSaga saga = saga { sagaState = st' }
      where st' = st { stateTitle = stateTitle st 
                     , seasonTime = ns
                     , covenants = cov
@@ -94,10 +88,6 @@ instance Advance Saga where
            (cov,ch) = jointAdvance saga ((covenants st),(characters st))
            ns = nextSeason saga
 
-   nextAdvancement saga  = min charnext covnext 
-      where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
-            covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
-            st = sagaState saga
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
@@ -106,8 +96,11 @@ advanceSaga saga = reverse $ saga:advanceSaga' ts saga
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
-advanceSaga' (t:ts) x = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
-    where n = advance t x
+advanceSaga' (t:ts) saga0 = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
+    where n = f t saga0
+          f ssn saga | NoTime == nextSeason saga = saga 
+                     | ssn < nextSeason saga = saga 
+                     | otherwise = f ssn $ stepSaga saga
 
 -- |
 -- Advance listed covenants and characters one season forward.
@@ -215,17 +208,6 @@ addBook' (Just cov) y = f bs y
 -- The `Advance` instance is very similar to that of `Character`, but has to
 -- be implemented separately to account for different advancement classes.
 instance Advance Covenant where
-   advance ct c | isNothing (covenantState c) = trace "need prepare" $ advance ct $ prepare c
-                | ct < ct' =  c
-                | otherwise =  advance ct $ step c 
-            where ct' =  nextSeason c
-
-   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeCovAdv . applyCovAdv . nextCovAdv ns
-
-   step cov = completeCovAdv $ applyCovAdv (new,Just y')
-            where (y:ys) = futureCovAdvancement cov
-                  y' = prepareCovAdvancement y
-                  new = cov { futureCovAdvancement = ys }
    nextAdvancement c = f $ futureCovAdvancement c
        where f [] = NoTime
              f (x:_) = caSeason x
@@ -278,23 +260,6 @@ applyCovAdv (c,Just a) = (c',Just a)
 -- + `prepareAdvancement` if it modifies the advancement only
 -- + `applyAdvancement` if it modifies the CharacterState
 instance Advance Character where
-   advance ct c | isNothing (state c) = advance ct $ prepare c
-                | futureAdvancement c == [] = c
-                | ct < ct' = c
-                | otherwise =  advance ct $ step c 
-            where y =  head $ futureAdvancement c
-                  ct' =  season y
-
-   stepIf ns = trace ("stepIf: "++show ns) $ completeAdv . applyAdv . nextAdv ns
-
-   step c = c { state = Just cs
-              , pastAdvancement = (a:xs)
-              , futureAdvancement = ys
-              }
-            where (y:ys) = futureAdvancement c
-                  xs = pastAdvancement c
-                  (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
-                  cstate = fromJust $ state c
 
    nextAdvancement = f . futureAdvancement
        where f [] = NoTime
