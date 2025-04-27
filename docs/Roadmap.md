@@ -22,6 +22,7 @@ title:
 ## Plan
 
 + [ ] Phase 1.Consolidation
+	+ [ ] Fix annals display (bullet points)
 	+ [ ] Covenant
 		+ [ ] Story advancement
 			+ [ ] SQ

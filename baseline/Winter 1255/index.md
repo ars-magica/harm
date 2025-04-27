@@ -5,7 +5,7 @@
 + [Tessa Tanagh (Winter 1249)](Tessa Tanagh (Winter 1249))
 + [Rowan (Game Start)](Rowan (Game Start))
 
-+ [Elk's Run (Summer 1254)](Elk's Run (Summer 1254))
++ [Elk's Run (Winter 1254)](Elk's Run (Winter 1254))
 
 ## Advancement Errors
 

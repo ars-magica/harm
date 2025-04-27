@@ -31,6 +31,7 @@ module ArM.Types.Covenant ( Covenant(..)
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Extra
 import Data.Maybe
 
 import ArM.Types.Library
@@ -177,7 +178,7 @@ instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
         <$> fmap parseSeasonTime ( v .:? "season" )
-        <*> v .:? "narrative" .!= []
+        <*> v `parseCollapsedList` "story" 
         <*> fmap ( map CharacterKey ) ( v .:? "joining" .!= [] )
         <*> fmap ( map CharacterKey ) ( v .:? "leaving" .!= [] )
         <*> v .:? "acquired" .!= []

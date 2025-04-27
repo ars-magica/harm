@@ -17,6 +17,7 @@ module ArM.Types.Story ( Story(..)
 
 import ArM.Types.Calendar
 import Data.Aeson 
+import Data.Aeson.Extra
 import GHC.Generics
 
 data Story = Story 
@@ -35,8 +36,8 @@ instance FromJSON Story where
     parseJSON = withObject "Story" $ \v -> Story
         <$> v .:? "season" .!= NoTime
         <*> v .:? "title" .!= ""
-        <*> v .:? "narrative" .!= []
-        <*> v .:? "comment" .!= []
+        <*> v `parseCollapsedList` "narrative" 
+        <*> v `parseCollapsedList` "comment" 
         <*> v .:? "SQ" 
 
 class StoryObject ob where

@@ -20,6 +20,14 @@
       },
       { "season" : "Summer 1254"
       , "joining" : [ "Eogan mac Eogan" ]
+      },
+      { "season" : "Winter 1254"
+       , "story": [
+	  { "narrative" : "Beibhinn spends the year at Vigill to read."
+	  , "comment" : "Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9"
+	  }
+
+       ]
       }
    ]
 }
