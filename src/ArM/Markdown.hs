@@ -662,14 +662,15 @@ instance LongSheet Book
 instance Markdown Book where
     printMD book = OList  
          [ OString $ formatTitle book
-         , OList [ OString $ showStrList $ map show (bookStats book) 
+         , OList $ [ OString $ showStrList $ map show (bookStats book) 
                  , cnt
-                 , lns
-                 , ans
-                 , OString $ "Key: " ++ bookID book ++ " (" ++ originalID book ++")"
-                 ]
+                 , lns ]
+                 ++ ans ++
+                 [ OString $ "Key: " ++ bookID book ++ " (" ++ originalID book ++")" ]
          ]
-         where ans = OList $ map ( OString . trim ) $ bookAnnotation book
+         where ans = map ( f . trim ) $ bookAnnotation book
+               f "" = OList []
+               f s = OString s
                lng = trim $ fromMaybe "" $ bookLanguage book
                lns | lng == "" = OList []
                    | otherwise = OString $ "in " ++ lng
