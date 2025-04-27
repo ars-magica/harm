@@ -121,7 +121,7 @@ Player Covenant
 + *Teleportation* by Bonaventure of Mercere (No Time)
     + Rego Q11
     + Tractatus - Lost 1223 - Returned 1230 from Seafraid
-    + Key: RegoQ11 Teleportation (RegoQ11 Teleportation)
+    + Key: Teleportation (Teleportation)
 + *The Beings of Eden* by Victoria of Merinita (No Time)
     + Animal L15Q14
     + Key: AnimalL15Q14 (AnimalL15Q14)
@@ -139,21 +139,21 @@ Player Covenant
 + *The Lives of Vermin* by Tormax of Tytalus (No Time)
     + Animal Q12
     + From Midsummer Fair 1244
-    + Key: AnimalQ12 The Lives of Vermin (AnimalQ12 The Lives of Vermin)
+    + Key: Lives of Vermin (Lives of Vermin)
 + *The Fluid Element* (No Time)
     + Aquam L15Q14
-    + Key: AquamL15Q14 The Fluid Element (AquamL15Q14 The Fluid Element)
+    + Key: AquamL15Q14 (AquamL15Q14)
 + *The Element of Water* (No Time)
     + Aquam L7Q18
     + Root of the art
-    + Key: AquamL7Q18 The Element of Water (AquamL7Q18 The Element of Water)
+    + Key: AquamL7Q18 (AquamL7Q18)
 + *An Apprentice Primer in Aquam* by Sabastian ex Bonisagus (No Time)
     + Aquam L5Q15
-    + Key: AquamL5Q15 An Apprentice Primer in Aquam (AquamL5Q15 An Apprentice Primer in Aquam)
+    + Key: AquamL5Q15 (AquamL5Q15)
 + *Hibernian Musings on the Hermetic Arts - Volume 2 Aquam* by Maine Chleitigh ex Bonisagus (No Time)
     + Aquam Q14
     + 2 copies
-    + Key: AquamQ14 Hibernian Musings on the Hermetic Arts - Volume 2 Aquam (AquamQ14 Hibernian Musings on the Hermetic Arts - Volume 2 Aquam)
+    + Key: MaineAquam (MaineAquam)
 +  (No Time)
     + Auram 
     + From Tolosa Partage
@@ -164,11 +164,11 @@ Player Covenant
     + Key: AuramL6Q19 (AuramL6Q19)
 + *An Apprentice Primer in Auram* by Sabastian ex Bonisagus (No Time)
     + Auram L5Q15
-    + Key: AuramL5Q15 An Apprentice Primer in Auram (AuramL5Q15 An Apprentice Primer in Auram)
+    + Key: AuramL5Q15 (AuramL5Q15)
 + *Hibernian Musings on the Hermetic Arts - Volume 3 Auram* by Maine Chleitigh ex Bonisagus (No Time)
     + Auram Q14
     + 2 copies
-    + Key: AuramQ14 Hibernian Musings on the Hermetic Arts - Volume 3 Auram (AuramQ14 Hibernian Musings on the Hermetic Arts - Volume 3 Auram)
+    + Key: MaineAuram (MaineAuram)
 + *The Art of the Flesh* (No Time)
     + Corpus L17Q12
     + Key: CorpusL17Q12 The Art of the Flesh (CorpusL17Q12 The Art of the Flesh)
@@ -182,7 +182,7 @@ Player Covenant
 + *Hibernian Musings on the Hermetic Arts - Volume 4 Corpus* by Maine Chleitigh ex Bonisagus (No Time)
     + Corpus Q14
     + 2 copies
-    + Key: CorpusQ14 Hibernian Musings on the Hermetic Arts - Volume 4 Corpus (CorpusQ14 Hibernian Musings on the Hermetic Arts - Volume 4 Corpus)
+    + Key: MaineCorpus (MaineCorpus)
 + *Cierans notes on the body* by Cieran the Fletcher (No Time)
     + Corpus Q14
     + 2 copies
@@ -223,7 +223,7 @@ Player Covenant
 + *Hibernian Musings on the Hermetic Arts - Volume 5 Herbam* by Maine Chleitigh ex Bonisagus (No Time)
     + Herbam Q14
     + 2 copies
-    + Key: HerbamQ14 Hibernian Musings on the Hermetic Arts - Volume 5 Herbam (HerbamQ14 Hibernian Musings on the Hermetic Arts - Volume 5 Herbam)
+    + Key: MaineHerbam (MaineHerbam)
 +  (No Time)
     + Herbam Q12
     + in Gaelic
@@ -707,10 +707,10 @@ Player Covenant
     + Key: MedicineQ10  (MedicineQ10 )
 + *The Four Humours* by Rabarius of Belfast (No Time)
     + Medicine Q7
-    + Key: MedicineQ7 The Four Humours (MedicineQ7 The Four Humours)
+    + Key: FourHumours (FourHumours)
 + *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + Medicine L3Q12
-    + Key: MedicineL3Q12 Causes And Cures (Causae Et Curae) (MedicineL3Q12 Causes And Cures (Causae Et Curae))
+    + Key: MedicineL3Q12 (MedicineL3Q12)
 + *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + Philosophiae (natural philosophy) L2Q12
     + Key: Philosophiae (natural philosophy)L2Q12 Causes And Cures (Causae Et Curae) (Philosophiae (natural philosophy)L2Q12 Causes And Cures (Causae Et Curae))

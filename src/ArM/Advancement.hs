@@ -55,6 +55,12 @@ class Timed a => Advance a where
     stepIf _ = step
     -- | Time of the next advancement of the character.
     nextSeason :: a -> SeasonTime
+    nextSeason c | ssn == GameStart = ns
+                 | ssn == NoTime = ns
+                 | otherwise = seasonNext ssn
+       where ssn = season c
+             ns = nextAdvancement c
+    nextAdvancement :: a -> SeasonTime
     -- | The prepare function is applied when the object is read from file
     prepare :: a -> a
     prepare = id
@@ -85,8 +91,10 @@ instance Advance Saga where
            (cov,ch) = jointAdvance saga ((covenants st),(characters st))
            ns = nextSeason saga
 
-   -- nextSeason :: a -> SeasonTime
-   nextSeason = sagaStateNext . sagaState
+   nextAdvancement saga  = min charnext covnext 
+      where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
+            covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
+            st = sagaState saga
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
@@ -97,16 +105,6 @@ advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
 advanceSaga' (t:ts) x = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
     where n = advance t x
-
-
-sagaStateNext :: SagaState -> SeasonTime
-sagaStateNext saga | ssn == GameStart = min charnext covnext 
-                   | ssn == NoTime = min charnext covnext 
-                   | otherwise = seasonNext ssn
-      where charnext = foldl min NoTime [ nextSeason x | x <- characters saga ]
-            covnext = foldl min NoTime [ nextSeason x | x <- covenants saga ]
-            ssn = season saga
-          
 
 -- |
 -- Advance listed covenants and characters one season forward.
@@ -225,7 +223,7 @@ instance Advance Covenant where
             where (y:ys) = futureCovAdvancement cov
                   y' = prepareCovAdvancement y
                   new = cov { futureCovAdvancement = ys }
-   nextSeason = f . futureCovAdvancement
+   nextAdvancement c = f $ futureCovAdvancement c
        where f [] = NoTime
              f (x:_) = caSeason x
    prepare x = trace "prepare Covenant" $ f x
@@ -295,7 +293,7 @@ instance Advance Character where
                   (a,cs) = applyAdvancement (prepareAdvancement cstate y) cstate
                   cstate = fromJust $ state c
 
-   nextSeason = f . futureAdvancement
+   nextAdvancement = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
    prepare = prepareCharacter
