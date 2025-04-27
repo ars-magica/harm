@@ -19,7 +19,6 @@ module ArM.Types.Covenant where
 import GHC.Generics
 import Data.Aeson
 import Data.Maybe
-import Data.List
 
 import ArM.Char.Character
 import ArM.Types.Library
@@ -183,56 +182,6 @@ instance Timed AugCovAdvancement where
    season = fromMaybe NoTime . fmap caSeason . explicit
 instance Timed CovAdvancement where
    season = caSeason
-
--- |
--- The `Advance` instance is very similar to that of `Character`, but has to
--- be implemented separately to account for different advancement classes.
-instance Advance Covenant where
-   advance ct c | isNothing (covenantState c) = trace "need prepare" $ advance ct $ prepare c
-                | ct < ct' =  c
-                | otherwise =  advance ct $ step c 
-            where ct' =  nextSeason c
-
-   stepIf ns = trace ("stepIf (Cov): "++show ns) $ completeCovAdv . applyCovAdv . nextCovAdv ns
-
-   step cov = completeCovAdv $ applyCovAdv (new,Just y')
-            where (y:ys) = futureCovAdvancement cov
-                  y' = prepareAdvancement y
-                  new = cov { futureCovAdvancement = ys }
-   nextSeason = f . futureCovAdvancement
-       where f [] = NoTime
-             f (x:_) = caSeason x
-
--- | CovenFolk joining according to the augmented covenant advancement.
-joiningAug :: AugCovAdvancement -> [HarmKey]
-joiningAug (AugCovAdvancement a b) = a' ++ b'
-    where a' = fromMaybe [] $ fmap joining a
-          b' = fromMaybe [] $ fmap joining b
-
--- | CovenFolk leaving according to the augmented covenant advancement.
-leavingAug :: AugCovAdvancement -> [HarmKey]
-leavingAug (AugCovAdvancement a b) = a' ++ b'
-    where a' = fromMaybe [] $ fmap leaving a
-          b' = fromMaybe [] $ fmap leaving b
-
--- | Get the season of the augmented covenant advancement.
--- This is taken from the explicit advancement if available, and
--- the inferred advancement otherwise.
-caSeasonAug :: AugCovAdvancement -> SeasonTime
-caSeasonAug (AugCovAdvancement a b) = fromMaybe b' $ fmap caSeason a
-    where b' = fromMaybe NoTime $ fmap caSeason b
-
--- | Apply covenant advancement
-applyCovAdv :: (Covenant,Maybe AugCovAdvancement)
-         -> (Covenant,Maybe AugCovAdvancement)
-applyCovAdv (c,Nothing) = (c,Nothing)
-applyCovAdv (c,Just a) = (c',Just a)
-    -- where (a',st') = applyCovAdvancement a st
-    where st' = st { covTime = caSeasonAug a, covenFolkID = cid }
-          c' = c { covenantState = Just st' }
-          st = fromMaybe defaultCovState $ covenantState c
-          cid1 = sort $ joiningAug a ++ covenFolkID st 
-          cid = cid1 -= ( sort $ leavingAug a )
 
 -- |
 -- Find the character's covenant from a list.
