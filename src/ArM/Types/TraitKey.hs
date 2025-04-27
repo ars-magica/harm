@@ -10,9 +10,14 @@
 -- 
 -- Description :  TraitKey type used to index and sort traits.
 --
--- The `TraitKey` is conceptually simple, but the ordering takes some
+-- We use `TraitKey` objects to reference arbitrary traits in a variety
+-- of contexts.  It is conceptually simple, but the ordering takes some
 -- coding to handle all the different kinds of traits.  To avoid
 -- cluttering, it is kept as a separate module.
+--
+-- JSON support is provided, where most traits are represented as an
+-- object of the form { kind : trait } or `{ "art" : "Creo" }`.
+-- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.TraitKey ( TraitKey(..) ) where
@@ -133,6 +138,7 @@ instance ToJSON TraitKey
 instance FromJSON TraitKey where
     parseJSON = fmap convertProtoKey . parseJSON
 
+-- | Intermediate type used in the JSON parser for `TraitKey`.
 data ProtoKey = ProtoKey
    { ability :: Maybe String
    , characteristic :: Maybe String
@@ -168,6 +174,7 @@ instance FromJSON ProtoKey where
         <*> v .:? "possession" 
         <*> v .:? "combat" 
 
+-- | Auxiliary function for the JSON parser for `TraitKey`.
 convertProtoKey :: ProtoKey -> TraitKey
 convertProtoKey p 
   | isJust (ability p) = AbilityKey (fromJust $ ability p)
