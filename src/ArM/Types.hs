@@ -18,9 +18,11 @@ module ArM.Types ( module ArM.Types.KeyPair
                  , module ArM.Types.Calendar
                  , module ArM.Types.TraitKey
                  , module ArM.Types.HarmObject
+                 , module ArM.Types.Story
                  ) where
 
 import ArM.Types.TraitKey
 import ArM.Types.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
+import ArM.Types.Story

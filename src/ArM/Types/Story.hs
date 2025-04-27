@@ -23,7 +23,7 @@ data Story = Story
          , storyTitle :: String
          , storyNarrative :: [ String ]
          , storyComment :: [ String ]
-         , storySQ :: Int
+         , storySQ :: Maybe Int
        }  deriving (Eq,Generic,Show)
 
 instance Timed Story where
@@ -36,5 +36,5 @@ instance FromJSON Story where
         <*> v .:? "title" .!= ""
         <*> v .:? "narrative" .!= []
         <*> v .:? "comment" .!= []
-        <*> v .:? "SQ" .!= 0
+        <*> v .:? "SQ" 
 

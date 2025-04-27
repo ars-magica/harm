@@ -318,9 +318,28 @@ showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
           f z = "+" ++ showNum z
 
 instance Markdown AugCovAdvancement where
-   printMD _ = indentOList $ OList []
+   printMD = printMD . contractAdvancement
 instance Markdown CovAdvancement where
-   printMD _ = indentOList $ OList []
+   printMD ad = indentOList $ OList $ ( map printMD $ caStory ad ) ++ ch
+      where (OList ch) = printCovChanges ad
+instance Markdown Story where
+   printMD story = OList 
+         [ OString $ storyTitle story ++ sq (storySQ story) 
+         , OList $ map OString ( storyNarrative story )
+         , OList $ map OString ( storyComment story )
+         ]
+      where sq Nothing = "(no source quality)"
+            sq (Just x) = "(" ++ show x ++ ")"
+printCovChanges :: CovAdvancement -> OList
+printCovChanges a = OList [ OString "+ Changes", j, lv, acq, lst ]
+     where j | joining a == [] = OList []
+             | otherwise = OString $  "    + joining: " ++ showStrList (map show $ joining a)
+           lv | leaving a == [] = OList []
+             | otherwise = OString $  "    + leaving: " ++ showStrList (map show $ leaving a)
+           acq | acquired a == [] = OList []
+             | otherwise = OString $  "    + acquired: " ++ showStrList (map formatTitle $ acquired a)
+           lst | lost a == [] = OList []
+             | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
        [ OString $ showTime xps (season a) (mode a) y 

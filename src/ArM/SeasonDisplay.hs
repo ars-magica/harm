@@ -22,7 +22,6 @@ import ArM.Types.Covenant
 import ArM.Types
 import ArM.Markdown
 import ArM.BasicIO
-import ArM.Helper
 
 -- import ArM.Debug.Trace
 
@@ -80,16 +79,8 @@ instance Markdown CharAug where
        , OList $ map (OString . show) $ validation a
        ]
 instance Markdown CovAug where
-   printMD (CovAug c a') = OList [ OString ("+ " ++ name c), j, lv, acq, lst ]
-     where j | joining a == [] = OList []
-             | otherwise = OString $  "    + joining: " ++ showStrList (map show $ joining a)
-           lv | leaving a == [] = OList []
-             | otherwise = OString $  "    + leaving: " ++ showStrList (map show $ leaving a)
-           acq | acquired a == [] = OList []
-             | otherwise = OString $  "    + acquired: " ++ showStrList (map formatTitle $ acquired a)
-           lst | lost a == [] = OList []
-             | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
-           a = contractAdvancement a'
+   printMD (CovAug c a') = OList [ OString ("+ " ++ name c), printMD a ]
+     where a = contractAdvancement a'
 instance Markdown EitherAug where
    printMD (ECov x) = printMD x
    printMD (EChar x) = printMD x

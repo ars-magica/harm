@@ -152,7 +152,7 @@ instance FromJSON CovenantState where
 -- | Advancement (changes) to a covenant.
 data CovAdvancement = CovAdvancement 
      { caSeason :: SeasonTime    -- ^ season or development stage
-     , caNarrative :: [String]   -- ^ freeform description of the activities
+     , caStory :: [ Story ]   -- ^ freeform description of the activities
      , joining :: [ HarmKey ]
      , leaving :: [ HarmKey ]
      , acquired :: [ Book ]
@@ -164,7 +164,7 @@ data CovAdvancement = CovAdvancement
 defaultAdv :: CovAdvancement 
 defaultAdv = CovAdvancement 
      { caSeason = NoTime
-     , caNarrative = []
+     , caStory = []
      , joining = []
      , leaving = []
      , acquired = []
@@ -245,7 +245,7 @@ prepareCovAdvancement a = AugCovAdvancement (Just a) Nothing
 contractAdvancement :: AugCovAdvancement -> CovAdvancement
 contractAdvancement aug  = CovAdvancement
      { caSeason = season aug
-     , caNarrative = listFromMaybe caNarrative aa ++ listFromMaybe caNarrative ad
+     , caStory = listFromMaybe caStory aa ++ listFromMaybe caStory ad
      , joining = listFromMaybe joining aa ++ listFromMaybe joining ad
      , leaving = listFromMaybe leaving aa ++ listFromMaybe leaving ad
      , acquired = listFromMaybe acquired aa ++ listFromMaybe acquired ad
