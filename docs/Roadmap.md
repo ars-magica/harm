@@ -22,17 +22,8 @@ title:
 ## Plan
 
 + [ ] Phase 1.Consolidation
-	+ [ ] Fix annals display (bullet points)
+	+ [ ] Type of recent seasons from Hibernia
 	+ [ ] Covenant
-		+ [ ] Story advancement
-			+ [ ] SQ
-			+ [ ] Narrative
-			+ [ ] Comment
-			+ [ ] Should we allow multiple stories in the season?
-		+ [ ] Story object
-			+ [ ] Narrative
-			+ [ ] Comment
-			+ [ ] SQ
 		+ [ ] JSON Syntax for advancement
 		+ [ ] WIki layout for advancement
 	+ [ ] Validate missing seasons
