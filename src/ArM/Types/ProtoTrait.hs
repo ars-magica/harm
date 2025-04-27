@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Trait
+-- Module      :  ArM.Types.ProtoTrait
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -23,7 +23,7 @@
 -- `toTrait` and `getTrait` functions.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Trait ( module ArM.Types.Trait
+module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , ProtoTrait(..)
                       , TraitKey(..)
                       , TraitType(..)

@@ -28,7 +28,7 @@ import Data.Maybe
 
 import ArM.Char.Character 
 import ArM.Char.CharacterSheet
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 import ArM.Char.Combat
 import ArM.Cov.Saga
 import ArM.Types.Covenant

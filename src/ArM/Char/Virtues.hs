@@ -19,7 +19,7 @@ module ArM.Char.Virtues ( inferTraits
                         ) where
 
 import ArM.Types.Advancement
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 import ArM.Helper
 import ArM.GameRules
 

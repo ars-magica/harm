@@ -67,7 +67,7 @@ common harm-deps
                        , ArM.Types.Character
                        , ArM.Types.Advancement
                        , ArM.Advancement
-                       , ArM.Char.Trait
+                       , ArM.Types.ProtoTrait
                        , ArM.Types.Trait
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmObject

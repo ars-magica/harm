@@ -20,7 +20,7 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 import ArM.Types.Advancement
 import ArM.Types.Calendar
 import ArM.Types.KeyPair

@@ -19,7 +19,7 @@ module ArM.DB.Spell ( SpellRecord(..)
                        ) where
 
 import ArM.DB.CSV
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 import GHC.Generics
 import Data.List.Split
 import Text.Read

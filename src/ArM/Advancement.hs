@@ -23,7 +23,7 @@ import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
 import ArM.Char.Inference
 import ArM.Char.Validation
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 -- import ArM.Types.Trait
 import ArM.Types.Covenant
 -- import ArM.Types.Character

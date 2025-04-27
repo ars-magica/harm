@@ -20,7 +20,7 @@
 module ArM.Char.Validation (validate,validateCharGen,initialLimits) where
 
 import ArM.Types.Advancement
-import ArM.Char.Trait
+import ArM.Types.ProtoTrait
 import ArM.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
