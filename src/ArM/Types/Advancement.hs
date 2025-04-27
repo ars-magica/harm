@@ -42,7 +42,7 @@ module ArM.Types.Advancement where
 
 import ArM.Helper
 import ArM.Types.ProtoTrait
-import ArM.Types.Calendar
+import ArM.Types
 import ArM.GameRules
 import ArM.Types.Library
 

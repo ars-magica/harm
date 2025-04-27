@@ -25,7 +25,7 @@ import Text.Read
 
 import ArM.DB.CSV
 import ArM.Types.TraitKey
-import ArM.Types.Calendar
+import ArM.Types
 import ArM.Helper
 import ArM.Debug.Trace
 
@@ -62,15 +62,8 @@ data Book = Book
 instance ToJSON Book
 instance FromJSON Book
 
--- | Type for the unique identifier of an original book
-data BookKey = BookKey String
-   deriving (Show,Eq,Generic)
-
-instance ToJSON BookKey
-instance FromJSON BookKey
-
 -- | The original of a given book (constituent book in the case of an anotology)
-originalBook :: Book -> Maybe BookKey -> Maybe Book
+originalBook :: Book -> Maybe HarmKey -> Maybe Book
 originalBook b Nothing = Just $ originalTome b
 originalBook b (Just k) = fmap originalTome $ find ( (==k) . BookKey . bookID ) $ antologyOf b
 
@@ -100,7 +93,7 @@ originalTitle :: Book -> String
 originalTitle = bookTitle . originalTome
 
 -- | Get the unique identifier of an original book
-bookKey :: Book -> BookKey
+bookKey :: Book -> HarmKey
 bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
 
 -- |
@@ -181,8 +174,8 @@ instance ArMCSV Book where
 -- |
 -- == Descriptions of a reading season
 data ReadingID = ReadingID
-     { bookRead :: BookKey
-     , partRead :: Maybe BookKey
+     { bookRead :: HarmKey
+     , partRead :: Maybe HarmKey
      , topicRead :: TraitKey
      } deriving (Eq,Show,Generic)
 instance ToJSON ReadingID

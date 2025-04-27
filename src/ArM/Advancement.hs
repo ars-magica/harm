@@ -14,8 +14,8 @@
 -----------------------------------------------------------------------------
 module ArM.Advancement ( advanceSaga 
                        , Advance(..)
-		       , Validation(..)
-		       ) where
+                       , Validation(..)
+                       ) where
 
 import Data.Maybe 
 import Data.List 

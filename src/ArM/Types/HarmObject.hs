@@ -24,7 +24,7 @@ import ArM.Types.Calendar
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
 -- without enabling multi-parameter classes.
-data HarmKey = BookKey String String
+data HarmKey = BookKey String 
            | CharacterKey String
            | CovenantKey String
            | LabKey String
@@ -34,7 +34,7 @@ instance ToJSON HarmKey
 instance FromJSON HarmKey
 
 instance Show HarmKey where
-       show (BookKey ti au) = "Book: " ++ ti ++ " by " ++ au
+       show (BookKey x ) = "Book: " ++ x
        show (CharacterKey x) = "Character: " ++ x
        show (CovenantKey x) = "Covenant: " ++ x
        show (LabKey x) = "Lab: " ++ x

@@ -22,9 +22,7 @@ import Data.Maybe
 
 import ArM.Types.ProtoTrait
 import ArM.Types.Advancement
-import ArM.Types.Calendar
-import ArM.Types.KeyPair
-import ArM.Types.HarmObject
+import ArM.Types
 -- import ArM.Debug.Trace
 import ArM.Helper
 
