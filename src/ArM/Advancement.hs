@@ -23,10 +23,6 @@ import Data.List
 -- import ArM.Cov.Saga
 import ArM.Char.Character
 import ArM.Char.CharacterSheet
-import ArM.Char.Virtues
-import ArM.Char.Inference
-import ArM.Char.Validation
-import ArM.Types.ProtoTrait
 -- import ArM.Types.Trait
 import ArM.Types.Covenant
 -- import ArM.Types.Character
@@ -34,7 +30,6 @@ import ArM.Types.Library
 import ArM.Types
 import ArM.Types.Saga
 import ArM.Helper
-import ArM.GameRules
 
 import ArM.Debug.Trace
 
@@ -226,21 +221,21 @@ applyCovAdv (c,Just a) = (c',Just a)
           st = fromMaybe defaultCovState $ covenantState c
           cid1 = sort $ joining aa ++ covenFolkID st 
           cid = cid1 -= ( sort $ leaving aa )
-	  aa = contractAdvancement a
+          aa = contractAdvancement a
 
 -- |
 -- == Character Advancement
-
--- |
--- The implementation of character advancement depends on three auxiliary functions.
--- + `prepareCharacter` advances the character from a Nothing state to Game Start.
--- + `prepareAdvancement` augments the advancement object with limits and inference
--- + `applyAdvancement` applies an advancement to advance the character a single step.
+-- 
+-- Character advancement is divided conceptually into CharGen (pre-game advancement)
+-- and in-game advancement.  CharGen is handled by the `prepare` function, which
+-- is implemented by `ArM.Char.Character.prepareCharacter`.
 --
--- Additional inference should be added to one of these functions.
--- + `prepareCharacter` (see below) if it applies to Character Generation only
--- + `prepareAdvancement` if it modifies the advancement only
--- + `applyAdvancement` if it modifies the CharacterState
+-- In-game advancement is managed through saga advancement, which uses three different
+-- steps from the character advancement definitions:
+-- + nextAdv
+-- + applyAdv
+-- + completeAdv
+--
 instance Advance Character where
 
    nextAdvancement = f . futureAdvancement
@@ -250,33 +245,11 @@ instance Advance Character where
    -- The function uses `applyCGA` to process all of the pregame advancements.
    -- It then calls `addConfidence` to add the confidence trait to the state
    -- for the returned `Character` object
-   prepare c | state c /= Nothing = c
-             | otherwise = c { state = newstate
-                             , pregameDesign = xs
-                             , pregameAdvancement = []
-                             , entryTime = f $ futureAdvancement c
-                             }
-            where as = pregameAdvancement  c 
-                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
-                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
-                  f [] = NoTime
-                  f (x:_) = season x
+   prepare = prepareCharacter
 
--- | Apply advancement
--- This function is generic, and used for both chargen and ingame 
--- advancement.  The AugmentedAdvancement has to be prepared differently,
--- using either `prepareAdvancement` or `prepareCharGen`.
-applyAdvancement :: AugmentedAdvancement
-                 -> CharacterState 
-                 -> (AugmentedAdvancement,CharacterState)
-applyAdvancement a cs = (a,cs')
-    where cs' = cs { charTime = season a, traits = new }
-          new = advanceTraitList change tmp
-          tmp = advanceTraitList inferred old
-          change = sortTraits $ changes a
-          inferred = sortTraits $ inferredTraits a
-          old = sortTraits $ traits cs
 
+-- |
+-- Apply the next augmented advancement.
 applyAdv :: (Character,Maybe AugmentedAdvancement)
          -> (Character,Maybe AugmentedAdvancement)
 applyAdv (c,Nothing) = (c,Nothing)
@@ -285,67 +258,12 @@ applyAdv (c,Just a) = (c',Just a')
           c' = c { state = Just st' }
           st = trace (show $ characterSeason c ) $ fromMaybe defaultCS $ state c
 
+-- |
+-- Complete the advancement step and tidy up
 completeAdv :: (Character,Maybe AugmentedAdvancement)
                  -> Character
 completeAdv (c,Nothing) = c 
 completeAdv (c,Just a) = c { pastAdvancement = a:pastAdvancement c }
-
--- |
--- == Char Gen
-
-
--- | Augment and amend the advancements based on current virtues and flaws.
---
--- This function is applied by `applyCharGenAdv` before the advancement is
--- applied to the `CharacterState`.  It infers additional traits from 
--- virtues and flaws, add XP limits to the advancements, and checks that
--- the advancement does not overspend XP or exceed other limnits.
-prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
-prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
-                  . sortInferredTraits      -- Restore sort order on inferred traits
-                  . agingYears              -- add years of aging as an inferred trait
-                  . initialLimits (filterCS cs)        -- infer additional properties on the advancement
-                  . addInference cs         -- infer additional traits 
-          where sheet = filterCS cs
-
--- | Infer an aging trait advancing the age according to the advancement
-agingYears :: AugmentedAdvancement -> AugmentedAdvancement
-agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
-             | otherwise = x
-   where y = fromMaybe 0 $ augYears x
-
-
--- | Add the Confidence trait to the character state, using 
-addConfidence :: CharacterState -> CharacterState
-addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
-          where vfs = vfList sheet
-                sheet = filterCS cs
-                ct | csType sheet == Grog = ConfidenceTrait $ Confidence
-                           { cname = "Confidence", cscore = 0, cpoints = 0 }
-                   | otherwise = inferConfidence vfs 
-
-
--- | Apply CharGen advancement
-applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
-applyCharGenAdv a cs = (a',f cs')
-   where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
-         (PostProcessor g) = postProcessTrait a'
-         f x = x { traits = map g $ traits x }
-
--- | Apply a list of advancements
-applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
-applyCGA a cs = applyCGA' ([],a,cs)
-
--- | Recursive helper for `applyCGA`.
-applyCGA' :: ([AugmentedAdvancement],[Advancement],CharacterState)
-                   -> ([AugmentedAdvancement],CharacterState)
-applyCGA' (xs,[],cs) = (xs,cs)
-applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
-    where (a',cs') = applyCharGenAdv y cs
-
-
--- |
--- == Preparing the Advancement
 
 -- |
 -- Get the next augmented advancement.
@@ -358,101 +276,3 @@ nextAdv ns ch | fs == [] = (ch,Nothing)
               (adv:as) = fs
               fs = futureAdvancement ch
               new = ch { futureAdvancement = as }
-
--- | Augment and amend the advancements based on current virtues and flaws.
-prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
-prepareAdvancement c = validate 
-                     . sortInferredTraits   -- sort inferred traits
-                     . inferSQ c
-                     . winterEvents c 
-                     . addInference c
-
--- | Sort the `inferredTraits` field of an `AugmentedAdvancement`.
-sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
-sortInferredTraits x = x { inferredTraits = sortTraits $ inferredTraits x }
-
--- | Handle aging and some warping for Winter advancements.
--- Non-winter advancements are left unmodified.
-winterEvents :: CharacterState       -- ^ Current Character State
-             -> AugmentedAdvancement -- ^ Advancement 
-             -> AugmentedAdvancement -- ^ modified Advancement
-winterEvents c a | isWinter $ season a  
-             = validateAging (y >* yl) agingOb  -- check for aging roll is made if required
-             $ addYear agingOb                  -- add a yer of aging
-             $ warpingLR a                      -- add warping point for LR
-             | otherwise = a
-        where ageOb = ageObject c
-              y = age c
-              pt = find ( (AgeKey ==) . traitKey ) $ changes a
-              agingOb | isNothing pt = Nothing
-                      | otherwise = aging $ fromJust pt
-              lr | ageOb == Nothing = -1
-                 | otherwise = longevityRitual $ fromJust ageOb
-              yl | ageOb == Nothing = trace "No age object" 35
-                 | otherwise = ageLimit $ fromJust ageOb
-              warpingLR x | lr < 0 = x
-                          | otherwise = x { inferredTraits = 
-                                    defaultPT { other = Just "Warping"
-                                              , points = Just 1
-                                              , comment = Just "from Longevity Ritual" }
-                                    :inferredTraits x }
-              addYear o x | addsYear o = x
-                          | otherwise = x { inferredTraits = agePT 1 :inferredTraits x }
-              addsYear Nothing = False
-              addsYear (Just x) | isNothing (addYears x) = False
-                                | fromJust (addYears  x) <= 0 = False
-                                | otherwise = True
-              validateAging False _ x =  x
-              validateAging True Nothing x = trace ("No aging> "++show a) $ x { validation = err:validation x }
-              validateAging True (Just ob) x
-                   | isNothing (agingRoll ob) = x { validation = err:validation x }
-                   | otherwise =  x { validation = val:validation x }
-              err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
-              val = Validated $ "Aging roll made"
-
--- | Return a `ProtoTrait` for aging advancing a number of years.
-agePT :: Int -- ^ Number of years
-      ->  ProtoTrait -- ^ Resulting ProtoTrait
-agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
-
--- | Calculate initial XP limits on Advancements
-inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
-inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
-        where vf = vfList $ filterCS cs
-              (sq,cap) = getSQ ad
--- Infer SQ for Exposure = 2
--- Infer SQ for reading from book
--- Infer SQ for taught from teacher
--- Infer SQ for adventure from covenant
-
-bookSQ :: AugmentedAdvancement -> AugmentedAdvancement 
-bookSQ aa | isNothing stats = aa
-          | isNothing tr = aa
-          | otherwise = aa 
-    where tr = ttrace $ primaryXPTrait $ advancement aa
-          stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
-          ctp =  (==(fromJust tr)) . topic 
-
-
-getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
-getSQ a | isExposure ad = (Just 2,Nothing)
-        | mode ad == Reading = rd 
-        | otherwise = mstat
-   where ad = advancement a
-         mstat = (sourceQuality ad,sourceCap ad)
-         rd = (fmap fromIntegral $ quality bk,bookLevel bk)
-         bk = head $ bookStats $ head $ bookUsed a
-
--- |
--- Calculate the Source Quality the character generates as a teacher.
-charTeacherSQ :: CharacterState -> Int
-charTeacherSQ cs = 3 + com + tch
-    where sheet = filterCS cs
-          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
-          -- add good teacher
-          -- subtract flaws
-          -- add speciality
-          -- add one/two student bonus
--- Teacher SQ +
-

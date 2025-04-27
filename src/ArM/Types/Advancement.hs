@@ -331,3 +331,8 @@ primaryXPTrait :: Advancement -> Maybe TraitKey
 primaryXPTrait a | f a == [] = Nothing
                  | otherwise = Just $ traitKey $ head (f a)
    where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
+
+-- | Sort the `inferredTraits` field of an `AugmentedAdvancement`.
+sortInferredTraits :: AugmentedAdvancement -> AugmentedAdvancement
+sortInferredTraits x = x { inferredTraits = sortTraits $ inferredTraits x }
+

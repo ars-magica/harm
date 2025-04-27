@@ -15,21 +15,24 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Character ( module ArM.Types.Character
-                          , module ArM.Types.Advancement
-                          , Advancement(..)
+                          , module ArM.Char.Advancement
                           , characterEntryTime
+                          , prepareCharacter
+                          , applyAdvancement
+			  , agePT
                           ) where
 
--- import Data.Maybe 
+import Data.Maybe 
 -- import Data.List
 -- import Control.Monad
 
-import ArM.Types.Advancement
+import ArM.Char.Advancement
+import ArM.Char.CharacterSheet
 import ArM.Types
 -- import ArM.Types.Library
 import ArM.Types.Character
--- import ArM.Char.Validation
--- import ArM.GameRules
+import ArM.Types.Trait
+import ArM.Types.ProtoTrait
 
 -- |
 -- = Convenience Functions for Character Properties
@@ -41,4 +44,88 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
      where tm = entryTime c
            f [] = tm
            f (x:_) = season x
+
+-- |
+-- = Convenience Functions for Character Advancement
+
+-- | Apply advancement
+-- This function is generic, and used for both chargen and ingame 
+-- advancement.  The AugmentedAdvancement has to be prepared differently,
+-- using either `prepareAdvancement` or `prepareCharGen`.
+applyAdvancement :: AugmentedAdvancement
+                 -> CharacterState 
+                 -> (AugmentedAdvancement,CharacterState)
+applyAdvancement a cs = (a,cs')
+    where cs' = cs { charTime = season a, traits = new }
+          new = advanceTraitList change tmp
+          tmp = advanceTraitList inferred old
+          change = sortTraits $ changes a
+          inferred = sortTraits $ inferredTraits a
+          old = sortTraits $ traits cs
+
+
+-- |
+-- = Char Gen
+
+prepareCharacter :: Character -> Character
+prepareCharacter c | state c /= Nothing = c
+                   | otherwise = c { state = newstate
+                                   , pregameDesign = xs
+                                   , pregameAdvancement = []
+                                   , entryTime = f $ futureAdvancement c
+                                   }
+            where as = pregameAdvancement  c 
+                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
+                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
+                  f [] = NoTime
+                  f (x:_) = season x
+
+-- | Augment and amend the advancements based on current virtues and flaws.
+--
+-- This function is applied by `applyCharGenAdv` before the advancement is
+-- applied to the `CharacterState`.  It infers additional traits from 
+-- virtues and flaws, add XP limits to the advancements, and checks that
+-- the advancement does not overspend XP or exceed other limnits.
+prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
+prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
+                  . sortInferredTraits      -- Restore sort order on inferred traits
+                  . agingYears              -- add years of aging as an inferred trait
+                  . initialLimits (filterCS cs)        -- infer additional properties on the advancement
+                  . addInference cs         -- infer additional traits 
+          where sheet = filterCS cs
+
+-- | Infer an aging trait advancing the age according to the advancement
+agingYears :: AugmentedAdvancement -> AugmentedAdvancement
+agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
+             | otherwise = x
+   where y = fromMaybe 0 $ augYears x
+
+
+-- | Add the Confidence trait to the character state, using 
+addConfidence :: CharacterState -> CharacterState
+addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
+          where vfs = vfList sheet
+                sheet = filterCS cs
+                ct | csType sheet == Grog = ConfidenceTrait $ Confidence
+                           { cname = "Confidence", cscore = 0, cpoints = 0 }
+                   | otherwise = inferConfidence vfs 
+
+
+-- | Apply CharGen advancement
+applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
+applyCharGenAdv a cs = (a',f cs')
+   where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
+         (PostProcessor g) = postProcessTrait a'
+         f x = x { traits = map g $ traits x }
+
+-- | Apply a list of advancements
+applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
+applyCGA a cs = applyCGA' ([],a,cs)
+
+-- | Recursive helper for `applyCGA`.
+applyCGA' :: ([AugmentedAdvancement],[Advancement],CharacterState)
+                   -> ([AugmentedAdvancement],CharacterState)
+applyCGA' (xs,[],cs) = (xs,cs)
+applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
+    where (a',cs') = applyCharGenAdv y cs
 
