@@ -321,7 +321,7 @@ instance Markdown Story where
          , OList $ map OString ( storyComment story )
          ]
       where sq Nothing = "(no source quality)"
-            sq (Just x) = "(" ++ show x ++ ")"
+            sq (Just x) = " (SQ " ++ show x ++ ")"
 printCovChanges :: CovAdvancement -> OList
 printCovChanges a = OList [ OString "+ Changes", j, lv, acq, lst ]
      where j | joining a == [] = OList []

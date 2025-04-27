@@ -30,8 +30,6 @@ import ArM.Types
 import ArM.Types.Saga
 import ArM.Helper
 
-import ArM.Debug.Trace
-
 -- |
 -- = Advancement
 
@@ -90,7 +88,7 @@ advanceSaga saga = reverse $ saga:advanceSaga' ts saga
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
-advanceSaga' (t:ts) saga0 = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
+advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
     where n = f t saga0
           f ssn saga | NoTime == nextSeason saga = saga 
                      | ssn < nextSeason saga = saga 
@@ -205,7 +203,7 @@ instance Advance Covenant where
    nextAdvancement c = f $ futureCovAdvancement c
        where f [] = NoTime
              f (x:_) = caSeason x
-   prepare x = trace "prepare Covenant" $ f x
+   prepare x = f x
         where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
                   | otherwise = y 
 
@@ -258,7 +256,7 @@ applyAdv (c,Nothing) = (c,Nothing)
 applyAdv (c,Just a) = (c',Just a')
     where (a',st') = applyAdvancement a st
           c' = c { state = Just st' }
-          st = trace (show $ characterSeason c ) $ fromMaybe defaultCS $ state c
+          st = fromMaybe defaultCS $ state c
 
 -- |
 -- Complete the advancement step and tidy up
