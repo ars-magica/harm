@@ -46,7 +46,7 @@ data Saga = Saga
          , armour :: ArmourDB
        }  deriving (Eq)
 
-sagaDesc :: Saga -> String
+sagaDesc :: Saga -> [ String ]
 sagaDesc = sagaDescription . sagaFile
 sagaTitle :: Saga -> String
 sagaTitle = title . sagaFile
@@ -88,7 +88,7 @@ data SagaFile = SagaFile
          , seasons :: [ SeasonTime ]
          , currentSeason :: SeasonTime
          , rootDirectory :: Maybe String
-         , sagaDescription :: String
+         , sagaDescription :: [String]
          , covenantFiles :: [String]
          , characterFiles :: [String]
          , spellFile :: String
@@ -103,7 +103,7 @@ instance FromJSON SagaFile where
        <*> v .:? "seasons" .!= []
        <*> v .:? "currentSeason" .!= NoTime
        <*> v .:? "rootDirectory" 
-       <*> v .:? "description"  .!= ""
+       <*> v .:? "description"  .!= []
        <*> v .:? "covenantFiles" .!= []
        <*> v .:? "characterFiles" .!= []
        <*> v .:? "spellFile" .!= "spells.csv"

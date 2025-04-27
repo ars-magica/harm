@@ -69,6 +69,7 @@ covenant = fmap CovenantKey . memberOf
 
 instance HarmObject Covenant where
     name = covName . covenantConcept
+    description = covDescription . covenantConcept
 
 -- |
 -- = CovenantConcept Object
@@ -76,6 +77,7 @@ instance HarmObject Covenant where
 data CovenantConcept = CovenantConcept 
          { covName :: String
          , covConcept :: Maybe String
+         , covDescription :: [ String ]
          , covFounded :: Maybe Int
          , covAppearance :: Maybe String
          , covTribunal :: Maybe String
@@ -87,6 +89,7 @@ data CovenantConcept = CovenantConcept
 defaultCovConcept :: CovenantConcept 
 defaultCovConcept = CovenantConcept { covName = "Player Covenant"
                                   , covConcept = Nothing
+                                  , covDescription = [ ]
                                   , covFounded = Nothing
                                   , covAppearance = Nothing
                                   , covTribunal = Nothing
@@ -101,6 +104,7 @@ instance FromJSON CovenantConcept where
     parseJSON = withObject "CovenantConcept" $ \v -> CovenantConcept
         <$> v .: "name"
         <*> v .:? "concept"
+        <*> v .:? "description" .!= []
         <*> v .:? "founded"
         <*> v .:? "appearance"
         <*> v .:? "tribunal"

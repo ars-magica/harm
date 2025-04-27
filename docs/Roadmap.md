@@ -1,20 +1,52 @@
 ---
 tags:
   - armchar/json/cli
+title:
 ---
 
 + [[Visual Roadmap.canvas|Visual Roadmap]]
 
 # Roadmap
+## Check List
 
++ [ ] JSON syntax
+	+ [ ] Character
+	+ [x] Covenant
+	+ [x] Saga  (SagaFile)
++ [ ] Wiki layout
+	+ [ ] character view (Cieran)
+	+ [x] covenant view (Elk's Run)
+	+ [x] saga view
+	+ [ ] annals view
+
+## Plan
+
++ [ ] Phase 1.Consolidation
+	+ [ ] Covenant
+		+ [ ] Story advancement
+			+ [ ] SQ
+			+ [ ] Narrative
+			+ [ ] Comment
+			+ [ ] Should we allow multiple stories in the season?
+		+ [ ] Story object
+			+ [ ] Narrative
+			+ [ ] Comment
+			+ [ ] SQ
+		+ [ ] JSON Syntax for advancement
+		+ [ ] WIki layout for advancement
+	+ [ ] Validate missing seasons
+	+ [ ] Character advancement
+		+ [ ] Narrative 
+		+ [ ] Comment
+	+ [ ] SQ from book
+		+ [ ] Validate Reading Advancement
+		+ [ ] levelCap on ProtoTrait - where should this go?
+	+ [ ] Display aging bonus etc
 + [ ] **Review** Hibernia Saga
 	+ [ ] Fix ongoing
 		+ [ ] [[Reading and Books]]
 		+ [ ] Check Exposure
-		+ [ ] Check Narrative + Comment
-		+ [ ] Narrative on Saga
 		+ [ ] Comment on ProtoTrait
-		+ [ ] Narrative and advancement on covenant
 		+ [ ] Validation: Compare SQ
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
@@ -27,14 +59,8 @@ tags:
 	+ [ ] Review covenant sheet and library
 	+ [ ] Review object structure
 		+ [ ] AnnalSeason 
-		+ [ ] Character with State
-		+ [ ] Covenant with State
-		+ [ ] SagaState
 	+ [ ] Specialists (copyists in particular)
-+ [ ] Phase 1. [[Covenant]]
-	+ [ ] SQ from book
-		+ [ ] Validate Reading Advancement
-		+ [ ] levelCap on ProtoTrait - where should this go?
++ [ ] Phase 2. [[Covenant]]
 	+ [ ] Reading and copying advancements
 		+ [ ] calculate book quality from author
 		+ [ ] check for rereading of tractatus
@@ -43,18 +69,21 @@ tags:
 			+ [ ] covenant advancement may depend on character advancement
 			+ [ ] character advancement depends on previous covenant state for book availability
 			+ [ ] new books are created by characters and may propagate into the covenant advancement, augmenting the library
-		+ [ ] review use of ID
+		+ [x] review use of ID
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
 	+ [ ] group and  sort books in library
 	+ [ ] Handle Antologies
-+ [ ] Phase 2. Advancement 
++ [ ] Phase 3. Advancement 
 	+ [ ] Author books
 	+ [ ] Teaching/Taught
 		+ [ ] Difficult to derive SQ from the teacher
 		+ [ ] Could potentially augment advancement and advance in multiple steps
 		+ [ ] Training
 	+ [ ] Lab Total
+		+ [ ] Define Lab object
+		+ [ ] Advance lab (refinement and virtue installation)
+		+ [ ] Use lab bonuses in lab total
 	+ [ ] Enchantments
 		+ [ ] Create Lesser Enchantments
 		+ [ ] Create Greater Enchanted Devices with state
@@ -64,19 +93,16 @@ tags:
 	+ [ ] Virtue/Flaw descriptions
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
-	+ [ ] Validate missing seasons
 	+ [ ] Advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 	+ [ ] Consider a list of narrative items in advancements
-	+ [ ] Covenant Advancement with list of stories with SQ
 + [ ] Phase 4. Polish
 	+ [ ] Break up possession
 		+ [ ] different constructors for weapon and item
 		+ [ ] parse JSON with different constructors
 		+ [ ] support book possession
 		+ [ ] Get book from own CharacterState - when Possession supports book
-	+ [ ] Display aging bonus etc
 	+ [ ] Mark house virtues, mysteries etc
 	+ [ ] Refactor and document code
 		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings

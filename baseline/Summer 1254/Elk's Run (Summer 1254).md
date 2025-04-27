@@ -1,10 +1,10 @@
 # Elk's Run
 
-Player Covenant
++ Player Covenant
++ **Founded** 1170
++ **Appearance** Situated in a warm valley in Munster
 
-*Founded* Just 1170
-
-**Appearance** Situated in a warm valley in Munster
+Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 for the purpose of this saga.
 
 ## Summer 1254
 

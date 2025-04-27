@@ -44,7 +44,7 @@ data SpellRecord = SpellRecord
     , formReq :: [String]
     , rdt :: (String,String,String)   -- ^ Range/Duration/Target
     , specialSpell :: [String]        -- ^ Special tags, like Ritual or Mutantum.
-    , description :: String           -- ^ Freeform description of the effect
+    , spellDescription :: String           -- ^ Freeform description of the effect
     , design :: String                -- ^ Level calculation
     , spellComment :: String          -- ^ Freeform remarks that do not fit elsewhere
     , cite :: String                  -- ^ Source reference
@@ -70,7 +70,7 @@ instance ArMCSV SpellRecord where
                 , formReq = filter (/="") $ splitOn ";" x6
                 , rdt = (x8, x9, x10)
                 , specialSpell =  filter (/="") $ splitOn ";" x11
-                , description = x12
+                , spellDescription = x12
                 , design = x13
                 , spellComment = x14
                 , cite = x15
@@ -86,7 +86,7 @@ instance ArMCSV SpellRecord where
                    , formReq = []
                    , rdt = ("Per","Mom","Ind")
                    , specialSpell = []
-                   , description = ""
+                   , spellDescription = ""
                    , design = ""
                    , spellComment = ""
                    , cite = ""

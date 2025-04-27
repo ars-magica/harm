@@ -68,6 +68,10 @@ class Timed h => HarmObject h where
     -- | Full name of the entity
     name :: h -> String
 
+    -- | Full name of the entity
+    description :: h -> [ String ]
+    description _ = []
+
     -- | String identifying the object and its state
     stateName :: h -> String
     stateName x = name x ++ " (" ++ show (season x) ++ ")"

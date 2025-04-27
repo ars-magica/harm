@@ -537,7 +537,7 @@ coreSpellRecordMD :: Maybe SpellRecord -> OList
 coreSpellRecordMD Nothing = OList []
 coreSpellRecordMD sr = OList [ reqstr
                              , OString $ (showRDT sp) ++ spstr
-                             , os (description sp)
+                             , os (spellDescription sp)
                              , os (design sp)
                              , os (cite sp)
                              ]
@@ -593,7 +593,7 @@ instance Markdown Saga where
     printMD saga = OList 
         [ OList [ OString $ "# " ++ name saga
                 , OString ""
-                , OString $ sagaDesc saga
+                , OList $ map OString $ sagaDesc saga
                 , OString ""
                 ]
         , OList $ [ OString $ "+ " ++ pagesLink (show x) | x <- stateSeasons saga ] 
@@ -640,15 +640,17 @@ instance Markdown Covenant where
 
 instance LongSheet CovenantConcept
 instance Markdown CovenantConcept where
-    printMD cov = OList  
-       [ OString $ fromMaybe "" $ covConcept cov
-       , OString ""
-       , OString $ "*Founded* " ++ (show $ covFounded cov)
-       , OString ""
-       , OString app
-       ]
-       where app | isNothing (covAppearance cov) = ""
-                 | otherwise = "**Appearance** " ++ (fromJust $ covAppearance cov)
+    printMD cc = OList $ bullets cc ++ fd (covDescription cc)
+      where bullets = map OString . map ("+ "++) . covconceptHelper
+            fd [] = []
+            fd (x:xs) = OString "":OString x:fd xs
+
+covconceptHelper :: CovenantConcept -> [ String ]
+covconceptHelper cc = filterNothing 
+   [ covConcept cc
+   , fmap ( ("**Founded** "++) . show ) (covFounded cc)
+   , fmap  ("**Appearance** "++)  (covAppearance cc)
+   ]
 
 formatTitle :: Book -> String
 formatTitle book = tis ++ aus ++ dat

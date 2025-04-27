@@ -5,7 +5,9 @@
       , "tribunal" : "Hibernia"
       , "appearance" : "Situated in a warm valley in Munster"
       , "founded" : 1170
-      , "data" : { }
+      , "description" : [
+	 "Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 for the purpose of this saga."
+      ]
       }
    , "state" : {
       "librarycsv" : "Data/books.csv"
