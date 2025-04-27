@@ -1664,11 +1664,11 @@ Total: 1309 levels of spells.
 
 ## Future Advancement
 
-+ Autumn 1255 (2.0xp) Authoring (Exposure)
++ Autumn 1255 (2xp) Authoring (Exposure)
     + Auram Tracatus (64xp)
     + Ability: Latin 2xp; 
     + Possession: Me vis (4)
-+ Winter 1256 (2.0xp) Teaching (Exposure)
++ Winter 1256 (2xp) Teaching (Exposure)
     + Teaching Luciu
     + Ability: Teaching 2xp; 
     + Aging  No roll. No aging.

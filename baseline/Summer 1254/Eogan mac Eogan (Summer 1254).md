@@ -107,10 +107,10 @@ Weakness [for Dogs] (-1),
 
 ## Future Advancement
 
-+ Autumn 1254 (2.0xp) Taming
++ Autumn 1254 (2xp) Taming
     + Train three lymers and a greyhound to Loyal +1.
     + Ability: Animal Handling 2xp; 
-+ Winter 1255 (2.0xp) Trained
++ Winter 1255 (2xp) Trained
     + Train one lymer in hunt +8 xp.
     + Ability: Hunt 2xp; 
 

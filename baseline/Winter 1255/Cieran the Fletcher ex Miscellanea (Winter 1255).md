@@ -1607,23 +1607,23 @@ Total: 1183 levels of spells.
 
 ## Future Advancement
 
-+ Spring 1255 (2.0xp) LabWork (Exposure)
++ Spring 1255 (2xp) LabWork (Exposure)
     + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
     + Ability: Magic Theory 2xp; 
     + Spell: Circular Ward Against Demons 0xp Penetration
     + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
     + Spell: Watching Ward 0xp Quiet Casting
-+ Summer 1255 (3.0xp) LabWork (Exposure)
++ Summer 1255 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
     + Spell: The Shadow of Human Life 0xp Quiet Casting
     + Spell: The Studious Doppleganger 0xp Quiet Casting
-+ Autumn 1255 (2.0xp) Authoring (Exposure)
++ Autumn 1255 (2xp) Authoring (Exposure)
     + Auram Tracatus (64xp)
     + Ability: Latin 2xp; 
     + Possession: Me vis (4)
-+ Winter 1256 (2.0xp) Teaching (Exposure)
++ Winter 1256 (2xp) Teaching (Exposure)
     + Teaching Luciu
     + Ability: Teaching 2xp; 
     + Aging  No roll. No aging.

@@ -50,6 +50,7 @@ import Data.Maybe
 import Data.List 
 import Data.Char 
 import Data.Aeson 
+import Data.Aeson.Extra
 import GHC.Generics
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Control.Monad
@@ -205,8 +206,8 @@ instance FromJSON Advancement where
         <$> v .:? "mode" .!= CharGen "Nothing"
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"
-        <*> v `parseSingleton` "narrative" 
-        <*> v `parseSingleton` "comment" 
+        <*> v `parseCollapsedList` "narrative" 
+        <*> v `parseCollapsedList` "comment" 
         <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
@@ -272,7 +273,7 @@ instance StoryObject Advancement where
          where xps | sx == Nothing = ""
                    | otherwise = " (" ++ ishow sx ++ "xp)" 
                sx = sourceQuality a
-               ishow = show . fromJust
+               ishow = showNum . fromJust
                y = advYears a
      narrative  = advNarrative
      comment  = advComment
@@ -297,13 +298,19 @@ showYears (Just x) = " (" ++ show x ++ " years)"
 
 instance StoryObject AugmentedAdvancement where
      name a = showTime xps (season a) (mode a) y 
-         where xps | sx == Nothing = ""
-                   | otherwise = " (" ++ ishow sx ++ "xp)" 
-               sx = sourceQuality a
-               ishow = show . fromJust
+         where xps = showSQ (sourceQuality a) (effectiveSQ a)
                y = augYears a
      narrative  = narrative . advancement
      comment  = comment . advancement
+
+-- | Render the source quality of an advancement
+showSQ :: Maybe XPType -> XPType -> String
+showSQ Nothing 0 = " (0xp)"
+showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
+showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
+showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
+    where f 0 = ""
+          f z = "+" ++ showNum z
 instance AdvancementLike AugmentedAdvancement where
      mode a = advMode  $ advancement a
      usesBook  a = advUses  $ advancement a

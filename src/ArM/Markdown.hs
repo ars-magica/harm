@@ -308,14 +308,6 @@ instance Markdown OtherTrait where
 -- |
 -- = Advancements
 
--- | Render the source quality of an advancement
-showSQ :: Maybe XPType -> XPType -> String
-showSQ Nothing 0 = " (0xp)"
-showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
-showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
-showSQ (Just x) (y) = " (" ++ showNum x ++ f (y-x) ++ "xp)"
-    where f 0 = ""
-          f z = "+" ++ showNum z
 
 instance Markdown AugCovAdvancement where
    printMD = printMD . contractAdvancement

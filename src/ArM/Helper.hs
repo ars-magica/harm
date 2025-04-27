@@ -1,5 +1,3 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  ArM.Helper
@@ -19,24 +17,6 @@ import Data.List (sort)
 import qualified Network.URI.Encode as URI
 import ArM.BasicIO
 import Data.Char
-import Data.Aeson
-import Data.Aeson.Types
-import Data.Aeson.Extra
-import GHC.Generics
-import qualified Data.Text as T
-import ArM.Debug.Trace
-
--- | Parse an optional list of strings from JSON, accepting a string
--- as a singleton list.
-parseSingleton :: Object -> T.Text -> Parser [String]
-parseSingleton v k = fmap singleton ( v `parseCollapsedList` k )
-
-newtype StringList = StringList [String] deriving (Generic,Show,Eq)
-instance FromJSON StringList
-
-singleton :: Maybe StringList -> [String]
-singleton Nothing = ttrace []
-singleton (Just (StringList xs)) = ttrace xs
 
 -- |
 -- Trim away whitespace from the head and tail of the string.
