@@ -246,7 +246,21 @@ instance Advance Character where
    nextAdvancement = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
-   prepare = prepareCharacter
+   -- | Compute the initial state if no state is recorded.
+   -- The function uses `applyCGA` to process all of the pregame advancements.
+   -- It then calls `addConfidence` to add the confidence trait to the state
+   -- for the returned `Character` object
+   prepare c | state c /= Nothing = c
+             | otherwise = c { state = newstate
+                             , pregameDesign = xs
+                             , pregameAdvancement = []
+                             , entryTime = f $ futureAdvancement c
+                             }
+            where as = pregameAdvancement  c 
+                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
+                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
+                  f [] = NoTime
+                  f (x:_) = season x
 
 -- | Apply advancement
 -- This function is generic, and used for both chargen and ingame 
@@ -279,23 +293,6 @@ completeAdv (c,Just a) = c { pastAdvancement = a:pastAdvancement c }
 -- |
 -- == Char Gen
 
--- | Compute the initial state if no state is recorded.
--- The function uses `applyCGA` to process all of the pregame advancements.
--- It then calls `addConfidence` to add the confidence trait to the state
--- for the returned `Character` object
-prepareCharacter :: Character -> Character
-prepareCharacter c 
-            | state c /= Nothing = c
-            | otherwise = c { state = newstate
-                            , pregameDesign = xs
-                            , pregameAdvancement = []
-                            , entryTime = f $ futureAdvancement c
-                            }
-            where as = pregameAdvancement  c 
-                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
-                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
-                  f [] = NoTime
-                  f (x:_) = season x
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 --
