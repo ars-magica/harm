@@ -19,7 +19,7 @@ module ArM.Types.HarmSagaObject where
 import ArM.Types.Saga
 import ArM.Types.HarmObject
 import ArM.Types.Covenant
-import ArM.Char.Types.Character
+import ArM.Types.Character
 
 
 class KeyObject h => HarmSagaObject h where

@@ -14,17 +14,16 @@
 -- advancement, including persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Character ( module ArM.Char.Types.Character
+module ArM.Char.Character ( module ArM.Types.Character
                           , module ArM.Types.KeyPair
                           , module ArM.Types.Calendar
-                          , module ArM.Char.Types.Advancement
+                          , module ArM.Types.Advancement
                           , Advancement(..)
                           , prepareCharacter
                           , Advance(..)
                           , Season(..)
                           , SeasonTime(..)
                           , characterEntryTime
-                          , HarmObject(..)
                           , nextAdv
                           , applyAdv
                           , completeAdv
@@ -35,12 +34,12 @@ import Data.List
 -- import Control.Monad
 
 import ArM.Char.Trait
-import ArM.Char.Types.Advancement
+import ArM.Types.Advancement
 import ArM.Types.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.Library
 import ArM.Types.HarmObject
-import ArM.Char.Types.Character
+import ArM.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Validation
 import ArM.Char.Inference
@@ -48,10 +47,6 @@ import ArM.Char.Virtues
 import ArM.GameRules
 
 import ArM.Debug.Trace
-
--- |
--- = The Harm Object
-
 
 instance HarmObject Character where
     name = fullConceptName . concept

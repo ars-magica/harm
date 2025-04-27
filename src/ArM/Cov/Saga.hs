@@ -25,13 +25,9 @@ module ArM.Cov.Saga ( Saga(..)
                     ) where
 
 import Data.Maybe 
-import Data.Aeson 
 import Data.List 
-import GHC.Generics
 
 import ArM.Char.Character
-import ArM.DB.Spell
-import ArM.DB.Weapon
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types.HarmObject

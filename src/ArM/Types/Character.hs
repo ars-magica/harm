@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Types.Character
+-- Module      :  ArM.Types.Character
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -14,14 +14,14 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Types.Character where
+module ArM.Types.Character where
 
 import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
 import ArM.Char.Trait
-import ArM.Char.Types.Advancement
+import ArM.Types.Advancement
 import ArM.Types.Calendar
 import ArM.Types.KeyPair
 import ArM.Types.HarmObject

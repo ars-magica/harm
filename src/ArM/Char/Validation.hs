@@ -19,9 +19,9 @@
 -----------------------------------------------------------------------------
 module ArM.Char.Validation (validate,validateCharGen,initialLimits) where
 
-import ArM.Char.Types.Advancement
+import ArM.Types.Advancement
 import ArM.Char.Trait
-import ArM.Char.Types.Character
+import ArM.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
 import ArM.GameRules

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Types.Trait
+-- Module      :  ArM.Types.Trait
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,7 +17,7 @@
 -- for `show`, sorting, and JSON.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Char.Types.Trait ( TraitKey(..)
+module ArM.Types.Trait ( TraitKey(..)
                             , Trait(..)
                             , Ability(..)
                             , Characteristic(..)

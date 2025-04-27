@@ -16,9 +16,9 @@
 -----------------------------------------------------------------------------
 module ArM.Char.Inference (addInference) where
 
-import ArM.Char.Types.Advancement
+import ArM.Types.Advancement
 import ArM.Char.Trait
-import ArM.Char.Types.Character
+import ArM.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Types.Calendar
 import ArM.Char.Virtues

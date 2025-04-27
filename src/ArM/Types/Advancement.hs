@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Types.Advancement
+-- Module      :  ArM.Types.Advancement
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -38,7 +38,7 @@
 -- has `inferredTraits` for additional implied changes.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Types.Advancement where
+module ArM.Types.Advancement where
 
 import ArM.Helper
 import ArM.Char.Trait

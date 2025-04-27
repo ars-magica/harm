@@ -23,7 +23,7 @@
 -- `toTrait` and `getTrait` functions.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Trait ( module ArM.Char.Types.Trait
+module ArM.Char.Trait ( module ArM.Types.Trait
                       , ProtoTrait(..)
                       , TraitKey(..)
                       , TraitType(..)
@@ -40,7 +40,7 @@ module ArM.Char.Trait ( module ArM.Char.Types.Trait
 
 import ArM.GameRules
 import ArM.Helper
-import ArM.Char.Types.Trait
+import ArM.Types.Trait
 
 import GHC.Generics
 import Data.Aeson

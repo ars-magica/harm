@@ -18,7 +18,7 @@ module ArM.Char.Virtues ( inferTraits
                         , vfBonusSQ
                         ) where
 
-import ArM.Char.Types.Advancement
+import ArM.Types.Advancement
 import ArM.Char.Trait
 import ArM.Helper
 import ArM.GameRules

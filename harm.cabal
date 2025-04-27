@@ -64,10 +64,10 @@ common harm-deps
                        , ArM.Types.Saga
                        , ArM.Types.KeyPair
                        , ArM.Types.Library
-                       , ArM.Char.Types.Character
-                       , ArM.Char.Types.Advancement
+                       , ArM.Types.Character
+                       , ArM.Types.Advancement
                        , ArM.Char.Trait
-                       , ArM.Char.Types.Trait
+                       , ArM.Types.Trait
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmObject
                        , ArM.Types.HarmSagaObject
