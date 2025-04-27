@@ -68,13 +68,25 @@ class Timed a => Advance a where
 -- characters and covenants advance accordingly.
 instance Advance Saga where
    -- advance :: SeasonTime -> a -> a
-   advance t saga = saga { sagaState = advance t (sagaState saga) }
+   advance t saga 
+      | NoTime == ns = saga 
+      | t < ns = saga 
+      | otherwise = advance t $ step saga
+     where ns = nextSeason saga
 
    -- step :: a -> a
-   step saga = saga { sagaState = step (sagaState saga) }
+   step saga = saga { sagaState = st' }
+     where st' = st { stateTitle = stateTitle st 
+                    , seasonTime = ns
+                    , covenants = cov
+                    , characters = ch
+                    }
+           st = sagaState saga
+           (cov,ch) = jointAdvance saga ((covenants st),(characters st))
+           ns = nextSeason saga
 
    -- nextSeason :: a -> SeasonTime
-   nextSeason = nextSeason . sagaState
+   nextSeason = sagaStateNext . sagaState
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
@@ -86,22 +98,9 @@ advanceSaga' [] _ = []
 advanceSaga' (t:ts) x = trace ("adv> " ++ show t) $ n:advanceSaga' ts n
     where n = advance t x
 
-instance Advance SagaState where
-   advance t saga 
-      | NoTime == ns = saga 
-      | t < ns = saga 
-      | otherwise = advance t $ step saga
-     where ns = nextSeason saga
 
-   step saga = saga { stateTitle = stateTitle saga 
-                    , seasonTime = ns
-                    , covenants = cov
-                    , characters = ch
-                    }
-     where (cov,ch) = jointAdvance saga ((covenants saga),(characters saga))
-           ns = nextSeason saga
-
-   nextSeason saga | ssn == GameStart = min charnext covnext 
+sagaStateNext :: SagaState -> SeasonTime
+sagaStateNext saga | ssn == GameStart = min charnext covnext 
                    | ssn == NoTime = min charnext covnext 
                    | otherwise = seasonNext ssn
       where charnext = foldl min NoTime [ nextSeason x | x <- characters saga ]
@@ -113,7 +112,7 @@ instance Advance SagaState where
 -- Advance listed covenants and characters one season forward.
 -- The advancement happens jointly, with several passes, to resolve
 -- inter-dependencies.
-jointAdvance :: SagaState         -- ^ Saga reference, passed to know what the next season is
+jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
 jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
@@ -125,7 +124,7 @@ type ChaAA = (Character,Maybe AugmentedAdvancement)
 
 -- |
 -- Get the next advancements, preparing for joint advancement
-nextJoint :: SagaState -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
+nextJoint :: Saga -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
 nextJoint saga (xs,ys) = (map (nextCovAdv ns) xs,map (nextAdv ns) ys)
            where ns = nextSeason saga
 
