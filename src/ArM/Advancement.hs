@@ -12,7 +12,10 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Advancement ( Advance(..), Validation(..), advanceSaga ) where
+module ArM.Advancement ( advanceSaga 
+                       , Advance(..)
+		       , Validation(..)
+		       ) where
 
 import Data.Maybe 
 import Data.List 
@@ -28,7 +31,7 @@ import ArM.Types.ProtoTrait
 import ArM.Types.Covenant
 -- import ArM.Types.Character
 import ArM.Types.Library
-import ArM.Types.HarmObject
+import ArM.Types
 import ArM.Types.Saga
 import ArM.Helper
 import ArM.GameRules

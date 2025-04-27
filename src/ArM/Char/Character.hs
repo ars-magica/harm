@@ -15,12 +15,8 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Character ( module ArM.Types.Character
-                          , module ArM.Types.KeyPair
-                          , module ArM.Types.Calendar
                           , module ArM.Types.Advancement
                           , Advancement(..)
-                          , Season(..)
-                          , SeasonTime(..)
                           , characterEntryTime
                           ) where
 
@@ -29,8 +25,7 @@ module ArM.Char.Character ( module ArM.Types.Character
 -- import Control.Monad
 
 import ArM.Types.Advancement
-import ArM.Types.KeyPair
-import ArM.Types.Calendar
+import ArM.Types
 -- import ArM.Types.Library
 import ArM.Types.Character
 -- import ArM.Char.Validation

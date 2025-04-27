@@ -14,7 +14,7 @@
 -- cluttering, it is kept as a separate module.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey where
+module ArM.Types.TraitKey ( TraitKey(..) ) where
 
 import Data.Aeson
 import GHC.Generics

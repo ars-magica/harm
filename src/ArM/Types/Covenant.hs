@@ -33,9 +33,9 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
-import ArM.Char.Character
 import ArM.Types.Library
-import ArM.Types.HarmObject
+import ArM.Types.Character
+import ArM.Types
 import ArM.Helper
 
 import ArM.Debug.Trace

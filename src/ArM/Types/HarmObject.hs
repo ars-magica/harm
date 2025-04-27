@@ -10,7 +10,10 @@
 -- Description :  HarmKey type used to index arbitrary hArM objects.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.HarmObject where
+module ArM.Types.HarmObject ( HarmKey(..)
+                            , HarmObject(..)
+                            , KeyObject(..)
+                            ) where
 
 import Data.Aeson
 import Data.List

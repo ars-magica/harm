@@ -34,7 +34,7 @@ import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types.Saga
-import ArM.Types.HarmObject
+import ArM.Types
 import ArM.DB.Spell
 import ArM.GameRules
 import ArM.BasicIO

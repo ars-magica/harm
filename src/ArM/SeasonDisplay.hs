@@ -15,10 +15,11 @@ module ArM.SeasonDisplay ( sagaAnnals
 
 -- import Data.Maybe 
 
-import ArM.Char.Character 
+import ArM.Types.Advancement
+import ArM.Types.Character 
 import ArM.Cov.Saga
 import ArM.Types.Covenant
-import ArM.Types.HarmObject
+import ArM.Types
 import ArM.Markdown
 import ArM.BasicIO
 import ArM.Helper

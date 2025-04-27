@@ -30,7 +30,7 @@ import ArM.Types.Covenant
 import ArM.Char.Character
 -- import ArM.Types.Character
 -- import ArM.Types.Calendar
-import ArM.Types.HarmObject
+import ArM.Types
 import ArM.Types.Saga
 import ArM.BasicIO
 import ArM.Helper
