@@ -26,11 +26,12 @@ import Text.ParserCombinators.Parsec
 
 import System.Directory
 
+import ArM.Advancement
 import ArM.Char.Character
 import ArM.Markdown
-import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types.Saga
+import ArM.Types.HarmObject
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.SeasonDisplay

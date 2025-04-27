@@ -18,6 +18,7 @@ module ArM.SeasonDisplay ( sagaAnnals
 import ArM.Char.Character 
 import ArM.Cov.Saga
 import ArM.Types.Covenant
+import ArM.Types.HarmObject
 import ArM.Markdown
 import ArM.BasicIO
 import ArM.Helper

@@ -27,6 +27,7 @@ import Data.Aeson
 import GHC.Generics
 
 import ArM.Char.Character
+import ArM.Types.HarmObject
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Types.Covenant
