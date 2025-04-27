@@ -16,6 +16,7 @@ module ArM.Char.Advancement ( module ArM.Types.Advancement
                             , module ArM.Char.Inference
                             , module ArM.Char.Validation
                             , prepareAdvancement 
+                            , applyAdvancement 
                             , agePT
                             ) where
 
@@ -129,6 +130,25 @@ charTeacherSQ cs = 3 + com + tch
           -- add speciality
           -- add one/two student bonus
 -- Teacher SQ +
+
+-- |
+-- = Applying the Advancement
+
+-- | Apply advancement
+-- This function is generic, and used for both chargen and ingame 
+-- advancement.  The AugmentedAdvancement has to be prepared differently,
+-- using either `prepareAdvancement` or `prepareCharGen`.
+applyAdvancement :: AugmentedAdvancement
+                 -> CharacterState 
+                 -> (AugmentedAdvancement,CharacterState)
+applyAdvancement a cs = (a,cs')
+    where cs' = cs { charTime = season a, traits = new }
+          new = advanceTraitList change tmp
+          tmp = advanceTraitList inferred old
+          change = sortTraits $ changes a
+          inferred = sortTraits $ inferredTraits a
+          old = sortTraits $ traits cs
+
 
 -- |
 -- == Convenience Functions (Exported)

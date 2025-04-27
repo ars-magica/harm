@@ -18,8 +18,6 @@ module ArM.Char.Character ( module ArM.Types.Character
                           , module ArM.Char.Advancement
                           , characterEntryTime
                           , prepareCharacter
-                          , applyAdvancement
-			  , agePT
                           ) where
 
 import Data.Maybe 
@@ -32,7 +30,6 @@ import ArM.Types
 -- import ArM.Types.Library
 import ArM.Types.Character
 import ArM.Types.Trait
-import ArM.Types.ProtoTrait
 
 -- |
 -- = Convenience Functions for Character Properties
@@ -44,24 +41,6 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
      where tm = entryTime c
            f [] = tm
            f (x:_) = season x
-
--- |
--- = Convenience Functions for Character Advancement
-
--- | Apply advancement
--- This function is generic, and used for both chargen and ingame 
--- advancement.  The AugmentedAdvancement has to be prepared differently,
--- using either `prepareAdvancement` or `prepareCharGen`.
-applyAdvancement :: AugmentedAdvancement
-                 -> CharacterState 
-                 -> (AugmentedAdvancement,CharacterState)
-applyAdvancement a cs = (a,cs')
-    where cs' = cs { charTime = season a, traits = new }
-          new = advanceTraitList change tmp
-          tmp = advanceTraitList inferred old
-          change = sortTraits $ changes a
-          inferred = sortTraits $ inferredTraits a
-          old = sortTraits $ traits cs
 
 
 -- |

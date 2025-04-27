@@ -22,7 +22,6 @@ import Data.List
 
 -- import ArM.Cov.Saga
 import ArM.Char.Character
-import ArM.Char.CharacterSheet
 -- import ArM.Types.Trait
 import ArM.Types.Covenant
 -- import ArM.Types.Character
@@ -250,6 +249,9 @@ instance Advance Character where
 
 -- |
 -- Apply the next augmented advancement.
+--
+-- The main process is defined by the `applyAdvancement` function from
+-- `ArM.Char.Advancement`
 applyAdv :: (Character,Maybe AugmentedAdvancement)
          -> (Character,Maybe AugmentedAdvancement)
 applyAdv (c,Nothing) = (c,Nothing)
@@ -267,6 +269,9 @@ completeAdv (c,Just a) = c { pastAdvancement = a:pastAdvancement c }
 
 -- |
 -- Get the next augmented advancement.
+--
+-- The main process is defined by the `prepareAdvancement` function from
+-- `ArM.Char.Advancement`
 nextAdv :: SeasonTime -> Character -> (Character,Maybe AugmentedAdvancement)
 nextAdv ns ch | fs == [] = (ch,Nothing)
               | season adv > ns = (ch,Nothing)
