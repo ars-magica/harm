@@ -67,9 +67,10 @@ instance KeyObject Covenant where
 covenant :: CharacterState -> Maybe HarmKey
 covenant = fmap CovenantKey . memberOf 
 
-instance HarmObject Covenant where
+instance HarmObject Covenant 
+instance StoryObject Covenant where
     name = covName . covenantConcept
-    description = covDescription . covenantConcept
+    narrative = covDescription . covenantConcept
 
 -- |
 -- = CovenantConcept Object

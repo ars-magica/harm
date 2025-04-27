@@ -77,7 +77,7 @@ winterEvents c a | isWinter $ season a
                           | otherwise = x { inferredTraits = 
                                     defaultPT { other = Just "Warping"
                                               , points = Just 1
-                                              , comment = Just "from Longevity Ritual" }
+                                              , ptComment = Just "from Longevity Ritual" }
                                     :inferredTraits x }
               addYear o x | addsYear o = x
                           | otherwise = x { inferredTraits = agePT 1 :inferredTraits x }

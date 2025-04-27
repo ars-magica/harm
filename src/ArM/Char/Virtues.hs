@@ -49,7 +49,7 @@ vl2 = [ ( "Puissant (art)",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } 
                      , defaultPT { ability = Just "Second Sight", xp = Just 5 } 
                      , defaultPT { virtue = Just "Second Sight", cost = Just 0
-                                 , comment = Just "from Strong Faerie Blood" } 
+                                 , ptComment = Just "from Strong Faerie Blood" } 
                      ] )
      , ( "Faerie Blood",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } ] )

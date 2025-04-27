@@ -20,6 +20,7 @@ import Data.List
 import GHC.Generics
 import ArM.Debug.Trace
 import ArM.Types.Calendar
+import ArM.Types.Story
 
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
@@ -64,13 +65,9 @@ class KeyObject h where
 -- |
 -- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
-class Timed h => HarmObject h where
+class (Timed h, StoryObject h) => HarmObject h where
     -- | Full name of the entity
-    name :: h -> String
-
-    -- | Full name of the entity
-    description :: h -> [ String ]
-    description _ = []
+    -- name :: h -> String
 
     -- | String identifying the object and its state
     stateName :: h -> String

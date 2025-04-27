@@ -342,17 +342,15 @@ printCovChanges a = OList [ OString "+ Changes", j, lv, acq, lst ]
              | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList
-       [ OString $ showTime xps (season a) (mode a) y 
-       , OList [ stringMD $ narrative a ]
-       , OList [ stringMD $ seasonComment a ]
+       [ OString $ name a
+       , OList $ map OString $ narrative a 
+       , OList $ map OString $ comment a 
        , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a
        ]
-      where xps = showSQ (sourceQuality a) (effectiveSQ a)
-            y = augYears a
-            inf = inferredTraits a
+      where inf = inferredTraits a
             chn = changes a
             chnl | chn == [] = OList []
                  | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
@@ -365,28 +363,15 @@ usesString a | u == [] = OList []
          where u = usesBook a
 
 
--- | Render the season and mode of an advancement
-showTime :: String -> SeasonTime -> AdvancementType -> Maybe Int -> String
-showTime xps NoTime tp y = (show tp ++ xps ++ showYears y)
-showTime xps x tp y = (show x ++ xps ++ showYears y ++ " " ++ show tp)
-
--- | Render the duration of an advancement
-showYears :: Maybe Int -> String
-showYears Nothing = ""
-showYears (Just x) = " (" ++ show x ++ " years)"
 
 instance Markdown Advancement where
    printMD a = indentOList $ OList
-         [ OString $ showTime xps (season a) (mode a) y 
-         , OList [ stringMD $ narrative a ]
+         [ OString $ name a
+         , OList $ map OString $ narrative a 
+         , OList $ map OString $ comment a 
          , usesString a
          , OList $ map printMD $ changes a
          ]
-      where xps | sx == Nothing = ""
-                | otherwise = " (" ++ ishow sx ++ "xp)" 
-            sx = sourceQuality a
-            ishow = show . fromJust
-            y = advYears a
 
 -- |
 -- = Long Sheet Format

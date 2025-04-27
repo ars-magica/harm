@@ -61,8 +61,10 @@ instance Show Saga where
 
 instance Timed Saga where
     season = seasonTime . sagaState
-instance HarmObject Saga where
+instance StoryObject Saga where
     name = sagaTitle
+    narrative = sagaDesc
+instance HarmObject Saga where
     stateName s = name s ++ " - " ++ (show $ season $ sagaState s)
 
 -- | Saga state at a particular point in time, comprising characters and

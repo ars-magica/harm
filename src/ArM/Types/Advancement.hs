@@ -148,10 +148,8 @@ dropWord (x:xs) | isSpace x = trim xs
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- AugmentedAdvanceemnt
-class AdvancementLike a where
+class StoryObject a => AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
-     narrative :: a -> Maybe String -- ^ narrative description of the activities
-     seasonComment :: a -> Maybe String -- ^ freeform description of the activities
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
      sourceCap :: a -> Maybe Int -- ^ Level cap from the source of learning
@@ -172,8 +170,8 @@ data Advancement = Advancement
      { advMode :: AdvancementType -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
      , advYears :: Maybe Int    -- ^ number of years advanced
-     , advNarrative :: Maybe String -- ^ narrative description of the activities
-     , advComment :: Maybe String -- ^ freeform description of the activities
+     , advNarrative :: [ String ] -- ^ narrative description of the activities
+     , advComment :: [ String ]   -- ^ freeform description of the activities
      , advUses :: [ String ] -- ^ Books used exclusively by the character
      -- , advReadTome :: String -- ^ Tome studied
      -- , advReadBook :: String -- ^ Partook studied
@@ -190,8 +188,8 @@ defaultAdv = Advancement
      { advMode = CharGen "Nothing"
      , advSeason = NoTime
      , advYears = Nothing
-     , advNarrative = Nothing
-     , advComment = Nothing
+     , advNarrative = []
+     , advComment = []
      , advUses = []
      , advSQ = Nothing
      , advCap = Nothing
@@ -207,13 +205,14 @@ instance FromJSON Advancement where
         <$> v .:? "mode" .!= CharGen "Nothing"
         <*> fmap parseSeasonTime ( v .:? "season" )
         <*> v .:? "years"
-        <*> v .:? "narrative"
-        <*> v .:? "comment"
+        <*> v `parseSingleton` "narrative" 
+        <*> v `parseSingleton` "comment" 
         <*> v .:? "usesBook"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
         <*> v .:? "bonusQuality"
         <*> v .:? "changes" .!= []
+
 
 -- |
 -- == The Augmented Advancement
@@ -268,20 +267,45 @@ defaultAA = Adv
 
 instance Timed Advancement where
      season  = advSeason
+instance StoryObject Advancement where
+     name a = showTime xps (season a) (mode a) y 
+         where xps | sx == Nothing = ""
+                   | otherwise = " (" ++ ishow sx ++ "xp)" 
+               sx = sourceQuality a
+               ishow = show . fromJust
+               y = advYears a
+     narrative  = advNarrative
+     comment  = advComment
 instance AdvancementLike Advancement where
      mode = advMode
-     narrative  = advNarrative
-     seasonComment  = advComment
      usesBook = advUses
      sourceQuality  = advSQ
      sourceCap  = advCap
      changes = advChanges
 instance Timed AugmentedAdvancement where
      season  = advSeason  .  advancement 
+
+-- | Render the season and mode of an advancement
+showTime :: String -> SeasonTime -> AdvancementType -> Maybe Int -> String
+showTime xps NoTime tp y = (show tp ++ xps ++ showYears y)
+showTime xps x tp y = (show x ++ xps ++ showYears y ++ " " ++ show tp)
+
+-- | Render the duration of an advancement
+showYears :: Maybe Int -> String
+showYears Nothing = ""
+showYears (Just x) = " (" ++ show x ++ " years)"
+
+instance StoryObject AugmentedAdvancement where
+     name a = showTime xps (season a) (mode a) y 
+         where xps | sx == Nothing = ""
+                   | otherwise = " (" ++ ishow sx ++ "xp)" 
+               sx = sourceQuality a
+               ishow = show . fromJust
+               y = augYears a
+     narrative  = narrative . advancement
+     comment  = comment . advancement
 instance AdvancementLike AugmentedAdvancement where
      mode a = advMode  $ advancement a
-     narrative  a = advNarrative  $ advancement  a
-     seasonComment  a = seasonComment  $ advancement  a
      usesBook  a = advUses  $ advancement a
      sourceQuality  a =  advSQ  $ advancement a
      sourceCap  = scoreCap

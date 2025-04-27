@@ -41,6 +41,7 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.Trait
+import ArM.Types.Story
 
 import GHC.Generics
 import Data.Aeson
@@ -110,7 +111,7 @@ data ProtoTrait = ProtoTrait
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
-    , comment :: Maybe String    -- ^ freeform comment
+    , ptComment :: Maybe String  -- ^ freeform comment
     } deriving (Eq,Generic)
 
 -- | Default ProtoTrait object, used internally for step-by-step construction of
@@ -149,7 +150,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , agingPts = Nothing
                              , charBonuses = []
                              , multiplicity = Nothing
-                             , comment = Nothing
+                             , ptComment = Nothing
                              }
 
 instance ToJSON ProtoTrait 
@@ -188,7 +189,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "agingPts"
         <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
-        <*> v .:?  "comment"
+        <*> v .:?  "comment" 
 
 showBonusScore :: ProtoTrait -> String
 showBonusScore pt | isNothing b = ""
@@ -213,9 +214,12 @@ showMastery Nothing = ""
 showMastery (Just []) = ""
 showMastery (Just (x:xs)) = ' ':(foldl (++) x $ map (", "++) xs)
 
+instance StoryObject ProtoTrait where
+   name = show . traitKey
+   comment = fromMaybe [] . fmap (:[]) . ptComment
 instance Show ProtoTrait  where
    show p = showPT p ++ cms
-      where cmt = (comment p)
+      where cmt = (ptComment p)
             cms | isNothing cmt = ""
                 | otherwise = " (" ++ fromJust cmt ++ ")"
 
@@ -337,7 +341,7 @@ data Aging = Aging
     , agingRollDie   :: Maybe Int    -- ^ aging roll die result
     , agingRoll      :: Maybe Int    -- ^ aging roll total
     , longevity      :: Maybe Int    -- ^ score of new longevity ritual
-    , agingLimit     :: Maybe Int    -- ^ freeform comment
+    , agingLimit     :: Maybe Int    -- ^ freeform ptComment
     , agingBonus     :: Maybe Int    -- ^ Bonus to aging rolls (excluding LR)
     , agingComment   :: Maybe String -- ^ age when aging rolls are required
     } deriving (Ord,Eq,Generic)
@@ -426,7 +430,7 @@ instance TraitType VF where
       where vf1 = VF { vfname = "", vfcost = fromMaybe 0 (cost p), vfDetail = fromMaybe "" $ detail p
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
-                    , vfComment = fromMaybe "" $ comment p }
+                    , vfComment = fromMaybe "" $ ptComment p }
     advanceTrait a x = x { vfMultiplicity = vfMultiplicity x + (fromMaybe 1 $ multiplicity a) }
 instance TraitType Ability where
     computeTrait p
@@ -483,7 +487,7 @@ instance TraitType Spell where
                       , spellExcessXP = y
                       , spellMultiplier = m
                       , spellCastingScore = Nothing
-                      , spellTComment = fromMaybe "" $ comment p
+                      , spellTComment = fromMaybe "" $ ptComment p
                       }
                 (s',y) = getAbilityScore (xp p)
                 fless = fromMaybe False $ flawless p
@@ -560,7 +564,7 @@ instance TraitType SpecialTrait where
        | strait p /= Nothing = Just $ SpecialTrait 
                            { specialTrait = fromJust ( strait p )
                            , specialScore = (score p) 
-                           , specialComment = comment p
+                           , specialComment = ptComment p
                            }
        | otherwise = Nothing
     advanceTrait a _ = fromJust $ computeTrait a

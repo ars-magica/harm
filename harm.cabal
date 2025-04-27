@@ -45,6 +45,7 @@ common deps
                        , text >= 1.2.4.0
                        , containers >= 0.6
                        , aeson >= 2.2.0.3
+		       , aeson-extra >= 0.5.1
                        , aeson-pretty >= 0.8
                        , bytestring >= 0.10.10
                        , unordered-containers >= 0.2.18

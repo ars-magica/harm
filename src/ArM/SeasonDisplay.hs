@@ -71,8 +71,8 @@ instance Timed EitherAug where
 instance Markdown CharAug where
    printMD (CharAug c a) = indentOList $ OList
        [ OString ("+ " ++ name c ++ " (" ++ show (mode a) ++ ")")
-       , OList [ stringMD $ narrative a ]
-       , OList [ stringMD $ seasonComment a ]
+       , OList  $ map OString $ narrative a 
+       , OList  $ map OString $ comment a 
        , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
        -- , chnl
        -- , infl

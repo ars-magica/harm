@@ -12,7 +12,8 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Types.Story ( Story(..)
-                          ) where
+                       , StoryObject(..)
+                       ) where
 
 import ArM.Types.Calendar
 import Data.Aeson 
@@ -38,3 +39,14 @@ instance FromJSON Story where
         <*> v .:? "comment" .!= []
         <*> v .:? "SQ" 
 
+class StoryObject ob where
+   name :: ob -> String
+   narrative :: ob -> [ String ]
+   narrative _ = []
+   comment :: ob -> [ String ]
+   comment _ = []
+
+instance StoryObject Story where
+   name = storyTitle
+   narrative = storyNarrative
+   comment = storyComment
