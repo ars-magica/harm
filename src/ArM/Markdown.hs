@@ -669,9 +669,7 @@ instance Markdown Book where
                  , OString $ "Key: " ++ bookID book ++ " (" ++ originalID book ++")"
                  ]
          ]
-         where ann = trim $ bookAnnotation book
-               ans | ann == "" = OList []
-                   | otherwise = OString $ ann
+         where ans = OList $ map ( OString . trim ) $ bookAnnotation book
                lng = trim $ fromMaybe "" $ bookLanguage book
                lns | lng == "" = OList []
                    | otherwise = OString $ "in " ++ lng

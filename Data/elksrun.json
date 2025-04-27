@@ -37,13 +37,19 @@
              , "Aedan MacCloud, an Irish lord, appears with his daughter, Deirdre, who is also betrothed to Joseph. It turns out that he has about eight wives, under old Brehon Law, often with faerie blessing. Aedan brother, a parish priest known as father Clint, is also part of the entourage.  They also bring two guards. Aedan's holdings are in the North of Ireland."
 	     ]
 	  , "comment" :
-	     [ "Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8)."
+	     [ "Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8), as proposed by Rhianna."
              , "One confidence point per character taking part."
 	     ]
 	  , "SQ" : 8
 	  }
-
        ]
+       , "acquired" :
+          [ { "bookID" : "Im-Vigil-Q8"
+	     , "stats" : { "quality" : 8 } 
+	  }, { "bookID" : "Im-Vigil-Q9"
+	  }, { "bookID" : "Im-Vigil-Q12"
+	  }
+	  ]
       }
    ]
 }

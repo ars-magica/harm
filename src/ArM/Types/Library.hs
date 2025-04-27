@@ -17,10 +17,10 @@
 module ArM.Types.Library where
 
 import Data.Aeson
+import Data.Aeson.Extra
 import GHC.Generics
 import Data.Maybe
 import Data.Text  (splitOn,unpack,pack)
-import Data.List
 import Text.Read 
 
 import ArM.DB.CSV
@@ -34,9 +34,15 @@ data BookStats = BookStats
          { topic :: TraitKey
          , quality :: Maybe Int
          , bookLevel :: Maybe Int
+         , reread :: Int
        }  deriving (Eq,Generic)
 instance ToJSON BookStats
-instance FromJSON BookStats
+instance FromJSON BookStats where
+    parseJSON = withObject "BookStats" $ \v -> BookStats
+        <$> v .:? "topic" .!= NoTrait
+        <*> v .:? "quality" 
+        <*> v .:? "level" 
+        <*> v .:? "reread"  .!= 1
 instance Show BookStats where
     show b = k ++ ' ':l ++ q
         where k = show $ topic b
@@ -53,15 +59,28 @@ data Book = Book
      , bookCreator :: String      -- ^ Creator of the copy or manuscript
      , bookDate :: SeasonTime     -- ^ Time the copy was made            
      , antologyOf :: [ Book ]     -- ^ The book is an antology of multiple books
-     , copiedFrom :: Maybe Book   -- ^ Book copied or Nothing for an original manuscript
-     , bookLocation :: String     -- ^ Location whre the book was written or copied
-     , bookAnnotation :: String   -- ^ Additional information in free text
+     , copiedFrom :: Maybe String   -- ^ Book copied or Nothing for an original manuscript
+     , bookLocation :: Maybe String     -- ^ Location whre the book was written or copied
+     , bookAnnotation :: [ String ]   -- ^ Additional information in free text
      , bookLanguage  :: Maybe String  -- ^ Language of the book
      , bookCount :: Int               -- ^ Number of copies 
      } deriving (Eq,Generic,Show)
 instance ToJSON Book
-instance FromJSON Book
+instance FromJSON Book where
+    parseJSON = withObject "Book" $ \v -> Book
+        <$> v .:? "bookID" .!= "No ID"
+        <*> v .:? "title" .!= "No title"
+        <*> v `parseCollapsedList` "stats" 
+        <*> v .:? "creator" .!= "N/A"
+        <*> v .:? "date" .!= NoTime
+        <*> v  `parseCollapsedList` "antologyOf" 
+        <*> v .:? "copiedFrom" 
+        <*> v .:? "location" 
+        <*> v  `parseCollapsedList` "comment" 
+        <*> v .:? "language" 
+        <*> v .:? "count"  .!= 1
 
+{-
 -- | The original of a given book (constituent book in the case of an anotology)
 originalBook :: Book -> Maybe HarmKey -> Maybe Book
 originalBook b Nothing = Just $ originalTome b
@@ -91,10 +110,24 @@ originalAuthor = bookCreator . originalTome
 -- | The original author of a given book
 originalTitle :: Book -> String
 originalTitle = bookTitle . originalTome
+-}
+
+-- | The original author of a given book
+originalTitle :: Book -> String
+originalTitle = bookTitle 
+-- | The original author of a given book
+originalAuthor :: Book -> String
+originalAuthor = bookCreator 
+-- | The original date the book was authored
+originalDate :: Book -> SeasonTime
+originalDate = bookDate 
+-- | The ID used to avoid rereading of tractatus
+originalID :: Book -> String
+originalID b = fromMaybe ( bookID b ) $ copiedFrom b
 
 -- | Get the unique identifier of an original book
 bookKey :: Book -> HarmKey
-bookKey b = BookKey $ show (bookStats b) ++ ":" ++ (bookTitle b)
+bookKey = BookKey . bookID
 
 -- |
 -- = Other instances
@@ -135,6 +168,7 @@ makeBookStats x y z = BookStats
          { topic = readTopic x y
          , quality = q
          , bookLevel = l
+         , reread = 1
          } where (l,q) = readStats z
 
 
@@ -144,7 +178,7 @@ instance ArMCSV Book where
                 , bookTitle = x4
                 , bookStats = [ makeBookStats x1 x2 x3 ]
                 , bookCreator = x5
-                , bookAnnotation = x6
+                , bookAnnotation = [x6]
                 , bookCount = fromMaybe 1 $ readMaybe x7
                 , bookLanguage = lng
                 }
@@ -164,8 +198,8 @@ instance ArMCSV Book where
      , bookDate = NoTime
      , antologyOf = []
      , copiedFrom = Nothing
-     , bookLocation = ""
-     , bookAnnotation = ""
+     , bookLocation = Nothing
+     , bookAnnotation = []
      , bookLanguage = Nothing
      , bookCount = 1 }
    getID = bookID
