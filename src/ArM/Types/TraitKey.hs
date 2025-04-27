@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  ArM.Types.TraitKey
@@ -16,6 +17,7 @@
 -----------------------------------------------------------------------------
 module ArM.Types.TraitKey ( TraitKey(..) ) where
 
+import Data.Maybe
 import Data.Aeson
 import GHC.Generics
 
@@ -128,4 +130,56 @@ charIdx "Qik" = 8
 charIdx _ = 9
 
 instance ToJSON TraitKey
-instance FromJSON TraitKey
+instance FromJSON TraitKey where
+    parseJSON = fmap convertProtoKey . parseJSON
+
+data ProtoKey = ProtoKey
+   { ability :: Maybe String
+   , characteristic :: Maybe String
+   , art :: Maybe String
+   , spell :: Maybe String
+   , spellLevel :: Maybe Int 
+   , detail :: Maybe String 
+   , personality :: Maybe String
+   , reputation :: Maybe String 
+   , vf :: Maybe String 
+   , confidence :: Maybe String
+   , other :: Maybe String
+   , special :: Maybe String
+   , possession :: Maybe String
+   , combat :: Maybe String
+   }
+   deriving ( Eq, Generic )
+
+instance FromJSON ProtoKey where
+    parseJSON = withObject "ProtoKey" $ \v -> ProtoKey
+        <$> v .:? "ability" 
+        <*> v .:? "characteristic" 
+        <*> v .:? "art" 
+        <*> v .:? "spell" 
+        <*> v .:? "spellLevel" 
+        <*> v .:? "detail" 
+        <*> v .:? "personality" 
+        <*> v .:? "reputation" 
+        <*> v .:? "vf" 
+        <*> v .:? "confidence" 
+        <*> v .:? "other" 
+        <*> v .:? "special" 
+        <*> v .:? "possession" 
+        <*> v .:? "combat" 
+
+convertProtoKey :: ProtoKey -> TraitKey
+convertProtoKey p 
+  | isJust (ability p) = AbilityKey (fromJust $ ability p)
+  | isJust (art p) = ArtKey (fromJust $ art p)
+  | isJust (characteristic p) = CharacteristicKey (fromJust $ characteristic p)
+  | isJust (spell p) = SpellKey (fromJust $ spell p) (fromMaybe (-1) $ spellLevel p) (fromMaybe "" $ detail p)
+  | isJust (personality p) = PTraitKey (fromJust $ personality p) 
+  | isJust (reputation p) = ReputationKey (fromJust $ reputation p) (fromMaybe "" $ detail p)
+  | isJust (vf p) = VFKey (fromJust $ vf p) (fromMaybe "" $ detail p)
+  | isJust (confidence p) = ConfidenceKey (fromJust $ confidence p) 
+  | isJust (other p) = OtherTraitKey (fromJust $ other p) 
+  | isJust (special p) = SpecialKey (fromJust $ special p) 
+  | isJust (possession p) = PossessionKey (fromJust $ possession p) 
+  | isJust (combat p) = CombatKey (fromJust $ combat p) 
+  | otherwise = NoTrait
