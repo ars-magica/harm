@@ -40,6 +40,9 @@ data Covenant = Covenant
          , pastCovAdvancement :: [ AugCovAdvancement ]
          , futureCovAdvancement :: [ CovAdvancement ]
        }  deriving (Eq,Generic,Show)
+instance Timed Covenant where
+    season = fromMaybe NoTime . fmap covTime . covenantState
+
 instance ToJSON Covenant 
 instance FromJSON Covenant where
     parseJSON = withObject "Covenant" $ \v -> Covenant
@@ -57,7 +60,6 @@ covenant = fmap CovenantKey . memberOf
 
 instance HarmObject Covenant where
     name = covName . covenantConcept
-    stateSeason = fromMaybe NoTime . fmap covTime . covenantState
     prepare x = trace "prepare Covenant" $ f x
         where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
                   | otherwise = y 

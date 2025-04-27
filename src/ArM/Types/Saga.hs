@@ -60,9 +60,10 @@ stateSeasons = reverse . (GameStart:) . seasons . sagaFile
 instance Show Saga where
    show saga = "Saga: " ++ sagaTitle saga
 
+instance Timed Saga where
+    season = seasonTime . sagaState
 instance HarmObject Saga where
     name = sagaTitle
-    stateSeason = seasonTime . sagaState
     stateName s = name s ++ " - " ++ (show $ season $ sagaState s)
 
 -- | Saga state at a particular point in time, comprising characters and

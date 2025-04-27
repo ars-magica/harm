@@ -61,12 +61,13 @@ class KeyObject h where
 -- |
 -- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
-class HarmObject h where
+class Timed h => HarmObject h where
     -- | Full name of the entity
     name :: h -> String
 
     -- | Current season of the object's stateY
     stateSeason :: h -> SeasonTime
+    stateSeason = season
 
     -- | String identifying the object and its state
     stateName :: h -> String

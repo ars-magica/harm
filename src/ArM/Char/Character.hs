@@ -50,7 +50,6 @@ import ArM.Debug.Trace
 
 instance HarmObject Character where
     name = fullConceptName . concept
-    stateSeason = characterSeason
     prepare = prepareCharacter
 
 
@@ -298,11 +297,11 @@ inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
 
 bookSQ :: AugmentedAdvancement -> AugmentedAdvancement 
 bookSQ aa | isNothing stats = aa
-          | isNothing trait = aa
+          | isNothing tr = aa
           | otherwise = aa 
-    where trait = ttrace $ primaryXPTrait $ advancement aa
+    where tr = ttrace $ primaryXPTrait $ advancement aa
           stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
-          ctp =  (==(fromJust trait)) . topic 
+          ctp =  (==(fromJust tr)) . topic 
 
 
 getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)

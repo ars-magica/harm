@@ -209,4 +209,5 @@ instance FromJSON CharacterState where
         <*> v .: "charType" 
         <*> v .:? "memberOf" 
         <*> fmap maybeList ( v .:? "traits" )
-
+instance Timed Character where
+    season = characterSeason
