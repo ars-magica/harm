@@ -1354,7 +1354,10 @@
       },
       { "mode" : "Adventure", "season" : "Winter 1254"
       , "sourceQuality" : 7
-      , "narrative" : "No Aging (rolled 4)"
+      , "narrative" :
+        [ "Sheriff Gui of the Worcesters.  Area of the Daisee clan."
+	 ,  "After the incident at the mine, Cieran was allowed to ride an old nag, owned by an old man Angus."
+	]
       , "changes" : [ { "ability" : "Finesse", "spec" : "Precision", "xp" : 5 } 
                     , { "ability" : "Etiquette", "xp" : 2 } 
                     , { "reputation" : "Friendly druid",

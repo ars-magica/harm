@@ -10,6 +10,9 @@ tags:
 		+ dependent on ability
 	+ Bonus SQ - can we mark explicit choice?
 	+ Correspondent - can this be inferred?
++ Multiple copies
+	+ Do we support a count field?
+	+ it would suppress details about the copy, for better or for worse
 + Books
 	+ Antology has `collectionOf :: [ Book ]` 
 		+ Individual work has empty list
