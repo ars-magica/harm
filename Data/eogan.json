@@ -128,6 +128,38 @@
       , "changes" : 
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
+      },
+      { "mode" : "Adventure"
+      , "season" : "Spring 1255"
+      , "sourceQuality" : 8
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         , { "confidence" : "Confidence", "points" : 1 }
+         ] 
+      },
+      { "mode" : "Training"
+      , "season" : "Summer 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "Train second lymer in hunt +8 xp."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Taming"
+      , "season" : "Autumn 1254"
+      , "sourceQuality" : 2
+      , "narrative" : "Train two lymers and a greyhound to Loyal +2, fourth lymer to +1."
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Training"
+      , "season" : "Winter 1256"
+      , "sourceQuality" : 2
+      , "narrative" : "Train one lymer in hunt +8 xp (+16 total)."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
       }
    ]
 }
