@@ -24,6 +24,7 @@
           , "comment" : "Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9"
           },
           { "title" : "Aegis Failing"
+	     , "narrative" :  "Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities."
 	     , "comment" : 
 		[ "2x Leprechauns might 15 have invaded"
 	        , "New Aegis L30 Penetration 27"
