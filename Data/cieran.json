@@ -1459,7 +1459,8 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1256"
       , "bonusQuality" : 1
-      , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text."
+      , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15)."
+      , "coment" : "Lab Total 70"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Book of Images"
             , "tefo" : "CrIm", "level" : 15
@@ -1473,6 +1474,14 @@
             , "tefo" : "CrIm", "level" : 5
             , "mastery" : [ "Quiet Casting" ]
          }
+      ]
+      },
+      { "mode" : "Reading", "season" : "Summer 1256"
+      , "comment" : "Reads the new Q9 Tractatus from Vigil"
+      , "sourceQuality" : 9
+      , "bonusQuality" : 1
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 13 }
       ]
       },
       { "mode" : "Teaching", "season" : "Winter 1257"
