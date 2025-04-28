@@ -22,8 +22,10 @@ title:
 ## Plan
 
 + [ ] Phase 1.  **Review** Hibernia Saga
-	+ [ ] Type of recent seasons from Hibernia and double-check
-	+ [ ] Update Eogan
+	+ [ ] Review recent seasons from Hibernia 
+		+ [ ] Cieran
+		+ [ ] Eogan
+		+ [ ] Elk's Run
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view
@@ -35,7 +37,7 @@ title:
 		+ [ ] AnnalSeason 
 + [ ] Phase 2. Consolidation
 	+ [ ] Covenant
-		+ [ ] JSON Syntax for advancement
+		+ [x] JSON Syntax for advancement
 		+ [ ] WIki layout for advancement
 	+ [ ] Validate missing seasons
 	+ [ ] Character advancement
