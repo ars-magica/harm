@@ -41,8 +41,14 @@
 
 ## Summer 1254
 
++ Elk's Run
+    + The lost Unicorn (SQ 10)
+        + Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
++ + Changes
++     + joining: Character: Eogan mac Eogan
 + + Eogan mac Eogan (Adventure)
-    + The Unicorn (SQ10 + Independent Study).  Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    +   Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + SQ10 + Independent Study.
     + Validated: Correctly spent 13 xp.
 + + Cieran the Fletcher ex Miscellanea (Vis Study)
     +  (350½xp)
@@ -65,12 +71,6 @@
     + No Aging (rolled 4)
     + Validated: Correctly spent 7 xp.
     + Validated: Aging roll made
-
-## Summer 1254
-
-+ Elk's Run
-+ + Changes
-+     + joining: Character: Eogan mac Eogan
 
 ## Autumn 1253
 
