@@ -1457,6 +1457,7 @@
       { "mode" : "Teaching", "season" : "Winter 1256"
       , "sourceQuality" : 2
       , "narrative" : "Teaching Luciu"
+      , "comment" : "Lab Total XX including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
       , "changes" : [ 
            { "ability" : "Teaching", "xp" : 2 }
             , { "aging" : { "deltaYounger" : 1

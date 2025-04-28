@@ -115,12 +115,15 @@ bookSQ aa | isNothing stats = aa
 
 getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
 getSQ a | isExposure ad = (Just 2,Nothing)
-        | mode ad == Reading = rd 
+        | mode ad == Reading = rd bks
         | otherwise = mstat
    where ad = advancement a
          mstat = (sourceQuality ad,sourceCap ad)
-         rd = (fmap fromIntegral $ quality bk,bookLevel bk)
-         bk = head $ bookStats $ head $ bookUsed a
+         rd [] = (Nothing,Nothing)
+         rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
+         bks | usd == [] = []
+	     | otherwise = bookStats $ head usd
+	 usd = bookUsed a
 
 -- |
 -- Calculate the Source Quality the character generates as a teacher.
