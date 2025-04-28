@@ -1429,8 +1429,35 @@
          , { "confidence" : "Confidence", "points" : 1 }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Summer 1255"
-      , "sourceQuality" : 3
+      { "mode" : "Reading", "season" : "Summer 1255"
+      , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      , "sourceQuality" : 12
+      , "bonusQuality" : 1
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 16 }
+      ]
+      },
+      { "mode" : "Author", "season" : "Autumn 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "Auram Tracatus (64xp)"
+      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
+                    , { "possession" : { "art" : "Me", "count" : 4
+		        , "comment" : "allowance/salary TBC" } } ]
+      },
+      { "mode" : "Teaching", "season" : "Winter 1256"
+      , "bonusQuality" : 1
+      , "narrative" : "Teaching Luciu"
+      , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
+      , "changes" : [ 
+           { "ability" : "Imaginem", "xp" : 3 }
+            , { "aging" : { "deltaYounger" : 1
+               , "agingRollDie" : 10
+               , "agingComment" : "No aging."
+	    } }
+      ]
+      },
+      { "mode" : "Lab Work", "season" : "Spring 1256"
+      , "bonusQuality" : 1
       , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text."
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Book of Images"
@@ -1445,32 +1472,6 @@
             , "tefo" : "CrIm", "level" : 5
             , "mastery" : [ "Quiet Casting" ]
          }
-      ]
-      },
-      { "mode" : "Author", "season" : "Autumn 1255"
-      , "sourceQuality" : 2
-      , "narrative" : "Auram Tracatus (64xp)"
-      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
-                    , { "possession" : { "art" : "Me", "count" : 4
-		        , "comment" : "allowance/salary TBC" } } ]
-      },
-      { "mode" : "Teaching", "season" : "Winter 1256"
-      , "sourceQuality" : 2
-      , "narrative" : "Teaching Luciu"
-      , "comment" : "Lab Total XX including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
-      , "changes" : [ 
-           { "ability" : "Teaching", "xp" : 2 }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 10
-               , "agingComment" : "No aging."
-	    } }
-      ]
-      },
-      { "mode" : "Reading", "season" : "Spring 1256"
-      , "comment" : "Reads the new Q12 Tractatus from Vigil"
-      , "bonusQuality" : 1
-      , "changes" : [ 
-           { "ability" : "Imaginem", "xp" : 16 }
       ]
       }
    ]
