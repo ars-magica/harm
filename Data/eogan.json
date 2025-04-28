@@ -116,8 +116,12 @@
       { "mode" : "Taming"
       , "season" : "Autumn 1254"
       , "sourceQuality" : 2
-      , "narrative" : "Train three lymers and a greyhound to Loyal +1."
-      , "comment" : "Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51]."
+      , "narrative" : "Train three lymers and two greyhounds to Loyal +1."
+      , "comment" :
+         [ "Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51]."
+	    , "Eogans taming total is 10."
+	    , "Each dog has zero confidence and thus an effective might of 1."
+	 ]
       , "changes" : 
          [ { "ability" : "Animal Handling", "xp": 2 }
          ] 
@@ -149,7 +153,9 @@
       { "mode" : "Taming"
       , "season" : "Autumn 1254"
       , "sourceQuality" : 2
-      , "narrative" : "Train two lymers and a greyhound to Loyal +2, fourth lymer to +1."
+      , "narrative" : "Train two lymers to Loyal +2, and one mastiff to +1."
+      , "comment" : 
+      [ "The mastiff has confidence 1 and thus effective might 3. The combined might is 5." ]
       , "changes" : 
          [ { "ability" : "Animal Handling", "xp": 2 }
          ] 
