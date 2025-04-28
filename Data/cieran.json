@@ -1439,7 +1439,8 @@
       },
       { "mode" : "Author", "season" : "Autumn 1255"
       , "sourceQuality" : 2
-      , "narrative" : "Auram Tracatus (64xp)"
+      , "narrative" : "Author *Arrow's Flight*, an Auram Tracatus"
+      , "comment" : "To 64xp in Latin"
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
                     , { "possession" : { "art" : "Me", "count" : 4
 		        , "comment" : "allowance/salary TBC" } } ]
