@@ -73,7 +73,7 @@ title:
 		+ [ ] Could potentially augment advancement and advance in multiple steps
 		+ [ ] Training
 	+ [ ] Lab Total
-		+ [ ] Define Lab object
+		+ [ ] Define [[Lab object]]
 		+ [ ] Advance lab (refinement and virtue installation)
 		+ [ ] Use lab bonuses in lab total
 	+ [ ] Enchantments
