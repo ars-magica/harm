@@ -1463,9 +1463,10 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1256"
-      , "narrative" : "New Tractatus from Vigil"
+      , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      , "bonusQuality" : 1
       , "changes" : [ 
-           { "ability" : "Imaginem", "xp" : 15 }
+           { "ability" : "Imaginem", "xp" : 16 }
       ]
       }
    ]
