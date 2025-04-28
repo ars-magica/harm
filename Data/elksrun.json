@@ -23,6 +23,12 @@
           { "narrative" : "Beibhinn spends the year at Vigill to read."
           , "comment" : "Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9"
           },
+          { "title" : "Aegis Failing"
+	     , "comment" : 
+		[ "2x Leprechauns might 15 have invaded"
+	        , "New Aegis L30 Penetration 27"
+		]
+          },
           { "title" : "Cieran's Penance in Waterford", "SQ" : 7
 	     , "comment" : 
 		[ "Aine also gets a Lvl 1 Local Reputation as a Healer"
