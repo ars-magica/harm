@@ -1423,6 +1423,7 @@
             , "tefo" : "ReVi", "level" : 20 
             , "mastery" : [ "Quiet Casting" ]
          }
+         , { "confidence" : "Confidence", "points" : 1 }
       ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1255"
