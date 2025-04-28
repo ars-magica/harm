@@ -116,6 +116,7 @@
       , "season" : "Autumn 1254"
       , "sourceQuality" : 2
       , "narrative" : "Train three lymers and a greyhound to Loyal +1."
+      , "comment" : "Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51]."
       , "changes" : 
          [ { "ability" : "Animal Handling", "xp": 2 }
          ] 
