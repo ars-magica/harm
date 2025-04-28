@@ -21,25 +21,9 @@ title:
 
 ## Plan
 
-+ [ ] Phase 1.Consolidation
-	+ [ ] Type of recent seasons from Hibernia
-	+ [ ] Covenant
-		+ [ ] JSON Syntax for advancement
-		+ [ ] WIki layout for advancement
-	+ [ ] Validate missing seasons
-	+ [ ] Character advancement
-		+ [ ] Narrative 
-		+ [ ] Comment
-	+ [ ] SQ from book
-		+ [ ] Validate Reading Advancement
-		+ [ ] levelCap on ProtoTrait - where should this go?
-	+ [ ] Display aging bonus etc
-+ [ ] **Review** Hibernia Saga
-	+ [ ] Fix ongoing
-		+ [ ] [[Reading and Books]]
-		+ [ ] Check Exposure
-		+ [ ] Comment on ProtoTrait
-		+ [ ] Validation: Compare SQ
++ [ ] Phase 1.  **Review** Hibernia Saga
+	+ [ ] Type of recent seasons from Hibernia and double-check
+	+ [ ] Update Eogan
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view
@@ -47,12 +31,42 @@ title:
 			+ [ ] Aging roll total
 		+ [ ] Comments on advancing traits (possession in particular)
 		+ [ ] Sort possessions
-	+ [ ] More spell descriptions in CSV file
-	+ [ ] Review covenant sheet and library
 	+ [ ] Review object structure
 		+ [ ] AnnalSeason 
++ [ ] Phase 2. Consolidation
+	+ [ ] Covenant
+		+ [ ] JSON Syntax for advancement
+		+ [ ] WIki layout for advancement
+	+ [ ] Validate missing seasons
+	+ [ ] Character advancement
+		+ [ ] Narrative 
+		+ [ ] Comment
+	+ [ ] Review covenant sheet and library
+	+ [ ] Distinguish between comment and narrative
+	+ [ ] list of narrative items in advancements (Consistent use)
++ [ ] Phase 3. Books
+	+ [ ] [[Reading and Books]]
+	+ [ ] Process books in covenant advancement
+	+ [ ] SQ from book
+	+ [ ] Validate Reading Advancement
+	+ [ ] levelCap on ProtoTrait - where should this go?
+	+ [ ] check errors in Cieran's edvancement
+	+ [ ] Use of Keys and objects
+	+ [ ] Type every book with edge cases and supersede wiki
++ [ ] Phase 4. Next steps
+	+ [ ] Display aging bonus etc
+	+ [ ] Fix ongoing
+		+ [ ] Check Exposure
+		+ [ ] Comment on ProtoTrait
+		+ [ ] Validation: Compare SQ
+	+ [ ] More spell descriptions in CSV file
 	+ [ ] Specialists (copyists in particular)
-+ [ ] Phase 2. [[Covenant]]
+	+ [ ] Lab Total
+		+ [ ] Define [[Lab object]]
+		+ [ ] Advance lab (refinement and virtue installation)
+		+ [ ] Use lab bonuses in lab total
+		+ [ ] Compute lab total in advancements
++ [ ] Phase 5. [[Covenant]]
 	+ [ ] Reading and copying advancements
 		+ [ ] calculate book quality from author
 		+ [ ] check for rereading of tractatus
@@ -66,29 +80,23 @@ title:
 	+ [ ] Initiation scripts
 	+ [ ] group and  sort books in library
 	+ [ ] Handle Antologies
-+ [ ] Phase 3. Advancement 
++ [ ] Phase 6. Advancement 
 	+ [ ] Author books
 	+ [ ] Teaching/Taught
 		+ [ ] Difficult to derive SQ from the teacher
 		+ [ ] Could potentially augment advancement and advance in multiple steps
 		+ [ ] Training
-	+ [ ] Lab Total
-		+ [ ] Define [[Lab object]]
-		+ [ ] Advance lab (refinement and virtue installation)
-		+ [ ] Use lab bonuses in lab total
 	+ [ ] Enchantments
 		+ [ ] Create Lesser Enchantments
 		+ [ ] Create Greater Enchanted Devices with state
 	+ [ ] Lab assistance
 + [ ] Phase 3. Improvements
-	+ [ ] Distinguish between comment and narrative
 	+ [ ] Virtue/Flaw descriptions
 	+ [ ] Remove dead and retired characters from main list
 		+ [ ] Retired property in Aging type
 	+ [ ] Advance Tessa until 1255 with more aging
 	+ [ ] Error control
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
-	+ [ ] Consider a list of narrative items in advancements
 + [ ] Phase 4. Polish
 	+ [ ] Break up possession
 		+ [ ] different constructors for weapon and item
