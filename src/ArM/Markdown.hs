@@ -703,6 +703,9 @@ instance Markdown CovenantState where
 instance LongSheet Lab
 instance Markdown Lab where
    printMD _ = OList []
+instance LongSheet LabVirtue
+instance Markdown LabVirtue where
+   printMD _ = OList []
 instance LongSheet LabBonus
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
