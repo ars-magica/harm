@@ -16,6 +16,7 @@ module ArM.Types.Lab where
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Extra
 import Data.Maybe
 import Data.List
 
@@ -97,7 +98,7 @@ instance FromJSON LabVirtue where
         <*> v .:? "description" .!= ""
         <*> v .:? "bonus" .!= []
         <*> v .:? "mechanics" .!= ""
-        <*> v .:? "comment" .!= []
+        <*> v `parseCollapsedList` "comment" 
 
 data LabBonus = LabBonus 
      { labTrait :: String
