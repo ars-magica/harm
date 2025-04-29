@@ -34,6 +34,7 @@ import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types.Saga
+import ArM.Types.Lab
 import ArM.Types
 import ArM.DB.Spell
 import ArM.GameRules
@@ -696,3 +697,13 @@ instance Markdown CovenantState where
         , OList $ map indentOList $ map (printMDaug saga) $ library cov
         ]
 
+-- |
+-- = Lab Markdown
+
+instance LongSheet Lab
+instance Markdown Lab where
+   printMD _ = OList []
+instance LongSheet LabBonus
+instance Markdown LabBonus where
+   printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
+   printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
