@@ -22,3 +22,9 @@
         + spells/items (possibly print three sets of casting totals)
         + teaching, experimentation
 + Special Mechanics from virtues and flaws
+
++ Lab as Possession
+	+ This allows advancement by ProtoTrait
+	+ Need to sort Possessions
+	+ List Lab specially
+	+ Other special possessions?
