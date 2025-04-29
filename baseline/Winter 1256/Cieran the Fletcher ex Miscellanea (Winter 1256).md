@@ -32,11 +32,11 @@ Saga
 Size
 : 0
 
-## Summer 1255
+## Winter 1256
 
-+ **Age:** 63 years (apparent age 51) Longevity Ritual: 22
++ **Age:** 64 years (apparent age 51) Longevity Ritual: 22
 + **Confidence**: 1 (33)
-+ **Warping**: 1 (9)
++ **Warping**: 2 (0)
 + **Characteristics:** 
 Int +3, 
 Per +1, 
@@ -92,7 +92,7 @@ Weak Spontaneous Magic (0),
     + Hermes Code [Stonehenge] 1 (0xp)
     + Hermes Lore [Hibernia] 1 (6xp)
     + Infernal Lore [Undead] 1 (0xp)
-    + Latin [Hermetic Usage] 4 (12xp)
+    + Latin [Hermetic Usage] 4 (14xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
     + Magic Theory [Spells] 7 (8xp)
@@ -103,7 +103,7 @@ Weak Spontaneous Magic (0),
     + SOCP Lore [Self initiation] 4 +2 (2xp)
     + Second Sight [Faerie Illusions] 3 (0xp)
     + Stealth [Hiding] 1 (0xp)
-    + Teaching [apprentices] 2 (8xp)
+    + Teaching [apprentices] 2 (10xp)
     + Thrown Weapon [Dart] 1 (0xp)
 + **Possessions:**
     + An vis (0)
@@ -116,7 +116,7 @@ Weak Spontaneous Magic (0),
     + In vis (0)
     + Lantern
     + Longbow
-    + Me vis (10)
+    + Me vis (14)
     + Mu vis (0)
     + Pe vis (-1)
     + Perdo Vis from Jerome's body
@@ -151,7 +151,7 @@ Weak Spontaneous Magic (0),
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
 | Imaginem | 26 | 25 | 5 |
-| Mentem | 17 | 0 | 10 |
+| Mentem | 17 | 0 | 14 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
 
@@ -551,6 +551,22 @@ Total: 1309 levels of spells.
 
 ## Past Advancement
 
++ Winter 1256 (2xp) (1 years) Teaching (Exposure)
+    + Teaching Luciu
+    + Changing traits
+        + Ability: Teaching 2xp; 
+        + Aging  No roll. No aging.
+    + Inferred traits
+        + Warping 1 (from Longevity Ritual)
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
+    + ERROR: Older than 50. Aging roll required.
++ Autumn 1255 (2xp) Authoring (Exposure)
+    + Auram Tracatus (64xp)
+    + Changing traits
+        + Ability: Latin 2xp; 
+        + Possession: Me vis (4)
+    + Validated: Correctly spent 2 xp.
 + Summer 1255 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Changing traits
@@ -1666,14 +1682,6 @@ Total: 1309 levels of spells.
 
 ## Future Advancement
 
-+ Autumn 1255 (2xp) Authoring (Exposure)
-    + Auram Tracatus (64xp)
-    + Ability: Latin 2xp; 
-    + Possession: Me vis (4)
-+ Winter 1256 (2xp) Teaching (Exposure)
-    + Teaching Luciu
-    + Ability: Teaching 2xp; 
-    + Aging  No roll. No aging.
 + Spring 1256 Reading
     + Reads the new Q12 Tractatus from Vigil
     + Ability: Imaginem 16xp; 

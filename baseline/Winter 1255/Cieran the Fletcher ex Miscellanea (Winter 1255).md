@@ -551,7 +551,8 @@ Total: 1183 levels of spells.
         + Possession: Im vis (-5)
     + Validated: Correctly spent 16 xp.
 + Winter 1254 (7xp) (1 years) Adventure
-    + No Aging (rolled 4)
+    + Sheriff Gui of the Worcesters.  Area of the Daisee clan.
+    + After the incident at the mine, Cieran was allowed to ride an old nag, owned by an old man Angus.
     + Changing traits
         + Ability: Finesse [Precision] 5xp; 
         + Ability: Etiquette 2xp; 
@@ -1613,6 +1614,7 @@ Total: 1183 levels of spells.
     + Spell: Circular Ward Against Demons 0xp Penetration
     + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
     + Spell: Watching Ward 0xp Quiet Casting
+    + Confidence: 0 (1)
 + Summer 1255 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text.
     + Art: Imaginem 3xp; 
@@ -1628,6 +1630,6 @@ Total: 1183 levels of spells.
     + Ability: Teaching 2xp; 
     + Aging  No roll. No aging.
 + Spring 1256 Reading
-    + New Tractatus from Vigil
-    + Ability: Imaginem 15xp; 
+    + Reads the new Q12 Tractatus from Vigil
+    + Ability: Imaginem 16xp; 
 

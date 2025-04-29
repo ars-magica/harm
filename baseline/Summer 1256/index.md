@@ -1,7 +1,7 @@
-# Hibernia Saga (Contested Lands) - Summer 1255
+# Hibernia Saga (Contested Lands) - Summer 1256
 
-+ [Cieran the Fletcher ex Miscellanea (Summer 1255)](Cieran the Fletcher ex Miscellanea (Summer 1255))
-+ [Eogan mac Eogan (Summer 1255)](Eogan mac Eogan (Summer 1255))
++ [Cieran the Fletcher ex Miscellanea (Spring 1256)](Cieran the Fletcher ex Miscellanea (Spring 1256))
++ [Eogan mac Eogan (Winter 1256)](Eogan mac Eogan (Winter 1256))
 + [Tessa Tanagh (Winter 1249)](Tessa Tanagh (Winter 1249))
 + [Rowan (Game Start)](Rowan (Game Start))
 
@@ -21,6 +21,8 @@
     + Older than 35. Aging roll required.
 + Eogan mac Eogan: Spring 1255 Adventure
     + Underspent 2xp of 11.
++ Cieran: Winter 1256 Teaching (Exposure)
+    + Older than 50. Aging roll required.
 + Rowan: Later Life
     + Underspent 260xp of 335.
 + Rowan: Virtues and Flaws

@@ -1,5 +1,21 @@
 # Annals
 
+## Winter 1256
+
++ + Eogan mac Eogan (Trained)
+    + Train one lymer in hunt +8 xp (+16 total).
+    + Validated: Correctly spent 2 xp.
++ + Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
+    + Teaching Luciu
+    + Validated: Correctly spent 2 xp.
+    + ERROR: Older than 50. Aging roll required.
+
+## Autumn 1255
+
++ + Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
+    + Auram Tracatus (64xp)
+    + Validated: Correctly spent 2 xp.
+
 ## Summer 1255
 
 + + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
@@ -12,8 +28,12 @@
     + Joseph's fiancé (SQ 8)
         + Joseph ex Miscellanea of Lambaird visits with his wife, Rhianna, and his brother Jacob, who is a horse trader.  They are fraternal twins. Joseph has been instrumental to healing the rift between Vigil and Lambaird.  It is not the first time they visit Elk's Run after the agreements of resiprocal reading hospitality were made.
         + Aedan MacCloud, an Irish lord, appears with his daughter, Deirdre, who is also betrothed to Joseph. It turns out that he has about eight wives, under old Brehon Law, often with faerie blessing. Aedan brother, a parish priest known as father Clint, is also part of the entourage.  They also bring two guards. Aedan's holdings are in the North of Ireland.
+        + Cieran is left mediating between the two groups.  Aedan has been rebaptised and borrowed £300 from the church, something which binds him to arrange a church marriage for his daughter. The betrothal was sealed before his rebaptism, in a faerie ceremony. It seems that the faeries involved are quite powerful. Faerie blood also runs in the family, and strongly so with Deirdre.
+        + Joseph's polygamy was the idea of his first wife, Criodne, a maga, who had started her longevity ritual.  She wanted Joseph to have more children before his longevity ritual.
+        + Cieran have them see that both parties have been less than honest and entered incompatible bargains. In the end, he arranges for Elk's Run to lend Aedan the money to cover half his dept to the church, with Joseph to have Vigil cover the other half, so that Aedan can embrace the faerie and Brehon ways.
         + Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8), as proposed by Rhianna.
         + One confidence point per character taking part.
+        + The covenant lends £165 to Aedan on the same terms as he had with the church.
 + + Changes
 +     + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
 + + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
@@ -22,9 +42,6 @@
 
 ## Winter 1255
 
-+ + Eogan mac Eogan (Trained)
-    + Train one lymer in hunt +8 xp.
-    + Validated: Correctly spent 2 xp.
 + + Cieran the Fletcher ex Miscellanea (OpeningArts (Exposure))
     + Open arts for Luciu
     + Validated: Correctly spent 2 xp.
@@ -33,21 +50,56 @@
 ## Autumn 1254
 
 + + Eogan mac Eogan (Taming)
-    + Train three lymers and a greyhound to Loyal +1.
+    + Train two lymers to Loyal +2, and one mastiff to +1.
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
     + Validated: Correctly spent 2 xp.
 + + Cieran the Fletcher ex Miscellanea (Vis Study)
     +   (371½xp)
     + Validated: Correctly spent 14 xp.
 
+## Summer 1255
+
++ + Eogan mac Eogan (Trained)
+    + Train second lymer in hunt +8 xp.
+    + Validated: Correctly spent 2 xp.
+
+## Spring 1255
+
++ + Eogan mac Eogan (Adventure)
+    + ERROR: Underspent 2xp of 11.
+
+## Winter 1255
+
++ + Eogan mac Eogan (Trained)
+    + Train one lymer in hunt +8 xp.
+    + Validated: Correctly spent 2 xp.
+
+## Autumn 1254
+
++ + Eogan mac Eogan (Taming)
+    + Train three lymers and two greyhounds to Loyal +1.
+    + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
+    + Eogans taming total is 10.
+    + Each dog has zero confidence and thus an effective might of 1.
+    + Validated: Correctly spent 2 xp.
+
 ## Summer 1254
 
 + Elk's Run
     + The lost Unicorn (SQ 10)
-        + Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+        + Aoibheann (Eevan) made the weapon and Dubhán (Devon) was the warrior.
+        + Iriandel was the unicorn.  Threetrot is the big horse who may the the unicorn
+        + Cormac the Owl is an old friend of Iriandel
+        + Maive - village elder
+        + Bran - the messenger form the village
+        + Black ram, wolf, and rabbit - apparently faeries who want to kill Threetrot
+        + Village has a newly built palisade and sharpened stakes.  Two guards at any one time
+        + Big pen with a large horse, size +4: grey horsea with a white patch on the forehead.
 + + Changes
 +     + joining: Character: Eogan mac Eogan
 + + Eogan mac Eogan (Adventure)
-    +   Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.
     + SQ10 + Independent Study.
     + Validated: Correctly spent 13 xp.
 + + Cieran the Fletcher ex Miscellanea (Vis Study)
@@ -66,9 +118,18 @@
     + (no source quality)
         + Beibhinn spends the year at Vigill to read.
         + Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9
+    + Aegis Failing(no source quality)
+        + Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities.
+        + 2x Leprechauns might 15 have invaded
+        + New Aegis L30 Penetration 27
+    + Cieran's Penance in Waterford (SQ 7)
+        + Aine also gets a Lvl 1 Local Reputation as a Healer
+        + Cieran gets 4 exp in Local Help Druid Reputation
+        + Mine Collapse 7 exp Cieran 2 confidence Aine and Sean 1 Confidence
 + + Changes
 + + Cieran the Fletcher ex Miscellanea (Adventure)
-    + No Aging (rolled 4)
+    + Sheriff Gui of the Worcesters.  Area of the Daisee clan.
+    + After the incident at the mine, Cieran was allowed to ride an old nag, owned by an old man Angus.
     + Validated: Correctly spent 7 xp.
     + Validated: Aging roll made
 

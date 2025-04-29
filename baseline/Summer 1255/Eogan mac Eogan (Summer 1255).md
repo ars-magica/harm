@@ -26,10 +26,10 @@ Prophecy
 Size
 : 0
 
-## Winter 1255
+## Summer 1255
 
 + **Age:** 25 years (apparent age 25)
-+ **Confidence**: 1 (5)
++ **Confidence**: 1 (6)
 + **Characteristics:** 
 Int +2, 
 Per 0, 
@@ -73,7 +73,7 @@ Weakness [for Dogs] (-1),
     + Covenant Lore [Hierarchies] 2 (0xp)
     + Faerie Lore [Dark Fae] 1 (0xp)
     + Guile [Fast talk] 1 (0xp)
-    + Hunt [with dogs] 5 (2xp)
+    + Hunt [with dogs] 5 (6xp)
     + Leadership [in the field] 2 (0xp)
     + Magic Lore [Ancient Myth] 1 (0xp)
     + Munster Lore [Outback] 1 (0xp)
@@ -96,6 +96,16 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
++ Summer 1255 (2xp) Trained
+    + Train second lymer in hunt +8 xp.
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Spring 1255 (8+3xp) Adventure
+    + Changing traits
+        + Ability: Hunt 2xp; 
+        + Confidence: 0 (1)
+    + ERROR: Underspent 2xp of 11.
 + Winter 1255 (2xp) (1 years) Trained
     + Train one lymer in hunt +8 xp.
     + Changing traits
@@ -104,13 +114,16 @@ Weakness [for Dogs] (-1),
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1254 (2xp) Taming
-    + Train three lymers and a greyhound to Loyal +1.
+    + Train three lymers and two greyhounds to Loyal +1.
     + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
+    + Eogans taming total is 10.
+    + Each dog has zero confidence and thus an effective might of 1.
     + Changing traits
         + Ability: Animal Handling 2xp; 
     + Validated: Correctly spent 2 xp.
 + Summer 1254 (10+3xp) Adventure
-    +   Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.
     + SQ10 + Independent Study.
     + Changing traits
         + Ability: Faerie Lore [Dark Fae] 5xp; 
@@ -118,4 +131,14 @@ Weakness [for Dogs] (-1),
         + Ability: Animal Ken 3xp; 
         + Confidence: 0 (2)
     + Validated: Correctly spent 13 xp.
+
+## Future Advancement
+
++ Autumn 1254 (2xp) Taming
+    + Train two lymers to Loyal +2, and one mastiff to +1.
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Ability: Animal Handling 2xp; 
++ Winter 1256 (2xp) Trained
+    + Train one lymer in hunt +8 xp (+16 total).
+    + Ability: Hunt 2xp; 
 

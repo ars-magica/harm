@@ -1,7 +1,7 @@
-# Hibernia Saga (Contested Lands) - Summer 1255
+# Hibernia Saga (Contested Lands) - Autumn 1255
 
-+ [Cieran the Fletcher ex Miscellanea (Summer 1255)](Cieran the Fletcher ex Miscellanea (Summer 1255))
-+ [Eogan mac Eogan (Summer 1255)](Eogan mac Eogan (Summer 1255))
++ [Cieran the Fletcher ex Miscellanea (Autumn 1255)](Cieran the Fletcher ex Miscellanea (Autumn 1255))
++ [Eogan mac Eogan (Autumn 1254)](Eogan mac Eogan (Autumn 1254))
 + [Tessa Tanagh (Winter 1249)](Tessa Tanagh (Winter 1249))
 + [Rowan (Game Start)](Rowan (Game Start))
 

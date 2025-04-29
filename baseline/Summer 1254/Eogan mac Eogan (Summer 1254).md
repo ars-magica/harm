@@ -97,7 +97,8 @@ Weakness [for Dogs] (-1),
 ## Past Advancement
 
 + Summer 1254 (10+3xp) Adventure
-    +   Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+    + Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.
     + SQ10 + Independent Study.
     + Changing traits
         + Ability: Faerie Lore [Dark Fae] 5xp; 
@@ -109,9 +110,25 @@ Weakness [for Dogs] (-1),
 ## Future Advancement
 
 + Autumn 1254 (2xp) Taming
-    + Train three lymers and a greyhound to Loyal +1.
+    + Train three lymers and two greyhounds to Loyal +1.
+    + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
+    + Eogans taming total is 10.
+    + Each dog has zero confidence and thus an effective might of 1.
     + Ability: Animal Handling 2xp; 
 + Winter 1255 (2xp) Trained
     + Train one lymer in hunt +8 xp.
+    + Ability: Hunt 2xp; 
++ Spring 1255 (8xp) Adventure
+    + Ability: Hunt 2xp; 
+    + Confidence: 0 (1)
++ Summer 1255 (2xp) Trained
+    + Train second lymer in hunt +8 xp.
+    + Ability: Hunt 2xp; 
++ Autumn 1254 (2xp) Taming
+    + Train two lymers to Loyal +2, and one mastiff to +1.
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Ability: Animal Handling 2xp; 
++ Winter 1256 (2xp) Trained
+    + Train one lymer in hunt +8 xp (+16 total).
     + Ability: Hunt 2xp; 
 
