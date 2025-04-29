@@ -151,7 +151,7 @@
       },
       { "mode" : "Reading"
       , "season" : "Autumn 1217"
-      , "usesBook" : [ "The Mind's Eye" ]
+      , "usesBook" : [ "MentemL16Q13" ]
       , "sourceQuality" : 13
       , "changes" : 
          [ { "art" : "Mentem", "xp": 16, "levelCap" : 16 }
@@ -1109,7 +1109,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1247"
       , "sourceQuality" : 9
-      , "usesBook" : [ "From nothing to everything" ]
+      , "usesBook" : [ "CreoQ9Vivianus" ]
       , "changes" : [ { "art" : "Creo", "xp" : 12 } ]
       },
       { "mode" : "Author", "season" : "Autumn 1247"
