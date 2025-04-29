@@ -151,7 +151,7 @@
       },
       { "mode" : "Reading"
       , "season" : "Autumn 1217"
-      , "usesBook" : [ "The Mind's Eye" ]
+      , "usesBook" : [ "MentemL16Q13" ]
       , "sourceQuality" : 13
       , "changes" : 
          [ { "art" : "Mentem", "xp": 16, "levelCap" : 16 }
@@ -1109,7 +1109,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1247"
       , "sourceQuality" : 9
-      , "usesBook" : [ "From nothing to everything" ]
+      , "usesBook" : [ "CreoQ9Vivianus" ]
       , "changes" : [ { "art" : "Creo", "xp" : 12 } ]
       },
       { "mode" : "Author", "season" : "Autumn 1247"
@@ -1412,7 +1412,7 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1255"
       , "sourceQuality" : 2
-      , "narrative" : "ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15)."
+      , "narrative" : "ReVi Spells; Train Luciu in Magic Theory (SQ 15)."
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
          , { "spell" : "Circular Ward Against Demons",
             "tefo" : "ReVi", "level" : 25 
@@ -1429,9 +1429,39 @@
          , { "confidence" : "Confidence", "points" : 1 }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Summer 1255"
-      , "sourceQuality" : 3
-      , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text."
+      { "mode" : "Reading", "season" : "Summer 1255"
+      , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      , "sourceQuality" : 12
+      , "bonusQuality" : 1
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 16 }
+      ]
+      },
+      { "mode" : "Author", "season" : "Autumn 1255"
+      , "sourceQuality" : 2
+      , "narrative" : "Author *Arrow's Flight*, an Auram Tracatus"
+      , "comment" : "To 64xp in Latin"
+      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
+                    , { "possession" : { "art" : "Me", "count" : 4
+		        , "comment" : "allowance/salary TBC" } } ]
+      },
+      { "mode" : "Teaching", "season" : "Winter 1256"
+      , "bonusQuality" : 1
+      , "narrative" : "Teaching Luciu"
+      , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
+      , "changes" : [ 
+           { "ability" : "Imaginem", "xp" : 3 }
+            , { "aging" : { "deltaYounger" : 1
+               , "agingRollDie" : 10
+               , "agingRoll" : -1
+               , "agingComment" : "No aging."
+	    } }
+      ]
+      },
+      { "mode" : "Lab Work", "season" : "Spring 1256"
+      , "bonusQuality" : 1
+      , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15)."
+      , "coment" : "Lab Total 70"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Book of Images"
             , "tefo" : "CrIm", "level" : 15
@@ -1447,29 +1477,22 @@
          }
       ]
       },
-      { "mode" : "Author", "season" : "Autumn 1255"
-      , "sourceQuality" : 2
-      , "narrative" : "Auram Tracatus (64xp)"
-      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
-                    , { "possession" : { "art" : "Me", "count" : 4
-		        , "comment" : "allowance/salary TBC" } } ]
-      },
-      { "mode" : "Teaching", "season" : "Winter 1256"
-      , "sourceQuality" : 2
-      , "narrative" : "Teaching Luciu"
-      , "changes" : [ 
-           { "ability" : "Teaching", "xp" : 2 }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 10
-               , "agingComment" : "No aging."
-	    } }
-      ]
-      },
-      { "mode" : "Reading", "season" : "Spring 1256"
-      , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      { "mode" : "Reading", "season" : "Summer 1256"
+      , "comment" : "Reads the new Q9 Tractatus from Vigil"
+      , "sourceQuality" : 9
       , "bonusQuality" : 1
       , "changes" : [ 
-           { "ability" : "Imaginem", "xp" : 16 }
+           { "art" : "Imaginem", "xp" : 13 }
+      ]
+      },
+      { "mode" : "Teaching", "season" : "Winter 1257"
+      , "narrative" : "Teaching Luciu"
+      , "changes" : [ 
+            { "aging" : { "deltaYounger" : 1
+               , "agingRollDie" : 5
+               , "agingRoll" : -1
+               , "agingComment" : "No aging."
+	    } }
       ]
       }
    ]
