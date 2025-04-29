@@ -28,13 +28,13 @@ import ArM.Debug.Trace
 data Lab = Lab 
          { labName :: String
          , labDescription :: String
-	 , labState :: LabState
+         , labState :: LabState
          , pastLabAdvancement :: [ LabAdvancement ]
          , futureLabAdvancement :: [ LabAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance ToJSON Lab
 instance FromJSON Lab
-    parseJSON = withObject "Covenant" $ \v -> Covenant
+    parseJSON = withObject "Lab" $ \v -> Lab
         <$> v .: "name"
         <*> v .:? "description" .!= ""
         <*> v .:? "state" .!= defaultLabState
@@ -42,7 +42,7 @@ instance FromJSON Lab
         <*> v .:? "plan" .!= []
 
 instance KeyObject Lab where
-    harmKey = CovenantKey . labName
+    harmKey = LabKey . labName
 
 instance Timed Lab where
     season = fromMaybe NoTime . fmap labTime . labState

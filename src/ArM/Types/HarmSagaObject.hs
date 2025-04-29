@@ -20,6 +20,7 @@ import ArM.Types.Saga
 import ArM.Types.HarmObject
 import ArM.Types.Covenant
 import ArM.Types.Character
+import ArM.Types.Lab
 
 
 class KeyObject h => HarmSagaObject h where
@@ -30,3 +31,8 @@ instance HarmSagaObject Covenant where
    harmGet saga k = harmFind k $ covenants $ sagaState saga
 instance HarmSagaObject Character where
    harmGet saga k = harmFind k $ characters $ sagaState saga
+instance HarmSagaObject Lab where
+   harmGet saga k = g $ map ( harmFind k . labs ) ( covenants $ sagaState saga )
+      where g [] = Nothing
+            g (Nothing:xs) = g xs
+            g (Just x:_) = Just x
