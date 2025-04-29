@@ -21,6 +21,8 @@ import Data.List
 
 import ArM.Helper
 import ArM.Types.HarmObject
+import ArM.Types.Calendar
+import ArM.Types.Story
 
 import ArM.Debug.Trace
 
@@ -28,27 +30,27 @@ import ArM.Debug.Trace
 data Lab = Lab 
          { labName :: String
          , labDescription :: String
-	 , labState :: LabState
-         , pastLabAdvancement :: [ LabAdvancement ]
-         , futureLabAdvancement :: [ LabAdvancement ]
+         , labState :: LabState
+         -- , pastLabAdvancement :: [ LabAdvancement ]
+         -- , futureLabAdvancement :: [ LabAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance ToJSON Lab
-instance FromJSON Lab
-    parseJSON = withObject "Covenant" $ \v -> Covenant
+instance FromJSON Lab where
+    parseJSON = withObject "Lab" $ \v -> Lab
         <$> v .: "name"
         <*> v .:? "description" .!= ""
         <*> v .:? "state" .!= defaultLabState
-        <*> v .:? "history" .!= []
-        <*> v .:? "plan" .!= []
+        -- <*> v .:? "history" .!= []
+        -- <*> v .:? "plan" .!= []
 
 instance KeyObject Lab where
-    harmKey = CovenantKey . labName
+    harmKey = LabKey . labName
 
 instance Timed Lab where
-    season = fromMaybe NoTime . fmap labTime . labState
-instance HarmObject Lab where
+    season = labTime . labState
+instance HarmObject Lab 
+instance StoryObject Lab where
     name = labName 
-    prepare x = id
 
 -- |
 -- = LabState Object
@@ -83,6 +85,7 @@ data LabVirtue = LabVirtue
      , labVirtueDescription :: String
      , labVirtueBonus :: [ LabBonus ]
      , labVirtueMechanics :: String
+     , labVirtueComment :: [ String ]
      }  deriving (Eq,Generic,Show)
 
 instance ToJSON LabVirtue
@@ -93,6 +96,7 @@ instance FromJSON LabVirtue where
         <*> v .:? "description" .!= ""
         <*> v .:? "bonus" .!= []
         <*> v .:? "mechanics" .!= ""
+        <*> v .:? "comment" .!= []
 
 data LabBonus = LabBonus 
      { labTrait :: String
@@ -126,6 +130,6 @@ defaultAdv = LabAdvancement
      , labNarrative = []
      , acquireVirtue = []
      , loseVirtue = []
-     , newSize = Nothung
+     , newSize = Nothing
      , labRefine = 0
      }

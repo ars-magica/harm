@@ -11,6 +11,74 @@
       }
    , "state" : {
       "librarycsv" : "Data/books.csv"
+      , "labs" : [
+         { "name" : "Cieran's WOrkshop"
+         , "description" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
+         , "state" : {
+            "virtues" : [
+               { "name" : "Dedicated Building"
+               , "bonus" : 
+	           [ { "name" : "Aestetics", "score" : 1 }
+	           , { "name" : "Upkeep", "score" : 1 }
+		   , { "name" : "Specialisation", "specialisation" : "Re",  "score" : 1 }
+		   ]
+               },
+               { "name" : " Servant"
+               , "bonus" : 
+	           [ { "name" : "Aestetics", "score" : 1 }
+	           , { "name" : "Safety", "score" : 1 }
+		   , { "name" : "Specialisation", "specialisation" : "Me",  "score" : 1 }
+		   ]
+               },
+               { "name" : " Safe Cauldron"
+               , "bonus" : 
+	           [ { "name" : "General Quality", "score" : 1 }
+		   , { "name" : "Specialisation", "specialisation" : "Experimentation",  "score" : 1 }
+		   ]
+               },
+               { "name" : " Precious Ingredients"
+               , "bonus" : 
+	           [ { "name" : "General Quality", "score" : 1 }
+	           , { "name" : "Upkeep", "score" : 2 }
+		   ]
+		   , "comment" : "+1 Longevity ritual, not used"
+               },
+               { "name" : "Major Feature: Antechamber"
+               , "bonus" : 
+	           [ { "name" : "Aestetics", "score" : 2 }
+		   , { "name" : "Specialisation", "specialisation" : "Spells",  "score" : 3 }
+		   ]
+               },
+               { "name" : " Major Focus: Antechamber"
+               , "bonus" : 
+	           [ { "name" : "General Quality", "score" : -2 }
+		   , { "name" : "Specialisation", "specialisation" : "Spells",  "score" : 4 }
+		   ]
+               },
+               { "name" : "Hermetic Chamber Pot"
+               , "bonus" : 
+	           [ { "name" : "Health", "score" : 1 } ]
+               },
+               { "name" : "Faerie Ingredients"
+               , "bonus" : 
+	           [ { "name" : "Warping", "score" : 1 }
+	           , { "name" : "General Quality", "score" : 1 }
+	           , { "name" : "Upkeep", "score" : -1 }
+		   , { "name" : "Specialisation", "specialisation" : "Experimentation",  "score" : 2 }
+		   ]
+               },
+               { "name" : " Magical Heating  "
+               , "bonus" : 
+	           [ { "name" : "Health", "score" : 1 }
+	           , { "name" : "Aestetics", "score" : 1 }
+		   , { "name" : "Specialisation", "specialisation" : "Ig",  "score" : 1 }
+		   ]
+	       }
+
+            ]
+         }
+         }
+      ]
    },
    "history" : [
    ],
@@ -24,18 +92,18 @@
           , "comment" : "Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9"
           },
           { "title" : "Aegis Failing"
-	     , "narrative" :  "Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities."
-	     , "comment" : 
-		[ "2x Leprechauns might 15 have invaded"
-	        , "New Aegis L30 Penetration 27"
-		]
+             , "narrative" :  "Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities."
+             , "comment" : 
+                [ "2x Leprechauns might 15 have invaded"
+                , "New Aegis L30 Penetration 27"
+                ]
           },
           { "title" : "Cieran's Penance in Waterford", "SQ" : 7
-	     , "comment" : 
-		[ "Aine also gets a Lvl 1 Local Reputation as a Healer"
-		   , "Cieran gets 4 exp in Local Help Druid Reputation"
-		   , "Mine Collapse 7 exp Cieran 2 confidence Aine and Sean 1 Confidence"
-		]
+             , "comment" : 
+                [ "Aine also gets a Lvl 1 Local Reputation as a Healer"
+                   , "Cieran gets 4 exp in Local Help Druid Reputation"
+                   , "Mine Collapse 7 exp Cieran 2 confidence Aine and Sean 1 Confidence"
+                ]
           }
 
        ]

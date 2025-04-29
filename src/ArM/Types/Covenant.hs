@@ -36,6 +36,7 @@ import Data.Maybe
 
 import ArM.Types.Library
 import ArM.Types.Character
+import ArM.Types.Lab
 import ArM.Types
 import ArM.Helper
 
@@ -128,6 +129,7 @@ data CovenantState = CovenantState
          , covenFolkID :: [ HarmKey ]
          , library :: [ Book ]
          , librarycsv :: Maybe String
+         , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
 
 defaultCovState :: CovenantState 
@@ -136,6 +138,7 @@ defaultCovState = CovenantState
          , covenFolkID = []
          , library = []
          , librarycsv = Nothing
+         , labs = []
        }  
 
 
@@ -146,6 +149,7 @@ instance FromJSON CovenantState where
         <*> fmap ( map CharacterKey ) ( v .:? "covenfolk" .!= [] )
         <*> v .:? "library" .!= []
         <*> v .:? "librarycsv"
+        <*> v .:? "labs" .!= []
 
 
 -- |

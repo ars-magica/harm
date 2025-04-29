@@ -26,3 +26,4 @@ import ArM.Types.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Story
+import ArM.Types.Lab

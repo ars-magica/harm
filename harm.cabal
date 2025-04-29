@@ -75,6 +75,7 @@ common harm-deps
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmObject
                        , ArM.Types.Story
+                       , ArM.Types.Lab
                        , ArM.Types.HarmSagaObject
                        , ArM.Char.Combat
                        , ArM.DB.CSV

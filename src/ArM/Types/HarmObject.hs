@@ -29,6 +29,7 @@ data HarmKey = BookKey String
            | CharacterKey String
            | CovenantKey String
            | LabKey String
+	   | NoObject
            deriving ( Eq, Ord, Generic )
 
 instance ToJSON HarmKey
@@ -39,6 +40,8 @@ instance Show HarmKey where
        show (CharacterKey x) = "Character: " ++ x
        show (CovenantKey x) = "Covenant: " ++ x
        show (LabKey x) = "Lab: " ++ x
+       show NoObject = "No Such Object"
+
 
 class KeyObject h where
    -- | Return the unique key of the object
