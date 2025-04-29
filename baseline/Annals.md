@@ -1,5 +1,17 @@
 # Annals
 
+## Summer 1256
+
++ + Cieran the Fletcher ex Miscellanea (Reading)
+    + Reads the new Q9 Tractatus from Vigil
+    + Validated: Correctly spent 13 xp.
+
+## Spring 1256
+
++ + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
+    + Validated: Correctly spent 3 xp.
+
 ## Winter 1256
 
 + + Eogan mac Eogan (Trained)
@@ -7,20 +19,22 @@
     + Validated: Correctly spent 2 xp.
 + + Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
     + Teaching Luciu
-    + Validated: Correctly spent 2 xp.
-    + ERROR: Older than 50. Aging roll required.
+    + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
+    + Validated: Correctly spent 3 xp.
+    + Validated: Aging roll made
 
 ## Autumn 1255
 
 + + Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
-    + Auram Tracatus (64xp)
+    + Author *Arrow's Flight*, an Auram Tracatus
+    + To 64xp in Latin
     + Validated: Correctly spent 2 xp.
 
 ## Summer 1255
 
-+ + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + CrIm spells (376xp).  Studious Doppleganger w/o text.
-    + Validated: Correctly spent 3 xp.
++ + Cieran the Fletcher ex Miscellanea (Reading)
+    + Reads the new Q12 Tractatus from Vigil
+    + Validated: Correctly spent 16 xp.
 
 ## Spring 1255
 
@@ -37,7 +51,7 @@
 + + Changes
 +     + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
 + + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
+    + ReVi Spells; Train Luciu in Magic Theory (SQ 15).
     + Validated: Correctly spent 2 xp.
 
 ## Winter 1255
@@ -311,7 +325,8 @@
 + + Tessa Tanagh ("" (Other Exposure))
     + Validated: Correctly spent 2 xp.
 + + Cieran the Fletcher ex Miscellanea (Reading)
-    + ERROR: Book not found (From nothing to everything)
+    + Uses *From nothing to everything* by Vivianus of Bonisagus (No Time)
+    + Validated: Book CreoQ9Vivianus is available.
     + Validated: Correctly spent 12 xp.
 
 ## Spring 1247
@@ -1011,7 +1026,8 @@
 
 + + Cieran the Fletcher ex Miscellanea (Reading)
     + Studies Mentem L16Q13 +3
-    + ERROR: Book not found (The Mind's Eye)
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
+    + Validated: Book MentemL16Q13 is available.
     + Validated: Correctly spent 16 xp.
 
 ## Summer 1217

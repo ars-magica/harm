@@ -533,7 +533,8 @@ Total: 1249 levels of spells.
 ## Past Advancement
 
 + Autumn 1255 (2xp) Authoring (Exposure)
-    + Auram Tracatus (64xp)
+    + Author *Arrow's Flight*, an Auram Tracatus
+    + To 64xp in Latin
     + Changing traits
         + Ability: Latin 2xp; 
         + Possession: Me vis (4)
@@ -544,7 +545,7 @@ Total: 1249 levels of spells.
         + Art: Imaginem 16xp; 
     + Validated: Correctly spent 16 xp.
 + Spring 1255 (2xp) LabWork (Exposure)
-    + ReVi Spells; No Aging (rolled 0). Train Luciu in Magic Theory (SQ 15).
+    + ReVi Spells; Train Luciu in Magic Theory (SQ 15).
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Spell: Circular Ward Against Demons 0xp Penetration
@@ -805,9 +806,10 @@ Total: 1249 levels of spells.
         + Possession: Re vis (-1)
     + Validated: Correctly spent 2 xp.
 + Summer 1247 (9+3xp) Reading
+    + Uses *From nothing to everything* by Vivianus of Bonisagus (No Time)
     + Changing traits
         + Art: Creo 12xp; 
-    + ERROR: Book not found (From nothing to everything)
+    + Validated: Book CreoQ9Vivianus is available.
     + Validated: Correctly spent 12 xp.
 + Spring 1247 (11+3xp) Reading
     + Tractatus *On the Spark*
@@ -1634,9 +1636,10 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 18 xp.
 + Autumn 1217 (13+3xp) Reading
     + Studies Mentem L16Q13 +3
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
-    + ERROR: Book not found (The Mind's Eye)
+    + Validated: Book MentemL16Q13 is available.
     + Validated: Correctly spent 16 xp.
 + Summer 1217 (21+3xp) Reading
     + Studies *Root of Herbam* L6 Q21 +3
@@ -1650,11 +1653,17 @@ Total: 1249 levels of spells.
     + Teaching Luciu
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Ability: Imaginem 3xp; 
-    + Aging  No roll. No aging.
+    + Aging Rolled -1 (10) No aging.
 + Spring 1256 LabWork (Exposure)
-    + CrIm spells (376xp).  Studious Doppleganger w/o text.
+    + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
     + Spell: The Shadow of Human Life 0xp Quiet Casting
     + Spell: The Studious Doppleganger 0xp Quiet Casting
++ Summer 1256 (9xp) Reading
+    + Reads the new Q9 Tractatus from Vigil
+    + Art: Imaginem 13xp; 
++ Winter 1257 Teaching (Exposure)
+    + Teaching Luciu
+    + Aging Rolled -1 (5) No aging.
 

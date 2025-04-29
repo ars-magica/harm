@@ -9,20 +9,14 @@
 
 ## Advancement Errors
 
-+ Cieran: Autumn 1217 Reading
-    + Book not found (The Mind's Eye)
 + Cieran: Summer 1221 Reading
     + Underspent 8xp of 11.
-+ Cieran: Summer 1247 Reading
-    + Book not found (From nothing to everything)
 + Tessa Tanagh: Winter 1248 Adventure
     + Older than 35. Aging roll required.
 + Tessa Tanagh: Winter 1249 "" (Other Exposure)
     + Older than 35. Aging roll required.
 + Eogan mac Eogan: Spring 1255 Adventure
     + Underspent 2xp of 11.
-+ Cieran: Winter 1256 Teaching (Exposure)
-    + Older than 50. Aging roll required.
 + Rowan: Later Life
     + Underspent 260xp of 335.
 + Rowan: Virtues and Flaws

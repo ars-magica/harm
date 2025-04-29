@@ -8,7 +8,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 
 ## Spring 1255
 
-+ [Cieran the Fletcher ex Miscellanea (Spring 1256)](Cieran the Fletcher ex Miscellanea (Spring 1256))
++ [Cieran the Fletcher ex Miscellanea (Summer 1256)](Cieran the Fletcher ex Miscellanea (Summer 1256))
 + [Eogan mac Eogan (Winter 1256)](Eogan mac Eogan (Winter 1256))
 
 ### Library
@@ -36,7 +36,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *From nothing to everything* by Vivianus of Bonisagus (No Time)
     + Creo Q9
     + Traded from Carolus of Criamon in 1243
-    + Key: CreoQ9 From nothing to everything (CreoQ9 From nothing to everything)
+    + Key: CreoQ9Vivianus (CreoQ9Vivianus)
 + *Restoration of Stone and Metal* by Queltus of Guernicus (No Time)
     + Creo Q9
     + From Midsummer Fair 1244
@@ -356,10 +356,10 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Fundamental Vim* by Kallias of Tremere (No Time)
     + Vim Q11
     + Traded from Carolus of Criamon in 1245
-    + Key: VimQ11 Fundamental Vim (VimQ11 Fundamental Vim)
+    + Key: VimQ11Kallias (VimQ11Kallias)
 + *Musings from the Edge of Twilight* by Serafinus of Criamon (No Time)
     + Vim Q9
-    + Key: VimQ9 Musings from the Edge of Twilight (VimQ9 Musings from the Edge of Twilight)
+    + Key: VimQ9Serafinus (VimQ9Serafinus)
 + *New omnibus after Bonisagus* by Unknown (No Time)
     + Magic Theory L5Q12
     + Key: MagicTheoryL5Q12 (MagicTheoryL5Q12)
@@ -383,12 +383,12 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Fundamental Fast Casting* by Kallias of Tremere (No Time)
     + Finesse Q12
     + This copy was made 1217 by the chief librarian to replace the below.
-    + Key: FinesseQ12 Fundamental Fast Casting (FinesseQ12 Fundamental Fast Casting)
+    + Key: KalliasQ12Finesse (KalliasQ12Finesse)
 + *Fundamental Fast Casting* by Kallias of Tremere (No Time)
     + Finesse Q11
     + in the noted Spell Master author of House Tremere. This copy is badly damaged
     + Published only in 1209
-    + Key: FinesseQ11 Fundamental Fast Casting (FinesseQ11 Fundamental Fast Casting)
+    + Key: KalliasQ11Finesse (KalliasQ11Finesse)
 + *Ultor* (No Time)
     + Penetration L5Q11
     + From Autumn 1228 - bought for 25pvf
