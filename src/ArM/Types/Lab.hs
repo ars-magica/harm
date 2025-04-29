@@ -106,12 +106,35 @@ data LabBonus = LabBonus
      , labScore :: Int
      }  deriving (Eq,Generic,Show)
 
+
+(<%) :: LabBonus -> LabBonus -> Bool
+(<%) a b | labTrait a < labTrait b = True
+         | labTrait b < labTrait a = False
+         | labSpecialisation a < labTrait b = True
+         | labSpecialisation b < labTrait a = False
+	 | otherwise = False
+lbOrd :: LabBonus -> LabBonus -> Ordering
+lbOrd a b | a <% b = LT
+          | b <% a = GT
+          | otherwise = EQ
+
 instance ToJSON LabBonus
 instance FromJSON LabBonus where
     parseJSON = withObject "LabBonus" $ \v -> LabBonus
         <$> v .: "name" 
         <*> v .:? "specialisation" .!= ""
         <*> v .:? "score" .!= 0
+
+mergeBonus :: [ LabBonus ] -> [ LabBonus ] -> [ LabBonus ]
+mergeBonus [] ys = ys
+mergeBonus xs [] = xs
+mergeBonus (x:xs) (y:ys) | x <% y = x:mergeBonus xs (y:ys)
+                         | y <% x = y:mergeBonus (x:xs) ys
+                         | otherwise = f x y:mergeBonus xs ys
+    where f x y = x { labScore = labScore x + labScore y }
+
+totalBonus :: [ LabVirtue ] -> [ LabBonus ]
+totalBonus = foldl mergeBonus [] . map (sortBy lbOrd . labVirtueBonus)
 
 -- |
 -- = Advancement and Traits
