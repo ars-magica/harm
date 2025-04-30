@@ -15,6 +15,7 @@
          { "name" : "Cieran's WOrkshop"
          , "description" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
          , "state" : {
+	    "aura" : 8,
             "virtues" : [
                { "name" : "Dedicated Building"
                , "bonus" : 

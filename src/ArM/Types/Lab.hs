@@ -126,7 +126,7 @@ data LabBonus = LabBonus
          | labTrait b < labTrait a = False
          | labSpecialisation a < labTrait b = True
          | labSpecialisation b < labTrait a = False
-	 | otherwise = False
+         | otherwise = False
 lbOrd :: LabBonus -> LabBonus -> Ordering
 lbOrd a b | a <% b = LT
           | b <% a = GT
@@ -138,6 +138,7 @@ instance FromJSON LabBonus where
         <$> v .: "name" 
         <*> v .:? "specialisation" .!= ""
         <*> v .:? "score" .!= 0
+
 
 mergeBonus :: [ LabBonus ] -> [ LabBonus ] -> [ LabBonus ]
 mergeBonus [] ys = ys
@@ -153,11 +154,34 @@ totalBonus' = foldl mergeBonus [] . map (sortBy lbOrd . labVirtueBonus)
 totalBonus :: Lab -> [ LabBonus ]
 totalBonus = totalBonus' . labVirtues . labState
 
+artSpecialisations  :: Lab -> [ LabBonus ]
+artSpecialisations  = filter ( (=="Art") . labTrait ) . totalBonus
+activitySpecialisations  :: Lab -> [ LabBonus ]
+activitySpecialisations  = filter ( (=="Activity") . labTrait ) . totalBonus
+getLabScore :: String -> Lab -> Int
+getLabScore s = fromMaybe 0 . fmap labScore . find ( (==s) . labTrait ) . totalBonus
+safety  :: Lab -> Int
+safety  = getLabScore "Safety"
+gq  :: Lab -> Int
+gq  = getLabScore "General Quality"
+health  :: Lab -> Int
+health  = getLabScore "Health"
+aestetics  :: Lab -> Int
+aestetics  = getLabScore "Aestetics"
+warping  :: Lab -> Int
+warping  = getLabScore "Warping"
+upkeep  :: Lab -> Int
+upkeep  = getLabScore "Upkeep"
+
+
+
 usedSize :: Lab -> Int
 usedSize = sum . map labVirtueCost . labVirtues . labState
 
 -- |
 -- = Advancement and Traits
+--
+-- This is not currently used.
 
 -- | Advancement (changes) to a covenant.
 data LabAdvancement = LabAdvancement 
