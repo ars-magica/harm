@@ -250,6 +250,10 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Spells:** "  $ sortTraits $ spellList c
                , showlistMD "+ **Possessions:** "  $ sortTraits $ possessionList c
                , toOList $ printCastingTotals c
+               , OString ""
+               , OString "## Laboratory"
+               , OString ""
+               , toOList $ printLabTotals c
                ]
    printMDaug saga = printMD . addCastingScores (spells saga)
 
@@ -281,6 +285,18 @@ printCastingTotals :: CharacterSheet -> [String]
 printCastingTotals c 
              | Magus /= csType c = []
              | otherwise = "":"| Casting Total | Creo | Intellego | Muto | Perdo | Rego |":
+                              "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
+                              lts
+      where
+          lts = [ "| " ++ fo ++ foldl (++) "" (map ( (" | "++) . show ) ts ) ++ " |" 
+                | (fo,ts) <- zip lforms (castingTotals c) ]
+          lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
+
+-- | Print a table of casting totals for every TeFo combination.
+printLabTotals :: CharacterSheet -> [String]
+printLabTotals c 
+             | Magus /= csType c = []
+             | otherwise = "":"| Lab Total | Creo | Intellego | Muto | Perdo | Rego |":
                               "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
                               lts
       where

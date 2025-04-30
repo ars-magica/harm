@@ -22,6 +22,7 @@ module ArM.Char.CharacterSheet ( CharacterSheet(..)
                                , sheetPossession
                                , castingScore
                                , addCastingScores
+                               , castingTotals
                                , labTotals
                                , HasAge(..)
                                , sheetVis
@@ -204,6 +205,20 @@ labTotal cs te fo = ts + fs + int + mt
 labTotals :: CharacterSheet -- ^ Current character sheet
              -> [[Int]]     -- ^ Computed lab totals 
 labTotals cs = [ [ labTotal cs te fo | te <- techniques ] | fo <- forms ]
+
+castingTotals :: CharacterSheet -- ^ Current character sheet
+             -> [[Int]]     -- ^ Computed casting totals 
+castingTotals cs = [ [ castingTotal cs te fo | te <- techniques ] | fo <- forms ]
+
+-- | Return the Lab Total a given TeFo combo.
+castingTotal :: CharacterSheet -- ^ Current character sheet
+             -> TraitKey       -- ^ Key identifying the technique
+             -> TraitKey       -- ^ Key identifying the form
+             -> Int            -- ^ Computed lab total
+castingTotal cs te fo = ts + fs + sta 
+   where ts = sheetArtScore cs te
+         fs = sheetArtScore cs fo
+         sta = sheetCharacteristicScore cs (CharacteristicKey "Sta" ) 
 
 -- | List of Hermetic Techniques
 techniques :: [ TraitKey ]
