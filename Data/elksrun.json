@@ -20,20 +20,20 @@
                , "bonus" : 
 	           [ { "name" : "Aestetics", "score" : 1 }
 	           , { "name" : "Upkeep", "score" : 1 }
-		   , { "name" : "Specialisation", "specialisation" : "Re",  "score" : 1 }
+		   , { "name" : "Art", "specialisation" : "Re",  "score" : 1 }
 		   ]
                },
                { "name" : " Servant"
                , "bonus" : 
 	           [ { "name" : "Aestetics", "score" : 1 }
 	           , { "name" : "Safety", "score" : 1 }
-		   , { "name" : "Specialisation", "specialisation" : "Me",  "score" : 1 }
+		   , { "name" : "Art", "specialisation" : "Me",  "score" : 1 }
 		   ]
                },
                { "name" : " Safe Cauldron"
                , "bonus" : 
 	           [ { "name" : "General Quality", "score" : 1 }
-		   , { "name" : "Specialisation", "specialisation" : "Experimentation",  "score" : 1 }
+		   , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 1 }
 		   ]
                },
                { "name" : " Precious Ingredients"
@@ -46,13 +46,13 @@
                { "name" : "Major Feature: Antechamber"
                , "bonus" : 
 	           [ { "name" : "Aestetics", "score" : 2 }
-		   , { "name" : "Specialisation", "specialisation" : "Spells",  "score" : 3 }
+		   , { "name" : "Activity", "specialisation" : "Spells",  "score" : 3 }
 		   ]
                },
                { "name" : " Major Focus: Antechamber"
                , "bonus" : 
 	           [ { "name" : "General Quality", "score" : -2 }
-		   , { "name" : "Specialisation", "specialisation" : "Spells",  "score" : 4 }
+		   , { "name" : "Activity", "specialisation" : "Spells",  "score" : 4 }
 		   ]
                },
                { "name" : "Hermetic Chamber Pot"
@@ -64,14 +64,14 @@
 	           [ { "name" : "Warping", "score" : 1 }
 	           , { "name" : "General Quality", "score" : 1 }
 	           , { "name" : "Upkeep", "score" : -1 }
-		   , { "name" : "Specialisation", "specialisation" : "Experimentation",  "score" : 2 }
+		   , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 2 }
 		   ]
                },
                { "name" : " Magical Heating  "
                , "bonus" : 
 	           [ { "name" : "Health", "score" : 1 }
 	           , { "name" : "Aestetics", "score" : 1 }
-		   , { "name" : "Specialisation", "specialisation" : "Ig",  "score" : 1 }
+		   , { "name" : "Art", "specialisation" : "Ig",  "score" : 1 }
 		   ]
 	       }
 
