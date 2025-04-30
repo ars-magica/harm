@@ -91,19 +91,24 @@ instance FromJSON LabState where
 data LabVirtue = LabVirtue 
      { labVirtueName :: String
      , labVirtueDetail :: String
-     , labVirtueDescription :: String
+     , labVirtueDescription :: [ String ]
      , labVirtueBonus :: [ LabBonus ]
      , labVirtueCost :: Int
      , labVirtueMechanics :: String
      , labVirtueComment :: [ String ]
      }  deriving (Eq,Generic,Show)
 
+instance StoryObject LabVirtue where
+    name = labVirtueName 
+    narrative = labVirtueDescription 
+    comment = labVirtueComment 
+
 instance ToJSON LabVirtue
 instance FromJSON LabVirtue where
     parseJSON = withObject "LabVirtue" $ \v -> LabVirtue
         <$> v .: "name" 
         <*> v .:? "detail" .!= ""
-        <*> v .:? "description" .!= ""
+        <*> v `parseCollapsedList` "description" 
         <*> v .:? "bonus" .!= []
         <*> v .:? "cost" .!= 0
         <*> v .:? "mechanics" .!= ""

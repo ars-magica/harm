@@ -731,7 +731,7 @@ instance Markdown Lab where
        ]
 instance LongSheet LabVirtue
 instance Markdown LabVirtue where
-   printMD _ = OList []
+   printMD = OString . name 
 instance LongSheet LabBonus
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
