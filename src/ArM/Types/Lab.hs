@@ -65,6 +65,7 @@ data LabState = LabState
          { labTime :: SeasonTime
          , labVirtues :: [ LabVirtue ]
          , labRefinement :: Int 
+         , labAura :: Int 
          , labSize :: Int 
        }  deriving (Eq,Generic,Show)
 
@@ -73,6 +74,7 @@ defaultLabState = LabState
          { labTime = GameStart
          , labVirtues = []
          , labRefinement = 0
+         , labAura = 0
          , labSize = 0
        }  
 
@@ -84,6 +86,7 @@ instance FromJSON LabState where
         <*> v .:? "virtues" .!= []
         <*> v .:? "refinement" .!= 0
         <*> v .:? "size" .!= 0
+        <*> v .:? "aura" .!= 0
 
 data LabVirtue = LabVirtue 
      { labVirtueName :: String
