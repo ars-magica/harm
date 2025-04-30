@@ -28,3 +28,4 @@
 	+ Need to sort Possessions
 	+ List Lab specially
 	+ Other special possessions?
++ Should the lab possession be a `HarmKey` or a `Lab` object?

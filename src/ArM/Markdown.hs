@@ -704,6 +704,8 @@ instance LongSheet Lab
 instance Markdown Lab where
    printMD lab = indentOList $ OList 
        [ OString $ name lab
+       , OString $ "Refinement: " ++ showBonus (labRefinement $ labState lab)
+       , OString $ "Size: " ++ showBonus (labSize $ labState lab)
        , OList $ map printMD $ totalBonus $ labVirtues $ labState lab
        , OList $ map OString $ narrative lab
        , OList $ map OString $ comment lab

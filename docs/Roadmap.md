@@ -35,6 +35,11 @@ title:
 		+ [ ] Sort possessions
 	+ [ ] Review object structure
 		+ [ ] AnnalSeason 
+	+ [ ] Lab Total
+		+ [x] Define [[Lab object]]
+		+ [ ] Use lab bonuses in lab total
+		+ [ ] Compute lab total in advancements
+		+ [ ] Advance lab (refinement and virtue installation)
 + [ ] Phase 2. Consolidation
 	+ [ ] Covenant
 		+ [x] JSON Syntax for advancement
@@ -63,11 +68,6 @@ title:
 		+ [ ] Validation: Compare SQ
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Specialists (copyists in particular)
-	+ [ ] Lab Total
-		+ [ ] Define [[Lab object]]
-		+ [ ] Advance lab (refinement and virtue installation)
-		+ [ ] Use lab bonuses in lab total
-		+ [ ] Compute lab total in advancements
 + [ ] Phase 5. [[Covenant]]
 	+ [ ] Reading and copying advancements
 		+ [ ] calculate book quality from author
