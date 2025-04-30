@@ -722,8 +722,9 @@ instance Markdown Lab where
        [ OString $ name lab
        , OString $ "Refinement: " ++ showBonus (labRefinement $ labState lab)
        , OString $ "Size: " ++ showBonus (labSize $ labState lab)
+       , OString $ "Unused size: " ++ showBonus ( (labSize $ labState lab) - usedSize lab )
        , OString $ "Aura: " ++ showBonus (labAura $ labState lab)
-       , OList $ map printMD $ totalBonus $ labVirtues $ labState lab
+       , OList $ map printMD $ totalBonus lab
        , OList $ map OString $ narrative lab
        , OList $ map OString $ comment lab
        , OList $ map printMD $ labVirtues $ labState lab

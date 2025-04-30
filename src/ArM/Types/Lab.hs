@@ -93,6 +93,7 @@ data LabVirtue = LabVirtue
      , labVirtueDetail :: String
      , labVirtueDescription :: String
      , labVirtueBonus :: [ LabBonus ]
+     , labVirtueCost :: Int
      , labVirtueMechanics :: String
      , labVirtueComment :: [ String ]
      }  deriving (Eq,Generic,Show)
@@ -104,6 +105,7 @@ instance FromJSON LabVirtue where
         <*> v .:? "detail" .!= ""
         <*> v .:? "description" .!= ""
         <*> v .:? "bonus" .!= []
+        <*> v .:? "cost" .!= 0
         <*> v .:? "mechanics" .!= ""
         <*> v `parseCollapsedList` "comment" 
 
@@ -140,8 +142,14 @@ mergeBonus (x:xs) (y:ys) | x <% y = x:mergeBonus xs (y:ys)
                          | otherwise = f x y:mergeBonus xs ys
     where f x y = x { labScore = labScore x + labScore y }
 
-totalBonus :: [ LabVirtue ] -> [ LabBonus ]
-totalBonus = foldl mergeBonus [] . map (sortBy lbOrd . labVirtueBonus)
+totalBonus' :: [ LabVirtue ] -> [ LabBonus ]
+totalBonus' = foldl mergeBonus [] . map (sortBy lbOrd . labVirtueBonus)
+
+totalBonus :: Lab -> [ LabBonus ]
+totalBonus = totalBonus' . labVirtues . labState
+
+usedSize :: Lab -> Int
+usedSize = sum . map labVirtueCost . labVirtues . labState
 
 -- |
 -- = Advancement and Traits
