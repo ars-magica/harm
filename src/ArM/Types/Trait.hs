@@ -41,6 +41,7 @@ module ArM.Types.Trait ( TraitKey(..)
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
+import ArM.Types.HarmObject
 import ArM.DB.Weapon
 -- import ArM.Debug.Trace
 
@@ -270,6 +271,7 @@ instance FromJSON CombatOption where
 -- on the characters sheet.
 data Possession = Possession 
      { itemName :: String           -- ^ Name identifying the unique item
+     , itemKey :: HarmKey           -- ^ Key for a unique item
      , weaponStats :: [ Weapon ]    -- ^ List of applicable Weapon stat objects
      , weapon :: [ String ]         -- ^ List of standard weapon stats that apply
      , armourStats :: [ Armour ]    -- ^ List of applicable Weapon stat objects
@@ -282,6 +284,7 @@ data Possession = Possession
 defaultPossession :: Possession 
 defaultPossession = Possession 
      { itemName = "No name"
+     , itemKey = NoObject
      , weaponStats = []
      , weapon = []
      , armourStats = []
@@ -296,6 +299,7 @@ instance FromJSON Possession where
     parseJSON (String t) = pure $ defaultPossession { itemName = (unpack (fromStrict t)) }
     parseJSON (Object v) = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
+       <*> v .:? "weaponStats" .!= NoObject
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
        <*> v .:? "armourStats" .!= []

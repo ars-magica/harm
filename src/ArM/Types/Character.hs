@@ -188,7 +188,6 @@ data CharacterState = CharacterState
          , charSType :: CharacterType
          , memberOf :: Maybe String
          , traits :: [ Trait ]
-         , hasLab :: HarmKey
          }  deriving (Eq,Generic,Show)
 
 
@@ -211,6 +210,5 @@ instance FromJSON CharacterState where
         <*> v .: "charType" 
         <*> v .:? "memberOf" 
         <*> fmap maybeList ( v .:? "traits" )
-        <*> v .:? "lab"  .!= NoObject
 instance Timed Character where
     season = characterSeason
