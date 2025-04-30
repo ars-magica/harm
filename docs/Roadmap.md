@@ -37,7 +37,12 @@ title:
 		+ [ ] AnnalSeason 
 	+ [ ] Lab Total
 		+ [x] Define [[Lab object]]
+		+ [ ] Character access to lab object
+			+ [ ] Via inclusion or HarmKey?
 		+ [ ] Use lab bonuses in lab total
+			+ [ ] Extract GQ and Aura
+			+ [ ] Extract art bonuses
+			+ [ ] Separate bonuses that require manual handling
 		+ [ ] Compute lab total in advancements
 		+ [ ] Advance lab (refinement and virtue installation)
 + [ ] Phase 2. Consolidation
