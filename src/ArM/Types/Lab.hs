@@ -30,7 +30,8 @@ import ArM.Debug.Trace
 
 data Lab = Lab 
          { labName :: String
-         , labDescription :: String
+         , labDescription :: [ String ]
+         , labComment :: [ String ]
          , labState :: LabState
          -- , pastLabAdvancement :: [ LabAdvancement ]
          -- , futureLabAdvancement :: [ LabAdvancement ]
@@ -40,7 +41,8 @@ instance ToJSON Lab
 instance FromJSON Lab where
     parseJSON = withObject "Lab" $ \v -> Lab
         <$> v .: "name"
-        <*> v .:? "description" .!= ""
+        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "comment"
         <*> v .:? "state" .!= defaultLabState
         -- <*> v .:? "history" .!= []
         -- <*> v .:? "plan" .!= []
@@ -53,6 +55,8 @@ instance Timed Lab where
 instance HarmObject Lab 
 instance StoryObject Lab where
     name = labName 
+    narrative = labDescription 
+    comment = labComment 
 
 -- |
 -- = LabState Object

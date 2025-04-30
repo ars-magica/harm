@@ -702,7 +702,13 @@ instance Markdown CovenantState where
 
 instance LongSheet Lab
 instance Markdown Lab where
-   printMD _ = OList []
+   printMD lab = indentOList $ OList 
+       [ OString $ name lab
+       , OList $ map printMD $ totalBonus $ labVirtues $ labState lab
+       , OList $ map OString $ narrative lab
+       , OList $ map OString $ comment lab
+       , OList $ map printMD $ labVirtues $ labState lab
+       ]
 instance LongSheet LabVirtue
 instance Markdown LabVirtue where
    printMD _ = OList []
