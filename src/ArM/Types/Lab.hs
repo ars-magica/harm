@@ -36,6 +36,8 @@ data Lab = Lab
          -- , pastLabAdvancement :: [ LabAdvancement ]
          -- , futureLabAdvancement :: [ LabAdvancement ]
        }  deriving (Eq,Generic,Show)
+instance Ord Lab where
+    compare = compareKey
 
 instance ToJSON Lab
 instance FromJSON Lab where

@@ -13,6 +13,7 @@
 module ArM.Types.HarmObject ( HarmKey(..)
                             , HarmObject(..)
                             , KeyObject(..)
+                            , compareKey
                             ) where
 
 import Data.Aeson
@@ -64,6 +65,9 @@ class KeyObject h where
    -- | Sorty objects by `HarmKey`
    sortOnKey :: [h] -> [h]
    sortOnKey = sortOn harmKey
+
+compareKey :: (KeyObject a,KeyObject b) => a -> b -> Ordering
+compareKey x y = compare (harmKey x) (harmKey y)
 
 -- |
 -- The `HarmObject` class establishes a common interface for `Covenant` and

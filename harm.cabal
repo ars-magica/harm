@@ -60,6 +60,7 @@ common deps
 common harm-deps
   import:    deps
   other-modules:       ArM.Char.Character
+                       -- , TestModule
                        , ArM.Char.CharacterSheet
                        , ArM.Char.Advancement
                        , ArM.Types

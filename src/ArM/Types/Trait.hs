@@ -36,18 +36,25 @@ module ArM.Types.Trait ( TraitKey(..)
                             , (<:)
                             , fote
                             , sortTraits
+                            , visArt
                             ) where
 
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
+import ArM.Types.Story
+import ArM.Types.Lab
 import ArM.DB.Weapon
 -- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
--- import Data.Aeson.Types
+-- import Control.Monad
+
+
+import Data.Aeson.Types
+import qualified Data.Aeson.KeyMap as KM
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Control.Monad
 import Data.Maybe
@@ -277,10 +284,28 @@ data Possession = Possession
      , armourStats :: [ Armour ]    -- ^ List of applicable Weapon stat objects
      , armour :: [ String ]         -- ^ List of standard weapon stats that apply
      , itemDescription :: String    -- ^ Description of the Item
-     , visArt :: Maybe String       -- ^ Relevant art if the item is raw vis
+     , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
      , itemCount :: Int             -- ^ Number of items possessed, default 1.
      }
+     | LabPossession Lab
     deriving ( Ord, Eq, Generic )
+visArt :: Possession -> Maybe String
+visArt (LabPossession _) = Nothing
+visArt ob = itemArt ob
+instance StoryObject Possession where
+   name (LabPossession lab) = name lab
+   name ob = itemName ob 
+   narrative (LabPossession lab) = narrative lab
+   narrative ob = [ itemDescription ob ]
+   comment (LabPossession lab) = comment lab
+   comment _ = [ ]
+
+class Countable c where
+   count :: c -> Int
+instance Countable Possession where
+   count (LabPossession _) = 1
+   count ob = itemCount ob
+
 defaultPossession :: Possession 
 defaultPossession = Possession 
      { itemName = "No name"
@@ -290,14 +315,19 @@ defaultPossession = Possession
      , armourStats = []
      , armour = []
      , itemDescription = ""
-     , visArt = Nothing
+     , itemArt = Nothing
      , itemCount = 1
      }
 instance ToJSON Possession 
 
 instance FromJSON Possession where
     parseJSON (String t) = pure $ defaultPossession { itemName = (unpack (fromStrict t)) }
-    parseJSON (Object v) = fmap fixPossessionName $ Possession 
+    parseJSON (Object v) = (parseLab v) `mplus` (parseOtherPossession v)
+    parseJSON _ = mzero
+
+
+parseOtherPossession :: Object -> Parser Possession
+parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
        <*> v .:? "weaponStats" .!= NoObject
        <*> v .:? "weaponStats" .!= []
@@ -307,7 +337,25 @@ instance FromJSON Possession where
        <*> v .:? "description" .!= ""
        <*> v .:? "art"
        <*> v .:? "count" .!= 1
-    parseJSON _ = mzero
+
+parseLab :: Object -> Parser Possession
+parseLab = fmap LabPossession . f . KM.lookup "lab"
+    where f Nothing = mzero
+          f (Just x) = parseJSON x
+
+{-
+instance FromJSON Request where
+  parseJSON (Object v) =
+    case H.lookup "req1" v of
+      Just (Object h) -> Req1 <$> h .: "id" <*> h .: "properties"
+      Nothing ->
+        case H.lookup "req2" v of
+          Just (Object h) -> Req2 <$> h .: "id" <*> h .: "properies"
+          Nothing ->
+            case H.lookup "req3" v of
+              Just (Object h) -> Req3 <$> h .: "id" <*> h .: "time"
+              Nothing -> mzero
+-}
 
 fixPossessionName :: Possession -> Possession 
 fixPossessionName p | itemName p /= "" = p
@@ -318,9 +366,9 @@ fixPossessionName p | itemName p /= "" = p
                     | otherwise = "Item"
 
 instance Show Possession where
-    show p = itemName p ++ cnt
-       where cnt | itemCount p == 1 = ""
-                 | otherwise = " (" ++ show (itemCount p) ++ ")"
+    show p = name p ++ cnt
+       where cnt | count p == 1 = ""
+                 | otherwise = " (" ++ show (count p) ++ ")"
 
 -- |
 -- = TraitClass 
@@ -429,7 +477,7 @@ instance TraitClass Age where
     getTrait _ = Nothing
 
 instance TraitClass Possession where
-    traitKey x = PossessionKey $ itemName x
+    traitKey x = PossessionKey $ name x
     getTrait (PossessionTrait x) = Just x
     getTrait _ = Nothing
     toTrait = PossessionTrait
