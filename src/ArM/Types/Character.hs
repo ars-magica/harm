@@ -110,18 +110,6 @@ data CharacterType = Magus | Companion | Grog
 instance ToJSON CharacterType
 instance FromJSON CharacterType
 
-class CharacterLike ct where
-     characterType :: ct -> CharacterType
-     -- | Is the character a grog or not?
-     isGrog :: ct -> Bool
-     isGrog c | characterType c == Grog = True
-              | otherwise = False
-     -- | Is the character a magus or not?
-     isMagus :: ct -> Bool
-     isMagus c | characterType c == Magus = True
-               | otherwise = False
-instance CharacterLike Character where
-     characterType = charType . concept
 
 
 -- | The CharacterConcept is the timeless information about the character.

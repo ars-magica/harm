@@ -7,12 +7,16 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
--- Description :  HarmKey type used to index arbitrary hArM objects.
+-- Description :  Classes and keys to provide generic interfaces to types.
+--
+-- HarmKey type used to index arbitrary hArM objects.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.HarmObject ( HarmKey(..)
                             , HarmObject(..)
                             , KeyObject(..)
+                            , StoryObject(..)
+                            , Countable(..)
                             , compareKey
                             ) where
 
@@ -21,7 +25,6 @@ import Data.List
 import GHC.Generics
 import ArM.Debug.Trace
 import ArM.Types.Calendar
-import ArM.Types.Story
 
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
@@ -44,6 +47,7 @@ instance Show HarmKey where
        show NoObject = "No Such Object"
 
 
+-- | Class of types that can be indexed by `HarmKey` objects.
 class KeyObject h where
    -- | Return the unique key of the object
    harmKey :: h -> HarmKey
@@ -66,6 +70,7 @@ class KeyObject h where
    sortOnKey :: [h] -> [h]
    sortOnKey = sortOn harmKey
 
+-- | Compare to objects by their `HarmKey`.
 compareKey :: (KeyObject a,KeyObject b) => a -> b -> Ordering
 compareKey x y = compare (harmKey x) (harmKey y)
 
@@ -73,9 +78,6 @@ compareKey x y = compare (harmKey x) (harmKey y)
 -- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
 class (Timed h, StoryObject h) => HarmObject h where
-    -- | Full name of the entity
-    -- name :: h -> String
-
     -- | String identifying the object and its state
     stateName :: h -> String
     stateName x = name x ++ " (" ++ show (season x) ++ ")"
@@ -84,3 +86,19 @@ class (Timed h, StoryObject h) => HarmObject h where
     -- | Is the character state still at Game Start?
     isGameStart :: h -> Bool
     isGameStart = (==GameStart) . season
+
+-- | Class for countable objects.
+class Countable c where
+   count :: c -> Int
+   addCount :: c -> Int -> c
+
+-- | Common interface for objects that have a narrative aspect.
+class StoryObject ob where
+   -- | The name could be the title of the story or other unique identifier.
+   name :: ob -> String
+   -- | Description focusing on a narrative feel.
+   narrative :: ob -> [ String ]
+   narrative _ = []
+   -- | Remarks that do not fit in a narrative style, e.g. mechanics.
+   comment :: ob -> [ String ]
+   comment _ = []

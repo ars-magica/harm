@@ -19,6 +19,7 @@ module ArM.Types ( module ArM.Types.KeyPair
                  , module ArM.Types.TraitKey
                  , module ArM.Types.HarmObject
                  , module ArM.Types.Story
+                 , module ArM.Types.Lab
                  ) where
 
 import ArM.Types.TraitKey

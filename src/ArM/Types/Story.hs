@@ -16,6 +16,7 @@ module ArM.Types.Story ( Story(..)
                        ) where
 
 import ArM.Types.Calendar
+import ArM.Types.HarmObject
 import Data.Aeson 
 import Data.Aeson.Extra
 import GHC.Generics
@@ -40,12 +41,6 @@ instance FromJSON Story where
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "SQ" 
 
-class StoryObject ob where
-   name :: ob -> String
-   narrative :: ob -> [ String ]
-   narrative _ = []
-   comment :: ob -> [ String ]
-   comment _ = []
 
 instance StoryObject Story where
    name = storyTitle

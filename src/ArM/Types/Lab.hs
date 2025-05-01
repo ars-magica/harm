@@ -20,12 +20,11 @@ import Data.Aeson.Extra
 import Data.Maybe
 import Data.List
 
-import ArM.Helper
+-- import ArM.Helper
 import ArM.Types.HarmObject
 import ArM.Types.Calendar
-import ArM.Types.Story
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 
 data Lab = Lab 
@@ -198,8 +197,8 @@ data LabAdvancement = LabAdvancement
      , labRefine :: Int
      }
    deriving (Eq,Generic,Show)
-defaultAdv :: LabAdvancement 
-defaultAdv = LabAdvancement 
+defaultLabAdv :: LabAdvancement 
+defaultLabAdv = LabAdvancement 
      { labSeason = NoTime
      , labNarrative = []
      , acquireVirtue = []

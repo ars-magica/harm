@@ -44,16 +44,12 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
-import ArM.Types.Story
 import ArM.Types.Lab
 import ArM.DB.Weapon
 -- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
--- import Control.Monad
-
-
 import Data.Aeson.Types
 import qualified Data.Aeson.KeyMap as KM
 import Data.Text.Lazy                            ( fromStrict, unpack )
@@ -305,11 +301,11 @@ instance StoryObject Possession where
    comment (LabPossession lab) = comment lab
    comment _ = [ ]
 
-class Countable c where
-   count :: c -> Int
 instance Countable Possession where
    count (LabPossession _) = 1
    count ob = itemCount ob
+   addCount (LabPossession _) _ = error "Labs are unique"
+   addCount ob n  = ob { itemCount = itemCount ob + n }
 
 defaultPossession :: Possession 
 defaultPossession = Possession 

@@ -122,8 +122,8 @@ getSQ a | isExposure ad = (Just 2,Nothing)
          rd [] = (Nothing,Nothing)
          rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
          bks | usd == [] = []
-	     | otherwise = bookStats $ head usd
-	 usd = bookUsed a
+             | otherwise = bookStats $ head usd
+         usd = bookUsed a
 
 -- |
 -- Calculate the Source Quality the character generates as a teacher.

@@ -21,13 +21,11 @@ module ArM.Char.Character ( module ArM.Types.Character
                           ) where
 
 import Data.Maybe 
--- import Data.List
--- import Control.Monad
 
 import ArM.Char.Advancement
 import ArM.Char.CharacterSheet
 import ArM.Types
-import ArM.Helper
+-- import ArM.Helper
 -- import ArM.Types.Library
 import ArM.Types.Character
 import ArM.Types.Trait
@@ -108,15 +106,4 @@ applyCGA' :: ([AugmentedAdvancement],[Advancement],CharacterState)
 applyCGA' (xs,[],cs) = (xs,cs)
 applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
     where (a',cs') = applyCharGenAdv y cs
-
-
-hasLabKey :: Character -> HarmKey
-hasLabKey = csLabKey . characterSheet
-csLabKey :: CharacterSheet -> HarmKey
-csLabKey = csLabKey' . map itemKey .  possessionList
-csLabKey' :: [ HarmKey ] -> HarmKey
-csLabKey' [] = NoObject
-csLabKey' (LabKey x:_) = LabKey x
-csLabKey' (_:xs) = csLabKey' xs
-
 

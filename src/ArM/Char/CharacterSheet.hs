@@ -24,7 +24,7 @@ module ArM.Char.CharacterSheet ( CharacterSheet(..)
                                , addCastingScores
                                , castingTotals
                                , labTotals
-                               , HasAge(..)
+                               , CharacterLike(..)
                                , sheetVis
                                , characterLab
                                ) where
@@ -97,8 +97,6 @@ instance ToJSON CharacterSheet where
     toEncoding = genericToEncoding defaultOptions
 instance FromJSON CharacterSheet 
 
-instance CharacterLike CharacterSheet where
-     characterType = csType
 
 -- | Get the CharacterSheet corresponding to a given CharacterState.
 filterCS :: CharacterState -> CharacterSheet
@@ -219,11 +217,11 @@ labTotalBonus' :: Maybe Lab -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
-labTotalBonus' Nothing _ _ = 0
 labTotalBonus' (Just lab) (ArtKey te) (ArtKey fo) = g + t + f
     where g = labAura (labState lab) + gq lab
           t = getLabArt te lab 
           f = getLabArt fo lab
+labTotalBonus' _ _ _ = 0
 
 -- | Return the Lab Total a given TeFo combo without lab bonuses.
 labTotalBase :: CharacterSheet -- ^ Current character sheet
@@ -267,20 +265,37 @@ forms = [ ArtKey fo | fo <- [ "An", "Aq", "Au", "Co", "He", "Ig", "Im", "Me", "T
 -- = Character Age 
 
 
-class HasAge a where
-    age :: a -> Int
-    ageObject  ::  a -> Maybe Age
-instance HasAge Character where
-    age = age . characterSheet
-    ageObject = ageObject . characterSheet
-instance HasAge CharacterSheet where
+
+-- | Class comprising different interfaces to a Character.
+-- The class provides convenience functions. 
+class CharacterLike ct where
+     characterType :: ct -> CharacterType
+     -- | Is the character a grog or not?
+     isGrog :: ct -> Bool
+     isGrog c | characterType c == Grog = True
+              | otherwise = False
+     -- | Is the character a magus or not?
+     isMagus :: ct -> Bool
+     isMagus c | characterType c == Magus = True
+               | otherwise = False
+     -- | Character age in years
+     age :: ct -> Int
+     -- | The age object (trait) of the character
+     ageObject  ::  ct -> Maybe Age
+instance CharacterLike Character where
+     characterType = charType . concept
+     age = age . characterSheet
+     ageObject = ageObject . characterSheet
+instance CharacterLike CharacterState where
+     characterType = charSType 
+     age = age . filterCS
+     ageObject = ageObject . filterCS
+instance CharacterLike CharacterSheet where
+    characterType = csType
     age = f . ageObject
       where f Nothing = -1
             f (Just x) = ageYears  x
     ageObject = maybeHead . fst . filterTrait . csTraits
-instance HasAge CharacterState where
-    age = age . filterCS
-    ageObject = ageObject . filterCS
 
 -- |
 -- = Vis
