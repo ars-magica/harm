@@ -104,22 +104,16 @@ class Markdown a where
 
      -- | This is a hack to augment characters using extra resources
      -- By default, it is identical to `printMD`.
-     printMDaug :: Saga      -- ^ Saga including databases for spells etc.
+     printSheetMD :: Saga      -- ^ Saga including databases for spells etc.
                 -> a         -- ^ object to render
                 -> OList     -- ^ list of lines for output
-     printMDaug _ = printMD
-
-     -- | By default `printSheetMD` is identical to `printMDaug`
-     printSheetMD :: Saga    -- ^ Saga including databases for spells, etc.
-                  -> a       -- ^ object to render
-                  -> OList   -- ^ list of lines for output
-     printSheetMD = printMDaug
+     printSheetMD _ = printMD
 
 instance Markdown a => Markdown (Maybe a) where
    printMD Nothing = OList []
    printMD (Just x) = printMD x
-   printMDaug _ Nothing = OList []
-   printMDaug saga (Just x) = printMDaug saga x
+   printSheetMD _ Nothing = OList []
+   printSheetMD saga (Just x) = printSheetMD saga x
 
 instance Markdown FieldValue where
    printMD  = OString . show
@@ -173,7 +167,7 @@ instance Markdown Character where
                | otherwise = OList [ s1, s2 ]
             s1 = printMD $ concept  c 
             s2 = printMD $ state  c 
-   printMDaug saga c = OList
+   printSheetMD saga c = OList
             [ printMD $ concept c
             , sf $ state c 
             , adv
@@ -186,7 +180,7 @@ instance Markdown Character where
 
 instance Markdown CharacterConcept where
    printMD = conceptPrintMD "../images/"
-   printMDaug saga = conceptPrintMD dir
+   printSheetMD saga = conceptPrintMD dir
       where dir = fromMaybe "../images/" (baseURL saga)
 
 conceptPrintMD :: String -> CharacterConcept -> OList
@@ -237,7 +231,7 @@ instance Markdown CharacterSheet where
                , OString ""
                , toOList $ printLabTotals c
                ]
-   printMDaug saga c' = OList 
+   printSheetMD saga c' = OList 
                [ briefTraits c
                , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
                , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
@@ -273,10 +267,10 @@ instance Markdown CharacterState where
        , OString ""
        , printMD $ characterSheet c
        ]
-   printMDaug saga c = OList
+   printSheetMD saga c = OList
        [ OString $ "## " ++ (show $ charTime c) 
        , OString ""
-       , printMDaug saga $ characterSheet c
+       , printSheetMD saga $ characterSheet c
        ]
 
 -- |
@@ -596,12 +590,12 @@ instance Markdown Covenant where
         , OString ""
         , printMD $ covenantState cov
         ]
-    printMDaug saga cov = OList 
+    printSheetMD saga cov = OList 
         [ OString $ "# " ++ (covName $ covenantConcept cov )
         , OString ""
         , printMD $ covenantConcept cov
         , OString ""
-        , printMDaug saga $ covenantState cov
+        , printSheetMD saga $ covenantState cov
         ]
 
 instance Markdown CovenantConcept where
@@ -653,14 +647,14 @@ instance Markdown CovenantState where
         , OString ""
         , OList $ map indentOList $ map printMD $ library cov
         ]
-    printMDaug saga cov = OList  
+    printSheetMD saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
         , OString ""
         , characterIndex $ covenFolk saga cov
         , OString ""
         , OString "### Library"
         , OString ""
-        , OList $ map indentOList $ map (printMDaug saga) $ library cov
+        , OList $ map indentOList $ map (printSheetMD saga) $ library cov
         ]
 
 -- |
