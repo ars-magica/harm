@@ -225,10 +225,14 @@ labTotalBase cs te fo = ts + fs + int + mt
          int = sheetCharacteristicScore cs (CharacteristicKey "Int" ) 
          (mt,_) = sheetAbilityScore cs (AbilityKey "Magic Theory" ) 
 
+-- | Lab totals for each TeFo combo.
+-- This is used to render a table of lab totals on the character sheet.
 labTotals :: CharacterSheet -- ^ Current character sheet
              -> [[Int]]     -- ^ Computed lab totals 
 labTotals cs = [ [ labTotal cs te fo | te <- techniques ] | fo <- forms ]
 
+-- | Casting totals for each TeFo combo.
+-- This is used to render a table of casting totals on the character sheet.
 castingTotals :: CharacterSheet -- ^ Current character sheet
              -> [[Int]]     -- ^ Computed casting totals 
 castingTotals cs = [ [ castingTotal cs te fo | te <- techniques ] | fo <- forms ]
@@ -253,14 +257,15 @@ forms = [ ArtKey fo | fo <- [ "An", "Aq", "Au", "Co", "He", "Ig", "Im", "Me", "T
 
 
 -- |
--- = Character Age 
-
-
+-- = Common interface for Character, CharacterSheet, and CharacterState
 
 -- | Class comprising different interfaces to a Character.
--- The class provides convenience functions. 
+-- The class provides convenience functions.  A minimal implementation
+-- has to implement `characterSheet`.
 class CharacterLike ct where
+     -- | The type (Magus/Companion/Grog) of character
      characterType :: ct -> CharacterType
+     characterType = characterType . characterSheet
      -- | Is the character a grog or not?
      isGrog :: ct -> Bool
      isGrog c | characterType c == Grog = True
