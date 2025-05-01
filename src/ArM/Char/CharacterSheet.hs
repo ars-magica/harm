@@ -271,13 +271,14 @@ class CharacterLike ct where
                | otherwise = False
      -- | Character age in years
      age :: ct -> Int
+     age = age . characterSheet
      -- | The age object (trait) of the character
      ageObject  ::  ct -> Maybe Age
+     ageObject = ageObject . characterSheet
+     -- | The `CharacterSheet` objct representing the character (state)
      characterSheet :: ct -> CharacterSheet
 instance CharacterLike Character where
      characterType = charType . concept
-     age = age . characterSheet
-     ageObject = ageObject . characterSheet
      characterSheet c | isNothing st = defaultSheet { csType = charType (concept c) }
                       | otherwise = cs { csType = charType (concept c) }
          where st = state c
@@ -285,8 +286,6 @@ instance CharacterLike Character where
                st' = fromJust st 
 instance CharacterLike CharacterState where
      characterType = charSType 
-     age = age . filterCS
-     ageObject = ageObject . filterCS
      characterSheet = filterCS
 instance CharacterLike CharacterSheet where
     characterType = csType
