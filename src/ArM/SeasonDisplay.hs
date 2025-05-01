@@ -34,9 +34,10 @@ instance Timed AnnalSeason where
    season (AnnalSeason t _) = t
 
 instance Markdown AnnalSeason where
-   printMD (AnnalSeason t xs) = OList [ b, h, b, (OList $ map printMD xs) ]
+   printMD (AnnalSeason t xs) = OList [ b, h, b, (OList $ map ind xs) ]
       where b = OString ""
             h = OString $ "## " ++ show t
+            ind = indentOList . printMD
 
 getSeasonAnnals :: [ EitherAug ] -> [ AnnalSeason ]
 getSeasonAnnals [] = []
@@ -69,8 +70,8 @@ instance Timed EitherAug where
    season (ECov x) = season x
 
 instance Markdown CharAug where
-   printMD (CharAug c a) = indentOList $ OList
-       [ OString ("+ " ++ name c ++ " (" ++ show (mode a) ++ ")")
+   printMD (CharAug c a) = OList
+       [ OString (name c ++ " (" ++ show (mode a) ++ ")")
        , OList  $ map OString $ narrative a 
        , OList  $ map OString $ comment a 
        , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
@@ -79,7 +80,7 @@ instance Markdown CharAug where
        , OList $ map (OString . show) $ validation a
        ]
 instance Markdown CovAug where
-   printMD (CovAug c a') = OList [ OString ("+ " ++ name c), printMD a ]
+   printMD (CovAug c a') = OList [ OString (name c), printMD a ]
      where a = contractAdvancement a'
 instance Markdown EitherAug where
    printMD (ECov x) = printMD x

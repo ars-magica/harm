@@ -27,14 +27,12 @@ module ArM.Markdown ( Markdown(..)
 import Data.Maybe 
 
 import ArM.Char.Character 
-import ArM.Char.CharacterSheet
 import ArM.Types.ProtoTrait
 import ArM.Char.Combat
 import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types.Saga
-import ArM.Types.Lab
 import ArM.Types
 import ArM.DB.Spell
 import ArM.GameRules
@@ -329,7 +327,7 @@ instance Markdown OtherTrait where
 instance Markdown AugCovAdvancement where
    printMD = printMD . contractAdvancement
 instance Markdown CovAdvancement where
-   printMD ad = indentOList $ OList $ ( map printMD $ caStory ad ) ++ ch
+   printMD ad = foldOList $ OList $ ( map printMD $ caStory ad ) ++ ch
       where (OList ch) = printCovChanges ad
 instance Markdown Story where
    printMD story = OList 
@@ -340,7 +338,7 @@ instance Markdown Story where
       where sq Nothing = "(no source quality)"
             sq (Just x) = " (SQ " ++ show x ++ ")"
 printCovChanges :: CovAdvancement -> OList
-printCovChanges a = OList [ OString "+ Changes", j, lv, acq, lst ]
+printCovChanges a = OList [ OString "Changes", j, lv, acq, lst ]
      where j | joining a == [] = OList []
              | otherwise = OString $  "    + joining: " ++ showStrList (map show $ joining a)
            lv | leaving a == [] = OList []
@@ -730,14 +728,19 @@ instance LongSheet Lab
 instance Markdown Lab where
    printMD lab = indentOList $ OList 
        [ OString $ name lab
-       , OString $ "Refinement: " ++ showBonus (labRefinement $ labState lab)
-       , OString $ "Size: " ++ showBonus (labSize $ labState lab)
-       , OString $ "Unused size: " ++ showBonus ( (labSize $ labState lab) - usedSize lab )
-       , OString $ "Aura: " ++ showBonus (labAura $ labState lab)
-       , OList $ map printMD $ totalBonus lab
-       , OList $ map OString $ narrative lab
-       , OList $ map OString $ comment lab
-       , OList $ map printMD $ labVirtues $ labState lab
+       , OList 
+         [ OString $ "Refinement: " ++ showBonus (labRefinement $ labState lab)
+         , OString $ "Size: " ++ showBonus (labSize $ labState lab)
+         , OString $ "Unused size: " ++ showBonus ( (labSize $ labState lab) - usedSize lab )
+         , OString $ "Aura: " ++ showBonus (labAura $ labState lab)
+         , OString "Stats"
+         , OList $ map printMD $ totalBonus lab
+         , OString "Description"
+         , OList $ map OString $ narrative lab
+         , OList $ map OString $ comment lab
+         , OString "Virtues and Flaws"
+         , OList $ map printMD $ labVirtues $ labState lab
+         ]
        ]
 instance LongSheet LabVirtue
 instance Markdown LabVirtue where

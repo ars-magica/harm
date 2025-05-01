@@ -25,13 +25,17 @@ import Data.Text.Lazy.IO as I
 -- This is intended to build output files, where each atomic object is rendered 
 -- as a list of lines and composite objects as a list of rendered constituent
 -- objects.
+--
+-- Hierarchical bullet points can be made from a vanilla OList with the
+-- `indentOList` function.
 data OList = OList [ OList ] | OString String deriving ( Show )
 
 
 -- | Convert a list of Strings to a OList object
 toOList :: [ String ] -> OList
-toOList= OList . map OString 
+toOList = OList . map OString 
 
+-- | Fold the first layer of a nested OList
 foldOList :: OList -> OList
 foldOList (OString x) = OString x
 foldOList (OList x) = OList $ f x
@@ -48,15 +52,6 @@ indentOList (OList xs) = OList $ map (indentOList' "+ ") xs
 indentOList' :: String -> OList -> OList
 indentOList' s (OString x) = OString $ s ++ x
 indentOList' s (OList xs) = OList $ map (indentOList' ("    "++s)) xs
-
--- | Render an OList as a hierarchical markdown list
-indentOList1 :: OList -> OList
-indentOList1 (OString x) = OString $ '+':' ':x
-indentOList1 (OList xs) = OList $ map (indentOList' "+ ") xs
-
-indentOList1' :: String -> OList -> OList
-indentOList1' s (OString x) = OString $ s ++ x
-indentOList1' s (OList xs) = OList $ map (indentOList' ("    "++s)) xs
 
 -- | 
 -- == Writing OList to file

@@ -16,6 +16,7 @@
 -----------------------------------------------------------------------------
 module ArM.Char.Character ( module ArM.Types.Character
                           , module ArM.Char.Advancement
+                          , module ArM.Char.CharacterSheet
                           , characterEntryTime
                           , prepareCharacter
                           ) where
