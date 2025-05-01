@@ -109,6 +109,7 @@ Weak Spontaneous Magic (0),
     + An vis
     + Au vis (0)
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
+    + Cieran's WOrkshop
     + Cr vis (2)
     + Dagger
     + Ig vis (3)
@@ -505,16 +506,62 @@ Total: 1183 levels of spells.
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
 |         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
-| Animal | 32 | 29 | 23 | 23 | 29 |
-| Aquam | 33 | 30 | 24 | 24 | 30 |
-| Auram | 33 | 30 | 24 | 24 | 30 |
-| Corpus | 38 | 35 | 29 | 29 | 35 |
-| Herbam | 33 | 30 | 24 | 24 | 30 |
-| Ignem | 35 | 32 | 26 | 26 | 32 |
-| Imaginem | 52 | 49 | 43 | 43 | 49 |
-| Mentem | 44 | 41 | 35 | 35 | 41 |
-| Terram | 36 | 33 | 27 | 27 | 33 |
-| Vim | 39 | 36 | 30 | 30 | 36 |
+| Animal | 25 | 22 | 16 | 16 | 22 |
+| Aquam | 26 | 23 | 17 | 17 | 23 |
+| Auram | 26 | 23 | 17 | 17 | 23 |
+| Corpus | 31 | 28 | 22 | 22 | 28 |
+| Herbam | 26 | 23 | 17 | 17 | 23 |
+| Ignem | 28 | 25 | 19 | 19 | 25 |
+| Imaginem | 45 | 42 | 36 | 36 | 42 |
+| Mentem | 37 | 34 | 28 | 28 | 34 |
+| Terram | 29 | 26 | 20 | 20 | 26 |
+| Vim | 32 | 29 | 23 | 23 | 29 |
+
+## Laboratory
+
+
+| Lab Total | Creo | Intellego | Muto | Perdo | Rego |
+|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
+| Animal | 41 | 38 | 32 | 32 | 39 |
+| Aquam | 42 | 39 | 33 | 33 | 40 |
+| Auram | 42 | 39 | 33 | 33 | 40 |
+| Corpus | 47 | 44 | 38 | 38 | 45 |
+| Herbam | 42 | 39 | 33 | 33 | 40 |
+| Ignem | 45 | 42 | 36 | 36 | 43 |
+| Imaginem | 61 | 58 | 52 | 52 | 59 |
+| Mentem | 54 | 51 | 45 | 45 | 52 |
+| Terram | 45 | 42 | 36 | 36 | 43 |
+| Vim | 48 | 45 | 39 | 39 | 46 |
+
++ Cieran's WOrkshop
+    + Refinement: 
+    + Size: 
+    + Unused size: 
+    + Aura:  +8
+    + Stats
+        + Experimentation  +3
+        + Spells  +7
+        + Aestetics  +5
+        + Ig  +1
+        + Me  +1
+        + Re  +1
+        + General Quality  +1
+        + Health  +2
+        + Safety  +1
+        + Upkeep  +2
+        + Warping  +1
+    + Description
+        + A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop.
+    + Virtues and Flaws
+        + Dedicated Building
+        + Servant
+        + Safe Cauldron
+        + Precious Ingredients
+        + Major Feature: Antechamber
+        + Major Focus: Antechamber
+        + Hermetic Chamber Pot
+        + Faerie Ingredients
+        + Magical Heating  
 
 ## Past Advancement
 
@@ -1112,7 +1159,7 @@ Total: 1183 levels of spells.
         + Possession: Te vis (-5)
     + Validated: Correctly spent 12 xp.
 + Summer 1235 (2xp) LabWork (Exposure)
-    +  93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
+    + 93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Spell: Posing the Silent Question 0xp Quiet Casting
@@ -1141,7 +1188,7 @@ Total: 1183 levels of spells.
         + Reputation: Friendly druid [Lands of O'Sullivan] 30xp
     + Validated: Correctly spent 13 xp.
 + Summer 1234 (13+3xp) Reading
-    +  *Magic Companion* L15Q13 
+    + *Magic Companion* L15Q13 
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
@@ -1153,7 +1200,7 @@ Total: 1183 levels of spells.
         + Possession: Porter’s Glove
     + Validated: Correctly spent 2 xp.
 + Winter 1234 (13+3xp) (1 years) Reading
-    +  *Magic Companion* L15Q13 
+    + *Magic Companion* L15Q13 
     + Changing traits
         + Art: Vim 16xp; 
     + Inferred traits
@@ -1302,7 +1349,7 @@ Total: 1183 levels of spells.
         + Spell: Willful Sidestep 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1229 (16+3xp) (1 years) Reading
-    +  *Corpus Hermeticum*
+    + *Corpus Hermeticum*
     + Changing traits
         + Art: Corpus 19xp; 
     + Inferred traits
@@ -1417,7 +1464,7 @@ Total: 1183 levels of spells.
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
 + Spring 1224 (16+3xp) Reading
-    +  *Corpus Hermeticus*
+    + *Corpus Hermeticus*
     + Changing traits
         + Art: Corpus 19xp; 
     + Validated: Correctly spent 19 xp.
@@ -1489,7 +1536,7 @@ Total: 1183 levels of spells.
         + Art: Auram 22xp; 
     + Validated: Correctly spent 22 xp.
 + Summer 1221 (8+3xp) Reading
-    +  (Causes and Curies) half xp due to injuries = 8
+    + (Causes and Curies) half xp due to injuries = 8
     + Changing traits
         + Ability: Philosophiæ [Rituals] 8xp; 
     + ERROR: Underspent 8xp of 11.
@@ -1572,6 +1619,7 @@ Total: 1183 levels of spells.
     + Studies *Root of Terram* L8Q15 +3
     + Changing traits
         + Art: Terram 18xp; 
+        + Possession: Cieran's WOrkshop
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.

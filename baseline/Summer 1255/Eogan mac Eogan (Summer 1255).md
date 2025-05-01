@@ -69,11 +69,13 @@ Weakness [for Dogs] (-1),
     + Bargain [Livestock] 2 (0xp)
     + Bows [Shortbow] 4 (0xp)
     + Brawl [Dirty fighting] 1 (0xp)
+    + Carouse [  --  ] 1 (0xp)
     + Charm [Animals] 1 (0xp)
     + Covenant Lore [Hierarchies] 2 (0xp)
-    + Faerie Lore [Dark Fae] 1 (0xp)
+    + Faerie Lore [Dark Fae] 1 (1xp)
     + Guile [Fast talk] 1 (0xp)
-    + Hunt [with dogs] 5 (6xp)
+    + Hermes Lore [  --  ] 1 (0xp)
+    + Hunt [with dogs] 5 (4xp)
     + Leadership [in the field] 2 (0xp)
     + Magic Lore [Ancient Myth] 1 (0xp)
     + Munster Lore [Outback] 1 (0xp)
@@ -103,9 +105,11 @@ Weakness [for Dogs] (-1),
     + Validated: Correctly spent 2 xp.
 + Spring 1255 (8+3xp) Adventure
     + Changing traits
-        + Ability: Hunt 2xp; 
+        + Ability: Hermes Lore 5xp; 
+        + Ability: Carouse 5xp; 
+        + Ability: Faerie Lore 1xp; 
         + Confidence: 0 (1)
-    + ERROR: Underspent 2xp of 11.
+    + Validated: Correctly spent 11 xp.
 + Winter 1255 (2xp) (1 years) Trained
     + Train one lymer in hunt +8 xp.
     + Changing traits

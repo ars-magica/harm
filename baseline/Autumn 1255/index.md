@@ -15,8 +15,6 @@
     + Older than 35. Aging roll required.
 + Tessa Tanagh: Winter 1249 "" (Other Exposure)
     + Older than 35. Aging roll required.
-+ Eogan mac Eogan: Spring 1255 Adventure
-    + Underspent 2xp of 11.
 + Rowan: Later Life
     + Underspent 260xp of 335.
 + Rowan: Virtues and Flaws

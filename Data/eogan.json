@@ -138,7 +138,9 @@
       , "season" : "Spring 1255"
       , "sourceQuality" : 8
       , "changes" : 
-         [ { "ability" : "Hunt", "xp": 2 }
+         [ { "ability" : "Hermes Lore", "xp": 5 }
+         , { "ability" : "Carouse", "xp": 5 }
+         , { "ability" : "Faerie Lore", "xp": 1 }
          , { "confidence" : "Confidence", "points" : 1 }
          ] 
       },

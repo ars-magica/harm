@@ -119,7 +119,9 @@ Weakness [for Dogs] (-1),
     + Train one lymer in hunt +8 xp.
     + Ability: Hunt 2xp; 
 + Spring 1255 (8xp) Adventure
-    + Ability: Hunt 2xp; 
+    + Ability: Hermes Lore 5xp; 
+    + Ability: Carouse 5xp; 
+    + Ability: Faerie Lore 1xp; 
     + Confidence: 0 (1)
 + Summer 1255 (2xp) Trained
     + Train second lymer in hunt +8 xp.

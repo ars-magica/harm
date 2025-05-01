@@ -190,6 +190,22 @@ Total: 150 levels of spells.
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
 |         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
+| Animal | 9 | 3 | 3 | 11 | 11 |
+| Aquam | 9 | 3 | 3 | 11 | 11 |
+| Auram | 9 | 3 | 3 | 11 | 11 |
+| Corpus | 14 | 8 | 8 | 16 | 16 |
+| Herbam | 9 | 3 | 3 | 11 | 11 |
+| Ignem | 9 | 3 | 3 | 11 | 11 |
+| Imaginem | 21 | 15 | 15 | 23 | 23 |
+| Mentem | 10 | 4 | 4 | 12 | 12 |
+| Terram | 14 | 8 | 8 | 16 | 16 |
+| Vim | 11 | 5 | 5 | 13 | 13 |
+
+## Laboratory
+
+
+| Lab Total | Creo | Intellego | Muto | Perdo | Rego |
+|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
 | Animal | 12 | 6 | 6 | 14 | 14 |
 | Aquam | 12 | 6 | 6 | 14 | 14 |
 | Auram | 12 | 6 | 6 | 14 | 14 |
@@ -200,6 +216,7 @@ Total: 150 levels of spells.
 | Mentem | 13 | 7 | 7 | 15 | 15 |
 | Terram | 17 | 11 | 11 | 19 | 19 |
 | Vim | 14 | 8 | 8 | 16 | 16 |
+
 
 ## Game start design
 

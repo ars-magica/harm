@@ -32,7 +32,7 @@ Saga
 Size
 : 0
 
-## Summer 1256
+## Spring 1256
 
 + **Age:** 64 years (apparent age 51) Longevity Ritual: 22
 + **Confidence**: 1 (33)
@@ -110,6 +110,7 @@ Weak Spontaneous Magic (0),
     + An vis (0)
     + Au vis (0)
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
+    + Cieran's WOrkshop
     + Cr vis (2)
     + Dagger
     + Ig vis (3)
@@ -151,7 +152,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 28 | 13.5 | 5 |
+| Imaginem | 27 | 22 | 5 |
 | Mentem | 17 | 0 | 14 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -229,34 +230,34 @@ Weak Spontaneous Magic (0),
     + Keeps heat and fire at bay, unable to approach within 1 pace of the target. This renders the target immune to damage from flames or heat of intensity less than that of molten iron. The target gets a +15 Soak against all fire-related damage. Any fire doing less than +15 damage per round doesn’t penetrate the ward. Such fires simply dim at the protected person’s passing and flare back up after he or she is gone.
     + Base 4, +2 for up to +15 damage, +1 Touch, +2 Sun
     + [ArM5:143]
-+ *False Window* CrIm5 (49)
++ *False Window* CrIm5 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + This spell allows the magus to trace the frame of a door or window and create a miniature that seems to show something that lies beyond the frame. A Perception + Finesse roll is required to craft a convincing illusion. The Ease Factor is 9 if the image seems to show a room, 12 if it seems to show a structure, or 15 if it seems to run to the horizon. These numbers already include the reduction for limiting the viewer’s line of sight, but could be reduced or increased by familiarity with the depicted scene.  Many casters of False Window add an additional magnitude, so that figures within the image appear to move, and the pattern of light changes to suit the time of day, but this simpler version creates only a static image. This spell also models similar spells for the other senses: a mirror that plays a tune, provided its face is not turned toward a wall, is an example. Directly created species like these are resisted by the Parma Magica.
     + Base 2, +2 Sun or Ring, +1 Individual
     + [HoH:S:68]
-+ *Smoke of Escaping* CrIm5 (49)
++ *Smoke of Escaping* CrIm5 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Diam; Target: Ind
     + Creates the illusion of a thick cloud of red smoke in the caster’s vicinity.
     + Base 1, +1 Touch, +1 Diameter, +1 size, +1 impenetrable to sight
     + [MoH:124]
-+ *The Studious Doppleganger* CrIm5 (49)
++ *The Studious Doppleganger* CrIm5 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + This spell creates a static copy of the caster, which sits on a stool and appears to be studying a book. The image is only visual.
     + Base 1, +1 Touch, +2 Sun, +1 intricacy
     + [App:47]
-+ *Clarity of Public Speech* CrIm10 (49)
++ *Clarity of Public Speech* CrIm10 (48)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Sun; Target: Room
-+ *Book of Images* CrIm15 (49)
++ *Book of Images* CrIm15 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Ring; Target: Ind
     + This spell creates moving sounds and images that are stored in a circle (such as a drawn circle on paper) as long as it is intact. With this spell it is possible to create a whole book or gallery of fantastic images and talking pictures, but only if proper Finesse rolls are made.
     + Base 2, +1 Touch, +2 Ring, +1 moving images, +1 intricacy
     + [MoH:124]
-+ *Horror Cabinet* CrIm35 (46)
++ *Horror Cabinet* CrIm35 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. Re
     + Range: Touch; Duration: Moon; Target: Room
@@ -269,81 +270,81 @@ Weak Spontaneous Magic (0),
     + The human image created (as in Phantasm of the Human Form) has limited freedom and simulated intellect. It functions as an independent human, albeit a stupid one, capable of interpreting general orders in new situations.
     + Base 2, +1 Touch, +2 Sun, +1 intricacy, +6 Mentem requisite, for a very elaborate effect
     + [ArM:144]
-+ *Prying Eyes* InIm5 (46)
++ *Prying Eyes* InIm5 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Conc; Target: Room
     + You can see inside a room, as long as you can touch one of its walls. If the room is unlit or poorly lit, you can only see as much as you could if you were inside, but magical enhancements of your senses do apply. You may change your viewpoint within the room throughout the duration of the spell.
     + Base 1, +1 Touch, +1 Concentration, +2 Room
     + [ArM5:144]
-+ *Brushstrokes Revealed* InIm10 (46)
++ *Brushstrokes Revealed* InIm10 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Ring; Target: Circle
     + This spell makes the species cast by an object within the circle more vivid, so that the magus can see tiny details that are otherwise invisible. This spell has traditionally been used to investigate the physical construction of artworks, but nature-oriented Jerbiton magi have recently begun using it to investigate the handiwork of God, by examining the tiny structures of creation.
     + Base 3, +1 Touch, +2 Ring
     + [HoH:S:65]
-+ *Palm of Seeing (Sun duration)* InIm20 (46)
++ *Palm of Seeing (Sun duration)* InIm20 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Diam; Target: Vision
     + The caster can see from the perspective of the target. This spell must Penetrate in order to sense creatures with Magic Resistance.  Ariane has learned this spell to cast down an Intangible Tunnel.
     + Base 1, +1 Touch, +1 Diameter, +4 Vision
     + [TtA:80]
-+ *Eyes of the Eagle (touch)* InIm30 (46)
++ *Eyes of the Eagle (touch)* InIm30 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Vision
     + You see distant things clearly. No matter how far away something is, you can make out details as if it were only a foot or so from you. Things do not all appear to be a foot away; you can simply make out details as well as if they were. You can still judge distance accurately; in fact, more accurately than normal, to within an inch or so at a distance of several miles, since you can see as clearly as if you were judging distance a foot away.
     + Base 3, +2 Sun, +4 Vision
     + Custom variant [ArM5:145]
-+ *Aura of Ennobled Presence* MuIm10 (40)
++ *Aura of Ennobled Presence* MuIm10 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target appears more forceful, authoritative, and believable.  Numerous subtle changes in appearance bring about this change, including a slight supernatural illumination of the face, a more erect posture, and a louder and smoother voice. The character gets a +3 on rolls to influence, lead, or convince others.
     + Base 3, +1 Touch, +2 Sun
     + [ArM5:145]
-+ *Aura of the Trustful Merchant* MuIm10 (40)
++ *Aura of the Trustful Merchant* MuIm10 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Custom
-+ *Disguise of the Transformed Image* MuIm15 (40)
++ *Disguise of the Transformed Image* MuIm15 (39)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Makes someone look, sound, feel, and smell different, though at least passably human.
     + Base 4, +1 Touch, +2 Sun
     + [ArM5:146]
-+ *Sight of the Warm Surface* MuIm15 (40)
++ *Sight of the Warm Surface* MuIm15 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Conc; Target: Vision
     + Although Imaginem magic cannot create heat, warm surfaces emit species, which humans can sense through touch. This spell transforms those into species that the eye responds to. How the warmth is seen varies by magus.
     + Base 2, +1 Touch, +1 Concentration, +4 Vision
     + [HoH:S:65]
-+ *Ogre's Stench* MuIm25 (40)
++ *Ogre's Stench* MuIm25 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Group
     + You change the targets’ smell (up to 100 people) in such a disgusting and awful way that they and every person near them must make Stamina rolls against an Ease Factor of 6 or act with a –3 penalty to all rolls. If they botch, they throw up.
     + Base 1, +2 Voice, +2 Sun, +2 Group, +1 size, +2 very “detailed” smell)cw
     + [MoH:125]
-+ *Veil of Invisibility* PeIm20 (40)
++ *Veil of Invisibility* PeIm20 (39)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target becomes completely undetectable to normal sight, regardless of what he does, but still casts a shadow.
     + Base 4, +1 Touch, +2 Sun, +1 changing image
     + [ArM5:146]
-+ *Circle of Undisturbed Rest* ReIm10 (46)
++ *Circle of Undisturbed Rest* ReIm10 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Ring; Target: Circle
     + Base 1, +2 Ring, +1 Touch, +1 additional sense
     + [MoH:30]
-+ *Willful Sidestep* ReIm20 (46)
++ *Willful Sidestep* ReIm20 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Custom
-+ *Image from the Wizard Torn* ReIm30 (46)
++ *Image from the Wizard Torn* ReIm30 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. In
     + Range: Per; Duration: Conc; Target: Ind
     + Your image separates from your body and moves as you do. It can speak whatever you say and do so in your voice, and you can see through its eyes. You must make an Int + Concentration stress roll for each solid object the image passes through and for each mile it travels. If you wish the image to be able to leave your sight, you must use an Arcane Connection to yourself (for example, a fingernail or a lock of hair) when you cast the spell. That connection becomes an integral part of the image, and when the spell ends, it falls to the ground wherever the image was located. As your image is away from your body, you are invisible and silent at your actual location.  The image is your image, so while you may move it in space you may not have it sit down if you are standing. Further, it appears as if illuminated by whatever light is falling on you, no matter what the level of illumination is at the image.
     + Base 15, +1 Concentration, +1 additional sense, +1 Intellego requisite
     + [ArM:147]
-+ *Confusion of the Insane Vibrations* ReIm35 (46)
++ *Confusion of the Insane Vibrations* ReIm35 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: ; Duration: Sun; Target: 
 + *By His Works* CrMe5 (38)
@@ -539,24 +540,65 @@ Total: 1309 levels of spells.
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
 |         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
-| Animal | 32 | 29 | 23 | 23 | 29 |
-| Aquam | 33 | 30 | 24 | 24 | 30 |
-| Auram | 33 | 30 | 24 | 24 | 30 |
-| Corpus | 38 | 35 | 29 | 29 | 35 |
-| Herbam | 33 | 30 | 24 | 24 | 30 |
-| Ignem | 35 | 32 | 26 | 26 | 32 |
-| Imaginem | 55 | 52 | 46 | 46 | 52 |
-| Mentem | 44 | 41 | 35 | 35 | 41 |
-| Terram | 36 | 33 | 27 | 27 | 33 |
-| Vim | 39 | 36 | 30 | 30 | 36 |
+| Animal | 25 | 22 | 16 | 16 | 22 |
+| Aquam | 26 | 23 | 17 | 17 | 23 |
+| Auram | 26 | 23 | 17 | 17 | 23 |
+| Corpus | 31 | 28 | 22 | 22 | 28 |
+| Herbam | 26 | 23 | 17 | 17 | 23 |
+| Ignem | 28 | 25 | 19 | 19 | 25 |
+| Imaginem | 47 | 44 | 38 | 38 | 44 |
+| Mentem | 37 | 34 | 28 | 28 | 34 |
+| Terram | 29 | 26 | 20 | 20 | 26 |
+| Vim | 32 | 29 | 23 | 23 | 29 |
+
+## Laboratory
+
+
+| Lab Total | Creo | Intellego | Muto | Perdo | Rego |
+|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |
+| Animal | 41 | 38 | 32 | 32 | 39 |
+| Aquam | 42 | 39 | 33 | 33 | 40 |
+| Auram | 42 | 39 | 33 | 33 | 40 |
+| Corpus | 47 | 44 | 38 | 38 | 45 |
+| Herbam | 42 | 39 | 33 | 33 | 40 |
+| Ignem | 45 | 42 | 36 | 36 | 43 |
+| Imaginem | 63 | 60 | 54 | 54 | 61 |
+| Mentem | 54 | 51 | 45 | 45 | 52 |
+| Terram | 45 | 42 | 36 | 36 | 43 |
+| Vim | 48 | 45 | 39 | 39 | 46 |
+
++ Cieran's WOrkshop
+    + Refinement: 
+    + Size: 
+    + Unused size: 
+    + Aura:  +8
+    + Stats
+        + Experimentation  +3
+        + Spells  +7
+        + Aestetics  +5
+        + Ig  +1
+        + Me  +1
+        + Re  +1
+        + General Quality  +1
+        + Health  +2
+        + Safety  +1
+        + Upkeep  +2
+        + Warping  +1
+    + Description
+        + A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop.
+    + Virtues and Flaws
+        + Dedicated Building
+        + Servant
+        + Safe Cauldron
+        + Precious Ingredients
+        + Major Feature: Antechamber
+        + Major Focus: Antechamber
+        + Hermetic Chamber Pot
+        + Faerie Ingredients
+        + Magical Heating  
 
 ## Past Advancement
 
-+ Summer 1256 (9+4xp) Reading
-    + Reads the new Q9 Tractatus from Vigil
-    + Changing traits
-        + Art: Imaginem 13xp; 
-    + Validated: Correctly spent 13 xp.
 + Spring 1256 (3xp) LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
     + Changing traits
@@ -1219,7 +1261,7 @@ Total: 1309 levels of spells.
         + Possession: Te vis (-5)
     + Validated: Correctly spent 12 xp.
 + Summer 1235 (2xp) LabWork (Exposure)
-    +  93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
+    + 93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Spell: Posing the Silent Question 0xp Quiet Casting
@@ -1248,7 +1290,7 @@ Total: 1309 levels of spells.
         + Reputation: Friendly druid [Lands of O'Sullivan] 30xp
     + Validated: Correctly spent 13 xp.
 + Summer 1234 (13+3xp) Reading
-    +  *Magic Companion* L15Q13 
+    + *Magic Companion* L15Q13 
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
@@ -1260,7 +1302,7 @@ Total: 1309 levels of spells.
         + Possession: Porter’s Glove
     + Validated: Correctly spent 2 xp.
 + Winter 1234 (13+3xp) (1 years) Reading
-    +  *Magic Companion* L15Q13 
+    + *Magic Companion* L15Q13 
     + Changing traits
         + Art: Vim 16xp; 
     + Inferred traits
@@ -1409,7 +1451,7 @@ Total: 1309 levels of spells.
         + Spell: Willful Sidestep 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1229 (16+3xp) (1 years) Reading
-    +  *Corpus Hermeticum*
+    + *Corpus Hermeticum*
     + Changing traits
         + Art: Corpus 19xp; 
     + Inferred traits
@@ -1524,7 +1566,7 @@ Total: 1309 levels of spells.
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
 + Spring 1224 (16+3xp) Reading
-    +  *Corpus Hermeticus*
+    + *Corpus Hermeticus*
     + Changing traits
         + Art: Corpus 19xp; 
     + Validated: Correctly spent 19 xp.
@@ -1596,7 +1638,7 @@ Total: 1309 levels of spells.
         + Art: Auram 22xp; 
     + Validated: Correctly spent 22 xp.
 + Summer 1221 (8+3xp) Reading
-    +  (Causes and Curies) half xp due to injuries = 8
+    + (Causes and Curies) half xp due to injuries = 8
     + Changing traits
         + Ability: Philosophiæ [Rituals] 8xp; 
     + ERROR: Underspent 8xp of 11.
@@ -1679,6 +1721,7 @@ Total: 1309 levels of spells.
     + Studies *Root of Terram* L8Q15 +3
     + Changing traits
         + Art: Terram 18xp; 
+        + Possession: Cieran's WOrkshop
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.
@@ -1697,6 +1740,9 @@ Total: 1309 levels of spells.
 
 ## Future Advancement
 
++ Summer 1256 (9xp) Reading
+    + Reads the new Q9 Tractatus from Vigil
+    + Art: Imaginem 13xp; 
 + Winter 1257 Teaching (Exposure)
     + Teaching Luciu
     + Aging Rolled -1 (5) No aging.
