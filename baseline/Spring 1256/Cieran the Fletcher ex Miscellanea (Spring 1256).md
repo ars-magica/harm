@@ -91,7 +91,6 @@ Weak Spontaneous Magic (0),
     + Folk Ken [Villagers] 1 (5xp)
     + Hermes Code [Stonehenge] 1 (0xp)
     + Hermes Lore [Hibernia] 1 (6xp)
-    + Imaginem [  --  ] 0 (3xp)
     + Infernal Lore [Undead] 1 (0xp)
     + Latin [Hermetic Usage] 4 (14xp)
     + Leadership [  --  ] 1 (0xp)
@@ -152,7 +151,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 27 | 22 | 5 |
+| Imaginem | 27 | 26.5 | 5 |
 | Mentem | 17 | 0 | 14 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -615,7 +614,7 @@ Total: 1309 levels of spells.
     + Teaching Luciu
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Changing traits
-        + Ability: Imaginem 3xp; 
+        + Art: Imaginem 3xp; 
         + Aging Rolled -1 (10) No aging.
     + Inferred traits
         + Warping 1 (from Longevity Ritual)

@@ -1700,7 +1700,7 @@ Total: 1249 levels of spells.
 + Winter 1256 Teaching (Exposure)
     + Teaching Luciu
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
-    + Ability: Imaginem 3xp; 
+    + Art: Imaginem 3xp; 
     + Aging Rolled -1 (10) No aging.
 + Spring 1256 LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
