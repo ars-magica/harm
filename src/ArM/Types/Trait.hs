@@ -37,6 +37,7 @@ module ArM.Types.Trait ( TraitKey(..)
                             , fote
                             , sortTraits
                             , visArt
+                            , getLab
                             ) where
 
 import ArM.GameRules
@@ -292,6 +293,10 @@ data Possession = Possession
 visArt :: Possession -> Maybe String
 visArt (LabPossession _) = Nothing
 visArt ob = itemArt ob
+getLab :: Possession -> Maybe Lab
+getLab (LabPossession lab) = Just lab
+getLab _ = Nothing
+
 instance StoryObject Possession where
    name (LabPossession lab) = name lab
    name ob = itemName ob 

@@ -176,20 +176,20 @@
 		        , { "name" : "Art", "specialisation" : "Re",  "score" : 1 }
 		        ]
                     },
-                    { "name" : " Servant"
+                    { "name" : "Servant"
                     , "bonus" : 
 	                [ { "name" : "Aestetics", "score" : 1 }
 	                , { "name" : "Safety", "score" : 1 }
 		        , { "name" : "Art", "specialisation" : "Me",  "score" : 1 }
 		        ]
                     },
-                    { "name" : " Safe Cauldron"
+                    { "name" : "Safe Cauldron"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 1 }
 		        ]
                     },
-                    { "name" : " Precious Ingredients"
+                    { "name" : "Precious Ingredients"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 	                , { "name" : "Upkeep", "score" : 2 }
@@ -202,7 +202,7 @@
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 3 }
 		        ]
                     },
-                    { "name" : " Major Focus: Antechamber"
+                    { "name" : "Major Focus: Antechamber"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : -2 }
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 4 }
@@ -220,7 +220,7 @@
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 2 }
 		        ]
                     },
-                    { "name" : " Magical Heating  "
+                    { "name" : "Magical Heating  "
                     , "bonus" : 
 	                [ { "name" : "Health", "score" : 1 }
 	                , { "name" : "Aestetics", "score" : 1 }
@@ -326,7 +326,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1221"
       , "sourceQuality" : 8
-      , "narrative" : " (Causes and Curies) half xp due to injuries = 8"
+      , "narrative" : "(Causes and Curies) half xp due to injuries = 8"
       , "changes" : [ { "ability" : "Philosophiæ", "spec" : "Rituals", "xp" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1221"
@@ -406,7 +406,7 @@
       },
       { "mode" : "Reading", "season" : "Spring 1224"
       , "sourceQuality" : 16
-      , "narrative" : " *Corpus Hermeticus*"
+      , "narrative" : "*Corpus Hermeticus*"
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1224"
@@ -526,7 +526,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1229"
       , "sourceQuality" : 16
-      , "narrative" : " *Corpus Hermeticum*"
+      , "narrative" : "*Corpus Hermeticum*"
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1229"
@@ -703,7 +703,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1234"
       , "sourceQuality" : 13
-      , "narrative" : " *Magic Companion* L15Q13 "
+      , "narrative" : "*Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Teaching", "season" : "Spring 1234"
@@ -718,7 +718,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1234"
       , "sourceQuality" : 13
-      , "narrative" : " *Magic Companion* L15Q13 "
+      , "narrative" : "*Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1234"
@@ -743,7 +743,7 @@
       },
       { "mode" : "Lab Work", "season" : "Summer 1235"
       , "sourceQuality" : 2
-      , "narrative" : " 93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text"
+      , "narrative" : "93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
          , { "spell" : "Posing the Silent Question"
             , "tefo" : "InMe", "level" : 20

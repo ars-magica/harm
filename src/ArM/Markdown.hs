@@ -437,8 +437,18 @@ instance LongSheet CharacterSheet where
                                         , OString ""
                                         , toOList $ printCastingTotals c 
                                         , OString ""
+                                        , OString "## Laboratory"
+                                        , OString ""
+                                        , toOList $ printLabTotals c 
+                                        , OString ""
+                                        , printSheetMD saga $ characterLab c
+                                        , OString ""
                                         ]
                    | otherwise = OString "" 
+
+instance (LongSheet c) => LongSheet (Maybe c) where
+   printSheetMD _ Nothing = OList []
+   printSheetMD saga (Just x) = printSheetMD saga x
 
 -- |
 -- == Pretty print arts

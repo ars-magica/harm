@@ -87,8 +87,8 @@ instance FromJSON LabState where
         <$> v .:? "season" .!= GameStart
         <*> v .:? "virtues" .!= []
         <*> v .:? "refinement" .!= 0
-        <*> v .:? "size" .!= 0
         <*> v .:? "aura" .!= 0
+        <*> v .:? "size" .!= 0
 
 data LabVirtue = LabVirtue 
      { labVirtueName :: String
@@ -126,8 +126,8 @@ data LabBonus = LabBonus
 (<%) :: LabBonus -> LabBonus -> Bool
 (<%) a b | labTrait a < labTrait b = True
          | labTrait b < labTrait a = False
-         | labSpecialisation a < labTrait b = True
-         | labSpecialisation b < labTrait a = False
+         | labSpecialisation a < labSpecialisation b = True
+         | labSpecialisation b < labSpecialisation a = False
          | otherwise = False
 lbOrd :: LabBonus -> LabBonus -> Ordering
 lbOrd a b | a <% b = LT
@@ -148,7 +148,7 @@ mergeBonus xs [] = xs
 mergeBonus (x:xs) (y:ys) | x <% y = x:mergeBonus xs (y:ys)
                          | y <% x = y:mergeBonus (x:xs) ys
                          | otherwise = f x y:mergeBonus xs ys
-    where f x y = x { labScore = labScore x + labScore y }
+    where f a b = a { labScore = labScore a + labScore b }
 
 totalBonus' :: [ LabVirtue ] -> [ LabBonus ]
 totalBonus' = foldl mergeBonus [] . map (sortBy lbOrd . labVirtueBonus)
@@ -174,6 +174,9 @@ warping  :: Lab -> Int
 warping  = getLabScore "Warping"
 upkeep  :: Lab -> Int
 upkeep  = getLabScore "Upkeep"
+
+getLabArt :: String -> Lab -> Int
+getLabArt s = fromMaybe 0 . fmap labScore . find ( (==s) . labSpecialisation ) . artSpecialisations
 
 
 

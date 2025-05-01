@@ -26,10 +26,12 @@ module ArM.Char.CharacterSheet ( CharacterSheet(..)
                                , labTotals
                                , HasAge(..)
                                , sheetVis
+                               , characterLab
                                ) where
 
 import ArM.Types.ProtoTrait
 import ArM.Types.Character
+import ArM.Types.Lab
 import ArM.DB.Spell
 import ArM.Helper
 
@@ -57,6 +59,13 @@ data CharacterSheet = CharacterSheet
          , combatList :: [ CombatOption ]
          , csTraits :: [ Trait ]
          }  deriving (Eq,Show,Generic)
+
+-- | Return the character's lab if any
+characterLab :: CharacterSheet -> Maybe Lab
+characterLab = f . map getLab . possessionList
+   where f [] = Nothing
+         f (Nothing:xs) = f xs
+         f (Just lab:_) = Just lab
 
 -- | A default CharacterSheet for internal use.
 defaultSheet :: CharacterSheet 
@@ -196,7 +205,32 @@ labTotal :: CharacterSheet -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
-labTotal cs te fo = ts + fs + int + mt
+labTotal cs te fo = labTotalBase cs te fo + labTotalBonus cs te fo
+
+-- | Return the Lab Bonuses for a given TeFo.
+labTotalBonus :: CharacterSheet -- ^ Current character sheet
+             -> TraitKey       -- ^ Key identifying the technique
+             -> TraitKey       -- ^ Key identifying the form
+             -> Int            -- ^ Computed lab total
+labTotalBonus = labTotalBonus' . characterLab
+
+-- | Return the Lab Bonuses for a given TeFo and Lab.
+labTotalBonus' :: Maybe Lab -- ^ Current character sheet
+             -> TraitKey       -- ^ Key identifying the technique
+             -> TraitKey       -- ^ Key identifying the form
+             -> Int            -- ^ Computed lab total
+labTotalBonus' Nothing _ _ = 0
+labTotalBonus' (Just lab) (ArtKey te) (ArtKey fo) = g + t + f
+    where g = labAura (labState lab) + gq lab
+          t = getLabArt te lab 
+          f = getLabArt fo lab
+
+-- | Return the Lab Total a given TeFo combo without lab bonuses.
+labTotalBase :: CharacterSheet -- ^ Current character sheet
+             -> TraitKey       -- ^ Key identifying the technique
+             -> TraitKey       -- ^ Key identifying the form
+             -> Int            -- ^ Computed lab total
+labTotalBase cs te fo = ts + fs + int + mt
    where ts = sheetArtScore cs te
          fs = sheetArtScore cs fo
          int = sheetCharacteristicScore cs (CharacteristicKey "Int" ) 
