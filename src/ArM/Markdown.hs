@@ -15,9 +15,6 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Markdown ( Markdown(..)
-                    , LongSheet(..)
-                    , gameStartSheet
-                    , currentSheet
                     , artMD
                     , artVisMD
                     , stringMD
@@ -44,28 +41,6 @@ import ArM.Helper
 -- |
 -- = Rendering the Character Sheet
 
--- | Render a character sheet without advancement log
-baseSheet :: Saga -> Character -> OList
-baseSheet saga c | isNothing (state c ) = s1
-               | otherwise = OList [ s1, s2, OString "", s3 ]
-       where 
-            s1 = printMDaug saga $ concept  c 
-            s2 = printMDaug saga $ state  c 
-            s3 = printCombatMD saga $ characterSheet c
-
--- | Render a character sheet at game start.
--- Unlike the regular `printMD`, this includes only the character design
--- and not ingame advancements.
-gameStartSheet :: Saga -> Character -> OList
-gameStartSheet saga c = OList
-            [ baseSheet saga c
-            , OString ""
-            , designMD c
-            ]
-
--- | Render the current character sheet without pregame design details.
-currentSheet :: Saga -> Character -> OList
-currentSheet saga c = OList [ baseSheet saga c, advancementMD c ]
 
 -- | Render the char gen design.
 -- This is a list of all the pregame advancement objects.
@@ -134,6 +109,12 @@ class Markdown a where
                 -> OList     -- ^ list of lines for output
      printMDaug _ = printMD
 
+     -- | By default `printSheetMD` is identical to `printMDaug`
+     printSheetMD :: Saga    -- ^ Saga including databases for spells, etc.
+                  -> a       -- ^ object to render
+                  -> OList   -- ^ list of lines for output
+     printSheetMD = printMDaug
+
 instance Markdown a => Markdown (Maybe a) where
    printMD Nothing = OList []
    printMD (Just x) = printMD x
@@ -193,11 +174,14 @@ instance Markdown Character where
             s1 = printMD $ concept  c 
             s2 = printMD $ state  c 
    printMDaug saga c = OList
-            [ baseSheet saga c
-            , designMD c
-            , chargenMD c
-            , advancementMD c
+            [ printMD $ concept c
+            , sf $ state c 
+            , adv
             ]
+        where sf Nothing = OList []
+              sf (Just s) = printSheetMD saga s
+              adv | isGameStart c = chargenMD c
+                  | otherwise =  advancementMD c
 
 
 instance Markdown CharacterConcept where
@@ -253,7 +237,35 @@ instance Markdown CharacterSheet where
                , OString ""
                , toOList $ printLabTotals c
                ]
-   printMDaug saga = printMD . addCastingScores (spells saga)
+   printMDaug saga c' = OList 
+               [ briefTraits c
+               , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
+               , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
+               , showlistMD "+ **Reputations:** "  $ sortTraits $ reputationList c
+               , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
+               , indentOList $ OList $ [ OString "**Abilities:**"
+                        , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
+               , indentOList $ OList $ [ OString "**Possessions:**"
+                        , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
+               , OString ""
+               , printCombatMD saga c
+               , mag
+               ]
+         where c = addCastingScores (spells saga) c'
+               mag | isMagus c' = OList [ artVisMD c
+                                        , OString ""
+                                        , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
+                                        , OString ""
+                                        , toOList $ printCastingTotals c 
+                                        , OString ""
+                                        , OString "## Laboratory"
+                                        , OString ""
+                                        , toOList $ printLabTotals c 
+                                        , OString ""
+                                        , printSheetMD saga $ characterLab c
+                                        , OString ""
+                                        ]
+                   | otherwise = OString "" 
 
 instance Markdown CharacterState where
    printMD c = OList
@@ -380,73 +392,7 @@ instance Markdown Advancement where
          , OList $ map printMD $ changes a
          ]
 
--- |
--- = Long Sheet Format
 
-
--- | The `LongSheet` class is similar to `Markdown`, but is
--- intended to make a longer output with both more space and more
--- verbose text.  
---
--- In the current impplementation, it is only the character state
--- which is made longer, by setting abilities and spells as bullet
--- points instead of a single paragraph for the full list.
-class Markdown a => LongSheet a where
-   -- | By default `printSheetMD` is identical to `printMDaug`
-   printSheetMD :: Saga    -- ^ Saga including databases for spells, etc.
-                -> a       -- ^ object to render
-                -> OList   -- ^ list of lines for output
-   printSheetMD = printMDaug
-
-instance LongSheet Character where
-   printSheetMD saga c = OList 
-            [ printMD $ concept c
-            , sf $ state c 
-            , adv
-            ]
-        where sf Nothing = OList []
-              sf (Just s) = printSheetMD saga s
-              adv | isGameStart c = chargenMD c
-                  | otherwise =  advancementMD c
-instance LongSheet CharacterState where
-   printSheetMD saga c = OList [ OString $ "## " ++ (show $ charTime c )
-                             , OString ""
-                             , printSheetMD saga $ characterSheet c ]
-
-instance LongSheet CharacterSheet where
-   printSheetMD saga c' = OList 
-               [ briefTraits c
-               , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
-               , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
-               , showlistMD "+ **Reputations:** "  $ sortTraits $ reputationList c
-               , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
-               , indentOList $ OList $ [ OString "**Abilities:**"
-                        , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , indentOList $ OList $ [ OString "**Possessions:**"
-                        , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
-               , OString ""
-               , printCombatMD saga c
-               , mag
-               ]
-         where c = addCastingScores (spells saga) c'
-               mag | isMagus c' = OList [ artVisMD c
-                                        , OString ""
-                                        , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
-                                        , OString ""
-                                        , toOList $ printCastingTotals c 
-                                        , OString ""
-                                        , OString "## Laboratory"
-                                        , OString ""
-                                        , toOList $ printLabTotals c 
-                                        , OString ""
-                                        , printSheetMD saga $ characterLab c
-                                        , OString ""
-                                        ]
-                   | otherwise = OString "" 
-
-instance (LongSheet c) => LongSheet (Maybe c) where
-   printSheetMD _ Nothing = OList []
-   printSheetMD saga (Just x) = printSheetMD saga x
 
 -- |
 -- == Pretty print arts
@@ -642,7 +588,6 @@ instance Markdown SagaState where
 -- |
 -- = Covenant Markdown
 
-instance LongSheet Covenant 
 instance Markdown Covenant where
     printMD cov = OList 
         [ OString $ "# " ++ (covName $ covenantConcept cov )
@@ -659,7 +604,6 @@ instance Markdown Covenant where
         , printMDaug saga $ covenantState cov
         ]
 
-instance LongSheet CovenantConcept
 instance Markdown CovenantConcept where
     printMD cc = OList $ bullets cc ++ fd (covDescription cc)
       where bullets = map OString . map ("+ "++) . covconceptHelper
@@ -683,7 +627,6 @@ formatTitle book = tis ++ aus ++ dat
                | otherwise = "*" ++ tit ++ "*"
            dat = " (" ++ show (originalDate book) ++ ")"
 
-instance LongSheet Book
 instance Markdown Book where
     printMD book = OList  
          [ OString $ formatTitle book
@@ -702,7 +645,6 @@ instance Markdown Book where
                cnt | bookCount book == 1 = OList []
                    | otherwise = OString $ show (bookCount book) ++ " copies"
 
-instance LongSheet CovenantState
 instance Markdown CovenantState where
     printMD cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
@@ -724,7 +666,6 @@ instance Markdown CovenantState where
 -- |
 -- = Lab Markdown
 
-instance LongSheet Lab
 instance Markdown Lab where
    printMD lab = indentOList $ OList 
        [ OString $ name lab
@@ -742,10 +683,8 @@ instance Markdown Lab where
          , OList $ map printMD $ labVirtues $ labState lab
          ]
        ]
-instance LongSheet LabVirtue
 instance Markdown LabVirtue where
    printMD = OString . name 
-instance LongSheet LabBonus
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
