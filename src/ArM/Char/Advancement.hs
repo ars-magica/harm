@@ -97,7 +97,7 @@ winterEvents c a | isWinter $ season a
 -- | Calculate initial XP limits on Advancements
 inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
 inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
-        where vf = vfList $ filterCS cs
+        where vf = vfList $ characterSheet cs
               (sq,cap) = getSQ ad
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
@@ -129,7 +129,7 @@ getSQ a | isExposure ad = (Just 2,Nothing)
 -- Calculate the Source Quality the character generates as a teacher.
 charTeacherSQ :: CharacterState -> Int
 charTeacherSQ cs = 3 + com + tch
-    where sheet = filterCS cs
+    where sheet = characterSheet cs
           com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
           (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
           -- add good teacher

@@ -261,12 +261,12 @@ instance Markdown CharacterState where
    printMD c = OList
        [ OString $ "## " ++ (show $ charTime c )
        , OString ""
-       , printMD $ filterCS c
+       , printMD $ characterSheet c
        ]
    printMDaug saga c = OList
        [ OString $ "## " ++ (show $ charTime c) 
        , OString ""
-       , printMDaug saga $ filterCS c
+       , printMDaug saga $ characterSheet c
        ]
 
 -- |
@@ -413,7 +413,7 @@ instance LongSheet Character where
 instance LongSheet CharacterState where
    printSheetMD saga c = OList [ OString $ "## " ++ (show $ charTime c )
                              , OString ""
-                             , printSheetMD saga $ filterCS c ]
+                             , printSheetMD saga $ characterSheet c ]
 
 instance LongSheet CharacterSheet where
    printSheetMD saga c' = OList 

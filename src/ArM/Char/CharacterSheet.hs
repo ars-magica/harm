@@ -14,8 +14,6 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Char.CharacterSheet ( CharacterSheet(..)
-                               , characterSheet
-                               , filterCS
                                , sheetArtScore
                                , sheetAbilityScore
                                , sheetCharacteristicScore
@@ -85,13 +83,6 @@ defaultSheet = CharacterSheet
          , csTraits = [ ]
          }  
 
--- | Get the CharacterSheet from a given Character.
-characterSheet :: Character -> CharacterSheet
-characterSheet c | isNothing st = defaultSheet { csType = charType (concept c) }
-                 | otherwise = cs { csType = charType (concept c) }
-    where st = state c
-          cs = filterCS st'
-          st' = fromJust st 
 
 instance ToJSON CharacterSheet where
     toEncoding = genericToEncoding defaultOptions
@@ -282,20 +273,28 @@ class CharacterLike ct where
      age :: ct -> Int
      -- | The age object (trait) of the character
      ageObject  ::  ct -> Maybe Age
+     characterSheet :: ct -> CharacterSheet
 instance CharacterLike Character where
      characterType = charType . concept
      age = age . characterSheet
      ageObject = ageObject . characterSheet
+     characterSheet c | isNothing st = defaultSheet { csType = charType (concept c) }
+                      | otherwise = cs { csType = charType (concept c) }
+         where st = state c
+               cs = filterCS st'
+               st' = fromJust st 
 instance CharacterLike CharacterState where
      characterType = charSType 
      age = age . filterCS
      ageObject = ageObject . filterCS
+     characterSheet = filterCS
 instance CharacterLike CharacterSheet where
     characterType = csType
     age = f . ageObject
       where f Nothing = -1
             f (Just x) = ageYears  x
     ageObject = maybeHead . fst . filterTrait . csTraits
+    characterSheet = id
 
 -- |
 -- = Vis

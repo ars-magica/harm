@@ -68,9 +68,9 @@ prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
                   . sortInferredTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
-                  . initialLimits (filterCS cs)        -- infer additional properties on the advancement
+                  . initialLimits (characterSheet cs)        -- infer additional properties on the advancement
                   . addInference cs         -- infer additional traits 
-          where sheet = filterCS cs
+          where sheet = characterSheet cs
 
 -- | Infer an aging trait advancing the age according to the advancement
 agingYears :: AugmentedAdvancement -> AugmentedAdvancement
@@ -83,7 +83,7 @@ agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
 addConfidence :: CharacterState -> CharacterState
 addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
           where vfs = vfList sheet
-                sheet = filterCS cs
+                sheet = characterSheet cs
                 ct | csType sheet == Grog = ConfidenceTrait $ Confidence
                            { cname = "Confidence", cscore = 0, cpoints = 0 }
                    | otherwise = inferConfidence vfs 

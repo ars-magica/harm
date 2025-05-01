@@ -90,6 +90,6 @@ flawlessSpells' (x:xs) | isNothing (spell x) = ys
 hasFlawless :: CharacterState -> Bool
 hasFlawless c | fms == [] = False
               | otherwise = True
-    where ts = vfList $ filterCS c
+    where ts = vfList $ characterSheet c
           fms = filter ((=="Flawless Magic") . vfname ) ts
 
