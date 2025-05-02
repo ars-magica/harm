@@ -165,8 +165,8 @@
       , "changes" : 
          [ { "art" : "Terram", "xp": 18, "levelCap" : 8 }
 	   , { "possession" : { "lab" : 
-              { "name" : "Cieran's WOrkshop"
-              , "description" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
+              { "name" : "Cieran's Workshop"
+              , "narrative" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
               , "state" : {
 	         "aura" : 8,
                  "virtues" : [
