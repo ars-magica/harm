@@ -1473,6 +1473,8 @@
       , "sourceQuality" : 14
       , "narrative" : "  (371½xp)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 14 } 
+                    , { "possession" : { "art" : "Cr", "count" : 3
+		        , "comment" : "Allowance" } } 
                     , { "possession" : { "art" : "Im", "count" : -5
 		        , "comment" : "vis study" } } ]
       },
@@ -1527,7 +1529,9 @@
       , "narrative" : "Author *Arrow's Flight*, an Auram Tracatus"
       , "comment" : "To 64xp in Latin"
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
-                    , { "possession" : { "art" : "Me", "count" : 4
+                    , { "possession" : { "art" : "Cr", "count" : 2
+		        , "comment" : "allowance/salary" } } 
+                    , { "possession" : { "art" : "Co", "count" : 6
 		        , "comment" : "allowance/salary TBC" } } ]
       },
       { "mode" : "Teaching", "season" : "Winter 1256"
