@@ -22,7 +22,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  config:
+  build:
     name: GHC ${{ matrix.ghc-version }} on ${{ matrix.os }}
     runs-on: ubuntu-latest
     strategy:
