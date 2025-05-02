@@ -70,12 +70,12 @@ jobs:
       - name: Install
         run: |
           mkdir dist-${{ matrix.os }}
-          cabal install build --install-method=copy --overwrite-policy=always --installdir=dist-${{ matrix.os }}
+          cabal install harm --install-method=copy --overwrite-policy=always --installdir=dist-${{ matrix.os }}
           ls -l dist-${{ matrix.os }}
       - name: Archive Binary
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ matrix.os }}
+          name: harm-${{ matrix.os }}
           path: dist-${{ matrix.os }}
 
       - name: Run tests
