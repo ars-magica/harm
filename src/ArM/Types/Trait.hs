@@ -303,14 +303,19 @@ isLab :: Possession -> Bool
 isLab (LabPossession _) = True
 isLab _ = False
 isVis :: Possession -> Bool
-isVis = isJust . itemArt
+isVis (LabPossession _) = False
+isVis c = isJust $ itemArt c
 isWeapon :: Possession -> Bool
+isWeapon (LabPossession _) = False
 isWeapon p = (weapon p /= []) || (weaponStats p /= [])
 isArmour :: Possession -> Bool
+isArmour (LabPossession _) = False
 isArmour p = (armour p /= []) || (armourStats p /= [])
 isAC :: Possession -> Bool
-isAC = isJust . acTo
+isAC (LabPossession _) = False
+isAC c = isJust $ acTo c
 isEquipment :: Possession -> Bool
+isEquipment (LabPossession _) = False
 isEquipment p = not $ foldl (&&) True [ f p | f <- fs ] 
    where fs = [ isLab, isVis, isWeapon, isArmour, isAC ]
 
