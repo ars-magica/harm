@@ -316,7 +316,7 @@ isAC (LabPossession _) = False
 isAC c = isJust $ acTo c
 isEquipment :: Possession -> Bool
 isEquipment (LabPossession _) = False
-isEquipment p = not $ foldl (&&) True [ f p | f <- fs ] 
+isEquipment p = not $ foldl (||) True [ f p | f <- fs ] 
    where fs = [ isLab, isVis, isWeapon, isArmour, isAC ]
 
 
