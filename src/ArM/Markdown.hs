@@ -674,7 +674,7 @@ instance Markdown Lab where
          , OList $ map OString $ narrative lab
          , OList $ map OString $ comment lab
          , OString "Virtues and Flaws"
-         , OList $ map printMD $ labVirtues $ labState lab
+         , foldOList $ OList $ map printMD $ labVirtues $ labState lab
          ]
        ]
 instance Markdown LabVirtue where
