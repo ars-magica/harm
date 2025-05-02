@@ -38,6 +38,9 @@ module ArM.Types.Trait ( TraitKey(..)
                             , sortTraits
                             , visArt
                             , getLab
+			    , isVis
+			    , isWeapon
+			    , isArmour
                             ) where
 
 import ArM.GameRules
@@ -283,6 +286,7 @@ data Possession = Possession
      , itemDescription :: String    -- ^ Description of the Item
      , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
      , itemCount :: Int             -- ^ Number of items possessed, default 1.
+     , acTo :: Maybe String
      }
      | LabPossession Lab
     deriving ( Ord, Eq, Generic )
@@ -292,6 +296,22 @@ visArt ob = itemArt ob
 getLab :: Possession -> Maybe Lab
 getLab (LabPossession lab) = Just lab
 getLab _ = Nothing
+
+isLab :: Possession -> Bool
+isLab (LabPossession _) = True
+isLab otherwise = False
+isVis :: Possession -> Bool
+isVis = isJust . itemArt
+isWeapon :: Possession -> Bool
+isWeapon p = (weapon /= []) || (weaponStats /= [])
+isArmour :: Possession -> Bool
+isArmour p = (armour /= []) || (armourStats /= [])
+isAC :: Possession -> Bool
+isAC p = isJust . acTo
+isEquipment :: Possession -> Bool
+isEquipment p = not $ foldl (&&) True [ f p | f <- fs ] 
+   where fs = [ isLab, isVis, isWeapon, isArmour, isAC ]
+
 
 instance StoryObject Possession where
    name (LabPossession lab) = name lab

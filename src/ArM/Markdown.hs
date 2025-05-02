@@ -213,6 +213,26 @@ conceptPrintMD dir c = OList
                 imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
                 nm = fullConceptName c
 
+pList :: [ Possession ] -> OList
+pList = OList .  map (OString . show) . sortTraits 
+listPossessions :: [ Possession ] -> OList
+listPossessions ps = OList
+      [ OString "Vis"
+      , OList (pList vs)
+      , OString "Weapons"
+      , OList (pList ws)
+      , OString "Armour"
+      , OList (pList as)
+      , OString "ArcaneConnections"
+      , OList (pList acs)
+      , OString "Equipment"
+      , OList (pList es)
+      ]
+   where vs = filter isVis ps
+         ws = filter isWeapon ps
+         as = filter isArmour ps
+         acs = filter isAC ps
+         es = filter isEquipment ps
 
 instance Markdown CharacterSheet where
    printMD c = OList 
