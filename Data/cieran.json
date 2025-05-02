@@ -475,7 +475,10 @@
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
       , "sourceQuality" : 2, "bonusQuality" : 1
-      , "narrative" : "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera"
+      , "narrative" : [ "Training for Hiccup in Magic Theory (SQ 8 for Hiccup)."
+                      , "Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera"
+      ]
+      , "comment" : [ "Exposure 2xp Magic Theory. Bonus XP in Hermes Lore." ]
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
                     , { "ability" : "Hermes Lore", "xp" : 1 } 
                     , { "possession" : { "art" : "Cr", "count" : -3
