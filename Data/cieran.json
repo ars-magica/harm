@@ -17,6 +17,7 @@
         , "Alma Mater" : "Stonehenge"
         , "Covenant" : "Elk's Run"
         , "Saga" :  "Contested Lands"
+        , "Casting Sigil" :  "A gentle gust of air"
         }
       },
    "pregameAdvancement" : [
@@ -164,8 +165,8 @@
       , "changes" : 
          [ { "art" : "Terram", "xp": 18, "levelCap" : 8 }
 	   , { "possession" : { "lab" : 
-              { "name" : "Cieran's WOrkshop"
-              , "description" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
+              { "name" : "Cieran's Workshop"
+              , "narrative" : "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
               , "state" : {
 	         "aura" : 8,
                  "virtues" : [
@@ -177,6 +178,7 @@
 		        ]
                     },
                     { "name" : "Servant"
+                    , "narrative" : "Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one."
                     , "bonus" : 
 	                [ { "name" : "Aestetics", "score" : 1 }
 	                , { "name" : "Safety", "score" : 1 }
@@ -184,35 +186,45 @@
 		        ]
                     },
                     { "name" : "Safe Cauldron"
+                    , "comment" : "Magic Item from Folio-1109 installed Spring 1227"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 1 }
 		        ]
                     },
                     { "name" : "Precious Ingredients"
+                    , "comment" : [ "From 1227"
+		        , "The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera."
+                    ]
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 	                , { "name" : "Upkeep", "score" : 2 }
 		        ]
-		        , "comment" : "+1 Longevity ritual, not used"
                     },
                     { "name" : "Major Feature: Antechamber"
+                    , "narrative" : "The Antechamber is actually a small courtyard which can be accessed only through the sanctum."
+                    , "comment" : "From 1228"
                     , "bonus" : 
 	                [ { "name" : "Aestetics", "score" : 2 }
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 3 }
 		        ]
                     },
                     { "name" : "Major Focus: Antechamber"
+                    , "comment" : "From 1228"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : -2 }
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 4 }
 		        ]
                     },
                     { "name" : "Hermetic Chamber Pot"
+                    , "comment" : "From 1235"
                     , "bonus" : 
 	                [ { "name" : "Health", "score" : 1 } ]
                     },
                     { "name" : "Faerie Ingredients"
+                    , "comment" : [ "From 1238"
+                       , "Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation."
+                    ]
                     , "bonus" : 
 	                [ { "name" : "Warping", "score" : 1 }
 	                , { "name" : "General Quality", "score" : 1 }
@@ -220,7 +232,8 @@
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 2 }
 		        ]
                     },
-                    { "name" : "Magical Heating  "
+                    { "name" : "Magical Heating"
+                       , "narrative" : "Fan of Summer Breezes"
                     , "bonus" : 
 	                [ { "name" : "Health", "score" : 1 }
 	                , { "name" : "Aestetics", "score" : 1 }
@@ -474,7 +487,10 @@
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
       , "sourceQuality" : 2, "bonusQuality" : 1
-      , "narrative" : "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera"
+      , "narrative" : [ "Training for Hiccup in Magic Theory (SQ 8 for Hiccup)."
+                      , "Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera"
+      ]
+      , "comment" : [ "Exposure 2xp Magic Theory. Bonus XP in Hermes Lore." ]
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
                     , { "ability" : "Hermes Lore", "xp" : 1 } 
                     , { "possession" : { "art" : "Cr", "count" : -3
@@ -956,7 +972,7 @@
       },
       { "mode" : "Copying", "season" : "Summer 1241"
       , "sourceQuality" : 2
-      , "narrative" : "Copy lab tests (covenant service)  "
+      , "narrative" : "Copy lab tests (covenant service)."
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1241"
@@ -1457,6 +1473,8 @@
       , "sourceQuality" : 14
       , "narrative" : "  (371½xp)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 14 } 
+                    , { "possession" : { "art" : "Cr", "count" : 3
+		        , "comment" : "Allowance" } } 
                     , { "possession" : { "art" : "Im", "count" : -5
 		        , "comment" : "vis study" } } ]
       },
@@ -1511,7 +1529,9 @@
       , "narrative" : "Author *Arrow's Flight*, an Auram Tracatus"
       , "comment" : "To 64xp in Latin"
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
-                    , { "possession" : { "art" : "Me", "count" : 4
+                    , { "possession" : { "art" : "Cr", "count" : 2
+		        , "comment" : "allowance/salary" } } 
+                    , { "possession" : { "art" : "Co", "count" : 6
 		        , "comment" : "allowance/salary TBC" } } ]
       },
       { "mode" : "Teaching", "season" : "Winter 1256"

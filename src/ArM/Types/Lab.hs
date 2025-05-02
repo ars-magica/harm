@@ -42,7 +42,7 @@ instance ToJSON Lab
 instance FromJSON Lab where
     parseJSON = withObject "Lab" $ \v -> Lab
         <$> v .: "name"
-        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "narrative" 
         <*> v `parseCollapsedList` "comment"
         <*> v .:? "state" .!= defaultLabState
         -- <*> v .:? "history" .!= []
@@ -109,7 +109,7 @@ instance FromJSON LabVirtue where
     parseJSON = withObject "LabVirtue" $ \v -> LabVirtue
         <$> v .: "name" 
         <*> v .:? "detail" .!= ""
-        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "narrative" 
         <*> v .:? "bonus" .!= []
         <*> v .:? "cost" .!= 0
         <*> v .:? "mechanics" .!= ""

@@ -9,7 +9,12 @@
 -- 
 -- Description :  Classes and keys to provide generic interfaces to types.
 --
--- HarmKey type used to index arbitrary hArM objects.
+-- The purpose of this module is to provide a consistent interface and 
+-- structure to different parts of the data model.  This includes
+-- + The `HarmKey` type used to index arbitrary hArM objects.
+--     + Presently, this does not include traits, which has its own
+--       `TraitKey`
+-- + Classes to provide common APIs
 --
 -----------------------------------------------------------------------------
 module ArM.Types.HarmObject ( HarmKey(..)

@@ -81,7 +81,7 @@
          , { "ability" : "Ride", "spec": "Horse training", "xp": 50 }
          , { "ability" : "Hunt", "spec": "with dogs", "xp": 75 }
          , { "ability" : "Leadership", "spec": "in the field", "xp": 15 }
-         , { "ability" : "Single Weapon", "spec": "spear", "xp": 5 }
+         , { "ability" : "Single Weapon", "spec": "Shortspear", "xp": 5 }
          , { "ability" : "Bows", "spec" : "Shortbow", "xp" : 50 }
          , { "ability" : "Survival", "spec": "Hills", "xp": 10 }
          , { "possession" : { "weapon" : [ "Shortbow" ] } }
@@ -137,6 +137,7 @@
       { "mode" : "Adventure"
       , "season" : "Spring 1255"
       , "sourceQuality" : 8
+      , "narrative" : "Eogan discussed horse training and possible trade with the visitors from Lambaird."
       , "changes" : 
          [ { "ability" : "Hermes Lore", "xp": 5 }
          , { "ability" : "Carouse", "xp": 5 }
@@ -166,6 +167,20 @@
       , "season" : "Winter 1256"
       , "sourceQuality" : 2
       , "narrative" : "Train one lymer in hunt +8 xp (+16 total)."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Training"
+      , "season" : "Spring 1256"
+      , "sourceQuality" : 2
+      , "narrative" : "Train second lymer in hunt +8 xp (+16 total)."
+      , "comment" : 
+         [ "Lymer 1-2. Loyal +2.  Hunt 16xp."
+            , "Lymer 3. Loyal +1."
+            , "Greyhound 1-2. Loyal +1."
+            , "Mastiff 1. Loyal +1."
+         ]
       , "changes" : 
          [ { "ability" : "Hunt", "xp": 2 }
          ] 

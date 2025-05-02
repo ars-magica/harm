@@ -44,17 +44,22 @@ from the command line.
 The following command builds all the character sheets for the
 Hibernia saga defined in `Data/hibernia.json:
 ```
-armchar -c Data/hibernia.json 
+armchar -s Data/hibernia.json 
 ```
 
 The test files are included in the distribution.
 Note that everything is defined in the saga file, including output
-directories;
+directories.
+
+Although other options are defined in the source code (`src/harm.hs`),
+these are not used at present.  The only use case supported is the
+generation of web pages (markdown) from a collection of files defined
+by the saga file specified by `-s`.
 
 ## Build
 
 If you want to build the software yourself, you should download the Haskell
 Platform.  To build and run the example above, use for instance,
 ```
-cabal run armchar -- -c Data/eogan.json -o eogan.md  -t "Summer 1255" -T summer1255eogan.md
+cabal run armchar -- -s Data/hibernia.json 
 ```
