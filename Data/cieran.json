@@ -960,7 +960,7 @@
       },
       { "mode" : "Copying", "season" : "Summer 1241"
       , "sourceQuality" : 2
-      , "narrative" : "Copy lab tests (covenant service)  "
+      , "narrative" : "Copy lab tests (covenant service)."
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1241"
