@@ -678,7 +678,10 @@ instance Markdown Lab where
          ]
        ]
 instance Markdown LabVirtue where
-   printMD = OString . name 
+   printMD v = OList [ OString $ name v
+                   , OList $ map OString $ narrative v
+                   , OList $ map OString $ comment v
+                   ]
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
