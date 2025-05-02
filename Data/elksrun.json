@@ -18,6 +18,28 @@
       { "season" : "Summer 1217"
       , "joining" : [ "Cieran" ]
       },
+      { "season" : "Winter 1242"
+      , "story" : { "comment" : "Arrival of Tim and Nemoy" }
+      },
+      { "season" : "Autumn 1242"
+      , "story" : { "narrative" : "investigation of the burnt village" }
+      },
+      { "season" : "Summer 1243"
+      , "story" : { "narrative" : "Limerick Adventure start" }
+      },
+      { "season" : "Winter 1245"
+      , "story" : { "narrative" : "Steal Hugo's apprentice adventure"
+            , "comment" : "1 confidence per session, Regina & Béibhinn 3." 
+            , "SQ" : 10 }
+      },
+      { "season" : "Summer 1243"
+      , "story" : { "name" : "Hugo visits" }
+      , "story" : { "name" : "Hermetic Faire" }
+      },
+      { "season" : "Spring 1244"
+      , "story" : { "name" : "Vampire story" }
+      , "story" : { "name" : "Dhergie Expedition" }
+      },
       { "season" : "Winter 1254"
        , "story": [
           { "narrative" : "Beibhinn spends the year at Vigill to read."
