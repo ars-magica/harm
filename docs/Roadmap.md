@@ -24,7 +24,7 @@ title:
 + [ ] Phase 1.  **Review** Hibernia Saga
 	+ [ ] Review recent seasons from Hibernia 
 		+ [ ] Cieran
-		+ [ ] Eogan
+		+ [x] Eogan
 		+ [ ] Elk's Run
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
@@ -37,8 +37,7 @@ title:
 		+ [ ] AnnalSeason 
 	+ [ ] Lab Total
 		+ [x] Define [[Lab object]]
-		+ [ ] Character access to lab object
-			+ [ ] Via inclusion or HarmKey?
+		+ [x] Character access to lab object
 		+ [ ] Use lab bonuses in lab total
 			+ [ ] Extract GQ and Aura
 			+ [ ] Extract art bonuses
