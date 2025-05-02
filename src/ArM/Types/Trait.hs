@@ -38,9 +38,11 @@ module ArM.Types.Trait ( TraitKey(..)
                             , sortTraits
                             , visArt
                             , getLab
-			    , isVis
-			    , isWeapon
-			    , isArmour
+                            , isVis
+                            , isWeapon
+                            , isArmour
+                            , isAC
+                            , isEquipment
                             ) where
 
 import ArM.GameRules
@@ -285,8 +287,8 @@ data Possession = Possession
      , armour :: [ String ]         -- ^ List of standard weapon stats that apply
      , itemDescription :: String    -- ^ Description of the Item
      , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
-     , itemCount :: Int             -- ^ Number of items possessed, default 1.
      , acTo :: Maybe String
+     , itemCount :: Int             -- ^ Number of items possessed, default 1.
      }
      | LabPossession Lab
     deriving ( Ord, Eq, Generic )
@@ -299,15 +301,15 @@ getLab _ = Nothing
 
 isLab :: Possession -> Bool
 isLab (LabPossession _) = True
-isLab otherwise = False
+isLab _ = False
 isVis :: Possession -> Bool
 isVis = isJust . itemArt
 isWeapon :: Possession -> Bool
-isWeapon p = (weapon /= []) || (weaponStats /= [])
+isWeapon p = (weapon p /= []) || (weaponStats p /= [])
 isArmour :: Possession -> Bool
-isArmour p = (armour /= []) || (armourStats /= [])
+isArmour p = (armour p /= []) || (armourStats p /= [])
 isAC :: Possession -> Bool
-isAC p = isJust . acTo
+isAC = isJust . acTo
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (&&) True [ f p | f <- fs ] 
    where fs = [ isLab, isVis, isWeapon, isArmour, isAC ]
@@ -337,6 +339,7 @@ defaultPossession = Possession
      , armour = []
      , itemDescription = ""
      , itemArt = Nothing
+     , acTo = Nothing
      , itemCount = 1
      }
 instance ToJSON Possession 
@@ -357,6 +360,7 @@ parseOtherPossession v = fmap fixPossessionName $ Possession
        <*> v .:? "armour" .!= []
        <*> v .:? "description" .!= ""
        <*> v .:? "art"
+       <*> v .:? "acTo" 
        <*> v .:? "count" .!= 1
 
 parseLab :: Object -> Parser Possession

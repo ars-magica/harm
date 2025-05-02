@@ -214,19 +214,26 @@ conceptPrintMD dir c = OList
                 nm = fullConceptName c
 
 pList :: [ Possession ] -> OList
-pList = OList .  map (OString . show) . sortTraits 
+pList = OList  . map (OString . show ) . sortTraits 
+
+{-
+listPossessions :: [ Trait ] -> OList
+listPossessions = listPossessions' . filterNothing . map f
+   where f (PossessionTrait p) = Just p
+         f _ =  Nothing
+-}
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
       [ OString "Vis"
-      , OList (pList vs)
+      , (pList vs)
       , OString "Weapons"
-      , OList (pList ws)
+      , (pList ws)
       , OString "Armour"
-      , OList (pList as)
+      , (pList as)
       , OString "ArcaneConnections"
-      , OList (pList acs)
+      , (pList acs)
       , OString "Equipment"
-      , OList (pList es)
+      , (pList es)
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
@@ -259,8 +266,9 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
                , indentOList $ OList $ [ OString "**Abilities:**"
                         , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , indentOList $ OList $ [ OString "**Possessions:**"
-                        , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
+               , indentOList $ listPossessions $ possessionList c
+               -- , indentOList $ OList $ [ OString "**Possessions:**"
+                        -- , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
                , OString ""
                , printCombatMD saga c
                , mag
