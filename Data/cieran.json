@@ -178,6 +178,7 @@
 		        ]
                     },
                     { "name" : "Servant"
+                    , "narrative" : "Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one."
                     , "bonus" : 
 	                [ { "name" : "Aestetics", "score" : 1 }
 	                , { "name" : "Safety", "score" : 1 }
@@ -185,35 +186,45 @@
 		        ]
                     },
                     { "name" : "Safe Cauldron"
+                    , "comment" : "Magic Item from Folio-1109 installed Spring 1227"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 1 }
 		        ]
                     },
                     { "name" : "Precious Ingredients"
+                    , "comment" : [ "From 1227"
+		        , "The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera."
+                    ]
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : 1 }
 	                , { "name" : "Upkeep", "score" : 2 }
 		        ]
-		        , "comment" : "+1 Longevity ritual, not used"
                     },
                     { "name" : "Major Feature: Antechamber"
+                    , "narrative" : "The Antechamber is actually a small courtyard which can be accessed only through the sanctum."
+                    , "comment" : "From 1228"
                     , "bonus" : 
 	                [ { "name" : "Aestetics", "score" : 2 }
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 3 }
 		        ]
                     },
                     { "name" : "Major Focus: Antechamber"
+                    , "comment" : "From 1228"
                     , "bonus" : 
 	                [ { "name" : "General Quality", "score" : -2 }
 		        , { "name" : "Activity", "specialisation" : "Spells",  "score" : 4 }
 		        ]
                     },
                     { "name" : "Hermetic Chamber Pot"
+                    , "comment" : "From 1235"
                     , "bonus" : 
 	                [ { "name" : "Health", "score" : 1 } ]
                     },
                     { "name" : "Faerie Ingredients"
+                    , "comment" : [ "From 1238"
+                       , "Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation."
+                    ]
                     , "bonus" : 
 	                [ { "name" : "Warping", "score" : 1 }
 	                , { "name" : "General Quality", "score" : 1 }
@@ -221,7 +232,8 @@
 		        , { "name" : "Activity", "specialisation" : "Experimentation",  "score" : 2 }
 		        ]
                     },
-                    { "name" : "Magical Heating  "
+                    { "name" : "Magical Heating"
+                       , "narrative" : "Fan of Summer Breezes"
                     , "bonus" : 
 	                [ { "name" : "Health", "score" : 1 }
 	                , { "name" : "Aestetics", "score" : 1 }
