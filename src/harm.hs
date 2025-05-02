@@ -23,7 +23,6 @@ import Data.Maybe (fromJust)
 
 data Options = Options 
   { sagaFile :: Maybe String
-  , charFile :: Maybe String
   , outFile  :: Maybe String
   , jsonFile :: Maybe String
   , spellDBFile :: Maybe String
@@ -34,7 +33,6 @@ data Options = Options
 defaultOptions :: Options
 defaultOptions = Options 
   { sagaFile = Just "Data/hibernia.json"
-  , charFile = Nothing
   , outFile  = Nothing
   , jsonFile  = Nothing
   , spellDBFile = Nothing
@@ -46,10 +44,7 @@ defaultOptions = Options
 
 options :: [ OptDescr (Options -> Options) ]
 options =
-    [ Option ['c']     ["character"] (ReqArg 
-            (\arg opt -> opt { charFile = Just arg })
-            "FILE") "character file"
-    , Option ['j']     ["json"] (ReqArg 
+    [ Option ['j']     ["json"] (ReqArg 
             (\arg opt -> opt { jsonFile = Just arg })
             "FILE") "JSON output file"
     , Option ['o']     ["output"]  (ReqArg 
