@@ -131,7 +131,7 @@
          , { "possession" : { "weapon" : [ "Longbow" ] } }
          , { "possession" : { "weapon" : [ "Dagger" ] } }
          , { "possession" : { "weapon" : [ "Quarterstaff" ] } }
-         , { "possession" : { "name" : [ "Writing Materials" ] } }
+         , { "possession" : { "name" : "Writing Materials" } }
          , { "combat" : { "weapon" :  "Longbow" } }
          , { "combat" : { "weapon" :  "Dodge" } }
          , { "combat" : { "weapon" :  "Fist"  } }
@@ -775,7 +775,7 @@
       , "sourceQuality" : 9
       , "narrative" : " 52->64 "
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
-         , { "possession" : { "armour" : "Weightless Chain (Protection 9, Load 2)"
+         , { "possession" : { "armour" : [ "Weightless Chain (Protection 9, Load 2)" ]
                             , "comment" : "made by Hiccup" } }
          , { "possession" : { "art" : "Te", "count" : -5, "comment" : "enchantments" } }
       ]
