@@ -191,7 +191,6 @@ data AugmentedAdvancement = Adv
      , bonusSQ  :: XPType     -- ^ Bonus to Source Quality from Virtues and Flaws
      , scoreCap :: Maybe Int
      , levelLimit :: Maybe Int      -- ^ spell level allowance
-     , spentXP  :: Maybe XPType     -- ^ Total XP spent on advancement
      , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
      , augYears :: Maybe Int        -- ^ number of years advanced
      , validation :: [Validation]   -- ^ Report from validation
@@ -258,7 +257,6 @@ defaultAA = Adv
      , bonusSQ = 0
      , scoreCap = Nothing
      , levelLimit = Nothing 
-     , spentXP = Nothing
      , inferredTraits = [ ] 
      , augYears = Nothing
      , validation = []
@@ -328,7 +326,6 @@ instance FromJSON AugmentedAdvancement where
         <*> v .:? "bonusSQ" .!= 0
         <*> v .:? "cap"
         <*> v .:? "levels"
-        <*> v .:? "spentXP"
         <*> v .:? "inferredTraits"  .!= []
         <*> v .:? "augYears"
         <*> v .:?  "validation" .!= []

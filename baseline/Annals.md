@@ -2,6 +2,16 @@
 
 ## Spring 1256
 
++ Elk's Run
+    + Council Meeting 1256(no source quality)
+        + Maine and Una, as well as Raymond, have left a few years ago.
+        + Crimthann is no longer active, whether he is dead, infirm, or lost in the magic realm is not decided.
+        + The magi agree to promote the welfare of the common people as a general principle, and decide against any uprising against English magi or Norman lords.
+        + As a means to support the common people, they will support the building of hospitals, and develop a great library on Medicine and Chirurgy.
+        + The council supports Cieran's wish to develop a great library on Imaginem, to attract paying readers.
+        + The matter of Lord Protector is discussed, as it is expected to come up at the tribunal.  The magi are concerned about the Norman intrusion on magical and faerie lands, and Ashenrise's apparent support. Archie and Tim are appointed to speak on the covenants behalf.
+        + Sean and Tiou are appointed to barter for vis exchange at the tribunal, aiming to stock up the arts where we have no source.
+    + Changes
 + Eogan mac Eogan (Trained)
     + Train second lymer in hunt +8 xp (+16 total).
     + Lymer 1-2. Loyal +2.  Hunt 16xp.
