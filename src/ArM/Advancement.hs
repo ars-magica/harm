@@ -103,16 +103,13 @@ jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next s
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
 jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
 
--- | Convenience type for joint advancement
-type CovAA = (Covenant,Maybe AugCovAdvancement)
--- | Convenience type for joint advancement
-type ChaAA = (Character,Maybe AugmentedAdvancement)
-
 data AdvancementStep = CovStep Covenant (Maybe CovAdvancement) (Maybe AugCovAdvancement)
                      | CharStep Character (Maybe Advancement) (Maybe AugmentedAdvancement)
 
 class StepAdvance c where
    nextStep :: SeasonTime -> c -> AdvancementStep
+   completeStep :: AdvancementStep -> c
+   stepSubject :: AdvancementStep -> c
 instance StepAdvance Character where
    nextStep ns ch | fs == [] = CharStep ch Nothing Nothing
                  | season adv > ns = CharStep ch Nothing Nothing
@@ -122,6 +119,11 @@ instance StepAdvance Character where
               (adv:as) = fs
               fs = futureAdvancement ch
               new = ch { futureAdvancement = as }
+   completeStep (CharStep c _ Nothing) = c 
+   completeStep (CharStep c _ (Just a)) = c { pastAdvancement = a:pastAdvancement c }
+   completeStep _ = error "StepAdvance is not for a Character"
+   stepSubject (CharStep c _ _) = c 
+   stepSubject _ = error "StepAdvance is not for a Character"
 instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
                  | season adv > ns = CovStep cov Nothing Nothing
@@ -130,55 +132,73 @@ instance StepAdvance Covenant where
               (adv:as) = fs
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
+   completeStep (CovStep c _ Nothing) = c 
+   completeStep (CovStep c _ (Just a)) = c { pastCovAdvancement = a:pastCovAdvancement c }
+   completeStep _ = error "StepAdvance is not for a Covenant"
+   stepSubject (CovStep c _ _) = c 
+   stepSubject _ = error "StepAdvance is not for a Covenant"
+
 -- |
--- Get the next augmented advancement.
-nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
-nextCovAdv ns cov | fs == [] = (cov,Nothing)
-              | season adv > ns = (cov,Nothing)
-              | otherwise = (new,Just a)
-        where a = prepareCovAdvancement adv
-              (adv:as) = fs
-              fs = futureCovAdvancement cov
-              new = cov { futureCovAdvancement = as }
+-- Apply the next augmented advancement.
+--
+-- The main process is defined by the `applyAdvancement` function from
+-- `ArM.Char.Advancement`
+applyAdv :: AdvancementStep -> AdvancementStep
+applyAdv (CharStep c a Nothing) = (CharStep c a Nothing) 
+applyAdv (CharStep c a (Just aa)) = (CharStep c' a (Just a')) 
+       where (a',st') = applyAdvancement aa st
+             c' = c { state = Just st' }
+             st = fromMaybe defaultCS $ state c
+applyAdv (CovStep c a Nothing) = (CovStep c a Nothing) 
+applyAdv (CovStep c a (Just aa')) = (CovStep c' a (Just aa')) 
+    where st' = st { covTime = caSeason aa, covenFolkID = cid }
+          c' = c { covenantState = Just st' }
+          st = fromMaybe defaultCovState $ covenantState c
+          cid1 = sort $ joining aa ++ covenFolkID st 
+          cid = cid1 -= ( sort $ leaving aa )
+          aa = contractAdvancement aa'
+
+
 
 -- |
 -- Get the next advancements, preparing for joint advancement
-nextJoint :: Saga -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
-nextJoint saga (xs,ys) = (map (nextCovAdv ns) xs,map (nextAdv ns) ys)
+nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
+nextJoint saga (xs,ys) = (map (nextStep ns) xs,map (nextStep ns) ys)
            where ns = nextSeason saga
 
 -- |
 -- Complete the joint advancement of characters and covenants.
-completeJoint :: ([CovAA],[ChaAA]) -> ([Covenant],[Character])
-completeJoint (xs,ys) = (map completeCovAdv xs,map completeAdv ys)
+completeJoint :: ([AdvancementStep],[AdvancementStep]) -> ([Covenant],[Character])
+completeJoint (xs,ys) = (map completeStep xs,map completeStep ys)
 
 -- |
 -- Jointly advance characters and covenants.
-advJoint :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
-advJoint (xs,ys) = (map applyCovAdv xs, map applyAdv ys)
+advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+advJoint (xs,ys) = (map applyAdv xs, map applyAdv ys)
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
-addBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
+addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
 addBooks (xs,ys) = validateBooks (xs,map (addBook xs') ys)
-   where xs' = map fst xs
+   where xs' = map stepSubject xs
 
 -- |
 -- Validate the use of books.
-validateBooks :: ([CovAA],[ChaAA]) -> ([CovAA],[ChaAA]) 
+validateBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
 validateBooks (xs,ys) = (xs, f ys)
    where vs = map valGBU $ getBookUse ys
          f [] = []
-         f ((ch,aa):s) 
-            | isNothing aa = (ch,aa):s
-            | bookUsed (fromJust aa) == [] = (ch,aa):s
-            | otherwise = (ch,Just $ g (fromJust aa) vs):s
+         f (step:s) 
+            | isNothing aa = step:s
+            | bookUsed (fromJust aa) == [] = step:s
+            | otherwise = step':s
+            where (CharStep ch a aa) = step
+                  step' = CharStep ch a (Just $ g (fromJust aa) vs)
          g aa [] = aa
          g aa ((x,v):s) 
            | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
            | otherwise = g aa s
-
 -- | Validate use of a single book.
 -- This is an auxiliary for `validateBooks` which applies it with `map`.
 valGBU :: (Book,[Character]) -> (Book,Validation)
@@ -189,12 +209,11 @@ valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
 
 -- |
 -- Get a list of book uses for validation.
-getBookUse :: [ChaAA] -> [ ( Book, [Character] ) ]
+getBookUse :: [AdvancementStep] -> [ ( Book, [Character] ) ]
 getBookUse = f5 . f4 . f3 . f2 . f1
-   where f1 = map  ( \ (ch,aa) -> ( bu aa, ch ) )
-         f2 = map ( \ (bs, ch) -> [ (b,ch) | b <- bs ] ) 
+   where f1 = map  ( \ x -> (aaBookUsed x,x) )
+         f2 = map ( \ (bs, step) -> [ (b,stepSubject step) | b <- bs ] ) 
          f3 = sortOn fst . foldl (++) [] 
-         bu = fromMaybe [] . fmap bookUsed
          f4 = map ( \ (x,y) -> ( x, [y] ) )
          f5 [] = []
          f5 (x:[]) = x:[]
@@ -202,13 +221,17 @@ getBookUse = f5 . f4 . f3 . f2 . f1
              | x1 == x2 = f5 ((x1,y1++y2):s)
              | otherwise = (x1,y1):f5 ((x2,y2):s)
 
-    
+aaBookUsed :: AdvancementStep -> [Book]
+aaBookUsed (CharStep _ _ (Just aa)) = bookUsed aa
+aaBookUsed _ = []
+
 -- |
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.
-addBook :: [Covenant] -> ChaAA -> ChaAA
-addBook cvs (x,y) = (x,fmap (addBook' cov) y)
+addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
+addBook cvs (CharStep x a aa) = CharStep x a (fmap (addBook' cov) aa)
    where cov =  findCov x cvs
+addBook _ step = step
 
 -- |
 -- Find and add books with stats to add to the character advancement.
@@ -240,18 +263,6 @@ instance Advance Covenant where
         where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
                   | otherwise = y 
 
--- | Apply covenant advancement
-applyCovAdv :: (Covenant,Maybe AugCovAdvancement)
-         -> (Covenant,Maybe AugCovAdvancement)
-applyCovAdv (c,Nothing) = (c,Nothing)
-applyCovAdv (c,Just a) = (c',Just a)
-    -- where (a',st') = applyCovAdvancement a st
-    where st' = st { covTime = caSeason aa, covenFolkID = cid }
-          c' = c { covenantState = Just st' }
-          st = fromMaybe defaultCovState $ covenantState c
-          cid1 = sort $ joining aa ++ covenFolkID st 
-          cid = cid1 -= ( sort $ leaving aa )
-          aa = contractAdvancement a
 
 -- |
 -- == Character Advancement
@@ -278,37 +289,3 @@ instance Advance Character where
    prepare = prepareCharacter
 
 
--- |
--- Apply the next augmented advancement.
---
--- The main process is defined by the `applyAdvancement` function from
--- `ArM.Char.Advancement`
-applyAdv :: (Character,Maybe AugmentedAdvancement)
-         -> (Character,Maybe AugmentedAdvancement)
-applyAdv (c,Nothing) = (c,Nothing)
-applyAdv (c,Just a) = (c',Just a')
-    where (a',st') = applyAdvancement a st
-          c' = c { state = Just st' }
-          st = fromMaybe defaultCS $ state c
-
--- |
--- Complete the advancement step and tidy up
-completeAdv :: (Character,Maybe AugmentedAdvancement)
-                 -> Character
-completeAdv (c,Nothing) = c 
-completeAdv (c,Just a) = c { pastAdvancement = a:pastAdvancement c }
-
--- |
--- Get the next augmented advancement.
---
--- The main process is defined by the `prepareAdvancement` function from
--- `ArM.Char.Advancement`
-nextAdv :: SeasonTime -> Character -> (Character,Maybe AugmentedAdvancement)
-nextAdv ns ch | fs == [] = (ch,Nothing)
-              | season adv > ns = (ch,Nothing)
-              | otherwise = (new,Just a)
-        where a = prepareAdvancement (fromJust st) adv
-              st = state ch
-              (adv:as) = fs
-              fs = futureAdvancement ch
-              new = ch { futureAdvancement = as }
