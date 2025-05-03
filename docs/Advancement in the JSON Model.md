@@ -59,3 +59,48 @@
 
 + Bonuses may be lists, including justifications
 + Validation - compare standard SQ to autocomputed SQ
+
+
+## Advancement Object
+
+
+| Field          | Advancement    | Augmented          | Type              | Comment                                            |     |     |     |
+| :------------- | :------------- | :----------------- | :---------------- | :------------------------------------------------- | --- | --- | --- |
+| mode           | `advMode`      |                    | `AdvancementType` | mode of study                                      |     |     |     |
+| season         | `advSeason`    |                    | `SeasonTime`      | season or development stage                        |     |     |     |
+| years          | `advYears`     | `augYears`         | `Maybe Int`       | number of years advanced                           |     |     |     |
+| narrative      | `advNarrative` | N/A                | `[ String ]`      | narrative description of the activities            |     |     |     |
+| comment        | `advComment`   | N/A                | `[ String ]`      | freeform description of the activities             |     |     |     |
+| uses book      | `advUses`      | `bookUsed`         | [ String/Book ]   | Books used exclusively by the character            |     |     |     |
+| SQ             | `advSQ`        | `baseSQ`           | `Maybe XPType`    | Source Quality (SQ)                                |     |     |     |
+| score cap      | `advCap`       | `scoreCap`         | `Maybe Int`       | advancement cap on abilities/arts                  |     |     |     |
+| Bonus SQ       | `advBonus`     |                    | `Maybe XPType`    | Bonus to Source Quality (SQ)                       |     |     |     |
+| Bonus SQ       |                | `bonusSQ`          | `XPType`          | Bonus to Source Quality from Virtues and Flaws     |     |     |     |
+| trait changes  | `advChanges`   | `inferredTraits`   | `[ ProtoTrait ]`  | trait changes defined by player                    |     |     |     |
+| SQ as teacher  |                | `teacherSQ`        | `Maybe Int`       | The SQ generated as teacher                        |     |     |     |
+| Spell levels   |                | `levelLimit`       | `Maybe Int`       | spell level allowance                              |     |     |     |
+| XP spent       | N/A            | `spentXP`          | `Maybe XPType`    | Total XP spent on advancement                      |     |     |     |
+| Validation     | N/A            | `validation`       | `[Validation]`    | Report from validation                             |     |     |     |
+| Postprocessing | N/A            | `postProcessTrait` | `PostProcessor`   | Extra postprocessing for traits at the given stage |     |     |     |
+| Advancement    |                | ``advancement`     | `Advancement`     | Base advancement as entered by the user            |     |     |     |
+
+```
+data Advancement = Advancement
+     { advMode :: AdvancementType -- ^ mode of study
+     , advSeason :: SeasonTime    -- ^ season or development stage
+     , advYears :: Maybe Int      -- ^ number of years advanced
+     , advNarrative :: [ String ] -- ^ narrative description of the activities
+     , advComment :: [ String ]   -- ^ freeform description of the activities
+     , advUses :: [ String ]      -- ^ Books used exclusively by the character
+     , advSQ :: Maybe XPType      -- ^ Source Quality (SQ)
+     , advCap :: Maybe Int        -- ^ Source Quality (SQ)
+     , advBonus :: Maybe XPType   -- ^ Bonus to Source Quality (SQ)
+     , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
+     , advSpellLevels :: Maybe Int   -- ^ spell level allowance
+     , advTeacherSQ :: Maybe XPType  -- ^ The SQ generated as teacher
+     , advSpentXP  :: `Maybe XPType  -- ^ Total XP spent on advancement
+     , advValidation :: [Validation] -- ^ Report from validation
+     , advPostprocessTrait :: PostProcessor -- ^ Extra postprocessing for traits at the given stage
+     }
+   deriving (Eq,Generic,Show)
+```

@@ -183,6 +183,24 @@ data Advancement = Advancement
      , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
      }
    deriving (Eq,Generic,Show)
+--
+-- | Advancement with additional inferred fields
+data AugmentedAdvancement = Adv
+     { advancement :: Advancement   -- ^ Base advancement as entered by the user
+     , baseSQ  :: Maybe XPType      -- ^ Base Source Quality
+     , bonusSQ  :: XPType     -- ^ Bonus to Source Quality from Virtues and Flaws
+     , scoreCap :: Maybe Int
+     , levelLimit :: Maybe Int      -- ^ spell level allowance
+     , spentXP  :: Maybe XPType     -- ^ Total XP spent on advancement
+     , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
+     , augYears :: Maybe Int        -- ^ number of years advanced
+     , validation :: [Validation]   -- ^ Report from validation
+     , postProcessTrait :: PostProcessor 
+        -- ^ Extra postprocessing for traits at the given stage 
+     , bookUsed :: [ Book ]    -- ^ Books required by the activity
+     , teacherSQ :: Maybe Int
+     }
+   deriving (Eq,Show,Generic)
 
 defaultAdv :: Advancement 
 defaultAdv = Advancement 
@@ -218,23 +236,6 @@ instance FromJSON Advancement where
 -- |
 -- == The Augmented Advancement
 
--- | Advancement with additional inferred fields
-data AugmentedAdvancement = Adv
-     { advancement :: Advancement   -- ^ Base advancement as entered by the user
-     , baseSQ  :: Maybe XPType      -- ^ Base Source Quality
-     , bonusSQ  :: XPType     -- ^ Bonus to Source Quality from Virtues and Flaws
-     , scoreCap :: Maybe Int
-     , levelLimit :: Maybe Int      -- ^ spell level allowance
-     , spentXP  :: Maybe XPType     -- ^ Total XP spent on advancement
-     , inferredTraits :: [ ProtoTrait ] -- ^ trait changes inferred by virtues and flaws
-     , augYears :: Maybe Int        -- ^ number of years advanced
-     , validation :: [Validation]   -- ^ Report from validation
-     , postProcessTrait :: PostProcessor 
-        -- ^ Extra postprocessing for traits at the given stage 
-     , bookUsed :: [ Book ]    -- ^ Books required by the activity
-     , teacherSQ :: Maybe Int
-     }
-   deriving (Eq,Show,Generic)
 
 -- |
 -- Type of function used to post-process traits after advancement.
