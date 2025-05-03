@@ -30,6 +30,9 @@ import Data.Text.Lazy.IO as I
 -- `indentOList` function.
 data OList = OList [ OList ] | OString String deriving ( Show )
 
+headOList :: String -> [ String ] -> OList
+headOList _ [] = OList []
+headOList s xs = OList [ OString s, OList $ map OString xs ]
 
 -- | Convert a list of Strings to a OList object
 toOList :: [ String ] -> OList

@@ -391,8 +391,8 @@ instance Markdown AugmentedAdvancement where
        , infl
        , OList $ map (OString . show) $ validation a
        ]
-      where inf = sortTraits $ inferredTraits a
-            chn = sortTraits $ changes a
+      where inf = sortTraits $ changes $ inferredAdv a
+            chn = sortTraits $ changes $ explicitAdv a
             chnl | chn == [] = OList []
                  | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
             infl | inf == [] = OList []
@@ -403,8 +403,6 @@ usesString a | u == [] = OList []
              | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
          where u = usesBook a
 
-
-
 instance Markdown Advancement where
    printMD a = indentOList $ OList
          [ OString $ name a
@@ -413,8 +411,6 @@ instance Markdown Advancement where
          , usesString a
          , OList $ map printMD $ changes a
          ]
-
-
 
 -- |
 -- == Pretty print arts

@@ -22,6 +22,7 @@ import Data.Maybe
 import Data.List 
 
 import ArM.Char.Character
+import ArM.Char.CharGen (prepareCharacter)
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types
@@ -49,7 +50,16 @@ class Timed a => Advance a where
              ns = nextAdvancement c
     -- | Next season with an advancement defined
     nextAdvancement :: a -> SeasonTime
-    -- | The prepare function is applied when the object is read from file
+    -- | Compute the initial state if no state is recorded.
+    -- The prepare function is applied when the object is read from file.
+    -- It is handled differently from in-game advancement, because character
+    -- generation is independent of any other characters in the game.
+    -- Thus CharGen advancement never has to infer stats from other objects
+    -- or check for cross-consistency.
+    --
+    -- The default implementation is the identity function, which is
+    -- sufficient for types which starts with a default state and do
+    -- not suport pre-game advancement.
     prepare :: a -> a
     prepare = id
 
@@ -167,7 +177,7 @@ validateBooks (xs,ys) = (xs, f ys)
                   step' = CharStep ch (Just $ g (fromJust aa) vs)
          g aa [] = aa
          g aa ((x,v):s) 
-           | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
+           | x `elem` bookUsed aa = g (addValidation [v] aa) s
            | otherwise = g aa s
 -- | Validate use of a single book.
 -- This is an auxiliary for `validateBooks` which applies it with `map`.
@@ -210,15 +220,15 @@ addBook _ step = step
 -- Not implemented yet.
 addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
 addBook' Nothing y  = y
-addBook' (Just cov) y = f bs y
+addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
     where u = usesBook y
           bk | isNothing st = [ Nothing | _ <- u ]
              | otherwise = map (findBook (fromJust st)) u
           bs = zip u bk
           st = covenantState cov
           f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ aa { validation = nobk bid:validation aa }
-          f ((_,Just b):xs) aa = f xs $ aa { bookUsed = b:bookUsed aa }
+          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
+          f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
 -- |
@@ -281,10 +291,6 @@ instance Advance Character where
    nextAdvancement = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
-   -- | Compute the initial state if no state is recorded.
-   -- The function uses `applyCGA` to process all of the pregame advancements.
-   -- It then calls `addConfidence` to add the confidence trait to the state
-   -- for the returned `Character` object
    prepare = prepareCharacter
 
 -- |

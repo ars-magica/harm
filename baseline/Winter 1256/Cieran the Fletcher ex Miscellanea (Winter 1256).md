@@ -597,7 +597,7 @@ Total: 1249 levels of spells.
 
 ## Past Advancement
 
-+ Winter 1256 (3xp) (1 years) Teaching (Exposure)
++ Winter 1256 (2+1xp) (1 years) Teaching (Exposure)
     + Teaching Luciu
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Changing traits
@@ -735,7 +735,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Spring 1252 (3xp) LabWork (Exposure)
++ Spring 1252 (2+1xp) LabWork (Exposure)
     + ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)
     + Changing traits
         + Art: Imaginem 3xp; 
@@ -763,7 +763,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Rego 12xp; 
     + Validated: Correctly spent 12 xp.
-+ Spring 1251 (3xp) LabWork (Exposure)
++ Spring 1251 (2+1xp) LabWork (Exposure)
     + InIm spells below ->  281½.  Lab total 71
     + Changing traits
         + Art: Imaginem 3xp; 
@@ -828,7 +828,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
-+ Winter 1249 (3xp) (1 years) LabWork (Exposure)
++ Winter 1249 (2+1xp) (1 years) LabWork (Exposure)
     +  254½xp Invisibility Quartz for Sean; see below ; no aging (-18)
     + Changing traits
         + Art: Imaginem 3xp; 
@@ -839,7 +839,7 @@ Total: 1249 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 3 xp.
     + Validated: Aging roll made
-+ Autumn 1248 (3xp) LabWork (Exposure)
++ Autumn 1248 (2+1xp) LabWork (Exposure)
     +  250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3
     + Changing traits
         + Art: Imaginem 3xp; 
@@ -1125,7 +1125,7 @@ Total: 1249 levels of spells.
         + Spell: Sight of the Warm Surface 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1239 (17xp) LabWork (Exposure)
++ Autumn 1239 (2+15xp) LabWork (Exposure)
     + Gift of Quickness. Experimentation. Discovery (15xp in MT). Magi Theory to 126xp
     + Changing traits
         + Ability: Magic Theory 17xp; 
@@ -1427,7 +1427,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Ability: Teaching [apprentices] 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Spring 1229 (3xp) LabWork (Exposure)
++ Spring 1229 (2+1xp) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore
     + Changing traits
         + Ability: Hermes Lore 1xp; 

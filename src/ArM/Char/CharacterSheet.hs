@@ -25,6 +25,7 @@ module ArM.Char.CharacterSheet ( CharacterSheet(..)
                                , CharacterLike(..)
                                , sheetVis
                                , characterLab
+                               , charTeacherSQ
                                ) where
 
 import ArM.Types.ProtoTrait
@@ -321,3 +322,18 @@ sheetVis :: CharacterSheet -> [(TraitKey,Int)]
 sheetVis = sortOn fst . map f . addVis . sort . map xVis . visList
     where f (x,y) = (ArtKey $ take 2 x,y) 
 
+-- | 
+-- = Derived stats 
+
+-- |
+-- Calculate the Source Quality the character generates as a teacher.
+charTeacherSQ :: CharacterLike c => c -> Int
+charTeacherSQ cs = 3 + com + tch
+    where sheet = characterSheet cs
+          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
+          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
+          -- add good teacher
+          -- subtract flaws
+          -- add speciality
+          -- add one/two student bonus
+-- Teacher SQ +

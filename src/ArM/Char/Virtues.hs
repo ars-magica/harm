@@ -123,15 +123,15 @@ laterLifeXP' (vf:vfs) (x,y) = laterLifeXP' vfs $ (x'+x,f y y')
                f 0 z = z
                f z _ = z
 
-laterLifeSQ' :: Advancement -> (XPType,XPType) -> XPType
+laterLifeSQ' :: AugmentedAdvancement -> (XPType,XPType) -> XPType
 laterLifeSQ' ad (x,y) = t
    where t | isJust (sourceQuality ad) = fromJust (sourceQuality ad)
-           | isJust (advYears ad) = x+y*yy
+           | isJust (years ad) = x+y*yy
            | otherwise = x
-         yy = fromIntegral $ fromJust (advYears ad)
+         yy = fromIntegral $ fromMaybe 0 (years ad)
 
 -- | Get XP total for Later Life
-laterLifeSQ :: [VF] -> Advancement -> XPType
+laterLifeSQ :: [VF] -> AugmentedAdvancement -> XPType
 laterLifeSQ vfs ad = laterLifeSQ' ad $ laterLifeXP vfs
 
 -- | Get XP and spell level total for Apprenticeship
@@ -142,12 +142,12 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
              | otherwise = appSQ xs
 
 
-vfBonusSQ :: AdvancementLike a => [VF] -> a -> XPType
-vfBonusSQ vs a = sum $ map (vfBonusSQ' a) vs
+vfBonusSQ :: AdvancementLike a => [VF] -> a -> [BonusSQ]
+vfBonusSQ vs a = filterNothing $ map (vfBonusSQ' a) vs
 
-vfBonusSQ' :: AdvancementLike a => a ->  VF -> XPType
-vfBonusSQ' m vf = f (vfname vf) (mode m)
-    where  f "Apt Student" Taught = 5
+vfBonusSQ' :: AdvancementLike a => a ->  VF -> Maybe BonusSQ
+vfBonusSQ' m vf = g (vfname vf) (mode m)
+    where  f "Apt Student" Taught = 5 :: XPType
            f "Apt Student" Trained = 5
            f "Poor Student" Taught = -3
            f "Poor Student" Reading = -3
@@ -156,6 +156,8 @@ vfBonusSQ' m vf = f (vfname vf) (mode m)
            f "Independent Study" Adventure = 3
            f "Free Study" VisStudy = 3
            f _ _ = 0
+           g x y | 0 == f x y = Nothing
+                 | otherwise = Just $ BonusSQ { sourceBonus = f x y, bonusSource = x }
 
 
 -- | 

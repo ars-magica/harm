@@ -14,7 +14,6 @@
 module ArM.Char.Advancement ( module ArM.Types.Advancement
                             , module ArM.Char.Virtues
                             , module ArM.Char.Inference
-                            , module ArM.Char.Validation
                             , prepareAdvancement 
                             , applyAdvancement 
                             , agePT
@@ -24,7 +23,6 @@ module ArM.Char.Advancement ( module ArM.Types.Advancement
 import ArM.Types.Advancement
 import ArM.Char.Virtues
 import ArM.Char.Inference
-import ArM.Char.Validation
 
 -- Other Types
 import ArM.Types.Character
@@ -48,7 +46,7 @@ import Data.List
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareAdvancement c = validate 
-                     . sortInferredTraits   -- sort inferred traits
+                     . sortAdvTraits   -- sort inferred traits
                      . inferSQ c
                      . winterEvents c 
                      . addInference c
@@ -59,51 +57,53 @@ prepareAdvancement c = validate
 winterEvents :: CharacterState       -- ^ Current Character State
              -> AugmentedAdvancement -- ^ Advancement 
              -> AugmentedAdvancement -- ^ modified Advancement
-winterEvents c a | isWinter $ season a  
-             = validateAging (y >* yl) agingOb  -- check for aging roll is made if required
-             $ addYear agingOb                  -- add a yer of aging
-             $ warpingLR a                      -- add warping point for LR
+winterEvents c a | isWinter $ season a = Adv { explicitAdv = ad, inferredAdv = aa' }
+
              | otherwise = a
-        where ageOb = ageObject c
-              y = age c
-              pt = find ( (AgeKey ==) . traitKey ) $ changes a
-              agingOb | isNothing pt = Nothing
+    where ageOb = ageObject c
+          y = age c
+          ad = explicitAdv a
+          aa = inferredAdv a
+          -- check for aging roll is made if required
+          aa' = validateAging (y >* yl) agingOb  
+                  $ addYear agingOb                  -- add a yer of aging
+                  $ warpingLR aa                     -- add warping point for LR
+          pt = find ( (AgeKey ==) . traitKey ) $ changes ad
+          agingOb | isNothing pt = Nothing
                       | otherwise = aging $ fromJust pt
-              lr | ageOb == Nothing = -1
+          lr | ageOb == Nothing = -1
                  | otherwise = longevityRitual $ fromJust ageOb
-              yl | ageOb == Nothing = trace "No age object" 35
+          yl | ageOb == Nothing = trace "No age object" 35
                  | otherwise = ageLimit $ fromJust ageOb
-              warpingLR x | lr < 0 = x
-                          | otherwise = x { inferredTraits = 
-                                    defaultPT { other = Just "Warping"
-                                              , points = Just 1
-                                              , ptComment = Just "from Longevity Ritual" }
-                                    :inferredTraits x }
-              addYear o x | addsYear o = x
-                          | otherwise = x { inferredTraits = agePT 1 :inferredTraits x }
-              addsYear Nothing = False
-              addsYear (Just x) | isNothing (addYears x) = False
-                                | fromJust (addYears  x) <= 0 = False
-                                | otherwise = True
-              validateAging False _ x =  x
-              validateAging True Nothing x = trace ("No aging> "++show a) $ x { validation = err:validation x }
-              validateAging True (Just ob) x
-                   | isNothing (agingRoll ob) = x { validation = err:validation x }
-                   | otherwise =  x { validation = val:validation x }
-              err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
-              val = Validated $ "Aging roll made"
+          warpingLR x | lr < 0 = x
+                      | otherwise = x { advChanges = lrWarping:advChanges x }
+          addYear o x | addsYear o = x
+                      | otherwise = x { advChanges = agePT 1:advChanges x }
+          addsYear Nothing = False
+          addsYear (Just x) | isNothing (addYears x) = False
+                            | fromJust (addYears  x) <= 0 = False
+                            | otherwise = True
+          validateAging False _ =  id
+          validateAging True Nothing = addValidation  [err]
+          validateAging True (Just ob) 
+                   | isNothing (agingRoll ob) = addValidation [err]
+                   | otherwise =  addValidation [val]
+          err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
+          val = Validated $ "Aging roll made"
 
 
 -- | Calculate initial XP limits on Advancements
 inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
-inferSQ cs ad = ad { baseSQ = sq, bonusSQ = vfBonusSQ vf ad }
+inferSQ cs ad = ad { inferredAdv = aa { advSQ = sq, advBonus = vfBonusSQ vf ad } }
         where vf = vfList $ characterSheet cs
               (sq,cap) = getSQ ad
+              aa = inferredAdv ad
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
 -- Infer SQ for taught from teacher
 -- Infer SQ for adventure from covenant
 
+{-
 bookSQ :: AugmentedAdvancement -> AugmentedAdvancement 
 bookSQ aa | isNothing stats = aa
           | isNothing tr = aa
@@ -111,32 +111,19 @@ bookSQ aa | isNothing stats = aa
     where tr = ttrace $ primaryXPTrait $ advancement aa
           stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
           ctp =  (==(fromJust tr)) . topic 
-
+-}
 
 getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
 getSQ a | isExposure ad = (Just 2,Nothing)
-        | mode ad == Reading = rd bks
+        -- | mode ad == Reading = rd bks
         | otherwise = mstat
-   where ad = advancement a
+   where ad = explicitAdv a
          mstat = (sourceQuality ad,sourceCap ad)
          rd [] = (Nothing,Nothing)
          rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
-         bks | usd == [] = []
-             | otherwise = bookStats $ head usd
-         usd = bookUsed a
-
--- |
--- Calculate the Source Quality the character generates as a teacher.
-charTeacherSQ :: CharacterState -> Int
-charTeacherSQ cs = 3 + com + tch
-    where sheet = characterSheet cs
-          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
-          -- add good teacher
-          -- subtract flaws
-          -- add speciality
-          -- add one/two student bonus
--- Teacher SQ +
+         -- bks | usd == [] = []
+             -- | otherwise = bookStats $ head usd
+         -- usd = bookUsed a
 
 -- |
 -- = Applying the Advancement
@@ -152,8 +139,8 @@ applyAdvancement a cs = (a,cs')
     where cs' = cs { charTime = season a, traits = new }
           new = advanceTraitList change tmp
           tmp = advanceTraitList inferred old
-          change = sortTraits $ changes a
-          inferred = sortTraits $ inferredTraits a
+          change = sortTraits $ changes $ explicitAdv a
+          inferred = sortTraits $ changes $ inferredAdv a
           old = sortTraits $ traits cs
 
 
@@ -164,3 +151,19 @@ applyAdvancement a cs = (a,cs')
 agePT :: Int -- ^ Number of years
       ->  ProtoTrait -- ^ Resulting ProtoTrait
 agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
+
+-- | ProtoTrait representing the warping point from Longevity Ritual.
+lrWarping :: ProtoTrait
+lrWarping = defaultPT { other = Just "Warping"
+                      , points = Just 1
+                      , ptComment = Just "from Longevity Ritual" }
+
+-- |
+-- = In-game Validation
+-- In-game validation is relatively simple, depending only on the
+-- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
+
+-- |
+-- Validate an in-game advancement, adding results to the validation field.
+validate :: AugmentedAdvancement -> AugmentedAdvancement
+validate = validateXP

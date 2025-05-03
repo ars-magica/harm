@@ -36,6 +36,7 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , Armour(..)
                       , findTrait
                       , processChar
+                      , regularXP
                       ) where
 
 import ArM.GameRules
@@ -705,3 +706,14 @@ processChar'' c | charBonusList c == [] = c
           where x:xs = charBonusList c
                 sc | fst x < 0 = max (charScore c + snd x) (fst x)
                    | otherwise = min (charScore c + snd x) (fst x)
+
+-- |
+-- == Convenience Functions
+
+-- | Count regular XP (excluding reputation) from a ProtoTrait
+regularXP :: ProtoTrait -> XPType
+regularXP p | isJust (ability p) = f p
+        | isJust (art p) = f p
+        | isJust (spell p) = f p
+        | otherwise = 0
+        where f = fromMaybe 0 . xp 
