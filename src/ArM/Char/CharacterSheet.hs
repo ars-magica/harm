@@ -59,8 +59,8 @@ data CharacterSheet = CharacterSheet
          }  deriving (Eq,Show,Generic)
 
 -- | Return the character's lab if any
-characterLab :: CharacterSheet -> Maybe Lab
-characterLab = f . map getLab . possessionList
+characterLab :: CharacterLike c => c -> Maybe Lab
+characterLab = f . map getLab . possessionList . characterSheet
    where f [] = Nothing
          f (Nothing:xs) = f xs
          f (Just lab:_) = Just lab
