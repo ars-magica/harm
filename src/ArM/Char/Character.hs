@@ -53,8 +53,7 @@ agingBonus c = ag + lr + rb + cv + lh
           rb = af agingRollBonus -- Other personal bonus
           cv = 0 -- Covenant living condition
           lh = fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
-          af f = fromMaybe 0 $fmap f $ ageObject c
-          
+          af f = fromMaybe 0 $ fmap f $ ageObject c       -- get stat from ageobject
 
 -- |
 -- = Char Gen
