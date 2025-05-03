@@ -49,7 +49,16 @@ class Timed a => Advance a where
              ns = nextAdvancement c
     -- | Next season with an advancement defined
     nextAdvancement :: a -> SeasonTime
-    -- | The prepare function is applied when the object is read from file
+    -- | Compute the initial state if no state is recorded.
+    -- The prepare function is applied when the object is read from file.
+    -- It is handled differently from in-game advancement, because character
+    -- generation is independent of any other characters in the game.
+    -- Thus CharGen advancement never has to infer stats from other objects
+    -- or check for cross-consistency.
+    --
+    -- The default implementation is the identity function, which is
+    -- sufficient for types which starts with a default state and do
+    -- not suport pre-game advancement.
     prepare :: a -> a
     prepare = id
 
@@ -281,10 +290,6 @@ instance Advance Character where
    nextAdvancement = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
-   -- | Compute the initial state if no state is recorded.
-   -- The function uses `applyCGA` to process all of the pregame advancements.
-   -- It then calls `addConfidence` to add the confidence trait to the state
-   -- for the returned `Character` object
    prepare = prepareCharacter
 
 -- |

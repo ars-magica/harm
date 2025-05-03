@@ -58,6 +58,10 @@ agingBonus c = ag + lr + rb + cv + lh
 -- |
 -- = Char Gen
 
+-- | Compute the initial state if no state is recorded.
+-- The function uses `applyCGA` to process all of the pregame advancements.
+-- It then calls `addConfidence` to add the confidence trait to the state
+-- for the returned `Character` object
 prepareCharacter :: Character -> Character
 prepareCharacter c | state c /= Nothing = c
                    | otherwise = c { state = newstate
