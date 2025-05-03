@@ -40,21 +40,19 @@ import ArM.Debug.Trace
 -- |
 -- Validate an in-game advancement, adding results to the validation field.
 validate :: AugmentedAdvancement -> AugmentedAdvancement
-validate a = a { inferredAdv = validateXP $ inferredAdv a }
+validate a = addValidation (validateXP a) a
 
 -- |
--- == XP Validation
+-- == Validation on Advancement Objects alone
 
 -- | Validate allocation of XP.
-validateXP :: Advancement -> Advancement
-validateXP a | sq > xpsum = a { advValidation = und:validation a }
-             | sq < xpsum = a { advValidation = over:validation a }
-             | otherwise = a { advValidation = val:validation a }
+validateXP :: AugmentedAdvancement -> [ Validation ]
+validateXP a 
+    | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
+    | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
+    | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
     where xpsum = spentXP a
           sq = effectiveSQ a
-          val = Validated $ "Correctly spent " ++ showNum sq ++ " xp."
-          over = ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
-          und = ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
 
 
 -- |
@@ -76,14 +74,14 @@ validateCharGen' cs a
            where m = mode a
 
 -- | Validate allocation of virtues and flaws.
-validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateVF :: CharacterSheet -> Advancement -> [ Validation ]
 validateVF sheet a 
-             | m /= CharGen "Virtues and Flaws" = a
-             | 0 /= f + v = a { advValidation = ValidationError imb:validation a }
-             | v > lim = a { advValidation = ValidationError over:validation a }
-             | otherwise = a { advValidation = Validated val:validation a }
+             | m /= CharGen "Virtues and Flaws" = []
+             | 0 /= f + v = [ ValidationError imb ]
+             | v > lim = [ ValidationError over ]
+             | otherwise = [ Validated val ]
            where m = mode a
-                 (f,v) = calculateVFCost $ advancement a
+                 (f,v) = calculateVFCost a
                  imb = "Virtues and flaws are imbalanced: "
                      ++ show v ++ " points of virtues and"
                      ++ show (-f) ++ " points of flaws."
@@ -110,6 +108,7 @@ regCost p | isJust (virtue p) = m p * f p
           | otherwise = 0
         where f = fromMaybe 0 . cost 
               m = fromMaybe 1 . multiplicity
+
 
 -- | Calculate initial XP limits on Char Gen Advancements
 initialLimits :: CharacterSheet -> Advancement -> Advancement

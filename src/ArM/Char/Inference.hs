@@ -34,15 +34,23 @@ import Data.Maybe
 addInference :: CharacterState -> Advancement -> AugmentedAdvancement
 addInference cs = flawlessSpells cs . addInferredTraits
 
+inferAdvancement :: CharacterState -> Advancement -> Advancement
+inferAdvancement cs a = a 
+
+inferProtoTraits :: CharacterState -> ProtoTrait -> ProtoTrait
+inferProtoTraits cs xs = g xs ++ f xs 
+     where f = inferTraits . getVF 
+           g = inferDecrepitude 
+
 -- | Infer traits from new virtues and flaws and add them to the advancement.
 -- This typically applies to virtues providing supernatural abilities.
 -- The ability is inferred and should not be added manually.
-addInferredTraits :: Advancement -> AugmentedAdvancement
-addInferredTraits a = defaultAA { inferredTraits = g a ++ f a
-                                , advancement = a
-                                , augYears = yf }
-     where f = inferTraits . getVF . changes 
-           g = inferDecrepitude . changes
+addInferredTraits :: Advancement -> Advancement
+addInferredTraits a = defaultAdvancement { advChanges = inferProtoTraits xs
+				  , advSeason = season a
+				  , advMode = mode a
+                                  , advYears = yf }
+     where xs = changes a
            yf | Nothing /= advYears a = advYears a
               | isWinter $ season a = Just 1
               | otherwise = Nothing

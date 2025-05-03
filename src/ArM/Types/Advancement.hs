@@ -171,6 +171,25 @@ data Advancement = Advancement
      }
    deriving (Eq,Generic,Show)
 
+defaultAdvancement :: Advancement
+defaultAdvancement = Advancement
+     { advMode = Exposure (OtherExposure "Undefined")
+     , advSeason = NoTime
+     , advYears = Nothing
+     , advNarrative = []
+     , advComment = []
+     , advUses = []
+     , advSQ = Nothing
+     , advCap = Nothing
+     , advBonus = []
+     , advChanges = []
+     , advSpellLevels = Nothing
+     , advTeacherSQ = Nothing
+     , advValidation = []
+     , advPostprocessTrait = PostProcessor id
+     }
+
+
 data BonusSQ = BonusSQ 
          { sourceBonus :: XPType
          , bonusSource :: String
@@ -253,6 +272,7 @@ class StoryObject a => AdvancementLike a where
      -- | Count regular XP (excluding reputation) spent in an Advancement
      spentXP :: a -> XPType
      spentXP = sum . map regularXP . changes
+     addValidation :: [Validation] -> a -> a
 
 instance AdvancementLike Advancement where
      mode = advMode
@@ -267,6 +287,7 @@ instance AdvancementLike Advancement where
      validation = advValidation 
      postprocessTrait = advPostprocessTrait 
      sortAdvTraits x = x { advChanges = sortTraits $ changes x }
+     addValidation vs a = a { advValidation = vs ++ advValidation a }
 
 -- |
 -- == The Augmented Advancement
@@ -335,6 +356,9 @@ instance AdvancementLike AugmentedAdvancement where
      sortAdvTraits x = x { explicitAdv = fmap sortAdvTraits $ explicitAdv x
                          , inferredAdv = fmap sortAdvTraits $ inferredAdv x }
      spentXP = sum . map regularXP . fromMaybe [] . fmap changes . explicitAdv
+     addValidation vs a 
+        | isNothing (inferredAdv a) = a { inferredAdv = fmap f (inferredAdv a) }
+        where f x = x { advValidation = vs ++ advValidation x }
 
 fml :: (a -> [b]) -> Maybe a -> [b]
 fml f = fromMaybe [] . fmap f
