@@ -8,14 +8,24 @@
 --
 -- Description :  Code depending on specific virtues and flaws.
 --
+-- This module should gather all mechanics derived from virtues and
+-- flaws, even if the resulting functions are used differently in
+-- different modules.  By keeping virtue definitions together, it
+-- is easier to see if all known virtues and flaws have have been
+-- considered.
+--
 -----------------------------------------------------------------------------
 
-module ArM.Char.Virtues ( inferTraits
+module ArM.Char.Virtues (
+                        -- * Trait inference
+                        inferTraits
+                        -- * Bonus XP in-game
+                        , vfBonusSQ
+                        -- * CharGen specific code
                         , laterLifeSQ
                         , getCharAllowance
                         , inferConfidence
                         , appSQ
-                        , vfBonusSQ
                         ) where
 
 import ArM.Types.Advancement
@@ -88,6 +98,9 @@ virtueMap = Map.fromList $ vl1 ++ vl2
 
 confTrait :: Int -> Int -> Trait
 confTrait x y = ConfidenceTrait $ Confidence { cname = "Confidence", cscore = x, cpoints = y } 
+
+-- | Get the starting confidence trait, based on the given list of
+-- virtues and flaws.
 inferConfidence :: [VF] -> Trait
 inferConfidence vfs | rs == [] = confTrait 1 3
                     | otherwise =  head rs
@@ -95,6 +108,8 @@ inferConfidence vfs | rs == [] = confTrait 1 3
           app Nothing _ = Nothing
           app (Just f) x = Just $ f x
           rs = filterNothing [ app g x | (g,x) <- zip vf vfs ]
+
+-- | Helper for `inferConfidence`
 confMap :: Map.Map String ( VF -> Trait ) 
 confMap = Map.fromList $ vl3
 
@@ -106,14 +121,15 @@ inferTraits vfs = sortTraits $ foldl (++) [] rs
           app (Just f) x = Just $ f x
           rs = filterNothing [ app g x | (g,x) <- zip vf vfs ]
 
--- |
--- = Infer Limits for Pregame Design
-
+-- | Get pre-game XP from given virtue
 llLookup:: String -> (XPType,XPType)
 llLookup "Warrior" = (50,0) 
 llLookup "Wealthy" = (0,20) 
 llLookup "Poor" = (0,10) 
 llLookup _  = (0,0) 
+
+-- | Get XP for later life, both fixed allowances from virtues
+-- and the allowance per year.
 laterLifeXP :: [ VF ] -> (XPType,XPType)
 laterLifeXP vfs = laterLifeXP' vfs (0,15)
 laterLifeXP' :: [ VF ] -> (XPType,XPType) -> (XPType,XPType)
@@ -142,6 +158,8 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
              | otherwise = appSQ xs
 
 
+-- | Get Bonus SQ/XP for in-game advancement types, dependent
+-- on mode of study.
 vfBonusSQ :: AdvancementLike a => [VF] -> a -> [BonusSQ]
 vfBonusSQ vs a = filterNothing $ map (vfBonusSQ' a) vs
 
@@ -158,10 +176,6 @@ vfBonusSQ' m vf = g (vfname vf) (mode m)
            f _ _ = 0
            g x y | 0 == f x y = Nothing
                  | otherwise = Just $ BonusSQ { sourceBonus = f x y, bonusSource = x }
-
-
--- | 
--- == Characteristics
 
 
 -- | Get the point allowance for characteristics purchase,
