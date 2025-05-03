@@ -19,6 +19,7 @@ module ArM.Char.Character ( module ArM.Types.Character
                           , module ArM.Char.CharacterSheet
                           , characterEntryTime
                           , prepareCharacter
+                          , agingBonus
                           ) where
 
 import Data.Maybe 
@@ -31,6 +32,8 @@ import ArM.Types
 import ArM.Types.Character
 import ArM.Types.Trait
 
+import ArM.Helper
+
 -- |
 -- = Convenience Functions for Character Properties
 
@@ -42,6 +45,15 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
            f [] = tm
            f (x:_) = season x
 
+
+agingBonus :: Character -> Int
+agingBonus c = ag + lr + rb + cv + lh
+    where ag = age c // 10
+          lr = af longevityRitual -- Longevity Ritual 
+          rb = af agingRollBonus -- Other personal bonus
+          cv = 0 -- Covenant living condition
+          lh = fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
+          af f = fromMaybe 0 $ fmap f $ ageObject c       -- get stat from ageobject
 
 -- |
 -- = Char Gen

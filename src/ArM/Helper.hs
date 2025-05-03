@@ -25,6 +25,11 @@ trim = f . f
    where f = reverse . dropWhile isSpace
 
 -- |
+-- Division of integers, rounding up
+(//) :: Integral a => a -> a -> a
+(//) x y = (x+1) `div` y
+
+-- |
 -- Remove elements from the second list from the first.
 -- Both lists have to be sorted.
 (-=) :: Ord a => [a] -> [a] -> [a] 

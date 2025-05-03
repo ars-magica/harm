@@ -20,6 +20,9 @@ Player
 Alma Mater
 : Stonehenge
 
+Casting Sigil
+: A gentle gust of air
+
 Covenant
 : Elk's Run
 
@@ -86,12 +89,16 @@ Weak Spontaneous Magic (0),
     + Second Sight [Faerie Illusions] 1 (0xp)
     + Stealth [Hiding] 1 (0xp)
     + Thrown Weapon [Dart] 1 (0xp)
-+ **Possessions:**
-    + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
++ Vis
++ Weapons
     + Dagger
-    + Lantern
     + Longbow
     + Quarterstaff
++ Armour
++ ArcaneConnections
++ Equipment
+    + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
+    + Lantern
     + Writing Materials
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |

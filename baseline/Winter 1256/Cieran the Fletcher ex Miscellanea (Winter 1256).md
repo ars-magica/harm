@@ -20,6 +20,9 @@ Player
 Alma Mater
 : Stonehenge
 
+Casting Sigil
+: A gentle gust of air
+
 Covenant
 : Elk's Run
 
@@ -105,30 +108,34 @@ Weak Spontaneous Magic (0),
     + Stealth [Hiding] 1 (0xp)
     + Teaching [apprentices] 2 (8xp)
     + Thrown Weapon [Dart] 1 (0xp)
-+ **Possessions:**
++ Vis
     + An vis (0)
     + Au vis (0)
-    + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
-    + Cieran's WOrkshop
-    + Cr vis (2)
-    + Dagger
+    + Co vis (6)
+    + Cr vis (7)
     + Ig vis (3)
     + Im vis (5)
     + In vis (0)
-    + Lantern
-    + Longbow
-    + Me vis (14)
+    + Me vis (10)
     + Mu vis (0)
     + Pe vis (-1)
     + Perdo Vis from Jerome's body
-    + Porter’s Glove
-    + Quarterstaff
     + Re vis (-1)
     + Rego Vis from Jerome's body (3)
-    + Stone-Cutting Knife
     + Te vis (3)
     + Vi vis (0)
++ Weapons
+    + Dagger
+    + Longbow
+    + Quarterstaff
++ Armour
     + Weightless Chain (Protection 9, Load 2)
++ ArcaneConnections
++ Equipment
+    + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
+    + Lantern
+    + Porter’s Glove
+    + Stone-Cutting Knife
     + Writing Materials
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
@@ -140,7 +147,7 @@ Weak Spontaneous Magic (0),
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
-| Creo | 17 | 10 | 2 |
+| Creo | 17 | 10 | 7 |
 | Intellego | 14 | 7 | 0 |
 | Muto | 8 | 0 | 0 |
 | Perdo | 8 | 0 | 0 |
@@ -148,11 +155,11 @@ Weak Spontaneous Magic (0),
 | Animal | 5 | 2 | 0 |
 | Aquam | 6 | 0 | 0 |
 | Auram | 6 | 0 | 0 |
-| Corpus | 11 | 2 | 0 |
+| Corpus | 11 | 2 | 6 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
 | Imaginem | 27 | 22 | 5 |
-| Mentem | 17 | 0 | 14 |
+| Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
 
@@ -547,7 +554,7 @@ Total: 1249 levels of spells.
 | Terram | 45 | 42 | 36 | 36 | 43 |
 | Vim | 48 | 45 | 39 | 39 | 46 |
 
-+ Cieran's WOrkshop
++ Cieran's Workshop
     + Refinement: 
     + Size: 
     + Unused size: 
@@ -569,13 +576,24 @@ Total: 1249 levels of spells.
     + Virtues and Flaws
         + Dedicated Building
         + Servant
+            + Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one.
         + Safe Cauldron
+            + Magic Item from Folio-1109 installed Spring 1227
         + Precious Ingredients
+            + From 1227
+            + The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera.
         + Major Feature: Antechamber
+            + The Antechamber is actually a small courtyard which can be accessed only through the sanctum.
+            + From 1228
         + Major Focus: Antechamber
+            + From 1228
         + Hermetic Chamber Pot
+            + From 1235
         + Faerie Ingredients
-        + Magical Heating  
+            + From 1238
+            + Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation.
+        + Magical Heating
+            + Fan of Summer Breezes
 
 ## Past Advancement
 
@@ -595,7 +613,8 @@ Total: 1249 levels of spells.
     + To 64xp in Latin
     + Changing traits
         + Ability: Latin 2xp; 
-        + Possession: Me vis (4)
+        + Possession: Cr vis (2)
+        + Possession: Co vis (6)
     + Validated: Correctly spent 2 xp.
 + Summer 1255 (12+4xp) Reading
     + Reads the new Q12 Tractatus from Vigil
@@ -633,6 +652,7 @@ Total: 1249 levels of spells.
     +   (371½xp)
     + Changing traits
         + Art: Imaginem 14xp; 
+        + Possession: Cr vis (3)
         + Possession: Im vis (-5)
     + Validated: Correctly spent 14 xp.
 + Summer 1254 (21xp) Vis Study
@@ -1050,7 +1070,7 @@ Total: 1249 levels of spells.
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
 + Summer 1241 (2xp) Copying (Exposure)
-    + Copy lab tests (covenant service)  
+    + Copy lab tests (covenant service).
     + Changing traits
         + Ability: Latin 2xp; 
     + Validated: Correctly spent 2 xp.
@@ -1466,7 +1486,9 @@ Total: 1249 levels of spells.
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
 + Winter 1227 (2+1xp) (1 years) LabWork (Exposure)
-    + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera
+    + Training for Hiccup in Magic Theory (SQ 8 for Hiccup).
+    + Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera
+    + Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Ability: Hermes Lore 1xp; 
@@ -1689,7 +1711,7 @@ Total: 1249 levels of spells.
     + Studies *Root of Terram* L8Q15 +3
     + Changing traits
         + Art: Terram 18xp; 
-        + Possession: Cieran's WOrkshop
+        + Possession: Cieran's Workshop
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.

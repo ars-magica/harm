@@ -81,18 +81,22 @@ Weakness [for Dogs] (-1),
     + Munster Lore [Outback] 1 (0xp)
     + Native Language: Irish [Munster] 5 (0xp)
     + Ride [Horse training] 4 (0xp)
-    + Single Weapon [spear] 1 (0xp)
+    + Single Weapon [Shortspear] 1 (0xp)
     + Stealth [Hiding] 1 (0xp)
     + Survival [Hills] 2 (0xp)
-+ **Possessions:**
++ Vis
++ Weapons
     + Round Shield
     + Shortbow
     + Shortspear
++ Armour
++ ArcaneConnections
++ Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
 |  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |
-| Spear and Shield | 0 | 3 | 1 | 4 | N/A | 3 | Spec. spear not applied |
-| Shortspear | 0 | 3 | -1 | 4 | N/A | 1 | Spec. spear not applied |
+| Spear and Shield | 0 | 4 | 2 | 4 | N/A | 3 | Speciality applied |
+| Shortspear | 0 | 4 | 0 | 4 | N/A | 1 | Speciality applied |
 | Shortbow | -3 | 8 | 3 | 5 | 15 | 2 | Speciality applied |
 | Fist | -2 | 1 | -1 | -1 | N/A | 0 | Spec. Dirty fighting not applied |
 
@@ -117,6 +121,7 @@ Weakness [for Dogs] (-1),
         + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1255 (8+3xp) Adventure
+    + Eogan discussed horse training and possible trade with the visitors from Lambaird.
     + Changing traits
         + Ability: Hermes Lore 5xp; 
         + Ability: Carouse 5xp; 
@@ -148,4 +153,14 @@ Weakness [for Dogs] (-1),
         + Ability: Animal Ken 3xp; 
         + Confidence: 0 (2)
     + Validated: Correctly spent 13 xp.
+
+## Future Advancement
+
++ Spring 1256 (2xp) Trained
+    + Train second lymer in hunt +8 xp (+16 total).
+    + Lymer 1-2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Ability: Hunt 2xp; 
 

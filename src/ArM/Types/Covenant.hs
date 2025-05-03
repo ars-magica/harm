@@ -19,7 +19,6 @@ module ArM.Types.Covenant ( Covenant(..)
                           , CovenantState(..)
                           , CovAdvancement(..)
                           , AugCovAdvancement(..)
-                          , nextCovAdv
                           , prepareCovAdvancement
                           , findCov
                           , completeCovAdv
@@ -232,17 +231,6 @@ completeCovAdv :: (Covenant,Maybe AugCovAdvancement)
                  -> Covenant
 completeCovAdv (c,Nothing) = c
 completeCovAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
-
--- |
--- Get the next augmented advancement.
-nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
-nextCovAdv ns cov | fs == [] = (cov,Nothing)
-              | caSeason adv > ns = (cov,Nothing)
-              | otherwise = (new,Just a)
-        where a = prepareCovAdvancement adv
-              (adv:as) = fs
-              fs = futureCovAdvancement cov
-              new = cov { futureCovAdvancement = as }
 
 
 prepareCovAdvancement :: CovAdvancement -> AugCovAdvancement
