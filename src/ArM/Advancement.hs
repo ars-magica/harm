@@ -108,6 +108,39 @@ type CovAA = (Covenant,Maybe AugCovAdvancement)
 -- | Convenience type for joint advancement
 type ChaAA = (Character,Maybe AugmentedAdvancement)
 
+data AdvancementStep = CovStep Covenant (Maybe CovAdvancement) (Maybe AugCovAdvancement)
+                     | CharStep Character (Maybe Advancement) (Maybe AugmentedAdvancement)
+
+class StepAdvance c where
+   nextStep :: SeasonTime -> c -> AdvancementStep
+instance StepAdvance Character where
+   nextStep ns ch | fs == [] = CharStep ch Nothing Nothing
+                 | season adv > ns = CharStep ch Nothing Nothing
+                 | otherwise = CharStep new (Just adv) (Just a)
+        where a = prepareAdvancement (fromJust st) adv
+              st = state ch
+              (adv:as) = fs
+              fs = futureAdvancement ch
+              new = ch { futureAdvancement = as }
+instance StepAdvance Covenant where
+   nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
+                 | season adv > ns = CovStep cov Nothing Nothing
+                 | otherwise = CovStep new (Just adv) (Just a)
+        where a = prepareCovAdvancement adv
+              (adv:as) = fs
+              fs = futureCovAdvancement cov
+              new = cov { futureCovAdvancement = as }
+-- |
+-- Get the next augmented advancement.
+nextCovAdv :: SeasonTime -> Covenant -> (Covenant,Maybe AugCovAdvancement)
+nextCovAdv ns cov | fs == [] = (cov,Nothing)
+              | season adv > ns = (cov,Nothing)
+              | otherwise = (new,Just a)
+        where a = prepareCovAdvancement adv
+              (adv:as) = fs
+              fs = futureCovAdvancement cov
+              new = cov { futureCovAdvancement = as }
+
 -- |
 -- Get the next advancements, preparing for joint advancement
 nextJoint :: Saga -> ([Covenant],[Character]) -> ([CovAA],[ChaAA]) 
