@@ -345,12 +345,13 @@ effectiveSQ aa = fromMaybe aasq adsq + vfb + inb
 
 -- |
 -- A Validation is a message reporting either an error or a successful test.
-data Validation = ValidationError String | Validated String
+data Validation = ValidationError String | Validated String | ValidationWarning String
    deriving (Eq,Generic)
 
 instance Show Validation where
     show (ValidationError x) = "ERROR: " ++ x
     show (Validated x) = "Validated: " ++ x
+    show (ValidationWarning x) = "Warning: " ++ x
 
 instance ToJSON Validation
 instance FromJSON Validation
