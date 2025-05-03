@@ -8,7 +8,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Advancement process and convenience functions for Characters.
+-- Description :  In-gameAdvancement process and convenience functions for Characters.
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Advancement ( module ArM.Types.Advancement
