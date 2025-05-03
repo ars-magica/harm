@@ -26,10 +26,10 @@ Prophecy
 Size
 : 0
 
-## Winter 1255
+## Summer 1255
 
 + **Age:** 25 years (apparent age 25)
-+ **Confidence**: 1 (5)
++ **Confidence**: 1 (6)
 + **Characteristics:** 
 Int +2, 
 Per 0, 
@@ -69,11 +69,13 @@ Weakness [for Dogs] (-1),
     + Bargain [Livestock] 2 (0xp)
     + Bows [Shortbow] 4 (0xp)
     + Brawl [Dirty fighting] 1 (0xp)
+    + Carouse [  --  ] 1 (0xp)
     + Charm [Animals] 1 (0xp)
     + Covenant Lore [Hierarchies] 2 (0xp)
-    + Faerie Lore [Dark Fae] 1 (0xp)
+    + Faerie Lore [Dark Fae] 1 (1xp)
     + Guile [Fast talk] 1 (0xp)
-    + Hunt [with dogs] 5 (2xp)
+    + Hermes Lore [  --  ] 1 (0xp)
+    + Hunt [with dogs] 5 (4xp)
     + Leadership [in the field] 2 (0xp)
     + Magic Lore [Ancient Myth] 1 (0xp)
     + Munster Lore [Outback] 1 (0xp)
@@ -100,6 +102,19 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
++ Summer 1255 (2xp) Trained
+    + Train second lymer in hunt +8 xp.
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Spring 1255 (8+3xp) Adventure
+    + Eogan discussed horse training and possible trade with the visitors from Lambaird.
+    + Changing traits
+        + Ability: Carouse 5xp; 
+        + Ability: Faerie Lore 1xp; 
+        + Ability: Hermes Lore 5xp; 
+        + Confidence: 0 (1)
+    + Validated: Correctly spent 11 xp.
 + Winter 1255 (2xp) (1 years) Trained
     + Train one lymer in hunt +8 xp.
     + Changing traits
@@ -128,15 +143,6 @@ Weakness [for Dogs] (-1),
 
 ## Future Advancement
 
-+ Spring 1255 (8xp) Adventure
-    + Eogan discussed horse training and possible trade with the visitors from Lambaird.
-    + Ability: Hermes Lore 5xp; 
-    + Ability: Carouse 5xp; 
-    + Ability: Faerie Lore 1xp; 
-    + Confidence: 0 (1)
-+ Summer 1255 (2xp) Trained
-    + Train second lymer in hunt +8 xp.
-    + Ability: Hunt 2xp; 
 + Autumn 1254 (2xp) Taming
     + Train two lymers to Loyal +2, and one mastiff to +1.
     + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.

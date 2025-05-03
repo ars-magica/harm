@@ -35,10 +35,10 @@ Saga
 Size
 : 0
 
-## Winter 1255
+## Summer 1255
 
 + **Age:** 63 years (apparent age 51) Longevity Ritual: 22
-+ **Confidence**: 1 (32)
++ **Confidence**: 1 (33)
 + **Warping**: 1 (9)
 + **Characteristics:** 
 Int +3, 
@@ -98,7 +98,7 @@ Weak Spontaneous Magic (0),
     + Latin [Hermetic Usage] 4 (12xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
-    + Magic Theory [Spells] 7 (6xp)
+    + Magic Theory [Spells] 7 (8xp)
     + Native Language: Irish [Leinster] 5 (0xp)
     + Parma Magica [Mentem] 5 (0xp)
     + Penetration [Rego] 1 (0xp)
@@ -157,7 +157,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 26 | 20.5 | 5 |
+| Imaginem | 27 | 17.5 | 5 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -235,102 +235,102 @@ Weak Spontaneous Magic (0),
     + Keeps heat and fire at bay, unable to approach within 1 pace of the target. This renders the target immune to damage from flames or heat of intensity less than that of molten iron. The target gets a +15 Soak against all fire-related damage. Any fire doing less than +15 damage per round doesn’t penetrate the ward. Such fires simply dim at the protected person’s passing and flare back up after he or she is gone.
     + Base 4, +2 for up to +15 damage, +1 Touch, +2 Sun
     + [ArM5:143]
-+ *False Window* CrIm5 (47)
++ *False Window* CrIm5 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + This spell allows the magus to trace the frame of a door or window and create a miniature that seems to show something that lies beyond the frame. A Perception + Finesse roll is required to craft a convincing illusion. The Ease Factor is 9 if the image seems to show a room, 12 if it seems to show a structure, or 15 if it seems to run to the horizon. These numbers already include the reduction for limiting the viewer’s line of sight, but could be reduced or increased by familiarity with the depicted scene.  Many casters of False Window add an additional magnitude, so that figures within the image appear to move, and the pattern of light changes to suit the time of day, but this simpler version creates only a static image. This spell also models similar spells for the other senses: a mirror that plays a tune, provided its face is not turned toward a wall, is an example. Directly created species like these are resisted by the Parma Magica.
     + Base 2, +2 Sun or Ring, +1 Individual
     + [HoH:S:68]
-+ *Smoke of Escaping* CrIm5 (47)
++ *Smoke of Escaping* CrIm5 (48)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Diam; Target: Ind
     + Creates the illusion of a thick cloud of red smoke in the caster’s vicinity.
     + Base 1, +1 Touch, +1 Diameter, +1 size, +1 impenetrable to sight
     + [MoH:124]
-+ *Clarity of Public Speech* CrIm10 (47)
++ *Clarity of Public Speech* CrIm10 (48)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Sun; Target: Room
-+ *Horror Cabinet* CrIm35 (44)
++ *Horror Cabinet* CrIm35 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. Re
     + Range: Touch; Duration: Moon; Target: Room
     + Fills the room with horrible, moving images of beasts, ghosts, and undead threatening to devour any intruders.  Most will run in panic (failing a brave personality roll 12+), and some (botching such roll) may be driven insane.
     + Base 3 (three senses) + Touch + Moon +Room -> L25 +1 (Rego) +1 (Complexity) -> L35
-+ *Prying Eyes* InIm5 (44)
++ *Prying Eyes* InIm5 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Conc; Target: Room
     + You can see inside a room, as long as you can touch one of its walls. If the room is unlit or poorly lit, you can only see as much as you could if you were inside, but magical enhancements of your senses do apply. You may change your viewpoint within the room throughout the duration of the spell.
     + Base 1, +1 Touch, +1 Concentration, +2 Room
     + [ArM5:144]
-+ *Brushstrokes Revealed* InIm10 (44)
++ *Brushstrokes Revealed* InIm10 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Ring; Target: Circle
     + This spell makes the species cast by an object within the circle more vivid, so that the magus can see tiny details that are otherwise invisible. This spell has traditionally been used to investigate the physical construction of artworks, but nature-oriented Jerbiton magi have recently begun using it to investigate the handiwork of God, by examining the tiny structures of creation.
     + Base 3, +1 Touch, +2 Ring
     + [HoH:S:65]
-+ *Palm of Seeing (Sun duration)* InIm20 (44)
++ *Palm of Seeing (Sun duration)* InIm20 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Diam; Target: Vision
     + The caster can see from the perspective of the target. This spell must Penetrate in order to sense creatures with Magic Resistance.  Ariane has learned this spell to cast down an Intangible Tunnel.
     + Base 1, +1 Touch, +1 Diameter, +4 Vision
     + [TtA:80]
-+ *Eyes of the Eagle (touch)* InIm30 (44)
++ *Eyes of the Eagle (touch)* InIm30 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Vision
     + You see distant things clearly. No matter how far away something is, you can make out details as if it were only a foot or so from you. Things do not all appear to be a foot away; you can simply make out details as well as if they were. You can still judge distance accurately; in fact, more accurately than normal, to within an inch or so at a distance of several miles, since you can see as clearly as if you were judging distance a foot away.
     + Base 3, +2 Sun, +4 Vision
     + Custom variant [ArM5:145]
-+ *Aura of Ennobled Presence* MuIm10 (38)
++ *Aura of Ennobled Presence* MuIm10 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target appears more forceful, authoritative, and believable.  Numerous subtle changes in appearance bring about this change, including a slight supernatural illumination of the face, a more erect posture, and a louder and smoother voice. The character gets a +3 on rolls to influence, lead, or convince others.
     + Base 3, +1 Touch, +2 Sun
     + [ArM5:145]
-+ *Aura of the Trustful Merchant* MuIm10 (38)
++ *Aura of the Trustful Merchant* MuIm10 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Custom
-+ *Disguise of the Transformed Image* MuIm15 (38)
++ *Disguise of the Transformed Image* MuIm15 (39)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Makes someone look, sound, feel, and smell different, though at least passably human.
     + Base 4, +1 Touch, +2 Sun
     + [ArM5:146]
-+ *Sight of the Warm Surface* MuIm15 (38)
++ *Sight of the Warm Surface* MuIm15 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Conc; Target: Vision
     + Although Imaginem magic cannot create heat, warm surfaces emit species, which humans can sense through touch. This spell transforms those into species that the eye responds to. How the warmth is seen varies by magus.
     + Base 2, +1 Touch, +1 Concentration, +4 Vision
     + [HoH:S:65]
-+ *Ogre's Stench* MuIm25 (38)
++ *Ogre's Stench* MuIm25 (39)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Group
     + You change the targets’ smell (up to 100 people) in such a disgusting and awful way that they and every person near them must make Stamina rolls against an Ease Factor of 6 or act with a –3 penalty to all rolls. If they botch, they throw up.
     + Base 1, +2 Voice, +2 Sun, +2 Group, +1 size, +2 very “detailed” smell)cw
     + [MoH:125]
-+ *Veil of Invisibility* PeIm20 (38)
++ *Veil of Invisibility* PeIm20 (39)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target becomes completely undetectable to normal sight, regardless of what he does, but still casts a shadow.
     + Base 4, +1 Touch, +2 Sun, +1 changing image
     + [ArM5:146]
-+ *Circle of Undisturbed Rest* ReIm10 (44)
++ *Circle of Undisturbed Rest* ReIm10 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Ring; Target: Circle
     + Base 1, +2 Ring, +1 Touch, +1 additional sense
     + [MoH:30]
-+ *Willful Sidestep* ReIm20 (44)
++ *Willful Sidestep* ReIm20 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Custom
-+ *Image from the Wizard Torn* ReIm30 (44)
++ *Image from the Wizard Torn* ReIm30 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. In
     + Range: Per; Duration: Conc; Target: Ind
     + Your image separates from your body and moves as you do. It can speak whatever you say and do so in your voice, and you can see through its eyes. You must make an Int + Concentration stress roll for each solid object the image passes through and for each mile it travels. If you wish the image to be able to leave your sight, you must use an Arcane Connection to yourself (for example, a fingernail or a lock of hair) when you cast the spell. That connection becomes an integral part of the image, and when the spell ends, it falls to the ground wherever the image was located. As your image is away from your body, you are invisible and silent at your actual location.  The image is your image, so while you may move it in space you may not have it sit down if you are standing. Further, it appears as if illuminated by whatever light is falling on you, no matter what the level of illumination is at the image.
     + Base 15, +1 Concentration, +1 additional sense, +1 Intellego requisite
     + [ArM:147]
-+ *Confusion of the Insane Vibrations* ReIm35 (44)
++ *Confusion of the Insane Vibrations* ReIm35 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: ; Duration: Sun; Target: 
 + *By His Works* CrMe5 (38)
@@ -498,6 +498,20 @@ Weak Spontaneous Magic (0),
     + You can open a magical channel from yourself to some target, allowing you to cast any spell with a range greater than Personal on that target. The tunnel does not, of itself, grant any sense impressions of the target — you must cast appropriate spells through it if you wish to see. Spells cast through the tunnel cannot be of higher level than that of this spell. You must make standard Concentration rolls to maintain concentration on the Opening spell as you cast other spells. A magus who magically recognizes the tunnel (through The Invisible Eye Revealed or a similar spell) may cast spells through the tunnel back at you, and he need not concentrate on keeping the tunnel open. If this magus is the target of the spell, he is considered to be touching you. Otherwise, his effective range to you is his range to the target of the tunneling spell. If the target of the spell has Magic Resistance, you must penetrate that resistance to open the tunnel. Spells cast through the tunnel must also penetrate Magic Resistance normally.
     + Base effect, +4 Arcane Connection, +1 Concentration
     + [ArM:162]
++ *Watching Ward* ReVi20 (30)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Spec; Target: Ind; Ritual
+    + [ArM5:162]
++ *Maintaining the Demanding Spell* ReVi21 (30)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Diam; Target: Ind
+    + [ArM5:162]
++ *Circular Ward Against Demons* ReVi25 (30)
+    + Mastery: 1 (0xp) Penetration
+    + Range: Touch; Duration: Ring; Target: Circle
+    + All creatures with Infernal Might equal to or less than the level of the spell are unable to enter the circle or harm those within it.  If you cast the spell again, the stronger ring dispels the weaker, regardless of the order of casting. Some magi cast this spell before going to sleep at night. At night, from certain angles, the ring may be seen as a silver-hued dome.
+    + Base Spell
+    + [ArM5:162]
 + *Aegis of the Hearth* ReVi30 (31)
     + Mastery: 2 (8xp) Penetration, Safe Casting
     + Range: Touch; Duration: Year; Target: Boundary; Ritual
@@ -507,7 +521,7 @@ Weak Spontaneous Magic (0),
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
 
-Total: 1183 levels of spells.
+Total: 1249 levels of spells.
 
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
@@ -518,7 +532,7 @@ Total: 1183 levels of spells.
 | Corpus | 31 | 28 | 22 | 22 | 28 |
 | Herbam | 26 | 23 | 17 | 17 | 23 |
 | Ignem | 28 | 25 | 19 | 19 | 25 |
-| Imaginem | 46 | 43 | 37 | 37 | 43 |
+| Imaginem | 47 | 44 | 38 | 38 | 44 |
 | Mentem | 37 | 34 | 28 | 28 | 34 |
 | Terram | 29 | 26 | 20 | 20 | 26 |
 | Vim | 32 | 29 | 23 | 23 | 29 |
@@ -534,7 +548,7 @@ Total: 1183 levels of spells.
 | Corpus | 47 | 44 | 38 | 38 | 45 |
 | Herbam | 42 | 39 | 33 | 33 | 40 |
 | Ignem | 45 | 42 | 36 | 36 | 43 |
-| Imaginem | 62 | 59 | 53 | 53 | 60 |
+| Imaginem | 63 | 60 | 54 | 54 | 61 |
 | Mentem | 54 | 51 | 45 | 45 | 52 |
 | Terram | 45 | 42 | 36 | 36 | 43 |
 | Vim | 48 | 45 | 39 | 39 | 46 |
@@ -582,6 +596,24 @@ Total: 1183 levels of spells.
 
 ## Past Advancement
 
++ Summer 1255 (12+4xp) Reading
+    + Reads the new Q12 Tractatus from Vigil
+    + Changing traits
+        + Art: Imaginem 16xp; 
+    + Validated: Correctly spent 16 xp.
++ Spring 1255 (2xp) LabWork (Exposure)
+    + ReVi Spells; Train Luciu in Magic Theory (SQ 15).
+    + Changing traits
+        + Ability: Magic Theory 2xp; 
+        + Spell: Watching Ward 0xp Quiet Casting
+        + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
+        + Spell: Circular Ward Against Demons 0xp Penetration
+        + Confidence: 0 (1)
+    + Inferred traits
+        + Spell: Watching Ward 0xp with flawless magic
+        + Spell: Maintaining the Demanding Spell 0xp with flawless magic
+        + Spell: Circular Ward Against Demons 0xp with flawless magic
+    + Validated: Correctly spent 2 xp.
 + Winter 1255 (2xp) (1 years) OpeningArts (Exposure)
     + Open arts for Luciu
     + Changing traits
@@ -1678,16 +1710,6 @@ Total: 1183 levels of spells.
 
 ## Future Advancement
 
-+ Spring 1255 (2xp) LabWork (Exposure)
-    + ReVi Spells; Train Luciu in Magic Theory (SQ 15).
-    + Ability: Magic Theory 2xp; 
-    + Spell: Circular Ward Against Demons 0xp Penetration
-    + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
-    + Spell: Watching Ward 0xp Quiet Casting
-    + Confidence: 0 (1)
-+ Summer 1255 (12xp) Reading
-    + Reads the new Q12 Tractatus from Vigil
-    + Art: Imaginem 16xp; 
 + Autumn 1255 (2xp) Authoring (Exposure)
     + Author *Arrow's Flight*, an Auram Tracatus
     + To 64xp in Latin
