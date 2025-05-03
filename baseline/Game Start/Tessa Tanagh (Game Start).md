@@ -75,28 +75,28 @@ Warrior (1),
         + Ability: Animal Ken [Canine] 45xp; 
         + Ability: Athletics [obstacle race] 30xp; 
         + Ability: Awareness [Keen sight] 35xp; 
+        + Ability: Bargain [Avoid cheats] 5xp; 
         + Ability: Carouse [Hold liquor] 5xp; 
         + Ability: Chirurgy [First aid] 5xp; 
-        + Ability: Bargain [Avoid cheats] 5xp; 
         + Ability: Folk ken [Judge of character] 5xp; 
-        + Ability: Ride [Horse training] 5xp; 
-        + Ability: Survival [Hills] 45xp; 
         + Ability: Hunt [Track] 75xp; 
         + Ability: Legerdemain [pickpocket] 50xp; 
-        + Ability: Stealth [with dogs] 35xp; 
-        + Ability: Swim [survival] 5xp; 
+        + Ability: Ride [Horse training] 5xp; 
         + Ability: Single Weapon [spear] 30xp; 
+        + Ability: Stealth [with dogs] 35xp; 
+        + Ability: Survival [Hills] 45xp; 
+        + Ability: Swim [survival] 5xp; 
         + Ability: Thrown [Shortbow] 75xp; 
     + Inferred traits
         + Aging 30 years; apparent 30 years. No roll. 
     + Validated: Correctly spent 500 xp.
 + Early Childhood (45xp) (5 years)
     + Changing traits
-        + Ability: Stealth [Hiding] 15xp; 
         + Ability: Awareness [Good ears] 15xp; 
-        + Ability: Survival [Hills] 5xp; 
-        + Ability: Munster Lore [Outback] 5xp; 
         + Ability: Brawl [Dodge] 5xp; 
+        + Ability: Munster Lore [Outback] 5xp; 
+        + Ability: Stealth [Hiding] 15xp; 
+        + Ability: Survival [Hills] 5xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
@@ -114,13 +114,13 @@ Warrior (1),
 + Virtues and Flaws (0xp)
     + Changing traits
         + Ability: Native Language: Irish [Munster] 75xp; 
-        + Virtue: Warrior (1)
-        + Virtue: Great Characteristic (1 x2)
-        + Flaw: Small Frame (-1)
-        + Flaw: Social handicap (-1)
-        + Flaw: Overconfident (-1)
         + Personality Trait: Curious 3
         + Personality Trait: Helpful 1
+        + Virtue: Great Characteristic (1 x2)
+        + Flaw: Overconfident (-1)
+        + Flaw: Small Frame (-1)
+        + Flaw: Social handicap (-1)
+        + Virtue: Warrior (1)
     + Inferred traits
         + Characteristic: Dex 0
     + Validated: Virtues and flaws balance at 3 of 3 points.

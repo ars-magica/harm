@@ -74,8 +74,8 @@ Warrior (1),
 + Winter 1249 (2xp) (1 years) "" (Other Exposure)
     + Changing traits
         + Ability: Awareness 2xp; 
-        + Aging  No roll. 
         + Characteristic: Pre 0
+        + Aging  No roll. 
     + Inferred traits
         + Decrepitude 1
         + Aging 1 years; apparent 1 years. No roll. 
@@ -95,12 +95,12 @@ Warrior (1),
     + Validated: Correctly spent 4 xp.
 + Winter 1248 (10xp) (1 years) Adventure
     + Changing traits
-        + Ability: Swim 5xp; 
         + Ability: Animal Ken 5xp; 
-        + Aging  No roll. 
+        + Ability: Swim 5xp; 
         + Characteristic: Int 0
-        + Characteristic: Com 0
         + Characteristic: Pre 0
+        + Characteristic: Com 0
+        + Aging  No roll. 
     + Inferred traits
         + Decrepitude 2
         + Decrepitude 2

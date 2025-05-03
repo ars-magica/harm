@@ -79,8 +79,8 @@ Warrior (1),
         + Ability: Throw [spear] 75xp; 
         + Possession: Dagger
         + Possession: Sling
-        + Combat Option: Fist Fist
         + Combat Option: Dagger Dagger
+        + Combat Option: Fist Fist
         + Combat Option: Sling Sling
         + Combat Option: Thrown Knife Thrown Knife
     + Inferred traits
@@ -88,9 +88,9 @@ Warrior (1),
     + ERROR: Underspent 260xp of 335.
 + Early Childhood (45xp) (5 years)
     + Changing traits
-        + Ability: Stealth [Sneak] 15xp; 
         + Ability: Awareness [Good ears] 15xp; 
         + Ability: Killaloe Lore [Hiding places] 15xp; 
+        + Ability: Stealth [Sneak] 15xp; 
     + Inferred traits
         + Aging 5 years; apparent 5 years. No roll. 
     + Validated: Correctly spent 45 xp.
@@ -108,12 +108,12 @@ Warrior (1),
 + Virtues and Flaws (0xp)
     + Changing traits
         + Ability: Native Language: Irish [Munster] 75xp; 
-        + Flaw: Poor Characteristic (1)
-        + Virtue: Warrior (1)
-        + Flaw: Poor Characteristic (1)
-        + Personality Trait: Trustful -3
         + Personality Trait: Brave -1
         + Personality Trait: Curious 3
+        + Personality Trait: Trustful -3
+        + Flaw: Poor Characteristic (1)
+        + Flaw: Poor Characteristic (1)
+        + Virtue: Warrior (1)
     + Inferred traits
         + Characteristic: Pre 0
         + Characteristic: Pre 0

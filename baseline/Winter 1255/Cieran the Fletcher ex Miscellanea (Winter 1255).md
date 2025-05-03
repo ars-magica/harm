@@ -586,9 +586,9 @@ Total: 1183 levels of spells.
     + Open arts for Luciu
     + Changing traits
         + Ability: Magic Theory 2xp; 
+        + Possession: An vis (-1)
         + Possession: In vis (-3)
         + Possession: Mu vis (2)
-        + Possession: An vis (-1)
         + Possession: Vi vis (2)
         + Aging Rolled -1 (0) No aging.
     + Inferred traits
@@ -619,11 +619,11 @@ Total: 1183 levels of spells.
     + Sheriff Gui of the Worcesters.  Area of the Daisee clan.
     + After the incident at the mine, Cieran was allowed to ride an old nag, owned by an old man Angus.
     + Changing traits
-        + Ability: Finesse [Precision] 5xp; 
         + Ability: Etiquette 2xp; 
+        + Ability: Finesse [Precision] 5xp; 
         + Reputation: Friendly druid [Lands of O'Sullivan] 4xp
-        + Aging Rolled -1 (4) No aging.
         + Confidence: 0 (2)
+        + Aging Rolled -1 (4) No aging.
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -640,8 +640,8 @@ Total: 1183 levels of spells.
     + Intangible Tunnel ReVi20; diam version ReVi5 (144xp)
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Opening the Intangible Tunnel 0xp Quiet Casting
         + Spell: The Minute of Reckoning 0xp Quiet Casting
+        + Spell: Opening the Intangible Tunnel 0xp Quiet Casting
     + Inferred traits
         + Spell: The Minute of Reckoning 0xp with flawless magic
         + Spell: Opening the Intangible Tunnel 0xp with flawless magic
@@ -668,15 +668,15 @@ Total: 1183 levels of spells.
 + Autumn 1252 (15+1xp) Adventure
     + Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11
     + Changing traits
-        + Art: Imaginem 6xp; 
         + Ability: Faerie Lore 4xp; 
-        + Ability: Latin 2xp; 
         + Ability: Hermes Lore 4xp; 
+        + Ability: Latin 2xp; 
+        + Art: Imaginem 6xp; 
         + Confidence: 0 (5)
-        + Possession: Me vis (2)
-        + Possession: Im vis (4)
-        + Possession: Te vis (3)
         + Possession: Cr vis (2)
+        + Possession: Im vis (4)
+        + Possession: Me vis (2)
+        + Possession: Te vis (3)
     + Validated: Correctly spent 16 xp.
 + Summer 1252 (13+3xp) Reading
     + To 83xp
@@ -695,8 +695,8 @@ Total: 1183 levels of spells.
     + no aging -16
     + Changing traits
         + Art: Rego 12xp; 
-        + Aging Rolled -16 (-1) No aging.
         + Possession: Im vis (12)
+        + Aging Rolled -16 (-1) No aging.
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -715,9 +715,9 @@ Total: 1183 levels of spells.
     + InIm spells below ->  281½.  Lab total 71
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: Palm of Seeing (Sun duration) 0xp Penetration
-        + Spell: Brushstrokes Revealed 0xp Penetration
         + Spell: Prying Eyes 0xp Penetration
+        + Spell: Brushstrokes Revealed 0xp Penetration
+        + Spell: Palm of Seeing (Sun duration) 0xp Penetration
     + Inferred traits
         + Spell: Prying Eyes 0xp with flawless magic
         + Spell: Brushstrokes Revealed 0xp with flawless magic
@@ -780,8 +780,8 @@ Total: 1183 levels of spells.
     +  254½xp Invisibility Quartz for Sean; see below ; no aging (-18)
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Aging Rolled -18 (0) No aging. Die not recorded
         + Possession: Me vis (4)
+        + Aging Rolled -18 (0) No aging. Die not recorded
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -791,8 +791,8 @@ Total: 1183 levels of spells.
     +  250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: Ogre's Stench 0xp Quiet Casting
         + Spell: Aura of the Trustful Merchant 0xp Quiet Casting
+        + Spell: Ogre's Stench 0xp Quiet Casting
     + Inferred traits
         + Spell: Aura of the Trustful Merchant 0xp with flawless magic
         + Spell: Ogre's Stench 0xp with flawless magic
@@ -822,14 +822,14 @@ Total: 1183 levels of spells.
     + Changing traits
         + Ability: Latin 2xp; 
         + Characteristic: Com 5
-        + Possession: Me vis (-20)
         + Possession: Cr vis (-4)
-        + Possession: Vi vis (-14)
-        + Possession: Pe vis (-1)
         + Possession: In vis (-4)
+        + Possession: Me vis (-20)
         + Possession: Mu vis (-2)
-        + Possession: Te vis (-2)
+        + Possession: Pe vis (-1)
         + Possession: Re vis (-1)
+        + Possession: Te vis (-2)
+        + Possession: Vi vis (-14)
     + Validated: Correctly spent 2 xp.
 + Summer 1247 (9+3xp) Reading
     + Uses *From nothing to everything* by Vivianus of Bonisagus (No Time)
@@ -891,12 +891,12 @@ Total: 1183 levels of spells.
 + Spring 1245 (15xp) Adventure
     +  4 conf pts 
     + Changing traits
-        + Ability: Second Sight 5xp; 
-        + Ability: Parma Magica 5xp; 
         + Ability: Faerie Lore 5xp; 
+        + Ability: Parma Magica 5xp; 
+        + Ability: Second Sight 5xp; 
         + Confidence: 0 (4)
-        + Possession: Te vis (2)
         + Possession: Me vis (12)
+        + Possession: Te vis (2)
         + Possession: Vi vis (-4)
     + Validated: Correctly spent 15 xp.
 + Winter 1245 (2xp) (1 years) LabWork (Exposure)
@@ -905,8 +905,8 @@ Total: 1183 levels of spells.
         + Ability: Parma Magica 2xp; 
         + Spell: Fist of Fey Oblivion 0xp Penetration
         + Spell: Fist of Magic Oblivion 0xp Penetration
-        + Spell: Circle of Fey Oblivion 0xp Penetration
         + Spell: Break the Shield 0xp Penetration
+        + Spell: Circle of Fey Oblivion 0xp Penetration
         + Aging Rolled 4 (28) Apparent age increases
     + Inferred traits
         + Spell: Fist of Fey Oblivion 0xp with flawless magic
@@ -925,8 +925,8 @@ Total: 1183 levels of spells.
 + Summer 1244 (10xp) Adventure
     + Midsummer Fair: Parma Magica (5), Folk Ken (5) + one confidence point 
     + Changing traits
-        + Ability: Parma Magica 5xp; 
         + Ability: Folk Ken 5xp; 
+        + Ability: Parma Magica 5xp; 
         + Confidence: 0 (1)
         + Possession: Vi vis (18)
     + Validated: Correctly spent 10 xp.
@@ -967,8 +967,8 @@ Total: 1183 levels of spells.
     +  *The Mind's Eye* L16Q13 -> 81xp ; No aging
     + Changing traits
         + Art: Mentem 16xp; 
-        + Aging Rolled 0 (0) No aging. Rolls not recorded
         + Possession: Pe vis
+        + Aging Rolled 0 (0) No aging. Rolls not recorded
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -982,18 +982,18 @@ Total: 1183 levels of spells.
     + Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Aging  LR 22;  No roll. 
-        + Possession: Vi vis (-2)
         + Possession: Pe vis (-1)
         + Possession: Te vis (-1)
+        + Possession: Vi vis (-2)
+        + Aging  LR 22;  No roll. 
     + Validated: Correctly spent 2 xp.
 + Spring 1242 (2xp) LabWork (Exposure)
     + Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14).
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Horror Cabinet 0xp Quiet Casting
         + Spell: False Window 0xp Quiet Casting
         + Spell: Smoke of Escaping 0xp Quiet Casting
+        + Spell: Horror Cabinet 0xp Quiet Casting
     + Inferred traits
         + Spell: False Window 0xp with flawless magic
         + Spell: Smoke of Escaping 0xp with flawless magic
@@ -1004,9 +1004,9 @@ Total: 1183 levels of spells.
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Warping 1 (One botch some time before 1242.)
-        + Possession: Cr vis (2)
         + Possession: An vis
         + Possession: An vis (-1)
+        + Possession: Cr vis (2)
         + Possession: Ig vis (3)
         + Possession: Me vis (8)
     + Inferred traits
@@ -1059,15 +1059,15 @@ Total: 1183 levels of spells.
     + MuIm spells with help from Hiccup and Jimeny  (without text). MuIm 50 + 12 = 62. Magic Theory to 128xp.
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Sight of the Warm Surface 0xp Quiet Casting
-        + Spell: Disguise of the Transformed Image 0xp Quite Casting
         + Characteristic: Com 2 (Heroes ritual cast once)
+        + Spell: Disguise of the Transformed Image 0xp Quite Casting
+        + Spell: Sight of the Warm Surface 0xp Quiet Casting
         + Possession: An vis (-2)
         + Possession: An vis (3)
         + Possession: Au vis (2)
-        + Possession: Vi vis (3)
         + Possession: Me vis (16)
         + Possession: Me vis (-16)
+        + Possession: Vi vis (3)
     + Inferred traits
         + Spell: Disguise of the Transformed Image 0xp with flawless magic
         + Spell: Sight of the Warm Surface 0xp with flawless magic
@@ -1193,15 +1193,15 @@ Total: 1183 levels of spells.
     +  52->64 
     + Changing traits
         + Art: Rego 12xp; 
-        + Possession: Weightless Chain (Protection 9, Load 2)
         + Possession: Te vis (-5)
+        + Possession: Weightless Chain (Protection 9, Load 2)
     + Validated: Correctly spent 12 xp.
 + Summer 1235 (2xp) LabWork (Exposure)
     + 93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Posing the Silent Question 0xp Quiet Casting
         + Spell: Sight of Conflicting Motives 0xp Quiet Casting
+        + Spell: Posing the Silent Question 0xp Quiet Casting
     + Inferred traits
         + Spell: Sight of Conflicting Motives 0xp with flawless magic
         + Spell: Posing the Silent Question 0xp with flawless magic
@@ -1234,8 +1234,8 @@ Total: 1183 levels of spells.
     + Hiccup 
     + Changing traits
         + Ability: Teaching 2xp; 
-        + Possession: Stone-Cutting Knife
         + Possession: Porter’s Glove
+        + Possession: Stone-Cutting Knife
     + Validated: Correctly spent 2 xp.
 + Winter 1234 (13+3xp) (1 years) Reading
     + *Magic Companion* L15Q13 
@@ -1256,8 +1256,8 @@ Total: 1183 levels of spells.
     + Gift of Perception ++ Lab total 50 incl Hiccup
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Gift of Perception 0xp Quiet Casting
         + Spell: By His Works 0xp Quiet Casting
+        + Spell: Gift of Perception 0xp Quiet Casting
     + Inferred traits
         + Spell: By His Works 0xp with flawless magic
         + Spell: Gift of Perception 0xp with flawless magic
@@ -1271,10 +1271,10 @@ Total: 1183 levels of spells.
     + Hired teacher for £1. 
     + Changing traits
         + Ability: Craft: Rope. 15xp; 
-        + Possession: Me vis (8)
-        + Possession: Te vis
-        + Possession: Me vis (-16)
         + Characteristic: Per 1 (Gift of Perception Ritual Twice)
+        + Possession: Me vis (8)
+        + Possession: Me vis (-16)
+        + Possession: Te vis
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 15 xp.
@@ -1339,8 +1339,8 @@ Total: 1183 levels of spells.
 + Summer 1230 (10xp) Adventure
     + Cieran seeks a familiar
     + Changing traits
-        + Ability: Teaching 5xp; 
         + Ability: Magic Lore [creatures] 5xp; 
+        + Ability: Teaching 5xp; 
         + Confidence: 0 (1)
         + Possession: Im vis (-1)
     + Validated: Correctly spent 10 xp.
@@ -1353,8 +1353,8 @@ Total: 1183 levels of spells.
     + CrCo spells.  Lab total 43 + Hiccup + bookstand = 51.
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Restoration of the Defiled Body 0xp Penetration
         + Spell: Improved Purification of the Festering Wounds 0xp Penetration
+        + Spell: Restoration of the Defiled Body 0xp Penetration
     + Inferred traits
         + Spell: Improved Purification of the Festering Wounds 0xp with flawless magic
         + Spell: Restoration of the Defiled Body 0xp with flawless magic
@@ -1364,8 +1364,8 @@ Total: 1183 levels of spells.
     + ReCo 43 + Hiccup + bookstand = 51. Leap of Homecoming + Frog's Legs
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Leap of Homecoming 0xp Still Casting
         + Spell: Gift of the Frog's Legs 0xp Still Casting
+        + Spell: Leap of Homecoming 0xp Still Casting
     + Inferred traits
         + Spell: Gift of the Frog's Legs 0xp with flawless magic
         + Spell: Leap of Homecoming 0xp with flawless magic
@@ -1378,8 +1378,8 @@ Total: 1183 levels of spells.
 + Spring 1229 (3xp) LabWork (Exposure)
     + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore
     + Changing traits
-        + Ability: Magic Theory 2xp; 
         + Ability: Hermes Lore 1xp; 
+        + Ability: Magic Theory 2xp; 
         + Spell: Circle of Undisturbed Rest 0xp Quiet Casting
         + Spell: Willful Sidestep 0xp Quiet Casting
     + Inferred traits
@@ -1438,8 +1438,8 @@ Total: 1183 levels of spells.
     + Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera
     + Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.
     + Changing traits
-        + Ability: Magic Theory 2xp; 
         + Ability: Hermes Lore 1xp; 
+        + Ability: Magic Theory 2xp; 
         + Possession: Cr vis (-3)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1460,9 +1460,9 @@ Total: 1183 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Winter 1226 (15xp) (1 years) Adventure
     + Changing traits
-        + Ability: Second Sight 5xp; 
-        + Ability: Parma Magica 5xp; 
         + Ability: Leadership 5xp; 
+        + Ability: Parma Magica 5xp; 
+        + Ability: Second Sight 5xp; 
         + Confidence: 0 (5)
         + Possession: Cr vis (3)
         + Possession: Me vis (8)
@@ -1522,10 +1522,10 @@ Total: 1183 levels of spells.
     + Parma to 30xp.  Story (2conf pts) Lab work: InVi5 Spot the Vis + InVi5 Scales of M W + InVi20 Piercing the faerie veil (from texts) (lab total InVi 14 + Int 3 + MT 4 + Aura 5 + similar spell 4 = 30) + 2xp parma
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Confidence: 0 (2)
-        + Spell: Spot the Presence of Vis 0xp Quiet Casting
         + Spell: Scales of Magical Weight 0xp Quiet Casting
+        + Spell: Spot the Presence of Vis 0xp Quiet Casting
         + Spell: Piercing the Faerie Veil 0xp Quiet Casting
+        + Confidence: 0 (2)
     + Inferred traits
         + Spell: Scales of Magical Weight 0xp with flawless magic
         + Spell: Spot the Presence of Vis 0xp with flawless magic
@@ -1583,8 +1583,8 @@ Total: 1183 levels of spells.
 + Spring 1221 (10xp) Adventure
     + Jerome's Tower
     + Changing traits
-        + Ability: Second Sight 5xp; 
         + Ability: Parma Magica 5xp; 
+        + Ability: Second Sight 5xp; 
     + Validated: Correctly spent 10 xp.
 + Winter 1221 (18+3xp) (1 years) Reading
     + Changing traits
@@ -1652,8 +1652,8 @@ Total: 1183 levels of spells.
         + Ability: Infernal Lore [Undead] 5xp; 
         + Ability: Parma Magica 5xp; 
         + Ability: Second Sight 4xp; 
-        + Possession: Rego Vis from Jerome's body (3)
         + Possession: Perdo Vis from Jerome's body
+        + Possession: Rego Vis from Jerome's body (3)
     + Validated: Correctly spent 14 xp.
 + Winter 1218 (15+3xp) (1 years) Reading
     + Studies *Root of Terram* L8Q15 +3

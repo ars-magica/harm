@@ -120,9 +120,9 @@ Weakness [for Dogs] (-1),
     + Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.
     + SQ10 + Independent Study.
     + Changing traits
+        + Ability: Animal Ken 3xp; 
         + Ability: Faerie Lore [Dark Fae] 5xp; 
         + Ability: Magic Lore [Ancient Myth] 5xp; 
-        + Ability: Animal Ken 3xp; 
         + Confidence: 0 (2)
     + Validated: Correctly spent 13 xp.
 
