@@ -14,7 +14,6 @@
 module ArM.Char.Advancement ( module ArM.Types.Advancement
                             , module ArM.Char.Virtues
                             , module ArM.Char.Inference
-                            , module ArM.Char.Validation
                             , prepareAdvancement 
                             , applyAdvancement 
                             , agePT
@@ -24,7 +23,6 @@ module ArM.Char.Advancement ( module ArM.Types.Advancement
 import ArM.Types.Advancement
 import ArM.Char.Virtues
 import ArM.Char.Inference
-import ArM.Char.Validation
 
 -- Other Types
 import ArM.Types.Character
@@ -53,10 +51,6 @@ prepareAdvancement c = validate
                      . winterEvents c 
                      . addInference c
 
-lrWarping :: ProtoTrait
-lrWarping = defaultPT { other = Just "Warping"
-                      , points = Just 1
-                      , ptComment = Just "from Longevity Ritual" }
 
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
@@ -132,19 +126,6 @@ getSQ a | isExposure ad = (Just 2,Nothing)
          -- usd = bookUsed a
 
 -- |
--- Calculate the Source Quality the character generates as a teacher.
-charTeacherSQ :: CharacterState -> Int
-charTeacherSQ cs = 3 + com + tch
-    where sheet = characterSheet cs
-          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
-          -- add good teacher
-          -- subtract flaws
-          -- add speciality
-          -- add one/two student bonus
--- Teacher SQ +
-
--- |
 -- = Applying the Advancement
 
 -- | Apply advancement
@@ -170,3 +151,19 @@ applyAdvancement a cs = (a,cs')
 agePT :: Int -- ^ Number of years
       ->  ProtoTrait -- ^ Resulting ProtoTrait
 agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
+
+-- | ProtoTrait representing the warping point from Longevity Ritual.
+lrWarping :: ProtoTrait
+lrWarping = defaultPT { other = Just "Warping"
+                      , points = Just 1
+                      , ptComment = Just "from Longevity Ritual" }
+
+-- |
+-- = In-game Validation
+-- In-game validation is relatively simple, depending only on the
+-- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
+
+-- |
+-- Validate an in-game advancement, adding results to the validation field.
+validate :: AugmentedAdvancement -> AugmentedAdvancement
+validate = validateXP

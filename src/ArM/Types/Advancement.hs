@@ -46,6 +46,7 @@ module ArM.Types.Advancement ( Advancement(..)
                              , Validation(..) 
                              , PostProcessor(..)
                              , BonusSQ(..)
+                             , validateXP
                              ) where
 
 import ArM.Helper
@@ -55,7 +56,7 @@ import ArM.GameRules
 import ArM.Types.Library
 
 import Data.Maybe 
-import Data.List 
+-- import Data.List 
 import Data.Char 
 import Data.Aeson 
 import Data.Aeson.Extra
@@ -411,3 +412,17 @@ primaryXPTrait a | f a == [] = Nothing
    where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
 -}
 
+-- | Validate allocation of XP.
+validateXP :: AugmentedAdvancement -> AugmentedAdvancement
+validateXP a = addValidation (xpValidation a) a
+
+-- | Validate allocation of XP.
+xpValidation :: AugmentedAdvancement -> [ Validation ]
+xpValidation a 
+    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
+    | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
+    | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
+    | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
+    where xpsum = spentXP a
+          sq = fromMaybe 0 $ effectiveSQ a
+          sq' =  effectiveSQ a

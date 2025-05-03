@@ -1,61 +1,119 @@
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Validation
+-- Module      :  ArM.Char.CharGen
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Functions to calculate and validate advancements
+-- Description :  Character Generation
 --
--- Only one function is exported: `validate`.
--- It checks the integrity of an AugmentedAdvancement object, and adds its
--- reports to the validation field.
+-- The module exports only one function, `prepareCharacter`, which
+-- computes the character at game start, based on pre-game advancement
+-- objects.
 --
--- This function should be used after all other calculation of the 
--- AugmentedAdvancement is complete, and before the object is displayed,
--- or written to file.
+-- This function should be applied when a character is read from file
+-- which does not include a persistent state.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Validation (validate,validateCharGen) where
+module ArM.Char.CharGen (prepareCharacter) where
 
-import ArM.Types.Advancement
+import ArM.Char.Advancement
 import ArM.Types.ProtoTrait
 import ArM.Types.Character
 import ArM.Char.CharacterSheet
-import ArM.Char.Virtues
+import ArM.Types
 import ArM.GameRules
-import ArM.Helper
 
 import Data.Maybe 
 
 -- import ArM.Debug.Trace
 
--- |
--- = In-game Validation
--- In-game validation is relatively simple, depending only on the
--- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
-
 
 -- |
--- Validate an in-game advancement, adding results to the validation field.
-validate :: AugmentedAdvancement -> AugmentedAdvancement
-validate = validateXP
+-- = Char Gen
 
--- | Validate allocation of XP.
-validateXP :: AugmentedAdvancement -> AugmentedAdvancement
-validateXP a = addValidation (xpValidation a) a
+-- | Compute the initial state if no state is recorded.
+-- The function uses `applyCGA` to process all of the pregame advancements.
+-- It then calls `addConfidence` to add the confidence trait to the state
+-- for the returned `Character` object
+prepareCharacter :: Character -> Character
+prepareCharacter c | state c /= Nothing = c
+                   | otherwise = c { state = newstate
+                                   , pregameDesign = xs
+                                   , pregameAdvancement = []
+                                   , entryTime = f $ futureAdvancement c
+                                   }
+            where as = pregameAdvancement  c 
+                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
+                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
+                  f [] = NoTime
+                  f (x:_) = season x
 
--- | Validate allocation of XP.
-xpValidation :: AugmentedAdvancement -> [ Validation ]
-xpValidation a 
-    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
-    | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
-    where xpsum = spentXP a
-          sq = fromMaybe 0 $ effectiveSQ a
-          sq' =  effectiveSQ a
+-- | Augment and amend the advancements based on current virtues and flaws.
+--
+-- This function is applied by `applyCharGenAdv` before the advancement is
+-- applied to the `CharacterState`.  It infers additional traits from 
+-- virtues and flaws, add XP limits to the advancements, and checks that
+-- the advancement does not overspend XP or exceed other limnits.
+prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
+prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
+                  . sortAdvTraits      -- Restore sort order on inferred traits
+                  . agingYears              -- add years of aging as an inferred trait
+                  . initialLimits (characterSheet cs)        -- infer additional properties on the advancement
+                  . addInference cs         -- infer additional traits 
+          where sheet = characterSheet cs
+
+-- | Calculate initial XP limits on Char Gen Advancements
+initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits sheet ad 
+            | m == CharGen "Early Childhood" = sq 45 $ yr 5 ad
+            | m == CharGen "Apprenticeship" = sq app1 $ lv app2 $ yr 15 ad
+            | m == CharGen "Characteristics" = sq 0 ad
+            | m == CharGen "Later Life" = sq (laterLifeSQ vfs ad) ad
+            | otherwise = ad 
+      where m = mode ad
+            sq x a = a { inferredAdv = (inferredAdv a) { advSQ = Just x } }
+            yr x a = a { inferredAdv = (inferredAdv a) { advYears = Just x } }
+            lv x a = a { inferredAdv = (inferredAdv a) { advSpellLevels = Just x } }
+            (app1,app2) = appSQ vfs
+            vfs = vfList sheet
+
+-- | Infer an aging trait advancing the age according to the advancement
+agingYears :: AugmentedAdvancement -> AugmentedAdvancement
+agingYears x | y > 0 = addProtoTrait [ agePT y ] x
+             | otherwise = x
+   where y = fromMaybe 0 $ years x
+
+
+-- | Add the Confidence trait to the character state, using 
+addConfidence :: CharacterState -> CharacterState
+addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
+          where vfs = vfList sheet
+                sheet = characterSheet cs
+                ct | csType sheet == Grog = ConfidenceTrait $ Confidence
+                           { cname = "Confidence", cscore = 0, cpoints = 0 }
+                   | otherwise = inferConfidence vfs 
+
+
+-- | Apply CharGen advancement
+applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
+applyCharGenAdv a cs = (a',f cs')
+   where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
+         (PostProcessor g) = postprocessTrait a'
+         f x = x { traits = map g $ traits x }
+
+-- | Apply a list of advancements
+applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
+applyCGA a cs = applyCGA' ([],a,cs)
+
+-- | Recursive helper for `applyCGA`.
+applyCGA' :: ([AugmentedAdvancement],[Advancement],CharacterState)
+                   -> ([AugmentedAdvancement],CharacterState)
+applyCGA' (xs,[],cs) = (xs,cs)
+applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
+    where (a',cs') = applyCharGenAdv y cs
+
 
 
 -- |

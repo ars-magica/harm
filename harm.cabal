@@ -82,7 +82,7 @@ common harm-deps
                        , ArM.DB.CSV
                        , ArM.DB.Spell
                        , ArM.DB.Weapon
-                       , ArM.Char.Validation
+                       , ArM.Char.CharGen
                        , ArM.Char.Inference
                        , ArM.Char.Virtues
                        , ArM.Markdown
