@@ -160,6 +160,7 @@ data Advancement = Advancement
      , advNarrative :: [ String ] -- ^ narrative description of the activities
      , advComment :: [ String ]   -- ^ freeform description of the activities
      , advUses :: [ String ]      -- ^ Books used exclusively by the character
+     , advBook :: [ Book ]      -- ^ Books used exclusively by the character
      , advSQ :: Maybe XPType      -- ^ Source Quality (SQ)
      , advCap :: Maybe Int        -- ^ Source Quality (SQ)
      , advBonus :: [ BonusSQ ]    -- ^ Bonus to Source Quality (SQ)
@@ -179,6 +180,7 @@ defaultAdvancement = Advancement
      , advNarrative = []
      , advComment = []
      , advUses = []
+     , advBook = []
      , advSQ = Nothing
      , advCap = Nothing
      , advBonus = []
@@ -210,6 +212,7 @@ instance FromJSON Advancement where
         <*> v `parseCollapsedList` "narrative" 
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "usesBook"    .!= []
+        <*> v .:? "bookUsed"    .!= []
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
         <*> v `parseCollapsedList` "bonusQuality"
@@ -251,6 +254,7 @@ class StoryObject a => AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
      years :: a -> Maybe Int
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
+     bookUsed :: a -> [ Book ] -- ^ Books used exclusively by the character
      sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
      sourceCap :: a -> Maybe Int -- ^ Level cap from the source of learning
      bonusSQ :: a -> [ BonusSQ ]
@@ -282,6 +286,7 @@ instance AdvancementLike Advancement where
      mode = advMode
      years = advYears 
      usesBook = advUses
+     bookUsed = advBook
      sourceQuality  = advSQ
      sourceCap  = advCap
      bonusSQ = advBonus 
@@ -348,6 +353,7 @@ instance AdvancementLike AugmentedAdvancement where
      mode = mode . explicitAdv
      years = fmlx advYears 
      usesBook = fmls advUses
+     bookUsed = fmls advBook
      sourceQuality =  fmlx advSQ  
      sourceCap  = fmlx sourceCap 
      bonusSQ = fmls advBonus 

@@ -167,7 +167,7 @@ validateBooks (xs,ys) = (xs, f ys)
                   step' = CharStep ch (Just $ g (fromJust aa) vs)
          g aa [] = aa
          g aa ((x,v):s) 
-           | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
+           | x `elem` bookUsed aa = g (addValidation [v] aa) s
            | otherwise = g aa s
 -- | Validate use of a single book.
 -- This is an auxiliary for `validateBooks` which applies it with `map`.
@@ -210,15 +210,15 @@ addBook _ step = step
 -- Not implemented yet.
 addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
 addBook' Nothing y  = y
-addBook' (Just cov) y = f bs y
+addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
     where u = usesBook y
           bk | isNothing st = [ Nothing | _ <- u ]
              | otherwise = map (findBook (fromJust st)) u
           bs = zip u bk
           st = covenantState cov
           f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ aa { validation = nobk bid:validation aa }
-          f ((_,Just b):xs) aa = f xs $ aa { bookUsed = b:bookUsed aa }
+          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
+          f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
 -- |

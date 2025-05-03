@@ -391,8 +391,8 @@ instance Markdown AugmentedAdvancement where
        , infl
        , OList $ map (OString . show) $ validation a
        ]
-      where inf = inferredTraits a
-            chn = changes a
+      where inf = changes $ inferredAdv a
+            chn = changes $ explicitAdv a
             chnl | chn == [] = OList []
                  | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
             infl | inf == [] = OList []
