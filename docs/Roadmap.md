@@ -23,7 +23,7 @@ title:
 
 + [ ] Phase 1.  **Review** Hibernia Saga
 	+ [ ] Review recent seasons from Hibernia 
-		+ [ ] Cieran
+		+ [x] Cieran
 		+ [x] Eogan
 		+ [ ] Elk's Run
 	+ [ ] Review character sheet design (Cieran)
@@ -32,15 +32,15 @@ title:
 		+ [ ] Aging view
 			+ [ ] Aging roll total
 		+ [ ] Comments on advancing traits (possession in particular)
-		+ [ ] Sort possessions
+		+ [x] Sort possessions
 	+ [ ] Review object structure
 		+ [ ] AnnalSeason 
 	+ [ ] Lab Total
 		+ [x] Define [[Lab object]]
 		+ [x] Character access to lab object
 		+ [ ] Use lab bonuses in lab total
-			+ [ ] Extract GQ and Aura
-			+ [ ] Extract art bonuses
+			+ [x] Extract GQ and Aura
+			+ [x] Extract art bonuses
 			+ [ ] Separate bonuses that require manual handling
 		+ [ ] Compute lab total in advancements
 		+ [ ] Advance lab (refinement and virtue installation)
