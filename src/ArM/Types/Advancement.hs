@@ -344,20 +344,14 @@ fmls :: (Advancement -> [b]) -> AugmentedAdvancement -> [b]
 fmls f a = fml f (inferredAdv a) ++ fml f (explicitAdv a) 
 
 fmlx :: (Advancement -> Maybe b) -> AugmentedAdvancement -> Maybe b
-fmlx f aa = join $ fromMaybeMaybe inf exa
+fmlx f aa = join $ inf `mplus` exa
    where exa = fmap f (explicitAdv aa)
          inf = fmap f (inferredAdv aa)
 
 fmlz :: (Advancement -> b) -> AugmentedAdvancement -> Maybe b
-fmlz f aa = fromMaybeMaybe inf exa
+fmlz f aa = inf `mplus` exa
    where exa = fmap f (explicitAdv aa)
          inf = fmap f (inferredAdv aa)
-
-fromMaybeMaybe :: (Maybe a) -> (Maybe a) -> (Maybe a)
-fromMaybeMaybe x Nothing = x
-fromMaybeMaybe _ y = y
-
-
 
 
 -- |
