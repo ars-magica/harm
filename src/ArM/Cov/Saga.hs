@@ -28,7 +28,6 @@ import Data.List
 import ArM.Advancement
 import ArM.Types.Covenant
 import ArM.Char.Character
--- import ArM.Types.Character
 import ArM.Types
 import ArM.Types.Saga
 import ArM.BasicIO
