@@ -38,7 +38,15 @@
 -- has `inferredTraits` for additional implied changes.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Advancement where
+module ArM.Types.Advancement ( Advancement(..) 
+                             , defaultAdvancement
+                             , AugmentedAdvancement(..) 
+                             , AdvancementLike(..) 
+                             , AdvancementType(..) 
+                             , Validation(..) 
+                             , PostProcessor(..)
+                             , BonusSQ(..)
+                             ) where
 
 import ArM.Helper
 import ArM.Types.ProtoTrait
@@ -55,6 +63,7 @@ import GHC.Generics
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Control.Monad
 
+-- import ArM.Debug.Trace
 
 -- |
 -- = Advancement
@@ -374,10 +383,10 @@ instance AdvancementLike AugmentedAdvancement where
 fmls :: (Advancement -> [b]) -> AugmentedAdvancement -> [b]
 fmls f a = f (inferredAdv a) ++ f (explicitAdv a) 
 
-fmlx :: (Advancement -> Maybe b) -> AugmentedAdvancement -> Maybe b
+fmlx :: Show b => (Advancement -> Maybe b) -> AugmentedAdvancement -> Maybe b
 fmlx f aa = inf `mplus` exa
-   where exa = f (explicitAdv aa)
-         inf = f (inferredAdv aa)
+   where exa =  f (explicitAdv aa)
+         inf =  f (inferredAdv aa)
 
 -- |
 -- == Validation
@@ -395,9 +404,10 @@ instance Show Validation where
 instance ToJSON Validation
 instance FromJSON Validation
 
+{-
 primaryXPTrait :: Advancement -> Maybe TraitKey
 primaryXPTrait a | f a == [] = Nothing
                  | otherwise = Just $ traitKey $ head (f a)
    where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
-
+-}
 

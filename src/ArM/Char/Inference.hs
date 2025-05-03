@@ -45,8 +45,7 @@ augmentAdvancement cs a = defaultAdvancement
         , advMode = mode a
         , advYears = yf }
      where xs = changes a
-           yf | Nothing /= advYears a = advYears a
-              | isWinter $ season a = Just 1
+           yf | isWinter $ season a = Just 1
               | otherwise = Nothing
 
 inferProtoTraits :: CharacterState -> [ProtoTrait] -> [ProtoTrait]

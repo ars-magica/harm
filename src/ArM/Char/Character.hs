@@ -85,22 +85,20 @@ prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advance
                   . addInference cs         -- infer additional traits 
           where sheet = characterSheet cs
 
-initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-initialLimits cs x = x { inferredAdv = initialLimits' cs (inferredAdv x) }
-
 -- | Calculate initial XP limits on Char Gen Advancements
-initialLimits' :: CharacterSheet -> Advancement -> Advancement
-initialLimits' sheet ad
-            | m == CharGen "Early Childhood" = ( f ad 45 ) { advYears = Just 5 }
-            | m == CharGen "Apprenticeship" = app ad
-            | m == CharGen "Characteristics" = f ad 0
-            | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs ad
+initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits sheet ad 
+            | m == CharGen "Early Childhood" = sq 45 $ yr 5 ad
+            | m == CharGen "Apprenticeship" = sq app1 $ lv app2 $ yr 15 ad
+            | m == CharGen "Characteristics" = sq 0 ad
+            | m == CharGen "Later Life" = sq (laterLifeSQ vfs ad) ad
             | otherwise = ad 
-           where m = mode ad
-                 f a x = a { advSQ = Just x }
-                 (app1,app2) = appSQ vfs
-                 app a = a { advSQ = Just app1, advSpellLevels = Just app2, advYears = Just 15 }
-                 vfs = vfList sheet
+      where m = mode ad
+            sq x a = a { inferredAdv = (inferredAdv a) { advSQ = Just x } }
+            yr x a = a { inferredAdv = (inferredAdv a) { advYears = Just x } }
+            lv x a = a { inferredAdv = (inferredAdv a) { advSpellLevels = Just x } }
+            (app1,app2) = appSQ vfs
+            vfs = vfList sheet
 
 -- | Infer an aging trait advancing the age according to the advancement
 agingYears :: AugmentedAdvancement -> AugmentedAdvancement

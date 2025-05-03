@@ -45,12 +45,11 @@ import ArM.Helper
 advancementErrors :: SagaState -> OList
 advancementErrors saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
-    where formatOutput (cid,_,ssn,vs) = OList 
-              [ OString ( cid ++ ": " ++ ssn ),
-              OList $ mapmsg vs ]
+    where formatOutput (cid,_,ssn,vs) = 
+              headOList ( cid ++ ": " ++ ssn ) (mapmsg vs ) 
           errors = errorList saga
           mapmsg [] = []
-          mapmsg ((ValidationError x):xs) = OString x:mapmsg xs
+          mapmsg ((ValidationError x):xs) = x:mapmsg xs
           mapmsg (_:xs) = mapmsg xs
 
 -- | Convenience type for a list of validation messages for a 
@@ -121,8 +120,8 @@ augHead' NoTime tp = show tp
 augHead' x tp = (show x  ++ " " ++ show tp)
 
 
--- | Character Index
--- ==
+-- | 
+-- == Character Index
 
 -- | Write a single item for `characterIndex`
 characterIndexLine :: Character -> OList
