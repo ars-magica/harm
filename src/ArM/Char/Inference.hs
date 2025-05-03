@@ -27,7 +27,7 @@ import ArM.Char.Virtues
 
 import Data.Maybe 
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `CharacterState`.
@@ -40,7 +40,7 @@ addInference cs a = Adv { explicitAdv = a
 -- The ability is inferred and should not be added manually.
 augmentAdvancement :: CharacterState -> Advancement -> Advancement
 augmentAdvancement cs a = defaultAdvancement 
-        { advChanges = trace "> " $ ttrace $ inferProtoTraits cs xs
+        { advChanges = inferProtoTraits cs xs
         , advSeason = season a
         , advMode = mode a
         , advYears = yf }
@@ -51,9 +51,9 @@ augmentAdvancement cs a = defaultAdvancement
 
 inferProtoTraits :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
 inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
-     where f = trace "f> " $ ttrace . inferTraits . getVF 
-           g = trace "g> " $ ttrace . inferDecrepitude 
-           h = trace "h> " $ ttrace . flawlessSpells cs 
+     where f =  inferTraits . getVF 
+           g =  inferDecrepitude 
+           h =  flawlessSpells cs 
 
 
 -- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to

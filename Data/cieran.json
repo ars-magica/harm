@@ -547,7 +547,8 @@
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1229"
-      , "sourceQuality" : 3
+      , "sourceQuality" : 2
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Folio bonus in Hermes Lore" }
       , "narrative" : "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
                     , { "ability" : "Hermes Lore", "xp" : 1 } 
@@ -904,7 +905,7 @@
       ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1239"
-      , "sourceQuality" : 17
+      , "bonusQuality" : { "sourceBonus" : 15, "bonusSource" : "Discovery from Experimentation" }
       , "narrative" : "Gift of Quickness. Experimentation. Discovery (15xp in MT). Magi Theory to 126xp"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 17 } 
          , { "spell" : "Gift of Quickness (personal range)"
@@ -1239,7 +1240,8 @@
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1248"
-      , "sourceQuality" : 3
+      , "sourceQuality" : 2
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : " 250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Ogre's Stench"
@@ -1254,7 +1256,8 @@
       ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1249"
-      , "sourceQuality" : 3
+      , "sourceQuality" : 2
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : " 254½xp Invisibility Quartz for Sean; see below ; no aging (-18)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "aging" : { "deltaYounger" : 1
@@ -1330,7 +1333,8 @@
       ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1251"
-      , "sourceQuality" : 3
+      , "sourceQuality" : 2
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "InIm spells below ->  281½.  Lab total 71"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Palm of Seeing (Sun duration)"
@@ -1369,6 +1373,7 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1252"
       , "sourceQuality" : 3
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Confusion of the Insane Vibrations"
