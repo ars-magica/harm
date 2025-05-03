@@ -51,9 +51,13 @@ Warrior (1),
     + Single Weapon [spear] 1 (0xp)
     + Stealth [Sneak] 4 (0xp)
     + Throw [spear] 5 (0xp)
-+ **Possessions:**
++ Vis
++ Weapons
     + Dagger
     + Sling
++ Armour
++ ArcaneConnections
++ Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
 |  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |

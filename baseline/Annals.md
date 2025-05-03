@@ -2,6 +2,13 @@
 
 ## Spring 1256
 
++ Eogan mac Eogan (Trained)
+    + Train second lymer in hunt +8 xp (+16 total).
+    + Lymer 1-2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
     + Validated: Correctly spent 3 xp.
@@ -74,6 +81,7 @@
 ## Spring 1255
 
 + Eogan mac Eogan (Adventure)
+    + Eogan discussed horse training and possible trade with the visitors from Lambaird.
     + Validated: Correctly spent 11 xp.
 
 ## Winter 1255
@@ -404,6 +412,9 @@
 
 ## Spring 1244
 
++ Elk's Run
+    + (no source quality)
+    + Changes
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + CrIg Attack Spell. Parma to 57xp 
     + Validated: Correctly spent 2 xp.
@@ -423,9 +434,27 @@
 
 ## Summer 1243
 
++ Elk's Run
+    + (no source quality)
+    + Changes
 + Cieran the Fletcher ex Miscellanea (Reading)
     +  *Growing, Healing, and Creation* L15Q14 -> 106xp 
     + Validated: Correctly spent 17 xp.
+
+## Winter 1245
+
++ Elk's Run
+    +  (SQ 10)
+        + Steal Hugo's apprentice adventure
+        + 1 confidence per session, Regina & Béibhinn 3.
+    + Changes
+
+## Summer 1243
+
++ Elk's Run
+    + (no source quality)
+        + Limerick Adventure start
+    + Changes
 
 ## Spring 1243
 
@@ -441,6 +470,10 @@
 
 ## Autumn 1242
 
++ Elk's Run
+    + (no source quality)
+        + investigation of the burnt village
+    + Changes
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + Horror Cabinet Item  2xp Exposure Magic Theory
     + Validated: Correctly spent 2 xp.
@@ -459,6 +492,10 @@
 
 ## Winter 1242
 
++ Elk's Run
+    + (no source quality)
+        + Arrival of Tim and Nemoy
+    + Changes
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points.
     + Validated: Correctly spent 2 xp.
@@ -472,7 +509,7 @@
 ## Summer 1241
 
 + Cieran the Fletcher ex Miscellanea (Copying (Exposure))
-    + Copy lab tests (covenant service)  
+    + Copy lab tests (covenant service).
     + Validated: Correctly spent 2 xp.
 
 ## Spring 1241
@@ -815,7 +852,9 @@
 ## Winter 1227
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Create Safe Cauldron. Using Folio-1109 for lab text. Exposure 2xp Magic Theory. Bonus XP in Hermes Lore. Using bookstand of Hespera
+    + Training for Hiccup in Magic Theory (SQ 8 for Hiccup).
+    + Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera
+    + Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.
     + Validated: Correctly spent 3 xp.
 
 ## Autumn 1226

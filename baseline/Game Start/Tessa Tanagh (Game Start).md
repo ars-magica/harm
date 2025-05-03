@@ -60,7 +60,11 @@ Warrior (1),
     + Survival [Hills] 4 (0xp)
     + Swim [survival] 1 (0xp)
     + Thrown [Shortbow] 5 (0xp)
-+ **Possessions:**
++ Vis
++ Weapons
++ Armour
++ ArcaneConnections
++ Equipment
 
 
 ## Game start design
