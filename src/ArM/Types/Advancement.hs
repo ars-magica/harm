@@ -356,8 +356,7 @@ instance AdvancementLike AugmentedAdvancement where
      sortAdvTraits x = x { explicitAdv = fmap sortAdvTraits $ explicitAdv x
                          , inferredAdv = fmap sortAdvTraits $ inferredAdv x }
      spentXP = sum . map regularXP . fromMaybe [] . fmap changes . explicitAdv
-     addValidation vs a 
-        | isNothing (inferredAdv a) = a { inferredAdv = fmap f (inferredAdv a) }
+     addValidation vs a = a { inferredAdv = fmap f (inferredAdv a) }
         where f x = x { advValidation = vs ++ advValidation x }
 
 fml :: (a -> [b]) -> Maybe a -> [b]

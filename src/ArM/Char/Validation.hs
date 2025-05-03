@@ -17,7 +17,7 @@
 -- or written to file.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Validation (validate,validateCharGen,initialLimits) where
+module ArM.Char.Validation (validate,validateCharGen) where
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
@@ -48,11 +48,13 @@ validate a = addValidation (validateXP a) a
 -- | Validate allocation of XP.
 validateXP :: AugmentedAdvancement -> [ Validation ]
 validateXP a 
+    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality" ]
     | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
     | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
     | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
     where xpsum = spentXP a
-          sq = effectiveSQ a
+          sq = fromMaybe 0 $ effectiveSQ a
+          sq' =  effectiveSQ a
 
 
 -- |
@@ -68,10 +70,11 @@ validateCharGen sheet = validateCharGen' sheet
 
 validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateCharGen' cs a 
-           | m == CharGen "Virtues and Flaws" = validateVF cs a
+           | m == CharGen "Virtues and Flaws" = addValidation vfvs a
            | m == CharGen "Characteristics" = validateChar cs a
            | otherwise = validateLevels $ validateXP a
            where m = mode a
+	         vfvs = fromMaybe [] $ fmap (validateVF cs) (explicitAdv a)
 
 -- | Validate allocation of virtues and flaws.
 validateVF :: CharacterSheet -> Advancement -> [ Validation ]
@@ -110,23 +113,10 @@ regCost p | isJust (virtue p) = m p * f p
               m = fromMaybe 1 . multiplicity
 
 
--- | Calculate initial XP limits on Char Gen Advancements
-initialLimits :: CharacterSheet -> Advancement -> Advancement
-initialLimits sheet ad
-            | m == CharGen "Early Childhood" = ( f ad 45 ) { advYears = Just 5 }
-            | m == CharGen "Apprenticeship" = app ad
-            | m == CharGen "Characteristics" = f ad 0
-            | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
-            | otherwise = ad 
-           where m = mode ad
-                 f a x = a { sourceQuality = Just x }
-                 (app1,app2) = appSQ vfs
-                 app a = a { sourceQuality = Just app1, advSpellLevels = Just app2, advYears = Just 15 }
-                 vfs = vfList sheet
 
 -- | Validate allocation of Spell Levels.
 validateLevels :: AugmentedAdvancement -> AugmentedAdvancement
-validateLevels a | isNothing (levelLimit a) = a
+validateLevels a | isNothing (spellLevels a) = a
                  | sq > lsum = a { advValidation = und:validation a }
                  | sq < lsum = a { advValidation = over:validation a }
                  | otherwise = a { advValidation = val:validation a }

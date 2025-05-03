@@ -85,6 +85,20 @@ prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advance
                   . addInference cs         -- infer additional traits 
           where sheet = characterSheet cs
 
+-- | Calculate initial XP limits on Char Gen Advancements
+initialLimits :: CharacterSheet -> Advancement -> Advancement
+initialLimits sheet ad
+            | m == CharGen "Early Childhood" = ( f ad 45 ) { advYears = Just 5 }
+            | m == CharGen "Apprenticeship" = app ad
+            | m == CharGen "Characteristics" = f ad 0
+            | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs ad
+            | otherwise = ad 
+           where m = mode ad
+                 f a x = a { advSQ = Just x }
+                 (app1,app2) = appSQ vfs
+                 app a = a { advSQ = Just app1, advSpellLevels = Just app2, advYears = Just 15 }
+                 vfs = vfList sheet
+
 -- | Infer an aging trait advancing the age according to the advancement
 agingYears :: AugmentedAdvancement -> AugmentedAdvancement
 agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
