@@ -14,17 +14,15 @@
 -----------------------------------------------------------------------------
 module ArM.Advancement ( advanceSaga 
                        , Advance(..)
+                       , StepAdvance(..)
                        , Validation(..)
                        ) where
 
 import Data.Maybe 
 import Data.List 
 
--- import ArM.Cov.Saga
 import ArM.Char.Character
--- import ArM.Types.Trait
 import ArM.Types.Covenant
--- import ArM.Types.Character
 import ArM.Types.Library
 import ArM.Types
 import ArM.Types.Saga
@@ -103,43 +101,9 @@ jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next s
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
 jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
 
-data AdvancementStep = CovStep Covenant (Maybe CovAdvancement) (Maybe AugCovAdvancement)
-                     | CharStep Character (Maybe Advancement) (Maybe AugmentedAdvancement)
 
-class StepAdvance c where
-   nextStep :: SeasonTime -> c -> AdvancementStep
-   completeStep :: AdvancementStep -> c
-   stepSubject :: AdvancementStep -> c
-instance StepAdvance Character where
-   nextStep ns ch | fs == [] = CharStep ch Nothing Nothing
-                 | season adv > ns = CharStep ch Nothing Nothing
-                 | otherwise = CharStep new (Just adv) (Just a)
-        where a = prepareAdvancement (fromJust st) adv
-              st = state ch
-              (adv:as) = fs
-              fs = futureAdvancement ch
-              new = ch { futureAdvancement = as }
-   completeStep (CharStep c _ Nothing) = c 
-   completeStep (CharStep c _ (Just a)) = c { pastAdvancement = a:pastAdvancement c }
-   completeStep _ = error "StepAdvance is not for a Character"
-   stepSubject (CharStep c _ _) = c 
-   stepSubject _ = error "StepAdvance is not for a Character"
-instance StepAdvance Covenant where
-   nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
-                 | season adv > ns = CovStep cov Nothing Nothing
-                 | otherwise = CovStep new (Just adv) (Just a)
-        where a = prepareCovAdvancement adv
-              (adv:as) = fs
-              fs = futureCovAdvancement cov
-              new = cov { futureCovAdvancement = as }
-   completeStep (CovStep c _ Nothing) = c 
-   completeStep (CovStep c _ (Just a)) = c { pastCovAdvancement = a:pastCovAdvancement c }
-   completeStep _ = error "StepAdvance is not for a Covenant"
-   stepSubject (CovStep c _ _) = c 
-   stepSubject _ = error "StepAdvance is not for a Covenant"
 
--- |
--- Apply the next augmented advancement.
+-- | Apply the next advancement step.
 --
 -- The main process is defined by the `applyAdvancement` function from
 -- `ArM.Char.Advancement`
@@ -158,18 +122,24 @@ applyAdv (CovStep c a (Just aa')) = (CovStep c' a (Just aa'))
           cid = cid1 -= ( sort $ leaving aa )
           aa = contractAdvancement aa'
 
-
-
 -- |
 -- Get the next advancements, preparing for joint advancement
 nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
 nextJoint saga (xs,ys) = (map (nextStep ns) xs,map (nextStep ns) ys)
            where ns = nextSeason saga
 
+-- | Complete a list of advancement steps.
+mapComplete :: StepAdvance c => [AdvancementStep] -> [c]
+mapComplete = filterNothing . map completeStepMaybe
+
+-- | Complete a list of advancement steps and split characters and covenants into two lists
+mapCompleteSplit :: [AdvancementStep] -> ([Covenant],[Character])
+mapCompleteSplit xs = (mapComplete xs,mapComplete xs)
+
 -- |
 -- Complete the joint advancement of characters and covenants.
 completeJoint :: ([AdvancementStep],[AdvancementStep]) -> ([Covenant],[Character])
-completeJoint (xs,ys) = (map completeStep xs,map completeStep ys)
+completeJoint (xs,ys) = mapCompleteSplit (ys++xs)
 
 -- |
 -- Jointly advance characters and covenants.
@@ -181,7 +151,7 @@ advJoint (xs,ys) = (map applyAdv xs, map applyAdv ys)
 -- who use them.
 addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
 addBooks (xs,ys) = validateBooks (xs,map (addBook xs') ys)
-   where xs' = map stepSubject xs
+   where xs' = filterNothing $ map stepSubjectMaybe xs
 
 -- |
 -- Validate the use of books.
@@ -212,9 +182,11 @@ valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
 getBookUse :: [AdvancementStep] -> [ ( Book, [Character] ) ]
 getBookUse = f5 . f4 . f3 . f2 . f1
    where f1 = map  ( \ x -> (aaBookUsed x,x) )
-         f2 = map ( \ (bs, step) -> [ (b,stepSubject step) | b <- bs ] ) 
+         f2 = map ( \ (bs, step) -> [ (b,stepSubjectMaybe step) | b <- bs ] ) 
          f3 = sortOn fst . foldl (++) [] 
-         f4 = map ( \ (x,y) -> ( x, [y] ) )
+         f4 = map f4i
+         f4i (x,Nothing) = (x,[])
+         f4i (x,Just y) = ( x, [y] ) 
          f5 [] = []
          f5 (x:[]) = x:[]
          f5 ((x1,y1):(x2,y2):s) 
@@ -250,23 +222,50 @@ addBook' (Just cov) y = f bs y
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
 -- |
--- == Covenant
+-- == Covenant and Character Advancement
 
--- |
--- The `Advance` instance is very similar to that of `Character`, but has to
--- be implemented separately to account for different advancement classes.
-instance Advance Covenant where
-   nextAdvancement c = f $ futureCovAdvancement c
-       where f [] = NoTime
-             f (x:_) = caSeason x
-   prepare x = f x
-        where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
-                  | otherwise = y 
+-- | Generic type for an advancement step for either a covenant or a character.
+data AdvancementStep = CovStep Covenant (Maybe CovAdvancement) (Maybe AugCovAdvancement)
+                     | CharStep Character (Maybe Advancement) (Maybe AugmentedAdvancement)
 
 
--- |
--- == Character Advancement
--- 
+-- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
+class StepAdvance c where
+   nextStep :: SeasonTime -> c -> AdvancementStep
+   completeStep :: AdvancementStep -> c
+   completeStep = fromJust . completeStepMaybe
+   completeStepMaybe :: AdvancementStep -> Maybe c
+   stepSubject :: AdvancementStep -> c
+   stepSubject = fromJust . stepSubjectMaybe
+   stepSubjectMaybe :: AdvancementStep -> Maybe c
+instance StepAdvance Character where
+   nextStep ns ch | fs == [] = CharStep ch Nothing Nothing
+                 | season adv > ns = CharStep ch Nothing Nothing
+                 | otherwise = CharStep new (Just adv) (Just a)
+        where a = prepareAdvancement (fromJust st) adv
+              st = state ch
+              (adv:as) = fs
+              fs = futureAdvancement ch
+              new = ch { futureAdvancement = as }
+   completeStepMaybe (CharStep c _ Nothing) = Just c 
+   completeStepMaybe (CharStep c _ (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
+   completeStepMaybe _ = Nothing
+   stepSubjectMaybe (CharStep c _ _) = Just c 
+   stepSubjectMaybe _ = Nothing
+instance StepAdvance Covenant where
+   nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
+                 | season adv > ns = CovStep cov Nothing Nothing
+                 | otherwise = CovStep new (Just adv) (Just a)
+        where a = prepareCovAdvancement adv
+              (adv:as) = fs
+              fs = futureCovAdvancement cov
+              new = cov { futureCovAdvancement = as }
+   completeStepMaybe (CovStep c _ Nothing) = Just c 
+   completeStepMaybe (CovStep c _ (Just a)) = Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
+   completeStepMaybe _ = Nothing
+   stepSubjectMaybe (CovStep c _ _) = Just c
+   stepSubjectMaybe _ = Nothing
+
 -- Character advancement is divided conceptually into CharGen (pre-game advancement)
 -- and in-game advancement.  CharGen is handled by the `prepare` function, which
 -- is implemented by `ArM.Char.Character.prepareCharacter`.
@@ -278,7 +277,6 @@ instance Advance Covenant where
 -- + completeAdv
 --
 instance Advance Character where
-
    nextAdvancement = f . futureAdvancement
        where f [] = NoTime
              f (x:_) = season x
@@ -288,4 +286,14 @@ instance Advance Character where
    -- for the returned `Character` object
    prepare = prepareCharacter
 
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
+instance Advance Covenant where
+   nextAdvancement c = f $ futureCovAdvancement c
+       where f [] = NoTime
+             f (x:_) = caSeason x
+   prepare x = f x
+        where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
+                  | otherwise = y 
 
