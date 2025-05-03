@@ -353,7 +353,6 @@ fmlz f aa = inf `mplus` exa
    where exa = fmap f (explicitAdv aa)
          inf = fmap f (inferredAdv aa)
 
-
 -- |
 -- == Validation
 

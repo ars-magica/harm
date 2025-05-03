@@ -56,8 +56,8 @@ regXP p | isJust (ability p) = f p
 
 -- | Validate allocation of XP.
 validateXP :: Advancement -> Advancement
-validateXP a | sq > xpsum = a { advCalidation = und:validation a }
-             | sq < xpsum = a { advCalidation = over:validation a }
+validateXP a | sq > xpsum = a { advValidation = und:validation a }
+             | sq < xpsum = a { advValidation = over:validation a }
              | otherwise = a { validation = val:validation a }
     where xpsum = calculateXP $ advancement a
           sq = effectiveSQ a
