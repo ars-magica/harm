@@ -17,7 +17,6 @@
 module ArM.Char.Character ( module ArM.Types.Character
                           , module ArM.Char.Advancement
                           , module ArM.Char.CharacterSheet
-                          , prepareCharacter
                           , characterEntryTime
                           , agingBonus
                           ) where
@@ -26,7 +25,6 @@ import Data.Maybe
 
 import ArM.Char.Advancement
 import ArM.Char.CharacterSheet
-import ArM.Char.CharGen (prepareCharacter)
 import ArM.Types
 -- import ArM.Helper
 -- import ArM.Types.Library
