@@ -166,7 +166,6 @@ data Advancement = Advancement
      , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
      , advSpellLevels :: Maybe Int   -- ^ spell level allowance
      , advTeacherSQ :: Maybe XPType  -- ^ The SQ generated as teacher
-     , advSpentXP  :: Maybe XPType   -- ^ Total XP spent on advancement
      , advValidation :: [Validation] -- ^ Report from validation
      , advPostprocessTrait :: PostProcessor -- ^ Extra postprocessing for traits at the given stage
      }
@@ -198,7 +197,6 @@ instance FromJSON Advancement where
         <*> v .:? "changes" .!= []
         <*> v .:? "spellLevels"
         <*> v .:? "teacherSQ"
-        <*> v .:? "spentXP"
         <*> v `parseCollapsedList` "validation"
         <*> v .:? "postProcessTrait" .!= PostProcessor id
 
@@ -240,7 +238,6 @@ class StoryObject a => AdvancementLike a where
      changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
      spellLevels :: a -> Maybe Int   -- ^ spell level allowance
      teacherSQ :: a -> Maybe XPType  -- ^ The SQ generated as teacher
-     spentXP  :: a -> Maybe XPType   -- ^ Total XP spent on advancement
      validation :: a -> [Validation] -- ^ Report from validation
      postprocessTrait :: a -> PostProcessor -- ^ Extra postprocessing for traits at the given stage
      isExposure :: a -> Bool
@@ -251,8 +248,11 @@ class StoryObject a => AdvancementLike a where
      totalBonusSQ = sum . map sourceBonus . bonusSQ
      effectiveSQ :: a -> Maybe XPType
      effectiveSQ a = fmap (+(totalBonusSQ a)) $ sourceQuality a 
-     -- | Sort the `inferredTraits` field of an `AugmentedAdvancement`.
+     -- | Sort the list of trait changes 
      sortAdvTraits :: a -> a
+     -- | Count regular XP (excluding reputation) spent in an Advancement
+     spentXP :: a -> XPType
+     spentXP = sum . map regularXP . changes
 
 instance AdvancementLike Advancement where
      mode = advMode
@@ -264,7 +264,6 @@ instance AdvancementLike Advancement where
      changes = advChanges
      spellLevels = advSpellLevels 
      teacherSQ = advTeacherSQ 
-     spentXP = advSpentXP  
      validation = advValidation 
      postprocessTrait = advPostprocessTrait 
      sortAdvTraits x = x { advChanges = sortTraits $ changes x }
@@ -331,11 +330,11 @@ instance AdvancementLike AugmentedAdvancement where
      changes = fmls advChanges 
      spellLevels = fmlx spellLevels 
      teacherSQ = fmlx advTeacherSQ 
-     spentXP = fmlx advSpentXP  
      validation = fmls advValidation 
      postprocessTrait = fromMaybe (PostProcessor id) . fmap advPostprocessTrait  . inferredAdv
      sortAdvTraits x = x { explicitAdv = fmap sortAdvTraits $ explicitAdv x
                          , inferredAdv = fmap sortAdvTraits $ inferredAdv x }
+     spentXP = sum . map regularXP . fromMaybe [] . fmap changes . explicitAdv
 
 fml :: (a -> [b]) -> Maybe a -> [b]
 fml f = fromMaybe [] . fmap f

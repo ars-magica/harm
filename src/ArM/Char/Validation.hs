@@ -45,29 +45,17 @@ validate a = a { inferredAdv = validateXP $ inferredAdv a }
 -- |
 -- == XP Validation
 
--- | Count regular XP (excluding reputation) from a ProtoTrait
-regXP :: ProtoTrait -> XPType
-regXP p | isJust (ability p) = f p
-        | isJust (art p) = f p
-        | isJust (spell p) = f p
-        | otherwise = 0
-        where f = fromMaybe 0 . xp 
-
-
 -- | Validate allocation of XP.
 validateXP :: Advancement -> Advancement
 validateXP a | sq > xpsum = a { advValidation = und:validation a }
              | sq < xpsum = a { advValidation = over:validation a }
-             | otherwise = a { validation = val:validation a }
-    where xpsum = calculateXP $ advancement a
+             | otherwise = a { advValidation = val:validation a }
+    where xpsum = spentXP a
           sq = effectiveSQ a
           val = Validated $ "Correctly spent " ++ showNum sq ++ " xp."
           over = ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
           und = ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "."
 
--- | Count regular XP (excluding reputation) from an Advancement
-calculateXP :: Advancement -> XPType
-calculateXP = sum . map regXP . changes
 
 -- |
 -- = CharGen Validation
@@ -91,9 +79,9 @@ validateCharGen' cs a
 validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateVF sheet a 
              | m /= CharGen "Virtues and Flaws" = a
-             | 0 /= f + v = a { validation = ValidationError imb:validation a }
-             | v > lim = a { validation = ValidationError over:validation a }
-             | otherwise = a { validation = Validated val:validation a }
+             | 0 /= f + v = a { advValidation = ValidationError imb:validation a }
+             | v > lim = a { advValidation = ValidationError over:validation a }
+             | otherwise = a { advValidation = Validated val:validation a }
            where m = mode a
                  (f,v) = calculateVFCost $ advancement a
                  imb = "Virtues and flaws are imbalanced: "
@@ -140,9 +128,9 @@ initialLimits sheet ad
 -- | Validate allocation of Spell Levels.
 validateLevels :: AugmentedAdvancement -> AugmentedAdvancement
 validateLevels a | isNothing (levelLimit a) = a
-                 | sq > lsum = a { validation = und:validation a }
-                 | sq < lsum = a { validation = over:validation a }
-                 | otherwise = a { validation = val:validation a }
+                 | sq > lsum = a { advValidation = und:validation a }
+                 | sq < lsum = a { advValidation = over:validation a }
+                 | otherwise = a { advValidation = val:validation a }
     where lsum = calculateLevels $ advancement a
           sq = fromMaybe 0 $ levelLimit a
           val = Validated $ "Correctly spent " ++ show sq ++ " spell levels."
@@ -163,9 +151,9 @@ validateChar sheet = f . validateChar' sheet
 
 validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateChar' sheet a | m /= CharGen "Characteristics" = a
-             | ex < lim = a { validation = ValidationError und:validation a }
-             | ex > lim = a { validation = ValidationError over:validation a }
-             | otherwise = a { validation = Validated val:validation a }
+             | ex < lim = a { advValidation = ValidationError und:validation a }
+             | ex > lim = a { advValidation = ValidationError over:validation a }
+             | otherwise = a { advValidation = Validated val:validation a }
            where m = mode a
                  lim = getCharAllowance $ vfList sheet
                  ex = calculateCharPoints $ advancement a

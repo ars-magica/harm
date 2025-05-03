@@ -48,7 +48,7 @@ import Data.List
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareAdvancement c = validate 
-                     . sortInferredTraits   -- sort inferred traits
+                     . sortAdvTraits   -- sort inferred traits
                      . inferSQ c
                      . winterEvents c 
                      . addInference c
