@@ -48,10 +48,11 @@ advancementErrors saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
     where formatOutput (cid,_,ssn,vs) = OList 
               [ OString ( cid ++ ": " ++ ssn ),
-              OList $ map msg vs ]
+              OList $ mapmsg vs ]
           errors = errorList saga
-          msg (ValidationError x) = OString x
-          msg _ = OString ""
+          mapmsg [] = []
+          mapmsg ((ValidationError x):xs) = OString x:mapmsg xs
+          mapmsg (_:xs) = mapmsg xs
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season

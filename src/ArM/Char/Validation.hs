@@ -49,7 +49,7 @@ validateXP a = addValidation (xpValidation a) a
 -- | Validate allocation of XP.
 xpValidation :: AugmentedAdvancement -> [ Validation ]
 xpValidation a 
-    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality" ]
+    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
     | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
     | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
     | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
