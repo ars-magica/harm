@@ -320,6 +320,7 @@ Total: 150 levels of spells.
         + Characteristic: Sta 2
         + Characteristic: Dex 2
         + Characteristic: Qik -3
+    + Validated: Correctly spent 0 xp.
     + Validated: Correctly spent 7 points on characteristics.
 + Virtues and Flaws (0xp)
     + Changing traits
@@ -345,5 +346,6 @@ Total: 150 levels of spells.
         + Art: Imaginem 0xp;  x1.5xp
         + Virtue: Second Sight (0) (from Strong Faerie Blood)
         + Aging  No roll. (limit 50) (bonus 3) 
+    + Warning: Undefined Source Quality. Spent 75xp.
     + Validated: Virtues and flaws balance at 10 of 10 points.
 

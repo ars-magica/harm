@@ -104,6 +104,7 @@ Warrior (1),
         + Characteristic: Sta 1
         + Characteristic: Dex 3
         + Characteristic: Qik 3
+    + Validated: Correctly spent 0 xp.
     + Validated: Correctly spent 7 points on characteristics.
 + Virtues and Flaws (0xp)
     + Changing traits
@@ -117,5 +118,6 @@ Warrior (1),
     + Inferred traits
         + Characteristic: Pre 0
         + Characteristic: Pre 0
+    + Warning: Undefined Source Quality. Spent 75xp.
     + ERROR: Virtues and flaws are imbalanced: 3 points of virtues and0 points of flaws.
 

@@ -143,6 +143,7 @@ Weakness [for Dogs] (-1),
         + Characteristic: Sta 1
         + Characteristic: Dex 0
         + Characteristic: Qik -2
+    + Validated: Correctly spent 0 xp.
     + Validated: Correctly spent 7 points on characteristics.
 + Virtues and Flaws (0xp)
     + Changing traits
@@ -170,5 +171,6 @@ Weakness [for Dogs] (-1),
         + Ability: Animal Handling 0xp;  x1.5xp
         + Ability: Animal Handling 0xp Bonus +2; 
         + Ability: Animal Ken 5xp; 
+    + Warning: Undefined Source Quality. Spent 75xp.
     + Validated: Virtues and flaws balance at 10 of 10 points.
 
