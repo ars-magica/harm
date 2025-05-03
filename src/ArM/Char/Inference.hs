@@ -32,28 +32,29 @@ import Data.Maybe
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `CharacterState`.
 addInference :: CharacterState -> Advancement -> AugmentedAdvancement
-addInference cs = flawlessSpells cs . addInferredTraits
-
-inferAdvancement :: CharacterState -> Advancement -> Advancement
-inferAdvancement cs a = a 
-
-inferProtoTraits :: CharacterState -> ProtoTrait -> ProtoTrait
-inferProtoTraits cs xs = g xs ++ f xs 
-     where f = inferTraits . getVF 
-           g = inferDecrepitude 
+addInference cs a = Adv { explicitAdv = a
+                        , inferredAdv = augmentAdvancement cs a }
 
 -- | Infer traits from new virtues and flaws and add them to the advancement.
 -- This typically applies to virtues providing supernatural abilities.
 -- The ability is inferred and should not be added manually.
-addInferredTraits :: Advancement -> Advancement
-addInferredTraits a = defaultAdvancement { advChanges = inferProtoTraits xs
-				  , advSeason = season a
-				  , advMode = mode a
-                                  , advYears = yf }
+augmentAdvancement :: CharacterState -> Advancement -> Advancement
+augmentAdvancement cs a = defaultAdvancement 
+        { advChanges = inferProtoTraits cs xs
+        , advSeason = season a
+        , advMode = mode a
+        , advYears = yf }
      where xs = changes a
            yf | Nothing /= advYears a = advYears a
               | isWinter $ season a = Just 1
               | otherwise = Nothing
+
+inferProtoTraits :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
+inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
+     where f = inferTraits . getVF 
+           g = inferDecrepitude 
+           h = flawlessSpells cs 
+
 
 -- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
 -- VF objects
@@ -76,11 +77,9 @@ inferDecrepitude (x:xs)
 
 
 -- | Inferred spell traits if Flawless Magic applies
-flawlessSpells :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
-flawlessSpells sheet x | hasFlawless sheet = x { inferredTraits = a ++ b }
-                       | otherwise = x
-     where a = flawlessSpells' $ changes $ advancement x
-           b = inferredTraits x
+flawlessSpells :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
+flawlessSpells sheet | hasFlawless sheet = flawlessSpells'
+                     | otherwise = id
 
 -- | Inferred spell traits implementing Flawless Magic.
 -- Auxiliary for `flawlessSpells`

@@ -79,15 +79,18 @@ prepareCharacter c | state c /= Nothing = c
 -- the advancement does not overspend XP or exceed other limnits.
 prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
-                  . sortInferredTraits      -- Restore sort order on inferred traits
+                  . sortAdvTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
                   . initialLimits (characterSheet cs)        -- infer additional properties on the advancement
                   . addInference cs         -- infer additional traits 
           where sheet = characterSheet cs
 
+initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits cs x = x { inferredAdv = initialLimits' cs (inferredAdv x) }
+
 -- | Calculate initial XP limits on Char Gen Advancements
-initialLimits :: CharacterSheet -> Advancement -> Advancement
-initialLimits sheet ad
+initialLimits' :: CharacterSheet -> Advancement -> Advancement
+initialLimits' sheet ad
             | m == CharGen "Early Childhood" = ( f ad 45 ) { advYears = Just 5 }
             | m == CharGen "Apprenticeship" = app ad
             | m == CharGen "Characteristics" = f ad 0
@@ -101,9 +104,9 @@ initialLimits sheet ad
 
 -- | Infer an aging trait advancing the age according to the advancement
 agingYears :: AugmentedAdvancement -> AugmentedAdvancement
-agingYears x | y > 0 = x { inferredTraits = agePT y: inferredTraits x }
+agingYears x | y > 0 = addProtoTrait [ agePT y ] x
              | otherwise = x
-   where y = fromMaybe 0 $ augYears x
+   where y = fromMaybe 0 $ years x
 
 
 -- | Add the Confidence trait to the character state, using 
@@ -120,7 +123,7 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
 applyCharGenAdv a cs = (a',f cs')
    where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
-         (PostProcessor g) = postProcessTrait a'
+         (PostProcessor g) = postprocessTrait a'
          f x = x { traits = map g $ traits x }
 
 -- | Apply a list of advancements

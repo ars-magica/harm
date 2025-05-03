@@ -272,7 +272,11 @@ class StoryObject a => AdvancementLike a where
      -- | Count regular XP (excluding reputation) spent in an Advancement
      spentXP :: a -> XPType
      spentXP = sum . map regularXP . changes
+     -- | Count spell levels from an Advancement
+     spentLevels :: a -> Int
+     spentLevels = sum . map ( fromMaybe 0 . level ) . changes
      addValidation :: [Validation] -> a -> a
+     addProtoTrait :: [ProtoTrait] -> a -> a
 
 instance AdvancementLike Advancement where
      mode = advMode
@@ -288,14 +292,15 @@ instance AdvancementLike Advancement where
      postprocessTrait = advPostprocessTrait 
      sortAdvTraits x = x { advChanges = sortTraits $ changes x }
      addValidation vs a = a { advValidation = vs ++ advValidation a }
+     addProtoTrait vs a = a { advChanges = vs ++ advChanges a }
 
 -- |
 -- == The Augmented Advancement
 
 -- | Advancement with additional inferred fields
 data AugmentedAdvancement = Adv
-     { explicitAdv :: Maybe Advancement   
-     , inferredAdv :: Maybe Advancement   
+     { explicitAdv :: Advancement   
+     , inferredAdv :: Advancement   
      }
    deriving (Eq,Show,Generic)
 
@@ -303,8 +308,8 @@ instance ToJSON AugmentedAdvancement where
     toEncoding = genericToEncoding defaultOptions
 instance FromJSON AugmentedAdvancement where
     parseJSON = withObject "AugmentedAdvancement" $ \v -> Adv
-        <$> v .:? "explicitAdv"
-        <*> v .:? "inferredAdv"
+        <$> v .: "explicitAdv"
+        <*> v .: "inferredAdv"
 
 -- |
 -- Type of function used to post-process traits after advancement.
@@ -321,7 +326,7 @@ instance ToJSON PostProcessor where
 
 
 instance Timed AugmentedAdvancement where
-     season  = fromMaybe NoTime . fmap advSeason . explicitAdv 
+     season  = advSeason . explicitAdv 
 
 instance StoryObject AugmentedAdvancement where
      name a = showTime xps (season a) (mode a) y 
@@ -340,9 +345,7 @@ showSQ (Just x) (y) = " (" ++ showNum x ++ f y ++ "xp)"
           f z = "+" ++ showNum z
 
 instance AdvancementLike AugmentedAdvancement where
-     mode = f . fmlz mode 
-        where f (Just x) = x
-              f Nothing = Exposure (OtherExposure "Undefined")
+     mode = mode . explicitAdv
      years = fmlx advYears 
      usesBook = fmls advUses
      sourceQuality =  fmlx advSQ  
@@ -352,28 +355,23 @@ instance AdvancementLike AugmentedAdvancement where
      spellLevels = fmlx spellLevels 
      teacherSQ = fmlx advTeacherSQ 
      validation = fmls advValidation 
-     postprocessTrait = fromMaybe (PostProcessor id) . fmap advPostprocessTrait  . inferredAdv
-     sortAdvTraits x = x { explicitAdv = fmap sortAdvTraits $ explicitAdv x
-                         , inferredAdv = fmap sortAdvTraits $ inferredAdv x }
-     spentXP = sum . map regularXP . fromMaybe [] . fmap changes . explicitAdv
-     addValidation vs a = a { inferredAdv = fmap f (inferredAdv a) }
+     postprocessTrait = advPostprocessTrait . inferredAdv
+     sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
+                         , inferredAdv = sortAdvTraits $ inferredAdv x }
+     spentXP = spentXP . explicitAdv
+     spentLevels = spentLevels . explicitAdv
+     addValidation vs a = a { inferredAdv = f (inferredAdv a) }
         where f x = x { advValidation = vs ++ advValidation x }
-
-fml :: (a -> [b]) -> Maybe a -> [b]
-fml f = fromMaybe [] . fmap f
+     addProtoTrait vs a = a { inferredAdv = f (inferredAdv a) }
+          where f x = x { advChanges = vs ++ advChanges x }
 
 fmls :: (Advancement -> [b]) -> AugmentedAdvancement -> [b]
-fmls f a = fml f (inferredAdv a) ++ fml f (explicitAdv a) 
+fmls f a = f (inferredAdv a) ++ f (explicitAdv a) 
 
 fmlx :: (Advancement -> Maybe b) -> AugmentedAdvancement -> Maybe b
-fmlx f aa = join $ inf `mplus` exa
-   where exa = fmap f (explicitAdv aa)
-         inf = fmap f (inferredAdv aa)
-
-fmlz :: (Advancement -> b) -> AugmentedAdvancement -> Maybe b
-fmlz f aa = inf `mplus` exa
-   where exa = fmap f (explicitAdv aa)
-         inf = fmap f (inferredAdv aa)
+fmlx f aa = inf `mplus` exa
+   where exa = f (explicitAdv aa)
+         inf = f (inferredAdv aa)
 
 -- |
 -- == Validation

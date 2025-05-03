@@ -142,11 +142,11 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
              | otherwise = appSQ xs
 
 
-vfBonusSQ :: AdvancementLike a => [VF] -> a -> XPType
-vfBonusSQ vs a = sum $ map (vfBonusSQ' a) vs
+vfBonusSQ :: AdvancementLike a => [VF] -> a -> [BonusSQ]
+vfBonusSQ vs a = filterNothing $ map (vfBonusSQ' a) vs
 
-vfBonusSQ' :: AdvancementLike a => a ->  VF -> XPType
-vfBonusSQ' m vf = f (vfname vf) (mode m)
+vfBonusSQ' :: AdvancementLike a => a ->  VF -> Maybe BonusSQ
+vfBonusSQ' m vf = g (vfname vf) (mode m)
     where  f "Apt Student" Taught = 5
            f "Apt Student" Trained = 5
            f "Poor Student" Taught = -3
@@ -156,6 +156,8 @@ vfBonusSQ' m vf = f (vfname vf) (mode m)
            f "Independent Study" Adventure = 3
            f "Free Study" VisStudy = 3
            f _ _ = 0
+           g x y | 0 == f x y = Nothing
+                 | otherwise = Just $ BonusSQ { sourceBonus = f x y, bonusSource = x }
 
 
 -- | 

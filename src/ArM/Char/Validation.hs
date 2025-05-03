@@ -29,7 +29,7 @@ import ArM.Helper
 
 import Data.Maybe 
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- |
 -- = In-game Validation
@@ -40,14 +40,15 @@ import ArM.Debug.Trace
 -- |
 -- Validate an in-game advancement, adding results to the validation field.
 validate :: AugmentedAdvancement -> AugmentedAdvancement
-validate a = addValidation (validateXP a) a
-
--- |
--- == Validation on Advancement Objects alone
+validate = validateXP
 
 -- | Validate allocation of XP.
-validateXP :: AugmentedAdvancement -> [ Validation ]
-validateXP a 
+validateXP :: AugmentedAdvancement -> AugmentedAdvancement
+validateXP a = addValidation (xpValidation a) a
+
+-- | Validate allocation of XP.
+xpValidation :: AugmentedAdvancement -> [ Validation ]
+xpValidation a 
     | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality" ]
     | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
     | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
@@ -66,19 +67,22 @@ validateXP a
 
 -- | validate an advancement, adding results to the validation field
 validateCharGen :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateCharGen sheet = validateCharGen' sheet 
+validateCharGen sheet = validateLevels . validateXP . validateCharGen' sheet 
 
 validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateCharGen' cs a 
-           | m == CharGen "Virtues and Flaws" = addValidation vfvs a
+           | m == CharGen "Virtues and Flaws" = validateVF cs a
            | m == CharGen "Characteristics" = validateChar cs a
-           | otherwise = validateLevels $ validateXP a
+           | otherwise = a
            where m = mode a
-	         vfvs = fromMaybe [] $ fmap (validateVF cs) (explicitAdv a)
+
+validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateVF cs a = addValidation vfvs a
+         where vfvs = (vfValidation cs) (explicitAdv a)
 
 -- | Validate allocation of virtues and flaws.
-validateVF :: CharacterSheet -> Advancement -> [ Validation ]
-validateVF sheet a 
+vfValidation :: CharacterSheet -> Advancement -> [ Validation ]
+vfValidation sheet a 
              | m /= CharGen "Virtues and Flaws" = []
              | 0 /= f + v = [ ValidationError imb ]
              | v > lim = [ ValidationError over ]
@@ -117,43 +121,38 @@ regCost p | isJust (virtue p) = m p * f p
 -- | Validate allocation of Spell Levels.
 validateLevels :: AugmentedAdvancement -> AugmentedAdvancement
 validateLevels a | isNothing (spellLevels a) = a
-                 | sq > lsum = a { advValidation = und:validation a }
-                 | sq < lsum = a { advValidation = over:validation a }
-                 | otherwise = a { advValidation = val:validation a }
-    where lsum = calculateLevels $ advancement a
-          sq = fromMaybe 0 $ levelLimit a
+                 | sq > lsum = addValidation [und] a 
+                 | sq < lsum = addValidation [over] a
+                 | otherwise = addValidation [val] a
+    where lsum = spentLevels a
+          sq = fromMaybe 0 $ spellLevels a
           val = Validated $ "Correctly spent " ++ show sq ++ " spell levels."
           over = ValidationError $ "Overspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
           und = ValidationError $ "Underspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
 
--- | Count spell levels from an Advancement
-calculateLevels :: Advancement -> Int
-calculateLevels = sum . map ( fromMaybe 0 . level ) . changes
 
 -- |
 -- == Validation of Characteristics
 
 -- | Validate points spent on characterics.
 validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
-validateChar sheet = f . validateChar' sheet
+validateChar sheet = g . validateChar' sheet
      where f x = x { advPostprocessTrait = PostProcessor processChar }
+           g x = x { inferredAdv = f $ inferredAdv x }
 
 validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateChar' sheet a | m /= CharGen "Characteristics" = a
-             | ex < lim = a { advValidation = ValidationError und:validation a }
-             | ex > lim = a { advValidation = ValidationError over:validation a }
-             | otherwise = a { advValidation = Validated val:validation a }
+             | ex < lim = addValidation [ValidationError und] a
+             | ex > lim = addValidation [ValidationError over] a
+             | otherwise = addValidation [Validated val] a
            where m = mode a
                  lim = getCharAllowance $ vfList sheet
-                 ex = calculateCharPoints $ advancement a
+                 ex = calculateCharPoints $ explicitAdv a
                  und = "Underspent " ++ (show ex) ++ " points out of "
                      ++ show lim ++ " on characteristics."  
                  over = "Overspent " ++ (show ex) ++ " points out of "
                      ++ show lim ++ " on characteristics."  
                  val = "Correctly spent " ++ (show ex) ++ " points on characteristics."  
-
-
-
 -- | Count characterics points spent in an Advancement
 calculateCharPoints :: Advancement -> Int
 calculateCharPoints = sum . map cScore . changes
