@@ -40,7 +40,7 @@ import ArM.Debug.Trace
 -- |
 -- Validate an in-game advancement, adding results to the validation field.
 validate :: AugmentedAdvancement -> AugmentedAdvancement
-validate a | otherwise = validateXP a
+validate a = a { inferredAdv = validateXP $ inferredAdv a }
 
 -- |
 -- == XP Validation
@@ -55,9 +55,9 @@ regXP p | isJust (ability p) = f p
 
 
 -- | Validate allocation of XP.
-validateXP :: AugmentedAdvancement -> AugmentedAdvancement
-validateXP a | sq > xpsum = a { validation = und:validation a }
-             | sq < xpsum = trace ("Overspent> "++ show (advancement a)) $ a { validation = over:validation a }
+validateXP :: Advancement -> Advancement
+validateXP a | sq > xpsum = a { advCalidation = und:validation a }
+             | sq < xpsum = a { advCalidation = over:validation a }
              | otherwise = a { validation = val:validation a }
     where xpsum = calculateXP $ advancement a
           sq = effectiveSQ a
@@ -124,19 +124,17 @@ regCost p | isJust (virtue p) = m p * f p
               m = fromMaybe 1 . multiplicity
 
 -- | Calculate initial XP limits on Char Gen Advancements
-initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits :: CharacterSheet -> Advancement -> Advancement
 initialLimits sheet ad
-            | m == CharGen "Early Childhood" = ( f ad 45 ) { augYears = Just 5 }
+            | m == CharGen "Early Childhood" = ( f ad 45 ) { advYears = Just 5 }
             | m == CharGen "Apprenticeship" = app ad
             | m == CharGen "Characteristics" = f ad 0
             | m == CharGen "Later Life" = f ad $ laterLifeSQ vfs (advancement ad)
             | otherwise = ad 
            where m = mode ad
-                 f a x | isJust t = a { baseSQ = t }
-                       | otherwise = a { baseSQ = Just x }
-                 t = sourceQuality $ advancement ad
+                 f a x = a { sourceQuality = Just x }
                  (app1,app2) = appSQ vfs
-                 app a = a { baseSQ = Just app1, levelLimit = Just app2, augYears = Just 15 }
+                 app a = a { sourceQuality = Just app1, advSpellLevels = Just app2, advYears = Just 15 }
                  vfs = vfList sheet
 
 -- | Validate allocation of Spell Levels.
@@ -161,7 +159,7 @@ calculateLevels = sum . map ( fromMaybe 0 . level ) . changes
 -- | Validate points spent on characterics.
 validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateChar sheet = f . validateChar' sheet
-     where f x = x { postProcessTrait = PostProcessor processChar }
+     where f x = x { advPostprocessTrait = PostProcessor processChar }
 
 validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
 validateChar' sheet a | m /= CharGen "Characteristics" = a
