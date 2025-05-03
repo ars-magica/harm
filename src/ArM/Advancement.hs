@@ -108,13 +108,13 @@ jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
 -- The main process is defined by the `applyAdvancement` function from
 -- `ArM.Char.Advancement`
 applyAdv :: AdvancementStep -> AdvancementStep
-applyAdv (CharStep c a Nothing) = (CharStep c a Nothing) 
-applyAdv (CharStep c a (Just aa)) = (CharStep c' a (Just a')) 
+applyAdv (CharStep c Nothing) = (CharStep c Nothing) 
+applyAdv (CharStep c (Just aa)) = (CharStep c' (Just a')) 
        where (a',st') = applyAdvancement aa st
              c' = c { state = Just st' }
              st = fromMaybe defaultCS $ state c
-applyAdv (CovStep c a Nothing) = (CovStep c a Nothing) 
-applyAdv (CovStep c a (Just aa')) = (CovStep c' a (Just aa')) 
+applyAdv (CovStep c Nothing) = (CovStep c Nothing) 
+applyAdv (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
     where st' = st { covTime = caSeason aa, covenFolkID = cid }
           c' = c { covenantState = Just st' }
           st = fromMaybe defaultCovState $ covenantState c
@@ -163,8 +163,8 @@ validateBooks (xs,ys) = (xs, f ys)
             | isNothing aa = step:s
             | bookUsed (fromJust aa) == [] = step:s
             | otherwise = step':s
-            where (CharStep ch a aa) = step
-                  step' = CharStep ch a (Just $ g (fromJust aa) vs)
+            where (CharStep ch aa) = step
+                  step' = CharStep ch (Just $ g (fromJust aa) vs)
          g aa [] = aa
          g aa ((x,v):s) 
            | x `elem` bookUsed aa = g (aa { validation = v:validation aa }) s
@@ -194,14 +194,14 @@ getBookUse = f5 . f4 . f3 . f2 . f1
              | otherwise = (x1,y1):f5 ((x2,y2):s)
 
 aaBookUsed :: AdvancementStep -> [Book]
-aaBookUsed (CharStep _ _ (Just aa)) = bookUsed aa
+aaBookUsed (CharStep _ (Just aa)) = bookUsed aa
 aaBookUsed _ = []
 
 -- |
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.
 addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
-addBook cvs (CharStep x a aa) = CharStep x a (fmap (addBook' cov) aa)
+addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
    where cov =  findCov x cvs
 addBook _ step = step
 
@@ -225,8 +225,8 @@ addBook' (Just cov) y = f bs y
 -- == Covenant and Character Advancement
 
 -- | Generic type for an advancement step for either a covenant or a character.
-data AdvancementStep = CovStep Covenant (Maybe CovAdvancement) (Maybe AugCovAdvancement)
-                     | CharStep Character (Maybe Advancement) (Maybe AugmentedAdvancement)
+data AdvancementStep = CovStep Covenant  (Maybe AugCovAdvancement)
+                     | CharStep Character (Maybe AugmentedAdvancement)
 
 
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
@@ -239,31 +239,31 @@ class StepAdvance c where
    stepSubject = fromJust . stepSubjectMaybe
    stepSubjectMaybe :: AdvancementStep -> Maybe c
 instance StepAdvance Character where
-   nextStep ns ch | fs == [] = CharStep ch Nothing Nothing
-                 | season adv > ns = CharStep ch Nothing Nothing
-                 | otherwise = CharStep new (Just adv) (Just a)
+   nextStep ns ch | fs == [] = CharStep ch Nothing
+                 | season adv > ns = CharStep ch Nothing
+                 | otherwise = CharStep new  (Just a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
               (adv:as) = fs
               fs = futureAdvancement ch
               new = ch { futureAdvancement = as }
-   completeStepMaybe (CharStep c _ Nothing) = Just c 
-   completeStepMaybe (CharStep c _ (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
+   completeStepMaybe (CharStep c Nothing) = Just c 
+   completeStepMaybe (CharStep c (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
    completeStepMaybe _ = Nothing
-   stepSubjectMaybe (CharStep c _ _) = Just c 
+   stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
 instance StepAdvance Covenant where
-   nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
-                 | season adv > ns = CovStep cov Nothing Nothing
-                 | otherwise = CovStep new (Just adv) (Just a)
+   nextStep ns cov | fs == [] = CovStep cov Nothing
+                 | season adv > ns = CovStep cov Nothing
+                 | otherwise = CovStep new  (Just a)
         where a = AugCovAdvancement (Just adv) Nothing
               (adv:as) = fs
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
-   completeStepMaybe (CovStep c _ Nothing) = Just c 
-   completeStepMaybe (CovStep c _ (Just a)) = Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
+   completeStepMaybe (CovStep c Nothing) = Just c 
+   completeStepMaybe (CovStep c (Just a)) = Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
    completeStepMaybe _ = Nothing
-   stepSubjectMaybe (CovStep c _ _) = Just c
+   stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
 
 
