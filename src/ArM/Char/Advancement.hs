@@ -159,7 +159,7 @@ applyAdvancement a cs = (a,cs')
           new = advanceTraitList change tmp
           tmp = advanceTraitList inferred old
           change = sortTraits $ changes $ explicitAdv a
-          inferred = sortTraits $ changes $ inferredAdv a
+          inferred = ttrace $ sortTraits $ changes $ inferredAdv a
           old = sortTraits $ traits cs
 
 

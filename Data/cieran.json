@@ -486,7 +486,8 @@
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
-      , "sourceQuality" : 2, "bonusQuality" : 1
+      , "sourceQuality" : 2
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : [ "Training for Hiccup in Magic Theory (SQ 8 for Hiccup)."
                       , "Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera"
       ]
@@ -1138,7 +1139,8 @@
 		    ]
       },
       { "mode" : "Reading", "season" : "Summer 1245"
-      , "sourceQuality" : 10, "bonusQuality" : 1
+      , "sourceQuality" : 10
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Summa; capped at 19 +1½xp for correspondent (191½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
                     , { "art" : "Imaginem", "xp" : 1 } ]
@@ -1225,12 +1227,14 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1248"
-      , "sourceQuality" : 14, "bonusQuality" : 1
+      , "sourceQuality" : 14
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Oswald's tractatus Q14 + correspondent "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1248"
-      , "sourceQuality" : 14, "bonusQuality" : 1
+      , "sourceQuality" : 14
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Maine's tractatus Q14 + correspondent (245½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
@@ -1298,7 +1302,8 @@
          ]
       },
       { "mode" : "Reading", "season" : "Spring 1250"
-      , "sourceQuality" : 11, "bonusQuality" : 1
+      , "sourceQuality" : 11
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity"
       , "changes" : [ { "art" : "Imaginem", "xp" : 15 } ]
       },
@@ -1378,7 +1383,8 @@
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Adventure", "season" : "Autumn 1252"
-      , "sourceQuality" : 15, "bonusQuality" : 1
+      , "sourceQuality" : 15
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11"
       , "changes" : [ { "art" : "Imaginem", "xp" : 6 }
                     , { "ability" : "Faerie Lore", "xp" : 4 }
@@ -1396,7 +1402,8 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1253"
-      , "sourceQuality" : 9, "bonusQuality" : 1
+      , "sourceQuality" : 9
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 13 } 
@@ -1409,7 +1416,8 @@
       ]
       },
       { "mode" : "Reading", "season" : "Spring 1253"
-      , "sourceQuality" : 9, "bonusQuality" : 1
+      , "sourceQuality" : 9
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (101->114)"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 13 } ]
@@ -1519,7 +1527,7 @@
       { "mode" : "Reading", "season" : "Summer 1255"
       , "comment" : "Reads the new Q12 Tractatus from Vigil"
       , "sourceQuality" : 12
-      , "bonusQuality" : 1
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 16 }
       ]
@@ -1535,7 +1543,7 @@
 		        , "comment" : "allowance/salary TBC" } } ]
       },
       { "mode" : "Teaching", "season" : "Winter 1256"
-      , "bonusQuality" : 1
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Teaching Luciu"
       , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
       , "changes" : [ 
@@ -1548,7 +1556,7 @@
       ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1256"
-      , "bonusQuality" : 1
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15)."
       , "coment" : "Lab Total 70"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
@@ -1569,7 +1577,7 @@
       { "mode" : "Reading", "season" : "Summer 1256"
       , "comment" : "Reads the new Q9 Tractatus from Vigil"
       , "sourceQuality" : 9
-      , "bonusQuality" : 1
+      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 13 }
       ]

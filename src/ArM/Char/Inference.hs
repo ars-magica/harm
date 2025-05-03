@@ -27,7 +27,7 @@ import ArM.Char.Virtues
 
 import Data.Maybe 
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `CharacterState`.
@@ -40,7 +40,7 @@ addInference cs a = Adv { explicitAdv = a
 -- The ability is inferred and should not be added manually.
 augmentAdvancement :: CharacterState -> Advancement -> Advancement
 augmentAdvancement cs a = defaultAdvancement 
-        { advChanges = inferProtoTraits cs xs
+        { advChanges = trace "> " $ ttrace $ inferProtoTraits cs xs
         , advSeason = season a
         , advMode = mode a
         , advYears = yf }
@@ -51,9 +51,9 @@ augmentAdvancement cs a = defaultAdvancement
 
 inferProtoTraits :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
 inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
-     where f = inferTraits . getVF 
-           g = inferDecrepitude 
-           h = flawlessSpells cs 
+     where f = trace "f> " $ ttrace . inferTraits . getVF 
+           g = trace "g> " $ ttrace . inferDecrepitude 
+           h = trace "h> " $ ttrace . flawlessSpells cs 
 
 
 -- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
@@ -78,8 +78,8 @@ inferDecrepitude (x:xs)
 
 -- | Inferred spell traits if Flawless Magic applies
 flawlessSpells :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
-flawlessSpells sheet | hasFlawless sheet = flawlessSpells'
-                     | otherwise = id
+flawlessSpells sheet xs | hasFlawless sheet = flawlessSpells' xs
+                        | otherwise = []
 
 -- | Inferred spell traits implementing Flawless Magic.
 -- Auxiliary for `flawlessSpells`
