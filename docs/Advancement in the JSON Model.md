@@ -1,6 +1,14 @@
 
-+ [[Saga Advancement Visualised.canvas|Saga Advancement Visualised]] illustrates the top level flow when a saga is loaded and processed.
-	+ maps advance over `characters` and `covenants`
++ Advancement process is managed from Saga
+	+ [[Saga Advancement Visualised.canvas|Saga Advancement Visualised]] illustrates the top level flow when a saga is loaded and processed.
+	+ `advanceSaga` maps the advancement functions over `characters` and `covenants`
+	+ `Character` and `Covenant` are members of the `StepAdvance` class which provides the following function
+		+ nextAdv -> `AdvancementStep` object
+		+ applyAdv -> advances, `AdvancementStep` object in and out
+		+ completeAdv -> completes the `AdvancementStep` and returns the Object
+	+ Other functions could be interleaved between the above functions
+		+ possibly using lists of `AdvancementStep` objects
++ [ ] Review below - is it still correct?		
 + For each season, the `advance` function is called independently for each `Character` and each `Covenant`
 	+ This is not fully developed for `Covenant` yet, for `Character` it
 		+ First augments the advancement
@@ -28,14 +36,6 @@
 		+ tricky!  Inter-dependency between advancements
 	+ Add book to covenant library
 		+ process characters first, then covenants
-+ Process
-	+ Current - three functions applied by `stepIf`
-		+ nextAdv -> (Object,Augmented Advancement) pair
-		+ applyAdv -> advances, (O,AA) pair in and out
-		+ completeAdv -> completes and returns the Object
-	+ Note, same function names for Covenant and Character - this may have to change
-	+ Other functions could be interleaved between nextAdv and applyAdv
-		+ possibly using lists of O/AA pairs
 
 + P/G advancement
 	+ P/G season

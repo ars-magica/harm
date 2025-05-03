@@ -256,7 +256,7 @@ instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing Nothing
                  | season adv > ns = CovStep cov Nothing Nothing
                  | otherwise = CovStep new (Just adv) (Just a)
-        where a = prepareCovAdvancement adv
+        where a = AugCovAdvancement (Just adv) Nothing
               (adv:as) = fs
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
@@ -265,6 +265,7 @@ instance StepAdvance Covenant where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CovStep c _ _) = Just c
    stepSubjectMaybe _ = Nothing
+
 
 -- Character advancement is divided conceptually into CharGen (pre-game advancement)
 -- and in-game advancement.  CharGen is handled by the `prepare` function, which

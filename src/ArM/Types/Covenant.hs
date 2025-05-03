@@ -19,9 +19,7 @@ module ArM.Types.Covenant ( Covenant(..)
                           , CovenantState(..)
                           , CovAdvancement(..)
                           , AugCovAdvancement(..)
-                          , prepareCovAdvancement
                           , findCov
-                          , completeCovAdv
                           , defaultCovState
                           , findBook
                           , contractAdvancement
@@ -85,19 +83,6 @@ data CovenantConcept = CovenantConcept
          , covTribunal :: Maybe String
          , covData :: KeyPairList
        }  deriving (Eq,Generic)
-
-{-
--- | Default (empty) covenant concept object.
-defaultCovConcept :: CovenantConcept 
-defaultCovConcept = CovenantConcept { covName = "Player Covenant"
-                                  , covConcept = Nothing
-                                  , covDescription = [ ]
-                                  , covFounded = Nothing
-                                  , covAppearance = Nothing
-                                  , covTribunal = Nothing
-                                  , covData = KeyPairList []
-       }  
--}
 
 instance ToJSON CovenantConcept where
     toEncoding = genericToEncoding defaultOptions
@@ -165,18 +150,6 @@ data CovAdvancement = CovAdvancement
      }
    deriving (Eq,Generic,Show)
 
-{-
-defaultAdv :: CovAdvancement 
-defaultAdv = CovAdvancement 
-     { caSeason = NoTime
-     , caStory = []
-     , joining = []
-     , leaving = []
-     , acquired = []
-     , lost = []
-     }
--}
-
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
@@ -224,18 +197,7 @@ hasMember cov ch = cid `elem` chs
    where cid = harmKey ch
          chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
 
-
--- | Complete the advancement procedure to return the new Covenant with
--- the updated state.
-completeCovAdv :: (Covenant,Maybe AugCovAdvancement)
-                 -> Covenant
-completeCovAdv (c,Nothing) = c
-completeCovAdv (c,Just a) = c { pastCovAdvancement = a:pastCovAdvancement c }
-
-
-prepareCovAdvancement :: CovAdvancement -> AugCovAdvancement
-prepareCovAdvancement a = AugCovAdvancement (Just a) Nothing
-
+-- | Merge explicit and inferred advancement into onw `CovAdvancement` object
 contractAdvancement :: AugCovAdvancement -> CovAdvancement
 contractAdvancement aug  = CovAdvancement
      { caSeason = season aug
