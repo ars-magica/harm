@@ -13,16 +13,29 @@
 -- This module contains exports the types to process characters and 
 -- advancement, including persistence in JSON and advancement.
 --
+-- Character advancement is divided conceptually into CharGen (pre-game advancement)
+-- and in-game advancement.  Functions that are specific for one or the other requires
+-- the import of
+-- + `ArM.Char.CharGen` for character generation
+-- + `ArM.Char.Advancement` for in-game ddvancement
+--
+--
 -----------------------------------------------------------------------------
-module ArM.Char.Character ( module ArM.Types.Character
-                          , module ArM.Types.Advancement
-                          , module ArM.Char.Inference
+module ArM.Char.Character (
+                          -- * The Character Type
+                          module ArM.Types.Character
+                          -- * The CharacterSheet Type
                           , module ArM.Char.CharacterSheet
+                          -- * The CharacterSheet Type
+                          , module ArM.Types.Advancement
+                          -- * Character Advancement
+                          , module ArM.Char.Inference
                           , module ArM.Char.Virtues
-                          , characterEntryTime
                           , applyAdvancement 
-                          , charAgingBonus
                           , agePT
+                          -- * Convenience Functions
+                          , characterEntryTime
+                          , charAgingBonus
                           ) where
 
 import Data.Maybe 

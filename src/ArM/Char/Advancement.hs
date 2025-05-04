@@ -18,19 +18,10 @@
 -----------------------------------------------------------------------------
 module ArM.Char.Advancement ( prepareAdvancement ) where
 
--- Module reexported
 import ArM.Char.Character
-import ArM.Char.Virtues
-import ArM.Char.Inference
-
--- Other Types
-import ArM.Types.Character
 import ArM.Types.ProtoTrait
 import ArM.Types.Library
 import ArM.Types
-
--- Other modules
-import ArM.Char.CharacterSheet
 import ArM.GameRules
 
 import ArM.Debug.Trace
