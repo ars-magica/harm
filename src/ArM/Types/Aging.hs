@@ -102,3 +102,10 @@ advanceAge ag x = updateLR (longevity ag )
                 updateAge (Just b) y = y { ageYears = ageYears y + b }
                 del = fromMaybe 0 $ deltaYounger ag
 
+toAge :: Aging -> Age
+toAge ag = Age { ageYears = fromMaybe 0 $ addYears ag
+                , ageLimit = fromMaybe 35 $ agingLimit ag
+                , apparentYounger = fromMaybe 0 $ deltaYounger ag
+                , longevityRitual = (fromMaybe (-1) $ longevity ag)
+                , agingRollBonus = ( fromMaybe 0 $ agingBonus ag ) 
+                , ageComment = agingComment ag }

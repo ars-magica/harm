@@ -320,7 +320,6 @@ instance TraitClass ProtoTrait where
       | otherwise  = error "No Trait for this ProtoTrait" 
    getTrait _ = Nothing
 
-
 {-
 instance TraitClass Aging where
     traitKey _ = AgeKey
@@ -555,15 +554,8 @@ instance TraitType CombatOption where
 instance TraitType Age where
     advanceTrait p = advanceAge ag
           where ag = fromJust $ aging p
-    computeTrait p
-       | isNothing (aging p) = Nothing
-       | otherwise =  Just $ Age { ageYears = fromMaybe 0 $ addYears ag
-                , ageLimit = fromMaybe 35 $ agingLimit ag
-                , apparentYounger = fromMaybe 0 $ deltaYounger ag
-                , longevityRitual = (fromMaybe (-1) $ longevity ag)
-                , agingRollBonus = ( fromMaybe 0 $ agingBonus ag ) 
-                , ageComment = agingComment ag }
-          where ag = fromJust $ aging p
+    computeTrait p | isNothing (aging p) = Nothing
+                   | otherwise = fmap toAge (aging p)
 
 -- |
 -- = Advancement
