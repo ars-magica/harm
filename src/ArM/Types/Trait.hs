@@ -334,6 +334,7 @@ instance Countable Possession where
    count (LabPossession _) = 1
    count ob = itemCount ob
    addCount (LabPossession _) _ = error "Labs are unique"
+   addCount (DevicePossession _) _ = error "Magic devices are unique"
    addCount ob n  = ob { itemCount = itemCount ob + n }
 
 defaultPossession :: Possession 

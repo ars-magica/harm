@@ -20,6 +20,7 @@ import ArM.Types.HarmObject
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Extra
 -- import Data.Aeson.Types
 -- import Control.Monad
 -- import Data.Maybe
@@ -30,18 +31,33 @@ import Data.Aeson
 data EnchantmentType = LesserItem | GreaterDevice | ChargedItem | Talisman
            deriving (Show, Eq, Ord, Generic)
 
+instance ToJSON EnchantmentType
+instance FromJSON EnchantmentType 
+
 data MagicItem = MagicItem
-           { enchantmentType :: EnchantmentType
-           , deviceName :: String
+           { deviceName :: String
+           , enchantmentType :: EnchantmentType
+           , deviceVis :: Int
            , effect :: [ MagicEffect ]
            , deviceDate :: SeasonTime   -- ^ Time the device was first crafted 
            , deviceDescription :: [String]
            , deviceComment :: String    -- ^ Freeform remarks that do not fit elsewhere
            }
            deriving (Show, Eq, Ord, Generic)
+
+instance ToJSON MagicItem
+instance FromJSON MagicItem where
+    parseJSON = withObject "MagicItem" $ \v -> MagicItem
+        <$> v .: "name" 
+        <*> v .:? "type" .!= LesserItem
+        <*> v .:? "visSlots" .!= 0
+        <*> v `parseCollapsedList` "effect" 
+        <*> v .:? "season" .!= NoTime
+        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "comment" 
+
 data MagicEffect = MagicEffect
            { effectName :: String
-           , enchantLevel :: Int
            , effectLevel :: Int
            , effectTechnique :: String
            , effectTechniqueReq :: [String]
@@ -51,15 +67,26 @@ data MagicEffect = MagicEffect
            , effectModifiers :: [ String ]
            , effectDesign :: String     -- ^ Level calculation
            , effectDescription :: [String]
-           , effectComment :: String    -- ^ Freeform remarks that do not fit elsewhere
+           , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
            , effectReference :: String  -- ^ Source reference
            , effectDate :: SeasonTime   -- ^ Time of investment
            }
            deriving (Show, Eq, Ord, Generic)
 
-instance ToJSON EnchantmentType
-instance FromJSON EnchantmentType
-instance ToJSON MagicItem
-instance FromJSON MagicItem
+
 instance ToJSON MagicEffect
-instance FromJSON MagicEffect
+instance FromJSON MagicEffect where
+    parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
+        <$> v .: "name" 
+        <*> v .: "level" 
+        <*> v .: "techique" 
+        <*> v  `parseCollapsedList` "techiqueReq" 
+        <*> v .: "form" 
+        <*> v  `parseCollapsedList` "formReq" 
+        <*> v .:? "rdt" .!= ("","","")
+        <*> v `parseCollapsedList` "effectModifiers" 
+        <*> v .:? "design"  .!= ""
+        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "comment" 
+        <*> v .:? "reference"  .!= ""
+        <*> v .:? "season" .!= NoTime

@@ -73,11 +73,11 @@ instance FromJSON Character where
         <$> v .: "charID"
         <*> v .: "concept"
         <*> v .:? "state" 
-        <*> fmap ( fromMaybe NoTime) (v .:? "entryTime" )
-        <*> fmap maybeList ( v .:? "pregameDesign" )
-        <*> fmap maybeList ( v .:? "pregameAdvancement" )
-        <*> fmap maybeList ( v .:? "pastAdvancement" )
-        <*> fmap maybeList ( v .:? "futureAdvancement" )
+        <*> v .:? "entryTime" .!= NoTime
+        <*> v .:? "pregameDesign" .!= []
+        <*> v .:? "pregameAdvancement" .!= []
+        <*> v .:? "pastAdvancement" .!= []
+        <*> v .:? "futureAdvancement" .!= []
 
 
 -- | 
