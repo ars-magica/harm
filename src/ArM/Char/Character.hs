@@ -26,12 +26,9 @@ import Data.Maybe
 import ArM.Char.Advancement
 import ArM.Char.CharacterSheet
 import ArM.Types
--- import ArM.Helper
--- import ArM.Types.Library
+import ArM.Helper
 import ArM.Types.Character
 import ArM.Types.Trait
-
-import ArM.Helper
 
 -- |
 -- = Convenience Functions for Character Properties

@@ -157,6 +157,9 @@ advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Advance
 advJoint (xs,ys) = (map applyAdv xs, map applyAdv ys)
 
 -- |
+-- == Books
+
+-- |
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
 addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -277,6 +280,7 @@ instance StepAdvance Covenant where
    stepSubjectMaybe _ = Nothing
 
 
+-- |
 -- Character advancement is divided conceptually into CharGen (pre-game advancement)
 -- and in-game advancement.  CharGen is handled by the `prepare` function, which
 -- is implemented by `ArM.Char.Character.prepareCharacter`.
