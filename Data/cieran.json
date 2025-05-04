@@ -97,7 +97,7 @@
          , { "art" : "Terram", "xp": 15 }
          , { "art" : "Vim", "xp": 3 }
          , { "ability" : "Hermes Lore", "spec": "Hibernia", "xp": 5 }
-         , { "ability" : "Artes Liberales", "spec" : "Rituals", "xp": 5 }
+         , { "ability" : "Artes Liberales", "spec" : "Ritual Casting", "xp": 5 }
          , { "ability" : "Latin", "spec" : "Hermetic Usage", "xp": 30 }
          , { "ability" : "Hermes Code", "spec" : "Stonehenge", "xp": 5 }
          , { "ability" : "Magic Theory", "spec" : "Spells", "xp": 30 }
@@ -340,7 +340,7 @@
       { "mode" : "Reading", "season" : "Summer 1221"
       , "sourceQuality" : 8
       , "narrative" : "(Causes and Curies) half xp due to injuries = 8"
-      , "changes" : [ { "ability" : "Philosophiae", "spec" : "Rituals", "xp" : 8 } ]
+      , "changes" : [ { "ability" : "Philosophiae", "spec" : "Ritual Casting", "xp" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1221"
       , "sourceQuality" : 19
