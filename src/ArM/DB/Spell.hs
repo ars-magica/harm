@@ -50,8 +50,8 @@ data SpellRecord = SpellRecord
     , cite :: String                  -- ^ Source reference
     } deriving (Ord, Eq, Generic, Show)
 
--- | Default SpellRecord object as a starting point for step-by-step construction.
 
+-- | Default SpellRecord object as a starting point for step-by-step construction.
 type SpellDB = M.Map String SpellRecord
 
 -- | Create a `Data.Map.Map` of SpellRecord objects.  
