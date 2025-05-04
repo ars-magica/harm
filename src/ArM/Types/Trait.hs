@@ -50,6 +50,7 @@ import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
 import ArM.Types.Lab
+import ArM.Types.Device
 import ArM.Types.Aging
 import ArM.DB.Weapon
 -- import ArM.Debug.Trace
@@ -281,10 +282,12 @@ data Possession = Possession
      , acTo :: Maybe String
      , itemCount :: Int             -- ^ Number of items possessed, default 1.
      }
+     | DevicePossession MagicItem
      | LabPossession Lab
     deriving ( Ord, Eq, Generic )
 visArt :: Possession -> Maybe String
 visArt (LabPossession _) = Nothing
+visArt (DevicePossession _) = Nothing
 visArt ob = itemArt ob
 getLab :: Possession -> Maybe Lab
 getLab (LabPossession lab) = Just lab
@@ -293,22 +296,30 @@ getLab _ = Nothing
 isLab :: Possession -> Bool
 isLab (LabPossession _) = True
 isLab _ = False
+
+specialPossession :: Possession -> Bool
+specialPossession (LabPossession _) = True
+specialPossession (DevicePossession _) = True
+specialPossession _ = False
+
 isVis :: Possession -> Bool
-isVis (LabPossession _) = False
-isVis c = isJust $ itemArt c
+isVis c | specialPossession c = False
+        | otherwise = isJust $ itemArt c
+
 isWeapon :: Possession -> Bool
-isWeapon (LabPossession _) = False
-isWeapon p = (weapon p /= []) || (weaponStats p /= [])
+isWeapon p | specialPossession p = False
+           | otherwise = (weapon p /= []) || (weaponStats p /= [])
+
 isArmour :: Possession -> Bool
-isArmour (LabPossession _) = False
-isArmour p = (armour p /= []) || (armourStats p /= [])
+isArmour p | specialPossession p = False
+           | otherwise = (armour p /= []) || (armourStats p /= [])
 isAC :: Possession -> Bool
-isAC (LabPossession _) = False
-isAC c = isJust $ acTo c
+isAC p | specialPossession p = False
+       | otherwise = isJust $ acTo p
+
 isEquipment :: Possession -> Bool
-isEquipment (LabPossession _) = False
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isLab, isVis, isWeapon, isArmour, isAC ]
+   where fs = [ isLab, isVis, isWeapon, isArmour, isAC, specialPossession ]
 
 
 instance StoryObject Possession where

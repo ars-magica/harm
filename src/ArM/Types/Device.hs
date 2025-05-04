@@ -28,7 +28,7 @@ import Data.Aeson
 -- = The Trait Type
 
 data EnchantmentType = LesserItem | GreaterDevice | ChargedItem | Talisman
-           deriving (Show, Eq, Generic)
+           deriving (Show, Eq, Ord, Generic)
 
 data MagicItem = MagicItem
            { enchantmentType :: EnchantmentType
@@ -38,7 +38,7 @@ data MagicItem = MagicItem
            , deviceDescription :: [String]
            , deviceComment :: String    -- ^ Freeform remarks that do not fit elsewhere
            }
-           deriving (Show, Eq, Generic)
+           deriving (Show, Eq, Ord, Generic)
 data MagicEffect = MagicEffect
            { effectName :: String
            , enchantLevel :: Int
@@ -55,7 +55,7 @@ data MagicEffect = MagicEffect
            , effectReference :: String  -- ^ Source reference
            , effectDate :: SeasonTime   -- ^ Time of investment
            }
-           deriving (Show, Eq, Generic)
+           deriving (Show, Eq, Ord, Generic)
 
 instance ToJSON EnchantmentType
 instance FromJSON EnchantmentType
