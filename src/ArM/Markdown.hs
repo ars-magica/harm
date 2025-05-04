@@ -264,6 +264,8 @@ instance Markdown CharacterSheet where
                , OString "## Laboratory"
                , OString ""
                , toOList $ printLabTotals c
+               , OString ""
+               , OString "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.""
                ]
    printSheetMD saga c' = OList 
                [ briefTraits c
