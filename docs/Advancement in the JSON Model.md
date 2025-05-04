@@ -1,3 +1,8 @@
+---
+tags:
+  - armchar/json
+  - advancement
+---
 
 + Advancement process is managed from Saga
 	+ [[Saga Advancement Visualised.canvas|Saga Advancement Visualised]] illustrates the top level flow when a saga is loaded and processed.

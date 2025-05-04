@@ -7,54 +7,36 @@ title:
 + [[Visual Roadmap.canvas|Visual Roadmap]]
 
 # Roadmap
-## Check List
 
-+ [ ] JSON syntax
-	+ [ ] Character
-	+ [x] Covenant
-	+ [x] Saga  (SagaFile)
-+ [ ] Wiki layout
-	+ [ ] character view (Cieran)
-	+ [x] covenant view (Elk's Run)
-	+ [x] saga view
-	+ [ ] annals view
 
 ## Plan
 
 + [ ] Phase 1.  **Review** Hibernia Saga
-	+ [ ] Review recent seasons from Hibernia 
-		+ [x] Cieran
-		+ [x] Eogan
-		+ [ ] Elk's Run
+	+ [ ] Review Character JSON syntax
+	+ [ ] Review recent seasons from Hibernia  for Elk's Run
+	+ [ ] Display aging bonus etc
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view
-		+ [ ] Aging view
-			+ [ ] Aging roll total
 		+ [ ] Comments on advancing traits (possession in particular)
-		+ [x] Sort possessions
-	+ [ ] Review object structure
-		+ [ ] AnnalSeason 
-	+ [ ] Lab Total
-		+ [x] Define [[Lab object]]
-		+ [x] Character access to lab object
-		+ [ ] Use lab bonuses in lab total
-			+ [x] Extract GQ and Aura
-			+ [x] Extract art bonuses
-			+ [ ] Separate bonuses that require manual handling
+	+ [ ] Review covenant sheet and library
+	+ [ ] Review Wiki layout for AnnalSeason
+	+ [ ] Review object structure of AnnalSeason 
+	+ [ ] [[Lab object]]
+		+ [ ] Separate bonuses that require manual handling
 		+ [ ] Compute lab total in advancements
 		+ [ ] Advance lab (refinement and virtue installation)
+	+ [ ] Comment field on traits
 + [ ] Phase 2. Consolidation
-	+ [ ] Covenant
-		+ [x] JSON Syntax for advancement
-		+ [ ] WIki layout for advancement
 	+ [ ] Validate missing seasons
 	+ [ ] Character advancement
 		+ [ ] Narrative 
 		+ [ ] Comment
-	+ [ ] Review covenant sheet and library
-	+ [ ] Distinguish between comment and narrative
-	+ [ ] list of narrative items in advancements (Consistent use)
+		+ [ ] Consistency of Narrative and Comment
+	+ [ ] Fix ongoing
+		+ [ ] Check Exposure
+		+ [ ] Comment on ProtoTrait
+		+ [ ] Validation: Compare SQ
 + [ ] Phase 3. Books
 	+ [ ] [[Reading and Books]]
 	+ [ ] Process books in covenant advancement
@@ -65,11 +47,6 @@ title:
 	+ [ ] Use of Keys and objects
 	+ [ ] Type every book with edge cases and supersede wiki
 + [ ] Phase 4. Next steps
-	+ [ ] Display aging bonus etc
-	+ [ ] Fix ongoing
-		+ [ ] Check Exposure
-		+ [ ] Comment on ProtoTrait
-		+ [ ] Validation: Compare SQ
 	+ [ ] More spell descriptions in CSV file
 	+ [ ] Specialists (copyists in particular)
 + [ ] Phase 5. [[Covenant]]
@@ -113,7 +90,6 @@ title:
 	+ [ ] Refactor and document code
 		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
 		+ [ ] Draw a flow chart of the character and covenant processing
-	+ [ ] Comment field on traits
 	+ [ ] P/G Char Gen
 	+ [ ] Remove trait when advancing
 	+ [ ] More user friendly sheets
