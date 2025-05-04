@@ -35,9 +35,10 @@ module ArM.Char.Character (
                           , agePT
                           -- * Aging
                           , module ArM.Types.Aging
+                          , charAgingBonusList
+                          , charAgingBonus
                           -- * Convenience Functions
                           , characterEntryTime
-                          , charAgingBonus
                           ) where
 
 import Data.Maybe 
@@ -65,11 +66,16 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
 
 
 charAgingBonus :: Character -> Int
-charAgingBonus c = ag + lr + rb + cv + lh
+charAgingBonus c = ag + sum ( map snd (charAgingBonusList c) )
     where ag = age c // 10
-          lr = af longevityRitual -- Longevity Ritual 
-          rb = af agingRollBonus -- Other personal bonus
-          cv = 0 -- Covenant living condition
+
+charAgingBonusList :: Character -> [ (String,Int) ]
+charAgingBonusList c = [ ( "Longevity Ritual", af longevityRitual )
+                       , ( "Personal Bonus", af agingRollBonus )
+                       , ( "Living Conditions", cv )
+                       , ( "Lab Health Bonus", lh )
+                       ]
+    where cv = 0 -- Covenant living condition
           lh = (`div`2) $ fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
           af f = fromMaybe 0 $ fmap f $ ageObject c       -- get stat from ageobject
 

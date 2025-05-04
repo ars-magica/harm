@@ -10,6 +10,11 @@
 -- 
 -- Description :  Managing of character aging 
 --
+-- The module defines the `Age` trait and the `Aging` ProtoTrait.
+-- The latter represents changes to `Age`, where all fields
+-- are `Maybe` values since some fields will usually be left
+-- unchanged.  The `Aging` object also has fields to record
+-- the aging roll.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.Aging where
@@ -32,7 +37,7 @@ data Age = Age
     , ageLimit :: Int
     , longevityRitual :: Int      -- ^ Score of longevity ritual (LR), negative number means none
     , agingRollBonus :: Int       -- ^ Bonus to aging rolls (excluding LR)
-    , ageComment :: Maybe String  -- ^ freeform comment
+    , ageComment :: [ String ]    -- ^ freeform comment
     } deriving (Show,Ord,Eq,Generic)
 instance ToJSON Age
 instance FromJSON Age where
@@ -50,10 +55,10 @@ defaultAging = Aging
     , deltaYounger   = Nothing
     , agingRollDie   = Nothing
     , agingRoll      = Nothing
-    , longevity      = Nothing
     , agingLimit     = Nothing
+    , longevity      = Nothing
     , agingBonus     = Nothing
-    , agingComment   = Nothing
+    , agingComment   = []
     }
 -- | The `Aging` is a `ProtoTrait` representing changes to the
 -- `Age` trait.
@@ -66,13 +71,23 @@ data Aging = Aging
     , longevity      :: Maybe Int    -- ^ score of new longevity ritual
     , agingLimit     :: Maybe Int    -- ^ age when aging rolls are required
     , agingBonus     :: Maybe Int    -- ^ Bonus to aging rolls (excluding LR)
-    , agingComment   :: Maybe String -- ^ freeform comment
+    , agingComment   :: [ String ]   -- ^ freeform comment
     } deriving (Ord,Eq,Generic)
 instance ToJSON Aging
-instance FromJSON Aging 
+instance FromJSON Aging where
+    parseJSON = withObject "Aging" $ \v -> Aging
+        <$> v .:? "years" 
+        <*> v .:? "apparentYounger"  
+        <*> v .:? "die"  
+        <*> v .:? "roll"  
+        <*> v .:? "ageLimit"  
+        <*> v .:? "longevityRitual"  
+        <*> v .:? "agingRollBonus"  
+        <*> v `parseCollapsedList` "comment"  
 
 instance Show Aging where
-    show x = "Aging " ++ y ++ lr ++ roll ++ lim ++ b ++ fromMaybe "" (agingComment x)
+    show x = "Aging " ++ y ++ lr ++ roll ++ lim ++ b 
+      -- ++ fromMaybe "" (agingComment x)
        where y | isNothing (addYears x) = ""
                | otherwise = show yr ++ " years; apparent " 
                     ++ show (yr-del) ++ " years."
