@@ -340,7 +340,7 @@
       { "mode" : "Reading", "season" : "Summer 1221"
       , "sourceQuality" : 8
       , "narrative" : "(Causes and Curies) half xp due to injuries = 8"
-      , "changes" : [ { "ability" : "Philosophiæ", "spec" : "Rituals", "xp" : 8 } ]
+      , "changes" : [ { "ability" : "Philosophiae", "spec" : "Rituals", "xp" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1221"
       , "sourceQuality" : 19

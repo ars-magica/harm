@@ -16,6 +16,7 @@ module ArM.DB.Spell ( SpellRecord(..)
                        , spellDB
                        , spellLookup
                        , SpellDB
+                       , isRitual
                        ) where
 
 import ArM.DB.CSV
@@ -24,6 +25,7 @@ import GHC.Generics
 import Data.List.Split
 import Text.Read
 import qualified Data.Map as M
+import Data.List
 -- import Data.Maybe
 
 -- import ArM.Debug.Trace
@@ -97,4 +99,10 @@ spellLookup = M.lookup . spellKeyName
    
 
 
+-- | Is the spell a ritual or not?
+isRitual :: SpellRecord -> Bool
+isRitual = f . find tf . specialSpell
+    where tf = (=="Ritual") 
+          f Nothing = False
+          f (Just _) = True
 

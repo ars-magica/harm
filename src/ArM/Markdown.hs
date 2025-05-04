@@ -261,6 +261,8 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Possessions:** "  $ sortTraits $ possessionList c
                , toOList $ printCastingTotals c
                , OString ""
+               , OString "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+               , OString ""
                , OString "## Laboratory"
                , OString ""
                , toOList $ printLabTotals c

@@ -43,7 +43,6 @@ module ArM.Types.Trait ( TraitKey(..)
                             , isArmour
                             , isAC
                             , isEquipment
-                            , isRitual
                             ) where
 
 import ArM.GameRules
@@ -133,10 +132,6 @@ data Spell = Spell { spellName :: String
 spellTeFoLe :: Spell -> String
 spellTeFoLe sp = spellTeFo sp ++ show (spellLevel sp)
 -}
-
--- | Is the spell a ritual or not?
-isRitual :: Spell -> Bool
-isRitual _ = False
 
 -- | Return a string of Form/Technique for sorting
 spellFoTe :: Spell -> String

@@ -26,6 +26,8 @@ module ArM.Char.CharacterSheet ( CharacterSheet(..)
                                , sheetVis
                                , characterLab
                                , charTeacherSQ
+                               , ritualCastingBonus
+                               , ceremonialCastingBonus
                                ) where
 
 import ArM.Types.ProtoTrait
@@ -163,6 +165,20 @@ castingScore' cs ts fs = t + f + sta
           minl [] = 0
           minl (x:xs) = foldl min x xs
 
+ritualCastingBonus :: CharacterSheet -> Int
+ritualCastingBonus = ritualCastingBonus' "Ritual Casting"
+ceremonialCastingBonus :: CharacterSheet -> Int
+ceremonialCastingBonus = ritualCastingBonus' "Ceremonial Casting"
+
+ritualCastingBonus' :: String -> CharacterSheet -> Int
+ritualCastingBonus' sp cs = p + a
+    where (p',ps) = sheetAbilityScore cs (AbilityKey "Philosophiae" ) 
+          (a',as) = sheetAbilityScore cs (AbilityKey "Artes Liberales" ) 
+          a | fromMaybe "" as == sp = a' + 1
+            | otherwise = a' 
+          p | fromMaybe "" ps == sp = p' + 1
+            | otherwise = p' 
+
 -- | Return the Casting Score for a given spell.
 -- The function depends both on the Spell trait from the CharacterSheet
 -- and a generic spell description from a SpellDB.
@@ -172,7 +188,7 @@ castingScore :: SpellDB    -- ^ Spell DB with general descriptions of the spells
              -> Int            -- ^ Computed casting score
 castingScore db cs k | isNothing rec' =   0
                      | isNothing sp' =   0
-                     | otherwise =  castingScore' cs ts fs + mf ( getTrait sp)
+                     | otherwise =  castingScore' cs ts fs + mf ( getTrait sp) + rb
    where sp' = findTraitCS k cs
          sp = fromJust sp'
          mf Nothing = 0
@@ -181,6 +197,8 @@ castingScore db cs k | isNothing rec' =   0
          rec = fromJust rec'
          ts = (ArtKey $ technique rec):(map ArtKey $ techniqueReq rec)
          fs = (ArtKey $ form rec):(map ArtKey $ formReq rec)
+         rb | isRitual rec = ritualCastingBonus cs
+            | otherwise = 0
 
 addCastingScores :: SpellDB -> CharacterSheet -> CharacterSheet
 addCastingScores db cs =  cs { spellList = spellList' }
