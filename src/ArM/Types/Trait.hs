@@ -53,7 +53,7 @@ import ArM.Types.Lab
 import ArM.Types.Device
 import ArM.Types.Aging
 import ArM.DB.Weapon
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
@@ -333,8 +333,8 @@ instance StoryObject Possession where
 instance Countable Possession where
    count (LabPossession _) = 1
    count ob = itemCount ob
-   addCount (LabPossession _) _ = error "Labs are unique"
-   addCount (DevicePossession _) _ = error "Magic devices are unique"
+   addCount (LabPossession x) _ = trace "Labs are unique"  (LabPossession x)
+   addCount (DevicePossession x) _ = trace "Magic devices are unique" (DevicePossession x)
    addCount ob n  = ob { itemCount = itemCount ob + n }
 
 defaultPossession :: Possession 
