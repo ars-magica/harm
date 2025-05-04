@@ -18,12 +18,12 @@ title:
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view
+		+ [ ] Lab totals
 		+ [ ] Comments on advancing traits (possession in particular)
 	+ [ ] Review covenant sheet and library
 	+ [ ] Review Wiki layout for AnnalSeason
 	+ [ ] Review object structure of AnnalSeason 
 	+ [ ] [[Lab object]]
-		+ [ ] Separate bonuses that require manual handling
 		+ [ ] Compute lab total in advancements
 		+ [ ] Advance lab (refinement and virtue installation)
 	+ [ ] Comment field on traits
