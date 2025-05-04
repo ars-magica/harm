@@ -235,6 +235,9 @@ instance Advance Covenant where
 -- = Book Management
 
 -- |
+-- == Books
+
+-- |
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
 addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -308,3 +311,4 @@ addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
           f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+

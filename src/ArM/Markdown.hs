@@ -410,8 +410,6 @@ usesString a | u == [] = OList []
              | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
          where u = usesBook a
 
-
-
 instance Markdown Advancement where
    printMD a = indentOList $ OList
          [ OString $ name a
@@ -420,8 +418,6 @@ instance Markdown Advancement where
          , usesString a
          , OList $ map printMD $ changes a
          ]
-
-
 
 -- |
 -- == Pretty print arts

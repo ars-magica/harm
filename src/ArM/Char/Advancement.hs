@@ -47,7 +47,7 @@ prepareAdvancement c = validate
 winterEvents :: CharacterState       -- ^ Current Character State
              -> AugmentedAdvancement -- ^ Advancement 
              -> AugmentedAdvancement -- ^ modified Advancement
-winterEvents c a | isWinter $ season a = Adv { explicitAdv = ad, inferredAdv = aa' }
+winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
 
              | otherwise = a
     where ageOb = ageObject c

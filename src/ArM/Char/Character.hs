@@ -46,12 +46,8 @@ import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
 import ArM.Types
 import ArM.Types.ProtoTrait
--- import ArM.Helper
--- import ArM.Types.Library
-import ArM.Types.Character
--- import ArM.Types.Trait
-
 import ArM.Helper
+import ArM.Types.Character
 
 -- |
 -- = Convenience Functions for Character Properties

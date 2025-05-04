@@ -14,7 +14,6 @@
 module ArM.Types.Calendar ( SeasonTime(..)
                           , Season(..)
                           , parseSeasonTime
-                          , isWinter
                           , seasonNext
                           , seasonPrev
                           , (>*)
@@ -91,10 +90,6 @@ instance FromJSON SeasonTime where
     parseJSON (String t) = pure $ parseST (unpack (fromStrict t))
     parseJSON _ = mzero
 
--- | Is the Season Winter?
-isWinter :: SeasonTime -> Bool
-isWinter (SeasonTime Winter _) = True
-isWinter _ = False
 
 -- | Parse SeasonTime from String
 parseST :: String -> SeasonTime
@@ -150,4 +145,14 @@ class Timed a where
    mergeByTime = mergeBy compareTimed
    mergeTimed :: [ [a] ] -> [ a ]
    mergeTimed = foldl mergeByTime []
+   -- | Is the Season Winter?
+   isWinter :: a -> Bool
+   isWinter = isWinter' . season
 
+instance Timed SeasonTime where
+   season = id
+
+-- | Is the Season Winter?
+isWinter' :: SeasonTime -> Bool
+isWinter' (SeasonTime Winter _) = True
+isWinter' _ = False

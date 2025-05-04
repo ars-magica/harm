@@ -22,8 +22,6 @@ import ArM.Types.Character
 import ArM.Char.CharacterSheet
 import ArM.Types
 import ArM.Char.Virtues
--- import ArM.GameRules
--- import ArM.Helper
 
 import Data.Maybe 
 
