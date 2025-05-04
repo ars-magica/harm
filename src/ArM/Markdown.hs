@@ -697,10 +697,10 @@ instance Markdown Lab where
    printMD lab = indentOList $ OList 
        [ OString $ name lab
        , OList 
-         [ OString $ "Refinement: " ++ showBonus (labRefinement $ labState lab)
-         , OString $ "Size: " ++ showBonus (labSize $ labState lab)
-         , OString $ "Unused size: " ++ showBonus ( (labSize $ labState lab) - usedSize lab )
-         , OString $ "Aura: " ++ showBonus (labAura $ labState lab)
+         [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lab)
+         , OString $ "Size: " ++ showSigned (labSize $ labState lab)
+         , OString $ "Unused size: " ++ showSigned ( (labSize $ labState lab) - usedSize lab )
+         , OString $ "Aura: " ++ show (labAura $ labState lab)
          , OString $ "Traits: " ++ commalistMD ts
          , OString $ "Art Specialisations: " ++ commalistMD arsp
          , OString $ "Activity Specialisations: " ++ commalistMD acsp
