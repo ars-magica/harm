@@ -699,7 +699,9 @@ instance Markdown Lab where
          , OString $ "Size: " ++ showBonus (labSize $ labState lab)
          , OString $ "Unused size: " ++ showBonus ( (labSize $ labState lab) - usedSize lab )
          , OString $ "Aura: " ++ showBonus (labAura $ labState lab)
-         , OString "Stats"
+         , OString $ "Traits: " ++ commalistMD ts
+         , OString $ "Art Specialisations: " ++ commalistMD arsp
+         , OString $ "Activity Specialisations: " ++ commalistMD acsp
          , OList $ map printMD $ totalBonus lab
          , OString "Description"
          , OList $ map OString $ narrative lab
@@ -708,6 +710,10 @@ instance Markdown Lab where
          , foldOList $ OList $ map printMD $ labVirtues $ labState lab
          ]
        ]
+       where ts = filter ( (=="") . labSpecialisation ) tb
+             arsp = filter ( (=="Art") . labTrait ) tb
+             acsp = filter ( (=="Activity") . labTrait ) tb
+             tb = totalBonus lab
 instance Markdown LabVirtue where
    printMD v = OList [ OString $ name v
                    , OList $ map OString $ narrative v
