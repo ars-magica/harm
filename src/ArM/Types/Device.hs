@@ -14,31 +14,52 @@
 -----------------------------------Types.------------------------------------------
 module ArM.Types.Device where
 
-import ArM.GameRules
-import ArM.Helper
-import ArM.Types.TraitKey
+import ArM.Types.Calendar
 import ArM.Types.HarmObject
-import ArM.Types.Lab
-import ArM.Types.Aging
-import ArM.DB.Weapon
 -- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
-import Data.Aeson.Types
-import qualified Data.Aeson.KeyMap as KM
-import Data.Text.Lazy                            ( fromStrict, unpack )
-import Control.Monad
-import Data.Maybe
-import Data.List (sortBy)
+-- import Data.Aeson.Types
+-- import Control.Monad
+-- import Data.Maybe
 
 -- |
 -- = The Trait Type
 
 data EnchantmentType = LesserItem | GreaterDevice | ChargedItem | Talisman
+           deriving (Show, Eq, Generic)
 
 data MagicItem = MagicItem
            { enchantmentType :: EnchantmentType
-	   , name :: String
-	   }
+           , deviceName :: String
+           , effect :: [ MagicEffect ]
+           , deviceDate :: SeasonTime   -- ^ Time the device was first crafted 
+           , deviceDescription :: [String]
+           , deviceComment :: String    -- ^ Freeform remarks that do not fit elsewhere
+           }
            deriving (Show, Eq, Generic)
+data MagicEffect = MagicEffect
+           { effectName :: String
+           , enchantLevel :: Int
+           , effectLevel :: Int
+           , effectTechnique :: String
+           , effectTechniqueReq :: [String]
+           , effectForm :: String
+           , effectFormReq :: [String]
+           , effectRDT :: (String,String,String)   -- ^ Range/Duration/Target
+           , effectModifiers :: [ String ]
+           , effectDesign :: String     -- ^ Level calculation
+           , effectDescription :: [String]
+           , effectComment :: String    -- ^ Freeform remarks that do not fit elsewhere
+           , effectReference :: String  -- ^ Source reference
+           , effectDate :: SeasonTime   -- ^ Time of investment
+           }
+           deriving (Show, Eq, Generic)
+
+instance ToJSON EnchantmentType
+instance FromJSON EnchantmentType
+instance ToJSON MagicItem
+instance FromJSON MagicItem
+instance ToJSON MagicEffect
+instance FromJSON MagicEffect

@@ -322,18 +322,15 @@ briefTraits c = OList
           ]
 printAge :: CharacterSheet -> OList
 printAge c | isNothing ag' = OString "**Age** undefined"
-         | otherwise = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
-            ++ show (y - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
+         | otherwise = OString $ "+ **Age:** " ++ show yr ++ " years (apparent age " 
+            ++ show (yr - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
             ++ " (" ++ (showStrList $ map f bs) ++ ")"
    where ag' = ageObject c
          ag = fromJust ag'
-         y = ageYears ag
+         yr = ageYears ag
          f (x,y) = x ++ " " ++ showSigned y
          bs = charAgingBonusList c
          b = charAgingBonus c
-         lrs = longevityRitual ag
-         lr | lrs < 0 = ""
-            | otherwise = " Longevity Ritual: " ++ show lrs
 
 instance Markdown Age where
    printMD c = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
