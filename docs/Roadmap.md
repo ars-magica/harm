@@ -15,7 +15,7 @@ title:
 	+ [ ] Review Character JSON syntax
 	+ [ ] Review recent seasons from Hibernia  for Elk's Run
 	+ [ ] Display aging bonus etc
-	+ [ ] Arcane Connections
+	+ [x] Arcane Connections
 	+ [ ] Review character sheet design (Cieran)
 		+ [ ] Spell view
 		+ [ ] Advancement view

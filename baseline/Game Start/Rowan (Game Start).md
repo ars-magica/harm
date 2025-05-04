@@ -56,7 +56,7 @@ Warrior (1),
     + Dagger
     + Sling
 + Armour
-+ ArcaneConnections
++ Arcane Connections to:
 + Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |

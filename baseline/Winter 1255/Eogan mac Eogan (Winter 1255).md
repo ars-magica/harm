@@ -88,7 +88,7 @@ Weakness [for Dogs] (-1),
     + Shortbow
     + Shortspear
 + Armour
-+ ArcaneConnections
++ Arcane Connections to:
 + Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |

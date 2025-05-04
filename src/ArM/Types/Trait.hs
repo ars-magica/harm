@@ -51,7 +51,7 @@ import ArM.Types.TraitKey
 import ArM.Types.HarmObject
 import ArM.Types.Lab
 import ArM.DB.Weapon
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
@@ -313,7 +313,7 @@ isArmour (LabPossession _) = False
 isArmour p = (armour p /= []) || (armourStats p /= [])
 isAC :: Possession -> Bool
 isAC (LabPossession _) = False
-isAC c = isJust $ acTo c
+isAC c = isJust $ ttrace $ acTo c
 isEquipment :: Possession -> Bool
 isEquipment (LabPossession _) = False
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
@@ -336,7 +336,7 @@ instance Countable Possession where
 
 defaultPossession :: Possession 
 defaultPossession = Possession 
-     { itemName = "No name"
+     { itemName = ""
      , itemKey = NoObject
      , weaponStats = []
      , weapon = []
@@ -387,12 +387,14 @@ instance FromJSON Request where
               Nothing -> mzero
 -}
 
+-- | Derive `itemName` from other properties, if the name is undefined.
 fixPossessionName :: Possession -> Possession 
 fixPossessionName p | itemName p /= "" = p
                     | otherwise = p { itemName = n }
             where n | weapon p /= [] = head $ weapon p
                     | armour p /= [] = head $ armour p
                     | isJust (visArt p) = fromJust (visArt p) ++ " vis"
+                    | isAC p = "AC to " ++ (fromJust $ acTo p)
                     | otherwise = "Item"
 
 instance Show Possession where

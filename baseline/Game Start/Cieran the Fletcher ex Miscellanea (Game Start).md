@@ -70,7 +70,7 @@ Weak Spontaneous Magic (0),
 + **Abilities:**
     + Area Lore: Ireland [Legends] 1 (0xp)
     + Area Lore: Munster [Hiding Places] 1 (0xp)
-    + Artes Liberales [Rituals] 1 (0xp)
+    + Artes Liberales [Ritual Casting] 1 (0xp)
     + Awareness [Searching] 2 (0xp)
     + Bargain [] 1 (0xp)
     + Bows [Longbow] 3 (0xp)
@@ -95,7 +95,7 @@ Weak Spontaneous Magic (0),
     + Longbow
     + Quarterstaff
 + Armour
-+ ArcaneConnections
++ Arcane Connections to:
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
@@ -208,6 +208,8 @@ Total: 150 levels of spells.
 | Terram | 14 | 8 | 8 | 16 | 16 |
 | Vim | 11 | 5 | 5 | 13 | 13 |
 
++ Ceremonial Casting Bonus: +1
+
 ## Laboratory
 
 
@@ -229,7 +231,7 @@ Total: 150 levels of spells.
 
 + Apprenticeship (300xp) (15 years)
     + Changing traits
-        + Ability: Artes Liberales [Rituals] 5xp; 
+        + Ability: Artes Liberales [Ritual Casting] 5xp; 
         + Ability: Bows [Longbow] 30xp; 
         + Ability: Hermes Code [Stonehenge] 5xp; 
         + Ability: Hermes Lore [Hibernia] 5xp; 

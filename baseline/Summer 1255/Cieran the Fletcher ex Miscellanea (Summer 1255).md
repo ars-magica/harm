@@ -79,7 +79,7 @@ Weak Spontaneous Magic (0),
 + **Abilities:**
     + Area Lore: Ireland [Legends] 2 (5xp)
     + Area Lore: Munster [Hiding Places] 1 (0xp)
-    + Artes Liberales [Rituals] 1 (0xp)
+    + Artes Liberales [Ritual Casting] 1 (0xp)
     + Awareness [Searching] 2 (0xp)
     + Bargain [] 1 (0xp)
     + Bows [Longbow] 3 (0xp)
@@ -102,7 +102,7 @@ Weak Spontaneous Magic (0),
     + Native Language: Irish [Leinster] 5 (0xp)
     + Parma Magica [Mentem] 5 (0xp)
     + Penetration [Rego] 1 (0xp)
-    + Philosophiæ [Rituals] 1 (3xp)
+    + Philosophiae [Ritual Casting] 1 (3xp)
     + SOCP Lore [Self initiation] 4 +2 (2xp)
     + Second Sight [Faerie Illusions] 3 (0xp)
     + Stealth [Hiding] 1 (0xp)
@@ -129,7 +129,13 @@ Weak Spontaneous Magic (0),
     + Quarterstaff
 + Armour
     + Weightless Chain (Protection 9, Load 2)
-+ ArcaneConnections
++ Arcane Connections to:
+    + Cieran's Workshop
+    + Killaloe (secluded location in the woods 250-500 paces downstream.)
+    + Qui Sonant (at polite distance)
+    + Standing Stones in Brittany
+    + Tress's Covenant
+    + Tribunal Location (at polite distance)
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
@@ -170,13 +176,13 @@ Weak Spontaneous Magic (0),
     + The target gains a +12 bonus to Recovery rolls to recover from injuries or diseases, as long as he has been under the influence of this spell for the whole of the recovery interval. The recovery interval is counted from the time that the spell is cast; any previous time is ignored.
     + Base 5, +1 Touch, +3 Moon
     + Custom variant [ArM5:129]
-+ *Restoration of the Defiled Body* CrCo25 (32)
++ *Restoration of the Defiled Body* CrCo25 (36)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind; Ritual
     + Removes the crippling or malignant aftereffects of any injury, poison, or disease, or of premature aging. The effects of natural aging cannot be undone by this or any spell. This spell does not heal wounds, only extra effects.
     + Base 20, +1 Touch
     + [ArM5:129]
-+ *Gift of Quickness (personal range)* CrCo30 (32)
++ *Gift of Quickness (personal range)* CrCo30 (36)
     + Mastery: 1 (0xp) Safe Casting
     + Range: Per; Duration: Mom; Target: Ind; Ritual
     + Increases the caster's Quickness by one point up to a maximum of 0.
@@ -339,19 +345,19 @@ Weak Spontaneous Magic (0),
     + Refreshes a specific memory within the mind of the caster; as long as some fragment of it remains, this spell will restore it. Once refreshed, the caster can hold the perfected memory as long he concentrates. Studying the memory effectively creates a new one which does not fade when the spell expires. This spell was created to allow Quaesitors to perfectly recall spell sigils they encounter. The spell can be used to recall other details of a brief event, like faces or voices. This spell is often used to double- check identification.
     + Base 4, +1 Concentration
     + [HoH:TL:73]
-+ *Gift of Communication* CrMe40 (38)
++ *Gift of Communication* CrMe40 (42)
     + Mastery: 1 (0xp) Safe Casting
     + Range: Touch; Duration: Mom; Target: Ind; Ritual
     + Permanently increases the target’s Communication by 1 point, to no higher than +1.
     + Base 35, +1 Touch
     + Custom
-+ *Gift of Perception* CrMe40 (38)
++ *Gift of Perception* CrMe40 (42)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Mom; Target: Ind; Ritual
     + Permanently increases the target’s Perception by 1 point, to no higher than +1.
     + Base 35, +1 Touch
     + Custom
-+ *Communication of the Heroes* CrMe60 (38)
++ *Communication of the Heroes* CrMe60 (42)
     + Mastery: 1 (0xp) Safe Casting
     + Range: Touch; Duration: Mom; Target: Ind; Ritual
     + [HoH:TL:103]
@@ -498,7 +504,7 @@ Weak Spontaneous Magic (0),
     + You can open a magical channel from yourself to some target, allowing you to cast any spell with a range greater than Personal on that target. The tunnel does not, of itself, grant any sense impressions of the target — you must cast appropriate spells through it if you wish to see. Spells cast through the tunnel cannot be of higher level than that of this spell. You must make standard Concentration rolls to maintain concentration on the Opening spell as you cast other spells. A magus who magically recognizes the tunnel (through The Invisible Eye Revealed or a similar spell) may cast spells through the tunnel back at you, and he need not concentrate on keeping the tunnel open. If this magus is the target of the spell, he is considered to be touching you. Otherwise, his effective range to you is his range to the target of the tunneling spell. If the target of the spell has Magic Resistance, you must penetrate that resistance to open the tunnel. Spells cast through the tunnel must also penetrate Magic Resistance normally.
     + Base effect, +4 Arcane Connection, +1 Concentration
     + [ArM:162]
-+ *Watching Ward* ReVi20 (30)
++ *Watching Ward* ReVi20 (34)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
@@ -512,11 +518,11 @@ Weak Spontaneous Magic (0),
     + All creatures with Infernal Might equal to or less than the level of the spell are unable to enter the circle or harm those within it.  If you cast the spell again, the stronger ring dispels the weaker, regardless of the order of casting. Some magi cast this spell before going to sleep at night. At night, from certain angles, the ring may be seen as a silver-hued dome.
     + Base Spell
     + [ArM5:162]
-+ *Aegis of the Hearth* ReVi30 (31)
++ *Aegis of the Hearth* ReVi30 (35)
     + Mastery: 2 (8xp) Penetration, Safe Casting
     + Range: Touch; Duration: Year; Target: Boundary; Ritual
     + [ArM5:161]
-+ *Watching Ward* ReVi30 (30)
++ *Watching Ward* ReVi30 (34)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
@@ -536,6 +542,8 @@ Total: 1249 levels of spells.
 | Mentem | 37 | 34 | 28 | 28 | 34 |
 | Terram | 29 | 26 | 20 | 20 | 26 |
 | Vim | 32 | 29 | 23 | 23 | 29 |
+
++ Ceremonial Casting Bonus: +2
 
 ## Laboratory
 
@@ -1064,6 +1072,12 @@ Total: 1249 levels of spells.
     + Fixate AC
     + Changing traits
         + Ability: Magic Theory 2xp; 
+        + Possession: AC to Cieran's Workshop
+        + Possession: AC to Killaloe (secluded location in the woods 250-500 paces downstream.)
+        + Possession: AC to Qui Sonant (at polite distance)
+        + Possession: AC to Standing Stones in Brittany
+        + Possession: AC to Tress's Covenant
+        + Possession: AC to Tribunal Location (at polite distance)
         + Possession: Vi vis (-6)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1610,7 +1624,7 @@ Total: 1249 levels of spells.
 + Summer 1221 (8+3xp) Reading
     + (Causes and Curies) half xp due to injuries = 8
     + Changing traits
-        + Ability: Philosophiæ [Rituals] 8xp; 
+        + Ability: Philosophiae [Ritual Casting] 8xp; 
     + ERROR: Underspent 8xp of 11.
 + Spring 1221 (10xp) Adventure
     + Jerome's Tower

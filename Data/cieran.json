@@ -962,6 +962,12 @@
       , "narrative" : "Fixate AC"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 }
          , { "possession" : { "art" : "Vi", "count" : -6, "comment" : "to fixate arcane connections" } }
+         , { "possession" : { "acTo" : "Cieran's Workshop"  } }
+         , { "possession" : { "acTo" : "Tress's Covenant"  } }
+         , { "possession" : { "acTo" : "Standing Stones in Brittany"  } }
+         , { "possession" : { "acTo" : "Qui Sonant (at polite distance)"  } }
+         , { "possession" : { "acTo" : "Tribunal Location (at polite distance)"  } }
+         , { "possession" : { "acTo" : "Killaloe (secluded location in the woods 250-500 paces downstream.)"  } }
          ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1241"

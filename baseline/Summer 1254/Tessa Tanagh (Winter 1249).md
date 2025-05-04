@@ -65,7 +65,7 @@ Warrior (1),
 + Vis
 + Weapons
 + Armour
-+ ArcaneConnections
++ Arcane Connections to:
 + Equipment
 
 

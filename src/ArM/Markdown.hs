@@ -22,6 +22,7 @@ module ArM.Markdown ( Markdown(..)
                     ) where
 
 import Data.Maybe 
+import Data.List 
 
 import ArM.Char.Character 
 import ArM.Types.ProtoTrait
@@ -36,7 +37,7 @@ import ArM.GameRules
 import ArM.BasicIO
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- = Rendering the Character Sheet
@@ -237,16 +238,17 @@ listPossessions ps = OList
       , (pList ws)
       , OString "Armour"
       , (pList as)
-      , OString "ArcaneConnections"
-      , (pList acs)
+      , OString "Arcane Connections to:"
+      , (acList acs)
       , OString "Equipment"
       , (pList es)
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
          as = filter isArmour ps
-         acs = filter isAC ps
+         acs = ttrace $ filter isAC ps
          es = filter isEquipment ps
+         acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
 instance Markdown CharacterSheet where
    printMD c = OList 
