@@ -23,7 +23,7 @@ Size
 
 ## Game Start
 
-+ **Age:** 24 years (apparent age 24)
++ **Age:** 24 years (apparent age 24) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
 + **Confidence**: 0 (0)
 + **Characteristics:** 
 Int +1, 

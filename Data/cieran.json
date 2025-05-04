@@ -1042,10 +1042,10 @@
       , "sourceQuality" : 13
       , "narrative" : " *The Mind's Eye* L16Q13 -> 81xp ; No aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 0
-            , "agingRoll" : 0
-            , "agingComment" : "No aging. Rolls not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 0
+            , "roll" : 0
+            , "comment" : "No aging. Rolls not recorded"
          } 
          }
          , { "possession" : { "art" : "Pe", "count" : 1
@@ -1071,10 +1071,10 @@
       , "sourceQuality" : 14
       , "narrative" : "Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } 
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 0
-            , "agingRoll" : 0
-            , "agingComment" : "No aging. Rolls not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 0
+            , "roll" : 0
+            , "comment" : "No aging. Rolls not recorded"
          } }
       ]
       },
@@ -1123,10 +1123,10 @@
             , "tefo" : "PeVi", "level" : 10
            , "mastery" : [ "Penetration" ]
          }
-         , { "aging" : { "deltaYounger" : 0
-            , "agingRollDie" : 28
-            , "agingRoll" : 4
-            , "agingComment" : "Apparent age increases"
+         , { "aging" : { "apparentYounger" : 0
+            , "die" : 28
+            , "roll" : 4
+            , "comment" : "Apparent age increases"
          } } 
         ]
       },
@@ -1161,10 +1161,10 @@
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 0
-            , "agingRoll" : 0
-            , "agingComment" : "No aging. Rolls not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 0
+            , "roll" : 0
+            , "comment" : "No aging. Rolls not recorded"
          } 
          }
       ]
@@ -1188,10 +1188,10 @@
       , "sourceQuality" : 14
       , "narrative" : "Maine's Tractatus + Book Learner; 8-24=-16 no aging"
       , "changes" : [ { "art" : "Mentem", "xp" : 17 }
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 8
-            , "agingRoll" : -16
-            , "agingComment" : "No aging. Rolls not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 8
+            , "roll" : -16
+            , "comment" : "No aging. Rolls not recorded"
          } 
          } 
       ]
@@ -1225,10 +1225,10 @@
       , "sourceQuality" : 12
       , "narrative" : "Summa L20Q12; no aging (-4) "
       , "changes" : [ { "art" : "Muto", "xp" : 15 } 
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 0
-            , "agingRoll" : -4
-            , "agingComment" : "No aging. Die not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 0
+            , "roll" : -4
+            , "comment" : "No aging. Die not recorded"
          } 
          } 
       ]
@@ -1266,10 +1266,10 @@
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : " 254½xp Invisibility Quartz for Sean; see below ; no aging (-18)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
-         , { "aging" : { "deltaYounger" : 1
-            , "agingRollDie" : 0
-            , "agingRoll" : -18
-            , "agingComment" : "No aging. Die not recorded"
+         , { "aging" : { "apparentYounger" : 1
+            , "die" : 0
+            , "roll" : -18
+            , "comment" : "No aging. Die not recorded"
             } 
          }
 	 , { "possession" : {  "art" : "Me",  "count" : 4
@@ -1302,10 +1302,10 @@
          }
          , { "reputation" : "Crafter of Magic", "locale" : "Hermetic", 
             "xp" : 20, "comment" : "From Lab Aesthetics" }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : -1
-               , "agingRoll" : -18
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : -1
+               , "roll" : -18
+               , "comment" : "No aging."
 	    }
 	    }
          ]
@@ -1330,10 +1330,10 @@
       , "sourceQuality" : 13
       , "narrative" : "Summa L15Q13 + Book Learner 96 -> 112; no aging -20"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } 
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : -1
-               , "agingRoll" : -20
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : -1
+               , "roll" : -20
+               , "comment" : "No aging."
 	    }
 	    }
       ]
@@ -1367,10 +1367,10 @@
       , "sourceQuality" : 9
       , "narrative" : "no aging -16"
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : -1
-               , "agingRoll" : -16
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : -1
+               , "roll" : -16
+               , "comment" : "No aging."
 	    }
 	    }
         , { "possession" : { "art" : "Im", "count" : 12
@@ -1418,10 +1418,10 @@
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 13 } 
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : -1
-               , "agingRoll" : -21
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : -1
+               , "roll" : -21
+               , "comment" : "No aging."
 	    }
          } 
       ]
@@ -1466,10 +1466,10 @@
                     , { "ability" : "Etiquette", "xp" : 2 } 
                     , { "reputation" : "Friendly druid",
                        "locale" : "Lands of O'Sullivan", "xp" : 4 }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 4
-               , "agingRoll" : -1
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : 4
+               , "roll" : -1
+               , "comment" : "No aging."
 	    } }
          , { "confidence" : "Confidence", "points" : 2 }
       ]
@@ -1509,10 +1509,10 @@
 		        , "comment" : "Correction" } } 
         , { "possession" : { "art" : "Vi", "count" : 2
 		        , "comment" : "Correction" } } 
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 0
-               , "agingRoll" : -1
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : 0
+               , "roll" : -1
+               , "comment" : "No aging."
 	    } }
       ]
       },
@@ -1559,10 +1559,10 @@
       , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 3 }
-            , { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 10
-               , "agingRoll" : -1
-               , "agingComment" : "No aging."
+            , { "aging" : { "apparentYounger" : 1
+               , "die" : 10
+               , "roll" : -1
+               , "comment" : "No aging."
 	    } }
       ]
       },
@@ -1596,10 +1596,10 @@
       { "mode" : "Teaching", "season" : "Winter 1257"
       , "narrative" : "Teaching Luciu"
       , "changes" : [ 
-            { "aging" : { "deltaYounger" : 1
-               , "agingRollDie" : 5
-               , "agingRoll" : -1
-               , "agingComment" : "No aging."
+            { "aging" : { "apparentYounger" : 1
+               , "die" : 5
+               , "roll" : -1
+               , "comment" : "No aging."
 	    } }
       ]
       }

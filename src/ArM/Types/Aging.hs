@@ -19,8 +19,7 @@
 -----------------------------------------------------------------------------
 module ArM.Types.Aging where
 
--- import ArM.GameRules
--- import ArM.Helper
+import ArM.Helper
 -- import ArM.Types.TraitKey
 -- import ArM.Types.HarmObject
 -- import ArM.Debug.Trace
@@ -45,7 +44,7 @@ instance FromJSON Age where
         <$> v .:? "age" .!= 0
         <*> v .:? "apparentYounger"  .!= 0
         <*> v .:? "ageLimit"  .!= 35
-        <*> v .:? "longevityRitual"  .!= 0
+        <*> v .:? "longevity"  .!= 0
         <*> v .:? "agingRollBonus"  .!= 0
         <*> v `parseCollapsedList` "comment"  
 
@@ -80,14 +79,14 @@ instance FromJSON Aging where
         <*> v .:? "apparentYounger"  
         <*> v .:? "die"  
         <*> v .:? "roll"  
+        <*> v .:? "longevity"  
         <*> v .:? "ageLimit"  
-        <*> v .:? "longevityRitual"  
         <*> v .:? "agingRollBonus"  
         <*> v `parseCollapsedList` "comment"  
 
 instance Show Aging where
     show x = "Aging " ++ y ++ lr ++ roll ++ lim ++ b 
-      -- ++ fromMaybe "" (agingComment x)
+       ++ f (agingComment x)
        where y | isNothing (addYears x) = ""
                | otherwise = show yr ++ " years; apparent " 
                     ++ show (yr-del) ++ " years."
@@ -102,7 +101,8 @@ instance Show Aging where
              roll | isNothing (agingRoll x) = " No roll. "
                 | otherwise = "Rolled " ++ show (fromJust $ agingRoll x) ++ " ("
                            ++ show (fromMaybe (-1) $ agingRollDie x) ++ ") "
-
+             f [] = ""
+             f xs = " [" ++ showStrList xs ++ "]"
 
 advanceAge :: Aging -> Age -> Age
 advanceAge ag x = updateLR (longevity ag ) 
@@ -121,6 +121,6 @@ toAge :: Aging -> Age
 toAge ag = Age { ageYears = fromMaybe 0 $ addYears ag
                 , ageLimit = fromMaybe 35 $ agingLimit ag
                 , apparentYounger = fromMaybe 0 $ deltaYounger ag
-                , longevityRitual = (fromMaybe (-1) $ longevity ag)
+                , longevityRitual = (fromMaybe 0 $ longevity ag)
                 , agingRollBonus = ( fromMaybe 0 $ agingBonus ag ) 
                 , ageComment = agingComment ag }

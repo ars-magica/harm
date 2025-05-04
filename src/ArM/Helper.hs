@@ -39,16 +39,7 @@ trim = f . f
                    | x > y = (x:xs) -= ys
                    | otherwise = xs -= ys
 
--- |
--- = Convenience functions for Maybe
-
-{-
--- | Collapse a neste Maybe Maybe object to a single Maybe
-join :: Maybe (Maybe a) -> Maybe a
-join Nothing = Nothing
-join (Just Nothing) = Nothing
-join (Just (Just x)) = Just x
--}
+-- * Convenience functions for Maybe
 
 -- | Show a number or «N/A»
 showstat :: Show a => Maybe a -> String
@@ -69,25 +60,17 @@ maybeAdd :: Num a => Maybe a -> Maybe a -> Maybe a
 maybeAdd Nothing Nothing = Nothing 
 maybeAdd x y = Just $ fromMaybe 0 x + fromMaybe 0 y
 
--- | Remove Nothing elements from a list, and map the Just-elements
--- to the constituent object.
-filterNothing :: [Maybe a] -> [a]
-filterNothing = f
-    where f [] = []
-          f (Nothing:xs) = f xs
-          f (Just x:xs) = x:f xs
 
 -- | Skip Nothing values and apply the give function on Just-objects.
 passMaybe :: (Monad m) => (a -> m b) -> Maybe a -> m (Maybe b)
 passMaybe _ Nothing = return Nothing
 passMaybe g (Just x) = fmap Just $ g x
 
--- |
--- = Convenience display functions 
-
+-- | Show a Maybe value, with an empty string for Nothing
 maybeShow :: Show a => Maybe a -> String
-maybeShow Nothing = ""
-maybeShow (Just x) = show x
+maybeShow = fromMaybe "" . fmap show
+
+-- * Rendering Numbers
 
 -- | Show a number with decimals only if required.
 showNum :: (Show a, RealFrac a) => a -> String
@@ -106,13 +89,16 @@ showSigned :: Int -> String
 showSigned x | x > 0 = "+" ++ show x
             | otherwise = show x
 
--- | Show a list of strings without brackets and quotes.
-showStrList :: [String] -> String
-showStrList [] = ""
-showStrList (x:xs) = foldl (++) x $ map (", "++) xs
 
--- |
--- = Unique Sort
+-- * List Management
+
+-- | Remove Nothing elements from a list, and map the Just-elements
+-- to the constituent object.
+filterNothing :: [Maybe a] -> [a]
+filterNothing = f
+    where f [] = []
+          f (Nothing:xs) = f xs
+          f (Just x:xs) = x:f xs
 
 -- | Sort the list and remove duplicates.
 uniqueSort :: (Ord a,Eq a) => [a] -> [a]
@@ -122,8 +108,7 @@ uniqueSort = f . sort
           f (x:y:ys) | x == y = f (y:ys)
                      | otherwise = x:f (y:ys)
 
--- |
--- = Convenience functions for Markdown
+-- * Convenience functions for Markdown
 
 -- | Set a markdown link, escaping spaces in the link.
 markdownLink :: String -> String -> String
@@ -141,3 +126,14 @@ wikiLink txt = "[[" ++ txt ++ "]]"
 markdownDL :: String -> String -> OList
 markdownDL t d = OList [ OString t, OString (": "++d), OString "" ]
 
+-- * Plain Text Rendering
+
+-- | Render a list of objects as a comma-separated list on a single
+-- line/paragraph.  This works for any instance of `Show`.
+commaList :: Show a => [a] -> String
+commaList = showStrList . map show
+
+-- | Show a list of strings without brackets and quotes.
+showStrList :: [String] -> String
+showStrList [] = ""
+showStrList (x:xs) = foldl (++) x $ map (", "++) xs

@@ -140,13 +140,6 @@ showlistMD s xs = OList [ OString s
                         , toOList $ (map (++", ") $ map show xs)
                         ]
  
--- | Render a list of objects as a comma-separated list on a single
--- line/paragraph.  This works for any instance of `Show`.
-commalistMD :: Show a => [a] -> String
-commalistMD = f . map show
-   where f [] = ""
-         f (x:xs) = ' ':(foldl (++) x $ map (", "++) xs)
-
 -- | Render a Maybe String as an OList.
 -- Nothing becomes an empty OList and a Just object becomes a single line.
 -- Note that this is different from the generic instance for Maybe, because
@@ -323,10 +316,32 @@ instance Markdown CharacterState where
 -- | Print age, confidence, warping, and decrepitude as bullet points
 briefTraits :: CharacterSheet -> OList
 briefTraits c = OList
-          [ printMD (ageObject c)
+          [ printAge c
           , OList $ map printMD $ confList c
           , OList $ map printMD $ otherList c
           ]
+printAge :: CharacterSheet -> OList
+printAge c | isNothing ag' = OString "**Age** undefined"
+         | otherwise = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
+            ++ show (y - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
+            ++ " (" ++ (showStrList $ map f bs) ++ ")"
+   where ag' = ageObject c
+         ag = fromJust ag'
+         y = ageYears ag
+         f (x,y) = x ++ " " ++ showSigned y
+         bs = charAgingBonusList c
+         b = charAgingBonus c
+         lrs = longevityRitual ag
+         lr | lrs < 0 = ""
+            | otherwise = " Longevity Ritual: " ++ show lrs
+
+instance Markdown Age where
+   printMD c = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
+            ++ show (y - apparentYounger c)  ++ ")" ++ lr
+      where y = ageYears c
+            lrs = longevityRitual c
+            lr | lrs < 0 = ""
+               | otherwise = " Longevity Ritual: " ++ show lrs
 
 -- | Print a table of casting totals for every TeFo combination.
 printCastingTotals :: CharacterSheet -> [String]
@@ -352,13 +367,6 @@ printLabTotals c
                 | (fo,ts) <- zip lforms (labTotals c) ]
           lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
 
-instance Markdown Age where
-   printMD c = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
-            ++ show (y - apparentYounger c)  ++ ")" ++ lr
-      where y = ageYears c
-            lrs = longevityRitual c
-            lr | lrs < 0 = ""
-               | otherwise = " Longevity Ritual: " ++ show lrs
 instance Markdown Confidence where
    printMD c = OString $
              "+ **" ++ cname c ++ "**: " ++ show (cscore c) ++ " ("
@@ -372,7 +380,6 @@ instance Markdown OtherTrait where
 
 -- |
 -- = Advancements
-
 
 instance Markdown AugCovAdvancement where
    printMD = printMD . contractAdvancement
@@ -708,9 +715,9 @@ instance Markdown Lab where
          , OString $ "Size: " ++ showSigned (labSize $ labState lab)
          , OString $ "Unused size: " ++ showSigned ( (labSize $ labState lab) - usedSize lab )
          , OString $ "Aura: " ++ show (labAura $ labState lab)
-         , OString $ "Traits: " ++ commalistMD ts
-         , OString $ "Art Specialisations: " ++ commalistMD arsp
-         , OString $ "Activity Specialisations: " ++ commalistMD acsp
+         , OString $ "Traits: " ++ commaList ts
+         , OString $ "Art Specialisations: " ++ commaList arsp
+         , OString $ "Activity Specialisations: " ++ commaList acsp
          , OString "Description"
          , OList $ map OString $ narrative lab
          , OList $ map OString $ comment lab
@@ -728,7 +735,7 @@ instance Markdown LabVirtue where
                    , OList $ map OString $ comment v
                    , OList [ OString ts ]
                    ]
-        where ts = "Bonuses: " ++ commalistMD (labVirtueBonus v)
+        where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z

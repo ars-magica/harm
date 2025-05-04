@@ -20,7 +20,7 @@ Size
 
 ## Winter 1249
 
-+ **Age:** 38 years (apparent age 38)
++ **Age:** 38 years (apparent age 38) Aging Bonus: +3 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
 + **Confidence**: 0 (0)
 + **Decrepitude**: 1 (1)
 + **Characteristics:** 

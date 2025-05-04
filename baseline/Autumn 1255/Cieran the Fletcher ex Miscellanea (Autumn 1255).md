@@ -37,7 +37,7 @@ Size
 
 ## Autumn 1255
 
-+ **Age:** 63 years (apparent age 51) Longevity Ritual: 22
++ **Age:** 63 years (apparent age 51) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
 + **Confidence**: 1 (33)
 + **Warping**: 1 (9)
 + **Characteristics:** 
@@ -567,41 +567,41 @@ Total: 1249 levels of spells.
     + Size: 0
     + Unused size: 0
     + Aura: 8
-    + Traits:  Aestetics +5, General Quality +1, Health +2, Safety +1, Upkeep +2, Warping +1
-    + Art Specialisations:  Ig +1, Me +1, Re +1
-    + Activity Specialisations:  Experimentation +3, Spells +7
+    + Traits: Aestetics +5, General Quality +1, Health +2, Safety +1, Upkeep +2, Warping +1
+    + Art Specialisations: Ig +1, Me +1, Re +1
+    + Activity Specialisations: Experimentation +3, Spells +7
     + Description
         + A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop.
     + Virtues and Flaws
         + Dedicated Building
-            + Bonuses:  Aestetics +1, Upkeep +1, Re +1
+            + Bonuses: Aestetics +1, Upkeep +1, Re +1
         + Servant
             + Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one.
-            + Bonuses:  Aestetics +1, Safety +1, Me +1
+            + Bonuses: Aestetics +1, Safety +1, Me +1
         + Safe Cauldron
             + Magic Item from Folio-1109 installed Spring 1227
-            + Bonuses:  General Quality +1, Experimentation +1
+            + Bonuses: General Quality +1, Experimentation +1
         + Precious Ingredients
             + From 1227
             + The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera.
-            + Bonuses:  General Quality +1, Upkeep +2
+            + Bonuses: General Quality +1, Upkeep +2
         + Major Feature: Antechamber
             + The Antechamber is actually a small courtyard which can be accessed only through the sanctum.
             + From 1228
-            + Bonuses:  Aestetics +2, Spells +3
+            + Bonuses: Aestetics +2, Spells +3
         + Major Focus: Antechamber
             + From 1228
-            + Bonuses:  General Quality -2, Spells +4
+            + Bonuses: General Quality -2, Spells +4
         + Hermetic Chamber Pot
             + From 1235
-            + Bonuses:  Health +1
+            + Bonuses: Health +1
         + Faerie Ingredients
             + From 1238
             + Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation.
-            + Bonuses:  Warping +1, General Quality +1, Upkeep -1, Experimentation +2
+            + Bonuses: Warping +1, General Quality +1, Upkeep -1, Experimentation +2
         + Magical Heating
             + Fan of Summer Breezes
-            + Bonuses:  Health +1, Aestetics +1, Ig +1
+            + Bonuses: Health +1, Aestetics +1, Ig +1
 
 ## Past Advancement
 
@@ -639,7 +639,7 @@ Total: 1249 levels of spells.
         + Possession: In vis (-3)
         + Possession: Mu vis (2)
         + Possession: Vi vis (2)
-        + Aging Rolled -1 (0) No aging.
+        + Aging Rolled -1 (0)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -672,7 +672,7 @@ Total: 1249 levels of spells.
         + Ability: Finesse [Precision] 5xp; 
         + Reputation: Friendly druid [Lands of O'Sullivan] 4xp
         + Confidence: 0 (2)
-        + Aging Rolled -1 (4) No aging.
+        + Aging Rolled -1 (4)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -707,7 +707,7 @@ Total: 1249 levels of spells.
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 13xp; 
-        + Aging Rolled -21 (-1) No aging.
+        + Aging Rolled -21 (-1)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -745,7 +745,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Rego 12xp; 
         + Possession: Im vis (12)
-        + Aging Rolled -16 (-1) No aging.
+        + Aging Rolled -16 (-1)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -776,7 +776,7 @@ Total: 1249 levels of spells.
     + Summa L15Q13 + Book Learner 96 -> 112; no aging -20
     + Changing traits
         + Art: Intellego 16xp; 
-        + Aging Rolled -20 (-1) No aging.
+        + Aging Rolled -20 (-1)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -803,7 +803,7 @@ Total: 1249 levels of spells.
         + Ability: Parma Magica 2xp; 
         + Spell: Converse with Plant and Tree 0xp Penetration
         + Reputation: Crafter of Magic [Hermetic] 20xp (From Lab Aesthetics)
-        + Aging Rolled -18 (-1) No aging.
+        + Aging Rolled -18 (-1)  [No aging.]
     + Inferred traits
         + Spell: Converse with Plant and Tree 0xp with flawless magic
         + Warping 1 (from Longevity Ritual)
@@ -830,7 +830,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Imaginem 3xp; 
         + Possession: Me vis (4)
-        + Aging Rolled -18 (0) No aging. Die not recorded
+        + Aging Rolled -18 (0)  [No aging. Die not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -860,7 +860,7 @@ Total: 1249 levels of spells.
     + Summa L20Q12; no aging (-4) 
     + Changing traits
         + Art: Muto 15xp; 
-        + Aging Rolled -4 (0) No aging. Die not recorded
+        + Aging Rolled -4 (0)  [No aging. Die not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -895,7 +895,7 @@ Total: 1249 levels of spells.
     + Maine's Tractatus + Book Learner; 8-24=-16 no aging
     + Changing traits
         + Art: Mentem 17xp; 
-        + Aging Rolled -16 (8) No aging. Rolls not recorded
+        + Aging Rolled -16 (8)  [No aging. Rolls not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -920,7 +920,7 @@ Total: 1249 levels of spells.
     + Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging
     + Changing traits
         + Art: Mentem 16xp; 
-        + Aging Rolled 0 (0) No aging. Rolls not recorded
+        + Aging Rolled 0 (0)  [No aging. Rolls not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -956,7 +956,7 @@ Total: 1249 levels of spells.
         + Spell: Fist of Magic Oblivion 0xp Penetration
         + Spell: Break the Shield 0xp Penetration
         + Spell: Circle of Fey Oblivion 0xp Penetration
-        + Aging Rolled 4 (28) Apparent age increases
+        + Aging Rolled 4 (28)  [Apparent age increases]
     + Inferred traits
         + Spell: Fist of Fey Oblivion 0xp with flawless magic
         + Spell: Fist of Magic Oblivion 0xp with flawless magic
@@ -991,7 +991,7 @@ Total: 1249 levels of spells.
     + Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging
     + Changing traits
         + Art: Creo 17xp; 
-        + Aging Rolled 0 (0) No aging. Rolls not recorded
+        + Aging Rolled 0 (0)  [No aging. Rolls not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1017,7 +1017,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Mentem 16xp; 
         + Possession: Pe vis
-        + Aging Rolled 0 (0) No aging. Rolls not recorded
+        + Aging Rolled 0 (0)  [No aging. Rolls not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1737,7 +1737,7 @@ Total: 1249 levels of spells.
     + Teaching Luciu
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Art: Imaginem 3xp; 
-    + Aging Rolled -1 (10) No aging.
+    + Aging Rolled -1 (10)  [No aging.]
 + Spring 1256 LabWork (Exposure)
     + CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).
     + Art: Imaginem 3xp; 
@@ -1749,5 +1749,5 @@ Total: 1249 levels of spells.
     + Art: Imaginem 13xp; 
 + Winter 1257 Teaching (Exposure)
     + Teaching Luciu
-    + Aging Rolled -1 (5) No aging.
+    + Aging Rolled -1 (5)  [No aging.]
 

@@ -28,7 +28,7 @@ Size
 
 ## Winter 1256
 
-+ **Age:** 26 years (apparent age 26)
++ **Age:** 26 years (apparent age 26) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
 + **Confidence**: 1 (6)
 + **Characteristics:** 
 Int +2, 

@@ -65,11 +65,11 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
            f (x:_) = season x
 
 
-charAgingBonus :: Character -> Int
+charAgingBonus :: CharacterLike c => c -> Int
 charAgingBonus c = ag + sum ( map snd (charAgingBonusList c) )
     where ag = age c // 10
 
-charAgingBonusList :: Character -> [ (String,Int) ]
+charAgingBonusList :: CharacterLike c => c -> [ (String,Int) ]
 charAgingBonusList c = [ ( "Longevity Ritual", af longevityRitual )
                        , ( "Personal Bonus", af agingRollBonus )
                        , ( "Living Conditions", cv )
