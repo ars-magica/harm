@@ -704,7 +704,6 @@ instance Markdown Lab where
          , OString $ "Traits: " ++ commalistMD ts
          , OString $ "Art Specialisations: " ++ commalistMD arsp
          , OString $ "Activity Specialisations: " ++ commalistMD acsp
-         , OList $ map printMD $ totalBonus lab
          , OString "Description"
          , OList $ map OString $ narrative lab
          , OList $ map OString $ comment lab
