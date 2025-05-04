@@ -8,19 +8,18 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Advancement process and convenience functions for Characters.
+-- Description :  In-game character ddvancement.
+--
+-- Only a single function, `prepareAdvancement`, is exported.
+-- It applice to in-game character advancement only.
+-- Its purpose is to make those inferences which can be made on the
+-- individual character in isolation.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Advancement ( module ArM.Types.Advancement
-                            , module ArM.Char.Virtues
-                            , module ArM.Char.Inference
-                            , prepareAdvancement 
-                            , applyAdvancement 
-                            , agePT
-                            ) where
+module ArM.Char.Advancement ( prepareAdvancement ) where
 
 -- Module reexported
-import ArM.Types.Advancement
+import ArM.Char.Character
 import ArM.Char.Virtues
 import ArM.Char.Inference
 
@@ -126,37 +125,14 @@ getSQ a | isExposure ad = (Just 2,Nothing)
          -- usd = bookUsed a
 
 -- |
--- = Applying the Advancement
-
--- | Apply advancement
--- This function is generic, and used for both chargen and ingame 
--- advancement.  The AugmentedAdvancement has to be prepared differently,
--- using either `prepareAdvancement` or `prepareCharGen`.
-applyAdvancement :: AugmentedAdvancement
-                 -> CharacterState 
-                 -> (AugmentedAdvancement,CharacterState)
-applyAdvancement a cs = (a,cs')
-    where cs' = cs { charTime = season a, traits = new }
-          new = advanceTraitList change tmp
-          tmp = advanceTraitList inferred old
-          change = sortTraits $ changes $ explicitAdv a
-          inferred = sortTraits $ changes $ inferredAdv a
-          old = sortTraits $ traits cs
-
-
--- |
--- == Convenience Functions (Exported)
-
--- | Return a `ProtoTrait` for aging advancing a number of years.
-agePT :: Int -- ^ Number of years
-      ->  ProtoTrait -- ^ Resulting ProtoTrait
-agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
+-- == Convenience Functions
 
 -- | ProtoTrait representing the warping point from Longevity Ritual.
 lrWarping :: ProtoTrait
 lrWarping = defaultPT { other = Just "Warping"
                       , points = Just 1
                       , ptComment = Just "from Longevity Ritual" }
+
 
 -- |
 -- = In-game Validation

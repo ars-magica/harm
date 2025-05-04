@@ -18,10 +18,8 @@
 -----------------------------------------------------------------------------
 module ArM.Char.CharGen (prepareCharacter) where
 
-import ArM.Char.Advancement
+import ArM.Char.Character
 import ArM.Types.ProtoTrait
-import ArM.Types.Character
-import ArM.Char.CharacterSheet
 import ArM.Types
 import ArM.GameRules
 

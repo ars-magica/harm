@@ -22,6 +22,7 @@ import Data.Maybe
 import Data.List 
 
 import ArM.Char.Character
+import ArM.Char.Advancement (prepareAdvancement)
 import ArM.Char.CharGen (prepareCharacter)
 import ArM.Types.Covenant
 import ArM.Types.Library
