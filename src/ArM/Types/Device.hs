@@ -15,7 +15,7 @@
 module ArM.Types.Device where
 
 import ArM.Types.Calendar
-import ArM.Types.HarmObject
+-- import ArM.Types.HarmObject
 -- import ArM.Debug.Trace
 
 import GHC.Generics
