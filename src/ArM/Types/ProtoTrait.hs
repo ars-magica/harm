@@ -321,11 +321,12 @@ instance TraitClass ProtoTrait where
    getTrait _ = Nothing
 
 
+{-
 instance TraitClass Aging where
     traitKey _ = AgeKey
     toTrait p = AgeTrait $ fromJust $ computeTrait $ defaultPT { aging = Just p } 
     getTrait _ = Nothing
-
+-}
 
 -- |
 -- = Advancement - the TraitType class
