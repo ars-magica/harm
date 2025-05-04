@@ -554,22 +554,13 @@ Total: 1249 levels of spells.
 | Vim | 48 | 45 | 39 | 39 | 46 |
 
 + Cieran's Workshop
-    + Refinement: 
-    + Size: 
-    + Unused size: 
-    + Aura:  +8
-    + Stats
-        + Experimentation  +3
-        + Spells  +7
-        + Aestetics  +5
-        + Ig  +1
-        + Me  +1
-        + Re  +1
-        + General Quality  +1
-        + Health  +2
-        + Safety  +1
-        + Upkeep  +2
-        + Warping  +1
+    + Refinement: 0
+    + Size: 0
+    + Unused size: 0
+    + Aura: 8
+    + Traits:  Aestetics +5, General Quality +1, Health +2, Safety +1, Upkeep +2, Warping +1
+    + Art Specialisations:  Ig +1, Me +1, Re +1
+    + Activity Specialisations:  Experimentation +3, Spells +7
     + Description
         + A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop.
     + Virtues and Flaws
