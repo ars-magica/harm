@@ -285,19 +285,22 @@ instance Markdown CharacterSheet where
                , mag
                ]
          where c = addCastingScores (spells saga) c'
-               mag | isMagus c' = OList [ artVisMD c
-                                        , OString ""
-                                        , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
-                                        , OString ""
-                                        , toOList $ printCastingTotals c 
-                                        , OString ""
-                                        , OString "## Laboratory"
-                                        , OString ""
-                                        , toOList $ printLabTotals c 
-                                        , OString ""
-                                        , printSheetMD saga $ characterLab c
-                                        , OString ""
-                                        ]
+               mag | isMagus c' = OList 
+	               [ artVisMD c
+                       , OString ""
+                       , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
+                       , OString ""
+                       , toOList $ printCastingTotals c 
+                       , OString ""
+                       , OString "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+                       , OString ""
+                       , OString "## Laboratory"
+                       , OString ""
+                       , toOList $ printLabTotals c 
+                       , OString ""
+                       , printSheetMD saga $ characterLab c
+                       , OString ""
+                       ]
                    | otherwise = OString "" 
 
 instance Markdown CharacterState where
