@@ -261,7 +261,7 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Possessions:** "  $ sortTraits $ possessionList c
                , toOList $ printCastingTotals c
                , OString ""
-               , OString "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+               , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
                , OString ""
                , OString "## Laboratory"
                , OString ""
@@ -286,13 +286,13 @@ instance Markdown CharacterSheet where
                ]
          where c = addCastingScores (spells saga) c'
                mag | isMagus c' = OList 
-	               [ artVisMD c
+                       [ artVisMD c
                        , OString ""
                        , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
                        , OString ""
                        , toOList $ printCastingTotals c 
                        , OString ""
-                       , OString "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+                       , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
                        , OString ""
                        , OString "## Laboratory"
                        , OString ""
