@@ -30,6 +30,7 @@ module ArM.Char.Virtues (
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
+import ArM.Types.Aging
 import ArM.Helper
 import ArM.GameRules
 

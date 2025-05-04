@@ -61,11 +61,11 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
           pt = find ( (AgeKey ==) . traitKey ) $ changes ad
           agingOb | isNothing pt = Nothing
                       | otherwise = aging $ fromJust pt
-          lr | ageOb == Nothing = -1
+          lr | ageOb == Nothing = 0
                  | otherwise = longevityRitual $ fromJust ageOb
           yl | ageOb == Nothing = trace "No age object" 35
                  | otherwise = ageLimit $ fromJust ageOb
-          warpingLR x | lr < 0 = x
+          warpingLR x | lr <= 0 = x
                       | otherwise = x { advChanges = lrWarping:advChanges x }
           addYear o x | addsYear o = x
                       | otherwise = x { advChanges = agePT 1:advChanges x }

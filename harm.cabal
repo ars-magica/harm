@@ -71,6 +71,7 @@ common harm-deps
                        , ArM.Types.Character
                        , ArM.Types.Advancement
                        , ArM.Advancement
+                       , ArM.Types.Aging
                        , ArM.Types.ProtoTrait
                        , ArM.Types.Trait
                        , ArM.Types.TraitKey

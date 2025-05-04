@@ -30,8 +30,6 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , advanceTraitList
                       , defaultPT
                       , spellKeyName
-                      , Aging(..)
-                      , defaultAging
                       , Weapon(..)
                       , Armour(..)
                       , findTrait
@@ -43,6 +41,7 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Types.Trait
 import ArM.Types.Story
+import ArM.Types.Aging
 
 import GHC.Generics
 import Data.Aeson
@@ -321,54 +320,11 @@ instance TraitClass ProtoTrait where
       | otherwise  = error "No Trait for this ProtoTrait" 
    getTrait _ = Nothing
 
--- |
--- == Aging
-
-defaultAging :: Aging
-defaultAging = Aging
-    { addYears       = Nothing
-    , deltaYounger   = Nothing
-    , agingRollDie   = Nothing
-    , agingRoll      = Nothing
-    , longevity      = Nothing
-    , agingLimit     = Nothing
-    , agingBonus     = Nothing
-    , agingComment   = Nothing
-    }
-data Aging = Aging
-    { addYears       :: Maybe Int
-    , deltaYounger   :: Maybe Int   
-        -- ^ Should be 1 when age changes and apparent age does not, otherwise 0
-    , agingRollDie   :: Maybe Int    -- ^ aging roll die result
-    , agingRoll      :: Maybe Int    -- ^ aging roll total
-    , longevity      :: Maybe Int    -- ^ score of new longevity ritual
-    , agingLimit     :: Maybe Int    -- ^ freeform ptComment
-    , agingBonus     :: Maybe Int    -- ^ Bonus to aging rolls (excluding LR)
-    , agingComment   :: Maybe String -- ^ age when aging rolls are required
-    } deriving (Ord,Eq,Generic)
-instance ToJSON Aging
-instance FromJSON Aging 
 
 instance TraitClass Aging where
     traitKey _ = AgeKey
     toTrait p = AgeTrait $ fromJust $ computeTrait $ defaultPT { aging = Just p } 
     getTrait _ = Nothing
-instance Show Aging where
-    show x = "Aging " ++ y ++ lr ++ roll ++ lim ++ b ++ fromMaybe "" (agingComment x)
-       where y | isNothing (addYears x) = ""
-               | otherwise = show yr ++ " years; apparent " 
-                    ++ show (yr-del) ++ " years."
-             yr = fromJust $ addYears x
-             del = fromMaybe 0 $ deltaYounger x
-             lr | isNothing (longevity x) = ""
-               | otherwise = " LR " ++ show (fromJust $ longevity x) ++ "; "
-             lim | isNothing (agingLimit x) = ""
-                | otherwise = "(limit " ++ show (fromJust $ agingLimit x) ++ ") "
-             b | isNothing (agingBonus x) = ""
-                | otherwise = "(bonus " ++ show (fromJust $ agingBonus x) ++ ") "
-             roll | isNothing (agingRoll x) = " No roll. "
-                | otherwise = "Rolled " ++ show (fromJust $ agingRoll x) ++ " ("
-                           ++ show (fromMaybe (-1) $ agingRollDie x) ++ ") "
 
 
 -- |
@@ -596,20 +552,8 @@ instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ computeTrait p
     computeTrait = combat 
 instance TraitType Age where
-    advanceTrait p x = updateLR (longevity ag ) 
-                     $ updateABonus ( agingBonus ag )
-                     $ updateAge ( addYears ag )
-                     $ x { apparentYounger = apparentYounger x + del }
+    advanceTrait p = advanceAge ag
           where ag = fromJust $ aging p
-                updateLR Nothing y = y
-                updateLR (Just lr) y = y { longevityRitual = lr }
-                updateABonus Nothing y = y
-                updateABonus (Just b) y = y { agingRollBonus = agingRollBonus y + b }
-                updateAge Nothing y = y
-                updateAge (Just b) y = y { ageYears = ageYears y + b }
-                del = fromMaybe 0 $ deltaYounger ag
-
-
     computeTrait p
        | isNothing (aging p) = Nothing
        | otherwise =  Just $ Age { ageYears = fromMaybe 0 $ addYears ag

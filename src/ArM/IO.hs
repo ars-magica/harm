@@ -126,8 +126,8 @@ loadCovenant (Just c)
     | isNothing fn = trace "loadCovenant -> Nothing to load" $ return $ Just c
     | otherwise = parseFromFile CSV.csvFile (fromJust fn) >>=
        ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = g lib } } )
-       where fn = ttrace $ librarycsv st
-             st = ttrace $ fromJust st'
+       where fn = librarycsv st
+             st = fromJust st'
              st' = covenantState c
              g (Left _) = []
              g (Right x) = map fromCSVline x

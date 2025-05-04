@@ -37,7 +37,7 @@ import ArM.GameRules
 import ArM.BasicIO
 import ArM.Helper
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- |
 -- = Rendering the Character Sheet
@@ -246,7 +246,7 @@ listPossessions ps = OList
    where vs = filter isVis ps
          ws = filter isWeapon ps
          as = filter isArmour ps
-         acs = ttrace $ filter isAC ps
+         acs = filter isAC ps
          es = filter isEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 

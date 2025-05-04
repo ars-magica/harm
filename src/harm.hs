@@ -81,7 +81,7 @@ main = do
      args <- getArgs
      (opt,n) <- armcharOpts args
      putStrLns n
-     putStrLn $ "Options: " ++ show opt
+     -- putStrLn $ "Options: " ++ show opt
 
      main' opt
 

@@ -33,6 +33,8 @@ module ArM.Char.Character (
                           , module ArM.Char.Virtues
                           , applyAdvancement 
                           , agePT
+                          -- * Aging
+                          , module ArM.Types.Aging
                           -- * Convenience Functions
                           , characterEntryTime
                           , charAgingBonus
@@ -41,6 +43,7 @@ module ArM.Char.Character (
 import Data.Maybe 
 
 import ArM.Types.Advancement
+import ArM.Types.Aging
 import ArM.Char.Inference
 import ArM.Char.CharacterSheet
 import ArM.Char.Virtues
@@ -67,7 +70,7 @@ charAgingBonus c = ag + lr + rb + cv + lh
           lr = af longevityRitual -- Longevity Ritual 
           rb = af agingRollBonus -- Other personal bonus
           cv = 0 -- Covenant living condition
-          lh = fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
+          lh = (`div`2) $ fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
           af f = fromMaybe 0 $ fmap f $ ageObject c       -- get stat from ageobject
 
 -- | Return a `ProtoTrait` for aging advancing a number of years.

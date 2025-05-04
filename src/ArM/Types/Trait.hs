@@ -50,8 +50,9 @@ import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
 import ArM.Types.Lab
+import ArM.Types.Aging
 import ArM.DB.Weapon
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
@@ -177,16 +178,6 @@ data SpecialTrait = SpecialTrait { specialTrait :: String
 instance FromJSON SpecialTrait
 instance ToJSON SpecialTrait
 
-data Age = Age
-    { ageYears :: Int             -- ^ character age in years
-    , apparentYounger :: Int      -- ^ difference between age and apparent age
-    , ageLimit :: Int
-    , longevityRitual :: Int      -- ^ Score of longevity ritual (LR), negative number means none
-    , agingRollBonus :: Int       -- ^ Bonus to aging rolls (excluding LR)
-    , ageComment :: Maybe String  -- ^ freeform comment
-    } deriving (Show,Ord,Eq,Generic)
-instance ToJSON Age
-instance FromJSON Age 
 
 -- |
 -- == Show instances
@@ -313,7 +304,7 @@ isArmour (LabPossession _) = False
 isArmour p = (armour p /= []) || (armourStats p /= [])
 isAC :: Possession -> Bool
 isAC (LabPossession _) = False
-isAC c = isJust $ ttrace $ acTo c
+isAC c = isJust $ acTo c
 isEquipment :: Possession -> Bool
 isEquipment (LabPossession _) = False
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
@@ -433,6 +424,7 @@ class TraitClass t where
     filterTrait' (x:xs,(ys,zs)) | isNothing ab  = filterTrait' (xs,(ys,x:zs))
                                 | otherwise = filterTrait' (xs,(fromJust ab:ys,zs))
         where ab = getTrait x
+
 
 instance TraitClass Trait where
     traitKey (CharacteristicTrait x) = traitKey x
