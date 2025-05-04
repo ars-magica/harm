@@ -20,7 +20,7 @@ import Data.Aeson.Extra
 import Data.Maybe
 import Data.List
 
--- import ArM.Helper
+import ArM.Helper
 import ArM.Types.HarmObject
 import ArM.Types.Calendar
 
@@ -119,7 +119,12 @@ data LabBonus = LabBonus
      { labTrait :: String
      , labSpecialisation :: String
      , labScore :: Int
-     }  deriving (Eq,Generic,Show)
+     }  deriving (Eq,Generic)
+instance Show LabBonus where
+   show (LabBonus "Art" s score) = s ++ " " ++ showSigned score
+   show (LabBonus "Activity" s score) = s ++ " " ++ showSigned score
+   show (LabBonus s _ score) = s ++ " " ++ showSigned score
+
 
 
 (<%) :: LabBonus -> LabBonus -> Bool

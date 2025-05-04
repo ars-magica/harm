@@ -138,6 +138,13 @@ showlistMD _ [] = OList []
 showlistMD s xs = OList [ OString s
                         , toOList $ (map (++", ") $ map show xs)
                         ]
+ 
+-- | Render a list of objects as a comma-separated list on a single
+-- line/paragraph.  This works for any instance of `Show`.
+commalistMD :: Show a => [a] -> String
+commalistMD = f . map show
+   where f [] = ""
+         f (x:xs) = ' ':(foldl (++) x $ map (", "++) xs)
 
 -- | Render a Maybe String as an OList.
 -- Nothing becomes an empty OList and a Just object becomes a single line.
@@ -709,7 +716,9 @@ instance Markdown LabVirtue where
    printMD v = OList [ OString $ name v
                    , OList $ map OString $ narrative v
                    , OList $ map OString $ comment v
+                   , OList [ OString ts ]
                    ]
+        where ts = "Bonuses: " ++ commalistMD (labVirtueBonus v)
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z

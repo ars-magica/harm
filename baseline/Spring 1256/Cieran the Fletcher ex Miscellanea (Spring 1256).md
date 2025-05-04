@@ -594,25 +594,34 @@ Total: 1309 levels of spells.
         + A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop.
     + Virtues and Flaws
         + Dedicated Building
+            + Bonuses:  Aestetics +1, Upkeep +1, Re +1
         + Servant
             + Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one.
+            + Bonuses:  Aestetics +1, Safety +1, Me +1
         + Safe Cauldron
             + Magic Item from Folio-1109 installed Spring 1227
+            + Bonuses:  General Quality +1, Experimentation +1
         + Precious Ingredients
             + From 1227
             + The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera.
+            + Bonuses:  General Quality +1, Upkeep +2
         + Major Feature: Antechamber
             + The Antechamber is actually a small courtyard which can be accessed only through the sanctum.
             + From 1228
+            + Bonuses:  Aestetics +2, Spells +3
         + Major Focus: Antechamber
             + From 1228
+            + Bonuses:  General Quality -2, Spells +4
         + Hermetic Chamber Pot
             + From 1235
+            + Bonuses:  Health +1
         + Faerie Ingredients
             + From 1238
             + Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation.
+            + Bonuses:  Warping +1, General Quality +1, Upkeep -1, Experimentation +2
         + Magical Heating
             + Fan of Summer Breezes
+            + Bonuses:  Health +1, Aestetics +1, Ig +1
 
 ## Past Advancement
 
