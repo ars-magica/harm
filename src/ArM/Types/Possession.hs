@@ -40,19 +40,54 @@ import ArM.Debug.Trace
 -- equipment, and any physical object that should be recorded
 -- on the characters sheet.
 data Possession = Possession 
-     { itemName :: String           -- ^ Name identifying the unique item
-     , itemKey :: HarmKey           -- ^ Key for a unique item
-     , weaponStats :: [ Weapon ]    -- ^ List of applicable Weapon stat objects
-     , weapon :: [ String ]         -- ^ List of standard weapon stats that apply
-     , armourStats :: [ Armour ]    -- ^ List of applicable Weapon stat objects
-     , armour :: [ String ]         -- ^ List of standard weapon stats that apply
-     , itemDescription :: String    -- ^ Description of the Item
+     { itemName :: String            -- ^ Name identifying the unique item
+     -- , itemKey :: HarmKey            -- ^ Key for a unique item
+     , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
+     , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
+     , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
+     , armour :: [ String ]          -- ^ List of standard weapon stats that apply
+     , enchantment :: Enchantment
+     , itemDescription :: [ String ] -- ^ Description of the Item
+     , itemComment :: [ String ]     -- ^ Comments, supplementing the description
      , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
      , acTo :: Maybe String
-     , itemCount :: Int             -- ^ Number of items possessed, default 1.
+     , itemCount :: Int              -- ^ Number of items possessed, default 1.
+     , itemDate :: SeasonTime        -- ^ Time of creation
      }
      | LabPossession Lab
     deriving ( Ord, Eq, Generic )
+
+data Enchantment = LesserItem MagicEffect
+                 | GreaterDevice Int [ MagicEffect ]
+                 | Talisman Int [ MagicEffect ]
+                 | ChargedItem Int MagicEffect
+                 | MundaneItem
+    deriving ( Ord, Eq, Generic )
+instance ToJSON Enchantment 
+
+parseLesser :: Object -> Parser Enchantment
+parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
+    where f Nothing = mzero
+          f (Just x) = parseJSON x
+
+parseGreater :: Object -> Parser Enchantment
+parseGreater v = GreaterDevice
+        <$> v .: "viscapacity" 
+        <*> v `parseCollapsedList` "effects" 
+parseTalisman :: Object -> Parser Enchantment
+parseTalisman v = GreaterDevice
+        <$> v .: "talisman" 
+        <*> v `parseCollapsedList` "effects" 
+parseCharged :: Object -> Parser Enchantment
+parseCharged v = ChargedItem
+        <$> v .: "charged" 
+        <*> v .: "effect" 
+
+instance FromJSON Enchantment where
+    parseJSON (Object v) = foldl mplus (parseLesser v) 
+       [ (parseGreater v), (parseTalisman v), (parseCharged v) ]
+    parseJSON _ = mzero
+
 visArt :: Possession -> Maybe String
 visArt (LabPossession _) = Nothing
 visArt ob = itemArt ob
@@ -92,13 +127,13 @@ instance StoryObject Possession where
    name (LabPossession lab) = name lab
    name ob = itemName ob 
    narrative (LabPossession lab) = narrative lab
-   narrative ob = [ itemDescription ob ]
+   narrative ob = itemDescription ob
    addNarrative s (LabPossession lab) = LabPossession $ addNarrative s lab
-   addNarrative s x = x { itemDescription = s ++ itemDescription x }
+   addNarrative s x = x { itemDescription = s:narrative x }
    comment (LabPossession lab) = comment lab
-   comment _ = [ ]
+   comment ob = comment ob
    addComment s (LabPossession lab) = LabPossession $ addComment s lab
-   addComment _ _ = error "No comment on Possession"
+   addComment s x = x { itemComment = s:comment x }
 
 instance Countable Possession where
    count (LabPossession _) = 1
@@ -109,15 +144,18 @@ instance Countable Possession where
 defaultPossession :: Possession 
 defaultPossession = Possession 
      { itemName = ""
-     , itemKey = NoObject
+     -- , itemKey = NoObject
      , weaponStats = []
      , weapon = []
      , armourStats = []
      , armour = []
-     , itemDescription = ""
+     , enchantment = MundaneItem
+     , itemDescription = []
+     , itemComment = []
      , itemArt = Nothing
      , acTo = Nothing
      , itemCount = 1
+     , itemDate = NoTime
      }
 instance ToJSON Possession 
 
@@ -130,15 +168,17 @@ instance FromJSON Possession where
 parseOtherPossession :: Object -> Parser Possession
 parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
-       <*> v .:? "weaponStats" .!= NoObject
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
        <*> v .:? "armourStats" .!= []
        <*> v .:? "armour" .!= []
-       <*> v .:? "description" .!= ""
+       <*> v .:? "enchantment" .!= MundaneItem
+       <*> v `parseCollapsedList` "description" 
+       <*> v `parseCollapsedList` "comment" 
        <*> v .:? "art"
        <*> v .:? "acTo" 
        <*> v .:? "count" .!= 1
+       <*> v .:? "date"  .!= NoTime
 
 parseLab :: Object -> Parser Possession
 parseLab = fmap LabPossession . f . KM.lookup "lab"
@@ -161,11 +201,6 @@ instance Show Possession where
                  | otherwise = " (" ++ show (count p) ++ ")"
 
 
-data EnchantmentType = LesserItem | GreaterDevice | ChargedItem | Talisman
-           deriving (Show, Eq, Ord, Generic)
-
-instance ToJSON EnchantmentType
-instance FromJSON EnchantmentType 
 
 {-
 data MagicItem = MagicItem
@@ -201,6 +236,7 @@ data MagicEffect = MagicEffect
            , effectFormReq :: [String]
            , effectRDT :: (String,String,String)   -- ^ Range/Duration/Target
            , effectModifiers :: [ String ]
+           , effectTrigger :: String
            , effectDesign :: String     -- ^ Level calculation
            , effectDescription :: [String]
            , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
@@ -222,6 +258,7 @@ instance FromJSON MagicEffect where
         <*> v .:? "rdt" .!= ("","","")
         <*> v `parseCollapsedList` "effectModifiers" 
         <*> v .:? "design"  .!= ""
+        <*> v .:? "trigger"  .!= ""
         <*> v `parseCollapsedList` "description" 
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "reference"  .!= ""

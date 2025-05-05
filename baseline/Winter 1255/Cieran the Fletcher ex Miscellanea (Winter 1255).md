@@ -287,6 +287,7 @@ Weak Spontaneous Magic (0),
 + *Aura of the Trustful Merchant* MuIm10 (38)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
+    + Base 3, +1 Touch, +2 Sun
     + Custom
 + *Disguise of the Transformed Image* MuIm15 (38)
     + Mastery: 1 (0xp) Quite Casting
@@ -315,11 +316,13 @@ Weak Spontaneous Magic (0),
 + *Circle of Undisturbed Rest* ReIm10 (44)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Ring; Target: Circle
-    + Base 1, +2 Ring, +1 Touch, +1 additional sense
+    + Created in conjunction with Be Rid the Tell Tale Smoke, this large circle spell is meant to be used around an encampment. The circle pre- vents iconic and echoic species from leaving the circle, making the encampment undetect- able. Perfect for ensuring privacy in unfamiliar territories, it does leave the camp as a silent black area; this is normally enough at night, when everything is dark, and Conscientia does not see the need for additional illusions. This version covers smell as well as hearing and sight.
+    + Base 1, +2 Ring, +1 Touch, +2 additional sense
     + [MoH:30]
 + *Willful Sidestep* ReIm20 (44)
     + Mastery: 1 (0xp) Quiet Casting
-    + Range: Touch; Duration: Sun; Target: Ind
+    + Range: Touch; Duration: Sun; Target: Ind; This variant of Wizard's Sidestep is the result of Original Research and was published in a Folio. Contrary to established theory, the target can end the spell at will.
+    + Base 2, +1 Touch, +2 Sun, +1 changing image, +1 moved image matches changes, +1 end at will
     + Custom
 + *Image from the Wizard Torn* ReIm30 (44)
     + Mastery: 1 (0xp) Quiet Casting
@@ -392,7 +395,9 @@ Weak Spontaneous Magic (0),
 + *Stone Tell of the Mind that Sits* InTe30 (27)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Conc; Target: Ind
-    + Base 20
+    + Allows you to talk with natural stone. A stone’s answers feel slow and ponderous, but do not actually take any longer than a normal conversation. Though a stone is usually willing to talk, its direction sense and awareness of quickly moving things (such as people) are limited.
+    + Base 20 +1 Touch +1 Concentration
+    + [ArM:153]
 + *Arrow of Gaping Earth* PeTe15 (21)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Mom; Target: Part
@@ -417,24 +422,31 @@ Weak Spontaneous Magic (0),
 + *Sense the Nature of Vis* InVi5 (30)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Mom; Target: Ind
+    + You can tell what Art a supply of raw vis is connected to. To you, the vis appears to glow with an aura that is appropriate to the Technique or Form that the vis is associated with. Creo is
     + Base 4, +1 Touch
     + [ArM5:158]
 + *Spot the Presence of Vis* InVi5 (30)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Per; Duration: Mom; Target: Vision
+    + The caster can see vis, as if briefly lit by a bright spotlight. They get no further information about the art or quantity.
     + Base 1 +4 Vision
     + Custom
 + *Piercing the Faerie Veil* InVi20 (30)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Per; Duration: Conc; Target: Vision
+    + This spell allows the caster to see through the boundaries of regiones, and therefore divine the path to the next level (more details about regiones are given on page 189). There are separate but related spells for Divine, Magical and Infernal regiones.
+    + Base 3, +1 Concentration, +4 Vision
     + [ArM5:158]
 + *Piercing the Magical Veil* InVi20 (30)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Per; Duration: Conc; Target: Vision
+    + Identical to Piercing the Faerie Veil, except that magic regione are detected instead for faerie ones.
+    + Base 3, +1 Concentration, +4 Vision
     + Custom variant
 + *Sense of the Lingering Magic* InVi30 (30)
     + Mastery: 1 (0xp) Penetration
-    + Range: ; Duration: ; Target: 
+    + Range: Per; Duration: Conc; Target: Hearing
+    + This spell can detect the presence of many magical residues, even from weak spells, as well as giving the presence and power of active spells. It does not grant any information apart from the power, however.  (Base 10, +1 Concentration, +3 Hearing)
     + Base 10; Per, Hearing (+3); D: Conc (+1);
     + [ArM5:158]
 + *Wizard's Communion* MuVi10 (24)
@@ -445,22 +457,25 @@ Weak Spontaneous Magic (0),
 + *Circle of Demon's Oblivion* PeVi5 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Circle
+    + Any demon finding themself inside the circle, loses Level+5 might.
+    + Base effect +1 Touch
+    + Custom
 + *Fist of Demon's Oblivion* PeVi5 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
-    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level.
+    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level+5.
     + Base effect +1 Touch
     + Custom Variant
 + *Fist of Fey Oblivion* PeVi5 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
-    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level.
+    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level+5.
     + Base effect +1 Touch
     + Custom Variant
 + *Fist of Magic Oblivion* PeVi5 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
-    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level.
+    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level+5.
     + Base effect +1 Touch
     + Custom Variant
 + *Break the Shield* PeVi10 (24)
@@ -472,16 +487,22 @@ Weak Spontaneous Magic (0),
 + *Circle of Fey Oblivion* PeVi10 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
+    + Similar to Circle of Demon's Oblivion, destroying faeries instead of demons.
+    + Base effect +1 Touch
+    + Custom
 + *Tearing the Fabric of Imaginem* PeVi13 (24)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Mom; Target: Ind
 + *Circle of Demon's Oblivion* PeVi15 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Circle
+    + Any demon finding themself inside the circle, loses Level+5 might.
+    + Base effect +1 Touch
+    + Custom
 + *Fist of Demon's Oblivion* PeVi15 (24)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
-    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level.
+    + Weakens and possibly destroys a demon.  If the spell penetrates the demon’s Magic Resistance, the demon loses Might Score equal to the spell’s level+5.
     + Base effect +1 Touch
     + Custom Variant
 + *The Minute of Reckoning* ReVi5 (30)
