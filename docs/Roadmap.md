@@ -13,13 +13,13 @@ title:
 
 + [ ] Immediate
 	+ [ ] Spell comments (see Cieran print)
-	+ [ ] Split character sheet in sections
+	+ [ ] Split character sheet in different pages
 		+ [ ] Brief grimoire
 		+ [ ] Long grimoire in separate doc
 	+ [ ] SQ penalties (e.g. Cieran injured)
 	+ [x] Lab safety
 	+ [x] Remove items at zero count
-	+ [ ] Narrative in italics (see Annals print)
+	+ [x] Narrative in italics (see Annals print)
 	+ [ ] Double-check regression output
 + [ ] Phase 1.  **Review** Hibernia Saga
 	+ [ ] Review Character JSON syntax

@@ -377,26 +377,30 @@ instance Markdown OtherTrait where
 instance Markdown AugCovAdvancement where
    printMD = printMD . contractAdvancement
 instance Markdown CovAdvancement where
-   printMD ad = foldOList $ OList $ ( map printMD $ caStory ad ) ++ ch
-      where (OList ch) = printCovChanges ad
+   printMD ad = OList $ sls ++ f ch
+      where ch = printCovChanges ad
+            sls = foldl (++) [] ( map ( f . printMD ) $ caStory ad )
+            f (OList x) = x
+            f (OString "") = []
+            f (OString xs) = [OString xs]
 instance Markdown Story where
    printMD story = OList 
          [ OString $ storyTitle story ++ sq (storySQ story) 
-         , OList $ map OString ( storyNarrative story )
+         , OList $ map italicOString ( storyNarrative story )
          , OList $ map OString ( storyComment story )
          ]
       where sq Nothing = "(no source quality)"
             sq (Just x) = " (SQ " ++ show x ++ ")"
 printCovChanges :: CovAdvancement -> OList
-printCovChanges a = OList [ OString "Changes", j, lv, acq, lst ]
+printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
      where j | joining a == [] = OList []
-             | otherwise = OString $  "    + joining: " ++ showStrList (map show $ joining a)
+             | otherwise = OString $  "joining: " ++ showStrList (map show $ joining a)
            lv | leaving a == [] = OList []
-             | otherwise = OString $  "    + leaving: " ++ showStrList (map show $ leaving a)
+             | otherwise = OString $  "leaving: " ++ showStrList (map show $ leaving a)
            acq | acquired a == [] = OList []
-             | otherwise = OString $  "    + acquired: " ++ showStrList (map formatTitle $ acquired a)
+             | otherwise = OString $  "acquired: " ++ showStrList (map formatTitle $ acquired a)
            lst | lost a == [] = OList []
-             | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
+             | otherwise = OString $  "lost: " ++ showStrList (map formatTitle $ lost a)
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList $ storyOList a ++
        [ OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
