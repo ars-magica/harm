@@ -214,10 +214,7 @@ usedSize :: Lab -> Int
 usedSize = sum . map labVirtueCost . labVirtues . labState
 
 occupiedSize :: Lab -> Int
-occupiedSize lab = virtueTotal lab - labRefinement (labState lab)
-
-virtueTotal :: Lab -> Int
-virtueTotal = sum . map labVirtueCost . labVirtues . labState
+occupiedSize lab = usedSize lab - labRefinement (labState lab)
 
 baseSafety :: Lab -> Int
 baseSafety lab = labRefinement st - max (occupiedSize lab) 0

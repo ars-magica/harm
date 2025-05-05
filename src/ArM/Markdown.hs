@@ -704,7 +704,8 @@ instance Markdown Lab where
        , OList 
          [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lab)
          , OString $ "Size: " ++ showSigned (labSize $ labState lab)
-         , OString $ "Unused size: " ++ showSigned ( (labSize $ labState lab) - usedSize lab )
+         , OString $ "Used size: " ++ used ++ " out of " ++ lim
+         , OString $ "Safety: " ++ saf ++ " (" ++ bas ++ " + " ++ sfl ++ ")"
          , OString $ "Aura: " ++ show (labAura $ labState lab)
          , OString $ "Traits: " ++ commaList ts
          , OString $ "Art Specialisations: " ++ commaList arsp
@@ -720,6 +721,11 @@ instance Markdown Lab where
              arsp = filter ( (=="Art") . labTrait ) tb
              acsp = filter ( (=="Activity") . labTrait ) tb
              tb = totalBonus lab
+             used = showSigned $ usedSize lab
+             lim = showSigned $ labVirtueLimit lab
+             saf = showSigned $ labSafety lab 
+             bas = showSigned $ baseSafety lab 
+             sfl = showSigned $ safety lab
 instance Markdown LabVirtue where
    printMD v = OList [ OString $ name v
                    , OList $ map OString $ narrative v
