@@ -17,9 +17,6 @@ title:
 		+ [ ] Brief grimoire
 		+ [ ] Long grimoire in separate doc
 	+ [ ] SQ penalties (e.g. Cieran injured)
-	+ [x] Lab safety
-	+ [x] Remove items at zero count
-	+ [x] Narrative in italics (see Annals print)
 	+ [ ] Double-check regression output
 + [ ] Phase 1.  **Review** Hibernia Saga
 	+ [ ] Review Character JSON syntax
