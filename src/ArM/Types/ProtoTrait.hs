@@ -562,10 +562,13 @@ instance TraitType Age where
 
 -- | Apply a list of ProtoTrait advancements to a list of Traits.
 --
--- This is the main function used by other modules when characters are
--- advanced.
+-- advance a list of traits.  This is the main function used by other
+-- modules when characters are advanced.
 advanceTraitList :: [ ProtoTrait ] -> [ Trait ] -> [ Trait ]
 advanceTraitList x = filter (not . isNone) .  advanceTraitList' x
+
+-- This is a helper for `advanceTraitList`.  It advances the list
+-- of traits, but leaving traits with zero count in.
 advanceTraitList' :: [ ProtoTrait ] -> [ Trait ] -> [ Trait ]
 advanceTraitList' [] ys = ys
 advanceTraitList' (x:xs) [] = advanceTraitList xs [toTrait x]
