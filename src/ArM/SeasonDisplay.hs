@@ -69,14 +69,22 @@ instance Timed EitherAug where
    season (EChar x) = season x
    season (ECov x) = season x
 
+
+instance StoryObject CharAug where
+   name (CharAug c a) = (name c ++ " (" ++ show (mode a) ++ ")")
+   narrative (CharAug _ a) = narrative a
+   comment (CharAug _ a) = comment a
+
+{-
+instance StoryObject CovAug where
+   name (CovAug c a) = (name c ++ " (" ++ show (mode a) ++ ")")
+   narrative (CovAug _ a) = narrative a
+   comment (CovAug _ a) = comment a
+-}
+
 instance Markdown CharAug where
-   printMD (CharAug c a) = OList
-       [ OString (name c ++ " (" ++ show (mode a) ++ ")")
-       , OList  $ map OString $ narrative a 
-       , OList  $ map OString $ comment a 
-       , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
-       -- , chnl
-       -- , infl
+   printMD (CharAug c a) = OList $ storyOList (CharAug c a) ++
+       [ OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
        , OList $ map (OString . show) $ validation a
        ]
 instance Markdown CovAug where

@@ -19,6 +19,8 @@ module ArM.Markdown ( Markdown(..)
                     , artVisMD
                     , stringMD
                     , formatTitle
+                    , italicOString
+                    , storyOList
                     ) where
 
 import Data.Maybe 
@@ -396,11 +398,8 @@ printCovChanges a = OList [ OString "Changes", j, lv, acq, lst ]
            lst | lost a == [] = OList []
              | otherwise = OString $  "    + lost: " ++ showStrList (map formatTitle $ lost a)
 instance Markdown AugmentedAdvancement where
-   printMD a = indentOList $ OList
-       [ OString $ name a
-       , OList $ map OString $ narrative a 
-       , OList $ map OString $ comment a 
-       , OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
+   printMD a = indentOList $ OList $ storyOList a ++
+       [ OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a
@@ -418,11 +417,8 @@ usesString a | u == [] = OList []
          where u = usesBook a
 
 instance Markdown Advancement where
-   printMD a = indentOList $ OList
-         [ OString $ name a
-         , OList $ map OString $ narrative a 
-         , OList $ map OString $ comment a 
-         , usesString a
+   printMD a = indentOList $ OList $ storyOList a ++
+         [ usesString a
          , OList $ map printMD $ changes a
          ]
 
@@ -705,13 +701,13 @@ instance Markdown Lab where
          [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lab)
          , OString $ "Size: " ++ showSigned (labSize $ labState lab)
          , OString $ "Used size: " ++ used ++ " out of " ++ lim
-         , OString $ "Safety: " ++ saf ++ " (" ++ bas ++ " + " ++ sfl ++ ")"
+         , OString $ "Safety: " ++ saf ++ " (" ++ bas ++ sfl ++ ")"
          , OString $ "Aura: " ++ show (labAura $ labState lab)
          , OString $ "Traits: " ++ commaList ts
          , OString $ "Art Specialisations: " ++ commaList arsp
          , OString $ "Activity Specialisations: " ++ commaList acsp
          , OString "Description"
-         , OList $ map OString $ narrative lab
+         , OList $ map italicOString $ narrative lab
          , OList $ map OString $ comment lab
          , OString "Virtues and Flaws"
          , foldOList $ OList $ map printMD $ labVirtues $ labState lab
@@ -728,7 +724,7 @@ instance Markdown Lab where
              sfl = showSigned $ safety lab
 instance Markdown LabVirtue where
    printMD v = OList [ OString $ name v
-                   , OList $ map OString $ narrative v
+                   , OList $ map italicOString $ narrative v
                    , OList $ map OString $ comment v
                    , OList [ OString ts ]
                    ]
@@ -736,3 +732,16 @@ instance Markdown LabVirtue where
 instance Markdown LabBonus where
    printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
+
+-- * Convenience Functions
+
+-- | Render a string in italics, as an OString
+italicOString :: String  -> OList
+italicOString c = OString $ "*" ++ trim c ++ "*"
+
+storyOList :: StoryObject a => a -> [ OList ]
+storyOList ob = 
+       [ OString $ name ob
+       , OList  $ map italicOString $ narrative ob
+       , OList  $ map OString $ comment ob 
+       ]

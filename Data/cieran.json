@@ -419,7 +419,7 @@
       },
       { "mode" : "Reading", "season" : "Spring 1224"
       , "sourceQuality" : 16
-      , "narrative" : "*Corpus Hermeticus*"
+      , "narrative" : "Reads *Corpus Hermeticus* which Phillipedes had on loan."
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1224"
@@ -543,7 +543,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1229"
       , "sourceQuality" : 16
-      , "narrative" : "*Corpus Hermeticum*"
+      , "narrative" : "Reads *Corpus Hermeticus* which Phillipedes had on loan."
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1229"
