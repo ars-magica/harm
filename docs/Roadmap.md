@@ -11,11 +11,20 @@ title:
 
 ## Plan
 
++ [ ] Immediate
+	+ [ ] Spell comments (see Cieran print)
+	+ [ ] Split character sheet in sections
+		+ [ ] Brief grimoire
+		+ [ ] Long grimoire in separate doc
+	+ [ ] SQ penalties (e.g. Cieran injured)
+	+ [ ] Lab safety
+	+ [ ] Remove items at zero count
+	+ [ ] Narrative in italics (see Annals print)
+	+ [ ] Double-check regression output
 + [ ] Phase 1.  **Review** Hibernia Saga
 	+ [ ] Review Character JSON syntax
 	+ [ ] Review recent seasons from Hibernia  for Elk's Run
 	+ [ ] Review character sheet design (Cieran)
-		+ [ ] Spell view
 		+ [ ] Advancement view
 		+ [ ] Lab totals
 		+ [ ] Comments on advancing traits (possession in particular)
