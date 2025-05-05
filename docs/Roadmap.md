@@ -33,7 +33,6 @@ title:
 		+ [ ] Comment
 		+ [ ] Consistency of Narrative and Comment
 	+ [ ] Fix ongoing
-		+ [ ] Check Exposure
 		+ [ ] Comment on ProtoTrait
 		+ [ ] Validation: Compare SQ
 + [ ] Phase 3. Books

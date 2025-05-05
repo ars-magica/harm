@@ -49,18 +49,18 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
-import ArM.Types.Lab
-import ArM.Types.Device
+-- import ArM.Types.Lab
+import ArM.Types.Possession
 import ArM.Types.Aging
-import ArM.DB.Weapon
-import ArM.Debug.Trace
+-- import ArM.DB.Weapon
+-- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
-import Data.Aeson.Types
-import qualified Data.Aeson.KeyMap as KM
-import Data.Text.Lazy                            ( fromStrict, unpack )
-import Control.Monad
+-- import Data.Aeson.Types
+-- import qualified Data.Aeson.KeyMap as KM
+-- import Data.Text.Lazy                            ( fromStrict, unpack )
+-- import Control.Monad
 import Data.Maybe
 import Data.List (sortBy)
 
@@ -262,149 +262,6 @@ instance FromJSON CombatOption where
                     <*> v .:   "weapon"
                     <*> v .:?  "shield"
                     <*> v .:?  "ability"
--- |
--- == Weapons and other Possessions
-
--- | A `Possession` is any kind of device that can be acquired, lost,
--- given, or traded.  It is treated like inherent traits in the data
--- model.  Possessions comprise weapons, armour, vis, magic devices,
--- equipment, and any physical object that should be recorded
--- on the characters sheet.
-data Possession = Possession 
-     { itemName :: String           -- ^ Name identifying the unique item
-     , itemKey :: HarmKey           -- ^ Key for a unique item
-     , weaponStats :: [ Weapon ]    -- ^ List of applicable Weapon stat objects
-     , weapon :: [ String ]         -- ^ List of standard weapon stats that apply
-     , armourStats :: [ Armour ]    -- ^ List of applicable Weapon stat objects
-     , armour :: [ String ]         -- ^ List of standard weapon stats that apply
-     , itemDescription :: String    -- ^ Description of the Item
-     , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
-     , acTo :: Maybe String
-     , itemCount :: Int             -- ^ Number of items possessed, default 1.
-     }
-     | DevicePossession MagicItem
-     | LabPossession Lab
-    deriving ( Ord, Eq, Generic )
-visArt :: Possession -> Maybe String
-visArt (LabPossession _) = Nothing
-visArt (DevicePossession _) = Nothing
-visArt ob = itemArt ob
-getLab :: Possession -> Maybe Lab
-getLab (LabPossession lab) = Just lab
-getLab _ = Nothing
-
-isLab :: Possession -> Bool
-isLab (LabPossession _) = True
-isLab _ = False
-
-specialPossession :: Possession -> Bool
-specialPossession (LabPossession _) = True
-specialPossession (DevicePossession _) = True
-specialPossession _ = False
-
-isVis :: Possession -> Bool
-isVis c | specialPossession c = False
-        | otherwise = isJust $ itemArt c
-
-isWeapon :: Possession -> Bool
-isWeapon p | specialPossession p = False
-           | otherwise = (weapon p /= []) || (weaponStats p /= [])
-
-isArmour :: Possession -> Bool
-isArmour p | specialPossession p = False
-           | otherwise = (armour p /= []) || (armourStats p /= [])
-isAC :: Possession -> Bool
-isAC p | specialPossession p = False
-       | otherwise = isJust $ acTo p
-
-isEquipment :: Possession -> Bool
-isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isLab, isVis, isWeapon, isArmour, isAC, specialPossession ]
-
-
-instance StoryObject Possession where
-   name (LabPossession lab) = name lab
-   name ob = itemName ob 
-   narrative (LabPossession lab) = narrative lab
-   narrative ob = [ itemDescription ob ]
-   comment (LabPossession lab) = comment lab
-   comment _ = [ ]
-
-instance Countable Possession where
-   count (LabPossession _) = 1
-   count ob = itemCount ob
-   addCount (LabPossession x) _ = trace "Labs are unique"  (LabPossession x)
-   addCount (DevicePossession x) _ = trace "Magic devices are unique" (DevicePossession x)
-   addCount ob n  = ob { itemCount = itemCount ob + n }
-
-defaultPossession :: Possession 
-defaultPossession = Possession 
-     { itemName = ""
-     , itemKey = NoObject
-     , weaponStats = []
-     , weapon = []
-     , armourStats = []
-     , armour = []
-     , itemDescription = ""
-     , itemArt = Nothing
-     , acTo = Nothing
-     , itemCount = 1
-     }
-instance ToJSON Possession 
-
-instance FromJSON Possession where
-    parseJSON (String t) = pure $ defaultPossession { itemName = (unpack (fromStrict t)) }
-    parseJSON (Object v) = (parseLab v) `mplus` (parseOtherPossession v)
-    parseJSON _ = mzero
-
-
-parseOtherPossession :: Object -> Parser Possession
-parseOtherPossession v = fmap fixPossessionName $ Possession 
-       <$> v .:? "name" .!= ""
-       <*> v .:? "weaponStats" .!= NoObject
-       <*> v .:? "weaponStats" .!= []
-       <*> v .:? "weapon" .!= []
-       <*> v .:? "armourStats" .!= []
-       <*> v .:? "armour" .!= []
-       <*> v .:? "description" .!= ""
-       <*> v .:? "art"
-       <*> v .:? "acTo" 
-       <*> v .:? "count" .!= 1
-
-parseLab :: Object -> Parser Possession
-parseLab = fmap LabPossession . f . KM.lookup "lab"
-    where f Nothing = mzero
-          f (Just x) = parseJSON x
-
-{-
-instance FromJSON Request where
-  parseJSON (Object v) =
-    case H.lookup "req1" v of
-      Just (Object h) -> Req1 <$> h .: "id" <*> h .: "properties"
-      Nothing ->
-        case H.lookup "req2" v of
-          Just (Object h) -> Req2 <$> h .: "id" <*> h .: "properies"
-          Nothing ->
-            case H.lookup "req3" v of
-              Just (Object h) -> Req3 <$> h .: "id" <*> h .: "time"
-              Nothing -> mzero
--}
-
--- | Derive `itemName` from other properties, if the name is undefined.
-fixPossessionName :: Possession -> Possession 
-fixPossessionName p | itemName p /= "" = p
-                    | otherwise = p { itemName = n }
-            where n | weapon p /= [] = head $ weapon p
-                    | armour p /= [] = head $ armour p
-                    | isJust (visArt p) = fromJust (visArt p) ++ " vis"
-                    | isAC p = "AC to " ++ (fromJust $ acTo p)
-                    | otherwise = "Item"
-
-instance Show Possession where
-    show p = name p ++ cnt
-       where cnt | count p == 1 = ""
-                 | otherwise = " (" ++ show (count p) ++ ")"
-
 -- |
 -- = TraitClass 
 

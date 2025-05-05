@@ -73,7 +73,7 @@ common harm-deps
                        , ArM.Advancement
                        , ArM.Types.Aging
                        , ArM.Types.ProtoTrait
-                       , ArM.Types.Device
+                       , ArM.Types.Possession
                        , ArM.Types.Trait
                        , ArM.Types.TraitKey
                        , ArM.Types.HarmObject
