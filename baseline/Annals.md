@@ -4,13 +4,13 @@
 
 + Elk's Run
     + Council Meeting 1256(no source quality)
-        + Maine and Una, as well as Raymond, have left a few years ago.
-        + Crimthann is no longer active, whether he is dead, infirm, or lost in the magic realm is not decided.
-        + The magi agree to promote the welfare of the common people as a general principle, and decide against any uprising against English magi or Norman lords.
-        + As a means to support the common people, they will support the building of hospitals, and develop a great library on Medicine and Chirurgy.
-        + The council supports Cieran's wish to develop a great library on Imaginem, to attract paying readers.
-        + The matter of Lord Protector is discussed, as it is expected to come up at the tribunal.  The magi are concerned about the Norman intrusion on magical and faerie lands, and Ashenrise's apparent support. Archie and Tim are appointed to speak on the covenants behalf.
-        + Sean and Tiou are appointed to barter for vis exchange at the tribunal, aiming to stock up the arts where we have no source.
+        + *Maine and Una, as well as Raymond, have left a few years ago.*
+        + *Crimthann is no longer active, whether he is dead, infirm, or lost in the magic realm is not decided.*
+        + *The magi agree to promote the welfare of the common people as a general principle, and decide against any uprising against English magi or Norman lords.*
+        + *As a means to support the common people, they will support the building of hospitals, and develop a great library on Medicine and Chirurgy.*
+        + *The council supports Cieran's wish to develop a great library on Imaginem, to attract paying readers.*
+        + *The matter of Lord Protector is discussed, as it is expected to come up at the tribunal.  The magi are concerned about the Norman intrusion on magical and faerie lands, and Ashenrise's apparent support. Archie and Tim are appointed to speak on the covenants behalf.*
+        + *Sean and Tiou are appointed to barter for vis exchange at the tribunal, aiming to stock up the arts where we have no source.*
     + Changes
 + Eogan mac Eogan (Trained)
     + *Train second lymer in hunt +8 xp (+16 total).*
@@ -51,16 +51,16 @@
 
 + Elk's Run
     + Joseph's fiancé (SQ 8)
-        + Joseph ex Miscellanea of Lambaird visits with his wife, Rhianna, and his brother Jacob, who is a horse trader.  They are fraternal twins. Joseph has been instrumental to healing the rift between Vigil and Lambaird.  It is not the first time they visit Elk's Run after the agreements of resiprocal reading hospitality were made.
-        + Aedan MacCloud, an Irish lord, appears with his daughter, Deirdre, who is also betrothed to Joseph. It turns out that he has about eight wives, under old Brehon Law, often with faerie blessing. Aedan brother, a parish priest known as father Clint, is also part of the entourage.  They also bring two guards. Aedan's holdings are in the North of Ireland.
-        + Cieran is left mediating between the two groups.  Aedan has been rebaptised and borrowed £300 from the church, something which binds him to arrange a church marriage for his daughter. The betrothal was sealed before his rebaptism, in a faerie ceremony. It seems that the faeries involved are quite powerful. Faerie blood also runs in the family, and strongly so with Deirdre.
-        + Joseph's polygamy was the idea of his first wife, Criodne, a maga, who had started her longevity ritual.  She wanted Joseph to have more children before his longevity ritual.
-        + Cieran have them see that both parties have been less than honest and entered incompatible bargains. In the end, he arranges for Elk's Run to lend Aedan the money to cover half his dept to the church, with Joseph to have Vigil cover the other half, so that Aedan can embrace the faerie and Brehon ways.
+        + *Joseph ex Miscellanea of Lambaird visits with his wife, Rhianna, and his brother Jacob, who is a horse trader.  They are fraternal twins. Joseph has been instrumental to healing the rift between Vigil and Lambaird.  It is not the first time they visit Elk's Run after the agreements of resiprocal reading hospitality were made.*
+        + *Aedan MacCloud, an Irish lord, appears with his daughter, Deirdre, who is also betrothed to Joseph. It turns out that he has about eight wives, under old Brehon Law, often with faerie blessing. Aedan brother, a parish priest known as father Clint, is also part of the entourage.  They also bring two guards. Aedan's holdings are in the North of Ireland.*
+        + *Cieran is left mediating between the two groups.  Aedan has been rebaptised and borrowed £300 from the church, something which binds him to arrange a church marriage for his daughter. The betrothal was sealed before his rebaptism, in a faerie ceremony. It seems that the faeries involved are quite powerful. Faerie blood also runs in the family, and strongly so with Deirdre.*
+        + *Joseph's polygamy was the idea of his first wife, Criodne, a maga, who had started her longevity ritual.  She wanted Joseph to have more children before his longevity ritual.*
+        + *Cieran have them see that both parties have been less than honest and entered incompatible bargains. In the end, he arranges for Elk's Run to lend Aedan the money to cover half his dept to the church, with Joseph to have Vigil cover the other half, so that Aedan can embrace the faerie and Brehon ways.*
         + Trade three Creo tractatus to receive three Imaginem Tractatus (Q2/Q9/Q8), as proposed by Rhianna.
         + One confidence point per character taking part.
         + The covenant lends £165 to Aedan on the same terms as he had with the church.
     + Changes
-    +     + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
+        + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *ReVi Spells; Train Luciu in Magic Theory (SQ 15).*
     + Validated: Correctly spent 2 xp.
@@ -113,16 +113,16 @@
 
 + Elk's Run
     + The lost Unicorn (SQ 10)
-        + Aoibheann (Eevan) made the weapon and Dubhán (Devon) was the warrior.
-        + Iriandel was the unicorn.  Threetrot is the big horse who may the the unicorn
-        + Cormac the Owl is an old friend of Iriandel
-        + Maive - village elder
-        + Bran - the messenger form the village
-        + Black ram, wolf, and rabbit - apparently faeries who want to kill Threetrot
-        + Village has a newly built palisade and sharpened stakes.  Two guards at any one time
-        + Big pen with a large horse, size +4: grey horsea with a white patch on the forehead.
+        + *Aoibheann (Eevan) made the weapon and Dubhán (Devon) was the warrior.*
+        + *Iriandel was the unicorn.  Threetrot is the big horse who may the the unicorn*
+        + *Cormac the Owl is an old friend of Iriandel*
+        + *Maive - village elder*
+        + *Bran - the messenger form the village*
+        + *Black ram, wolf, and rabbit - apparently faeries who want to kill Threetrot*
+        + *Village has a newly built palisade and sharpened stakes.  Two guards at any one time*
+        + *Big pen with a large horse, size +4: grey horsea with a white patch on the forehead.*
     + Changes
-    +     + joining: Character: Eogan mac Eogan
+        + joining: Character: Eogan mac Eogan
 + Eogan mac Eogan (Adventure)
     + *Eogan was approached by a man from a village half a day away, needing help with a wild horse with wounds that would not heal.  The horse was chased by three dark fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient hole, saying that the hole was made by the horn of a unicorn who since lost the horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.*
     + *Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.*
@@ -142,10 +142,10 @@
 
 + Elk's Run
     + (no source quality)
-        + Beibhinn spends the year at Vigill to read.
+        + *Beibhinn spends the year at Vigill to read.*
         + Available books at Vigil: Three imaginem titles at Q8/Q9/Q12; Herbam Tractatus Q12, Q11, Q8; Magic Theory Tractactus Q11, Q9, Q9
     + Aegis Failing(no source quality)
-        + Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities.
+        + *Cieran is guilt-ridden and realises the day before the winter solstice that he cannot cast the Aegis. He sneaks out, taking silver and some utilities.*
         + 2x Leprechauns might 15 have invaded
         + New Aegis L30 Penetration 27
     + Cieran's Penance in Waterford (SQ 7)
@@ -455,7 +455,7 @@
 
 + Elk's Run
     +  (SQ 10)
-        + Steal Hugo's apprentice adventure
+        + *Steal Hugo's apprentice adventure*
         + 1 confidence per session, Regina & Béibhinn 3.
     + Changes
 
@@ -463,7 +463,7 @@
 
 + Elk's Run
     + (no source quality)
-        + Limerick Adventure start
+        + *Limerick Adventure start*
     + Changes
 
 ## Spring 1243
@@ -482,7 +482,7 @@
 
 + Elk's Run
     + (no source quality)
-        + investigation of the burnt village
+        + *investigation of the burnt village*
     + Changes
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *Horror Cabinet Item  2xp Exposure Magic Theory*
@@ -818,7 +818,7 @@
 ## Winter 1229
 
 + Cieran the Fletcher ex Miscellanea (Reading)
-    + **Corpus Hermeticum**
+    + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
 
 ## Autumn 1228
@@ -924,7 +924,7 @@
 ## Spring 1224
 
 + Cieran the Fletcher ex Miscellanea (Reading)
-    + **Corpus Hermeticus**
+    + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
 
 ## Winter 1224
@@ -1077,7 +1077,7 @@
 
 + Elk's Run
     + Changes
-    +     + joining: Character: Cieran
+        + joining: Character: Cieran
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies *Root of Herbam* L6 Q21 +3*
     + Validated: Correctly spent 24 xp.

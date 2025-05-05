@@ -1477,7 +1477,7 @@ Total: 1309 levels of spells.
         + Spell: Willful Sidestep 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1229 (16+3xp) (1 years) Reading
-    + **Corpus Hermeticum**
+    + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Changing traits
         + Art: Corpus 19xp; 
     + Inferred traits
@@ -1594,7 +1594,7 @@ Total: 1309 levels of spells.
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
 + Spring 1224 (16+3xp) Reading
-    + **Corpus Hermeticus**
+    + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Changing traits
         + Art: Corpus 19xp; 
     + Validated: Correctly spent 19 xp.
