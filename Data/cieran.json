@@ -1027,7 +1027,8 @@
          , { "aging" : { "longevity" : 22 } } 
          , { "possession" : { "art" : "Vi", "count" : -2
                             , "comment" : "payment to Main for the LR" } }
-         , { "possession" : { "art" : "Pe", "count" : -1
+         , { "possession" : {  "name" : "Perdo Vis from Jerome's body"
+                            , "art" : "Pe", "count" : -1
                             , "comment" : "payment to Main for the LR" } }
          , { "possession" : { "art" : "Te", "count" : -1
                             , "comment" : "payment to Main for the LR" } }
@@ -1218,7 +1219,7 @@
 	            , { "possession" : {  "art" : "In",  "count" : -4, "comment" :  "Traded for Mentem for the ritual" } }
 	            , { "possession" : {  "art" : "Mu",  "count" : -2, "comment" :  "Traded for Mentem for the ritual" } }
 	            , { "possession" : {  "art" : "Te",  "count" : -2, "comment" :  "Traded for Mentem for the ritual" } }
-	            , { "possession" : {  "art" : "Re",  "count" : -1, "comment" :  "Traded for Mentem for the ritual" } }
+	            , { "possession" : {  "name" : "Rego Vis from Jerome's body", "art" : "Re",  "count" : -1, "comment" :  "Traded for Mentem for the ritual" } }
                     ]
       },
       { "mode" : "Reading", "season" : "Winter 1248"

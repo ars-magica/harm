@@ -217,12 +217,6 @@ conceptPrintMD dir c = OList
 pList :: [ Possession ] -> OList
 pList = OList  . map (OString . show ) . sortTraits 
 
-{-
-listPossessions :: [ Trait ] -> OList
-listPossessions = listPossessions' . filterNothing . map f
-   where f (PossessionTrait p) = Just p
-         f _ =  Nothing
--}
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
       [ OString "Vis"
