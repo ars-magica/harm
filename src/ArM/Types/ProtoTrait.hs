@@ -565,9 +565,11 @@ instance TraitType Age where
 -- This is the main function used by other modules when characters are
 -- advanced.
 advanceTraitList :: [ ProtoTrait ] -> [ Trait ] -> [ Trait ]
-advanceTraitList [] ys = ys
-advanceTraitList (x:xs) [] = advanceTraitList xs [toTrait x]
-advanceTraitList (x:xs) (y:ys) 
+advanceTraitList x = filter (not . isNone) .  advanceTraitList' x
+advanceTraitList' :: [ ProtoTrait ] -> [ Trait ] -> [ Trait ]
+advanceTraitList' [] ys = ys
+advanceTraitList' (x:xs) [] = advanceTraitList xs [toTrait x]
+advanceTraitList' (x:xs) (y:ys) 
     | x <: y = advanceTraitList xs (toTrait x:y:ys)
     | y <: x = y:advanceTraitList (x:xs) ys
     | otherwise = advanceTraitList xs (advanceTrait x y:ys)

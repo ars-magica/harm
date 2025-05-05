@@ -43,6 +43,7 @@ module ArM.Types.Trait ( TraitKey(..)
                             , isArmour
                             , isAC
                             , isEquipment
+                            , isNone
                             ) where
 
 import ArM.GameRules
@@ -83,6 +84,11 @@ data Trait = AbilityTrait Ability
            deriving (Show, Eq, Generic)
 instance Ord Trait where
      compare x y = compare (traitKey x) (traitKey y)
+
+isNone :: Trait -> Bool
+isNone (VFTrait x) = count x == 0
+isNone (PossessionTrait x) = count x == 0
+isNone _ = False
 
 -- |
 -- = Different types of Traits
@@ -163,6 +169,9 @@ data VF = VF { vfname :: String    -- ^ name of the virtue/flaw
              , vfComment :: String              -- ^ freeform comment
              }
            deriving (Ord, Eq, Generic)
+instance Countable VF where
+    count = vfMultiplicity
+    addCount x n = x { vfMultiplicity = vfMultiplicity x + n }
 data Confidence = Confidence { cname :: String, cscore :: Int, cpoints :: Int }
            deriving ( Ord, Eq, Generic)
 data OtherTrait = OtherTrait { trait :: String

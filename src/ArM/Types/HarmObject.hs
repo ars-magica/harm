@@ -95,7 +95,9 @@ class (Timed h, StoryObject h) => HarmObject h where
 -- | Class for countable objects.
 class Countable c where
    count :: c -> Int
+   count _ = 1
    addCount :: c -> Int -> c
+   addCount x _ = trace "Cannot add count to unique objects." x
 
 -- | Common interface for objects that have a narrative aspect.
 class StoryObject ob where
