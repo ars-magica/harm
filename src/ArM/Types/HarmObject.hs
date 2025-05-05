@@ -93,6 +93,8 @@ class (Timed h, StoryObject h) => HarmObject h where
     isGameStart = (==GameStart) . season
 
 -- | Class for countable objects.
+-- Defaults assume a non-countable object, with count equal to one, and
+-- adding to the count is an error. 
 class Countable c where
    count :: c -> Int
    count _ = 1
