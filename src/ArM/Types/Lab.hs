@@ -58,6 +58,8 @@ instance StoryObject Lab where
     name = labName 
     narrative = labDescription 
     comment = labComment 
+    addNarrative s x = x { labDescription = s:labDescription x }
+    addComment s x = x { labComment = s:labComment x }
 
 -- |
 -- = LabState Object
@@ -102,6 +104,8 @@ instance StoryObject LabVirtue where
     name = labVirtueName 
     narrative = labVirtueDescription 
     comment = labVirtueComment 
+    addNarrative s x = x { labVirtueDescription = s:narrative x }
+    addComment s x = x { labVirtueComment = s:comment x }
 
 instance ToJSON LabVirtue
 instance FromJSON LabVirtue where

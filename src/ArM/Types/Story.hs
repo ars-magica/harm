@@ -46,3 +46,5 @@ instance StoryObject Story where
    name = storyTitle
    narrative = storyNarrative
    comment = storyComment
+   addNarrative s x = x { storyNarrative = s:storyNarrative x }
+   addComment s x = x { storyComment = s:storyComment x }

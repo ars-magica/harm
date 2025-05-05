@@ -74,6 +74,8 @@ instance StoryObject CharAug where
    name (CharAug c a) = (name c ++ " (" ++ show (mode a) ++ ")")
    narrative (CharAug _ a) = narrative a
    comment (CharAug _ a) = comment a
+   addNarrative s (CharAug c x) = CharAug c $ addNarrative s x 
+   addComment s (CharAug c x) = CharAug c $ addComment s x 
 
 {-
 instance StoryObject CovAug where

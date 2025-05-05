@@ -243,6 +243,8 @@ instance StoryObject Advancement where
                y = advYears a
      narrative  = advNarrative
      comment  = advComment
+     addNarrative s x = x { advNarrative = s:narrative x }
+     addComment s x = x { advComment = s:comment x }
 
 -- | Render the season and mode of an advancement
 showTime :: String -> SeasonTime -> AdvancementType -> Maybe Int -> String
@@ -349,6 +351,8 @@ instance StoryObject AugmentedAdvancement where
                y = years a
      narrative  = fmls narrative 
      comment  = fmls comment 
+     addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
+     addComment s (Adv a aa) = Adv a $ addComment s aa
 
 -- | Render the source quality of an advancement
 showSQ :: Maybe XPType -> XPType -> String

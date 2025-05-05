@@ -87,7 +87,6 @@ class (Timed h, StoryObject h) => HarmObject h where
     stateName :: h -> String
     stateName x = name x ++ " (" ++ show (season x) ++ ")"
 
-
     -- | Is the character state still at Game Start?
     isGameStart :: h -> Bool
     isGameStart = (==GameStart) . season
@@ -111,3 +110,8 @@ class StoryObject ob where
    -- | Remarks that do not fit in a narrative style, e.g. mechanics.
    comment :: ob -> [ String ]
    comment _ = []
+
+   addNarrative :: String -> ob -> ob
+   addNarrative _ = id
+   addComment :: String -> ob -> ob
+   addComment _ = id

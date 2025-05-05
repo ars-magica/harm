@@ -93,8 +93,12 @@ instance StoryObject Possession where
    name ob = itemName ob 
    narrative (LabPossession lab) = narrative lab
    narrative ob = [ itemDescription ob ]
+   addNarrative s (LabPossession lab) = LabPossession $ addNarrative s lab
+   addNarrative s x = x { itemDescription = s ++ itemDescription x }
    comment (LabPossession lab) = comment lab
    comment _ = [ ]
+   addComment s (LabPossession lab) = LabPossession $ addComment s lab
+   addComment _ _ = error "No comment on Possession"
 
 instance Countable Possession where
    count (LabPossession _) = 1
