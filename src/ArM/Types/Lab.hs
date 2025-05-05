@@ -79,7 +79,6 @@ defaultLabState = LabState
          , labSize = 0
        }  
 
-
 instance ToJSON LabState
 instance FromJSON LabState where
     parseJSON = withObject "LabState" $ \v -> LabState
@@ -114,6 +113,12 @@ instance FromJSON LabVirtue where
         <*> v .:? "cost" .!= 0
         <*> v .:? "mechanics" .!= ""
         <*> v `parseCollapsedList` "comment" 
+instance ToJSON LabBonus
+instance FromJSON LabBonus where
+    parseJSON = withObject "LabBonus" $ \v -> LabBonus
+        <$> v .: "name" 
+        <*> v .:? "specialisation" .!= ""
+        <*> v .:? "score" .!= 0
 
 data LabBonus = LabBonus 
      { labTrait :: String
@@ -126,6 +131,7 @@ instance Show LabBonus where
    show (LabBonus s _ score) = s ++ " " ++ showSigned score
 
 
+-- * Auxiliary functions
 
 (<%) :: LabBonus -> LabBonus -> Bool
 (<%) a b | labTrait a < labTrait b = True
@@ -138,13 +144,33 @@ lbOrd a b | a <% b = LT
           | b <% a = GT
           | otherwise = EQ
 
-instance ToJSON LabBonus
-instance FromJSON LabBonus where
-    parseJSON = withObject "LabBonus" $ \v -> LabBonus
-        <$> v .: "name" 
-        <*> v .:? "specialisation" .!= ""
-        <*> v .:? "score" .!= 0
+-- * Advancement and Traits
 
+-- | Advancement (changes) to a covenant.
+--
+-- This is not currently used.
+data LabAdvancement = LabAdvancement 
+     { labSeason :: SeasonTime    -- ^ season or development stage
+     , labNarrative :: [String]   -- ^ freeform description of the activities
+     , acquireVirtue :: [ LabVirtue ]
+     , loseVirtue :: [ LabVirtue ]
+     , newSize :: Maybe Int
+     , labRefine :: Int
+     }
+   deriving (Eq,Generic,Show)
+defaultLabAdv :: LabAdvancement 
+defaultLabAdv = LabAdvancement 
+     { labSeason = NoTime
+     , labNarrative = []
+     , acquireVirtue = []
+     , loseVirtue = []
+     , newSize = Nothing
+     , labRefine = 0
+     }
+
+-- * Access function to lab traits
+--
+-- ** Basic traits
 
 mergeBonus :: [ LabBonus ] -> [ LabBonus ] -> [ LabBonus ]
 mergeBonus [] ys = ys
@@ -182,32 +208,24 @@ upkeep  = getLabScore "Upkeep"
 getLabArt :: String -> Lab -> Int
 getLabArt s = fromMaybe 0 . fmap labScore . find ( (==s) . labSpecialisation ) . artSpecialisations
 
-
+-- ** Derived stats
 
 usedSize :: Lab -> Int
 usedSize = sum . map labVirtueCost . labVirtues . labState
 
--- |
--- = Advancement and Traits
---
--- This is not currently used.
+occupiedSize :: Lab -> Int
+occupiedSize lab = virtueTotal lab - labRefinement (labState lab)
 
--- | Advancement (changes) to a covenant.
-data LabAdvancement = LabAdvancement 
-     { labSeason :: SeasonTime    -- ^ season or development stage
-     , labNarrative :: [String]   -- ^ freeform description of the activities
-     , acquireVirtue :: [ LabVirtue ]
-     , loseVirtue :: [ LabVirtue ]
-     , newSize :: Maybe Int
-     , labRefine :: Int
-     }
-   deriving (Eq,Generic,Show)
-defaultLabAdv :: LabAdvancement 
-defaultLabAdv = LabAdvancement 
-     { labSeason = NoTime
-     , labNarrative = []
-     , acquireVirtue = []
-     , loseVirtue = []
-     , newSize = Nothing
-     , labRefine = 0
-     }
+virtueTotal :: Lab -> Int
+virtueTotal = sum . map labVirtueCost . labVirtues . labState
+
+baseSafety :: Lab -> Int
+baseSafety lab = labRefinement st - max (occupiedSize lab) 0
+   where st = labState lab
+
+labVirtueLimit :: Lab -> Int
+labVirtueLimit lab = labSize st + labRefinement st
+   where st = labState lab
+
+labSafety :: Lab -> Int
+labSafety lab = baseSafety lab + safety lab
