@@ -172,14 +172,20 @@ data VF = VF { vfname :: String    -- ^ name of the virtue/flaw
 instance Countable VF where
     count = vfMultiplicity
     addCount x n = x { vfMultiplicity = vfMultiplicity x + n }
+-- | The Confidence trait covers True Faith as well as Confidence,
+-- and potentially other traits where points are accumulated without
+-- limit and independently of the score.
 data Confidence = Confidence { cname :: String, cscore :: Int, cpoints :: Int }
            deriving ( Ord, Eq, Generic)
+-- | OtherTrait covers warping and decrepitude, and potentially other singular
+-- traits which progress like abilities.
 data OtherTrait = OtherTrait { trait :: String
                              , otherScore :: Int
                              -- , pts :: Int 
                              , otherExcess :: Int
                              }
            deriving (Ord, Eq, Generic)
+-- | SpecialTrait is not used at all
 data SpecialTrait = SpecialTrait { specialTrait :: String
                              , specialScore :: Maybe Int
                              , specialComment :: Maybe String 
