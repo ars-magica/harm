@@ -18,6 +18,7 @@ import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Lab
 import ArM.DB.Weapon
+import ArM.Helper
 
 import GHC.Generics
 import Data.Aeson
@@ -241,30 +242,6 @@ instance Show Possession where
 
 
 
-{-
-data MagicItem = MagicItem
-           { deviceName :: String
-           , enchantmentType :: EnchantmentType
-           , deviceVis :: Int
-           , effect :: [ MagicEffect ]
-           , deviceDate :: SeasonTime   -- ^ Time the device was first crafted 
-           , deviceDescription :: [String]
-           , deviceComment :: String    -- ^ Freeform remarks that do not fit elsewhere
-           }
-           deriving (Show, Eq, Ord, Generic)
-
-instance ToJSON MagicItem
-instance FromJSON MagicItem where
-    parseJSON = withObject "MagicItem" $ \v -> MagicItem
-        <$> v .: "name" 
-        <*> v .:? "type" .!= LesserItem
-        <*> v .:? "visSlots" .!= 0
-        <*> v `parseCollapsedList` "effect" 
-        <*> v .:? "season" .!= NoTime
-        <*> v `parseCollapsedList` "description" 
-        <*> v `parseCollapsedList` "comment" 
--}
-
 -- | A magic effect that can be instilled in an enchanted device.
 data MagicEffect = MagicEffect
            { effectName :: String
@@ -273,8 +250,11 @@ data MagicEffect = MagicEffect
            , effectTechniqueReq :: [String]
            , effectForm :: String
            , effectFormReq :: [String]
-           , effectRDT :: (String,String,String)   -- ^ Range/Duration/Target
+           , effectRange :: String        -- ^ Range
+           , effectDuration :: String     -- ^ Duration
+           , effectTarget :: String       -- ^ Target
            , effectModifiers :: [ String ]
+           , effectUses :: Int          -- ^ Number of uses per day
            , effectTrigger :: String
            , effectDesign :: String     -- ^ Level calculation
            , effectDescription :: [String]
@@ -283,6 +263,15 @@ data MagicEffect = MagicEffect
            , effectDate :: SeasonTime   -- ^ Time of investment
            }
            deriving (Show, Eq, Ord, Generic)
+
+effectRDT :: MagicEffect -> String
+effectRDT eff = showStrList [ r, d, t ]
+   where r = f "Range" (effectRange eff)
+         d = f "Duration" (effectDuration eff)
+         t = f "Target" (effectTarget eff)
+         f _ "" = ""
+         f s x = s ++ ": " ++ x
+
 
 
 instance ToJSON MagicEffect
@@ -294,8 +283,11 @@ instance FromJSON MagicEffect where
         <*> v  `parseCollapsedList` "techiqueReq" 
         <*> v .: "form" 
         <*> v  `parseCollapsedList` "formReq" 
-        <*> v .:? "rdt" .!= ("","","")
+        <*> v .:? "range" .!= ""
+        <*> v .:? "duration" .!= ""
+        <*> v .:? "target" .!= ""
         <*> v `parseCollapsedList` "effectModifiers" 
+        <*> v .:? "uses"  .!= 1
         <*> v .:? "trigger"  .!= ""
         <*> v .:? "design"  .!= ""
         <*> v `parseCollapsedList` "description" 

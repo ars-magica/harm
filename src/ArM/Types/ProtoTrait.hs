@@ -633,12 +633,12 @@ processChar' c | charBonusList c == [] = c
 processChar'' :: Characteristic -> Characteristic 
 processChar'' c | charBonusList c == [] = c
                | otherwise  = processChar'' $ c { charScore = sc, charBonusList = xs }
-          where x:xs = charBonusList c
+          where x = head $ charBonusList c
+                xs = tail $ charBonusList c
                 sc | fst x < 0 = max (charScore c + snd x) (fst x)
                    | otherwise = min (charScore c + snd x) (fst x)
 
--- |
--- == Convenience Functions
+-- ** Convenience Functions
 
 -- | Count regular XP (excluding reputation) from a ProtoTrait
 regularXP :: ProtoTrait -> XPType

@@ -47,6 +47,7 @@ module ArM.Types.Trait ( TraitKey(..)
                             , isMundaneEquipment
                             , isEquipment
                             , isNone
+                            , effectRDT
                             ) where
 
 import ArM.GameRules

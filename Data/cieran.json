@@ -740,6 +740,7 @@
 		      , "range" : "Touch"
 		      , "duration" : "Conc"
 		      , "target" : "Ind"
+		      , "uses" : 24
 		      , "design" : "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
 		      , "description" : "This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground"
 		      , "comment" : "Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration"

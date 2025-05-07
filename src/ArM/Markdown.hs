@@ -224,8 +224,9 @@ effectTeFo eff = " (" ++ te ++ rt ++ fo ++ rf ++ show (effectLevel eff) ++ ")"
 instance Markdown MagicEffect  where
    printMD ob = OList
        [ OString $ name ob ++ effectTeFo ob
-       , OList [ OString $ show $ effectRDT ob
+       , OList [ OString $ effectRDT ob
        , nonemptyStringMD $ showStrList md
+       , OString $ show (effectUses ob) ++ " uses per day"
        , trs
        ]
        , OList $ map italicOString $ narrative ob
