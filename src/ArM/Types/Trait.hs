@@ -32,6 +32,8 @@ module ArM.Types.Trait ( TraitKey(..)
                             , Reputation(..)
                             , Age(..)
                             , TraitClass(..)
+                            , Enchantment(..)
+                            , MagicEffect(..)
                             , (<:)
                             , fote
                             , sortTraits

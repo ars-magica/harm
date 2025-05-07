@@ -44,6 +44,7 @@ instance FromJSON Story where
 
 instance StoryObject Story where
    name = storyTitle
+   setName n x = x { storyTitle = n }
    narrative = storyNarrative
    comment = storyComment
    addNarrative s x = x { storyNarrative = s:storyNarrative x }

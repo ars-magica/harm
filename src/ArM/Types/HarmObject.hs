@@ -104,6 +104,8 @@ class Countable c where
 class StoryObject ob where
    -- | The name could be the title of the story or other unique identifier.
    name :: ob -> String
+   setName :: String -> ob -> ob
+   setName _ _ = error "Cannot set name on this StoryObject"
    -- | Description focusing on a narrative feel.
    narrative :: ob -> [ String ]
    narrative _ = []

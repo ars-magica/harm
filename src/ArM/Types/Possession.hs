@@ -65,6 +65,13 @@ data Enchantment = LesserItem MagicEffect
     deriving ( Ord, Eq, Generic )
 instance ToJSON Enchantment 
 
+enchantmentName :: Enchantment -> String
+enchantmentName (LesserItem e) = effectName e
+enchantmentName (ChargedItem _ e) = effectName e
+enchantmentName (GreaterDevice _ (e:_)) = effectName e
+enchantmentName (Talisman _ _) = "Talisman"
+enchantmentName _ = ""
+
 {-
 parseLesser :: Object -> Parser Enchantment
 parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
@@ -136,9 +143,19 @@ isEquipment p = not $ foldl (||) False [ f p | f <- fs ]
    where fs = [ isLab, isVis, isWeapon, isArmour, isAC, specialPossession ]
 
 
+instance StoryObject MagicEffect where
+   name ob = effectName ob 
+   setName n x = x { effectName = n }
+   narrative ob = effectDescription ob
+   addNarrative s x = x { effectDescription = s:narrative x }
+   comment ob = comment ob
+   addComment s x = x { effectComment = s:comment x }
+
 instance StoryObject Possession where
    name (LabPossession lab) = name lab
    name ob = itemName ob 
+   setName _ (LabPossession _) = error "Not implemented.  LabPossession should be obsoleted."
+   setName n x = x { itemName = n }
    narrative (LabPossession lab) = narrative lab
    narrative ob = itemDescription ob
    addNarrative s (LabPossession lab) = LabPossession $ addNarrative s lab
@@ -173,7 +190,7 @@ defaultPossession = Possession
 instance ToJSON Possession 
 
 instance FromJSON Possession where
-    parseJSON (String t) = pure $ defaultPossession { itemName = (unpack (fromStrict t)) }
+    parseJSON (String t) = pure $ setName (unpack (fromStrict t)) defaultPossession 
     parseJSON (Object v) = (parseLab v) `mplus` (parseOtherPossession v)
     parseJSON _ = mzero
 
@@ -198,15 +215,24 @@ parseLab = fmap LabPossession . f . KM.lookup "lab"
     where f Nothing = mzero
           f (Just x) = parseJSON x
 
+
+
 -- | Derive `itemName` from other properties, if the name is undefined.
 fixPossessionName :: Possession -> Possession 
-fixPossessionName p | itemName p /= "" = p
-                    | otherwise = p { itemName = n }
-            where n | weapon p /= [] = head $ weapon p
-                    | armour p /= [] = head $ armour p
-                    | isJust (visArt p) = fromJust (visArt p) ++ " vis"
-                    | isAC p = "AC to " ++ (fromJust $ acTo p)
-                    | otherwise = "Item"
+fixPossessionName =  fixPN getPN1 . fixPN f
+    where f p | enchantment p /= MundaneItem = enchantmentName $ enchantment p
+              | otherwise = ""
+
+fixPN :: (Possession -> String) -> Possession -> Possession 
+fixPN f p | itemName p /= "" = p
+          | otherwise = setName (f p) p
+
+getPN1 :: Possession -> String 
+getPN1 p | weapon p /= [] = head $ weapon p
+         | armour p /= [] = head $ armour p
+         | isJust (visArt p) = fromJust (visArt p) ++ " vis"
+         | isAC p = "AC to " ++ (fromJust $ acTo p)
+         | otherwise = "Item"
 
 instance Show Possession where
     show p = name p ++ cnt

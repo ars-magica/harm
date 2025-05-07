@@ -217,10 +217,31 @@ conceptPrintMD dir c = OList
                 nm = fullConceptName c
 
 pList :: [ Possession ] -> OList
-pList = OList  . map printMD . sortTraits 
+pList = foldOList . OList  . map printMD . sortTraits 
+
+instance Markdown MagicEffect  where
+   printMD ob = OString $ name ob
+instance Markdown Enchantment  where
+   printMD (LesserItem eff) = OList [ printMD eff ]
+   printMD (GreaterDevice vn eff) = OList 
+       [ OString $ "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)"
+       , OList $ map printMD eff ]
+   printMD (Talisman vn eff) = OList 
+       [ OString $ "Talisman (opened with " ++ show vn ++ "p vis)"
+       , OList $ map printMD eff ]
+   printMD (ChargedItem vn eff) = OList 
+       [ OString $ "Charged Item (" ++ show vn ++ "charges)"
+       , OList [ printMD eff ] ]
+   printMD MundaneItem = OString "Mundane Item" 
 
 instance Markdown Possession  where
-   printMD = OString . show
+   printMD ob | isMagic ob = OList 
+                           [ OString $ name ob ++ cnt
+                           , printMD $ enchantment ob
+                           ]
+              | otherwise = OString $ show ob
+       where cnt | count ob == 1 = ""
+                 | otherwise = " (" ++ show (count ob) ++ ")"
 
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
