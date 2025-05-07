@@ -320,15 +320,7 @@ instance TraitClass ProtoTrait where
       | otherwise  = error "No Trait for this ProtoTrait" 
    getTrait _ = Nothing
 
-{-
-instance TraitClass Aging where
-    traitKey _ = AgeKey
-    toTrait p = AgeTrait $ fromJust $ computeTrait $ defaultPT { aging = Just p } 
-    getTrait _ = Nothing
--}
-
--- |
--- = Advancement - the TraitType class
+-- * Advancement - the TraitType class
 --
 -- Advancement of traits is based `ProtoTrait` objects representing
 -- changes in objects.  The `TraitType` class provides two functions.
@@ -565,13 +557,14 @@ advanceTraitList' (x:xs) (y:ys)
     | y <: x = y:advanceTraitList (x:xs) ys
     | otherwise = advanceTraitList xs (advanceTrait x y:ys)
 
--- |
--- == Auxiliary update functions
+-- ** Auxiliary update functions
 
+-- | Change the speciality of an Ability
 updateAbilitySpec :: Maybe String -> Ability -> Ability
 updateAbilitySpec Nothing a = a
 updateAbilitySpec (Just x) a = a { speciality = Just x }
 
+-- | Add XP to an Ability and update the score if required.
 updateAbilityXP :: Maybe Int -> XPType -> Ability -> Ability
 updateAbilityXP lim x ab
     | isJust lim && fromJust lim <= abilityScore ab = ab
@@ -581,12 +574,14 @@ updateAbilityXP lim x ab
     where sc = abilityScore ab
           tr = fromIntegral (sc+1)*5
 
+-- | Add XP to a reputation and update the score if required.
 updateRepXP :: XPType -> Reputation -> Reputation
 updateRepXP x ab | x < tr = ab { repExcessXP = x }
                  | otherwise = updateRepXP (x-tr) $ ab { repScore = sc+1 }
     where sc = repScore ab
           tr = fromIntegral $ (sc+1)*5
 
+-- | Add XP to an art and update the score if required.
 updateArtXP :: Maybe Int ->  XPType -> Art -> Art
 updateArtXP lim x ab
     | isJust lim && fromJust lim <= artScore ab = ab
@@ -613,9 +608,7 @@ updateArtBonus :: Maybe Int -> Art -> Art
 updateArtBonus Nothing a = a 
 updateArtBonus (Just x) a = a { artBonus = x + artBonus a }
 
--- |
--- == Postprocessing of traits
-
+-- ** Postprocessing of traits
 
 -- | Process bonuses to characteristics, typically granted by virtues.
 -- THis has to be applied after validation of the points expenditure at
