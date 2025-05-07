@@ -226,7 +226,6 @@ instance Markdown MagicEffect  where
        [ OString $ name ob ++ effectTeFo ob
        , OList [ OString $ effectRDT ob
        , nonemptyStringMD $ showStrList md
-       , OString $ show (effectUses ob) ++ " uses per day"
        , trs
        ]
        , OList $ map italicOString $ narrative ob

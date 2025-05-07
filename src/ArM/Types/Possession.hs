@@ -254,7 +254,6 @@ data MagicEffect = MagicEffect
            , effectDuration :: String     -- ^ Duration
            , effectTarget :: String       -- ^ Target
            , effectModifiers :: [ String ]
-           , effectUses :: Int          -- ^ Number of uses per day
            , effectTrigger :: String
            , effectDesign :: String     -- ^ Level calculation
            , effectDescription :: [String]
@@ -286,8 +285,7 @@ instance FromJSON MagicEffect where
         <*> v .:? "range" .!= ""
         <*> v .:? "duration" .!= ""
         <*> v .:? "target" .!= ""
-        <*> v `parseCollapsedList` "effectModifiers" 
-        <*> v .:? "uses"  .!= 1
+        <*> v `parseCollapsedList` "modifiers" 
         <*> v .:? "trigger"  .!= ""
         <*> v .:? "design"  .!= ""
         <*> v `parseCollapsedList` "description" 

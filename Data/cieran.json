@@ -728,8 +728,25 @@
       , "sourceQuality" : 2
       , "narrative" : "Hiccup "
       , "changes" : [ { "ability" : "Teaching", "xp" : 2 } 
-         , { "possession" : { "name" : "Stone-Cutting Knife"
-                            , "comment" : "made by Hiccup" } }
+         , { "possession" : 
+	       { "enchantment" : { "lesseritem" :
+		   { "name" : "Stone-Cutting Knife"
+		      , "level" : 15
+		      , "technique" : "Re"
+		      , "form" : "Te"
+		      , "range" : "Touch"
+		      , "duration" : "Mom"
+		      , "target" : "Part"
+		      , "modifiers" : "Unlimited uses"
+		      , "design" : "GL 2, +1 stone, +1 Touch, +1 Part, +10 levels unlimited uses"
+		      , "description" : [
+			 "This enchanted chisel shapes and forms stone as if a well-equipped stone- mason were carving it. The device may be used to carve blocks from a quarry (hence the Part Target). The wielder’s Dexterity + Finesse roll substitutes for a mason’s Craft roll (with +3 to the comparable Ease Factor). "
+		      , "It is a Simple task for a Mason to cut a plain block, so the basic Finesse Ease Factor to use this device to cut blocks for building is 6. Grogs deputed to the task can usually be trusted to carve blocks of approximately regular shape, though they may need trimming to fit, when used. "
+      ]
+		   }
+		   
+		}
+               , "comment" : "made by Hiccup" } }
          , { "possession" :
 	        { "name" : "Porter’s Glove"
 	        , "enchantment" : { "lesseritem" :
@@ -740,7 +757,7 @@
 		      , "range" : "Touch"
 		      , "duration" : "Conc"
 		      , "target" : "Ind"
-		      , "uses" : 24
+		      , "modifiers" : "24 uses/day"
 		      , "design" : "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
 		      , "description" : "This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground"
 		      , "comment" : "Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration"
