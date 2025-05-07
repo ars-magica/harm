@@ -251,14 +251,23 @@ instance Markdown Enchantment  where
        , OList [ printMD eff ] ]
    printMD MundaneItem = OString "Mundane Item" 
 
-instance Markdown Possession  where
-   printMD ob | isMagic ob = OList 
-                           [ OString $ name ob ++ cnt
-                           , printMD $ enchantment ob
+enchantedMD :: Possession -> Enchantment -> OList
+enchantedMD ob (LesserItem eff) = OList [ OString $ pName ob ++ tf ++ "lesser enchanted device"
+                          , f $ printMD eff ]
+   where f (OList xs) = foldOList $ OList $ tail xs
+         f os = os
+         tf = " " ++ effectTeFo eff ++ " "
+enchantedMD ob enc = OList [ OString $ pName ob 
+                          , printMD $ enc
                            ]
-              | otherwise = OString $ show ob
+pName :: Possession -> String
+pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
+
+instance Markdown Possession  where
+   printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
+              | otherwise = OString $ show ob
 
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList

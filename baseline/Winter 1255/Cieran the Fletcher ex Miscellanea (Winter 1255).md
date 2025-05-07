@@ -129,20 +129,18 @@ Weak Spontaneous Magic (0),
     + Tress's Covenant
     + Tribunal Location (at polite distance)
 + Magic Items
-    + Porter’s Glove
-        + The Enchanted Porter (ReTe15)
-            + Range: Touch, Duration: Conc, Target: Ind
-            + 24 uses/day
-            + *This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground*
-            + Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration
-            + "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
-    + Stone-Cutting Knife
-        + Stone-Cutting Knife (ReTe15)
-            + Range: Touch, Duration: Mom, Target: Part
-            + Unlimited uses
-            + *This enchanted chisel shapes and forms stone as if a well-equipped stone- mason were carving it. The device may be used to carve blocks from a quarry (hence the Part Target). The wielder’s Dexterity + Finesse roll substitutes for a mason’s Craft roll (with +3 to the comparable Ease Factor).*
-            + *It is a Simple task for a Mason to cut a plain block, so the basic Finesse Ease Factor to use this device to cut blocks for building is 6. Grogs deputed to the task can usually be trusted to carve blocks of approximately regular shape, though they may need trimming to fit, when used.*
-            + "GL 2, +1 stone, +1 Touch, +1 Part, +10 levels unlimited uses"
+    + Porter’s Glove  (ReTe15) lesser enchanted device
+        + Range: Touch, Duration: Conc, Target: Ind
+        + 24 uses/day
+        + *This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground*
+        + Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration
+        + "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
+    + Stone-Cutting Knife  (ReTe15) lesser enchanted device
+        + Range: Touch, Duration: Mom, Target: Part
+        + Unlimited uses
+        + *This enchanted chisel shapes and forms stone as if a well-equipped stone- mason were carving it. The device may be used to carve blocks from a quarry (hence the Part Target). The wielder’s Dexterity + Finesse roll substitutes for a mason’s Craft roll (with +3 to the comparable Ease Factor).*
+        + *It is a Simple task for a Mason to cut a plain block, so the basic Finesse Ease Factor to use this device to cut blocks for building is 6. Grogs deputed to the task can usually be trusted to carve blocks of approximately regular shape, though they may need trimming to fit, when used.*
+        + "GL 2, +1 stone, +1 Touch, +1 Part, +10 levels unlimited uses"
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
