@@ -25,7 +25,6 @@ module ArM.Types.Trait ( TraitKey(..)
                             , VF(..)
                             , Spell(..)
                             , PTrait(..)
-                            , SpecialTrait(..)
                             , OtherTrait(..)
                             , Possession(..)
                             , CombatOption(..)
@@ -77,7 +76,6 @@ data Trait = AbilityTrait Ability
            | VFTrait VF
            | ConfidenceTrait Confidence
            | OtherTraitTrait OtherTrait
-           | SpecialTraitTrait SpecialTrait
            | PossessionTrait Possession
            | CombatOptionTrait CombatOption
            | AgeTrait Age
@@ -185,14 +183,6 @@ data OtherTrait = OtherTrait { trait :: String
                              , otherExcess :: Int
                              }
            deriving (Ord, Eq, Generic)
--- | SpecialTrait is not used at all
-data SpecialTrait = SpecialTrait { specialTrait :: String
-                             , specialScore :: Maybe Int
-                             , specialComment :: Maybe String 
-                             }
-           deriving (Show, Ord, Eq, Generic)
-instance FromJSON SpecialTrait
-instance ToJSON SpecialTrait
 
 
 -- |
@@ -320,7 +310,6 @@ instance TraitClass Trait where
     traitKey (PTraitTrait x) = traitKey x
     traitKey (OtherTraitTrait x) = traitKey x
     traitKey (ConfidenceTrait x) = traitKey x
-    traitKey (SpecialTraitTrait x) = traitKey x
     traitKey (PossessionTrait x) = traitKey x
     traitKey (CombatOptionTrait x) = traitKey x
     traitKey (AgeTrait x) = traitKey x
@@ -371,11 +360,6 @@ instance TraitClass OtherTrait where
     traitKey x = OtherTraitKey ( trait x ) 
     toTrait = OtherTraitTrait
     getTrait (OtherTraitTrait x) = Just x
-    getTrait _ = Nothing
-instance TraitClass SpecialTrait where
-    traitKey x = SpecialKey ( specialTrait x ) 
-    toTrait = SpecialTraitTrait
-    getTrait (SpecialTraitTrait x) = Just x
     getTrait _ = Nothing
 
 instance TraitClass Age where

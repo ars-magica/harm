@@ -12,7 +12,7 @@ title:
 ## Plan
 
 + [ ] Immediate
-	+ [ ] Spell comments (see Cieran print)
+	+ [x] Spell comments (see Cieran print)
 	+ [ ] Split character sheet in different pages
 		+ [ ] Brief grimoire
 		+ [ ] Long grimoire in separate doc

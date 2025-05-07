@@ -516,17 +516,6 @@ updateOther x ab
     where sc = otherScore ab
           tr = (sc+1)*5
 
-instance TraitType SpecialTrait where
-    computeTrait p 
-       | strait p /= Nothing = Just $ SpecialTrait 
-                           { specialTrait = fromJust ( strait p )
-                           , specialScore = (score p) 
-                           , specialComment = ptComment p
-                           }
-       | otherwise = Nothing
-    advanceTrait a _ = fromJust $ computeTrait a
-
-
 instance TraitType Trait where
     advanceTrait a (CharacteristicTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (AbilityTrait x) = toTrait $ advanceTrait a x
@@ -537,7 +526,6 @@ instance TraitType Trait where
     advanceTrait a (PTraitTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (OtherTraitTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (ConfidenceTrait x) = toTrait $ advanceTrait a x
-    advanceTrait a (SpecialTraitTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (PossessionTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (CombatOptionTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (AgeTrait x) = AgeTrait $ advanceTrait a x
