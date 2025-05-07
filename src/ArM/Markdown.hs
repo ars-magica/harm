@@ -39,7 +39,7 @@ import ArM.GameRules
 import ArM.BasicIO
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- = Rendering the Character Sheet
@@ -229,6 +229,8 @@ listPossessions ps = OList
       , (pList as)
       , OString "Arcane Connections to:"
       , (acList acs)
+      , OString "Magic Items"
+      , (pList ms)
       , OString "Equipment"
       , (pList es)
       ]
@@ -236,7 +238,8 @@ listPossessions ps = OList
          ws = filter isWeapon ps
          as = filter isArmour ps
          acs = filter isAC ps
-         es = filter isEquipment ps
+         ms = filter isMagic ps
+         es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
 instance Markdown CharacterSheet where
@@ -473,14 +476,16 @@ artVisBody cs = map artVisLine $ mergeArt as bs
 mergeArt :: [(TraitKey,String,Int,XPType)] -> [(TraitKey,Int)] 
          -> [(TraitKey,String,Int,XPType,Int)]
 mergeArt [] [] = []
-mergeArt [] ((y1,y2):ys) = (y1,xn,0,0,y2):mergeArt [] ys
-     where (ArtKey xn) = y1
+mergeArt [] ((y1,y2):ys) = (y1,f y1,0,0,y2):mergeArt [] ys
+     where f (ArtKey xn) = xn
+           f _ = trace "ERROR: Not an art in mergeArt." ""
 mergeArt ((x1,x2,x3,x4):xs) []  = (x1,x2,x3,x4,0):mergeArt xs [] 
 mergeArt ((x1,x2,x3,x4):xs) ((y1,y2):ys) 
      | x1 == y1 = (x1,x2,x3,x4,y2):mergeArt xs ys
      | x1 < y1 = (x1,x2,x3,x4,0):mergeArt xs ((y1,y2):ys) 
-     | otherwise = (y1,xn,0,0,y2):mergeArt ((x1,x2,x3,x4):xs) ys
-     where (ArtKey xn) = y1
+     | otherwise = (y1,f y1,0,0,y2):mergeArt ((x1,x2,x3,x4):xs) ys
+     where f (ArtKey xn) = xn
+           f _ = trace "ERROR: Not an art in mergeArt." ""
 
 
 -- | Auxiliary for `artVisMD`, rendering a single line in the table

@@ -41,6 +41,8 @@ module ArM.Types.Trait ( TraitKey(..)
                             , isWeapon
                             , isArmour
                             , isAC
+                            , isMagic
+                            , isMundaneEquipment
                             , isEquipment
                             , isNone
                             ) where

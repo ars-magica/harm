@@ -730,8 +730,21 @@
       , "changes" : [ { "ability" : "Teaching", "xp" : 2 } 
          , { "possession" : { "name" : "Stone-Cutting Knife"
                             , "comment" : "made by Hiccup" } }
-         , { "possession" : { "name" : "Porter’s Glove"
-                            , "comment" : "made by Hiccup" } }
+         , { "possession" :
+	        { "name" : "Porter’s Glove"
+	        , "enchantment" : { "lesseritem" :
+		   { "name" : "The Enchanted Porter"
+		      , "level" : 15
+		      , "technique" : "Re"
+		      , "form" : "Te"
+		      , "design" : "(GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter)"
+		      , "description" : "This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground"
+		      , "comment" : "Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration"
+		   }
+		   
+		}
+                , "comment" : "made by Hiccup" } 
+		}
       ]
       },
       { "mode" : "Reading", "season" : "Summer 1234"

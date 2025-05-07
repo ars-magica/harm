@@ -65,10 +65,16 @@ data Enchantment = LesserItem MagicEffect
     deriving ( Ord, Eq, Generic )
 instance ToJSON Enchantment 
 
+{-
 parseLesser :: Object -> Parser Enchantment
 parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
     where f Nothing = mzero
           f (Just x) = parseJSON x
+-}
+
+parseLesser :: Object -> Parser Enchantment
+parseLesser v = LesserItem
+        <$> v .: "lesseritem" 
 
 parseGreater :: Object -> Parser Enchantment
 parseGreater v = GreaterDevice
@@ -114,9 +120,16 @@ isWeapon p | specialPossession p = False
 isArmour :: Possession -> Bool
 isArmour p | specialPossession p = False
            | otherwise = (armour p /= []) || (armourStats p /= [])
+isMagic :: Possession -> Bool
+isMagic p | specialPossession p = False
+       | otherwise = enchantment p /= MundaneItem
 isAC :: Possession -> Bool
 isAC p | specialPossession p = False
        | otherwise = isJust $ acTo p
+
+isMundaneEquipment :: Possession -> Bool
+isMundaneEquipment p | specialPossession p = False
+       | otherwise = isEquipment p && (not . isMagic) p
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
@@ -251,7 +264,7 @@ instance FromJSON MagicEffect where
     parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
         <$> v .: "name" 
         <*> v .: "level" 
-        <*> v .: "techique" 
+        <*> v .: "technique" 
         <*> v  `parseCollapsedList` "techiqueReq" 
         <*> v .: "form" 
         <*> v  `parseCollapsedList` "formReq" 
