@@ -57,6 +57,7 @@ Warrior (1),
     + Sling
 + Armour
 + Arcane Connections to:
++ Magic Items
 + Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |

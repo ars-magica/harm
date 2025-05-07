@@ -217,7 +217,10 @@ conceptPrintMD dir c = OList
                 nm = fullConceptName c
 
 pList :: [ Possession ] -> OList
-pList = OList  . map (OString . show ) . sortTraits 
+pList = OList  . map printMD . sortTraits 
+
+instance Markdown Possession  where
+   printMD = OString . show
 
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList

@@ -96,6 +96,7 @@ Weak Spontaneous Magic (0),
     + Quarterstaff
 + Armour
 + Arcane Connections to:
++ Magic Items
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern

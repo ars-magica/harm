@@ -129,10 +129,11 @@ Weak Spontaneous Magic (0),
     + Standing Stones in Brittany
     + Tress's Covenant
     + Tribunal Location (at polite distance)
++ Magic Items
+    + Porter’s Glove
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
-    + Porter’s Glove
     + Stone-Cutting Knife
     + Writing Materials
 

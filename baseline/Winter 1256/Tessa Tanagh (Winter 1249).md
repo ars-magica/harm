@@ -66,6 +66,7 @@ Warrior (1),
 + Weapons
 + Armour
 + Arcane Connections to:
++ Magic Items
 + Equipment
 
 

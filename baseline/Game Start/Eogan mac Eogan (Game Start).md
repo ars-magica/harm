@@ -87,6 +87,7 @@ Weakness [for Dogs] (-1),
     + Shortspear
 + Armour
 + Arcane Connections to:
++ Magic Items
 + Equipment
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
