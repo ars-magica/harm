@@ -118,7 +118,7 @@ implicitAbility db cs co df
   | otherwise = explicitAbility db cs co ab df
    where wstr = combatWeapon co
          ws = sheetWeapon db cs wstr
-         w:_ = ws
+         w = head ws
          ab = weaponAbility w
 
 addShield :: WeaponDB -> CharacterSheet -> String -> Maybe String -> CombatLine -> CombatLine

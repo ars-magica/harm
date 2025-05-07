@@ -47,7 +47,6 @@ title:
 	+ [ ] SQ from book
 	+ [ ] Validate Reading Advancement
 	+ [ ] levelCap on ProtoTrait - where should this go?
-	+ [ ] check errors in Cieran's edvancement
 	+ [ ] Use of Keys and objects
 	+ [ ] Type every book with edge cases and supersede wiki
 + [ ] Phase 4. Next steps

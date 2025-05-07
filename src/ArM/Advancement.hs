@@ -191,7 +191,8 @@ instance StepAdvance Character where
                  | otherwise = CharStep new  (Just a)
         where a = prepareAdvancement (fromJust st) adv
               st = state ch
-              (adv:as) = fs
+              adv = head fs
+              as = tail fs
               fs = futureAdvancement ch
               new = ch { futureAdvancement = as }
    completeStepMaybe (CharStep c Nothing) = Just c 
@@ -204,7 +205,8 @@ instance StepAdvance Covenant where
                  | season adv > ns = CovStep cov Nothing
                  | otherwise = CovStep new  (Just a)
         where a = AugCovAdvancement (Just adv) Nothing
-              (adv:as) = fs
+              adv = head fs
+              as = tail fs
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
    completeStepMaybe (CovStep c Nothing) = Just c 
@@ -231,11 +233,9 @@ instance Advance Covenant where
         where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
                   | otherwise = y 
 
--- |
--- = Book Management
+-- * Book Management
 
--- |
--- == Books
+-- ** Books
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
@@ -250,12 +250,12 @@ validateBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Ad
 validateBooks (xs,ys) = (xs, f ys)
    where vs = map valGBU $ getBookUse ys
          f [] = []
-         f (step:s) 
+         f (step@(CharStep ch aa):s) 
             | isNothing aa = step:s
             | bookUsed (fromJust aa) == [] = step:s
             | otherwise = step':s
-            where (CharStep ch aa) = step
-                  step' = CharStep ch (Just $ g (fromJust aa) vs)
+            where step' = CharStep ch (Just $ g (fromJust aa) vs)
+         f ss = ss
          g aa [] = aa
          g aa ((x,v):s) 
            | x `elem` bookUsed aa = g (addValidation [v] aa) s
