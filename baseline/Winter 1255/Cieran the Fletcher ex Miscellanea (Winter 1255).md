@@ -130,6 +130,11 @@ Weak Spontaneous Magic (0),
     + Tribunal Location (at polite distance)
 + Magic Items
     + Porter’s Glove
+        + The Enchanted Porter (ReTe15)
+            + ("","","")
+            + *This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground*
+            + Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration
+            + "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
