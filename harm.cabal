@@ -104,5 +104,5 @@ executable harm
     -O2
     -Wall
     -threaded
-    "-with-rtsopts=-N -s -h -i0.1"
+    "-with-rtsopts=-N -s -hT -i0.1"
 

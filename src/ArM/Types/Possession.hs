@@ -148,7 +148,7 @@ instance StoryObject MagicEffect where
    setName n x = x { effectName = n }
    narrative ob = effectDescription ob
    addNarrative s x = x { effectDescription = s:narrative x }
-   comment ob = comment ob
+   comment ob = effectComment ob
    addComment s x = x { effectComment = s:comment x }
 
 instance StoryObject Possession where
@@ -296,8 +296,8 @@ instance FromJSON MagicEffect where
         <*> v  `parseCollapsedList` "formReq" 
         <*> v .:? "rdt" .!= ("","","")
         <*> v `parseCollapsedList` "effectModifiers" 
-        <*> v .:? "design"  .!= ""
         <*> v .:? "trigger"  .!= ""
+        <*> v .:? "design"  .!= ""
         <*> v `parseCollapsedList` "description" 
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "reference"  .!= ""

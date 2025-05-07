@@ -17,7 +17,6 @@
 module ArM.Markdown ( Markdown(..)
                     , artMD
                     , artVisMD
-                    , stringMD
                     , formatTitle
                     , italicOString
                     , storyOList
@@ -142,14 +141,6 @@ showlistMD s xs = OList [ OString s
                         , toOList $ (map (++", ") $ map show xs)
                         ]
  
--- | Render a Maybe String as an OList.
--- Nothing becomes an empty OList and a Just object becomes a single line.
--- Note that this is different from the generic instance for Maybe, because
--- of the difficulties making an instance for String.
-stringMD :: Maybe String -> OList
-stringMD Nothing = OList []
-stringMD (Just x) = OString x
-
 -- |
 -- = Markdown for the Character types
 -- 
@@ -219,10 +210,36 @@ conceptPrintMD dir c = OList
 pList :: [ Possession ] -> OList
 pList = foldOList . OList  . map printMD . sortTraits 
 
+effectTeFo :: MagicEffect -> String
+effectTeFo eff = " (" ++ te ++ rt ++ fo ++ rf ++ show (effectLevel eff) ++ ")"
+   where te = take 2 $ effectTechnique eff
+         fo = take 2 $ effectForm eff
+         rts = effectTechniqueReq eff
+         rfs = effectFormReq eff
+         rt | rts == [] = ""
+            | otherwise = foldl (++) "" $ map (take 2) rts
+         rf | rts == [] = ""
+            | otherwise = foldl (++) "" $ map (take 2) rfs
+
 instance Markdown MagicEffect  where
-   printMD ob = OString $ name ob
+   printMD ob = OList
+       [ OString $ name ob ++ effectTeFo ob
+       , OList [ OString $ show $ effectRDT ob
+       , nonemptyStringMD $ showStrList md
+       , trs
+       ]
+       , OList $ map italicOString $ narrative ob
+       , OList $ map OString $ comment ob
+       , OList $ [  OString $ show $ effectDesign ob 
+       , nonemptyStringMD $ effectReference ob 
+       ]
+       ]
+       where tr = effectTrigger ob
+             trs | tr == "" = OList []
+                 | otherwise = OString $ "Trigger: " ++ tr
+             md = effectModifiers ob
 instance Markdown Enchantment  where
-   printMD (LesserItem eff) = OList [ printMD eff ]
+   printMD (LesserItem eff) = printMD eff 
    printMD (GreaterDevice vn eff) = OList 
        [ OString $ "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)"
        , OList $ map printMD eff ]
