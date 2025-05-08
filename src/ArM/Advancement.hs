@@ -118,7 +118,7 @@ advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
 jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
+jointAdvance saga = completeJoint . validateBookUse . advJoint . nextJoint saga
 
 
 
@@ -242,12 +242,29 @@ instance Advance Covenant where
 -- * Book Management
 
 -- ** Books
+--
+-- $books
+-- The book validation consists of several steps.
+-- 1. `addBooks` add book objects to the character for each book key.
+--    A ValidationError is created if the book is not found.
+-- 2. **TODO** Check the source quality, if the book is read
+-- 3. **TODO** Check for repeat reading of tractatus
+-- 4. **TODO** create new books on copying
+-- 4. **TODO** create new books on authoring
+
+-- | Validation and inference concerning books.
+validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+validateBookUse = validateBooks . addBooks
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
+--
+-- Note that books are currently only taken from the character's covenant.
+-- This will have to be extended to allow reading as a guest, and books
+-- borrowed from other characters or covenants.
 addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-addBooks (xs,ys) = validateBooks (xs,map (addBook covs) ys)
+addBooks (xs,ys) = (xs,map (addBook covs) ys)
    where covs = filterNothing $ map stepSubjectMaybe xs
 
 -- |
