@@ -40,8 +40,7 @@ import ArM.Types
 import ArM.Types.Saga
 import ArM.Helper
 
--- |
--- = Advancement
+-- * Advancement
 
 -- |
 -- The Advance class represents objects which change state from
@@ -75,8 +74,7 @@ class Timed a => Advance a where
     prepare = id
 
 
--- |
--- == Saga Advancement
+-- ** Saga Advancement
 
 -- | The saga can be advanced with the same class methods as
 -- characters and covenants.  When the saga advances, all its
@@ -168,8 +166,7 @@ advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Advance
 advJoint (xs,ys) = (map applyAdv xs, map applyAdv ys)
 
 
--- |
--- == Covenant and Character Advancement
+-- ** Covenant and Character Advancement
 
 -- | Generic type for an advancement step for either a covenant or a character.
 data AdvancementStep = CovStep Covenant  (Maybe AugCovAdvancement)
