@@ -306,13 +306,28 @@ bookCollision :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Ad
 bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
     where cbs = stepContestedBooks chs
 
+-- | Add validation errors to one Character advancement, given a list
+-- of counted book uses.
 bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
-bookCollision' bcs step@(CovStep _ _) = step
-bookCollision' bcs step@(CharStep _ Nothing) = step
-bookCollision' bcs step@(CharStep ch (Just ad)) = CharStep ch (Just ad')
+bookCollision' _ step@(CovStep _ _) = step
+bookCollision' _ step@(CharStep _ Nothing) = step
+bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
     where bks = bookUsed  ad
-          ad' = ad
+          ad' = addValidation vs ad
+          vs = bkVal $ bkCollisions bcs bks
 
+bkVal :: [(Book,Int)] -> [Validation] 
+bkVal [] = []
+bkVal (x:xs) = val:bkVal xs
+   where val = ValidationError $ name (fst x) ++ " is oversubscribed"
+
+bkCollisions :: [(Book,Int)] -> [Book] -> [(Book,Int)]
+bkCollisions bcs bks = f bcs $ sort bks 
+   where  f [] _ = []
+          f _ [] = []
+          f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
+                          | fst c > b = f (c:cs) bs
+                          | otherwise = c:f cs bs
 
 stepContestedBooks :: [AdvancementStep] -> [(Book,Int)]
 stepContestedBooks = filter f . stepCountBooks

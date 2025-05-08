@@ -61,6 +61,7 @@ data Book = Book
      , antologyOf :: [ Book ]     -- ^ The book is an antology of multiple books
      , copiedFrom :: Maybe String   -- ^ Book copied or Nothing for an original manuscript
      , bookLocation :: Maybe String     -- ^ Location whre the book was written or copied
+     , bookNarrative :: [ String ]   -- ^ Additional information in free text
      , bookAnnotation :: [ String ]   -- ^ Additional information in free text
      , bookLanguage  :: Maybe String  -- ^ Language of the book
      , bookCount :: Int               -- ^ Number of copies 
@@ -68,6 +69,17 @@ data Book = Book
 instance Countable Book where
     count = bookCount
     addCount b n = b { bookCount = bookCount b + n }
+instance StoryObject Book where
+    name book = tis ++ aus ++ dat
+     where aut = trim $ originalAuthor book
+           aus | aut == "" = ""
+               | otherwise = " by " ++ aut
+           tit = trim $ originalTitle book
+           tis | tit == "" = ""
+               | otherwise = "*" ++ tit ++ "*"
+           dat = " (" ++ show (originalDate book) ++ ")"
+    narrative = bookNarrative
+    comment = bookAnnotation
 instance ToJSON Book
 instance FromJSON Book where
     parseJSON = withObject "Book" $ \v -> Book
@@ -79,6 +91,7 @@ instance FromJSON Book where
         <*> v  `parseCollapsedList` "antologyOf" 
         <*> v .:? "copiedFrom" 
         <*> v .:? "location" 
+        <*> v  `parseCollapsedList` "narrative" 
         <*> v  `parseCollapsedList` "comment" 
         <*> v .:? "language" 
         <*> v .:? "count"  .!= 1
@@ -202,6 +215,7 @@ instance ArMCSV Book where
      , antologyOf = []
      , copiedFrom = Nothing
      , bookLocation = Nothing
+     , bookNarrative = []
      , bookAnnotation = []
      , bookLanguage = Nothing
      , bookCount = 1 }

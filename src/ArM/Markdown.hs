@@ -17,7 +17,6 @@
 module ArM.Markdown ( Markdown(..)
                     , artMD
                     , artVisMD
-                    , formatTitle
                     , italicOString
                     , storyOList
                     ) where
@@ -451,12 +450,12 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
            lv | leaving a == [] = OList []
              | otherwise = OString $  "leaving: " ++ showStrList (map show $ leaving a)
            acq | acquired a == [] = OList []
-             | otherwise = OString $  "acquired: " ++ showStrList (map formatTitle $ acquired a)
+             | otherwise = OString $  "acquired: " ++ showStrList (map name $ acquired a)
            lst | lost a == [] = OList []
-             | otherwise = OString $  "lost: " ++ showStrList (map formatTitle $ lost a)
+             | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
 instance Markdown AugmentedAdvancement where
    printMD a = indentOList $ OList $ storyOList a ++
-       [ OList $ map (OString . ("Uses "++) . formatTitle ) $ bookUsed a
+       [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a
@@ -704,19 +703,10 @@ covconceptHelper cc = filterNothing
    , fmap  ("**Appearance** "++)  (covAppearance cc)
    ]
 
-formatTitle :: Book -> String
-formatTitle book = tis ++ aus ++ dat
-     where aut = trim $ originalAuthor book
-           aus | aut == "" = ""
-               | otherwise = " by " ++ aut
-           tit = trim $ originalTitle book
-           tis | tit == "" = ""
-               | otherwise = "*" ++ tit ++ "*"
-           dat = " (" ++ show (originalDate book) ++ ")"
 
 instance Markdown Book where
     printMD book = OList  
-         [ OString $ formatTitle book
+         [ OString $ name book
          , OList $ [ OString $ showStrList $ map show (bookStats book) 
                  , cnt
                  , lns ]
