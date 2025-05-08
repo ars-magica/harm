@@ -121,7 +121,6 @@ jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next s
 jointAdvance saga = completeJoint . validateBookUse . advJoint . nextJoint saga
 
 
-
 -- | Apply the next advancement step.
 --
 -- The main process is defined by the `applyAdvancement` function from
@@ -191,6 +190,10 @@ class StepAdvance c where
    -- returning Nothing if the constituent subject does not match
    -- the required type.
    stepSubjectMaybe :: AdvancementStep -> Maybe c
+   -- | Get the advancement fromn a `AdvancementStep` object.
+class StepAdvanceAdv c where
+   -- | Get the advancement fromn a `AdvancementStep` object.
+   stepAdvancement :: AdvancementStep -> Maybe c
 instance StepAdvance Character where
    nextStep ns ch | fs == [] = CharStep ch Nothing
                  | season adv > ns = CharStep ch Nothing
@@ -206,6 +209,9 @@ instance StepAdvance Character where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
+instance StepAdvanceAdv AugmentedAdvancement where
+   stepAdvancement (CharStep _ a) = a
+   stepAdvancement _ = Nothing
 instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing
                  | season adv > ns = CovStep cov Nothing
@@ -220,7 +226,9 @@ instance StepAdvance Covenant where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
-
+instance StepAdvanceAdv AugCovAdvancement where
+   stepAdvancement (CovStep _ a) = a
+   stepAdvancement _ = Nothing
 
 instance Advance Character where
    nextAdvancement = f . futureAdvancement
@@ -247,10 +255,11 @@ instance Advance Covenant where
 -- The book validation consists of several steps.
 -- 1. `addBooks` add book objects to the character for each book key.
 --    A ValidationError is created if the book is not found.
--- 2. **TODO** Check the source quality, if the book is read
--- 3. **TODO** Check for repeat reading of tractatus
--- 4. **TODO** create new books on copying
--- 4. **TODO** create new books on authoring
+-- 2. **TODO** Check for conflicting use requests
+-- 3. **TODO** Check the source quality, if the book is read
+-- 4. **TODO** Check for repeat reading of tractatus
+-- 5. **TODO** create new books on copying
+-- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -290,6 +299,23 @@ addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
           f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+
+stepCountBooks :: [AdvancementStep] -> [(Book,Int)]
+stepCountBooks = countBooks . stepBooksUsed
+
+countBooks :: [Book] -> [(Book,Int)]
+countBooks = f . map ( \b -> (b,1) ) 
+   where f [] = []
+         f (x:[]) = x:[]
+         f (x:y:ys) | fst x /= fst y  = x:f (y:ys)
+                    | otherwise = f ((fst x,snd x + snd y):ys)
+
+-- | Get a list of books used in the seqason
+stepBooksUsed :: [AdvancementStep] -> [Book]
+stepBooksUsed = sort . foldl (++) [] . map bookUsed .  stepBooksUsed' 
+
+stepBooksUsed' :: [AdvancementStep] -> [AugmentedAdvancement]
+stepBooksUsed' = filterNothing . map stepAdvancement
 
 -- |
 -- Validate the use of books.
