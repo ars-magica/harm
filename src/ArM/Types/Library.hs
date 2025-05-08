@@ -65,6 +65,9 @@ data Book = Book
      , bookLanguage  :: Maybe String  -- ^ Language of the book
      , bookCount :: Int               -- ^ Number of copies 
      } deriving (Eq,Generic,Show)
+instance Countable Book where
+    count = bookCount
+    addCount b n = b { bookCount = bookCount b + n }
 instance ToJSON Book
 instance FromJSON Book where
     parseJSON = withObject "Book" $ \v -> Book

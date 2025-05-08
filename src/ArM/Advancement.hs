@@ -300,6 +300,9 @@ addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
           f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
+stepContestedBooks :: [AdvancementStep] -> [(Book,Int)]
+stepContestedBooks = filter f . stepCountBooks
+   where f (b,c) = c > count b
 stepCountBooks :: [AdvancementStep] -> [(Book,Int)]
 stepCountBooks = countBooks . stepBooksUsed
 
