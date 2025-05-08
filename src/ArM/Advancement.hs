@@ -256,14 +256,24 @@ instance Advance Covenant where
 -- 1. `addBooks` add book objects to the character for each book key.
 --    A ValidationError is created if the book is not found.
 -- 2. `bookCollision` checks for conflicting use requests
--- 3. **TODO** Check the source quality, if the book is read
+-- 3. **TODO** `bookSQ` checks the source quality, if the book is read
 -- 4. **TODO** Check for repeat reading of tractatus
 -- 5. **TODO** create new books on copying
 -- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-validateBookUse = bookCollision . addBooks
+validateBookUse = bookSQ . bookCollision . addBooks
+
+-- | Add and validate source quality on reading advancements
+bookSQ :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+bookSQ (xs,ys) = (xs,map bookSQ' ys)
+
+bookSQ' :: AdvancementStep -> AdvancementStep
+bookSQ' (CharStep c (Just ad)) = CharStep c (Just $ bookAdvSQ ad)
+bookSQ' step = step
+bookAdvSQ :: AugmentedAdvancement -> AugmentedAdvancement
+bookAdvSQ = id
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
