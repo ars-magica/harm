@@ -176,16 +176,16 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Bonus SQ +4 from Book Learner and Correspondent (101->114)*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
-    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
+    + Validated: Book RegoL20Q9 is available.
 
 ## Winter 1253
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
-    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 
 ## Autumn 1252
@@ -338,8 +338,8 @@
     + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Uses *From nothing to everything* by Vivianus of Bonisagus (No Time)
-    + Validated: Book CreoQ9Vivianus is available.
     + Validated: Correctly spent 12 xp.
+    + Validated: Book CreoQ9Vivianus is available.
 
 ## Spring 1247
 
@@ -1070,8 +1070,8 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies Mentem L16Q13 +3*
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
-    + Validated: Book MentemL16Q13 is available.
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Summer 1217
 

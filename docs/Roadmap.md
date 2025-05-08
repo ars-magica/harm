@@ -8,6 +8,8 @@ title:
 
 # Roadmap
 
+1. Level cap on  advancement.
+2. SQ from book
 
 ## Plan
 
@@ -44,7 +46,6 @@ title:
 + [ ] Phase 3. Books
 	+ [ ] [[Reading and Books]]
 	+ [ ] Process books in covenant advancement
-	+ [ ] SQ from book
 	+ [ ] Validate Reading Advancement
 	+ [ ] levelCap on ProtoTrait - where should this go?
 	+ [ ] Use of Keys and objects

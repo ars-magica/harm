@@ -16,7 +16,7 @@
 -- individual character in isolation.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Advancement ( prepareAdvancement ) where
+module ArM.Char.Advancement ( prepareAdvancement, validate ) where
 
 import ArM.Char.Character
 import ArM.Types.ProtoTrait
@@ -33,11 +33,10 @@ import Data.List
 -- = Preparing the Advancement
 
 
+
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
-prepareAdvancement c = validate 
-                     . sortAdvTraits   -- sort inferred traits
-                     . inferSQ c
+prepareAdvancement c = sortAdvTraits   -- sort inferred traits
                      . winterEvents c 
                      . addInference c
 
@@ -83,7 +82,7 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
 
 
 -- | Calculate initial XP limits on Advancements
-inferSQ :: CharacterState -> AugmentedAdvancement -> AugmentedAdvancement
+inferSQ :: Character -> AugmentedAdvancement -> AugmentedAdvancement
 inferSQ cs ad = ad { inferredAdv = aa { advSQ = sq, advBonus = vfBonusSQ vf ad } }
         where vf = vfList $ characterSheet cs
               (sq,cap) = getSQ ad
@@ -125,12 +124,11 @@ lrWarping = defaultPT { other = Just "Warping"
                       , ptComment = Just "from Longevity Ritual" }
 
 
--- |
--- = In-game Validation
+-- * In-game Validation
+--
 -- In-game validation is relatively simple, depending only on the
 -- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
 
--- |
--- Validate an in-game advancement, adding results to the validation field.
-validate :: AugmentedAdvancement -> AugmentedAdvancement
-validate = validateXP
+-- | Add source qualities and validate XP expenditure
+validate :: Character -> AugmentedAdvancement -> AugmentedAdvancement
+validate c = validateXP . inferSQ c

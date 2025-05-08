@@ -736,8 +736,8 @@ Total: 1249 levels of spells.
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 13xp; 
-    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
+    + Validated: Book RegoL20Q9 is available.
 + Winter 1253 (9+4xp) (1 years) Reading
     + *Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
@@ -747,8 +747,8 @@ Total: 1249 levels of spells.
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Book RegoL20Q9 is available.
     + Validated: Correctly spent 13 xp.
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 + Autumn 1252 (15+1xp) Adventure
     + *Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11*
@@ -920,8 +920,8 @@ Total: 1249 levels of spells.
     + Uses *From nothing to everything* by Vivianus of Bonisagus (No Time)
     + Changing traits
         + Art: Creo 12xp; 
-    + Validated: Book CreoQ9Vivianus is available.
     + Validated: Correctly spent 12 xp.
+    + Validated: Book CreoQ9Vivianus is available.
 + Spring 1247 (11+3xp) Reading
     + *Tractatus *On the Spark**
     + Changing traits
@@ -1759,8 +1759,8 @@ Total: 1249 levels of spells.
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
-    + Validated: Book MentemL16Q13 is available.
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Summer 1217 (21+3xp) Reading
     + *Studies *Root of Herbam* L6 Q21 +3*
     + Changing traits

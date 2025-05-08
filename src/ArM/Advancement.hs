@@ -32,7 +32,7 @@ import Data.Maybe
 import Data.List 
 
 import ArM.Char.Character
-import ArM.Char.Advancement (prepareAdvancement)
+import ArM.Char.Advancement (prepareAdvancement,validate)
 import ArM.Char.CharGen (prepareCharacter)
 import ArM.Types.Covenant
 import ArM.Types.Library
@@ -118,7 +118,12 @@ advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
 jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next season is
              -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance saga = completeJoint . validateBookUse . advJoint . nextJoint saga
+jointAdvance saga = completeJoint . validateStep . validateBookUse . advJoint . nextJoint saga
+
+validateStep :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+validateStep (xs,ys) = (xs,map f ys)
+    where f (CharStep c (Just a)) = CharStep c $ Just $ validate c a
+          f step = step
 
 
 -- | Apply the next advancement step.
