@@ -331,12 +331,9 @@ bkCollisions bcs bks = f bcs $ sort bks
           val c b | count b < c = errBook b
                   | otherwise = valBook b
 
-{-
-stepContestedBooks :: [AdvancementStep] -> [(Book,Int)]
-stepContestedBooks = filter f . stepCountBooks
-   where f (b,c) = c > count b
--}
-stepCountBooks :: [AdvancementStep] -> [(Book,Int)]
+-- | Count uses of books in an advancement step
+stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
+               -> [(Book,Int)]       -- ^ List of books with number of users
 stepCountBooks = countBooks . stepBooksUsed
 
 countBooks :: [Book] -> [(Book,Int)]
@@ -353,49 +350,3 @@ stepBooksUsed = sort . foldl (++) [] . map bookUsed .  stepBooksUsed'
 stepBooksUsed' :: [AdvancementStep] -> [AugmentedAdvancement]
 stepBooksUsed' = filterNothing . map stepAdvancement
 
-{-
--- |
--- Validate the use of books.
-validateBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-validateBooks (xs,ys) = (xs, f ys)
-   where vs = map valGBU $ getBookUse ys
-         f [] = []
-         f (step@(CharStep ch aa):s) 
-            | isNothing aa = step:s
-            | bookUsed (fromJust aa) == [] = step:s
-            | otherwise = step':s
-            where step' = CharStep ch (Just $ g (fromJust aa) vs)
-         f ss = ss
-         g aa [] = aa
-         g aa ((x,v):s) 
-           | x `elem` bookUsed aa = g (addValidation [v] aa) s
-           | otherwise = g aa s
--- | Validate use of a single book.
--- This is an auxiliary for `validateBooks` which applies it with `map`.
-valGBU :: (Book,[Character]) -> (Book,Validation)
-valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
-              | otherwise = (b,Validated $ "Book " ++ bookID b ++ " is available.")
-    where err = "Oversubscription " ++ show (bookCount b) ++ " copies of " ++ (bookID b)
-                    ++ ". Used by " ++ showStrList (map name cs) ++ "." 
-
--- |
--- Get a list of book uses for validation.
-getBookUse :: [AdvancementStep] -> [ ( Book, [Character] ) ]
-getBookUse = f5 . f4 . f3 . f2 . f1
-   where f1 = map  ( \ x -> (aaBookUsed x,x) )
-         f2 = map ( \ (bs, step) -> [ (b,stepSubjectMaybe step) | b <- bs ] ) 
-         f3 = sortOn fst . foldl (++) [] 
-         f4 = map f4i
-         f4i (x,Nothing) = (x,[])
-         f4i (x,Just y) = ( x, [y] ) 
-         f5 [] = []
-         f5 (x:[]) = x:[]
-         f5 ((x1,y1):(x2,y2):s) 
-             | x1 == x2 = f5 ((x1,y1++y2):s)
-             | otherwise = (x1,y1):f5 ((x2,y2):s)
-
-aaBookUsed :: AdvancementStep -> [Book]
-aaBookUsed (CharStep _ (Just aa)) = bookUsed aa
-aaBookUsed _ = []
-
--}
