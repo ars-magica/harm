@@ -263,7 +263,7 @@ instance Advance Covenant where
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-validateBookUse = validateBooks . bookCollision . addBooks
+validateBookUse = bookCollision . addBooks
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
@@ -304,7 +304,7 @@ addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
 -- is oversubscribed.
 bookCollision :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
 bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
-    where cbs = stepContestedBooks chs
+    where cbs = stepCountBooks chs
 
 -- | Add validation errors to one Character advancement, given a list
 -- of counted book uses.
@@ -314,24 +314,28 @@ bookCollision' _ step@(CharStep _ Nothing) = step
 bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
     where bks = bookUsed  ad
           ad' = addValidation vs ad
-          vs = bkVal $ bkCollisions bcs bks
+          vs = bkCollisions bcs bks
 
-bkVal :: [(Book,Int)] -> [Validation] 
-bkVal [] = []
-bkVal (x:xs) = val:bkVal xs
-   where val = ValidationError $ name (fst x) ++ " is oversubscribed"
+errBook :: Book -> Validation
+errBook b = ValidationError $ name b ++ " is oversubscribed"
+valBook :: Book -> Validation
+valBook b = Validated $ "Book " ++ bookID b ++ " is available."
 
-bkCollisions :: [(Book,Int)] -> [Book] -> [(Book,Int)]
+bkCollisions :: [(Book,Int)] -> [Book] -> [Validation]
 bkCollisions bcs bks = f bcs $ sort bks 
    where  f [] _ = []
           f _ [] = []
           f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
                           | fst c > b = f (c:cs) bs
-                          | otherwise = c:f cs bs
+                          | otherwise = val (snd c) b:f cs bs
+          val c b | count b < c = errBook b
+                  | otherwise = valBook b
 
+{-
 stepContestedBooks :: [AdvancementStep] -> [(Book,Int)]
 stepContestedBooks = filter f . stepCountBooks
    where f (b,c) = c > count b
+-}
 stepCountBooks :: [AdvancementStep] -> [(Book,Int)]
 stepCountBooks = countBooks . stepBooksUsed
 
@@ -349,6 +353,7 @@ stepBooksUsed = sort . foldl (++) [] . map bookUsed .  stepBooksUsed'
 stepBooksUsed' :: [AdvancementStep] -> [AugmentedAdvancement]
 stepBooksUsed' = filterNothing . map stepAdvancement
 
+{-
 -- |
 -- Validate the use of books.
 validateBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -393,5 +398,4 @@ aaBookUsed :: AdvancementStep -> [Book]
 aaBookUsed (CharStep _ (Just aa)) = bookUsed aa
 aaBookUsed _ = []
 
-
-
+-}
