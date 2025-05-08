@@ -263,7 +263,7 @@ instance Advance Covenant where
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-validateBookUse = validateBooks . addBooks
+validateBookUse = validateBooks . bookCollision . addBooks
 
 -- |
 -- Find books in the covenants and add to the advancements for characters
@@ -299,6 +299,20 @@ addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
           f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+
+-- | Add validation errors to Character advancements where a book
+-- is oversubscribed.
+bookCollision :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
+    where cbs = stepContestedBooks chs
+
+bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
+bookCollision' bcs step@(CovStep _ _) = step
+bookCollision' bcs step@(CharStep _ Nothing) = step
+bookCollision' bcs step@(CharStep ch (Just ad)) = CharStep ch (Just ad')
+    where bks = bookUsed  ad
+          ad' = ad
+
 
 stepContestedBooks :: [AdvancementStep] -> [(Book,Int)]
 stepContestedBooks = filter f . stepCountBooks
