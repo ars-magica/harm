@@ -128,14 +128,14 @@ jointAdvance saga = completeJoint . addBooks . advJoint . nextJoint saga
 --
 -- The main process is defined by the `applyAdvancement` function from
 -- `ArM.Char.Advancement`
-applyAdv :: AdvancementStep -> AdvancementStep
-applyAdv (CharStep c Nothing) = (CharStep c Nothing) 
-applyAdv (CharStep c (Just aa)) = (CharStep c' (Just a')) 
+applyStep :: AdvancementStep -> AdvancementStep
+applyStep (CharStep c Nothing) = (CharStep c Nothing) 
+applyStep (CharStep c (Just aa)) = (CharStep c' (Just a')) 
        where (a',st') = applyAdvancement aa st
              c' = c { state = Just st' }
              st = fromMaybe defaultCS $ state c
-applyAdv (CovStep c Nothing) = (CovStep c Nothing) 
-applyAdv (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
+applyStep (CovStep c Nothing) = (CovStep c Nothing) 
+applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
     where st' = st { covTime = caSeason aa, covenFolkID = cid }
           c' = c { covenantState = Just st' }
           st = fromMaybe defaultCovState $ covenantState c
@@ -165,7 +165,7 @@ completeJoint (xs,ys) = mapCompleteSplit (ys++xs)
 -- |
 -- Jointly advance characters and covenants.
 advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-advJoint (xs,ys) = (map applyAdv xs, map applyAdv ys)
+advJoint (xs,ys) = (map applyStep xs, map applyStep ys)
 
 
 -- |
@@ -178,13 +178,22 @@ data AdvancementStep = CovStep Covenant  (Maybe AugCovAdvancement)
 
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
 class StepAdvance c where
+   -- | Create the next `AdvancementStep` object for a character or covenant.
    nextStep :: SeasonTime -> c -> AdvancementStep
+   -- | Clean up the advancement step. This should only be applied after
+   -- `applyStep`.
    completeStep :: AdvancementStep -> c
    completeStep = fromJust . completeStepMaybe
    completeStepMaybe :: AdvancementStep -> Maybe c
-   applyStep :: AdvancementStep -> c
-   applyStep = fromJust . applyStepMaybe
-   applyStepMaybe :: AdvancementStep -> Maybe c
+   -- | Get the subjct (i.e. covenant or character) from the object.
+   -- Note that this returns an error when the type of the `StepAdvance`
+   -- object does not match the actual contents.
+   stepSubject :: AdvancementStep -> c
+   stepSubject = fromJust . stepSubjectMaybe
+   -- | Get the subjct (i.e. covenant or character) from the object,
+   -- returning Nothing if the constituent subject does not match
+   -- the required type.
+   stepSubjectMaybe :: AdvancementStep -> Maybe c
 instance StepAdvance Character where
    nextStep ns ch | fs == [] = CharStep ch Nothing
                  | season adv > ns = CharStep ch Nothing
@@ -198,8 +207,8 @@ instance StepAdvance Character where
    completeStepMaybe (CharStep c Nothing) = Just c 
    completeStepMaybe (CharStep c (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
    completeStepMaybe _ = Nothing
-   applyStepMaybe (CharStep c _) = Just c 
-   applyStepMaybe _ = Nothing
+   stepSubjectMaybe (CharStep c _) = Just c 
+   stepSubjectMaybe _ = Nothing
 instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing
                  | season adv > ns = CovStep cov Nothing
@@ -212,8 +221,8 @@ instance StepAdvance Covenant where
    completeStepMaybe (CovStep c Nothing) = Just c 
    completeStepMaybe (CovStep c (Just a)) = Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
    completeStepMaybe _ = Nothing
-   applyStepMaybe (CovStep c _) = Just c
-   applyStepMaybe _ = Nothing
+   stepSubjectMaybe (CovStep c _) = Just c
+   stepSubjectMaybe _ = Nothing
 
 
 instance Advance Character where
@@ -241,8 +250,32 @@ instance Advance Covenant where
 -- Find books in the covenants and add to the advancements for characters
 -- who use them.
 addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-addBooks (xs,ys) = validateBooks (xs,map (addBook xs') ys)
-   where xs' = filterNothing $ map applyStepMaybe xs
+addBooks (xs,ys) = validateBooks (xs,map (addBook covs) ys)
+   where covs = filterNothing $ map stepSubjectMaybe xs
+
+-- |
+-- Find books in the covenants and add to the advancement of the given
+-- character if they use the book.
+addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
+addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
+   where cov =  findCov x cvs
+addBook _ step = step
+
+-- |
+-- Find and add books with stats to add to the character advancement.
+-- Not implemented yet.
+addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
+addBook' Nothing y  = y
+addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
+    where u = usesBook y
+          bk | isNothing st = [ Nothing | _ <- u ]
+             | otherwise = map (findBook (fromJust st)) u
+          bs = zip u bk
+          st = covenantState cov
+          f [] aa = aa
+          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
+          f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
+          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
 -- |
 -- Validate the use of books.
@@ -273,7 +306,7 @@ valGBU (b,cs) | bookCount b < length cs = (b, ValidationError err )
 getBookUse :: [AdvancementStep] -> [ ( Book, [Character] ) ]
 getBookUse = f5 . f4 . f3 . f2 . f1
    where f1 = map  ( \ x -> (aaBookUsed x,x) )
-         f2 = map ( \ (bs, step) -> [ (b,applyStepMaybe step) | b <- bs ] ) 
+         f2 = map ( \ (bs, step) -> [ (b,stepSubjectMaybe step) | b <- bs ] ) 
          f3 = sortOn fst . foldl (++) [] 
          f4 = map f4i
          f4i (x,Nothing) = (x,[])
@@ -288,27 +321,5 @@ aaBookUsed :: AdvancementStep -> [Book]
 aaBookUsed (CharStep _ (Just aa)) = bookUsed aa
 aaBookUsed _ = []
 
--- |
--- Find books in the covenants and add to the advancement of the given
--- character if they use the book.
-addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
-addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
-   where cov =  findCov x cvs
-addBook _ step = step
 
--- |
--- Find and add books with stats to add to the character advancement.
--- Not implemented yet.
-addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
-addBook' Nothing y  = y
-addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
-    where u = usesBook y
-          bk | isNothing st = [ Nothing | _ <- u ]
-             | otherwise = map (findBook (fromJust st)) u
-          bs = zip u bk
-          st = covenantState cov
-          f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
-          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
 
