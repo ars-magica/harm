@@ -255,7 +255,7 @@ instance Advance Covenant where
 -- The book validation consists of several steps.
 -- 1. `addBooks` add book objects to the character for each book key.
 --    A ValidationError is created if the book is not found.
--- 2. **TODO** Check for conflicting use requests
+-- 2. `bookCollision` checks for conflicting use requests
 -- 3. **TODO** Check the source quality, if the book is read
 -- 4. **TODO** Check for repeat reading of tractatus
 -- 5. **TODO** create new books on copying
@@ -316,27 +316,30 @@ bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
           ad' = addValidation vs ad
           vs = bkCollisions bcs bks
 
-errBook :: Book -> Validation
-errBook b = ValidationError $ name b ++ " is oversubscribed"
-valBook :: Book -> Validation
-valBook b = Validated $ "Book " ++ bookID b ++ " is available."
 
-bkCollisions :: [(Book,Int)] -> [Book] -> [Validation]
+-- | Check for oversubscribed books reporting as a list of Validation
+-- objects.
+bkCollisions :: [(Book,Int)]  -- ^ List of books and numbers of subscribers.
+             -> [Book]        -- ^ List of books to check for oversubscription.
+             -> [Validation]  -- ^ Verification or error for each book checked.
 bkCollisions bcs bks = f bcs $ sort bks 
    where  f [] _ = []
           f _ [] = []
           f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
                           | fst c > b = f (c:cs) bs
                           | otherwise = val (snd c) b:f cs bs
-          val c b | count b < c = errBook b
-                  | otherwise = valBook b
+          val c b | count b < c = ValidationError $ name b ++ " is oversubscribed"
+                  | otherwise = Validated $ "Book " ++ bookID b ++ " is available."
 
 -- | Count uses of books in an advancement step
 stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
                -> [(Book,Int)]       -- ^ List of books with number of users
 stepCountBooks = countBooks . stepBooksUsed
 
-countBooks :: [Book] -> [(Book,Int)]
+-- | Count duplications in a list of books.
+countBooks :: (Eq b, Countable b)
+           => [b]       -- ^ Sorted list of books with duplications
+           -> [(b,Int)] -- ^ List of unique books with number of repetitions in the input
 countBooks = f . map ( \b -> (b,1) ) 
    where f [] = []
          f (x:[]) = x:[]
@@ -347,6 +350,8 @@ countBooks = f . map ( \b -> (b,1) )
 stepBooksUsed :: [AdvancementStep] -> [Book]
 stepBooksUsed = sort . foldl (++) [] . map bookUsed .  stepBooksUsed' 
 
+-- | Auxiliary for `stepBooksUsed`.  This is required to force typing
+-- in intermediate steps.
 stepBooksUsed' :: [AdvancementStep] -> [AugmentedAdvancement]
 stepBooksUsed' = filterNothing . map stepAdvancement
 

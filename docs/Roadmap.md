@@ -50,7 +50,6 @@ title:
 	+ [ ] Use of Keys and objects
 	+ [ ] Type every book with edge cases and supersede wiki
 + [ ] Phase 4. Next steps
-	+ [ ] More spell descriptions in CSV file
 	+ [ ] Specialists (copyists in particular)
 + [ ] Phase 5. [[Covenant]]
 	+ [ ] Reading and copying advancements
@@ -70,7 +69,6 @@ title:
 	+ [ ] Author books
 	+ [ ] Teaching/Taught
 		+ [ ] Difficult to derive SQ from the teacher
-		+ [ ] Could potentially augment advancement and advance in multiple steps
 		+ [ ] Training
 	+ [ ] Enchantments
 		+ [ ] Create Lesser Enchantments
