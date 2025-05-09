@@ -22,6 +22,7 @@ import GHC.Generics
 import Data.Maybe
 import Data.Text  (splitOn,unpack,pack)
 import Text.Read 
+import Control.Monad
 
 import ArM.DB.CSV
 import ArM.Types.TraitKey
@@ -108,19 +109,22 @@ originalBook b Nothing = Just $ originalTome b
 originalBook b (Just k) = fmap originalTome $ find ( (==k) . harmKey ) $ antologyOf b
 -}
 
-{-
- - This does not work because we cannot look up books by ID.
- -
+class BookDB h where
+   bookLookup :: h -> String -> Maybe Book
+
+instance (BookDB h) => BookDB [h] where
+   bookLookup db k = foldl mplus Nothing $ map (\ x -> bookLookup x k) db
+
 -- | The ID used to avoid rereading of tractatus
-originalKey :: Book -> HarmKey
-originalKey = harmKey . originalTome
+originalKey :: BookDB h => h -> Book -> HarmKey
+originalKey db = harmKey . originalTome db
 
 -- | The original of a given tome
-originalTome :: Book -> Book
-originalTome b
-   | isNothing (copiedFrom b) = b
-   | otherwise = originalTome (fromJust $ copiedFrom b)
--}
+originalTome :: BookDB h => h -> Book -> Book
+originalTome db b
+   | isNothing b' = b
+   | otherwise = originalTome db (fromJust b')
+   where b' = join $ fmap (bookLookup db) (copiedFrom b)
 
 {-
 bookTraitStats :: Book -> TraitKey -> Maybe BookStats
