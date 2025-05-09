@@ -19,9 +19,9 @@ module ArM.Types.Covenant ( Covenant(..)
                           , CovenantState(..)
                           , CovAdvancement(..)
                           , AugCovAdvancement(..)
+                          , CovenantLike(..)
                           , findCov
                           , defaultCovState
-                          , findBook
                           , contractAdvancement
                           , covenant
                           ) where
@@ -186,9 +186,16 @@ findCov :: Character -> [Covenant] -> Maybe Covenant
 findCov ch cs = maybeHead xs
     where xs = filter (`hasMember` ch) cs
 
-findBook ::  CovenantState -> String -> Maybe Book
-findBook cov bs = maybeHead xs
-    where xs = filter ( (==bs) . bookID ) ( library cov )
+class CovenantLike c where
+    findBook ::  c -> String -> Maybe Book
+instance CovenantLike Covenant where
+    findBook cov bs = f (covenantState cov) bs
+       where f Nothing _ = Nothing
+             f (Just st) xs = findBook st xs
+    
+instance CovenantLike CovenantState where
+    findBook cov bs = maybeHead xs
+        where xs = filter ( (==bs) . bookID ) ( library cov )
 
 -- |
 -- Does the covenant have the character as a member?

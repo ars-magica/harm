@@ -324,6 +324,13 @@ addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Advance
 addBooks (xs,ys) = (xs,map (addBook covs) ys)
    where covs = filterNothing $ map stepSubjectMaybe xs
 
+findBookStep :: [AdvancementStep] -> String -> Maybe Book
+findBookStep xs k = maybeHead $ filterNothing $ map f xs
+    where f (CovStep c _) = findBook c k
+          f  _ = Nothing
+   -- where cvs = map getSubject xs
+
+
 -- |
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.

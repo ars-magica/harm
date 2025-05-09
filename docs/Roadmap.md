@@ -10,6 +10,9 @@ title:
 
 1. Level cap on  advancement.
 2. SQ from book
+3. Book lookup
+	1. originalBook
+	2. access to DB
 
 ## Plan
 
