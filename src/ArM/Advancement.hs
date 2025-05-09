@@ -262,13 +262,46 @@ instance Advance Covenant where
 --    A ValidationError is created if the book is not found.
 -- 2. `bookCollision` checks for conflicting use requests
 -- 3. **TODO** `bookSQ` checks the source quality, if the book is read
--- 4. **TODO** Check for repeat reading of tractatus
+-- 4. **TODO** `bookRepeat` checks for repeat reading of tractatus
 -- 5. **TODO** create new books on copying
 -- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-validateBookUse = bookSQ . bookCollision . addBooks
+validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
+
+-- | Check if a tractatus is read for the second time
+bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+bookRepeat (xs,ys) = (xs, map bookRepeat' ys)
+
+-- | Check a single character to see if they reread a tractatus 
+bookRepeat' :: AdvancementStep -> AdvancementStep
+bookRepeat' (CharStep c (Just ad)) | mode ad == Reading = CharStep c (Just ad')
+    where ad' = bookRepeat'' (pastAdvancement c) ad
+bookRepeat' step = step
+
+bookRepeat'' :: [AugmentedAdvancement] -> AugmentedAdvancement -> AugmentedAdvancement
+bookRepeat'' _ = id
+{-
+bookRepeat'' xs x = f x
+    where bs = filterNothing $ map getBookRead xs
+          b = fmap originalKey $ getBookRead x
+	  f Nothing = x
+	  f (Just b) | isTractatus b = x
+	             | otherwise = find (==b) bs
+		     -- addValidation err x
+	             -- | otherwise = addValidation err x
+	  bid = fromMaybe "" $ fmap bookID b
+	  err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
+
+-- | This does not work because we cannot look up the original tome
+getBookRead :: AugmentedAdvancement -> HarmKey
+getBookRead aa | mode aa /= Reading = NoObject
+               | bs == [] = NoObject
+               | otherwise = NoObject
+               -- | otherwise = originalBook  head bs
+               where bs = bookUsed aa
+-}
 
 -- | Add and validate source quality on reading advancements
 bookSQ :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 

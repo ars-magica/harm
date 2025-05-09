@@ -96,24 +96,36 @@ instance FromJSON Book where
         <*> v .:? "language" 
         <*> v .:? "count"  .!= 1
 
+isTractatus :: Book -> Bool
+isTractatus = f . bookStats 
+    where f [] = False
+          f (x:_) = isJust ( quality x ) && isNothing ( bookLevel x )
+
 {-
 -- | The original of a given book (constituent book in the case of an anotology)
 originalBook :: Book -> Maybe HarmKey -> Maybe Book
 originalBook b Nothing = Just $ originalTome b
-originalBook b (Just k) = fmap originalTome $ find ( (==k) . BookKey . bookID ) $ antologyOf b
+originalBook b (Just k) = fmap originalTome $ find ( (==k) . harmKey ) $ antologyOf b
+-}
 
-bookTraitStats :: Book -> TraitKey -> Maybe BookStats
-bookTraitStats b k = find ( (==k) . topic ) $ bookStats b
+{-
+ - This does not work because we cannot look up books by ID.
+ -
+-- | The ID used to avoid rereading of tractatus
+originalKey :: Book -> HarmKey
+originalKey = harmKey . originalTome
 
 -- | The original of a given tome
 originalTome :: Book -> Book
 originalTome b
    | isNothing (copiedFrom b) = b
    | otherwise = originalTome (fromJust $ copiedFrom b)
+-}
 
--- | The ID used to avoid rereading of tractatus
-originalID :: Book -> String
-originalID = bookID . originalTome
+{-
+bookTraitStats :: Book -> TraitKey -> Maybe BookStats
+bookTraitStats b k = find ( (==k) . topic ) $ bookStats b
+
 
 -- | The original date the book was authored
 originalDate :: Book -> SeasonTime
@@ -238,3 +250,5 @@ instance FromJSON ReadingID {- where
                     <*> fmap ArtKey ( v .:? "art" )
 -}
 
+instance KeyObject Book where
+   harmKey = BookKey . bookID
