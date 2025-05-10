@@ -6,5 +6,6 @@ while
    read line
 do
    echo $line
-   diff -C 3 "$line" ../pages"/$line"
+   diff  "$line" ../pages"/$line"
+   #diff -C 3 "$line" ../pages"/$line"
 done

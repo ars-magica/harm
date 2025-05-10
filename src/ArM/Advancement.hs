@@ -138,13 +138,20 @@ applyStep (CharStep c (Just aa)) = (CharStep c' (Just a'))
              st = fromMaybe defaultCS $ state c
 applyStep (CovStep c Nothing) = (CovStep c Nothing) 
 applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
-    where st' = st { covTime = caSeason aa, covenFolkID = cid }
-          c' = c { covenantState = Just st' }
-          st = fromMaybe defaultCovState $ covenantState c
-          cid1 = sort $ joining aa ++ covenFolkID st 
-          cid = cid1 -= ( sort $ leaving aa )
-          aa = contractAdvancement aa'
+     where aa = contractAdvancement aa'
+           c' = c { covenantState = Just st' }
+           st' = stepBooks aa $ stepCovenFolk aa $ fs st
+           fs x = x { covTime = caSeason aa }
+           st = fromMaybe defaultCovState $ covenantState c
 
+stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
+stepCovenFolk aa st = st { covenFolkID = cid }
+   where cid1 = sort $ joining aa ++ covenFolkID st 
+         cid = cid1 -= ( sort $ leaving aa )
+stepBooks :: CovAdvancement -> CovenantState -> CovenantState
+stepBooks aa st = st { library = bid }
+   where bid1 = sort $ acquired aa ++ library st 
+         bid = bid1 -= ( sort $ lost aa )
 -- |
 -- Get the next advancements, preparing for joint advancement
 nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -290,13 +297,13 @@ bookRepeat'' _ = id
 bookRepeat'' xs x = f x
     where bs = filterNothing $ map getBookRead xs
           b = fmap originalKey $ getBookRead x
-	  f Nothing = x
-	  f (Just b) | isTractatus b = x
-	             | otherwise = find (==b) bs
-		     -- addValidation err x
-	             -- | otherwise = addValidation err x
-	  bid = fromMaybe "" $ fmap bookID b
-	  err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
+          f Nothing = x
+          f (Just b) | isTractatus b = x
+                     | otherwise = find (==b) bs
+                     -- addValidation err x
+                     -- | otherwise = addValidation err x
+          bid = fromMaybe "" $ fmap bookID b
+          err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
 
 -- | This does not work because we cannot look up the original tome
 getBookRead :: AugmentedAdvancement -> HarmKey
