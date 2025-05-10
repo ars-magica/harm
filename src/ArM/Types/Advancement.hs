@@ -43,10 +43,12 @@ module ArM.Types.Advancement ( Advancement(..)
                              , AugmentedAdvancement(..) 
                              , AdvancementLike(..) 
                              , AdvancementType(..) 
-                             , Validation(..) 
                              , PostProcessor(..)
                              , BonusSQ(..)
+                             -- * Validation
+                             , Validation(..) 
                              , validateXP
+                             , primaryXPTrait
                              ) where
 
 import ArM.Helper
@@ -56,7 +58,7 @@ import ArM.GameRules
 import ArM.Types.Library
 
 import Data.Maybe 
--- import Data.List 
+import Data.List 
 import Data.Char 
 import Data.Aeson 
 import Data.Aeson.Extra
@@ -66,11 +68,9 @@ import Control.Monad
 
 -- import ArM.Debug.Trace
 
--- |
--- = Advancement
+-- * Advancement
 
--- |
--- == Advancement Types
+-- ** Advancement Types
 
 -- |
 -- Main advancement modes as defined in the core rules [ArM]
@@ -183,6 +183,7 @@ data Advancement = Advancement
      }
    deriving (Eq,Generic,Show)
 
+-- | Default object for standardised initialisation of fields.
 defaultAdvancement :: Advancement
 defaultAdvancement = Advancement
      { advMode = Exposure (OtherExposure "Undefined")
@@ -202,15 +203,6 @@ defaultAdvancement = Advancement
      , advValidation = []
      , advPostprocessTrait = PostProcessor id
      }
-
-
-data BonusSQ = BonusSQ 
-         { sourceBonus :: XPType
-         , bonusSource :: String
-         }
-         deriving (Eq,Generic,Show)
-instance ToJSON BonusSQ
-instance FromJSON BonusSQ
 
 
 instance ToJSON Advancement where
@@ -259,9 +251,18 @@ showYears :: Maybe Int -> String
 showYears Nothing = ""
 showYears (Just x) = " (" ++ show x ++ " years)"
 
+-- | A Bonus with a description
+data BonusSQ = BonusSQ 
+         { sourceBonus :: XPType
+         , bonusSource :: String
+         }
+         deriving (Eq,Generic,Show)
+instance ToJSON BonusSQ
+instance FromJSON BonusSQ
 
--- |
--- == The AdvancementLike Class
+
+
+-- ** The AdvancementLike Class
 
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
@@ -319,8 +320,7 @@ instance AdvancementLike Advancement where
      addProtoTrait vs a = a { advChanges = vs ++ advChanges a }
      setRead db ad = ad { advRead = map (originalID db) (bookUsed ad) }
 
--- |
--- == The Augmented Advancement
+-- ** The Augmented Advancement
 
 -- | Advancement with additional inferred fields
 data AugmentedAdvancement = Adv
@@ -403,8 +403,7 @@ fmlx f aa = inf `mplus` exa
    where exa =  f (explicitAdv aa)
          inf =  f (inferredAdv aa)
 
--- |
--- == Validation
+-- ** Validation
 
 -- |
 -- A Validation is a message reporting either an error or a successful test.
@@ -419,12 +418,11 @@ instance Show Validation where
 instance ToJSON Validation
 instance FromJSON Validation
 
-{-
+-- | Find the trait earning the most XP from the advancement
 primaryXPTrait :: Advancement -> Maybe TraitKey
 primaryXPTrait a | f a == [] = Nothing
                  | otherwise = Just $ traitKey $ head (f a)
    where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
--}
 
 -- | Validate allocation of XP.
 validateXP :: AugmentedAdvancement -> AugmentedAdvancement

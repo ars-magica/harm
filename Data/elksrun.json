@@ -27,6 +27,29 @@
 	  }
 
       },
+      { "season" : "Autumn 1226"
+      , "acquired" :
+      { 
+	 "comment" : [ "Point Cost 40. The copyist accumulates 6+Prof: Scribe points per season if he copies carefully."
+
+          , "Lesser Item; CrCo26; The Blanket of Healing Sleep; [touch/sun/ind]"
+          , "Lesser Item; PeVi40; The Vim Bin"
+          , "Lesser Item; CrIg30; Safe Cauldron"
+	 ],
+	 "antologyOf" : [
+	    { "bookID" : "MTQ13folio1109"
+	       , "stats" : { "ability" : "Magic Theory", "quality" : 13,
+		  "title" : "Lesser is Greater" }
+, "narrative" : [
+"The Vim Bin (lab item) +3 Safety, +1 Warping PeVi40 (PeVi30 + unlimited uses). Dispel any magical effect on any item or substance which enters the bin up to level 22½ + stress die."
+
+, "The Blanket of Healing Sleep +15 recover, provided the patient is in bed, covered by the blanket at sunset and sunrise. Side effect: psychedelic, but pleasant dreams. Base 10 +1 touch +2 sun +1 lvl for 2 uses."
+
+, "Safe Cauldron +1 GQ, +1 Experimentation CrIg30. The cauldron gently heats the contents, and the temperature can easily be adjusted by concentrating. Side effect: the cauldron gives off a smell of saffron, with intensity increasing with the heat."
+]
+      }
+	 ]
+      } },
       { "season" : "Winter 1242"
       , "story" : { "comment" : "Arrival of Tim and Nemoy" }
       },
@@ -48,6 +71,31 @@
       { "season" : "Spring 1244"
       , "story" : { "name" : "Vampire story" }
       , "story" : { "name" : "Dhergie Expedition" }
+      },
+      { "season" : "Spring 1245"
+	 , "aquired" : { "bookID" : "Folio1186"
+	    , "title" : "Folio of 1186"
+	    , "antologyOf" : [
+	       { "bookID" : "MTQ7leaf"
+	       , "stats" : { "ability" : "Magic Theory", "quality" : 7 }
+               , "comment" : "Introduces the Shape bonus of “Leaf” giving +4 herbam"
+	       },
+	       { "bookID" : "MutoQ9transmuting"
+	       , "stats" : { "art" : "Muto",	"quality" : 9 }
+               , "comment" : "On the possibility of transmuting Vis"
+	       }
+	    ]
+	    , "narrative" : [
+	       "The Herbam Spells and the Magic theory tractatus were submitted by Vesta of Bonisagus, a Maga with a Potency in Gardens. The Muto tractatus were found in the effects of a Magus Bonisagus who went into twilight whilst investigating the possibility of changing the Art that Vis is aligned to. There is no evidence that they succeded. Possibly there might be interesting artifacts in such a Magus’s laboratory?"
+	       , "The Creation of Acorns Aplenty CrHe 20 R: Touch D: Momentary, T: Group, Ritual This spell creates a vast pile of acorns, totaling 1 000 cubic paces in volume. An added magnitude (or reduction of the volume to one tenth) allows the maga to precisely mix the varieties of seeds she creates. The maga may use other Creo spells – not rituals this time – to mature each tree, or can use a vast ritual to mature every plant within the Boundary the wall creates. (Base 1, +1 Touch, +2 Group. +3 size)"
+	    ]
+          , "comment" : [
+	     "Point Cost 32. The copyist accumulates 6+Prof: Scribe points per season if he copies carefully."
+	     , "Lab Text; Vines as Mayflies; CrHe35; Brings a standard size group of plants to Maturity in a day. Potent Spell: Leaf +4"
+	  , "Lab text; How does my Garden Grow; InHe25; As the spell Converse with Plant and Tree, except experimentation has added the side effect that bystanders can understand. Potent Spell: Leaf +4"
+	  , "Lab text; The Creation of Acorns Aplenty; CrHe 20; [TME:62] Not only acorns can be created, but seeds of any tree"
+	  ]
+      }
       },
       { "season" : "Winter 1254"
        , "story": [
