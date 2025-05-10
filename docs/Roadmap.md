@@ -48,7 +48,6 @@ title:
 		+ [ ] Validation: Compare SQ
 + [ ] Phase 3. Books
 	+ [ ] [[Reading and Books]]
-	+ [ ] Process books in covenant advancement
 	+ [ ] Validate Reading Advancement
 	+ [ ] levelCap on ProtoTrait - where should this go?
 	+ [ ] Use of Keys and objects
