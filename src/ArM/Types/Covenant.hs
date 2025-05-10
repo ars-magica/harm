@@ -30,6 +30,7 @@ import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Maybe
+import Control.Monad
 
 import ArM.Types.Library
 import ArM.Types.Character
@@ -218,3 +219,7 @@ contractAdvancement aug  = CovAdvancement
 
 listFromMaybe :: ( a -> [b]) -> Maybe a -> [b]
 listFromMaybe f = fromMaybe [] . fmap f 
+
+instance BookDB Covenant where
+   lookupBook k = join . fmap ( lookupBook k . library ) . covenantState 
+

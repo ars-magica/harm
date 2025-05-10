@@ -110,10 +110,19 @@ originalBook b (Just k) = fmap originalTome $ find ( (==k) . harmKey ) $ antolog
 -}
 
 class BookDB h where
+   -- | Look up a book by key (String) in a database.
    bookLookup :: h -> String -> Maybe Book
+   bookLookup db k = lookupBook k db 
+   -- | Look up a book by key (String) in a database.
+   -- This is equivalent to `bookLookup` with the arguments swapped
+   lookupBook :: String -> h -> Maybe Book
+   lookupBook k db = bookLookup db k
 
 instance (BookDB h) => BookDB [h] where
-   bookLookup db k = foldl mplus Nothing $ map (\ x -> bookLookup x k) db
+   lookupBook k = foldl mplus Nothing . map (\ x -> bookLookup x k) 
+instance BookDB Book where
+   bookLookup bk k | k == bookID bk = Just bk
+                   | otherwise = Nothing
 
 -- | The ID used to avoid rereading of tractatus
 originalKey :: BookDB h => h -> Book -> HarmKey
