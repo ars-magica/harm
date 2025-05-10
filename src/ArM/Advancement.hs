@@ -177,6 +177,10 @@ data AdvancementStep = CovStep Covenant  (Maybe AugCovAdvancement)
                      | CharStep Character (Maybe AugmentedAdvancement)
 
 
+instance BookDB AdvancementStep where
+   bookLookup (CovStep c _) k = bookLookup c k
+   bookLookup _ _ = Nothing
+
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
 class StepAdvance c where
    -- | Create the next `AdvancementStep` object for a character or covenant.
@@ -324,13 +328,6 @@ addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[Advance
 addBooks (xs,ys) = (xs,map (addBook covs) ys)
    where covs = filterNothing $ map stepSubjectMaybe xs
 
-findBookStep :: [AdvancementStep] -> String -> Maybe Book
-findBookStep xs k = maybeHead $ filterNothing $ map f xs
-    where f (CovStep c _) = findBook c k
-          f  _ = Nothing
-   -- where cvs = map getSubject xs
-
-
 -- |
 -- Find books in the covenants and add to the advancement of the given
 -- character if they use the book.
@@ -346,10 +343,8 @@ addBook' :: Maybe Covenant -> AugmentedAdvancement -> AugmentedAdvancement
 addBook' Nothing y  = y
 addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
     where u = usesBook y
-          bk | isNothing st = [ Nothing | _ <- u ]
-             | otherwise = map (findBook (fromJust st)) u
+          bk = map (bookLookup cov) u
           bs = zip u bk
-          st = covenantState cov
           f [] aa = aa
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
           f ((_,Just b):xs) aa = f xs $ aa { advBook = b:advBook aa }
