@@ -223,13 +223,13 @@ instance FromJSON Advancement where
         <*> v .:? "years"
         <*> v `parseCollapsedList` "narrative" 
         <*> v `parseCollapsedList` "comment" 
-        <*> v .:? "usesBook"    .!= []
-        <*> v .:? "readBook"    .!= []
-        <*> v .:? "bookUsed"    .!= []
+        <*> v `parseCollapsedList` "usesBook"
+        <*> v `parseCollapsedList` "readBook"
+        <*> v `parseCollapsedList` "bookUsed"
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
         <*> v `parseCollapsedList` "bonusQuality"
-        <*> v .:? "changes" .!= []
+        <*> v `parseCollapsedList` "changes"
         <*> v .:? "spellLevels"
         <*> v .:? "teacherSQ"
         <*> v `parseCollapsedList` "validation"

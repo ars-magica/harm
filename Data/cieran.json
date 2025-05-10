@@ -145,6 +145,7 @@
       { "mode" : "Reading"
       , "season" : "Summer 1217"
       , "sourceQuality" : 21
+      , "usesBook" : "RootHerbam"
       , "changes" : 
          [ { "art" : "Herbam", "xp": 24, "levelCap" : 6  }
          ] 
@@ -247,6 +248,7 @@
          }
          ] 
       , "narrative" : "Studies *Root of Terram* L8Q15 +3" 
+      , "usesBook" : "RootTerram"
       },
       { "mode" : "Adventure"
       , "season" : "Spring 1218"
@@ -263,6 +265,7 @@
       { "mode" : "Reading"
       , "season" : "Summer 1218"
       , "sourceQuality" : 14
+      , "usesBook" : "socpL4Q14"
       , "changes" : 
          [ { "ability" : "SOCP Lore"
 	    , "spec" : "Self initiation"
@@ -282,6 +285,7 @@
       { "mode" : "Reading"
       , "season" : "Winter 1219"
       , "sourceQuality" : 13
+      , "usesBook" : "VimL15Q13"
       , "changes" : 
          [ { "art" : "Intellego", "xp": 16, "levelCap" : 15 }
          ] 
@@ -628,6 +632,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1231"
       , "sourceQuality" : 14
+      , "usesBook" : "socpL4Q14"
       , "changes" : 
          [ { "ability" : "SOCP Lore"
 	    , "spec" : "Self initiation"
@@ -637,6 +642,7 @@
       { "mode" : "Reading", "season" : "Autumn 1231"
       , "sourceQuality" : 14
       , "narrative" : "SOCP Lore. Reaching 4. "
+      , "usesBook" : "socpL4Q14"
       , "changes" : 
          [ { "ability" : "SOCP Lore"
 	    , "spec" : "Self initiation"
@@ -720,6 +726,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Winter 1234"
+	 , "usesBook" : "VimL15Q13"
       , "sourceQuality" : 13
       , "narrative" : "*Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
@@ -770,11 +777,13 @@
       },
       { "mode" : "Reading", "season" : "Summer 1234"
       , "sourceQuality" : 13
+	 , "usesBook" : "VimL15Q13"
       , "narrative" : "*Magic Companion* L15Q13 "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1234"
       , "sourceQuality" : 10
+      , "usesBook" : "ImaginemL19Q10"
       , "narrative" : "Maine's wedding in Clonmacnoise.  Reading  (13x1½) Imaginem."
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } 
          , { "reputation" : "Friendly druid", "locale" : "Lands of O'Sullivan", 
@@ -783,6 +792,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1235"
       , "sourceQuality" : 10
+      , "usesBook" : "ImaginemL19Q10"
       , "narrative" : "13x1½ -> Imaginem 105x1½xp = 157½ -> 17 (4½)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } 
          , { "possession" : { "art" : "Te", "count" : 2, "comment" : "Allowance" } }
@@ -808,6 +818,7 @@
       ]
       },
       { "mode" : "Reading", "season" : "Autumn 1235"
+	 , "usesBook" : "RegoL20Q9"
       , "sourceQuality" : 9
       , "narrative" : " 52->64 "
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
@@ -818,6 +829,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1236"
       , "sourceQuality" : 10
+      , "usesBook" : "ImaginemL19Q10"
       , "narrative" : "13x1½ -> Imaginem 118x1½xp = 177 -> 18 (6)"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } ]
       },
@@ -1183,6 +1195,7 @@
       { "mode" : "Reading", "season" : "Summer 1245"
       , "sourceQuality" : 10
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
+      , "usesBook" : "ImaginemL19Q10"
       , "narrative" : "Summa; capped at 19 +1½xp for correspondent (191½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
                     , { "art" : "Imaginem", "xp" : 1 } ]
@@ -1259,6 +1272,7 @@
       { "mode" : "Reading", "season" : "Winter 1248"
       , "sourceQuality" : 12
       , "narrative" : "Summa L20Q12; no aging (-4) "
+      , "usesBook" : "MutoL20Q12"
       , "changes" : [ { "art" : "Muto", "xp" : 15 } 
          , { "aging" : { "apparentYounger" : 1
             , "die" : 0
@@ -1270,12 +1284,14 @@
       },
       { "mode" : "Reading", "season" : "Spring 1248"
       , "sourceQuality" : 14
+      , "usesBook" : "ImaginemQ14Oswald"
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Oswald's tractatus Q14 + correspondent "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1248"
       , "sourceQuality" : 14
+      , "usesBook" : "ImaginemQ14Maine"
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Maine's tractatus Q14 + correspondent (245½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
@@ -1314,11 +1330,13 @@
       },
       { "mode" : "Reading", "season" : "Spring 1249"
       , "sourceQuality" : 13
+      , "usesBook" : "IntellegoL15Q13"
       , "narrative" : "Summa L15Q13 (to 80xp: 12) "
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1249"
       , "sourceQuality" : 13
+      , "usesBook" : "IntellegoL15Q13"
       , "narrative" : "Summa L15Q13"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
@@ -1572,6 +1590,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1255"
       , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      , "usesBook" : "Im-Vigil-Q12"
       , "sourceQuality" : 12
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
@@ -1622,6 +1641,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1256"
       , "comment" : "Reads the new Q9 Tractatus from Vigil"
+      , "usesBook" : "Im-Vigil-Q9"
       , "sourceQuality" : 9
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
