@@ -22,7 +22,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Dogs of Hibernia* by Unknown (No Time)
     + Animal Handling Q11
     + An illustrated text of various dog breeds and the best uses of their natural abilities
-    + Key: Animal HandlingQ11 Dogs of Hibernia
+    + Key: AnimalHQ11
 +  (No Time)
     + Artes Liberales Q6
     + Key: Artes LiberalesQ6 
@@ -37,41 +37,41 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Posterior Analytics* by Aristotle (No Time)
     + Artes Liberales Q12
     + in Ancient Greek
-    + Key: Artes LiberalesQ12 Posterior Analytics
+    + Key: AristotlePosterior
 + *Prior Analytics* by Aristotle (No Time)
     + Artes Liberales Q12
     + in Ancient Greek
-    + Key: Artes LiberalesQ12 Prior Analytics
+    + Key: AristotlePrior
 + *De inventione* by Priscian (No Time)
     + Artes Liberales Q14
     + Comprised of three tractatus of the same quality - Cherished item
-    + Key: Artes LiberalesQ14 De inventione
+    + Key: inventione
 + *Buy Low* by Sell High (No Time)
     + Bargain Q8
     + in 1
     + Kevin the Merchant of Elk's Run
-    + Key: BargainQ8 Buy Low
+    + Key: BargainKevin02
 + *Tricks of the Trade* by Kevin the Merchant of Elk's Run (No Time)
     + Bargain Q8
     + Autumn 1237
-    + Key: BargainQ8 Tricks of the Trade
+    + Key: BargainKevin01
 + *Blood Hunts* by Conley Fionn (No Time)
     + Brehon Law Q7
     + in Gaelic
     + Gaelic 1093
-    + Key: Brehon LawQ7 Blood Hunts
+    + Key: BrehonConley02
 + *Cattle Raids* by Conley Fionn (No Time)
     + Brehon Law Q7
     + in Gaelic
     + Gaelic 1091
-    + Key: Brehon LawQ7 Cattle Raids
+    + Key: BrehonConley01
 +  (No Time)
     + Brehon Law Q9
-    + Key: Brehon LawQ9 
+    + Key: BrehonQ9
 +  (No Time)
     + Britannia Lore L3Q15
     + Illustrated with brilliant Maps; from Midsummer Fair 1244
-    + Key: Britannia LoreL3Q15 
+    + Key: BritanniaL3Q15
 + *Arrival of the Papacy* by Rabarius of Belfast (No Time)
     + Church Lore Q7
     + Key: Church LoreQ7 Arrival of the Papacy
@@ -83,22 +83,22 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Church LoreQ10 The Province of Dublin
 +  (No Time)
     + Church Lore L2Q10
-    + Key: Church LoreL2Q10 
+    + Key: ChurchL2Q10
 + *The Bible* by Various Authors (No Time)
     + Church Lore L3Q3
     + Key: Church LoreL3Q3 The Bible
 + *The Book Of God’s Way (Liber Viarum Dei)* by Elizabeth of Schönau (No Time)
     + Church Lore L4Q7
-    + Key: Church LoreL4Q7 The Book Of God’s Way (Liber Viarum Dei)
+    + Key: ChurchL4Q7
 + *Wizard's War.  The Most Notable Cases.* by Caelus of Flambeau (No Time)
     + Code of Hermes Q11
     + in dated 1158
     + With a dedication to Lugardis from her pater
-    + Key: Code of HermesQ11 Wizard's War.  The Most Notable Cases.
+    + Key: CodeQ11Caelus
 + *The Apprentice's Guide to the Code* by Lugardis of Guernicus (No Time)
     + Code of Hermes L3Q14
     + Written about 1182 for the benefit of apprentices at Elk's Run.
-    + Key: Code of HermesL3Q14 The Apprentice's Guide to the Code
+    + Key: CodeL3Q14
 + *The Trials of the Poet* by Crimthann an Chleitigh (No Time)
     + Concentration Q12
     + A surprisingly amusing account of a poet contending with distractions to his writing. Primarily his strange patrons' requests. Written Autumn of 1232
@@ -109,7 +109,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Primer after Priamitus* (No Time)
     + Cult of Mercury Lore L4Q10
     + Lost 1223 - Returned 1230 from Herrick
-    + Key: Cult of Mercury LoreL4Q10 Primer after Priamitus
+    + Key: MercuryL4Q10
 +  (No Time)
     + DL: Classic Greek L5Q15
     + Key: DL: Classic GreekL5Q15 
@@ -127,7 +127,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Dominion LoreQ10 
 + *The fate of Saint Patrick* by Oswald of Bonisagus (No Time)
     + Dominion Lore Q14
-    + Key: Dominion LoreQ14 The fate of Saint Patrick
+    + Key: DominionQ14Oswald
 +  (No Time)
     + Dublin Lore Q7
     + Key: Dublin LoreQ7 
@@ -148,48 +148,48 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: FaerieQ8Dark
 + *Faeries of the Irish Waterways* by Kevin the Merchant of Elk's Run (No Time)
     + Faerie Lore Q8
-    + Key: Faerie LoreQ8 Faeries of the Irish Waterways
+    + Key: FaerieQ8Kevin01
 + *The Wee Folk at Play* by Kevin the Merchant of Elk's Run (No Time)
     + Faerie Lore Q8
     + Winter 1237
-    + Key: Faerie LoreQ8 The Wee Folk at Play
+    + Key: FaerieQ8Kevin02
 +  (No Time)
     + Faerie Lore Q11
     + Key: Faerie LoreQ11 
 + *The Fair Folk* by Astrið (No Time)
     + Faerie Lore Q12
     + Bought Autumn 1232
-    + Key: Faerie LoreQ12 The Fair Folk
+    + Key: FaerieQ12Astrid
 + *The Making of The Giants' Causeway* by Oswald of Bonisagus (No Time)
     + Faerie Lore Q14
-    + Key: Faerie LoreQ14 The Making of The Giants' Causeway
+    + Key: FaerieQ14Oswald
 +  (No Time)
     + Faerie Lore L3Q10
-    + Key: Faerie LoreL3Q10 
+    + Key: FaerieL3Q10
 +  (No Time)
     + Finesse 
     + Midsummer Fair 1244 for 19p vis (7 animal and 12 aquam). Stats TBD: L5Q12+D4
-    + Key: Finesse 
+    + Key: FinesseL5Qx
 + *Fundamental Fast Casting* by Kallias of Tremere (No Time)
     + Finesse Q11
     + in the noted Spell Master author of House Tremere. This copy is badly damaged
     + Published only in 1209
     + Key: KalliasQ11Finesse
-+ *Fundamental Fast Casting* by Kallias of Tremere (No Time)
++ *Fundamental Fast Casting* by N/A (No Time)
     + Finesse Q12
-    + This copy was made 1217 by the chief librarian to replace the below.
-    + Key: KalliasQ12Finesse
+    + This copy was made 1217 by the chief librarian to replace the below
+    + Key: KalliasQ12Finesse (KalliasQ11Finesse)
 + *Hibernian Battles of the Spider War* by Karthax Filii Pralicis (No Time)
     + Hermes Lore Q9
     + in 1
     + Accounts told by those who were there
-    + Key: Hermes LoreQ9 Hibernian Battles of the Spider War
+    + Key: HermesLore03
 +  by Lost 1223 - Returned 1230 from Herrick (No Time)
     + Hermes Lore Q10
-    + Key: Hermes LoreQ10 
+    + Key: HermesLore01
 +  (No Time)
     + Hermes Lore Q10
-    + Key: Hermes LoreQ10 
+    + Key: HermesLore02
 +  (No Time)
     + Hibernia Lore Q6
     + Key: Hibernia LoreQ6 
@@ -202,7 +202,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 +  (No Time)
     + Hibernia Lore L3Q15
     + Illustrated with brilliant Maps; from Midsummer Fair 1244
-    + Key: Hibernia LoreL3Q15 
+    + Key: HiberniaL3Q15
 +  (No Time)
     + Hibernia Lore L6Q12
     + Cherished item - lost 1223 - returned 1230 from Oswald
@@ -252,22 +252,22 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: L Lang: WelshQ7 
 +  (No Time)
     + Leadership Q6
-    + Key: LeadershipQ6 
+    + Key: LeadershipQ6
 +  (No Time)
     + Leadership Q8
-    + Key: LeadershipQ8 
+    + Key: LeadershipQ8
 +  (No Time)
     + Leadership Q12
-    + Key: LeadershipQ12 
+    + Key: LeadershipQ12
 +  (No Time)
     + Leinster Lore Q9
     + Key: Leinster LoreQ9 
 +  (No Time)
     + Limerick Lore Q7
-    + Key: Limerick LoreQ7 
+    + Key: LimerickQ7
 +  (No Time)
     + Limerick Lore Q9
-    + Key: Limerick LoreQ9 
+    + Key: LimerickQ9
 +  (No Time)
     + Loch Leglean Lore Q9
     + Key: Loch Leglean LoreQ9 
@@ -284,12 +284,12 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Magic LoreQ8 Primal Spirits of the Sea
 + *The Spirits of our Forefathers* by Caelan of Gort (No Time)
     + Magic Lore Q9
-    + Key: Magic LoreQ9 The Spirits of our Forefathers
+    + Key: MagicLoreQ9Caelan
 +  (No Time)
     + Magic Lore Q10
     + in Gaelic
     + bought from from Norse traders 1221
-    + Key: Magic LoreQ10 
+    + Key: MagicLoreQ10Gaelic
 + *The Uncaring Masters of Creation* (No Time)
     + Magic Lore L5Q12
     + Speciality Legends
@@ -315,7 +315,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: FourHumours
 +  (No Time)
     + Medicine Q10
-    + Key: MedicineQ10 
+    + Key: MedicineQ10
 + *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + Medicine L3Q12
     + Key: MedicineL3Q12
@@ -327,20 +327,20 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Munster LoreQ11 
 +  (No Time)
     + Munster Lore L6Q9
-    + Key: Munster LoreL6Q9 
+    + Key: MunsterL6Q9
 +  (No Time)
     + Normandy (tribunal) Lore L3Q15
     + Illustrated with brilliant Maps; from Midsummer Fair 1244
-    + Key: Normandy (tribunal) LoreL3Q15 
+    + Key: NormandyL3Q15
 + *Tales from The East* by Brethran the Wise (No Time)
     + Norway Lore L2Q14
     + in 1
     + Written in Gaelic towards the end of the 10th Century
-    + Key: Norway LoreL2Q14 Tales from The East
+    + Key: NorwayL2Q14
 + *classic Latin traveller's account from Thule (area Lore)* (No Time)
     + Norway Lore L4Q14
     + from Norse traders 1222
-    + Key: Norway LoreL4Q14 classic Latin traveller's account from Thule (area Lore)
+    + Key: NorwayL4Q14
 + *Metaphysics book 2* by Aristotle (No Time)
     + Pagan Theology Q12
     + in Ancient Greek
@@ -379,7 +379,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Philosophiae (moral) L6Q9
     + in 1
     + transl. by Robert Grosseteste
-    + Key: Philosophiae (moral)L6Q9 Nicomachean Ethics
+    + Key: AristotleEthics
 + *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + Philosophiae (natural philosophy) L2Q12
     + Key: Philosophiae (natural philosophy)L2Q12 Causes And Cures (Causae Et Curae)
@@ -401,11 +401,11 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *How to Run an Irish Trade Business* by Kevin the Merchant of Elk's Run (No Time)
     + Profession: Merchant Q8
     + Autumn 1238
-    + Key: Profession: MerchantQ8 How to Run an Irish Trade Business
+    + Key: MerchantKevin01
 + *Trust No One and Smile at all* by Kevin the Merchant of Elk's Run (No Time)
     + Profession: Merchant Q8
     + Winter 1239
-    + Key: Profession: MerchantQ8 Trust No One and Smile at all
+    + Key: MerchantKevin02
 + *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Servant of the People lore L4Q14
     + Key: socpL4Q14
@@ -414,7 +414,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Stonehenge LoreQ9 
 + *Thomas Aquinas* by Pierrhan O'Coffer (No Time)
     + Theology Q7
-    + Key: TheologyQ7 Thomas Aquinas
+    + Key: ThomasAquinas
 + *The Book Of Life’s Merits (Liber Vitae Meritorum)* by Hildegard von Bingen (No Time)
     + Theology Q11
     + Key: TheologyQ11 The Book Of Life’s Merits (Liber Vitae Meritorum)
@@ -423,7 +423,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: TheologyL10Q3 The Bible
 +  (No Time)
     + Ulster Lore L2Q10
-    + Key: Ulster LoreL2Q10 
+    + Key: UlsterL2Q10
 + *From nothing to everything* by Vivianus of Bonisagus (No Time)
     + Creo Q9
     + Traded from Carolus of Criamon in 1243
@@ -584,23 +584,23 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Corpus Q7
     + in 1
     + Tractatus in bad shape
-    + Key: CorpusQ7 Secrets of Longevity
+    + Key: CorpusQ7Vitor
 + *Life and eternity* by Vivianus of Bonisagus (No Time)
     + Corpus Q9
     + Traded from Carolus of Criamon in 1243
-    + Key: CorpusQ9 Life and eternity
+    + Key: CorpusQ9Vivianus
 + *Some more thoughts on the body* by Sebastian ex Bonisagus (No Time)
     + Corpus Q9
     + Tractatus
-    + Key: CorpusQ9 Some more thoughts on the body
+    + Key: CorpusQ9Sebastian
 + *Motion of Man* by Bonaventure of Mercere (No Time)
     + Corpus Q11
     + Tractatus
-    + Key: CorpusQ11 Motion of Man
+    + Key: CorpusQ11Bonaventure
 + *Diseases of the Flesh* by Herbancia of ex Miscellanea (No Time)
     + Corpus Q12
     + From Midsummer Fair 1244
-    + Key: CorpusQ12 Diseases of the Flesh
+    + Key: CorpusQ12Herbancia
 + *Cierans notes on the body* by Cieran the Fletcher (No Time)
     + Corpus Q14
     + 2 copies

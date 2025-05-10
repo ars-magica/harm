@@ -1206,6 +1206,7 @@
 + Elk's Run
     + Changes
         + joining: Character: Cieran
+        + acquired: *Fundamental Fast Casting* by N/A (No Time)
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies *Root of Herbam* L6 Q21 +3*
     + Uses *Roots First* by Horatio of Bonisagus (No Time)
