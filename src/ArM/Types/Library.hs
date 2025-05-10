@@ -128,6 +128,10 @@ instance BookDB Book where
 originalKey :: BookDB h => h -> Book -> HarmKey
 originalKey db = harmKey . originalTome db
 
+-- | The ID used to avoid rereading of tractatus
+originalID :: BookDB h => h -> Book -> String
+originalID db = bookID . originalTome db
+
 -- | The original of a given tome
 originalTome :: BookDB h => h -> Book -> Book
 originalTome db b
@@ -162,9 +166,6 @@ originalAuthor = bookCreator
 -- | The original date the book was authored
 originalDate :: Book -> SeasonTime
 originalDate = bookDate 
--- | The ID used to avoid rereading of tractatus
-originalID :: Book -> String
-originalID b = fromMaybe ( bookID b ) $ copiedFrom b
 
 -- | Get the unique identifier of an original book
 bookKey :: Book -> HarmKey

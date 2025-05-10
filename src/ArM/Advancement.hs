@@ -276,35 +276,44 @@ validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 
 -- | Check if a tractatus is read for the second time
 bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-bookRepeat (xs,ys) = (xs, map bookRepeat' ys)
+bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
 
 -- | Check a single character to see if they reread a tractatus 
-bookRepeat' :: AdvancementStep -> AdvancementStep
-bookRepeat' (CharStep c (Just ad)) | mode ad == Reading = CharStep c (Just ad')
-    where ad' = bookRepeat'' (pastAdvancement c) ad
-bookRepeat' step = step
+bookRepeat' :: [AdvancementStep] -> AdvancementStep -> AdvancementStep
+bookRepeat' db (CharStep c (Just ad)) | mode ad == Reading
+      = valRepeat $ CharStep c (Just $ valRead $ setRead db ad)
+bookRepeat' _ step = step
 
-bookRepeat'' :: [AugmentedAdvancement] -> AugmentedAdvancement -> AugmentedAdvancement
-bookRepeat'' _ = id
+valRepeat :: AdvancementStep -> AdvancementStep
+valRepeat (CharStep c Nothing) = (CharStep c Nothing)
+valRepeat (CharStep c (Just ad)) = (CharStep c (Just ad'))
+   where bks = sort $ filterNothing $ map ( maybeHead . readBook ) ads
+         bk = readBook ad'
+         ad' = ad
+         ads = pastAdvancement c
+valRepeat step = step
+
+valRead :: AugmentedAdvancement -> AugmentedAdvancement 
+valRead ad = g ad $ readBook ad
+    where g x [] = addValidation nobk x
+          g x [_] = x
+          g x (_:_:_) = addValidation xbk x
+          nobk = [ ValidationError $ "Missing book for reading season" ]
+          xbk = [ ValidationError $ "Superfluous books for reading season" ]
+          
+
 {-
 bookRepeat'' xs x = f x
     where bs = filterNothing $ map getBookRead xs
           b = fmap originalKey $ getBookRead x
-	  f Nothing = x
-	  f (Just b) | isTractatus b = x
-	             | otherwise = find (==b) bs
-		     -- addValidation err x
-	             -- | otherwise = addValidation err x
-	  bid = fromMaybe "" $ fmap bookID b
-	  err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
+          f Nothing = x
+          f (Just b) | isTractatus b = x
+                     | otherwise = find (==b) bs
+                     -- addValidation err x
+                     -- | otherwise = addValidation err x
+          bid = fromMaybe "" $ fmap bookID b
+          err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
 
--- | This does not work because we cannot look up the original tome
-getBookRead :: AugmentedAdvancement -> HarmKey
-getBookRead aa | mode aa /= Reading = NoObject
-               | bs == [] = NoObject
-               | otherwise = NoObject
-               -- | otherwise = originalBook  head bs
-               where bs = bookUsed aa
 -}
 
 -- | Add and validate source quality on reading advancements

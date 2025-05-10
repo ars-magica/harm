@@ -223,13 +223,13 @@ instance FromJSON Advancement where
         <*> v .:? "years"
         <*> v `parseCollapsedList` "narrative" 
         <*> v `parseCollapsedList` "comment" 
-        <*> v .:? "usesBook"    .!= []
-        <*> v .:? "readBook"    .!= []
-        <*> v .:? "bookUsed"    .!= []
+        <*> v `parseCollapsedList` "usesBook"
+        <*> v `parseCollapsedList` "readBook"
+        <*> v `parseCollapsedList` "bookUsed"
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
         <*> v `parseCollapsedList` "bonusQuality"
-        <*> v .:? "changes" .!= []
+        <*> v `parseCollapsedList` "changes"
         <*> v .:? "spellLevels"
         <*> v .:? "teacherSQ"
         <*> v `parseCollapsedList` "validation"
@@ -258,6 +258,7 @@ showTime xps x tp y = (show x ++ xps ++ showYears y ++ " " ++ show tp)
 showYears :: Maybe Int -> String
 showYears Nothing = ""
 showYears (Just x) = " (" ++ show x ++ " years)"
+
 
 -- |
 -- == The AdvancementLike Class
@@ -297,6 +298,7 @@ class StoryObject a => AdvancementLike a where
      spentLevels = sum . map ( fromMaybe 0 . level ) . changes
      addValidation :: [Validation] -> a -> a
      addProtoTrait :: [ProtoTrait] -> a -> a
+     setRead :: BookDB h => h -> a -> a
 
 instance AdvancementLike Advancement where
      mode = advMode
@@ -315,6 +317,7 @@ instance AdvancementLike Advancement where
      sortAdvTraits x = x { advChanges = sortTraits $ changes x }
      addValidation vs a = a { advValidation = vs ++ advValidation a }
      addProtoTrait vs a = a { advChanges = vs ++ advChanges a }
+     setRead db ad = ad { advRead = map (originalID db) (bookUsed ad) }
 
 -- |
 -- == The Augmented Advancement
@@ -390,6 +393,7 @@ instance AdvancementLike AugmentedAdvancement where
         where f x = x { advValidation = vs ++ advValidation x }
      addProtoTrait vs a = a { inferredAdv = f (inferredAdv a) }
           where f x = x { advChanges = vs ++ advChanges x }
+     setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
 
 fmls :: (Advancement -> [b]) -> AugmentedAdvancement -> [b]
 fmls f a = f (inferredAdv a) ++ f (explicitAdv a) 

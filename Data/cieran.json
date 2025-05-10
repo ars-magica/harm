@@ -1572,6 +1572,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1255"
       , "comment" : "Reads the new Q12 Tractatus from Vigil"
+      , "usesBook" : "Im-Vigil-Q9"
       , "sourceQuality" : 12
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
