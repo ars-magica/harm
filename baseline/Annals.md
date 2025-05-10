@@ -635,6 +635,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *SQ 6 doubled by flawless magic. Aegis of the Heath Mastery. Learns Safe Casting.*
     + Validated: Correctly spent 9 xp.
+    + ERROR: Missing book for reading season
 
 ## Autumn 1238
 
@@ -894,6 +895,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
+    + ERROR: Missing book for reading season
     + ERROR: Book not found (CorpusHermeticus)
 
 ## Autumn 1228
@@ -1021,6 +1023,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
+    + ERROR: Missing book for reading season
     + ERROR: Book not found (CorpusHermeticus)
 
 ## Winter 1224

@@ -1227,6 +1227,7 @@ Total: 1249 levels of spells.
         + Spell: Aegis of the Hearth 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 9 xp.
+    + ERROR: Missing book for reading season
 + Autumn 1238 (2xp) LabWork (Exposure)
     + *Invent ReVi spells with help from Hiccup and Jimeny and lab text.  Lab total (ReVi) 47 + 11 (Hiccup + Jimeny) +2 text = 60.  Exposure 2xp Magic Theory (-> 107xp)*
     + Changing traits
@@ -1538,6 +1539,7 @@ Total: 1249 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 19 xp.
+    + ERROR: Missing book for reading season
     + ERROR: Book not found (CorpusHermeticus)
 + Autumn 1228 (10+3xp) Reading
     + Uses *The true meaning of Sound* by Light and Shadow (No Time)
@@ -1674,6 +1676,7 @@ Total: 1249 levels of spells.
     + Changing traits
         + Art: Corpus 19xp; 
     + Validated: Correctly spent 19 xp.
+    + ERROR: Missing book for reading season
     + ERROR: Book not found (CorpusHermeticus)
 + Winter 1224 (15+3xp) (1 years) Reading
     + Uses *Burning for Beginners* by Elaine of Flambeau (No Time)

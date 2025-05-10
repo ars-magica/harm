@@ -12,9 +12,13 @@
 + Cieran: Summer 1221 Reading
     + Underspent 8xp of 11.
 + Cieran: Spring 1224 Reading
+    + Missing book for reading season
     + Book not found (CorpusHermeticus)
 + Cieran: Winter 1229 Reading
+    + Missing book for reading season
     + Book not found (CorpusHermeticus)
++ Cieran: Winter 1239 Reading
+    + Missing book for reading season
 + Tessa Tanagh: Winter 1248 Adventure
     + Older than 35. Aging roll required.
 + Tessa Tanagh: Winter 1249 "" (Other Exposure)
