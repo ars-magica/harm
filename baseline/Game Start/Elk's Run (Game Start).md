@@ -113,7 +113,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: DL: Classic GreekL5Q15 
 +  (No Time)
     + DL: Latin L5Q15
-    + Key: DL: LatinL5Q15 
+    + Key: LatinL5Q15
 + *Revelations Of The Sacred Company Of Virgins At Cologne (Revelatio De Sacro Exercitu Virginum Coloniensium)* by Elizabeth of Schönau (No Time)
     + Dominion Lore Q6
     + Key: Dominion LoreQ6 Revelations Of The Sacred Company Of Virgins At Cologne (Revelatio De Sacro Exercitu Virginum Coloniensium)
@@ -294,17 +294,17 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: MagicLoreL5Q12
 + *Laboratories, Familiars and Apprentices* by Ibhan the scribe (No Time)
     + Magic Theory Q12
-    + Key: Magic TheoryQ12 Laboratories, Familiars and Apprentices
+    + Key: MT12Ibhan2
 + *Magic Theory in relation to scribing hermetic documents* by Ibhan the scribe (No Time)
     + Magic Theory Q12
-    + Key: Magic TheoryQ12 Magic Theory in relation to scribing hermetic documents
+    + Key: MT12Ibhan1
 + *Lesser is Greater* (No Time)
     + Magic Theory Q13
     + [Folio-1109]() from Autumn 1226
-    + Key: Magic TheoryQ13 Lesser is Greater
+    + Key: Folio1109MT
 + *Magic Theory in Relation to Talisman* by Maine Chleitigh ex Bonisagus (No Time)
     + Magic Theory Q14
-    + Key: Magic TheoryQ14 Magic Theory in Relation to Talisman
+    + Key: MaineMT
 + *New omnibus after Bonisagus* by Unknown (No Time)
     + Magic Theory L5Q12
     + Key: MagicTheoryL5Q12
@@ -346,23 +346,23 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Pagan TheologyQ12 Metaphysics book 2
 + *Fire through the Parma* by Elaine of Flambeau (No Time)
     + Penetration Q11
-    + Key: PenetrationQ11 Fire through the Parma
+    + Key: ElainePenetration2
 + *Increasing the Sting* by Elaine of Flambeau (No Time)
     + Penetration Q11
     + From Lambaird A'27
-    + Key: PenetrationQ11 Increasing the Sting
+    + Key: ElainePenetration1
 + *More Penetration* by Astrid (No Time)
     + Penetration Q12
     + in Gaelic
     + bought Autumn 1232
-    + Key: PenetrationQ12 More Penetration
+    + Key: AstridPenetration2
 + *Penetration* by Astrid (No Time)
     + Penetration Q12
     + in Gaelic
-    + Key: PenetrationQ12 Penetration
+    + Key: AstridPenetration1
 + *The Penetrating Fire* by Maine Chleitigh ex Bonisagus (No Time)
     + Penetration Q14
-    + Key: PenetrationQ14 The Penetrating Fire
+    + Key: MainePenetration
 + *Ultor* (No Time)
     + Penetration L5Q11
     + From Autumn 1228 - bought for 25pvf
@@ -406,7 +406,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: Profession: MerchantQ8 Trust No One and Smile at all
 + *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Servant of the People lore L4Q14
-    + Key: Servant of the People loreL4Q14 Service to the Common People
+    + Key: socpL4Q14
 +  (No Time)
     + Stonehenge Lore Q9
     + Key: Stonehenge LoreQ9 
@@ -429,21 +429,21 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Restoration of Stone and Metal* by Queltus of Guernicus (No Time)
     + Creo Q9
     + From Midsummer Fair 1244
-    + Key: CreoQ9 Restoration of Stone and Metal
+    + Key: CreoQ9Queltus
 + *More On the Spark* by Igneous Drake (No Time)
     + Creo Q11
     + 2 copies
     + Dated 1244; available 1247
-    + Key: IgnemQ11Igneous2
+    + Key: CreoQ11Igneous1244
 + *On the Spark* by Igneous Drake (No Time)
     + Creo Q11
     + 2 copies
     + From 1238
-    + Key: IgnemQ11Igneous1
+    + Key: CreoQ11Igneous1239
 + *Hibernian Musings on the Hermetic Techniques - Volume 1 Creo* by Maine Chleitigh ex Bonisagus (No Time)
     + Creo Q14
     + 2 copies
-    + Key: RegoQ14Maine
+    + Key: CreoQ14Maine
 + *An Apprentice Primer in Creo* by Sabastian ex Bonisagus (No Time)
     + Creo L5Q15
     + Key: CreoL5Q15
@@ -453,7 +453,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Magical Investigations of the Realms* by Esther of Bonisagus (No Time)
     + Intellego Q9
     + From Midsummer Fair 1244
-    + Key: IntellegoQ9 Magical Investigations of the Realms
+    + Key: IntellegoQ9Esther
 + *Hibernian Musings on the Hermetic Techniques - Volume 2 Intellego* by Maine Chleitigh ex Bonisagus (No Time)
     + Intellego Q14
     + 2 copies
@@ -468,23 +468,23 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Chrysallid* by Papilia of Bjornaer (No Time)
     + Muto Q8
     + From Midsummer Fair 1244
-    + Key: MutoQ8 Chrysallid
+    + Key: MutoQ8Papilia
 + *Hibernian Musings on the Hermetic Techniques - Volume 3 Muto* by Maine Chleitigh ex Bonisagus (No Time)
     + Muto Q14
     + 2 copies
-    + Key: MutoQ14 Hibernian Musings on the Hermetic Techniques - Volume 3 Muto
+    + Key: MutoQ14Maine
 + *An Apprentice Primer in Muto* by Sabastian ex Bonisagus (No Time)
     + Muto L5Q15
-    + Key: MutoL5Q15 An Apprentice Primer in Muto
+    + Key: MutoL5Q15
 + *Transitiones* (No Time)
     + Muto L6Q20
     + Root of the art
-    + Key: MutoL6Q20 Transitiones
+    + Key: RootMuto
 + *Transformations* by Jason ex Mercere (No Time)
     + Muto L20Q12
     + 2 copies
     + Arrives Spring 1227
-    + Key: MutoL20Q12 Transformations
+    + Key: MutoL20Q12
 + *Rust and Mold* by Senium of Bonisagus (No Time)
     + Perdo Q13
     + From Midsummer Fair 1244
@@ -492,13 +492,13 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Hibernian Musings on the Hermetic Techniques - Volume 4 Perdo* by Maine Chleitigh ex Bonisagus (No Time)
     + Perdo Q14
     + 2 copies
-    + Key: PerdoQ14 Hibernian Musings on the Hermetic Techniques - Volume 4 Perdo
+    + Key: PerdoQ14Maine
 + *An Apprentice Primer in Perdo* by Sabastian ex Bonisagus (No Time)
     + Perdo L5Q15
-    + Key: PerdoL5Q15 An Apprentice Primer in Perdo
+    + Key: PerdoL5Q15
 + *The Undoing of Hermes* by Decarpos of Flambeau (No Time)
     + Perdo L15Q14
-    + Key: PerdoL15Q14 The Undoing of Hermes
+    + Key: PerdoL15Q14
 + *Teleportation* by Bonaventure of Mercere (No Time)
     + Rego Q11
     + Tractatus - Lost 1223 - Returned 1230 from Seafraid
@@ -518,11 +518,11 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: RegoQ14Cieran
 + *An Apprentice Primer in Rego* by Sabastian ex Bonisagus (No Time)
     + Rego L5Q15
-    + Key: RegoL5Q15 An Apprentice Primer in Rego
+    + Key: RegoL5Q15
 + *Wizard in Charge* by Reginius Savus ex Bonisagus (No Time)
     + Rego L7Q19
     + Root of the art
-    + Key: RegoL7Q19 Wizard in Charge
+    + Key: RootRego
 + *The Kingly Art* by Etimarian ex Tremere (No Time)
     + Rego L10Q13
     + Key: RegoL10Q13
@@ -548,7 +548,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: AnimalL10Q18
 + *An Apprentice Primer in Animal* by Sabastian ex Bonisagus (No Time)
     + Animal L5Q15
-    + Key: AnimalL5Q15 An Apprentice Primer in Animal
+    + Key: AnimalL5Q15
 + *Hibernian Musings on the Hermetic Arts - Volume 2 Aquam* by Maine Chleitigh ex Bonisagus (No Time)
     + Aquam Q14
     + 2 copies
@@ -566,7 +566,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 +  (No Time)
     + Auram 
     + From Tolosa Partage
-    + Key: Auram 
+    + Key: Summa-Au-Tolosa
 + *Hibernian Musings on the Hermetic Arts - Volume 3 Auram* by Maine Chleitigh ex Bonisagus (No Time)
     + Auram Q14
     + 2 copies
@@ -603,77 +603,77 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Corpus Q14
     + 2 copies
     + Written Autumn 1247
-    + Key: CorpusQ14 Cierans notes on the body
+    + Key: CorpusQ14Cieran
 + *Hibernian Musings on the Hermetic Arts - Volume 4 Corpus* by Maine Chleitigh ex Bonisagus (No Time)
     + Corpus Q14
     + 2 copies
     + Key: MaineCorpus
 + *An Apprentice Primer in Corpus* by Sabastian ex Bonisagus (No Time)
     + Corpus L5Q15
-    + Key: CorpusL5Q15 An Apprentice Primer in Corpus
+    + Key: CorpusL5Q15
 + *The Basics of the Human Body* by Hipolyta of Bonisagus (No Time)
     + Corpus L6Q21
     + Root of the art
-    + Key: CorpusL6Q21 The Basics of the Human Body
+    + Key: RootCorpus
 + *The Art of the Flesh* (No Time)
     + Corpus L17Q12
-    + Key: CorpusL17Q12 The Art of the Flesh
+    + Key: CorpusL17Q12
 + *Roots and Stems* by author unknown (No Time)
     + Herbam Q8
     + From Midsummer Fair 1244
-    + Key: HerbamQ8 Roots and Stems
+    + Key: HerbamQ8Roots
 +  (No Time)
     + Herbam Q12
     + in Gaelic
     + From Panchia A'27
-    + Key: HerbamQ12 
+    + Key: HerbamQ12Gaelic
 + *Hibernian Musings on the Hermetic Arts - Volume 5 Herbam* by Maine Chleitigh ex Bonisagus (No Time)
     + Herbam Q14
     + 2 copies
     + Key: MaineHerbam
 + *An Apprentice Primer in Herbam* by Sabastian ex Bonisagus (No Time)
     + Herbam L5Q15
-    + Key: HerbamL5Q15 An Apprentice Primer in Herbam
+    + Key: HerbamL5Q15
 + *Roots First* by Horatio of Bonisagus (No Time)
     + Herbam L6Q21
     + Root of the art.  Written by a Diedne magus, this book was saved during the Schism book, and a clever magus recognising its quality rebound it with a false cover sheet. It was widely copied and distributed and gained a reputation as a Root of the Art, and nobody seems to know its dark secret.
-    + Key: HerbamL6Q21 Roots First
+    + Key: RootHerbam
 + *Wood* by Tree (No Time)
     + Herbam L15Q13
     + and Growth
-    + Key: HerbamL15Q13 Wood
+    + Key: HerbamL15Q13
 + *Seeing Through the Flames* by Igneous Drake ex Flambau (No Time)
     + Ignem Q11
     + Written Winter 1224
-    + Key: IgnemQ11 Seeing Through the Flames
+    + Key: IgenmQ11Igneous1224
 + *Understanding Through the Flames* by Igneous Drake ex Flambau (No Time)
     + Ignem Q11
     + in 1
     + Dated 1245
-    + Key: IgnemQ11 Understanding Through the Flames
+    + Key: IgenmQ11Igneous1245
 + *Walking Through the Flames* by Igneous Drake ex Flambau (No Time)
     + Ignem Q11
     + in 1
     + Dated 1242
-    + Key: IgnemQ11 Walking Through the Flames
+    + Key: IgenmQ11Igneous1242
 + *Passion for Fire* by Sakratus ex Flambau (No Time)
     + Ignem Q12
     + Traded from Lambaird.
-    + Key: IgnemQ12 Passion for Fire
+    + Key: IgnemQ12Sakratus
 + *Hibernian Musings on the Hermetic Arts - Volume 6 Ignem* by Maine Chleitigh ex Bonisagus (No Time)
     + Ignem Q14
-    + Key: IgnemQ14 Hibernian Musings on the Hermetic Arts - Volume 6 Ignem
+    + Key: MaineIgnem
 + *An Apprentice Primer in Ignem* by Sabastian ex Bonisagus (No Time)
     + Ignem L5Q15
-    + Key: IgnemL5Q15 An Apprentice Primer in Ignem
+    + Key: IgnemL5Q15
 + *Burning for Beginners* by Elaine of Flambeau (No Time)
     + Ignem L8Q15
     + Root of the art
-    + Key: IgnemL8Q15 Burning for Beginners
+    + Key: RootIgnem
 + *Fire as a Tool of Persuasion* by Igneous Drake ex Flambau (No Time)
     + Ignem L14Q11
     + In to library Winter 1226
-    + Key: IgnemL14Q11 Fire as a Tool of Persuasion
+    + Key: IgnemL14Q11
 + *Approaching Silence and Invisibility* by Rudolph of Merinita at Irencilia (No Time)
     + Imaginem Q11
     + From Midsummer Fair 1244
@@ -699,28 +699,28 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Key: ImaginemQ14Oswald
 + *An Apprentice Primer in Imaginem* by Sabastian ex Bonisagus (No Time)
     + Imaginem L5Q15
-    + Key: ImaginemL5Q15 An Apprentice Primer in Imaginem
+    + Key: ImaginemL5Q15
 + *Appearances* by Apparatia of Jerbiton (No Time)
     + Imaginem L7Q19
     + Root of the art
-    + Key: ImaginemL7Q19 Appearances
+    + Key: RootImaginem
 + *The true meaning of Sound* by Light and Shadow (No Time)
     + Imaginem L19Q10
     + in 2
     + Helena ex Jerbiton
-    + Key: ImaginemL19Q10 The true meaning of Sound
+    + Key: ImaginemL19Q10
 + *Mind over Body* by Euphemia of Bonisagus (No Time)
     + Mentem Q8
     + From Lambaid Summer 1228
-    + Key: MentemQ8 Mind over Body
+    + Key: MentemQ8Euphemia
 + *Mind* by Julia of Jerbiton (No Time)
     + Mentem Q12
     + Traded from Carolus of Criamon in 1245
-    + Key: MentemQ12 Mind
+    + Key: MentemQ12Julia
 + *Memory and Forgetfulness* by Mementus of Criamon (No Time)
     + Mentem Q13
     + From Midsummer Fair 1244
-    + Key: MentemQ13 Memory and Forgetfulness
+    + Key: MentemQ13Mementus
 + *Hibernian Musings on the Hermetic Arts - Volume 8 Mentem* by Maine Chleitigh ex Bonisagus (No Time)
     + Mentem Q14
     + Key: MentemQ14Maine
@@ -733,25 +733,25 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *On the Creation of Sand and Glass* by Tahlia of Bjornaer (No Time)
     + Terram Q11
     + From Midsummer Fair 1244
-    + Key: TerramQ11 On the Creation of Sand and Glass
+    + Key: TerramQ11Thalia
 + *Hibernian Musings on the Hermetic Arts - Volume 9 Terram* by Maine Chleitigh ex Bonisagus (No Time)
     + Terram Q14
     + 2 copies
-    + Key: TerramQ14 Hibernian Musings on the Hermetic Arts - Volume 9 Terram
+    + Key: MaineTerram
 + *An Apprentice Primer in Terram* by Sabastian ex Bonisagus (No Time)
     + Terram L5Q15
-    + Key: TerramL5Q15 An Apprentice Primer in Terram
+    + Key: TerramL5Q15
 + *Grounding* by Agustus Terranus of Guernicus (No Time)
     + Terram L8Q15
     + Root of the art
-    + Key: TerramL8Q15 Grounding
+    + Key: RootTerram
 + *Artful Support to Mining* by Concetta ex Verditius (No Time)
     + Terram L11Q10
-    + Key: TerramL11Q10 Artful Support to Mining
+    + Key: TerramL11Q10
 + *From Dust to Gemstone* by Augustus Terranus of Guernicus (No Time)
     + Terram L17Q13
     + From Midsummer Fair 1244
-    + Key: TerramL17Q13 From Dust to Gemstone
+    + Key: TerramL17Q13
 + *Musings from the Edge of Twilight* by Serafinus of Criamon (No Time)
     + Vim Q9
     + Key: VimQ9Serafinus
@@ -762,10 +762,10 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 + *Hibernian Musings on the Hermetic Arts - Volume 10 Vim* by Maine Chleitigh ex Bonisagus (No Time)
     + Vim Q14
     + 2 copies
-    + Key: VimQ14 Hibernian Musings on the Hermetic Arts - Volume 10 Vim
+    + Key: MaineVim
 + *An Apprentice Primer in Vim* by Sabastian ex Bonisagus (No Time)
     + Vim L5Q15
-    + Key: VimL5Q15 An Apprentice Primer in Vim
+    + Key: VimL5Q15
 + *Magic Companion* by Bella of Bonisagus (No Time)
     + Vim L15Q13
-    + Key: VimL15Q13 Magic Companion
+    + Key: VimL15Q13

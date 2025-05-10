@@ -651,9 +651,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Summer 1255 (12+4xp) Reading
     + Reads the new Q12 Tractatus from Vigil
+    + Uses *No title* by N/A (No Time)
     + Changing traits
         + Art: Imaginem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book Im-Vigil-Q12 is available.
 + Spring 1255 (2xp) LabWork (Exposure)
     + *ReVi Spells; Train Luciu in Magic Theory (SQ 15).*
     + Changing traits
@@ -765,9 +767,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 16 xp.
 + Summer 1252 (13+3xp) Reading
     + *To 83xp*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Spring 1252 (2+1xp) LabWork (Exposure)
     + *ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)*
     + Changing traits
@@ -778,6 +782,7 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 3 xp.
 + Winter 1252 (9+3xp) (1 years) Reading
     + *no aging -16*
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 12xp; 
         + Possession: Im vis (12)
@@ -786,6 +791,7 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 + Autumn 1251 (2xp) Authoring (Exposure)
     + **Imaginary Horrors**
@@ -793,9 +799,11 @@ Total: 1249 levels of spells.
         + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
 + Summer 1251 (9+3xp) Reading
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 12xp; 
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
 + Spring 1251 (2+1xp) LabWork (Exposure)
     + *InIm spells below ->  281½.  Lab total 71*
     + Changing traits
@@ -810,6 +818,7 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 3 xp.
 + Winter 1251 (13+3xp) (1 years) Reading
     + *Summa L15Q13 + Book Learner 96 -> 112; no aging -20*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
         + Aging Rolled -20 (-1)  [No aging.]
@@ -817,22 +826,29 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
     + Validated: Aging roll made
 + Autumn 1250 (13+3xp) Reading
     + *Summa L15Q13 + Book Learner 80 -> 96*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 + Summer 1250 (12+3xp) Reading
     + *Summa L17Q12 + Book Learner 53 -> 68*
+    + Uses *The Art of the Flesh* (No Time)
     + Changing traits
         + Art: Corpus 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book CorpusL17Q12 is available.
 + Spring 1250 (11+4xp) Reading
     + *Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity*
+    + Uses *Approaching Silence and Invisibility* by Rudolph of Merinita at Irencilia (No Time)
     + Changing traits
         + Art: Imaginem 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book ImaginemQ11Rudolph is available.
 + Winter 1250 (2xp) (1 years) LabWork (Exposure)
     + *no aging (-18); invent InHe25 Converse with Plant and Tree*
     + Changing traits
@@ -853,14 +869,18 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Summer 1249 (13+3xp) Reading
     + *Summa L15Q13*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 + Spring 1249 (13+3xp) Reading
     + *Summa L15Q13 (to 80xp: 12)*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 + Winter 1249 (2+1xp) (1 years) LabWork (Exposure)
     + *254½xp Invisibility Quartz for Sean; see below ; no aging (-18)*
     + Changing traits
@@ -884,16 +904,21 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 3 xp.
 + Summer 1248 (14+4xp) Reading
     + *Maine's tractatus Q14 + correspondent (245½xp)*
+    + Uses *Hibernian Musings on the Hermetic Arts - Volume 7 Imaginem* by Maine Chleitigh ex Bonisagus (No Time)
     + Changing traits
         + Art: Imaginem 18xp; 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book ImaginemQ14Maine is available.
 + Spring 1248 (14+4xp) Reading
     + *Oswald's tractatus Q14 + correspondent*
+    + Uses *Mystery Visions* by Oswald of Bonisagus (No Time)
     + Changing traits
         + Art: Imaginem 18xp; 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book ImaginemQ14Oswald is available.
 + Winter 1248 (12+3xp) (1 years) Reading
     + *Summa L20Q12; no aging (-4)*
+    + Uses *Transformations* by Jason ex Mercere (No Time)
     + Changing traits
         + Art: Muto 15xp; 
         + Aging Rolled -4 (0)  [No aging. Die not recorded]
@@ -901,6 +926,7 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MutoL20Q12 is available.
     + Validated: Aging roll made
 + Autumn 1247 (2xp) Authoring (Exposure)
     + *CrMe rituals x3 for Com to +5; (58xp) Tractatus on Corpus Q14*
@@ -924,11 +950,14 @@ Total: 1249 levels of spells.
     + Validated: Book CreoQ9Vivianus is available.
 + Spring 1247 (11+3xp) Reading
     + *Tractatus *On the Spark**
+    + Uses *On the Spark* by Igneous Drake (No Time)
     + Changing traits
         + Art: Creo 14xp; 
     + Validated: Correctly spent 14 xp.
+    + Validated: Book CreoQ11Igneous1239 is available.
 + Winter 1247 (14+3xp) (1 years) Reading
     + *Maine's Tractatus + Book Learner; 8-24=-16 no aging*
+    + Uses *Hibernian Musings on the Hermetic Arts - Volume 8 Mentem* by Maine Chleitigh ex Bonisagus (No Time)
     + Changing traits
         + Art: Mentem 17xp; 
         + Aging Rolled -16 (8)  [No aging. Rolls not recorded]
@@ -936,24 +965,32 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book MentemQ14Maine is available.
     + Validated: Aging roll made
 + Autumn 1246 (13+3xp) Reading
     + *13 (capped) Mentem L16Q13 to 16*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Summer 1246 (13+3xp) Reading
     + *Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Spring 1246 (13+3xp) Reading
     + *Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Winter 1246 (13+3xp) (1 years) Reading
     + *Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
         + Aging Rolled 0 (0)  [No aging. Rolls not recorded]
@@ -961,6 +998,7 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
     + Validated: Aging roll made
 + Autumn 1245 (2xp) Copying (Exposure)
     + *Copy spell texts; 2xp Latin; see below*
@@ -969,10 +1007,12 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Summer 1245 (10+4xp) Reading
     + *Summa; capped at 19 +1½xp for correspondent (191½xp)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
         + Art: Imaginem 1xp; 
     + Validated: Correctly spent 14 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Spring 1245 (15xp) Adventure
     + *4 conf pts*
     + Changing traits
@@ -1004,9 +1044,11 @@ Total: 1249 levels of spells.
     + Validated: Aging roll made
 + Autumn 1244 (8+3xp) Reading
     + **Dark Fey of the East**
+    + Uses *Dark Fey of the East* (No Time)
     + Changing traits
         + Ability: Faerie Lore [Dark fey] 11xp; 
     + Validated: Correctly spent 11 xp.
+    + Validated: Book FaerieQ8Dark is available.
 + Summer 1244 (10xp) Adventure
     + *Midsummer Fair: Parma Magica (5), Folk Ken (5) + one confidence point*
     + Changing traits
@@ -1025,6 +1067,7 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Winter 1244 (14+3xp) (1 years) Reading
     + *Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging*
+    + Uses *Hibernian Musings on the Hermetic Techniques - Volume 1 Creo* by Maine Chleitigh ex Bonisagus (No Time)
     + Changing traits
         + Art: Creo 17xp; 
         + Aging Rolled 0 (0)  [No aging. Rolls not recorded]
@@ -1032,24 +1075,32 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoQ14Maine is available.
     + Validated: Aging roll made
 + Autumn 1243 (14+3xp) Reading
     + **Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Summer 1243 (14+3xp) Reading
     + **Growing, Healing, and Creation* L15Q14 -> 106xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Spring 1243 (14+3xp) Reading
     + **Growing, Healing, and Creation* L15Q14 -> 89xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Winter 1243 (13+3xp) (1 years) Reading
     + **The Mind's Eye* L16Q13 -> 81xp ; No aging*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
         + Possession: Pe vis
@@ -1058,6 +1109,7 @@ Total: 1249 levels of spells.
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Autumn 1242 (2xp) LabWork (Exposure)
     + *Horror Cabinet Item  2xp Exposure Magic Theory*
     + Changing traits
@@ -1099,9 +1151,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Autumn 1241 (14+3xp) Reading
     + *17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Summer 1241 (2xp) Copying (Exposure)
     + *Copy lab tests (covenant service).*
     + Changing traits
@@ -1257,9 +1311,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Autumn 1236 (13+3xp) Reading
     + *65xp score 10*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Summer 1236 (2xp) LabWork (Exposure)
     + *Miner's Keen Eye (covenant service)  InTe lab total 52 (incl. Hiccup +7, Jimeny +3)*
     + Changing traits
@@ -1275,18 +1331,22 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Winter 1236 (10+3xp) (1 years) Reading
     + *13x1½ -> Imaginem 118x1½xp = 177 -> 18 (6)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Autumn 1235 (9+3xp) Reading
     + *52->64*
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 12xp; 
         + Possession: Te vis (-5)
         + Possession: Weightless Chain (Protection 9, Load 2)
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
 + Summer 1235 (2xp) LabWork (Exposure)
     + *93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text*
     + Changing traits
@@ -1304,23 +1364,29 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Winter 1235 (10+3xp) (1 years) Reading
     + *13x1½ -> Imaginem 105x1½xp = 157½ -> 17 (4½)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
         + Possession: Te vis (2)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Autumn 1234 (10+3xp) Reading
     + *Maine's wedding in Clonmacnoise.  Reading  (13x1½) Imaginem.*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
         + Reputation: Friendly druid [Lands of O'Sullivan] 30xp
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Summer 1234 (13+3xp) Reading
     + **Magic Companion* L15Q13*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Spring 1234 (2xp) Teaching (Exposure)
     + *Hiccup*
     + Changing traits
@@ -1330,11 +1396,13 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Winter 1234 (13+3xp) (1 years) Reading
     + **Magic Companion* L15Q13*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Vim 16xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Autumn 1233 (2xp) LabWork (Exposure)
     + *Ward against Heat and Flames Parma to 51xp ; Lab Total 42 + Hiccup (6) + Familiar (4) = 52*
     + Changing traits
@@ -1402,13 +1470,17 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Autumn 1231 (14+3xp) Reading
     + *SOCP Lore. Reaching 4.*
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Changing traits
         + Ability: SOCP Lore [Self initiation] 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 + Summer 1231 (14+3xp) Reading
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Changing traits
         + Ability: SOCP Lore [Self initiation] 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 + Spring 1231 (2xp) Teaching (Exposure)
     + *Teach Hiccup. Parma to 39xp*
     + Changing traits
@@ -1437,9 +1509,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 10 xp.
 + Spring 1230 (12+3xp) Reading
     + *L6Q12*
+    + Uses  (No Time)
     + Changing traits
         + Ability: Area Lore: Ireland 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book HiberniaL6Q12 is available.
 + Winter 1230 (2xp) (1 years) LabWork (Exposure)
     + *CrCo spells.  Lab total 43 + Hiccup + bookstand = 51.*
     + Changing traits
@@ -1484,15 +1558,20 @@ Total: 1249 levels of spells.
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 19 xp.
+    + ERROR: Book not found (CorpusHermeticus)
 + Autumn 1228 (10+3xp) Reading
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Summer 1228 (10+3xp) Reading
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
         + Possession: Vi vis (3)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 + Spring 1228 (2xp) LabWork (Exposure)
     + *Learn Sense of the lingering magic from lab text.  Using Bookstand of Hespera. Train Hiccup in Magic Theory. Exposure 2xp Magic Theory (-> 85xp)*
     + Changing traits
@@ -1502,11 +1581,13 @@ Total: 1249 levels of spells.
         + Spell: Sense of the Lingering Magic 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1228 (13+3xp) (1 years) Reading
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Autumn 1227 (2xp) Copying (Exposure)
     + *Copy spells (covenant service)*
     + Changing traits
@@ -1521,9 +1602,11 @@ Total: 1249 levels of spells.
         + Spell: Wizard's Communion 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1227 (14+3xp) Reading
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Winter 1227 (2+1xp) (1 years) LabWork (Exposure)
     + *Training for Hiccup in Magic Theory (SQ 8 for Hiccup).*
     + *Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera*
@@ -1536,14 +1619,18 @@ Total: 1249 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 3 xp.
 + Autumn 1226 (13+3xp) Reading
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
         + Art: Mentem 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 + Summer 1226 (14+3xp) Reading
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Changing traits
         + Art: Creo 17xp; 
         + Possession: Im vis (10)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 + Spring 1226 (2xp) OpeningArts (Exposure)
     + *Open arts for Hiccup.*
     + Changing traits
@@ -1562,9 +1649,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 15 xp.
 + Autumn 1225 (13+3xp) Reading
     + *Made Potions of Demon's Oblivion*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Summer 1225 (2xp) LabWork (Exposure)
     + *Lab work. Touch version of Pit of Gaping Earth PeTe15. Exposure 2xp Magic Theory. Lab Total 30.*
     + Changing traits
@@ -1574,9 +1663,11 @@ Total: 1249 levels of spells.
         + Spell: Arrow of Gaping Earth 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1225 (12+3xp) Reading
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Changing traits
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 + Winter 1225 (2xp) (1 years) LabWork (Exposure)
     + *Invent a touch version of Unravelling the Fabric of Imaginem lvl 13.  Exposure 2xp Second Sight. Lab Total 26.*
     + Changing traits
@@ -1587,28 +1678,37 @@ Total: 1249 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1224 (12+3xp) Reading
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Changing traits
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 + Summer 1224 (12+3xp) Reading
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Changing traits
         + Ability: Magic Theory 15xp; 
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 + Spring 1224 (16+3xp) Reading
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Changing traits
         + Art: Corpus 19xp; 
     + Validated: Correctly spent 19 xp.
+    + ERROR: Book not found (CorpusHermeticus)
 + Winter 1224 (15+3xp) (1 years) Reading
+    + Uses *Burning for Beginners* by Elaine of Flambeau (No Time)
     + Changing traits
         + Art: Ignem 18xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootIgnem is available.
 + Autumn 1223 (14+3xp) Reading
+    + Uses *The Beings of Eden* by Victoria of Merinita (No Time)
     + Changing traits
         + Art: Animal 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book AnimalL15Q14 is available.
 + Summer 1223 (2xp) LabWork (Exposure)
     + *Parma to 30xp.  Story (2conf pts) Lab work: InVi5 Spot the Vis + InVi5 Scales of M W + InVi20 Piercing the faerie veil (from texts) (lab total InVi 14 + Int 3 + MT 4 + Aura 5 + similar spell 4 = 30) + 2xp parma*
     + Changing traits
@@ -1644,33 +1744,43 @@ Total: 1249 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1222 (13+3xp) Reading
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 + Summer 1222 (2xp) LabWork (Exposure)
     + *ReTe items (covenant service) Parma to 24xp*
     + Changing traits
         + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.
 + Spring 1222 (15+3xp) Reading
+    + Uses *Burning for Beginners* by Elaine of Flambeau (No Time)
     + Changing traits
         + Art: Ignem 18xp; 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootIgnem is available.
 + Winter 1222 (13+3xp) (1 years) Reading
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 + Autumn 1221 (19+3xp) Reading
+    + Uses *The Element of Air* by Tempestina of Merinita (No Time)
     + Changing traits
         + Art: Auram 22xp; 
     + Validated: Correctly spent 22 xp.
+    + Validated: Book AuramL6Q19 is available.
 + Summer 1221 (8+3xp) Reading
     + *(Causes and Curies) half xp due to injuries = 8*
+    + Uses *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + Changing traits
         + Ability: Philosophiae [Ritual Casting] 8xp; 
     + ERROR: Underspent 8xp of 11.
+    + Validated: Book MedicineL3Q12 is available.
 + Spring 1221 (10xp) Adventure
     + *Jerome's Tower*
     + Changing traits
@@ -1678,19 +1788,25 @@ Total: 1249 levels of spells.
         + Ability: Second Sight 5xp; 
     + Validated: Correctly spent 10 xp.
 + Winter 1221 (18+3xp) (1 years) Reading
+    + Uses *The Element of Water* (No Time)
     + Changing traits
         + Art: Aquam 21xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 21 xp.
+    + Validated: Book AquamL7Q18 is available.
 + Autumn 1220 (20+3xp) Reading
+    + Uses *Transitiones* (No Time)
     + Changing traits
         + Art: Muto 23xp; 
     + Validated: Correctly spent 23 xp.
+    + Validated: Book RootMuto is available.
 + Summer 1220 (13+3xp) Reading
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Spring 1220 (5xp) Adventure
     + *Jerome's Tower.  Parma to 17xp*
     + Changing traits
@@ -1708,24 +1824,32 @@ Total: 1249 levels of spells.
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1219 (15+3xp) Reading
+    + Uses  (No Time)
     + Changing traits
         + Ability: Latin 18xp; 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book LatinL5Q15 is available.
 + Summer 1219 (13+3xp) Reading
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 16xp; 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book RegoL20Q9 is available.
 + Spring 1219 (10+3xp) Reading
+    + Uses *Artful Support to Mining* by Concetta ex Verditius (No Time)
     + Changing traits
         + Art: Terram 13xp; 
     + Validated: Correctly spent 13 xp.
+    + Validated: Book TerramL11Q10 is available.
 + Winter 1219 (13+3xp) (1 years) Reading
     + *Also a short story to Praesis.*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Changing traits
         + Art: Intellego 16xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 + Autumn 1218 (2xp) LabWork (Exposure)
     + *Enchant Bookstand of Hespera*
     + Changing traits
@@ -1734,9 +1858,11 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 2 xp.
 + Summer 1218 (14+3xp) Reading
     + *Studies book found in Jerome's Tower*
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Changing traits
         + Ability: SOCP Lore [Self initiation] 17xp; 
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 + Spring 1218 (14xp) Adventure
     + *Jerome's Tower - covenant service*
     + Changing traits
@@ -1748,12 +1874,14 @@ Total: 1249 levels of spells.
     + Validated: Correctly spent 14 xp.
 + Winter 1218 (15+3xp) (1 years) Reading
     + *Studies *Root of Terram* L8Q15 +3*
+    + Uses *Grounding* by Agustus Terranus of Guernicus (No Time)
     + Changing traits
         + Art: Terram 18xp; 
         + Possession: Cieran's Workshop
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootTerram is available.
 + Autumn 1217 (13+3xp) Reading
     + *Studies Mentem L16Q13 +3*
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
@@ -1763,9 +1891,11 @@ Total: 1249 levels of spells.
     + Validated: Book MentemL16Q13 is available.
 + Summer 1217 (21+3xp) Reading
     + *Studies *Root of Herbam* L6 Q21 +3*
+    + Uses *Roots First* by Horatio of Bonisagus (No Time)
     + Changing traits
         + Art: Herbam 24xp; 
     + Validated: Correctly spent 24 xp.
+    + Validated: Book RootHerbam is available.
 
 ## Future Advancement
 
@@ -1777,6 +1907,7 @@ Total: 1249 levels of spells.
     + Spell: The Studious Doppleganger 0xp Quiet Casting
 + Summer 1256 (9xp) Reading
     + Reads the new Q9 Tractatus from Vigil
+    + Uses: Im-Vigil-Q9
     + Art: Imaginem 13xp; 
 + Winter 1257 Teaching (Exposure)
     + *Teaching Luciu*
