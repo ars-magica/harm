@@ -400,17 +400,7 @@ bkCollisions bcs bks = f bcs $ sort bks
 -- | Count uses of books in an advancement step
 stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
                -> [(Book,Int)]       -- ^ List of books with number of users
-stepCountBooks = countBooks . stepBooksUsed
-
--- | Count duplications in a list of books.
-countBooks :: (Eq b, Countable b)
-           => [b]       -- ^ Sorted list of books with duplications
-           -> [(b,Int)] -- ^ List of unique books with number of repetitions in the input
-countBooks = f . map ( \b -> (b,1) ) 
-   where f [] = []
-         f (x:[]) = x:[]
-         f (x:y:ys) | fst x /= fst y  = x:f (y:ys)
-                    | otherwise = f ((fst x,snd x + snd y):ys)
+stepCountBooks = countRepetitions . stepBooksUsed
 
 -- | Get a list of books used in the seqason
 stepBooksUsed :: [AdvancementStep] -> [Book]

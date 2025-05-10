@@ -16,13 +16,25 @@ title:
 + [ ] Covenant guests
 + [ ] Covenant membership
 + [ ] Remove lab from properties
++ [ ] Level cap on  advancement.
+
++ Advancement $\to$  need to identify
+	+ [x] Book
+	+ [ ] Part
+	+ [ ] Original of Part
+	+ [ ] Stats
+	+ Book / Part and Original / Stats
+		+ Book for resource Conflict
+		+ Original for rereading check
+		+ Part for Stats
+		+ Stats for Advancement
+	+ Primary XP Trait
 
 **Other issues**
 + [ ] Trade and Gifts
 
-1. Level cap on  advancement.
-2. SQ from book
-3. Book lookup
+1. SQ from book
+2. Book lookup
 	1. originalBook
 	2. access to DB
 

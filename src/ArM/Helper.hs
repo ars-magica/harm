@@ -89,8 +89,17 @@ showSigned :: Int -> String
 showSigned x | x > 0 = "+" ++ show x
             | otherwise = show x
 
-
 -- * List Management
+
+-- | Count duplications in a list of books.
+countRepetitions :: Eq b
+           => [b]       -- ^ Sorted list of books with duplications
+           -> [(b,Int)] -- ^ List of unique books with number of repetitions in the input
+countRepetitions = f . map ( \b -> (b,1) ) 
+   where f [] = []
+         f (x:[]) = x:[]
+         f (x:y:ys) | fst x /= fst y  = x:f (y:ys)
+                    | otherwise = f ((fst x,snd x + snd y):ys)
 
 -- | Remove Nothing elements from a list, and map the Just-elements
 -- to the constituent object.
