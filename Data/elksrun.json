@@ -17,6 +17,15 @@
    "plan" : [ 
       { "season" : "Summer 1217"
       , "joining" : [ "Cieran" ]
+      , "acquired" :
+          { "bookID" : "KalliasQ12Finesse"
+	     , "title" : "Fundamental Fast Casting"
+	     , "creatore" : "Chief Librarian at Elk's Run"
+	     , "comment" : "This copy was made 1217 by the chief librarian to replace the below"
+	     , "copiedFrom" : "KalliasQ11Finesse"
+             , "stats" : { "quality" : 12, "topic" : { "ability" : "Finesse" } }
+	  }
+
       },
       { "season" : "Winter 1242"
       , "story" : { "comment" : "Arrival of Tim and Nemoy" }
