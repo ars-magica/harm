@@ -131,10 +131,10 @@ instance ToJSON CovenantState
 instance FromJSON CovenantState where
     parseJSON = withObject "CovenantState" $ \v -> CovenantState
         <$> v .:? "season" .!= GameStart
-        <*> fmap ( map CharacterKey ) ( v .:? "covenfolk" .!= [] )
-        <*> v .:? "library" .!= []
+        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
+        <*> v `parseCollapsedList` "library"
         <*> v .:? "librarycsv"
-        <*> v .:? "labs" .!= []
+        <*> v `parseCollapsedList` "labs"
 
 
 -- |
