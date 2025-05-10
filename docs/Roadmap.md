@@ -8,6 +8,18 @@ title:
 
 # Roadmap
 
+**Critical Challenges**
++ [ ] Antologies
++ [ ] Multi-Tractatus
++ [ ] Books on Spell Masteries
++ [ ] Books on Loan
++ [ ] Covenant guests
++ [ ] Covenant membership
++ [ ] Remove lab from properties
+
+**Other issues**
++ [ ] Trade and Gifts
+
 1. Level cap on  advancement.
 2. SQ from book
 3. Book lookup

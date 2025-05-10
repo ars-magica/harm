@@ -45,7 +45,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Reads the new Q12 Tractatus from Vigil
+    + Uses *No title* by N/A (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book Im-Vigil-Q12 is available.
 
 ## Spring 1255
 
@@ -198,7 +200,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *To 83xp*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Spring 1252
 
@@ -210,7 +214,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *no aging -16*
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 
 ## Autumn 1251
@@ -222,7 +228,9 @@
 ## Summer 1251
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
 
 ## Spring 1251
 
@@ -234,26 +242,34 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L15Q13 + Book Learner 96 -> 112; no aging -20*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
     + Validated: Aging roll made
 
 ## Autumn 1250
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L15Q13 + Book Learner 80 -> 96*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 
 ## Summer 1250
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L17Q12 + Book Learner 53 -> 68*
+    + Uses *The Art of the Flesh* (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book CorpusL17Q12 is available.
 
 ## Spring 1250
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity*
+    + Uses *Approaching Silence and Invisibility* by Rudolph of Merinita at Irencilia (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book ImaginemQ11Rudolph is available.
 
 ## Winter 1250
 
@@ -272,13 +288,17 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L15Q13*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 
 ## Spring 1249
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L15Q13 (to 80xp: 12)*
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 
 ## Winter 1249
 
@@ -304,7 +324,9 @@
     + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Maine's tractatus Q14 + correspondent (245½xp)*
+    + Uses *Hibernian Musings on the Hermetic Arts - Volume 7 Imaginem* by Maine Chleitigh ex Bonisagus (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book ImaginemQ14Maine is available.
 
 ## Spring 1248
 
@@ -312,7 +334,9 @@
     + Validated: Correctly spent 4 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Oswald's tractatus Q14 + correspondent*
+    + Uses *Mystery Visions* by Oswald of Bonisagus (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book ImaginemQ14Oswald is available.
 
 ## Winter 1248
 
@@ -321,7 +345,9 @@
     + ERROR: Older than 35. Aging roll required.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa L20Q12; no aging (-4)*
+    + Uses *Transformations* by Jason ex Mercere (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MutoL20Q12 is available.
     + Validated: Aging roll made
 
 ## Autumn 1247
@@ -347,7 +373,9 @@
     + Validated: Correctly spent 4 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Tractatus *On the Spark**
+    + Uses *On the Spark* by Igneous Drake (No Time)
     + Validated: Correctly spent 14 xp.
+    + Validated: Book CreoQ11Igneous1239 is available.
 
 ## Winter 1247
 
@@ -355,32 +383,42 @@
     + Validated: Correctly spent 10 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Maine's Tractatus + Book Learner; 8-24=-16 no aging*
+    + Uses *Hibernian Musings on the Hermetic Arts - Volume 8 Mentem* by Maine Chleitigh ex Bonisagus (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book MentemQ14Maine is available.
     + Validated: Aging roll made
 
 ## Autumn 1246
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *13 (capped) Mentem L16Q13 to 16*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Summer 1246
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Spring 1246
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Winter 1246
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
     + Validated: Aging roll made
 
 ## Autumn 1245
@@ -393,7 +431,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa; capped at 19 +1½xp for correspondent (191½xp)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 14 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Spring 1245
 
@@ -412,7 +452,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Dark Fey of the East**
+    + Uses *Dark Fey of the East* (No Time)
     + Validated: Correctly spent 11 xp.
+    + Validated: Book FaerieQ8Dark is available.
 
 ## Summer 1244
 
@@ -433,14 +475,18 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging*
+    + Uses *Hibernian Musings on the Hermetic Techniques - Volume 1 Creo* by Maine Chleitigh ex Bonisagus (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoQ14Maine is available.
     + Validated: Aging roll made
 
 ## Autumn 1243
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Summer 1243
 
@@ -449,7 +495,9 @@
     + Changes
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Growing, Healing, and Creation* L15Q14 -> 106xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Winter 1245
 
@@ -470,13 +518,17 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Growing, Healing, and Creation* L15Q14 -> 89xp*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Winter 1243
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **The Mind's Eye* L16Q13 -> 81xp ; No aging*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Autumn 1242
 
@@ -514,7 +566,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)*
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Summer 1241
 
@@ -634,7 +688,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *65xp score 10*
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Summer 1236
 
@@ -652,13 +708,17 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *13x1½ -> Imaginem 118x1½xp = 177 -> 18 (6)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Autumn 1235
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *52->64*
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Validated: Correctly spent 12 xp.
+    + Validated: Book RegoL20Q9 is available.
 
 ## Summer 1235
 
@@ -676,19 +736,25 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *13x1½ -> Imaginem 105x1½xp = 157½ -> 17 (4½)*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Autumn 1234
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Maine's wedding in Clonmacnoise.  Reading  (13x1½) Imaginem.*
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Summer 1234
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Magic Companion* L15Q13*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Spring 1234
 
@@ -700,7 +766,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + **Magic Companion* L15Q13*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Autumn 1233
 
@@ -754,12 +822,16 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *SOCP Lore. Reaching 4.*
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 
 ## Summer 1231
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 
 ## Spring 1231
 
@@ -789,7 +861,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *L6Q12*
+    + Uses  (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book HiberniaL6Q12 is available.
 
 ## Winter 1230
 
@@ -820,16 +894,21 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
+    + ERROR: Book not found (CorpusHermeticus)
 
 ## Autumn 1228
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Summer 1228
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book ImaginemL19Q10 is available.
 
 ## Spring 1228
 
@@ -840,7 +919,9 @@
 ## Winter 1228
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Autumn 1227
 
@@ -857,7 +938,9 @@
 ## Spring 1227
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Winter 1227
 
@@ -870,12 +953,16 @@
 ## Autumn 1226
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book MentemL16Q13 is available.
 
 ## Summer 1226
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Growing, Healing, and Creation* (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book CreoL15Q14 is available.
 
 ## Spring 1226
 
@@ -892,7 +979,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Made Potions of Demon's Oblivion*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Summer 1225
 
@@ -903,7 +992,9 @@
 ## Spring 1225
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 
 ## Winter 1225
 
@@ -914,28 +1005,37 @@
 ## Autumn 1224
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 
 ## Summer 1224
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *New omnibus after Bonisagus* by Unknown (No Time)
     + Validated: Correctly spent 15 xp.
+    + Validated: Book MagicTheoryL5Q12 is available.
 
 ## Spring 1224
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Validated: Correctly spent 19 xp.
+    + ERROR: Book not found (CorpusHermeticus)
 
 ## Winter 1224
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Burning for Beginners* by Elaine of Flambeau (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootIgnem is available.
 
 ## Autumn 1223
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The Beings of Eden* by Victoria of Merinita (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book AnimalL15Q14 is available.
 
 ## Summer 1223
 
@@ -958,7 +1058,9 @@
 ## Autumn 1222
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 
 ## Summer 1222
 
@@ -969,23 +1071,31 @@
 ## Spring 1222
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Burning for Beginners* by Elaine of Flambeau (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootIgnem is available.
 
 ## Winter 1222
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book IntellegoL15Q13 is available.
 
 ## Autumn 1221
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The Element of Air* by Tempestina of Merinita (No Time)
     + Validated: Correctly spent 22 xp.
+    + Validated: Book AuramL6Q19 is available.
 
 ## Summer 1221
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *(Causes and Curies) half xp due to injuries = 8*
+    + Uses *Causes And Cures (Causae Et Curae)* by Hildegard von Bingen (No Time)
     + ERROR: Underspent 8xp of 11.
+    + Validated: Book MedicineL3Q12 is available.
 
 ## Spring 1221
 
@@ -996,17 +1106,23 @@
 ## Winter 1221
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *The Element of Water* (No Time)
     + Validated: Correctly spent 21 xp.
+    + Validated: Book AquamL7Q18 is available.
 
 ## Autumn 1220
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Transitiones* (No Time)
     + Validated: Correctly spent 23 xp.
+    + Validated: Book RootMuto is available.
 
 ## Summer 1220
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Spring 1220
 
@@ -1023,23 +1139,31 @@
 ## Autumn 1219
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses  (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book LatinL5Q15 is available.
 
 ## Summer 1219
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book RegoL20Q9 is available.
 
 ## Spring 1219
 
 + Cieran the Fletcher ex Miscellanea (Reading)
+    + Uses *Artful Support to Mining* by Concetta ex Verditius (No Time)
     + Validated: Correctly spent 13 xp.
+    + Validated: Book TerramL11Q10 is available.
 
 ## Winter 1219
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Also a short story to Praesis.*
+    + Uses *Magic Companion* by Bella of Bonisagus (No Time)
     + Validated: Correctly spent 16 xp.
+    + Validated: Book VimL15Q13 is available.
 
 ## Autumn 1218
 
@@ -1051,7 +1175,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies book found in Jerome's Tower*
+    + Uses *Service to the Common People* by Jerome ex Miscellanea (No Time)
     + Validated: Correctly spent 17 xp.
+    + Validated: Book socpL4Q14 is available.
 
 ## Spring 1218
 
@@ -1063,7 +1189,9 @@
 
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies *Root of Terram* L8Q15 +3*
+    + Uses *Grounding* by Agustus Terranus of Guernicus (No Time)
     + Validated: Correctly spent 18 xp.
+    + Validated: Book RootTerram is available.
 
 ## Autumn 1217
 
@@ -1080,4 +1208,6 @@
         + joining: Character: Cieran
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Studies *Root of Herbam* L6 Q21 +3*
+    + Uses *Roots First* by Horatio of Bonisagus (No Time)
     + Validated: Correctly spent 24 xp.
+    + Validated: Book RootHerbam is available.
