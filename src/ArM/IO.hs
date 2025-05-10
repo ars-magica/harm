@@ -19,6 +19,7 @@
 module ArM.IO (readSaga,writeSaga) where
 
 import Data.Maybe 
+import Data.List 
 import Data.Aeson 
 import qualified Data.ByteString.Lazy as LB
 import qualified Data.CSV as CSV
@@ -130,7 +131,7 @@ loadCovenant (Just c)
              st = fromJust st'
              st' = covenantState c
              g (Left _) = []
-             g (Right x) = map fromCSVline x
+             g (Right x) = sort $ map fromCSVline x
 
 -- |
 -- = Write Character Sheets
