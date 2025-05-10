@@ -804,7 +804,7 @@
       { "mode" : "Reading", "season" : "Summer 1234"
       , "sourceQuality" : 13
 	 , "usesBook" : "VimL15Q13"
-      , "narrative" : "*Magic Companion* L15Q13 "
+      , "narrative" : "*Magic Companion* L15Q13"
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1234"
@@ -1180,6 +1180,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1244"
       , "sourceQuality" : 8
+      , "usesBook" : "FaerieQ8Dark"
       , "narrative" : " *Dark Fey of the East* "
       , "changes" : [ { "ability" : "Faerie Lore", "spec" : "Dark fey", "xp" : 11 } ]
       },
@@ -1284,6 +1285,7 @@
       },
       { "mode" : "Reading", "season" : "Spring 1247"
       , "sourceQuality" : 11
+	 , "usesBook" : "CreoQ11Igneous1239"
       , "narrative" : "Tractatus *On the Spark*"
       , "changes" : [ { "art" : "Creo", "xp" : 14 } ]
       },
@@ -1403,24 +1405,26 @@
       },
       { "mode" : "Reading", "season" : "Spring 1250"
       , "sourceQuality" : 11
+      , "usesBook" : "ImaginemQ11Rudolph"
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity"
       , "changes" : [ { "art" : "Imaginem", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1250"
       , "sourceQuality" : 12
+      , "usesBook" : "CorpusL17Q12"
       , "narrative" : "Summa L17Q12 + Book Learner 53 -> 68 "
       , "changes" : [ { "art" : "Corpus", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1250"
       , "sourceQuality" : 13
-      , "usesBook" : [ "IntellegoL15Q13 " ]
+      , "usesBook" : [ "IntellegoL15Q13" ]
       , "narrative" : "Summa L15Q13 + Book Learner 80 -> 96"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1251"
       , "sourceQuality" : 13
-      , "usesBook" : [ "IntellegoL15Q13 " ]
+      , "usesBook" : [ "IntellegoL15Q13" ]
       , "narrative" : "Summa L15Q13 + Book Learner 96 -> 112; no aging -20"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } 
             , { "aging" : { "apparentYounger" : 1
