@@ -14,17 +14,20 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Covenant ( Covenant(..)
-                          , CovenantConcept(..)
-                          , CovenantState(..)
-                          , CovAdvancement(..)
-                          , AugCovAdvancement(..)
-                          , CovenantLike(..)
-                          , findCov
-                          , defaultCovState
-                          , contractAdvancement
-                          , covenant
-                          ) where
+module ArM.Types.Covenant ( 
+           -- * The Covenant Type
+           Covenant(..)
+           , CovenantConcept(..)
+           , CovenantState(..)
+           , defaultCovState
+           -- * Advancement
+           , CovAdvancement(..)
+           , AugCovAdvancement(..)
+           , contractAdvancement
+           -- * Convenience Functions
+           , findCov
+           , covenant
+           ) where
 
 import GHC.Generics
 import Data.Aeson
@@ -38,8 +41,7 @@ import ArM.Types.Lab
 import ArM.Types
 import ArM.Helper
 
--- |
--- = Covenant Object
+-- * Covenant Tybe
 
 -- | A Covenant consists of a state and a timeless concept, as well as
 -- lists of advancement which define the evolution of states
@@ -60,21 +62,21 @@ instance FromJSON Covenant where
         <*> v .:? "history" .!= []
         <*> v .:? "plan" .!= []
 
+instance BookDB Covenant where
+   lookupBook k = join . fmap (lookupBook k) . covenantState 
+instance BookDB CovenantState where
+   lookupBook k = lookupBook k . library
 
 instance KeyObject Covenant where
     harmKey = CovenantKey . name
-
-covenant :: CharacterState -> Maybe HarmKey
-covenant = fmap CovenantKey . memberOf 
 
 instance HarmObject Covenant 
 instance StoryObject Covenant where
     name = covName . covenantConcept
     narrative = covDescription . covenantConcept
 
--- |
--- = CovenantConcept Object
-
+-- | The covenant concept is the timeless features of the covenant,
+-- as compared to the `CovenantState` which advances over time.
 data CovenantConcept = CovenantConcept 
          { covName :: String
          , covConcept :: Maybe String
@@ -106,9 +108,8 @@ instance Show CovenantConcept where
           sf (Just x ) = show x
 
 
--- |
--- = CovenantState Object
-
+-- | The `CovenantState` is the features of the covenant that changes
+-- from season to season
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
@@ -117,6 +118,7 @@ data CovenantState = CovenantState
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
 
+-- | A default object with some fields pre-initialised.
 defaultCovState :: CovenantState 
 defaultCovState = CovenantState 
          { covTime = GameStart
@@ -179,32 +181,6 @@ instance Timed AugCovAdvancement where
 instance Timed CovAdvancement where
    season = caSeason
 
--- |
--- Find the character's covenant from a list.
--- The covenant is identified by checking if the character is
--- listed as a member (covenFolkID).
-findCov :: Character -> [Covenant] -> Maybe Covenant
-findCov ch cs = maybeHead xs
-    where xs = filter (`hasMember` ch) cs
-
-class CovenantLike c where
-    findBook ::  c -> String -> Maybe Book
-instance CovenantLike Covenant where
-    findBook cov bs = f (covenantState cov) bs
-       where f Nothing _ = Nothing
-             f (Just st) xs = findBook st xs
-    
-instance CovenantLike CovenantState where
-    findBook cov bs = maybeHead xs
-        where xs = filter ( (==bs) . bookID ) ( library cov )
-
--- |
--- Does the covenant have the character as a member?
-hasMember :: Covenant -> Character -> Bool
-hasMember cov ch = cid `elem` chs
-   where cid = harmKey ch
-         chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
-
 -- | Merge explicit and inferred advancement into onw `CovAdvancement` object
 contractAdvancement :: AugCovAdvancement -> CovAdvancement
 contractAdvancement aug  = CovAdvancement
@@ -217,9 +193,30 @@ contractAdvancement aug  = CovAdvancement
      } 
      where (AugCovAdvancement aa ad) = aug
 
+-- | Auxiliary for `contractAdvancement`.  Apply a map which return
+-- a list, returning an empty list for a Nothing argument.
 listFromMaybe :: ( a -> [b]) -> Maybe a -> [b]
 listFromMaybe f = fromMaybe [] . fmap f 
 
-instance BookDB Covenant where
-   lookupBook k = join . fmap ( lookupBook k . library ) . covenantState 
+-- * Convenience Functions
+
+-- |
+-- Find the character's covenant from a list.
+-- The covenant is identified by checking if the character is
+-- listed as a member (covenFolkID).
+findCov :: Character -> [Covenant] -> Maybe Covenant
+findCov ch cs = maybeHead xs
+    where xs = filter (`hasMember` ch) cs
+
+-- |
+-- Does the covenant have the character as a member?
+hasMember :: Covenant -> Character -> Bool
+hasMember cov ch = cid `elem` chs
+   where cid = harmKey ch
+         chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
+
+
+
+covenant :: CharacterState -> Maybe HarmKey
+covenant = fmap CovenantKey . memberOf 
 
