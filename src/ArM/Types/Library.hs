@@ -30,6 +30,8 @@ import ArM.Types
 import ArM.Helper
 import ArM.Debug.Trace
 
+-- * Types
+
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
          { topic :: TraitKey
@@ -51,8 +53,20 @@ instance Show BookStats where
                 | otherwise = 'Q':show (fromJust $ quality b)
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
+instance Ord BookStats where
+    compare a b | topic a /= topic b = compare (topic a) (topic b)
+                | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
+                | otherwise  = compare (quality a) (quality b)
 
--- | A book may be an original manuscript or a copy.
+-- | A book may be an original manuscript, an antology,  or a copy.
+-- A copy will have a `copiedFrom` value, identifying the source.
+-- An antology will have a non-empty `antologyOf` field, listing
+-- all the constituent works.
+--
+-- A book may have one or more `BookStats` values.  An antology
+-- should not have book stats, since the book stats are properties
+-- of each constituent work.  A copy may or may not have book stats.
+-- If it does not, it inherits stats from the original.
 data Book = Book
      { bookID :: String
      , bookTitle :: String
@@ -67,9 +81,14 @@ data Book = Book
      , bookLanguage  :: Maybe String  -- ^ Language of the book
      , bookCount :: Int               -- ^ Number of copies 
      } deriving (Eq,Generic,Show)
+instance Ord Book where
+    compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
+                | otherwise = compare (bookTitle a) (bookTitle b)
 instance Countable Book where
     count = bookCount
     addCount b n = b { bookCount = bookCount b + n }
+instance KeyObject Book where
+   harmKey = BookKey . bookID
 instance StoryObject Book where
     name book = tis ++ aus ++ dat
      where aut = trim $ originalAuthor book
@@ -97,6 +116,9 @@ instance FromJSON Book where
         <*> v .:? "language" 
         <*> v .:? "count"  .!= 1
 
+-- * Convenience Functions
+--
+-- | Is the book a tractatus or something else?
 isTractatus :: Book -> Bool
 isTractatus = f . bookStats 
     where f [] = False
@@ -109,6 +131,8 @@ originalBook b Nothing = Just $ originalTome b
 originalBook b (Just k) = fmap originalTome $ find ( (==k) . harmKey ) $ antologyOf b
 -}
 
+-- | The `BookDB` class is any type wherein one may look up books by
+-- their ID.
 class BookDB h where
    -- | Look up a book by key (String) in a database.
    bookLookup :: h -> String -> Maybe Book
@@ -138,19 +162,6 @@ originalTome db b
 {-
 bookTraitStats :: Book -> TraitKey -> Maybe BookStats
 bookTraitStats b k = find ( (==k) . topic ) $ bookStats b
-
-
--- | The original date the book was authored
-originalDate :: Book -> SeasonTime
-originalDate = bookDate . originalTome
-
--- | The original author of a given book
-originalAuthor :: Book -> String
-originalAuthor = bookCreator . originalTome
-
--- | The original author of a given book
-originalTitle :: Book -> String
-originalTitle = bookTitle . originalTome
 -}
 
 -- | The original author of a given book
@@ -170,19 +181,8 @@ originalID b = fromMaybe ( bookID b ) $ copiedFrom b
 bookKey :: Book -> HarmKey
 bookKey = BookKey . bookID
 
--- |
--- = Other instances
 
-instance Ord Book where
-    compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
-                | otherwise = compare (bookTitle a) (bookTitle b)
-instance Ord BookStats where
-    compare a b | topic a /= topic b = compare (topic a) (topic b)
-                | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
-                | otherwise  = compare (quality a) (quality b)
-
--- |
--- == CSV
+-- * CSV
 
 readStats :: String -> (Maybe Int, Maybe Int)
 readStats "" = trace "empty book stats" (Nothing, Nothing)
@@ -247,8 +247,10 @@ instance ArMCSV Book where
    getID = bookID
 
 
--- |
--- == Descriptions of a reading season
+-- * Descriptions of a reading season
+
+-- | Currently unused, this is one idea for describing what book and part
+-- is read in a given season.
 data ReadingID = ReadingID
      { bookRead :: HarmKey
      , partRead :: Maybe HarmKey
@@ -263,5 +265,3 @@ instance FromJSON ReadingID {- where
                     <*> fmap ArtKey ( v .:? "art" )
 -}
 
-instance KeyObject Book where
-   harmKey = BookKey . bookID
