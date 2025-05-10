@@ -293,14 +293,17 @@
       },
       { "mode" : "Reading", "season" : "Spring 1219"
       , "sourceQuality" : 10
+      , "usesBook" : "TerramL11Q10"
       , "changes" : [ { "art" : "Terram", "xp" : 13, "levelCap" : 11 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1219"
       , "sourceQuality" : 13
+	 , "usesBook" : "RegoL20Q9"
       , "changes" : [ { "art" : "Rego", "xp" : 16, "levelCap" : 10 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1219"
       , "sourceQuality" : 15
+	 , "usesBook" : "LatinL5Q15"
       , "changes" : [ { "ability" : "Latin", "xp" : 18 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1220"
@@ -324,14 +327,17 @@
       },
       { "mode" : "Reading", "season" : "Summer 1220"
       , "sourceQuality" : 13
+      , "usesBook" : "VimL15Q13"
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1220"
       , "sourceQuality" : 20
+      , "usesBook" : "RootMuto"
       , "changes" : [ { "art" : "Muto", "xp" : 23, "levelCap" : 6 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1221"
       , "sourceQuality" : 18
+      , "usesBook" : "AquamL7Q18"
       , "changes" : [ { "art" : "Aquam", "xp" : 21, "levelCap" : 7 } ]
       },
       { "mode" : "Adventure", "season" : "Spring 1221"
@@ -343,19 +349,23 @@
       },
       { "mode" : "Reading", "season" : "Summer 1221"
       , "sourceQuality" : 8
+      , "usesBook" : "MedicineL3Q12"
       , "narrative" : "(Causes and Curies) half xp due to injuries = 8"
       , "changes" : [ { "ability" : "Philosophiae", "spec" : "Ritual Casting", "xp" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1221"
       , "sourceQuality" : 19
+      , "usesBook" : "AuramL6Q19"
       , "changes" : [ { "art" : "Auram", "xp" : 22, "levelCap" : 6 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1222"
       , "sourceQuality" : 13
+      , "usesBook" : "IntellegoL15Q13"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Spring 1222"
       , "sourceQuality" : 15
+      , "usesBook" : "RootIgnem"
       , "changes" : [ { "art" : "Ignem", "xp" : 18, "levelCap" : 8 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1222"
@@ -365,6 +375,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1222"
       , "sourceQuality" : 13
+      , "usesBook" : "IntellegoL15Q13"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1223"
@@ -415,23 +426,28 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1223"
       , "sourceQuality" : 14
+      , "usesBook" : "AnimalL15Q14"
       , "changes" : [ { "art" : "Animal", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1224"
       , "sourceQuality" : 15
+      , "usesBook" : "RootIgnem"
       , "changes" : [ { "art" : "Ignem", "xp" : 18, "levelCap" : 8 } ]
       },
       { "mode" : "Reading", "season" : "Spring 1224"
       , "sourceQuality" : 16
+      , "usesBook" : "CorpusHermeticus"
       , "narrative" : "Reads *Corpus Hermeticus* which Phillipedes had on loan."
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1224"
       , "sourceQuality" : 12
+      , "usesBook" : "MagicTheoryL5Q12"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1224"
       , "sourceQuality" : 12
+      , "usesBook" : "MagicTheoryL5Q12"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1225"
@@ -446,6 +462,7 @@
       },
       { "mode" : "Reading", "season" : "Spring 1225"
       , "sourceQuality" : 12
+      , "usesBook" : "MagicTheoryL5Q12"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 15 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1225"
@@ -460,6 +477,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1225"
       , "sourceQuality" : 13
+	 , "usesBook" : "VimL15Q13"
       , "narrative" : "Made Potions of Demon's Oblivion "
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
@@ -480,6 +498,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1226"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } 
                     , { "possession" : { "art" : "Im", "count" : 10
 		        , "comment" : "payment for items sold at the Midsummer fair" } }
@@ -487,6 +506,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1226"
       , "sourceQuality" : 13
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
@@ -522,6 +542,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1228"
       , "sourceQuality" : 13
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Lab Work", "season" : "Spring 1228"
@@ -547,6 +568,7 @@
       },
       { "mode" : "Reading", "season" : "Winter 1229"
       , "sourceQuality" : 16
+      , "usesBook" : "CorpusHermeticus"
       , "narrative" : "Reads *Corpus Hermeticus* which Phillipedes had on loan."
       , "changes" : [ { "art" : "Corpus", "xp" : 19 } ]
       },
@@ -849,6 +871,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1236"
       , "sourceQuality" : 13
+	 , "usesBook" : "MentemL16Q13"
       , "narrative" : " 65xp score 10 "
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
@@ -1088,6 +1111,7 @@
       { "mode" : "Reading", "season" : "Winter 1243"
       , "sourceQuality" : 13
       , "narrative" : " *The Mind's Eye* L16Q13 -> 81xp ; No aging"
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
          , { "aging" : { "apparentYounger" : 1
             , "die" : 0
@@ -1208,6 +1232,7 @@
       { "mode" : "Reading", "season" : "Winter 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging"
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } 
          , { "aging" : { "apparentYounger" : 1
             , "die" : 0
@@ -1220,21 +1245,25 @@
       { "mode" : "Reading", "season" : "Spring 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1246"
       , "sourceQuality" : 13
       , "narrative" : "Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1246"
       , "sourceQuality" : 13
       , "narrative" : "13 (capped) Mentem L16Q13 to 16 "
+	 , "usesBook" : "MentemL16Q13"
       , "changes" : [ { "art" : "Mentem", "xp" : 16, "levelCap" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1247"
       , "sourceQuality" : 14
       , "narrative" : "Maine's Tractatus + Book Learner; 8-24=-16 no aging"
+	 , "usesBook" : "MentemQ14Maine"
       , "changes" : [ { "art" : "Mentem", "xp" : 17 }
          , { "aging" : { "apparentYounger" : 1
             , "die" : 8
@@ -1376,11 +1405,13 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1250"
       , "sourceQuality" : 13
+      , "usesBook" : [ "IntellegoL15Q13 " ]
       , "narrative" : "Summa L15Q13 + Book Learner 80 -> 96"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1251"
       , "sourceQuality" : 13
+      , "usesBook" : [ "IntellegoL15Q13 " ]
       , "narrative" : "Summa L15Q13 + Book Learner 96 -> 112; no aging -20"
       , "changes" : [ { "art" : "Intellego", "xp" : 16 } 
             , { "aging" : { "apparentYounger" : 1
@@ -1409,6 +1440,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1251"
       , "sourceQuality" : 9
+      , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 12 } ]
       },
       { "mode" : "Author Book", "season" : "Autumn 1251"
@@ -1419,6 +1451,7 @@
       { "mode" : "Reading", "season" : "Winter 1252"
       , "sourceQuality" : 9
       , "narrative" : "no aging -16"
+      , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
             , { "aging" : { "apparentYounger" : 1
                , "die" : -1
@@ -1444,6 +1477,7 @@
       { "mode" : "Reading", "season" : "Summer 1252"
       , "sourceQuality" : 13
       , "narrative" : "To 83xp"
+      , "usesBook" : "VimL15Q13"
       , "changes" : [ { "art" : "Vim", "xp" : 16 } ]
       },
       { "mode" : "Adventure", "season" : "Autumn 1252"

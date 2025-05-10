@@ -134,7 +134,7 @@ MagicLoreL5Q12,Ability,Magic Lore, L5Q12, The Uncaring Masters of Creation , ,Sp
 ,Ability,L Lang: Irish    , Q6     , , ,,1,
 ,Ability,L Lang: Welsh    , Q7     , , ,,1,
 ,Ability,DL: Classic Greek, L5Q15  , , ,,1,
-,Ability,DL: Latin        , L5Q15  , , ,,1,
+LatinL5Q15,Ability,DL: Latin        , L5Q15  , , ,,1,
 ,Ability,Britannia Lore   , L3Q15       , , ,"Illustrated with brilliant Maps; from Midsummer Fair 1244", 1 ,
 ,Ability,Hibernia Lore    , L3Q15       , , ,"Illustrated with brilliant Maps; from Midsummer Fair 1244", 1 ,
 ,Ability,Normandy (tribunal) Lore, L3Q15, , ,"Illustrated with brilliant Maps; from Midsummer Fair 1244", 1 ,
