@@ -523,6 +523,7 @@
       },
       { "mode" : "Reading", "season" : "Spring 1227"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1227"
@@ -557,6 +558,7 @@
       },
       { "mode" : "Reading", "season" : "Summer 1228"
       , "sourceQuality" : 10
+      , "usesBook" : "ImaginemL19Q10"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
                     , { "possession" : { "art" : "Vi", "count" : 3
 		        , "comment" : "sales at the Grand tribunal" } } 
@@ -564,6 +566,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1228"
       , "sourceQuality" : 10
+      , "usesBook" : "ImaginemL19Q10"
       , "changes" : [ { "art" : "Imaginem", "xp" : 13 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1229"
@@ -622,6 +625,7 @@
       { "mode" : "Reading", "season" : "Spring 1230"
       , "sourceQuality" : 12
       , "narrative" : "L6Q12"
+      , "usesBook" : "HiberniaL6Q12"
       , "changes" : [ { "ability" : "Area Lore: Ireland", "xp" : 15 } ]
       },
       { "mode" : "Adventure", "season" : "Summer 1230"
@@ -1054,6 +1058,7 @@
       },
       { "mode" : "Reading", "season" : "Autumn 1241"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "narrative" : "17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
@@ -1125,21 +1130,25 @@
       },
       { "mode" : "Reading", "season" : "Spring 1243"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 -> 89xp "
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Summer 1243"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 -> 106xp "
       , "changes" : [ { "art" : "Creo", "xp" : 17 } ]
       },
       { "mode" : "Reading", "season" : "Autumn 1243"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoL15Q14"
       , "narrative" : " *Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp "
       , "changes" : [ { "art" : "Creo", "xp" : 17, "levelCap" : 15 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1244"
       , "sourceQuality" : 14
+	 , "usesBook" : "CreoQ14Maine"
       , "narrative" : "Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging"
       , "changes" : [ { "art" : "Creo", "xp" : 17 } 
          , { "aging" : { "apparentYounger" : 1
