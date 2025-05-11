@@ -17,6 +17,7 @@ module ArM.Types.Possession where
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Lab
+-- import ArM.Types.Library
 import ArM.DB.Weapon
 import ArM.Helper
 
@@ -43,6 +44,7 @@ import ArM.Debug.Trace
 data Possession = Possession 
      { itemName :: String            -- ^ Name identifying the unique item
      -- , itemKey :: HarmKey            -- ^ Key for a unique item
+     -- , itemBook :: Maybe Book        -- ^ A book, if the Possession is a book.
      , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
      , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
      , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
@@ -199,6 +201,7 @@ instance FromJSON Possession where
 parseOtherPossession :: Object -> Parser Possession
 parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
+       -- <*> v .:? "itemBook" 
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
        <*> v .:? "armourStats" .!= []
