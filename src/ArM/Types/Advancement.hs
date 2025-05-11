@@ -151,10 +151,8 @@ dropWord :: String -> String
 dropWord "" = ""
 dropWord (x:xs) | isSpace x = trim xs
                 | otherwise = dropWord xs
--- |
--- == The Advancement Type 
 
--- |
+-- ** The Advancement Type 
 
 -- | The advancement object has two roles.
 -- It can hold the advancemet from one season or chargen stage,

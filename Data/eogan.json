@@ -113,7 +113,7 @@
          , { "confidence" : "Confidence", "points" : 2 }
          ] 
       },
-      { "mode" : "Taming"
+      { "mode" : "Exposure Taming"
       , "season" : "Autumn 1254"
       , "sourceQuality" : 2
       , "narrative" : "Train three lymers and two greyhounds to Loyal +1."
@@ -126,7 +126,7 @@
          [ { "ability" : "Animal Handling", "xp": 2 }
          ] 
       },
-      { "mode" : "Training"
+      { "mode" : "Exposure Training"
       , "season" : "Winter 1255"
       , "sourceQuality" : 2
       , "narrative" : "Train one lymer in hunt +8 xp."
@@ -145,7 +145,7 @@
          , { "confidence" : "Confidence", "points" : 1 }
          ] 
       },
-      { "mode" : "Training"
+      { "mode" : "Exposure Training"
       , "season" : "Summer 1255"
       , "sourceQuality" : 2
       , "narrative" : "Train second lymer in hunt +8 xp."
@@ -153,8 +153,8 @@
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
       },
-      { "mode" : "Taming"
-      , "season" : "Autumn 1254"
+      { "mode" : "Exposure Taming"
+      , "season" : "Autumn 1255"
       , "sourceQuality" : 2
       , "narrative" : "Train two lymers to Loyal +2, and one mastiff to +1."
       , "comment" : 
@@ -163,7 +163,7 @@
          [ { "ability" : "Animal Handling", "xp": 2 }
          ] 
       },
-      { "mode" : "Training"
+      { "mode" : "Exposure Training"
       , "season" : "Winter 1256"
       , "sourceQuality" : 2
       , "narrative" : "Train one lymer in hunt +8 xp (+16 total)."
@@ -171,7 +171,7 @@
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
       },
-      { "mode" : "Training"
+      { "mode" : "Exposure Training"
       , "season" : "Spring 1256"
       , "sourceQuality" : 2
       , "narrative" : "Train second lymer in hunt +8 xp (+16 total)."

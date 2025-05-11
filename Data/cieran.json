@@ -1656,7 +1656,7 @@
       },
       { "mode" : "Teaching", "season" : "Winter 1256"
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
-      , "narrative" : "Teaching Luciu"
+      , "narrative" : "Teaching spells to Luciu"
       , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 3 }
@@ -1669,8 +1669,10 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1256"
       , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
-      , "narrative" : "CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15)."
-      , "coment" : "Lab Total 70"
+      , "narrative" :
+         [ "CrIm spells (376xp).  Studious Doppleganger w/o text."
+         , "Training Lucius in Magic Theory (SQ 15)." ]
+      , "comment" : "Lab Total 70"
       , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
          , { "spell" : "Book of Images"
             , "tefo" : "CrIm", "level" : 15
