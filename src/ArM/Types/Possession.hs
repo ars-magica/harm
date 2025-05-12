@@ -17,7 +17,7 @@ module ArM.Types.Possession where
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Lab
--- import ArM.Types.Library
+import ArM.Types.Library
 import ArM.DB.Weapon
 import ArM.Helper
 
@@ -44,7 +44,7 @@ import ArM.Debug.Trace
 data Possession = Possession 
      { itemName :: String            -- ^ Name identifying the unique item
      -- , itemKey :: HarmKey            -- ^ Key for a unique item
-     -- , itemBook :: Maybe Book        -- ^ A book, if the Possession is a book.
+     , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
      , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
      , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
      , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
@@ -122,6 +122,10 @@ specialPossession _ = False
 isVis :: Possession -> Bool
 isVis c | specialPossession c = False
         | otherwise = isJust $ itemArt c
+
+isBook :: Possession -> Bool
+isBook p | specialPossession p = False
+         | otherwise = bookText p /= []
 
 isWeapon :: Possession -> Bool
 isWeapon p | specialPossession p = False
