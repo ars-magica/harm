@@ -263,7 +263,7 @@ showPT p
               fromMaybe "Confidence" (confidence p) ++ ": " ++ show (fromMaybe 0 (score p)) ++ " (" ++
               show ( fromMaybe 0 (points p) ) ++ ")"
        | possession p /= Nothing = "Possession: " ++ show (fromJust $ possession p)
-       | lab p /= Nothing = "Lab: " ++ show (fromJust $ lab p)
+       | lab p /= Nothing = "Lab: " ++ show (name $ fromJust $ lab p)
        | combat p /= Nothing = show (fromJust $ combat p)
        | aging p /= Nothing = show (fromJust $ aging p)
        | other p /= Nothing = 

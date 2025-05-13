@@ -62,10 +62,10 @@ Warrior (1),
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
 |  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |
-| Thrown Knife | 3 | 4 | 3 | 3 | 5 | 0 |  |
-| Sling | 0 | 4 | 3 | 5 | 20 | 0 |  |
-| Fist | 3 | 6 | 6 | 1 | N/A | 0 | Spec. Dodge not applied |
 | Dagger | 3 | 8 | 6 | 4 | N/A | 0 | Spec. Dodge not applied |
+| Fist | 3 | 6 | 6 | 1 | N/A | 0 | Spec. Dodge not applied |
+| Sling | 0 | 4 | 3 | 5 | 20 | 0 |  |
+| Thrown Knife | 3 | 4 | 3 | 3 | 5 | 0 |  |
 
 ## Game start design
 

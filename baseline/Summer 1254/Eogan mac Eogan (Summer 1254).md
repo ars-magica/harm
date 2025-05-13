@@ -94,10 +94,10 @@ Weakness [for Dogs] (-1),
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
 |  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |
-| Spear and Shield | 0 | 4 | 2 | 4 | N/A | 3 | Speciality applied |
-| Shortspear | 0 | 4 | 0 | 4 | N/A | 1 | Speciality applied |
-| Shortbow | -3 | 8 | 3 | 5 | 15 | 2 | Speciality applied |
 | Fist | -2 | 1 | -1 | -1 | N/A | 0 | Spec. Dirty fighting not applied |
+| Shortbow | -3 | 8 | 3 | 5 | 15 | 2 | Speciality applied |
+| Shortspear | 0 | 4 | 0 | 4 | N/A | 1 | Speciality applied |
+| Spear and Shield | 0 | 4 | 2 | 4 | N/A | 3 | Speciality applied |
 
 ## Past Advancement
 

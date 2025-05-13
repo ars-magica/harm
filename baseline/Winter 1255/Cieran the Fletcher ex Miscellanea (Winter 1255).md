@@ -148,10 +148,10 @@ Weak Spontaneous Magic (0),
 
 | Weapon | Init | Atk | Def | Dam | Range | Load | Comment |
 |  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |
-| Longbow | -5 | 10 | 1 | 10 | 30 | 2 | Speciality applied |
-| Knife | -3 | 5 | -1 | 4 | N/A | 0 | Spec. Dodge not applied |
-| Fist | -3 | 4 | -1 | 2 | N/A | 0 | Spec. Dodge not applied |
 | Dodge | -3 | N/A | 0 | N/A | N/A | 0 | Speciality applied |
+| Fist | -3 | 4 | -1 | 2 | N/A | 0 | Spec. Dodge not applied |
+| Knife | -3 | 5 | -1 | 4 | N/A | 0 | Spec. Dodge not applied |
+| Longbow | -5 | 10 | 1 | 10 | 30 | 2 | Speciality applied |
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
@@ -1826,7 +1826,7 @@ Total: 1183 levels of spells.
     + Uses *Grounding* by Agustus Terranus of Guernicus (No Time)
     + Changing traits
         + Art: Terram 18xp; 
-        + Possession: Cieran's Workshop
+        + Lab: "Cieran's Workshop"
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 18 xp.
