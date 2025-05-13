@@ -82,6 +82,7 @@ data Trait = AbilityTrait Ability
            | ConfidenceTrait Confidence
            | OtherTraitTrait OtherTrait
            | PossessionTrait Possession
+           | EstateTrait Lab
            | CombatOptionTrait CombatOption
            | AgeTrait Age
            deriving (Show, Eq, Generic)
@@ -316,6 +317,7 @@ instance TraitClass Trait where
     traitKey (OtherTraitTrait x) = traitKey x
     traitKey (ConfidenceTrait x) = traitKey x
     traitKey (PossessionTrait x) = traitKey x
+    traitKey (EstateTrait x) = traitKey x
     traitKey (CombatOptionTrait x) = traitKey x
     traitKey (AgeTrait x) = traitKey x
     toTrait = id
@@ -378,6 +380,11 @@ instance TraitClass Possession where
     getTrait (PossessionTrait x) = Just x
     getTrait _ = Nothing
     toTrait = PossessionTrait
+instance TraitClass Lab where
+    traitKey x = EstateKey $ name x
+    getTrait (EstateTrait x) = Just x
+    getTrait _ = Nothing
+    toTrait = EstateTrait
 
 instance TraitClass CombatOption where
     traitKey x = CombatKey $ combatName x

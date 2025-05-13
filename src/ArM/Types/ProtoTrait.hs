@@ -86,6 +86,7 @@ data ProtoTrait = ProtoTrait
     , strait :: Maybe String      -- ^ special trait, like Longevity Potion
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
+    , lab :: Maybe Lab            -- ^ Possesion includes weapon, vis, equipment, etc.
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
     , protoTraitKey :: TraitKey
     , spec :: Maybe String        -- ^ specialisation of an ability
@@ -259,6 +260,7 @@ showPT p
               fromMaybe "Confidence" (confidence p) ++ ": " ++ show (fromMaybe 0 (score p)) ++ " (" ++
               show ( fromMaybe 0 (points p) ) ++ ")"
        | possession p /= Nothing = "Possession: " ++ show (fromJust $ possession p)
+       | lab p /= Nothing = "Lab: " ++ show (fromJust $ lab p)
        | combat p /= Nothing = show (fromJust $ combat p)
        | aging p /= Nothing = show (fromJust $ aging p)
        | other p /= Nothing = 
@@ -315,6 +317,7 @@ instance TraitClass ProtoTrait where
                       , cpoints = fromMaybe 0 (points p) }
       | other p /= Nothing = OtherTraitTrait $ fromJust $ computeTrait p
       | possession p /= Nothing = PossessionTrait $ fromJust $ computeTrait p
+      | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
       | combat p /= Nothing = CombatOptionTrait $ fromJust $ computeTrait p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
       | otherwise  = error "No Trait for this ProtoTrait" 
@@ -519,6 +522,7 @@ instance TraitType Trait where
     advanceTrait a (OtherTraitTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (ConfidenceTrait x) = toTrait $ advanceTrait a x
     advanceTrait a (PossessionTrait x) =  toTrait $ advanceTrait a x
+    advanceTrait a (EstateTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (CombatOptionTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (AgeTrait x) = AgeTrait $ advanceTrait a x
     computeTrait = Just . toTrait
@@ -527,6 +531,10 @@ instance TraitType Possession where
     advanceTrait p x = addCount x ( fromMaybe 1 m )
         where  m = fmap count $ possession  p
     computeTrait = possession
+instance TraitType Estate where
+    advanceTrait p x = addCount x ( fromMaybe 1 m )
+        where  m = fmap count $ lab  p
+    computeTrait = lab
 
 instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ computeTrait p

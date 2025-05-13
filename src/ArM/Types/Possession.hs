@@ -125,7 +125,7 @@ isVis c | specialPossession c = False
 
 isBook :: Possession -> Bool
 isBook p | specialPossession p = False
-         | otherwise = bookText p /= []
+         | otherwise = bookTexts p /= []
 
 isWeapon :: Possession -> Bool
 isWeapon p | specialPossession p = False
