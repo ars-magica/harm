@@ -1457,12 +1457,11 @@
       },
       { "mode" : "Author Book", "season" : "Autumn 1251"
       , "sourceQuality" : 2
-      , "narrative" : "*Imaginary Horrors*"
+      , "narrative" : "Authoring *Imaginary Horrors* drawing on the work with the Cathach protection."
       , "changes" : [ { "ability" : "Parma Magica", "xp" : 2 } ]
       },
       { "mode" : "Reading", "season" : "Winter 1252"
       , "sourceQuality" : 9
-      , "narrative" : "no aging -16"
       , "usesBook" : [ "RegoL20Q9" ]
       , "changes" : [ { "art" : "Rego", "xp" : 12 } 
             , { "aging" : { "apparentYounger" : 1
