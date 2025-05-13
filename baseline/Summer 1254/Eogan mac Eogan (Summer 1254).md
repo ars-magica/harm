@@ -114,13 +114,13 @@ Weakness [for Dogs] (-1),
 
 ## Future Advancement
 
-+ Autumn 1254 (2xp) Taming
++ Autumn 1254 (2xp) "Taming" (Other Exposure)
     + *Train three lymers and two greyhounds to Loyal +1.*
     + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
     + Eogans taming total is 10.
     + Each dog has zero confidence and thus an effective might of 1.
     + Ability: Animal Handling 2xp; 
-+ Winter 1255 (2xp) Trained
++ Winter 1255 (2xp) Training (Exposure)
     + *Train one lymer in hunt +8 xp.*
     + Ability: Hunt 2xp; 
 + Spring 1255 (8xp) Adventure
@@ -129,17 +129,17 @@ Weakness [for Dogs] (-1),
     + Ability: Carouse 5xp; 
     + Ability: Faerie Lore 1xp; 
     + Confidence: 0 (1)
-+ Summer 1255 (2xp) Trained
++ Summer 1255 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp.*
     + Ability: Hunt 2xp; 
-+ Autumn 1254 (2xp) Taming
++ Autumn 1255 (2xp) "Taming" (Other Exposure)
     + *Train two lymers to Loyal +2, and one mastiff to +1.*
     + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
     + Ability: Animal Handling 2xp; 
-+ Winter 1256 (2xp) Trained
++ Winter 1256 (2xp) Training (Exposure)
     + *Train one lymer in hunt +8 xp (+16 total).*
     + Ability: Hunt 2xp; 
-+ Spring 1256 (2xp) Trained
++ Spring 1256 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp (+16 total).*
     + Lymer 1-2. Loyal +2.  Hunt 16xp.
     + Lymer 3. Loyal +1.

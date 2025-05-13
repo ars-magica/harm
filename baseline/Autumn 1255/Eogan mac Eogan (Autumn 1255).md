@@ -26,7 +26,7 @@ Prophecy
 Size
 : 0
 
-## Summer 1255
+## Autumn 1255
 
 + **Age:** 25 years (apparent age 25) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
 + **Confidence**: 1 (6)
@@ -62,7 +62,7 @@ Uncertain Faith (-1),
 Warrior (1), 
 Weakness [for Dogs] (-1), 
 + **Abilities:**
-    + Animal Handling [Dogs] 5 +2 (3xp) [xp x1.5]
+    + Animal Handling [Dogs] 5 +2 (6xp) [xp x1.5]
     + Animal Ken [Canine] 4 (3xp)
     + Athletics [obstacle race] 2 (0xp)
     + Awareness [Good ears] 1 (0xp)
@@ -103,6 +103,12 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
++ Autumn 1255 (2xp) "Taming" (Other Exposure)
+    + *Train two lymers to Loyal +2, and one mastiff to +1.*
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Changing traits
+        + Ability: Animal Handling 2xp; 
+    + Validated: Correctly spent 2 xp.
 + Summer 1255 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp.*
     + Changing traits
@@ -144,10 +150,6 @@ Weakness [for Dogs] (-1),
 
 ## Future Advancement
 
-+ Autumn 1255 (2xp) "Taming" (Other Exposure)
-    + *Train two lymers to Loyal +2, and one mastiff to +1.*
-    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
-    + Ability: Animal Handling 2xp; 
 + Winter 1256 (2xp) Training (Exposure)
     + *Train one lymer in hunt +8 xp (+16 total).*
     + Ability: Hunt 2xp; 

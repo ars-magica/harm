@@ -103,7 +103,7 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
-+ Spring 1256 (2xp) Trained
++ Spring 1256 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp (+16 total).*
     + Lymer 1-2. Loyal +2.  Hunt 16xp.
     + Lymer 3. Loyal +1.
@@ -112,20 +112,20 @@ Weakness [for Dogs] (-1),
     + Changing traits
         + Ability: Hunt 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Winter 1256 (2xp) (1 years) Trained
++ Winter 1256 (2xp) (1 years) Training (Exposure)
     + *Train one lymer in hunt +8 xp (+16 total).*
     + Changing traits
         + Ability: Hunt 2xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1254 (2xp) Taming
++ Autumn 1255 (2xp) "Taming" (Other Exposure)
     + *Train two lymers to Loyal +2, and one mastiff to +1.*
     + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
     + Changing traits
         + Ability: Animal Handling 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Summer 1255 (2xp) Trained
++ Summer 1255 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp.*
     + Changing traits
         + Ability: Hunt 2xp; 
@@ -138,14 +138,14 @@ Weakness [for Dogs] (-1),
         + Ability: Hermes Lore 5xp; 
         + Confidence: 0 (1)
     + Validated: Correctly spent 11 xp.
-+ Winter 1255 (2xp) (1 years) Trained
++ Winter 1255 (2xp) (1 years) Training (Exposure)
     + *Train one lymer in hunt +8 xp.*
     + Changing traits
         + Ability: Hunt 2xp; 
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-+ Autumn 1254 (2xp) Taming
++ Autumn 1254 (2xp) "Taming" (Other Exposure)
     + *Train three lymers and two greyhounds to Loyal +1.*
     + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
     + Eogans taming total is 10.

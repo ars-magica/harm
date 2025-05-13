@@ -12,7 +12,7 @@
         + *The matter of Lord Protector is discussed, as it is expected to come up at the tribunal.  The magi are concerned about the Norman intrusion on magical and faerie lands, and Ashenrise's apparent support. Archie and Tim are appointed to speak on the covenants behalf.*
         + *Sean and Tiou are appointed to barter for vis exchange at the tribunal, aiming to stock up the arts where we have no source.*
     + Changes
-+ Eogan mac Eogan (Trained)
++ Eogan mac Eogan (Training (Exposure))
     + *Train second lymer in hunt +8 xp (+16 total).*
     + Lymer 1-2. Loyal +2.  Hunt 16xp.
     + Lymer 3. Loyal +1.
@@ -20,22 +20,28 @@
     + Mastiff 1. Loyal +1.
     + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + *CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).*
+    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
+    + *Training Lucius in Magic Theory (SQ 15).*
+    + Lab Total 70
     + Validated: Correctly spent 3 xp.
 
 ## Winter 1256
 
-+ Eogan mac Eogan (Trained)
++ Eogan mac Eogan (Training (Exposure))
     + *Train one lymer in hunt +8 xp (+16 total).*
     + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
-    + *Teaching Luciu*
+    + *Teaching spells to Luciu*
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Validated: Correctly spent 3 xp.
     + Validated: Aging roll made
 
 ## Autumn 1255
 
++ Eogan mac Eogan ("Taming" (Other Exposure))
+    + *Train two lymers to Loyal +2, and one mastiff to +1.*
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
     + *Author *Arrow's Flight*, an Auram Tracatus*
     + To 64xp in Latin
@@ -43,6 +49,9 @@
 
 ## Summer 1255
 
++ Eogan mac Eogan (Training (Exposure))
+    + *Train second lymer in hunt +8 xp.*
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Reads the new Q12 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)
@@ -63,12 +72,18 @@
         + The covenant lends £165 to Aedan on the same terms as he had with the church.
     + Changes
         + acquired: *No title* by N/A (No Time), *No title* by N/A (No Time), *No title* by N/A (No Time)
++ Eogan mac Eogan (Adventure)
+    + *Eogan discussed horse training and possible trade with the visitors from Lambaird.*
+    + Validated: Correctly spent 11 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *ReVi Spells; Train Luciu in Magic Theory (SQ 15).*
     + Validated: Correctly spent 2 xp.
 
 ## Winter 1255
 
++ Eogan mac Eogan (Training (Exposure))
+    + *Train one lymer in hunt +8 xp.*
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (OpeningArts (Exposure))
     + *Open arts for Luciu*
     + Validated: Correctly spent 2 xp.
@@ -76,40 +91,15 @@
 
 ## Autumn 1254
 
-+ Eogan mac Eogan (Taming)
-    + *Train two lymers to Loyal +2, and one mastiff to +1.*
-    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
-    + Validated: Correctly spent 2 xp.
-+ Cieran the Fletcher ex Miscellanea (Vis Study)
-    + *(371½xp)*
-    + Validated: Correctly spent 14 xp.
-
-## Summer 1255
-
-+ Eogan mac Eogan (Trained)
-    + *Train second lymer in hunt +8 xp.*
-    + Validated: Correctly spent 2 xp.
-
-## Spring 1255
-
-+ Eogan mac Eogan (Adventure)
-    + *Eogan discussed horse training and possible trade with the visitors from Lambaird.*
-    + Validated: Correctly spent 11 xp.
-
-## Winter 1255
-
-+ Eogan mac Eogan (Trained)
-    + *Train one lymer in hunt +8 xp.*
-    + Validated: Correctly spent 2 xp.
-
-## Autumn 1254
-
-+ Eogan mac Eogan (Taming)
++ Eogan mac Eogan ("Taming" (Other Exposure))
     + *Train three lymers and two greyhounds to Loyal +1.*
     + Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal to him.  He can train these further from canon stats [LoM:51].
     + Eogans taming total is 10.
     + Each dog has zero confidence and thus an effective might of 1.
     + Validated: Correctly spent 2 xp.
++ Cieran the Fletcher ex Miscellanea (Vis Study)
+    + *(371½xp)*
+    + Validated: Correctly spent 14 xp.
 
 ## Summer 1254
 
@@ -437,6 +427,8 @@
 
 ## Spring 1245
 
++ Elk's Run
+    + Changes
 + Cieran the Fletcher ex Miscellanea (Adventure)
     + *4 conf pts*
     + Validated: Correctly spent 15 xp.
@@ -954,6 +946,9 @@
 
 ## Autumn 1226
 
++ Elk's Run
+    + Changes
+        + acquired: *No title* by N/A (No Time)
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Validated: Correctly spent 16 xp.

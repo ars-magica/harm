@@ -9,7 +9,7 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 ## Spring 1255
 
 + [Cieran the Fletcher ex Miscellanea (Autumn 1255)](Cieran the Fletcher ex Miscellanea (Autumn 1255))
-+ [Eogan mac Eogan (Autumn 1254)](Eogan mac Eogan (Autumn 1254))
++ [Eogan mac Eogan (Autumn 1255)](Eogan mac Eogan (Autumn 1255))
 
 ### Library
 
@@ -19,6 +19,13 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
 +  (No Time)
     + 
     + Key: 
++ *No title* by N/A (No Time)
+    + 
+    + Point Cost 40. The copyist accumulates 6+Prof: Scribe points per season if he copies carefully.
+    + Lesser Item; CrCo26; The Blanket of Healing Sleep; [touch/sun/ind]
+    + Lesser Item; PeVi40; The Vim Bin
+    + Lesser Item; CrIg30; Safe Cauldron
+    + Key: No ID
 + *Dogs of Hibernia* by Unknown (No Time)
     + Animal Handling Q11
     + An illustrated text of various dog breeds and the best uses of their natural abilities
