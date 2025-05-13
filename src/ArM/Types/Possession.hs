@@ -182,6 +182,7 @@ defaultPossession :: Possession
 defaultPossession = Possession 
      { itemName = ""
      -- , itemKey = NoObject
+     , bookTexts = []
      , weaponStats = []
      , weapon = []
      , armourStats = []
@@ -205,7 +206,7 @@ instance FromJSON Possession where
 parseOtherPossession :: Object -> Parser Possession
 parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
-       -- <*> v .:? "itemBook" 
+       <*> v `parseCollapsedList` "texts" 
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
        <*> v .:? "armourStats" .!= []
