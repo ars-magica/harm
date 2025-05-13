@@ -631,7 +631,7 @@ Total: 1249 levels of spells.
 ## Past Advancement
 
 + Winter 1256 (2+1xp) (1 years) Teaching (Exposure)
-    + *Teaching Luciu*
+    + *Teaching spells to Luciu*
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Changing traits
         + Art: Imaginem 3xp; 
@@ -1903,7 +1903,9 @@ Total: 1249 levels of spells.
 ## Future Advancement
 
 + Spring 1256 LabWork (Exposure)
-    + *CrIm spells (376xp).  Studious Doppleganger w/o text. Training Lucius in Magic Theory (SQ 15).*
+    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
+    + *Training Lucius in Magic Theory (SQ 15).*
+    + Lab Total 70
     + Art: Imaginem 3xp; 
     + Spell: Book of Images 0xp Quiet Casting
     + Spell: The Shadow of Human Life 0xp Quiet Casting
