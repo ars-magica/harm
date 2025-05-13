@@ -42,6 +42,7 @@ import ArM.Helper
 import ArM.Types.Trait
 import ArM.Types.HarmObject
 import ArM.Types.Aging
+import ArM.Types.Lab
 
 import GHC.Generics
 import Data.Aeson
@@ -131,6 +132,7 @@ defaultPT = ProtoTrait { ability = Nothing
                              , strait = Nothing
                              , aging = Nothing
                              , possession = Nothing
+                             , lab = Nothing
                              , combat = Nothing
                              , protoTraitKey = NoTrait
                              , spec = Nothing
@@ -170,6 +172,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "specialTrait"
         <*> v .:?  "aging"
         <*> v .:?  "possession"
+        <*> v .:?  "lab"
         <*> v .:?  "combat"
         <*> return NoTrait
         <*> v .:?  "spec"
@@ -294,6 +297,7 @@ instance TraitClass ProtoTrait where
        | confidence p /= Nothing = ConfidenceKey $ fromMaybe "Confidence" $ confidence p
        | other p /= Nothing = OtherTraitKey $ fromJust $ other p
        | possession p /= Nothing = traitKey $ fromJust $ possession p
+       | lab p /= Nothing = traitKey $ fromJust $ lab p
        | combat p /= Nothing = traitKey $ fromJust $ combat p
        | aging p /= Nothing = AgeKey
        | strait p /= Nothing = trace (show p) $ error "No strait TraitKey"
@@ -317,6 +321,7 @@ instance TraitClass ProtoTrait where
                       , cpoints = fromMaybe 0 (points p) }
       | other p /= Nothing = OtherTraitTrait $ fromJust $ computeTrait p
       | possession p /= Nothing = PossessionTrait $ fromJust $ computeTrait p
+      | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
       | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
       | combat p /= Nothing = CombatOptionTrait $ fromJust $ computeTrait p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
@@ -531,9 +536,8 @@ instance TraitType Possession where
     advanceTrait p x = addCount x ( fromMaybe 1 m )
         where  m = fmap count $ possession  p
     computeTrait = possession
-instance TraitType Estate where
-    advanceTrait p x = addCount x ( fromMaybe 1 m )
-        where  m = fmap count $ lab  p
+instance TraitType Lab where
+    advanceTrait p x = fromMaybe x $ computeTrait p
     computeTrait = lab
 
 instance TraitType CombatOption where

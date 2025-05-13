@@ -57,16 +57,16 @@ data CharacterSheet = CharacterSheet
          , confList :: [ Confidence ]
          , otherList :: [ OtherTrait ]
          , possessionList :: [ Possession ]
+         , labList :: [ Lab ]
          , combatList :: [ CombatOption ]
          , csTraits :: [ Trait ]
          }  deriving (Eq,Show,Generic)
 
 -- | Return the character's lab if any
 characterLab :: CharacterLike c => c -> Maybe Lab
-characterLab = f . map getLab . possessionList . characterSheet
+characterLab = f . labList . characterSheet
    where f [] = Nothing
-         f (Nothing:xs) = f xs
-         f (Just lab:_) = Just lab
+         f (lab:_) = Just lab
 
 -- | A default CharacterSheet for internal use.
 defaultSheet :: CharacterSheet 
@@ -82,6 +82,7 @@ defaultSheet = CharacterSheet
          , confList = []
          , otherList = [ ]
          , possessionList = [ ]
+         , labList = [ ]
          , combatList = []
          , csTraits = [ ]
          }  
@@ -106,8 +107,9 @@ filterCS cs = defaultSheet
                  , confList = x8
                  , otherList = x9
                  , possessionList = x10
-                 , combatList = x11
-                 , csTraits = y11
+                 , labList = x11
+                 , combatList = x12
+                 , csTraits = y12
                 }
            where (x1,y1) = filterTrait $ traits cs
                  (x2,y2) = filterTrait y1
@@ -120,6 +122,7 @@ filterCS cs = defaultSheet
                  (x9,y9) = filterTrait y8
                  (x10,y10) = filterTrait y9
                  (x11,y11) = filterTrait y10
+                 (x12,y12) = filterTrait y11
 
 
 

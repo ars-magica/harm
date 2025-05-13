@@ -40,6 +40,7 @@ data TraitKey = AbilityKey String
            | OtherTraitKey String
            | SpecialKey String
            | PossessionKey String
+           | EstateKey String
            | CombatKey String
            | AgeKey
            | NoTrait
@@ -57,6 +58,7 @@ instance Show TraitKey where
            show (OtherTraitKey x) = x
            show (SpecialKey x) = x ++ " (special)"
            show (PossessionKey x) = "Possession: " ++ x
+           show (EstateKey x) = "Estate: " ++ x
            show (CombatKey x) = "Combat Option: " ++ x
            show AgeKey = "Age Trait"
            show NoTrait = "No Trait"
@@ -72,6 +74,7 @@ instance Ord TraitKey where
    compare (OtherTraitKey x) (OtherTraitKey y) = compare x y
    compare (SpecialKey x) (SpecialKey y) = compare x y
    compare (PossessionKey x) (PossessionKey y) = compare x y
+   compare (EstateKey x) (EstateKey y) = compare x y
    compare (CombatKey x) (CombatKey y) = compare x y
    compare AgeKey AgeKey = EQ
    compare NoTrait NoTrait = EQ
@@ -97,6 +100,8 @@ instance Ord TraitKey where
    compare _ (SpecialKey _) = GT
    compare (PossessionKey _) _ = LT
    compare _ (PossessionKey _) = GT
+   compare (EstateKey _) _ = LT
+   compare _ (EstateKey _) = GT
    compare (CombatKey _) _ = LT
    compare _ (CombatKey _) = GT
    compare AgeKey _ = LT
@@ -153,6 +158,7 @@ data ProtoKey = ProtoKey
    , other :: Maybe String
    , special :: Maybe String
    , possession :: Maybe String
+   , lab :: Maybe String
    , combat :: Maybe String
    }
    deriving ( Eq, Generic )
@@ -172,6 +178,7 @@ instance FromJSON ProtoKey where
         <*> v .:? "other" 
         <*> v .:? "special" 
         <*> v .:? "possession" 
+        <*> v .:? "lab" 
         <*> v .:? "combat" 
 
 -- | Auxiliary function for the JSON parser for `TraitKey`.
@@ -188,5 +195,6 @@ convertProtoKey p
   | isJust (other p) = OtherTraitKey (fromJust $ other p) 
   | isJust (special p) = SpecialKey (fromJust $ special p) 
   | isJust (possession p) = PossessionKey (fromJust $ possession p) 
+  | isJust (lab p) = EstateKey (fromJust $ lab p) 
   | isJust (combat p) = CombatKey (fromJust $ combat p) 
   | otherwise = NoTrait

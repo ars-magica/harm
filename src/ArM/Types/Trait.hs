@@ -38,7 +38,6 @@ module ArM.Types.Trait ( TraitKey(..)
                             , fote
                             , sortTraits
                             , visArt
-                            , getLab
                             , isVis
                             , isWeapon
                             , isArmour
@@ -54,7 +53,7 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Types.TraitKey
 import ArM.Types.HarmObject
--- import ArM.Types.Lab
+import ArM.Types.Lab
 import ArM.Types.Possession
 import ArM.Types.Aging
 -- import ArM.DB.Weapon

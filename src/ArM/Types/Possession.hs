@@ -16,7 +16,7 @@ module ArM.Types.Possession where
 
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
-import ArM.Types.Lab
+-- import ArM.Types.Lab
 import ArM.Types.Library
 import ArM.DB.Weapon
 import ArM.Helper
@@ -25,13 +25,12 @@ import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Aeson.Types
-import qualified Data.Aeson.KeyMap as KM
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Control.Monad
 -- import Control.Monad
 import Data.Maybe
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- |
 -- == Weapons and other Possessions
@@ -57,7 +56,6 @@ data Possession = Possession
      , itemCount :: Int              -- ^ Number of items possessed, default 1.
      , itemDate :: SeasonTime        -- ^ Time of creation
      }
-     | LabPossession Lab
     deriving ( Ord, Eq, Generic )
 
 data Enchantment = LesserItem MagicEffect
@@ -105,49 +103,30 @@ instance FromJSON Enchantment where
     parseJSON _ = mzero
 
 visArt :: Possession -> Maybe String
-visArt (LabPossession _) = Nothing
-visArt ob = itemArt ob
-getLab :: Possession -> Maybe Lab
-getLab (LabPossession lab) = Just lab
-getLab _ = Nothing
-
-isLab :: Possession -> Bool
-isLab (LabPossession _) = True
-isLab _ = False
-
-specialPossession :: Possession -> Bool
-specialPossession (LabPossession _) = True
-specialPossession _ = False
+visArt = itemArt 
 
 isVis :: Possession -> Bool
-isVis c | specialPossession c = False
-        | otherwise = isJust $ itemArt c
+isVis c = isJust $ itemArt c
 
 isBook :: Possession -> Bool
-isBook p | specialPossession p = False
-         | otherwise = bookTexts p /= []
+isBook p = bookTexts p /= []
 
 isWeapon :: Possession -> Bool
-isWeapon p | specialPossession p = False
-           | otherwise = (weapon p /= []) || (weaponStats p /= [])
+isWeapon p = (weapon p /= []) || (weaponStats p /= [])
 
 isArmour :: Possession -> Bool
-isArmour p | specialPossession p = False
-           | otherwise = (armour p /= []) || (armourStats p /= [])
+isArmour p = (armour p /= []) || (armourStats p /= [])
 isMagic :: Possession -> Bool
-isMagic p | specialPossession p = False
-       | otherwise = enchantment p /= MundaneItem
+isMagic p = enchantment p /= MundaneItem
 isAC :: Possession -> Bool
-isAC p | specialPossession p = False
-       | otherwise = isJust $ acTo p
+isAC p = isJust $ acTo p
 
 isMundaneEquipment :: Possession -> Bool
-isMundaneEquipment p | specialPossession p = False
-       | otherwise = isEquipment p && (not . isMagic) p
+isMundaneEquipment p = isEquipment p && (not . isMagic) p
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isLab, isVis, isWeapon, isArmour, isAC, specialPossession ]
+   where fs = [ isVis, isWeapon, isArmour, isAC ]
 
 
 instance StoryObject MagicEffect where
@@ -159,23 +138,15 @@ instance StoryObject MagicEffect where
    addComment s x = x { effectComment = s:comment x }
 
 instance StoryObject Possession where
-   name (LabPossession lab) = name lab
    name ob = itemName ob 
-   setName _ (LabPossession _) = error "Not implemented.  LabPossession should be obsoleted."
    setName n x = x { itemName = n }
-   narrative (LabPossession lab) = narrative lab
    narrative ob = itemDescription ob
-   addNarrative s (LabPossession lab) = LabPossession $ addNarrative s lab
    addNarrative s x = x { itemDescription = s:narrative x }
-   comment (LabPossession lab) = comment lab
    comment ob = comment ob
-   addComment s (LabPossession lab) = LabPossession $ addComment s lab
    addComment s x = x { itemComment = s:comment x }
 
 instance Countable Possession where
-   count (LabPossession _) = 1
    count ob = itemCount ob
-   addCount (LabPossession x) _ = trace "Labs are unique"  (LabPossession x)
    addCount ob n  = ob { itemCount = itemCount ob + n }
 
 defaultPossession :: Possession 
@@ -199,7 +170,7 @@ instance ToJSON Possession
 
 instance FromJSON Possession where
     parseJSON (String t) = pure $ setName (unpack (fromStrict t)) defaultPossession 
-    parseJSON (Object v) = (parseLab v) `mplus` (parseOtherPossession v)
+    parseJSON (Object v) = (parseOtherPossession v)
     parseJSON _ = mzero
 
 
@@ -218,11 +189,6 @@ parseOtherPossession v = fmap fixPossessionName $ Possession
        <*> v .:? "acTo" 
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime
-
-parseLab :: Object -> Parser Possession
-parseLab = fmap LabPossession . f . KM.lookup "lab"
-    where f Nothing = mzero
-          f (Just x) = parseJSON x
 
 
 
