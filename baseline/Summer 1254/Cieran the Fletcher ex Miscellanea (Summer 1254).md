@@ -710,7 +710,6 @@ Total: 1183 levels of spells.
         + Spell: Confusion of the Insane Vibrations 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1252 (9+3xp) (1 years) Reading
-    + *no aging -16*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
         + Art: Rego 12xp; 
@@ -723,7 +722,7 @@ Total: 1183 levels of spells.
     + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 + Autumn 1251 (2xp) Authoring (Exposure)
-    + **Imaginary Horrors**
+    + *Authoring *Imaginary Horrors* drawing on the work with the Cathach protection.*
     + Changing traits
         + Ability: Parma Magica 2xp; 
     + Validated: Correctly spent 2 xp.

@@ -79,13 +79,13 @@ data Trait = AbilityTrait Ability
            | ReputationTrait Reputation
            | VFTrait VF                 -- ^ Virtue or flaw
            | ConfidenceTrait Confidence 
-	           -- ^ Trait with score and points (Confidence, True Faith, etc.)
+                   -- ^ Trait with score and points (Confidence, True Faith, etc.)
            | OtherTraitTrait OtherTrait
-	           -- ^ Other traits advancing like abilities, e.g. Warping and Decrepitude
+                   -- ^ Other traits advancing like abilities, e.g. Warping and Decrepitude
            | PossessionTrait Possession -- ^ Movable and transferable property
            | EstateTrait Lab            -- ^ Immovable property, typically lab
            | CombatOptionTrait CombatOption  
-	           -- ^ Configuration for which combat stats should be calculated
+                   -- ^ Configuration for which combat stats should be calculated
            | AgeTrait Age
            deriving (Show, Eq, Generic)
 instance Ord Trait where

@@ -203,7 +203,6 @@
 ## Winter 1252
 
 + Cieran the Fletcher ex Miscellanea (Reading)
-    + *no aging -16*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
@@ -212,7 +211,7 @@
 ## Autumn 1251
 
 + Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
-    + **Imaginary Horrors**
+    + *Authoring *Imaginary Horrors* drawing on the work with the Cathach protection.*
     + Validated: Correctly spent 2 xp.
 
 ## Summer 1251
