@@ -155,12 +155,16 @@ parseOtherTraitKey :: Object -> Parser TraitKey
 parseOtherTraitKey v = OtherTraitKey <$> v .: "other" 
 parseReputationKey :: Object -> Parser TraitKey
 parseReputationKey v = ReputationKey <$> v .: "reputation"  <*> v .:? "locale" .!= "--"
+parseSpellKey :: Object -> Parser TraitKey
+parseSpellKey v = SpellKey <$> fmap fote (v .:? "tefo" .!= "TeFo")
+                           <*> v .:? "level" .!= 0
+                           <*> v .: "spell"  
 
 parseKey :: Object -> Parser TraitKey
 parseKey v = foldr mplus (pure NoTrait)
           [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
           , (parsePTraitKey v), (parseCharKey v), (parseConfidenceKey v) 
-          , (parseReputationKey v), (parseOtherTraitKey v) ]
+          , (parseReputationKey v), (parseSpellKey v), (parseOtherTraitKey v) ]
 
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
@@ -289,19 +293,21 @@ instance TraitClass ProtoTrait where
 
 -- | List of tentative functions converting ProtoTrait to Trait.
 computeList :: [ ProtoTrait -> Maybe Trait ]
-computeList = [ \ p -> computeTrait' (traitKey p) p
+computeList = [ computeTrait 
               , fmap CombatOptionTrait . combat
               , fmap EstateTrait . lab
               , fmap PossessionTrait . possession
-              , fmap SpellTrait . computeTrait
               , fmap (AgeTrait . toAge) . aging
               ]
 
+-- | Compute Trait from ProtoTrait if possible.
+computeTrait :: ProtoTrait   -> Maybe Trait  
+computeTrait p = computeTrait' (traitKey p) p
 
 -- | Compute Trait from ProtoTrait if possible.
 computeTrait' :: TraitKey     -- ^ The trait's key
               -> ProtoTrait   -- ^ The ProtoTrait 
-	      -> Maybe Trait  -- ^ Resulting Trait
+              -> Maybe Trait  -- ^ Resulting Trait
 computeTrait' NoTrait _ = Nothing
 computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
            Ability { abilityName = x
@@ -349,6 +355,25 @@ computeTrait' (ReputationKey n l) p = Just $ ReputationTrait
                       , repExcessXP = y
                       }
       where (s,y) = getAbilityScore (xp p)
+computeTrait' (SpellKey ft lvl sn) p =  Just $ SpellTrait $ 
+                Spell { spellName = sn
+                      , spellLevel = lvl
+                      , spellTeFo = fote ft
+                      , spellXP = fromMaybe 0 (xp p)
+                      , masteryScore = s
+                      , masteryOptions = fromMaybe [] (mastery p)
+                      , spellExcessXP = y
+                      , spellMultiplier = m
+                      , spellCastingScore = Nothing
+                      , spellTComment = fromMaybe "" $ ptComment p
+                      }
+         where  (s',y) = getAbilityScore (xp p)
+                fless = fromMaybe False $ flawless p
+                m | fless = 2
+                  | otherwise = fromMaybe 1.0 $ multiplyXP p
+                s | s' > 0 = s'
+                  | fless = 1
+                  | otherwise = 0
 computeTrait' _ _ = Nothing
 
 computeVF :: TraitKey -> ProtoTrait -> Maybe VF
@@ -374,15 +399,11 @@ computeVF _ _ = Nothing
 -- using `ProtoTrait` objects.
 class TraitType t where
 
-    -- | Convert a ProtoTrait (advancement) to a new trait object.
-    computeTrait :: ProtoTrait -> Maybe t
-
     -- | Advance a trait using changes defined by a ProtoTrait.
     advanceTrait :: ProtoTrait -> t -> t
     advanceTrait _ x = x
 
 instance TraitType Characteristic where
-    computeTrait _ = error "Characteristic computeTrait not implemented"
     advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
@@ -405,10 +426,8 @@ newCharScore  Nothing x = x
 newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
-    computeTrait _ = error "computeTrait VF not implemented"
     advanceTrait a x = x { vfMultiplicity = vfMultiplicity x + (fromMaybe 1 $ multiplicity a) }
 instance TraitType Ability where
-    computeTrait _ = error "computeTrait Ability not implemented"
     advanceTrait a x = 
           updateBonus (bonusScore a) $ um (multiplyXP a) $
           updateAbilitySpec (spec a) $ updateAbilityXP lim y x
@@ -418,7 +437,6 @@ instance TraitType Ability where
             um abm ab = ab { abilityMultiplier = fromMaybe 1.0 abm }
             lim = levelCap a
 instance TraitType Art where
-    computeTrait _ = error "computeTrait Art not implemented"
     advanceTrait a x = 
           updateArtBonus (bonusScore a) $ um (multiplyXP a) $ 
           updateArtXP lim y x 
@@ -428,26 +446,6 @@ instance TraitType Art where
             um abm ar = ar { artMultiplier = fromMaybe 1.0 abm }
             lim = levelCap a
 instance TraitType Spell where
-    computeTrait p | spell p == Nothing = Nothing
-                   | otherwise =  Just sp 
-          where sp = Spell { spellName = fromJust (spell p)
-                      , spellLevel = fromMaybe 0 $ level p
-                      , spellTeFo = fromMaybe "TeFo" $ tefo p
-                      , spellXP = fromMaybe 0 (xp p)
-                      , masteryScore = s
-                      , masteryOptions = fromMaybe [] (mastery p)
-                      , spellExcessXP = y
-                      , spellMultiplier = m
-                      , spellCastingScore = Nothing
-                      , spellTComment = fromMaybe "" $ ptComment p
-                      }
-                (s',y) = getAbilityScore (xp p)
-                fless = fromMaybe False $ flawless p
-                m | fless = 2
-                  | otherwise = fromMaybe 1.0 $ multiplyXP p
-                s | s' > 0 = s'
-                  | fless = 1
-                  | otherwise = 0
     advanceTrait a x = updateSpellXP y           -- add XP and update score
                      $ updateSpellMastery ms     -- add new mastery options
                      $ um (multiplyXP a)         -- update multiplier 
@@ -459,14 +457,11 @@ instance TraitType Spell where
             um Nothing ab = ab 
             um abm ar = ar { spellMultiplier = fromMaybe 1.0 abm }
 instance TraitType Reputation where
-    computeTrait _ = error "No Reputation computeTrait"
     advanceTrait a x = updateRepXP y x
       where y = (repExcessXP x) + (fromMaybe 0 $ xp a)
 instance TraitType PTrait where
-    computeTrait _ = error "computeTrait personality trait not implemented"
     advanceTrait _ x = trace "Warning! Advancement not implemented for personality traits"  x
 instance TraitType Confidence where
-    computeTrait _ = error "computeTrait Confidence not implemented"
     advanceTrait a = updateCScore (score a) . updateCPoints (points a) 
        where updateCScore Nothing x = x
              updateCScore (Just y) x = x { cscore = y }
@@ -474,7 +469,6 @@ instance TraitType Confidence where
              updateCPoints (Just y) x = x { cpoints = y + cpoints x }
 
 instance TraitType OtherTrait where
-    computeTrait _ = error "computeTrait OtherTrait not implemented"
     advanceTrait a x = updateOther y x
       where y = otherExcess x + (fromMaybe 0 $ points a)
 
@@ -501,23 +495,18 @@ instance TraitType Trait where
     advanceTrait a (EstateTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (CombatOptionTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (AgeTrait x) = AgeTrait $ advanceTrait a x
-    computeTrait = error "No instance for Trait computeTrait"
 
 instance TraitType Possession where
     advanceTrait p x = addCount x ( fromMaybe 1 m )
         where  m = fmap count $ possession  p
-    computeTrait = possession
 instance TraitType Lab where
     advanceTrait p x = fromMaybe x $ lab p
-    computeTrait = lab
 
 instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ combat p
-    computeTrait = combat 
 instance TraitType Age where
     advanceTrait p = advanceAge ag
           where ag = fromJust $ aging p
-    computeTrait _ = error "No computeTrait for age"
 
 -- |
 -- = Advancement
