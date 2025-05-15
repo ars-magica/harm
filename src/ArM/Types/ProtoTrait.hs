@@ -293,19 +293,23 @@ instance TraitClass ProtoTrait where
       | spell p /= Nothing = SpellTrait $ fromJust $ computeTrait p
       | reputation p /= Nothing = ReputationTrait $ fromJust $ computeTrait p
       | other p /= Nothing = OtherTraitTrait $ fromJust $ computeTrait p
-      | possession p /= Nothing = PossessionTrait $ fromJust $ possession p
-      | lab p /= Nothing = EstateTrait $ fromJust $ lab p
-      | combat p /= Nothing = CombatOptionTrait $ fromJust $ combat p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
       | otherwise  = error "No Trait for this ProtoTrait (toTrait)" 
-      where p' = foldr mplus Nothing [ a1, a2, a3, a4, a5, a6 ]
-            a1 = fmap AbilityTrait $ computeTrait p
-            a2 = fmap ArtTrait $ computeTrait p
-            a3 = fmap VFTrait $ computeTrait p
-            a4 = fmap CharacteristicTrait $ computeTrait p
-            a5 = fmap PTraitTrait $ computeTrait p
-            a6 = fmap ConfidenceTrait $ computeTrait p
+      where p' = foldr mplus Nothing [ f p | f <- computeList ]
    getTrait _ = Nothing
+
+computeList :: [ ProtoTrait -> Maybe Trait ]
+computeList = [ fmap AbilityTrait . computeTrait
+              , fmap ArtTrait . computeTrait
+              , fmap VFTrait . computeTrait
+              , fmap CharacteristicTrait . computeTrait
+              , fmap PTraitTrait . computeTrait
+              , fmap ConfidenceTrait . computeTrait 
+              , fmap CombatOptionTrait . combat
+              , fmap EstateTrait . lab
+              , fmap PossessionTrait . possession
+              ]
+
 
 {-
 computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
