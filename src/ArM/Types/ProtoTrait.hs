@@ -155,9 +155,9 @@ parseAbilityKey v = AbilityKey <$> v .:  "ability"
 parseArtKey :: Object -> Parser TraitKey
 parseArtKey v = ArtKey <$> v .:  "art"
 parseVirtueKey :: Object -> Parser TraitKey
-parseVirtueKey v = VFKey <$> v .:  "virtue" <*> v .:? detail .!= ""
+parseVirtueKey v = VFKey <$> v .:  "virtue" <*> v .:? "detail" .!= ""
 parseFlawKey :: Object -> Parser TraitKey
-parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? detail .!= ""
+parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? "detail" .!= ""
 
 parseKey :: Object -> Parser TraitKey
 parseKey v = foldl mplus (pure NoTrait)
@@ -225,24 +225,34 @@ instance StoryObject ProtoTrait where
    name = show . traitKey
    comment = fromMaybe [] . fmap (:[]) . ptComment
 instance Show ProtoTrait  where
-   show p = showPT p ++ cms
+   show p = showPT k p ++ cms
       where cmt = (ptComment p)
             cms | isNothing cmt = ""
                 | otherwise = " (" ++ fromJust cmt ++ ")"
+            k = protoTrait p
 
 -- | Auxiliary for show
-showPT :: ProtoTrait -> String
-showPT p 
-       | ability p /= Nothing = 
-           "Ability: " ++ fromJust ( ability p )  ++ showSpec p
+showPT :: TraitKey -> ProtoTrait -> String
+showPT (AbilityKey x) p =
+           "Ability: " ++ x  ++ showSpec p
            ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
+showPT (ArtKey x) p =
+           "Art: " ++ x ++ showXP p
+           ++ showBonusScore p ++ "; " ++ showMult p
+showPT (VFKey x d) p =
+              "Virtue/Flaw: " ++ x ++ ds ++ " ("
+              ++ show ( fromMaybe 0 (cost p) ) 
+              ++ mul (multiplicity p)
+              ++ ")"
+        where ds | d == "" = d
+	         | otherwise = ':':' ':d
+              mul Nothing = ""
+              mul (Just x) = " x" ++ show x
+showPT NoTrait p 
        | characteristic p /= Nothing =
            "Characteristic: " ++ fromJust ( characteristic p )  ++
            " " ++ show ( fromMaybe 0 (score p) ) ++ showAging p 
-       | art p /= Nothing = 
-           "Art: " ++ fromJust ( art p ) ++ showXP p
-           ++ showBonusScore p ++ "; " ++ showMult p
        | spell p /= Nothing =
               "Spell: " ++ fromJust (spell p) ++ showXP p
                     ++ showMastery (mastery p) ++ showMult p
@@ -253,15 +263,6 @@ showPT p
        | reputation p /= Nothing = 
               "Reputation: " ++ fromJust (reputation p) ++
               " [" ++ (fromMaybe "--" $ locale p) ++ "]" ++ showXP p
-       | virtue p /= Nothing = 
-              "Virtue: " ++ fromJust (virtue p) ++ " ("
-              ++ show ( fromMaybe 0 (cost p) ) 
-              ++ mul (multiplicity p)
-              ++ ")"
-       | flaw p /= Nothing = 
-              "Flaw: " ++ fromJust (flaw p) ++ " ("
-              ++ mul (multiplicity p)
-              ++ show ( fromMaybe 0 (cost p) ) ++ ")"
        | confidence p /= Nothing = 
               fromMaybe "Confidence" (confidence p) ++ ": " ++ show (fromMaybe 0 (score p)) ++ " (" ++
               show ( fromMaybe 0 (points p) ) ++ ")"
@@ -273,8 +274,6 @@ showPT p
                fromJust (other p) ++ " " ++ show ( fromMaybe 0 ( points p ) )
        | strait p /= Nothing = fromJust (strait p) 
        | otherwise  = error $ "No Trait for this ProtoTrait" 
-     where mul Nothing = ""
-           mul (Just x) = " x" ++ show x
 
 
 instance Ord ProtoTrait where
@@ -288,7 +287,7 @@ showAging p | Nothing == aging p = ""
 
 instance TraitClass ProtoTrait where
    traitKey p
-       | isJust (protoTrait p) = protoTrait p
+       | NoTrait /= (protoTrait p) = protoTrait p
        | characteristic p /= Nothing = CharacteristicKey $ fromJust $ characteristic p 
        | spell p /= Nothing = SpellKey (fote $ fromMaybe "TeFo" $ tefo p)
                            (fromMaybe 0 $ level p ) ( fromJust $ spell p ) 
