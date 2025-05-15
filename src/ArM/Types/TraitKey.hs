@@ -20,7 +20,7 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..), isSpell, isVF, artKey, artLongName ) where
+module ArM.Types.TraitKey ( TraitKey(..), fote, isSpell, isVF, artKey, artLongName ) where
 
 import Data.Maybe
 import Data.List
@@ -53,7 +53,7 @@ instance Show TraitKey where
            show (CharacteristicKey x) = x
            show (AbilityKey x) = x
            show (ArtKey x) = artLongName x
-           show (SpellKey x y z) = z ++ show y ++ " " ++ x
+           show (SpellKey x y z) = fote x ++ show y ++ " " ++ z
            show (PTraitKey x) = "Personality Trait: " ++ x
            show (ReputationKey x y) = x ++ " [" ++ y ++ "]"
            show (VFKey x y) = x ++ " [" ++ y ++ "]"
@@ -212,3 +212,7 @@ arts = [ "Creo", "Intellego", "Muto", "Perdo", "Rego", "Animàl", "Aquam", "Aura
 artLongName :: String -> String
 artLongName st = fromMaybe "" $ find ( (st'==) . take 2 ) arts
     where st' = take 2 st
+
+-- | Convert the TeFo string to Form/Technique for sorting
+fote :: String -> String
+fote tf = drop 2 tf ++ take 2 tf

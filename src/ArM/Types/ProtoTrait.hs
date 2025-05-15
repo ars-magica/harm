@@ -255,11 +255,10 @@ showPT (ConfidenceKey cn) p =
 showPT (OtherTraitKey cn) p = cn ++ " " ++ show ( fromMaybe 0 ( points p ) )
 showPT (ReputationKey cn lc) p = "Reputation: " ++ cn ++
               " [" ++ lc ++ "]" ++ showXP p
-showPT _ p 
-       | spell p /= Nothing =
-              "Spell: " ++ fromJust (spell p) ++ showXP p
+showPT k@(SpellKey _ _ _) p = "Spell: " ++ show k ++ showXP p
                     ++ showMastery (mastery p) ++ showMult p
                     ++ showFlawless p
+showPT _ p 
        | possession p /= Nothing = "Possession: " ++ show (fromJust $ possession p)
        | lab p /= Nothing = "Lab: " ++ show (name $ fromJust $ lab p)
        | combat p /= Nothing = show (fromJust $ combat p)

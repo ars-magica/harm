@@ -151,9 +151,6 @@ spellTeFoLe sp = spellTeFo sp ++ show (spellLevel sp)
 spellFoTe :: Spell -> String
 spellFoTe = fote . spellTeFo 
 
--- | Convert the TeFo string to Form/Technique for sorting
-fote :: String -> String
-fote tf = drop 2 tf ++ take 2 tf
 
 -- | Personality trait
 data PTrait = PTrait { ptraitName :: String, pscore :: Int }
