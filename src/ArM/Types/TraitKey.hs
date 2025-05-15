@@ -20,7 +20,7 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..) ) where
+module ArM.Types.TraitKey ( TraitKey(..), isVF ) where
 
 import Data.Maybe
 import Data.Aeson
@@ -198,3 +198,7 @@ convertProtoKey p
   | isJust (lab p) = EstateKey (fromJust $ lab p) 
   | isJust (combat p) = CombatKey (fromJust $ combat p) 
   | otherwise = NoTrait
+
+isVF :: TraitKey -> Bool
+isVF (VFKey _ _) = True
+isVF  _  = False

@@ -77,7 +77,6 @@ findTrait k = find ( (k==) . traitKey )
 -- give the name of the trait of the relevant type only. 
 data ProtoTrait = ProtoTrait
     { protoTrait :: TraitKey
-    , characteristic :: Maybe String  -- ^ characteristic name
     , spell :: Maybe String  -- ^ spell name
     , ptrait :: Maybe String  -- ^ personality trait name
     , confidence :: Maybe String  -- ^ confidence, true faith, or similar
@@ -118,7 +117,6 @@ data ProtoTrait = ProtoTrait
 -- new objects.
 defaultPT :: ProtoTrait
 defaultPT = ProtoTrait { protoTrait = NoTrait
-                             , characteristic = Nothing
                              , spell = Nothing
                              , ptrait = Nothing
                              , confidence = Nothing
@@ -160,14 +158,13 @@ parseFlawKey :: Object -> Parser TraitKey
 parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? "detail" .!= ""
 
 parseKey :: Object -> Parser TraitKey
-parseKey v = foldl mplus (pure NoTrait)
+parseKey v = foldr mplus (pure NoTrait)
        [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v) ]
 
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
     parseJSON = withObject "ProtoTrait" $ \v -> ProtoTrait
         <$> parseKey v
-        <*> v .:?  "characteristic"
         <*> v .:?  "spell"
         <*> v .:?  "ptrait"
         <*> v .:?  "confidence"
@@ -240,8 +237,8 @@ showPT (AbilityKey x) p =
 showPT (ArtKey x) p =
            "Art: " ++ x ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
-showPT (VFKey x d) p =
-              "Virtue/Flaw: " ++ x ++ ds ++ " ("
+showPT (VFKey vfn d) p =
+              "Virtue/Flaw: " ++ vfn ++ ds ++ " ("
               ++ show ( fromMaybe 0 (cost p) ) 
               ++ mul (multiplicity p)
               ++ ")"
@@ -249,10 +246,9 @@ showPT (VFKey x d) p =
                  | otherwise = ':':' ':d
               mul Nothing = ""
               mul (Just x) = " x" ++ show x
-showPT NoTrait p 
-       | characteristic p /= Nothing =
-           "Characteristic: " ++ fromJust ( characteristic p )  ++
+showPT (CharacteristicKey cn) p = "Characteristic: " ++ cn  ++
            " " ++ show ( fromMaybe 0 (score p) ) ++ showAging p 
+showPT _ p 
        | spell p /= Nothing =
               "Spell: " ++ fromJust (spell p) ++ showXP p
                     ++ showMastery (mastery p) ++ showMult p
@@ -273,7 +269,7 @@ showPT NoTrait p
        | other p /= Nothing = 
                fromJust (other p) ++ " " ++ show ( fromMaybe 0 ( points p ) )
        | strait p /= Nothing = fromJust (strait p) 
-       | otherwise  = error $ "No Trait for this ProtoTrait" 
+       | otherwise  = error $ "No Trait for this ProtoTrait (showPT) " ++ (show $ protoTrait p)
 
 
 instance Ord ProtoTrait where
@@ -288,7 +284,6 @@ showAging p | Nothing == aging p = ""
 instance TraitClass ProtoTrait where
    traitKey p
        | NoTrait /= (protoTrait p) = protoTrait p
-       | characteristic p /= Nothing = CharacteristicKey $ fromJust $ characteristic p 
        | spell p /= Nothing = SpellKey (fote $ fromMaybe "TeFo" $ tefo p)
                            (fromMaybe 0 $ level p ) ( fromJust $ spell p ) 
        | ptrait p /= Nothing = PTraitKey $ fromJust $ ptrait p
@@ -300,11 +295,10 @@ instance TraitClass ProtoTrait where
        | combat p /= Nothing = traitKey $ fromJust $ combat p
        | aging p /= Nothing = AgeKey
        | strait p /= Nothing = trace (show p) $ error "No strait TraitKey"
-       | otherwise  = trace (show p) $ error "No Trait for this ProtoTrait" 
+       | otherwise  = trace (show p) $ error "No Trait for this ProtoTrait (traitKey)"
 
    toTrait p 
       | isJust p' = fromJust p'
-      | characteristic p /= Nothing = CharacteristicTrait $  fromJust $ computeTrait p
       | spell p /= Nothing = SpellTrait $ fromJust $ computeTrait p
       | ptrait p /= Nothing = PTraitTrait $
            PTrait { ptraitName = fromJust (ptrait p)
@@ -321,15 +315,16 @@ instance TraitClass ProtoTrait where
       | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
       | combat p /= Nothing = CombatOptionTrait $ fromJust $ computeTrait p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
-      | otherwise  = error "No Trait for this ProtoTrait" 
-      where p' = foldr mplus Nothing [ a1, a2, a3 ]
+      | otherwise  = error "No Trait for this ProtoTrait (toTrait)" 
+      where p' = foldr mplus Nothing [ a1, a2, a3, a4 ]
             a1 = fmap AbilityTrait $ computeTrait p
             a2 = fmap ArtTrait $ computeTrait p
             a3 = fmap VFTrait $ computeTrait p
+            a4 = fmap CharacteristicTrait $ computeTrait p
    getTrait _ = Nothing
 
 computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
-computeTrait' NoTrait p = Nothing
+computeTrait' NoTrait _ = Nothing
 computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
            Ability { abilityName = x
                 , speciality = spec p
@@ -340,6 +335,7 @@ computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
                 , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
                 }
       where (s,y) = getAbilityScore (xp p)
+computeTrait' _ _ = Nothing
 
 -- * Advancement - the TraitType class
 --
@@ -364,13 +360,13 @@ class TraitType t where
     advanceTrait _ x = x
 
 instance TraitType Characteristic where
-    computeTrait p
-       | isNothing (characteristic p) = Nothing 
-       | otherwise = Just $
-          Characteristic { characteristicName = fromJust ( characteristic p ) 
+    computeTrait p = f (protoTrait p)
+       where f (CharacteristicKey x) = Just $ Characteristic
+                { characteristicName = x
                 , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
                 , agingPoints = fromMaybe 0 (agingPts p)
                 , charBonusList = charBonuses p }
+             f _ = Nothing
     advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
@@ -393,17 +389,17 @@ newCharScore  Nothing x = x
 newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
-    computeTrait p = f (protoTrait p) p
-       where f (VFKey x d) p = Just $ VF 
+    computeTrait p = f (protoTrait p)
+       where f (VFKey x d) = Just $ VF 
                     { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
                     , vfComment = fromMaybe "" $ ptComment p }
-             f _ _ = Nothing
+             f _ = Nothing
     advanceTrait a x = x { vfMultiplicity = vfMultiplicity x + (fromMaybe 1 $ multiplicity a) }
 instance TraitType Ability where
-    computeTrait p = f (protoTrait p) p
-       where f (AbilityKey x) p = Just $
+    computeTrait p = f (protoTrait p)
+       where f (AbilityKey x) = Just $
                Ability { abilityName = x
                     , speciality = spec p
                     , abilityXP = fromMaybe 0 (xp p)
@@ -412,7 +408,7 @@ instance TraitType Ability where
                     , abilityBonus = fromMaybe 0 $ bonusScore p
                     , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
                     }
-             f _ _ = Nothing
+             f _ = Nothing
              (s,y) = getAbilityScore (xp p)
     advanceTrait a x = 
           updateBonus (bonusScore a) $ um (multiplyXP a) $
@@ -423,8 +419,8 @@ instance TraitType Ability where
             um abm ab = ab { abilityMultiplier = fromMaybe 1.0 abm }
             lim = levelCap a
 instance TraitType Art where
-    computeTrait p = f (protoTrait p) p
-       where f (ArtKey nam) p = Just $
+    computeTrait p = f (protoTrait p)
+       where f (ArtKey nam) = Just $
                 Art { artName = nam
                     , artXP = x
                     , artScore = s
@@ -432,7 +428,7 @@ instance TraitType Art where
                     , artBonus = fromMaybe 0 $ bonusScore p
                     , artMultiplier = fromMaybe 1.0 $ multiplyXP p
                     }
-             f _ _ = Nothing
+             f _ = Nothing
              y = x - pyramidScore s
              s = scoreFromXP x
              x = fromMaybe 0 (xp p) 

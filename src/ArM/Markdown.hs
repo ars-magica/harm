@@ -747,33 +747,33 @@ instance Markdown CovenantState where
 -- = Lab Markdown
 
 instance Markdown Lab where
-   printMD lab = indentOList $ OList 
-       [ OString $ name lab
+   printMD lb = indentOList $ OList 
+       [ OString $ name lb
        , OList 
-         [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lab)
-         , OString $ "Size: " ++ showSigned (labSize $ labState lab)
+         [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lb)
+         , OString $ "Size: " ++ showSigned (labSize $ labState lb)
          , OString $ "Used size: " ++ used ++ " out of " ++ lim
          , OString $ "Safety: " ++ saf ++ " (" ++ bas ++ sfl ++ ")"
-         , OString $ "Aura: " ++ show (labAura $ labState lab)
+         , OString $ "Aura: " ++ show (labAura $ labState lb)
          , OString $ "Traits: " ++ commaList ts
          , OString $ "Art Specialisations: " ++ commaList arsp
          , OString $ "Activity Specialisations: " ++ commaList acsp
          , OString "Description"
-         , OList $ map italicOString $ narrative lab
-         , OList $ map OString $ comment lab
+         , OList $ map italicOString $ narrative lb
+         , OList $ map OString $ comment lb
          , OString "Virtues and Flaws"
-         , foldOList $ OList $ map printMD $ labVirtues $ labState lab
+         , foldOList $ OList $ map printMD $ labVirtues $ labState lb
          ]
        ]
        where ts = filter ( (=="") . labSpecialisation ) tb
              arsp = filter ( (=="Art") . labTrait ) tb
              acsp = filter ( (=="Activity") . labTrait ) tb
-             tb = totalBonus lab
-             used = showSigned $ usedSize lab
-             lim = showSigned $ labVirtueLimit lab
-             saf = showSigned $ labSafety lab 
-             bas = showSigned $ baseSafety lab 
-             sfl = showSigned $ safety lab
+             tb = totalBonus lb
+             used = showSigned $ usedSize lb
+             lim = showSigned $ labVirtueLimit lb
+             saf = showSigned $ labSafety lb 
+             bas = showSigned $ baseSafety lb 
+             sfl = showSigned $ safety lb
 instance Markdown LabVirtue where
    printMD v = OList [ OString $ name v
                    , OList $ map italicOString $ narrative v
