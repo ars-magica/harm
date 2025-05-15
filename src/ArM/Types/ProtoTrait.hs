@@ -315,10 +315,9 @@ instance TraitClass ProtoTrait where
                       , cscore = fromMaybe 0 (score p)
                       , cpoints = fromMaybe 0 (points p) }
       | other p /= Nothing = OtherTraitTrait $ fromJust $ computeTrait p
-      | possession p /= Nothing = PossessionTrait $ fromJust $ computeTrait p
-      | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
-      | lab p /= Nothing = EstateTrait $ fromJust $ computeTrait p
-      | combat p /= Nothing = CombatOptionTrait $ fromJust $ computeTrait p
+      | possession p /= Nothing = PossessionTrait $ fromJust $ possession p
+      | lab p /= Nothing = EstateTrait $ fromJust $ lab p
+      | combat p /= Nothing = CombatOptionTrait $ fromJust $ combat p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
       | otherwise  = error "No Trait for this ProtoTrait" 
    getTrait _ = Nothing
