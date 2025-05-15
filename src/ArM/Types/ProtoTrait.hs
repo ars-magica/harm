@@ -246,7 +246,7 @@ showPT (VFKey x d) p =
               ++ mul (multiplicity p)
               ++ ")"
         where ds | d == "" = d
-	         | otherwise = ':':' ':d
+                 | otherwise = ':':' ':d
               mul Nothing = ""
               mul (Just x) = " x" ++ show x
 showPT NoTrait p 
@@ -303,17 +303,14 @@ instance TraitClass ProtoTrait where
        | otherwise  = trace (show p) $ error "No Trait for this ProtoTrait" 
 
    toTrait p 
-      | ability p /= Nothing = AbilityTrait $ fromJust $ computeTrait p
+      | isJust p' = fromJust p'
       | characteristic p /= Nothing = CharacteristicTrait $  fromJust $ computeTrait p
-      | art p /= Nothing = ArtTrait $ fromJust $ computeTrait p
       | spell p /= Nothing = SpellTrait $ fromJust $ computeTrait p
       | ptrait p /= Nothing = PTraitTrait $
            PTrait { ptraitName = fromJust (ptrait p)
                   , pscore = fromMaybe 0 (score p)
                   } 
       | reputation p /= Nothing = ReputationTrait $ fromJust $ computeTrait p
-      | virtue p /= Nothing = VFTrait $ fromJust $ computeTrait p
-      | flaw p /= Nothing = VFTrait $ fromJust $ computeTrait p
       | confidence p /= Nothing = ConfidenceTrait $ 
            Confidence { cname = fromMaybe "Confidence" (confidence p)
                       , cscore = fromMaybe 0 (score p)
@@ -325,7 +322,24 @@ instance TraitClass ProtoTrait where
       | combat p /= Nothing = CombatOptionTrait $ fromJust $ computeTrait p
       | aging p /= Nothing = AgeTrait $ fromJust $ computeTrait p
       | otherwise  = error "No Trait for this ProtoTrait" 
+      where p' = foldr mplus Nothing [ a1, a2, a3 ]
+            a1 = fmap AbilityTrait $ computeTrait p
+            a2 = fmap ArtTrait $ computeTrait p
+            a3 = fmap VFTrait $ computeTrait p
    getTrait _ = Nothing
+
+computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
+computeTrait' NoTrait p = Nothing
+computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
+           Ability { abilityName = x
+                , speciality = spec p
+                , abilityXP = fromMaybe 0 (xp p)
+                , abilityScore = s
+                , abilityExcessXP = y
+                , abilityBonus = fromMaybe 0 $ bonusScore p
+                , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
+                }
+      where (s,y) = getAbilityScore (xp p)
 
 -- * Advancement - the TraitType class
 --
@@ -379,28 +393,27 @@ newCharScore  Nothing x = x
 newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
-    computeTrait p 
-       | virtue p /= Nothing = Just $ vf1 { vfname = fromJust (virtue p) }
-       | flaw p /= Nothing = Just $ vf1 { vfname = fromJust (flaw p) }
-       | otherwise = Nothing
-      where vf1 = VF { vfname = "", vfcost = fromMaybe 0 (cost p), vfDetail = fromMaybe "" $ detail p
+    computeTrait p = f (protoTrait p) p
+       where f (VFKey x d) p = Just $ VF 
+                    { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
                     , vfComment = fromMaybe "" $ ptComment p }
+             f _ _ = Nothing
     advanceTrait a x = x { vfMultiplicity = vfMultiplicity x + (fromMaybe 1 $ multiplicity a) }
 instance TraitType Ability where
-    computeTrait p
-       | ability p == Nothing = Nothing
-       | otherwise = Just $
-           Ability { abilityName = fromJust ( ability p ) 
-                , speciality = spec p
-                , abilityXP = fromMaybe 0 (xp p)
-                , abilityScore = s
-                , abilityExcessXP = y
-                , abilityBonus = fromMaybe 0 $ bonusScore p
-                , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
-                }
-      where (s,y) = getAbilityScore (xp p)
+    computeTrait p = f (protoTrait p) p
+       where f (AbilityKey x) p = Just $
+               Ability { abilityName = x
+                    , speciality = spec p
+                    , abilityXP = fromMaybe 0 (xp p)
+                    , abilityScore = s
+                    , abilityExcessXP = y
+                    , abilityBonus = fromMaybe 0 $ bonusScore p
+                    , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
+                    }
+             f _ _ = Nothing
+             (s,y) = getAbilityScore (xp p)
     advanceTrait a x = 
           updateBonus (bonusScore a) $ um (multiplyXP a) $
           updateAbilitySpec (spec a) $ updateAbilityXP lim y x
@@ -410,17 +423,17 @@ instance TraitType Ability where
             um abm ab = ab { abilityMultiplier = fromMaybe 1.0 abm }
             lim = levelCap a
 instance TraitType Art where
-    computeTrait p
-        | art p == Nothing = Nothing
-        | otherwise = Just $
-            Art { artName = fromJust ( art p ) 
-                , artXP = x
-                , artScore = s
-                , artExcessXP = y
-                , artBonus = fromMaybe 0 $ bonusScore p
-                , artMultiplier = fromMaybe 1.0 $ multiplyXP p
-                }
-       where y = x - pyramidScore s
+    computeTrait p = f (protoTrait p) p
+       where f (ArtKey nam) p = Just $
+                Art { artName = nam
+                    , artXP = x
+                    , artScore = s
+                    , artExcessXP = y
+                    , artBonus = fromMaybe 0 $ bonusScore p
+                    , artMultiplier = fromMaybe 1.0 $ multiplyXP p
+                    }
+             f _ _ = Nothing
+             y = x - pyramidScore s
              s = scoreFromXP x
              x = fromMaybe 0 (xp p) 
     advanceTrait a x = 
@@ -646,8 +659,9 @@ processChar'' c | charBonusList c == [] = c
 
 -- | Count regular XP (excluding reputation) from a ProtoTrait
 regularXP :: ProtoTrait -> XPType
-regularXP p | isJust (ability p) = f p
-        | isJust (art p) = f p
-        | isJust (spell p) = f p
-        | otherwise = 0
-        where f = fromMaybe 0 . xp 
+regularXP p = g (protoTrait p) 
+     where g (AbilityKey _) = x
+           g (ArtKey _) = x
+           g (SpellKey _ _ _) = x
+           g _ = 0
+           x = fromMaybe 0 $ xp p
