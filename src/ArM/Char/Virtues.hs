@@ -30,6 +30,7 @@ module ArM.Char.Virtues (
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
+import ArM.Types.TraitKey
 import ArM.Types.Aging
 import ArM.Helper
 import ArM.GameRules
@@ -49,11 +50,11 @@ import Data.Maybe
 
 vl2 :: [ ( String, VF -> [ ProtoTrait ] ) ]
 vl2 = [ ( "Puissant (art)",
-         \ x -> [ defaultPT { protoTrait = ArtKey $ vfDetail x, bonusScore = Just 3 } ] )
+         \ x -> [ defaultPT { protoTrait = artKey $ vfDetail x, bonusScore = Just 3 } ] )
      , ( "Puissant (ability)",
               \ x -> [ defaultPT { protoTrait = AbilityKey $ vfDetail x, bonusScore = Just 2 } ] )
      , ( "Affinity with (art)",
-              \ x -> [ defaultPT { protoTrait = ArtKey $ vfDetail x, multiplyXP = Just 1.5 } ] )
+              \ x -> [ defaultPT { protoTrait = artKey $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Affinity with (ability)",
               \ x -> [ defaultPT { protoTrait = AbilityKey $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Strong Faerie Blood",

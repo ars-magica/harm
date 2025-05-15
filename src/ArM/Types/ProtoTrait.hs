@@ -40,6 +40,7 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.Trait
+import ArM.Types.TraitKey
 import ArM.Types.HarmObject
 import ArM.Types.Aging
 import ArM.Types.Lab
@@ -82,12 +83,10 @@ data ProtoTrait = ProtoTrait
     , confidence :: Maybe String  -- ^ confidence, true faith, or similar
     , reputation :: Maybe String  -- ^ reputation contents
     , other :: Maybe String       -- ^ other trait, e.g. warping or decrepitude
-    , strait :: Maybe String      -- ^ special trait, like Longevity Potion
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
     , lab :: Maybe Lab            -- ^ Possesion includes weapon, vis, equipment, etc.
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
-    , protoTraitKey :: TraitKey
     , spec :: Maybe String        -- ^ specialisation of an ability
     , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
     , levelCap :: Maybe Int    -- ^ cap on advancement
@@ -122,12 +121,10 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , confidence = Nothing
                              , reputation = Nothing
                              , other = Nothing
-                             , strait = Nothing
                              , aging = Nothing
                              , possession = Nothing
                              , lab = Nothing
                              , combat = Nothing
-                             , protoTraitKey = NoTrait
                              , spec = Nothing
                              , appliesTo = Nothing
                              , levelCap = Nothing
@@ -151,15 +148,18 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
 parseAbilityKey :: Object -> Parser TraitKey
 parseAbilityKey v = AbilityKey <$> v .:  "ability"
 parseArtKey :: Object -> Parser TraitKey
-parseArtKey v = ArtKey <$> v .:  "art"
+parseArtKey v = artKey <$> v .:  "art"
 parseVirtueKey :: Object -> Parser TraitKey
 parseVirtueKey v = VFKey <$> v .:  "virtue" <*> v .:? "detail" .!= ""
 parseFlawKey :: Object -> Parser TraitKey
 parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? "detail" .!= ""
+parseCharKey :: Object -> Parser TraitKey
+parseCharKey v = CharacteristicKey <$> v .: "characteristic" 
 
 parseKey :: Object -> Parser TraitKey
-parseKey v = foldr mplus (pure NoTrait)
-       [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v) ]
+parseKey v = foldr1 mplus 
+       [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
+       , (parseCharKey v) ]
 
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
@@ -170,12 +170,10 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "confidence"
         <*> v .:?  "reputation"
         <*> v .:?  "other"
-        <*> v .:?  "specialTrait"
         <*> v .:?  "aging"
         <*> v .:?  "possession"
         <*> v .:?  "lab"
         <*> v .:?  "combat"
-        <*> return NoTrait
         <*> v .:?  "spec"
         <*> v .:?  "appliesTo"
         <*> v .:?  "levelCap"
@@ -268,8 +266,7 @@ showPT _ p
        | aging p /= Nothing = show (fromJust $ aging p)
        | other p /= Nothing = 
                fromJust (other p) ++ " " ++ show ( fromMaybe 0 ( points p ) )
-       | strait p /= Nothing = fromJust (strait p) 
-       | otherwise  = error $ "No Trait for this ProtoTrait (showPT) " ++ (show $ protoTrait p)
+       | otherwise  = ttrace $ "No Trait for this ProtoTrait (showPT) " ++ (show $ protoTrait p)
 
 
 instance Ord ProtoTrait where
@@ -294,7 +291,6 @@ instance TraitClass ProtoTrait where
        | lab p /= Nothing = traitKey $ fromJust $ lab p
        | combat p /= Nothing = traitKey $ fromJust $ combat p
        | aging p /= Nothing = AgeKey
-       | strait p /= Nothing = trace (show p) $ error "No strait TraitKey"
        | otherwise  = trace (show p) $ error "No Trait for this ProtoTrait (traitKey)"
 
    toTrait p 

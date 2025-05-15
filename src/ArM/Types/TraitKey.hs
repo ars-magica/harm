@@ -20,11 +20,14 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..), isVF ) where
+module ArM.Types.TraitKey ( TraitKey(..), isVF, artKey ) where
 
 import Data.Maybe
 import Data.Aeson
 import GHC.Generics
+
+artKey :: String -> TraitKey
+artKey = ArtKey . take 2
 
 -- | A unique identifier for traits.
 -- It implement the `Ord` class, with canonical ordering on characteristics
@@ -38,7 +41,6 @@ data TraitKey = AbilityKey String
            | VFKey String String
            | ConfidenceKey String
            | OtherTraitKey String
-           | SpecialKey String
            | PossessionKey String
            | EstateKey String
            | CombatKey String
@@ -56,7 +58,6 @@ instance Show TraitKey where
            show (VFKey x y) = x ++ " [" ++ y ++ "]"
            show (ConfidenceKey x) = x
            show (OtherTraitKey x) = x
-           show (SpecialKey x) = x ++ " (special)"
            show (PossessionKey x) = "Possession: " ++ x
            show (EstateKey x) = "Estate: " ++ x
            show (CombatKey x) = "Combat Option: " ++ x
@@ -72,7 +73,6 @@ instance Ord TraitKey where
    compare (VFKey x1 x2) (VFKey y1 y2) = compare (x1,x2) (y1,y2)
    compare (ConfidenceKey x) (ConfidenceKey y) = compare x y
    compare (OtherTraitKey x) (OtherTraitKey y) = compare x y
-   compare (SpecialKey x) (SpecialKey y) = compare x y
    compare (PossessionKey x) (PossessionKey y) = compare x y
    compare (EstateKey x) (EstateKey y) = compare x y
    compare (CombatKey x) (CombatKey y) = compare x y
@@ -96,8 +96,6 @@ instance Ord TraitKey where
    compare _ (ConfidenceKey _) = GT
    compare (OtherTraitKey _) _ = LT
    compare _ (OtherTraitKey _) = GT
-   compare (SpecialKey _) _ = LT
-   compare _ (SpecialKey _) = GT
    compare (PossessionKey _) _ = LT
    compare _ (PossessionKey _) = GT
    compare (EstateKey _) _ = LT
@@ -193,7 +191,6 @@ convertProtoKey p
   | isJust (vf p) = VFKey (fromJust $ vf p) (fromMaybe "" $ detail p)
   | isJust (confidence p) = ConfidenceKey (fromJust $ confidence p) 
   | isJust (other p) = OtherTraitKey (fromJust $ other p) 
-  | isJust (special p) = SpecialKey (fromJust $ special p) 
   | isJust (possession p) = PossessionKey (fromJust $ possession p) 
   | isJust (lab p) = EstateKey (fromJust $ lab p) 
   | isJust (combat p) = CombatKey (fromJust $ combat p) 
