@@ -20,7 +20,7 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..), isVF, artKey, artLongName ) where
+module ArM.Types.TraitKey ( TraitKey(..), isSpell, isVF, artKey, artLongName ) where
 
 import Data.Maybe
 import Data.List
@@ -197,6 +197,9 @@ convertProtoKey p
   | isJust (combat p) = CombatKey (fromJust $ combat p) 
   | otherwise = NoTrait
 
+isSpell :: TraitKey -> Bool
+isSpell (SpellKey _ _ _) = True
+isSpell  _  = False
 isVF :: TraitKey -> Bool
 isVF (VFKey _ _) = True
 isVF  _  = False
