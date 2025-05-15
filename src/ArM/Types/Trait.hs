@@ -17,37 +17,40 @@
 -- for `show`, sorting, and JSON.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Trait ( TraitKey(..)
-                            , Trait(..)
-                            , Ability(..)
-                            , Characteristic(..)
-                            , Art(..)
-                            , VF(..)
-                            , Spell(..)
-                            , PTrait(..)
-                            , OtherTrait(..)
-                            , Possession(..)
-                            , CombatOption(..)
-                            , Confidence(..)
-                            , Reputation(..)
-                            , Age(..)
-                            , TraitClass(..)
-                            , Enchantment(..)
-                            , MagicEffect(..)
-                            , (<:)
-                            , fote
-                            , sortTraits
-                            , visArt
-                            , isVis
-                            , isWeapon
-                            , isArmour
-                            , isAC
-                            , isMagic
-                            , isMundaneEquipment
-                            , isEquipment
-                            , isNone
-                            , effectRDT
-                            ) where
+module ArM.Types.Trait ( 
+         -- * The Trait Types
+         Trait(..)
+         , Ability(..)
+         , Characteristic(..)
+         , Art(..)
+         , VF(..)
+         , Spell(..)
+         , PTrait(..)
+         , OtherTrait(..)
+         , Possession(..)
+         , CombatOption(..)
+         , Confidence(..)
+         , Reputation(..)
+         , Age(..)
+         -- * Possessions
+         , Enchantment(..)
+         , MagicEffect(..)
+         , visArt
+         , isVis
+         , isWeapon
+         , isArmour
+         , isAC
+         , isMagic
+         , isMundaneEquipment
+         , isEquipment
+         , isNone
+         , effectRDT
+         -- * Convenience Functions
+         , TraitClass(..)
+         , (<:)
+         , fote
+         , sortTraits
+         ) where
 
 import ArM.GameRules
 import ArM.Helper
@@ -273,7 +276,7 @@ instance FromJSON CombatOption where
                     <*> v .:?  "shield"
                     <*> v .:?  "ability"
 -- |
--- = TraitClass 
+-- * TraitClass 
 
 -- | `TraitClass` provides the functions to get the search key (TraitKey),
 -- to wrap and unwrap traits in the generic `Trait` type, and to filter
@@ -391,8 +394,7 @@ instance TraitClass CombatOption where
     getTrait _ = Nothing
     toTrait = CombatOptionTrait
 
--- |
--- == Sorting 
+-- ** Sorting 
 
 (<:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
 (<:) p1 p2 = traitKey p1 < traitKey p2
@@ -407,8 +409,7 @@ sortTraits :: TraitClass t => [ t ] -> [ t ]
 sortTraits = sortBy f
        where f x y = compare (traitKey x) (traitKey y)
 
--- |
--- = Class instances
+-- ** Class instances
 
 instance FromJSON Ability
 instance FromJSON Characteristic 
