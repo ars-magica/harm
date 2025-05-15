@@ -319,6 +319,7 @@ instance TraitClass ProtoTrait where
             a4 = fmap CharacteristicTrait $ computeTrait p
    getTrait _ = Nothing
 
+{-
 computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
 computeTrait' NoTrait _ = Nothing
 computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
@@ -332,6 +333,7 @@ computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
                 }
       where (s,y) = getAbilityScore (xp p)
 computeTrait' _ _ = Nothing
+-}
 
 -- * Advancement - the TraitType class
 --
@@ -655,5 +657,7 @@ regularXP p = g (protoTrait p)
      where g (AbilityKey _) = x
            g (ArtKey _) = x
            g (SpellKey _ _ _) = x
-           g _ = 0
+           g _ = x0
+           x0 | isNothing (spell p) = 0
+              | otherwise = x= x
            x = fromMaybe 0 $ xp p

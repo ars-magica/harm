@@ -528,22 +528,22 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + From Spring 1229 - bought for 28pvf
     + Key: RegoL20Q9
 + *The Lives of Vermin* by Tormax of Tytalus (No Time)
-    + Animal Q12
+    + Animàl Q12
     + From Midsummer Fair 1244
     + Key: Lives of Vermin
 + *Hibernian Musings on the Hermetic Arts - Volume 1 Animal* by Maine Chleitigh ex Bonisagus (No Time)
-    + Animal Q14
+    + Animàl Q14
     + 2 copies
     + Key: AnimalQ14Maine
 + *The Beings of Eden* by Victoria of Merinita (No Time)
-    + Animal L15Q14
+    + Animàl L15Q14
     + Key: AnimalL15Q14
 + *The keeping of Bees* by Fedelmid An T-Eigse Measceal (No Time)
     + Animàl L10Q18
     + From Paruchia de Nerius Autumn 1227
     + Key: AnimalL10Q18
 + *An Apprentice Primer in Animal* by Sabastian ex Bonisagus (No Time)
-    + Animal L5Q15
+    + Animàl L5Q15
     + Key: AnimalL5Q15
 + *Hibernian Musings on the Hermetic Arts - Volume 2 Aquam* by Maine Chleitigh ex Bonisagus (No Time)
     + Aquam Q14

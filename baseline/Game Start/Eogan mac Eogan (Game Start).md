@@ -153,21 +153,21 @@ Weakness [for Dogs] (-1),
         + Personality Trait: Obedient -3
         + Personality Trait: Uncertain Faith 1
         + Reputation: Disloyal [Covenant and allies] 15xp
-        + Flaw: Ability Block (-1)
-        + Virtue: Affinity with (ability) (1)
-        + Virtue: Alluring to Magical Beings (1)
-        + Flaw: Ambitious (-3)
-        + Virtue: Animal Ken (1)
-        + Flaw: Black Sheep at the Covenant (-3)
-        + Virtue: Covenfolk (0)
-        + Virtue: Death Prophecy (3)
-        + Virtue: Independent Study (1)
-        + Flaw: Lesser Malediction: Vertigo (-1)
-        + Virtue: Puissant (ability) (1)
-        + Virtue: Unaging (1)
-        + Flaw: Uncertain Faith (-1)
-        + Virtue: Warrior (1)
-        + Flaw: Weakness (-1)
+        + Virtue/Flaw: Ability Block: for Letters (-1)
+        + Virtue/Flaw: Affinity with (ability): Animal Handling (1)
+        + Virtue/Flaw: Alluring to Magical Beings (1)
+        + Virtue/Flaw: Ambitious: train the greatest hounds of Ireland (-3)
+        + Virtue/Flaw: Animal Ken (1)
+        + Virtue/Flaw: Black Sheep at the Covenant (-3)
+        + Virtue/Flaw: Covenfolk (0)
+        + Virtue/Flaw: Death Prophecy (3)
+        + Virtue/Flaw: Independent Study (1)
+        + Virtue/Flaw: Lesser Malediction: Vertigo (-1)
+        + Virtue/Flaw: Puissant (ability): Animal Handling (1)
+        + Virtue/Flaw: Unaging (1)
+        + Virtue/Flaw: Uncertain Faith (-1)
+        + Virtue/Flaw: Warrior (1)
+        + Virtue/Flaw: Weakness: for Dogs (-1)
     + Inferred traits
         + Ability: Animal Handling 0xp;  x1.5xp
         + Ability: Animal Handling 0xp Bonus +2; 
