@@ -283,7 +283,7 @@ instance TraitClass ProtoTrait where
        | lab p /= Nothing = traitKey $ fromJust $ lab p
        | combat p /= Nothing = traitKey $ fromJust $ combat p
        | aging p /= Nothing = AgeKey
-       | otherwise  = error "No Trait for this ProtoTrait (traitKey)"
+       | otherwise  = trace (show p) $ error "No Trait for this ProtoTrait" 
 
    toTrait p 
       | isJust p' = fromJust p'
