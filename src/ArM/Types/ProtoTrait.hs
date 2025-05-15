@@ -127,29 +127,42 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , ptComment = Nothing
                              }
 
+-- | Parse an ability key from a JSON object
 parseAbilityKey :: Object -> Parser TraitKey
 parseAbilityKey v = AbilityKey <$> v .:  "ability"
+-- | Parse an art key from a JSON object
 parseArtKey :: Object -> Parser TraitKey
 parseArtKey v = artKey <$> v .:  "art"
+-- | Parse a virtue key from a JSON object
 parseVirtueKey :: Object -> Parser TraitKey
 parseVirtueKey v = VFKey <$> v .:  "virtue" <*> v .:? "detail" .!= ""
+-- | Parse a flaw key from a JSON object
 parseFlawKey :: Object -> Parser TraitKey
 parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? "detail" .!= ""
+-- | Parse a characteristic key from a JSON object
 parseCharKey :: Object -> Parser TraitKey
 parseCharKey v = CharacteristicKey <$> v .: "characteristic" 
+-- | Parse a personality trait key from a JSON object
 parsePTraitKey :: Object -> Parser TraitKey
 parsePTraitKey v = PTraitKey <$> v .: "ptrait" 
+-- | Parse a confidence (like) key from a JSON object
 parseConfidenceKey :: Object -> Parser TraitKey
 parseConfidenceKey v = ConfidenceKey <$> v .: "confidence" 
+-- | Parse an OtherTrait key from a JSON object
 parseOtherTraitKey :: Object -> Parser TraitKey
 parseOtherTraitKey v = OtherTraitKey <$> v .: "other" 
+-- | Parse a Reputation key from a JSON object
 parseReputationKey :: Object -> Parser TraitKey
 parseReputationKey v = ReputationKey <$> v .: "reputation"  <*> v .:? "locale" .!= "--"
+-- | Parse a Spell key from a JSON object
 parseSpellKey :: Object -> Parser TraitKey
 parseSpellKey v = SpellKey <$> fmap fote (v .:? "tefo" .!= "TeFo")
                            <*> v .:? "level" .!= 0
                            <*> v .: "spell"  
 
+-- | Parse a TraitKey from a JSON object.
+-- Not all trait types are supported.  This is used only as an auxiliary for 
+-- parsing ProtoTrait objects.
 parseKey :: Object -> Parser TraitKey
 parseKey v = foldr mplus (pure NoTrait)
           [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
