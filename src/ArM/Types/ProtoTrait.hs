@@ -46,8 +46,10 @@ import ArM.Types.Lab
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Types
 import Data.Maybe 
 import Data.List
+import Control.Monad
 
 import ArM.Debug.Trace
 import ArM.DB.Weapon
@@ -74,11 +76,8 @@ findTrait k = find ( (k==) . traitKey )
 -- types.  This is the case, in particular, for the first quite a few fields which
 -- give the name of the trait of the relevant type only. 
 data ProtoTrait = ProtoTrait
-    { ability :: Maybe String  -- ^ ability name 
-    , virtue :: Maybe String   -- ^ virtue name
-    , flaw :: Maybe String     -- ^ flaw name
+    { protoTrait :: TraitKey
     , characteristic :: Maybe String  -- ^ characteristic name
-    , art :: Maybe String  -- ^ art name
     , spell :: Maybe String  -- ^ spell name
     , ptrait :: Maybe String  -- ^ personality trait name
     , confidence :: Maybe String  -- ^ confidence, true faith, or similar
@@ -91,7 +90,6 @@ data ProtoTrait = ProtoTrait
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
     , protoTraitKey :: TraitKey
     , spec :: Maybe String        -- ^ specialisation of an ability
-    , detail :: Maybe String      -- ^ detail (options) for a virtue or flaw
     , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
     , levelCap :: Maybe Int    -- ^ cap on advancement
     , level :: Maybe Int       -- ^ level of a spell
@@ -119,11 +117,8 @@ data ProtoTrait = ProtoTrait
 -- | Default ProtoTrait object, used internally for step-by-step construction of
 -- new objects.
 defaultPT :: ProtoTrait
-defaultPT = ProtoTrait { ability = Nothing
-                             , virtue = Nothing
-                             , flaw = Nothing
+defaultPT = ProtoTrait { protoTrait = NoTrait
                              , characteristic = Nothing
-                             , art = Nothing
                              , spell = Nothing
                              , ptrait = Nothing
                              , confidence = Nothing
@@ -136,7 +131,6 @@ defaultPT = ProtoTrait { ability = Nothing
                              , combat = Nothing
                              , protoTraitKey = NoTrait
                              , spec = Nothing
-                             , detail = Nothing
                              , appliesTo = Nothing
                              , levelCap = Nothing
                              , level = Nothing
@@ -156,14 +150,24 @@ defaultPT = ProtoTrait { ability = Nothing
                              , ptComment = Nothing
                              }
 
+parseAbilityKey :: Object -> Parser TraitKey
+parseAbilityKey v = AbilityKey <$> v .:  "ability"
+parseArtKey :: Object -> Parser TraitKey
+parseArtKey v = ArtKey <$> v .:  "art"
+parseVirtueKey :: Object -> Parser TraitKey
+parseVirtueKey v = VFKey <$> v .:  "virtue" <*> v .:? detail .!= ""
+parseFlawKey :: Object -> Parser TraitKey
+parseFlawKey v = VFKey <$> v .:  "flaw" <*> v .:? detail .!= ""
+
+parseKey :: Object -> Parser TraitKey
+parseKey v = foldl mplus (pure NoTrait)
+       [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v) ]
+
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
     parseJSON = withObject "ProtoTrait" $ \v -> ProtoTrait
-        <$> v .:?  "ability"
-        <*> v .:?  "virtue"
-        <*> v .:?  "flaw"
+        <$> parseKey v
         <*> v .:?  "characteristic"
-        <*> v .:?  "art"
         <*> v .:?  "spell"
         <*> v .:?  "ptrait"
         <*> v .:?  "confidence"
@@ -176,7 +180,6 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "combat"
         <*> return NoTrait
         <*> v .:?  "spec"
-        <*> v .:?  "detail"
         <*> v .:?  "appliesTo"
         <*> v .:?  "levelCap"
         <*> v .:?  "level"
@@ -285,15 +288,12 @@ showAging p | Nothing == aging p = ""
 
 instance TraitClass ProtoTrait where
    traitKey p
-       | ability p /= Nothing = AbilityKey $ fromJust $ ability p 
+       | isJust (protoTrait p) = protoTrait p
        | characteristic p /= Nothing = CharacteristicKey $ fromJust $ characteristic p 
-       | art p /= Nothing = ArtKey $ take 2 $ fromJust $ art p 
        | spell p /= Nothing = SpellKey (fote $ fromMaybe "TeFo" $ tefo p)
                            (fromMaybe 0 $ level p ) ( fromJust $ spell p ) 
        | ptrait p /= Nothing = PTraitKey $ fromJust $ ptrait p
        | reputation p /= Nothing = ReputationKey (fromJust (reputation p)) (fromMaybe "" (locale p))
-       | virtue p /= Nothing = VFKey ( fromJust (virtue p) ) (fromMaybe "" $ detail p)
-       | flaw p /= Nothing = VFKey ( fromJust (flaw p) ) (fromMaybe "" $ detail p)
        | confidence p /= Nothing = ConfidenceKey $ fromMaybe "Confidence" $ confidence p
        | other p /= Nothing = OtherTraitKey $ fromJust $ other p
        | possession p /= Nothing = traitKey $ fromJust $ possession p
