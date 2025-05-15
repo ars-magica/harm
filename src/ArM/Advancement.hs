@@ -294,10 +294,10 @@ bookRepeat' _ step = step
 valRepeat :: AdvancementStep -> AdvancementStep
 valRepeat (CharStep c Nothing) = (CharStep c Nothing)
 valRepeat (CharStep c (Just ad)) = (CharStep c (Just ad'))
-   where bks = sort $ filterNothing $ map ( maybeHead . readBook ) ads
-         bk = readBook ad'
+   where -- bks = sort $ filterNothing $ map ( maybeHead . readBook ) ads
+         -- bk = readBook ad'
          ad' = ad
-         ads = pastAdvancement c
+         -- ads = pastAdvancement c
 valRepeat step = step
 
 valRead :: AugmentedAdvancement -> AugmentedAdvancement 

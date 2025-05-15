@@ -190,8 +190,11 @@ readStats "" = trace "empty book stats" (Nothing, Nothing)
 readStats "Spell" = trace "empty book stats" (Nothing, Nothing)
 readStats (' ':xs) = readStats xs
 readStats ('Q':xs) = (Nothing, Just $ readMaybeInt xs)
-readStats ('L':xs) = (Just $ readMaybeInt y, Just $ readMaybeInt z)
-        where y:z:_ = map unpack $ splitOn "Q" $ pack xs
+readStats ('L':xs) = (lvl ys, ql ys)
+        where ys = map ( readMaybeInt . unpack ) $ splitOn "Q" $ pack xs
+              lvl = maybeHead 
+              ql (_:x:_) = Just x
+              ql _ = Nothing
 readStats x = trace ( "no parse: " ++ x ) (Nothing, Nothing)
 
 readMaybeInt :: String -> Int

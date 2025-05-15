@@ -20,7 +20,7 @@ module ArM.Char.Advancement ( prepareAdvancement, validate ) where
 
 import ArM.Char.Character
 import ArM.Types.ProtoTrait
-import ArM.Types.Library
+-- import ArM.Types.Library
 import ArM.Types
 import ArM.GameRules
 
@@ -85,7 +85,7 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
 inferSQ :: Character -> AugmentedAdvancement -> AugmentedAdvancement
 inferSQ cs ad = ad { inferredAdv = aa { advSQ = sq, advBonus = vfBonusSQ vf ad } }
         where vf = vfList $ characterSheet cs
-              (sq,cap) = getSQ ad
+              (sq,_) = getSQ ad
               aa = inferredAdv ad
 -- Infer SQ for Exposure = 2
 -- Infer SQ for reading from book
@@ -108,8 +108,8 @@ getSQ a | isExposure ad = (Just 2,Nothing)
         | otherwise = mstat
    where ad = explicitAdv a
          mstat = (sourceQuality ad,sourceCap ad)
-         rd [] = (Nothing,Nothing)
-         rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
+         -- rd [] = (Nothing,Nothing)
+         -- rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
          -- bks | usd == [] = []
              -- | otherwise = bookStats $ head usd
          -- usd = bookUsed a
