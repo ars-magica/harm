@@ -53,14 +53,6 @@ inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
            h =  flawlessSpells cs 
 
 
--- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
--- VF objects
-getVF :: [ ProtoTrait ] -> [ VF ]
-getVF [] = []
-getVF (p:ps) | isVF (protoTrait p) = g p:getVF ps
-             | otherwise = getVF ps
-    where g = fromJust . computeTrait
-
 -- |
 -- Infer Decrepitude points from aging points on characteristics
 inferDecrepitude :: [ ProtoTrait ] -> [ ProtoTrait ]

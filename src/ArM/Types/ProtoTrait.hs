@@ -26,7 +26,6 @@
 module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , ProtoTrait(..)
                       , TraitKey(..)
-                      , TraitType(..)
                       , advanceTraitList
                       , defaultPT
                       , spellKeyName
@@ -35,6 +34,7 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , findTrait
                       , processChar
                       , regularXP
+                      , getVF
                       ) where
 
 import ArM.GameRules
@@ -291,10 +291,7 @@ instance TraitClass ProtoTrait where
    getTrait _ = Nothing
 
 computeList :: [ ProtoTrait -> Maybe Trait ]
-computeList = [ fmap AbilityTrait . computeTrait
-              , fmap ArtTrait . computeTrait
-              , fmap VFTrait . computeTrait
-              , fmap CharacteristicTrait . computeTrait
+computeList = [ \ p -> computeTrait' (traitKey p) p
               , fmap PTraitTrait . computeTrait
               , fmap ConfidenceTrait . computeTrait 
               , fmap CombatOptionTrait . combat
@@ -307,7 +304,6 @@ computeList = [ fmap AbilityTrait . computeTrait
               ]
 
 
-{-
 computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
 computeTrait' NoTrait _ = Nothing
 computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
@@ -320,8 +316,32 @@ computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
                 , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
                 }
       where (s,y) = getAbilityScore (xp p)
+computeTrait' vf@(VFKey _ _) p = fmap VFTrait $ computeVF vf p
+computeTrait' (CharacteristicKey x) p = Just $ CharacteristicTrait $ Characteristic
+                { characteristicName = x
+                , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
+                , agingPoints = fromMaybe 0 (agingPts p)
+                , charBonusList = charBonuses p }
+computeTrait' (ArtKey nam) p = Just $ ArtTrait $
+                Art { artName = artLongName nam
+                    , artXP = x
+                    , artScore = s
+                    , artExcessXP = y
+                    , artBonus = fromMaybe 0 $ bonusScore p
+                    , artMultiplier = fromMaybe 1.0 $ multiplyXP p
+                    }
+     where   y = x - pyramidScore s
+             s = scoreFromXP x
+             x = fromMaybe 0 (xp p) 
 computeTrait' _ _ = Nothing
--}
+
+computeVF :: TraitKey -> ProtoTrait -> Maybe VF
+computeVF (VFKey x d) p = Just $ VF
+                    { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
+                    , vfAppliesTo = Nothing
+                    , vfMultiplicity = fromMaybe 1 $ multiplicity p
+                    , vfComment = fromMaybe "" $ ptComment p }
+computeVF _ _ = Nothing
 
 -- * Advancement - the TraitType class
 --
@@ -346,13 +366,7 @@ class TraitType t where
     advanceTrait _ x = x
 
 instance TraitType Characteristic where
-    computeTrait p = f (protoTrait p)
-       where f (CharacteristicKey x) = Just $ Characteristic
-                { characteristicName = x
-                , charScore = fromMaybe 0 (score p) + fromMaybe 0 (bonusScore p)
-                , agingPoints = fromMaybe 0 (agingPts p)
-                , charBonusList = charBonuses p }
-             f _ = Nothing
+    computeTrait _ = error "Characteristic computeTrait not implemented"
     advanceTrait a =  agingChar apts . newCharScore newscore . ncb (charBonuses a) 
        where newscore = score a
              apts = agingPts a
@@ -375,27 +389,10 @@ newCharScore  Nothing x = x
 newCharScore  (Just s) x = x { charScore = s }
 
 instance TraitType VF where
-    computeTrait p = f (protoTrait p)
-       where f (VFKey x d) = Just $ VF 
-                    { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
-                    , vfAppliesTo = Nothing
-                    , vfMultiplicity = fromMaybe 1 $ multiplicity p
-                    , vfComment = fromMaybe "" $ ptComment p }
-             f _ = Nothing
+    computeTrait _ = error "computeTrait VF not implemented"
     advanceTrait a x = x { vfMultiplicity = vfMultiplicity x + (fromMaybe 1 $ multiplicity a) }
 instance TraitType Ability where
-    computeTrait p = f (protoTrait p)
-       where f (AbilityKey x) = Just $
-               Ability { abilityName = x
-                    , speciality = spec p
-                    , abilityXP = fromMaybe 0 (xp p)
-                    , abilityScore = s
-                    , abilityExcessXP = y
-                    , abilityBonus = fromMaybe 0 $ bonusScore p
-                    , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
-                    }
-             f _ = Nothing
-             (s,y) = getAbilityScore (xp p)
+    computeTrait _ = error "computeTrait Ability not implemented"
     advanceTrait a x = 
           updateBonus (bonusScore a) $ um (multiplyXP a) $
           updateAbilitySpec (spec a) $ updateAbilityXP lim y x
@@ -405,19 +402,7 @@ instance TraitType Ability where
             um abm ab = ab { abilityMultiplier = fromMaybe 1.0 abm }
             lim = levelCap a
 instance TraitType Art where
-    computeTrait p = f (protoTrait p)
-       where f (ArtKey nam) = Just $
-                Art { artName = artLongName nam
-                    , artXP = x
-                    , artScore = s
-                    , artExcessXP = y
-                    , artBonus = fromMaybe 0 $ bonusScore p
-                    , artMultiplier = fromMaybe 1.0 $ multiplyXP p
-                    }
-             f _ = Nothing
-             y = x - pyramidScore s
-             s = scoreFromXP x
-             x = fromMaybe 0 (xp p) 
+    computeTrait _ = error "computeTrait Art not implemented"
     advanceTrait a x = 
           updateArtBonus (bonusScore a) $ um (multiplyXP a) $ 
           updateArtXP lim y x 
@@ -529,11 +514,11 @@ instance TraitType Possession where
         where  m = fmap count $ possession  p
     computeTrait = possession
 instance TraitType Lab where
-    advanceTrait p x = fromMaybe x $ computeTrait p
+    advanceTrait p x = fromMaybe x $ lab p
     computeTrait = lab
 
 instance TraitType CombatOption where
-    advanceTrait p _ = fromJust $ computeTrait p
+    advanceTrait p _ = fromJust $ combat p
     computeTrait = combat 
 instance TraitType Age where
     advanceTrait p = advanceAge ag
@@ -647,3 +632,8 @@ regularXP p = g (protoTrait p)
            x0 | isNothing (spell p) = 0
               | otherwise = x
            x = fromMaybe 0 $ xp p
+
+-- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to
+-- VF objects
+getVF :: [ ProtoTrait ] -> [ VF ]
+getVF = filterNothing . map ( \ x -> computeVF (protoTrait x) x )
