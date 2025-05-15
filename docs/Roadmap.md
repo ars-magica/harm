@@ -87,7 +87,6 @@ title:
 			+ [ ] covenant advancement may depend on character advancement
 			+ [ ] character advancement depends on previous covenant state for book availability
 			+ [ ] new books are created by characters and may propagate into the covenant advancement, augmenting the library
-		+ [x] review use of ID
 	+ [ ] Grimoire
 	+ [ ] Initiation scripts
 	+ [ ] group and  sort books in library
@@ -110,14 +109,9 @@ title:
 		+ [ ] Parse invalid ProtoTrait as KeyPairList and display error in advancement log
 + [ ] Phase 4. Polish
 	+ [ ] Break up possession
-		+ [ ] different constructors for weapon and item
-		+ [ ] parse JSON with different constructors
 		+ [ ] support book possession
 		+ [ ] Get book from own CharacterState - when Possession supports book
 	+ [ ] Mark house virtues, mysteries etc
-	+ [ ] Refactor and document code
-		+ [ ] Use a single ProtoType field of type KeyTrait instead of a dozen Maybe Strings
-		+ [ ] Draw a flow chart of the character and covenant processing
 	+ [ ] P/G Char Gen
 	+ [ ] Remove trait when advancing
 	+ [ ] More user friendly sheets
@@ -131,7 +125,6 @@ title:
 	+ [ ] Print weapon tables etc
 	+ [ ] More [[Validation Rules]]
 + [ ] Characters staying at a foreign covenant
-+ [ ] Laboratory
 + [ ] Familiar
 + [ ] Talisman (and other enchanted devices)
 	+ [ ] Greater Enchanted Devices have a state - powers may be added
