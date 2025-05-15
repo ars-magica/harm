@@ -66,7 +66,7 @@ data CharacterSheet = CharacterSheet
 characterLab :: CharacterLike c => c -> Maybe Lab
 characterLab = f . labList . characterSheet
    where f [] = Nothing
-         f (lab:_) = Just lab
+         f (lb:_) = Just lb
 
 -- | A default CharacterSheet for internal use.
 defaultSheet :: CharacterSheet 
@@ -230,10 +230,10 @@ labTotalBonus' :: Maybe Lab -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
-labTotalBonus' (Just lab) (ArtKey te) (ArtKey fo) = g + t + f
-    where g = labAura (labState lab) + gq lab
-          t = getLabArt te lab 
-          f = getLabArt fo lab
+labTotalBonus' (Just lb) (ArtKey te) (ArtKey fo) = g + t + f
+    where g = labAura (labState lb) + gq lb
+          t = getLabArt te lb 
+          f = getLabArt fo lb
 labTotalBonus' _ _ _ = 0
 
 -- | Return the Lab Total a given TeFo combo without lab bonuses.
@@ -352,7 +352,7 @@ charTeacherSQ :: CharacterLike c => c -> Int
 charTeacherSQ cs = 3 + com + tch
     where sheet = characterSheet cs
           com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          (tch,tspec) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
+          (tch,_) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
           -- add good teacher
           -- subtract flaws
           -- add speciality
