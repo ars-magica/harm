@@ -78,13 +78,11 @@ findTrait k = find ( (k==) . traitKey )
 -- give the name of the trait of the relevant type only. 
 data ProtoTrait = ProtoTrait
     { protoTrait :: TraitKey
-    , reputation :: Maybe String  -- ^ reputation contents
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
     , lab :: Maybe Lab            -- ^ Possesion includes weapon, vis, equipment, etc.
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
     , spec :: Maybe String        -- ^ specialisation of an ability
-    , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
     , levelCap :: Maybe Int    -- ^ cap on advancement
     , mastery :: Maybe [ String ]   -- ^ mastery options for a spell
     , flawless :: Maybe Bool   -- ^ for a spell, if flawless magic applies
@@ -109,13 +107,11 @@ data ProtoTrait = ProtoTrait
 -- new objects.
 defaultPT :: ProtoTrait
 defaultPT = ProtoTrait { protoTrait = NoTrait
-                             , reputation = Nothing
                              , aging = Nothing
                              , possession = Nothing
                              , lab = Nothing
                              , combat = Nothing
                              , spec = Nothing
-                             , appliesTo = Nothing
                              , levelCap = Nothing
                              , mastery = Nothing
                              , flawless = Nothing
@@ -164,13 +160,11 @@ instance ToJSON ProtoTrait
 instance FromJSON ProtoTrait where
     parseJSON = withObject "ProtoTrait" $ \v -> ProtoTrait
         <$> parseKey v
-        <*> v .:?  "reputation"
         <*> v .:?  "aging"
         <*> v .:?  "possession"
         <*> v .:?  "lab"
         <*> v .:?  "combat"
         <*> v .:?  "spec"
-        <*> v .:?  "appliesTo"
         <*> v .:?  "levelCap"
         <*> v .:?  "mastery"
         <*> v .:?  "flawless"
