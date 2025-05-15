@@ -292,12 +292,9 @@ instance TraitClass ProtoTrait where
 
 computeList :: [ ProtoTrait -> Maybe Trait ]
 computeList = [ \ p -> computeTrait' (traitKey p) p
-              , fmap PTraitTrait . computeTrait
-              , fmap ConfidenceTrait . computeTrait 
               , fmap CombatOptionTrait . combat
               , fmap EstateTrait . lab
               , fmap PossessionTrait . possession
-              , fmap OtherTraitTrait . computeTrait
               , fmap AgeTrait . computeTrait
               , fmap SpellTrait . computeTrait
               , fmap ReputationTrait . computeTrait
@@ -333,6 +330,17 @@ computeTrait' (ArtKey nam) p = Just $ ArtTrait $
      where   y = x - pyramidScore s
              s = scoreFromXP x
              x = fromMaybe 0 (xp p) 
+computeTrait' (PTraitKey nam) p = Just $ PTraitTrait $ PTrait { ptraitName = nam
+                           , pscore = fromMaybe 0 (score p) }
+computeTrait' (ConfidenceKey nam) p = Just $ ConfidenceTrait $ Confidence { cname = nam
+                           , cscore = fromMaybe 0 (score p) 
+                           , cpoints = fromMaybe 0 (points p)
+                           }
+computeTrait' (OtherTraitKey n) p = Just $ OtherTraitTrait
+                $ updateOther xpts $ OtherTrait { trait = n
+                             , otherScore = fromMaybe 0 (score p) 
+                             , otherExcess = 0 }
+         where xpts = fromMaybe 0 (points p) 
 computeTrait' _ _ = Nothing
 
 computeVF :: TraitKey -> ProtoTrait -> Maybe VF
@@ -456,18 +464,10 @@ instance TraitType Reputation where
     advanceTrait a x = updateRepXP y x
       where y = (repExcessXP x) + (fromMaybe 0 $ xp a)
 instance TraitType PTrait where
-    computeTrait p = f (protoTrait p)
-       where f (PTraitKey nam) = Just $ PTrait { ptraitName = nam
-                           , pscore = fromMaybe 0 (score p) }
-             f _ = Nothing
+    computeTrait _ = error "computeTrait personality trait not implemented"
     advanceTrait _ x = trace "Warning! Advancement not implemented for personality traits"  x
 instance TraitType Confidence where
-    computeTrait p = f (protoTrait p)
-       where f (PTraitKey nam) = Just $ Confidence { cname = nam
-                           , cscore = fromMaybe 0 (score p) 
-                           , cpoints = fromMaybe 0 (points p)
-                           }
-             f _ = Nothing
+    computeTrait _ = error "computeTrait Confidence not implemented"
     advanceTrait a = updateCScore (score a) . updateCPoints (points a) 
        where updateCScore Nothing x = x
              updateCScore (Just y) x = x { cscore = y }
@@ -475,12 +475,7 @@ instance TraitType Confidence where
              updateCPoints (Just y) x = x { cpoints = y + cpoints x }
 
 instance TraitType OtherTrait where
-    computeTrait p = f (protoTrait p)
-       where f (OtherTraitKey n) = Just $ updateOther xpts $ OtherTrait { trait = n
-                             , otherScore = fromMaybe 0 (score p) 
-                             , otherExcess = 0 }
-             f _ = Nothing
-             xpts = fromMaybe 0 (points p) 
+    computeTrait _ = error "computeTrait OtherTrait not implemented"
     advanceTrait a x = updateOther y x
       where y = otherExcess x + (fromMaybe 0 $ points a)
 
