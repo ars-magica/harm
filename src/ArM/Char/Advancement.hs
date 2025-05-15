@@ -119,7 +119,7 @@ getSQ a | isExposure ad = (Just 2,Nothing)
 
 -- | ProtoTrait representing the warping point from Longevity Ritual.
 lrWarping :: ProtoTrait
-lrWarping = defaultPT { other = Just "Warping"
+lrWarping = defaultPT { protoTrait = OtherTraitKey "Warping"
                       , points = Just 1
                       , ptComment = Just "from Longevity Ritual" }
 

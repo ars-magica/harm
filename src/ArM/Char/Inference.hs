@@ -68,7 +68,7 @@ inferDecrepitude [] = []
 inferDecrepitude (x:xs) 
    | apts == 0 = inferDecrepitude xs
    | otherwise = d:inferDecrepitude xs
-   where d = defaultPT { other = Just "Decrepitude",  points = Just apts }
+   where d = defaultPT { protoTrait = OtherTraitKey "Decrepitude",  points = Just apts }
          apts = fromMaybe 0 $ agingPts x
 
 
