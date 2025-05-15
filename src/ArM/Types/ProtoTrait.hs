@@ -157,9 +157,9 @@ parseCharKey :: Object -> Parser TraitKey
 parseCharKey v = CharacteristicKey <$> v .: "characteristic" 
 
 parseKey :: Object -> Parser TraitKey
-parseKey v = foldr1 mplus 
-       [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
-       , (parseCharKey v) ]
+parseKey v = foldr mplus (pure NoTrait)
+          [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
+          , (parseCharKey v) ]
 
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
@@ -232,8 +232,8 @@ showPT (AbilityKey x) p =
            "Ability: " ++ x  ++ showSpec p
            ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
-showPT (ArtKey x) p =
-           "Art: " ++ x ++ showXP p
+showPT art@(ArtKey _) p =
+           "Art: " ++ show art ++ showXP p
            ++ showBonusScore p ++ "; " ++ showMult p
 showPT (VFKey vfn d) p =
               "Virtue/Flaw: " ++ vfn ++ ds ++ " ("
@@ -417,7 +417,7 @@ instance TraitType Ability where
 instance TraitType Art where
     computeTrait p = f (protoTrait p)
        where f (ArtKey nam) = Just $
-                Art { artName = nam
+                Art { artName = artLongName nam
                     , artXP = x
                     , artScore = s
                     , artExcessXP = y

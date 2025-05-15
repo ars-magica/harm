@@ -20,9 +20,10 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..), isVF, artKey ) where
+module ArM.Types.TraitKey ( TraitKey(..), isVF, artKey, artLongName ) where
 
 import Data.Maybe
+import Data.List
 import Data.Aeson
 import GHC.Generics
 
@@ -51,7 +52,7 @@ data TraitKey = AbilityKey String
 instance Show TraitKey where
            show (CharacteristicKey x) = x
            show (AbilityKey x) = x
-           show (ArtKey x) = x
+           show (ArtKey x) = artLongName x
            show (SpellKey x y z) = z ++ show y ++ " " ++ x
            show (PTraitKey x) = "Personality Trait: " ++ x
            show (ReputationKey x y) = x ++ " [" ++ y ++ "]"
@@ -199,3 +200,12 @@ convertProtoKey p
 isVF :: TraitKey -> Bool
 isVF (VFKey _ _) = True
 isVF  _  = False
+
+
+arts :: [ String ]
+arts = [ "Creo", "Intellego", "Muto", "Perdo", "Rego", "Animàl", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
+
+
+artLongName :: String -> String
+artLongName st = fromMaybe "" $ find ( (st'==) . take 2 ) arts
+    where st' = take 2 st
