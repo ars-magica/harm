@@ -160,7 +160,7 @@ Weak Spontaneous Magic (0),
 | Muto | 8 | 0 | 0 |
 | Perdo | 8 | 0 | 0 |
 | Rego | 14 | 9 | 2 |
-| Animal | 5 | 2 | 0 |
+| Animàl | 5 | 2 | 0 |
 | Aquam | 6 | 0 | 0 |
 | Auram | 6 | 0 | 0 |
 | Corpus | 11 | 2 | 0 |
@@ -1164,7 +1164,7 @@ Total: 1249 levels of spells.
     + *Cautious Sorcerer*
     + Changing traits
         + Ability: SOCP Lore 2xp; 
-        + Virtue: Cautious Sorcerer (0)
+        + Virtue/Flaw: Cautious Sorcerer (0)
     + Validated: Correctly spent 2 xp.
 + Summer 1240 (2xp) LabWork (Exposure)
     + *Gift of Com. Magic Theory to 130xp*
@@ -1436,14 +1436,14 @@ Total: 1249 levels of spells.
     + *Good Teacher.*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Virtue: Good Teacher (0)
+        + Virtue/Flaw: Good Teacher (0)
     + Validated: Correctly spent 2 xp.
 + Winter 1232 (2xp) (1 years) Initiation (Exposure)
     + *Puissant SOCP Lore.*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Virtue: Puissant (ability) (0)
-        + Flaw: Vow (0) (Works a little like a restriction when broken.  Magic can be restored by appropriate penance.)
+        + Virtue/Flaw: Puissant (ability): SOCP Lore (0)
+        + Virtue/Flaw: Vow: against harming ordinary people (0) (Works a little like a restriction when broken.  Magic can be restored by appropriate penance.)
     + Inferred traits
         + Ability: SOCP Lore 0xp Bonus +2; 
         + Aging 1 years; apparent 1 years. No roll. 
@@ -1688,7 +1688,7 @@ Total: 1249 levels of spells.
 + Autumn 1223 (14+3xp) Reading
     + Uses *The Beings of Eden* by Victoria of Merinita (No Time)
     + Changing traits
-        + Art: Animal 17xp; 
+        + Art: Animàl 17xp; 
     + Validated: Correctly spent 17 xp.
     + Validated: Book AnimalL15Q14 is available.
 + Summer 1223 (2xp) LabWork (Exposure)

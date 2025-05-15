@@ -118,11 +118,11 @@ Warrior (1),
         + Ability: Native Language: Irish [Munster] 75xp; 
         + Personality Trait: Curious 3
         + Personality Trait: Helpful 1
-        + Virtue: Great Characteristic (1 x2)
-        + Flaw: Overconfident (-1)
-        + Flaw: Small Frame (-1)
-        + Flaw: Social handicap (-1)
-        + Virtue: Warrior (1)
+        + Virtue/Flaw: Great Characteristic: Dex (1 x2)
+        + Virtue/Flaw: Overconfident (-1)
+        + Virtue/Flaw: Small Frame (-1)
+        + Virtue/Flaw: Social handicap: Easily stressed and evasive in social contact (-1)
+        + Virtue/Flaw: Warrior (1)
     + Inferred traits
         + Characteristic: Dex 0
     + Warning: Undefined Source Quality. Spent 75xp.

@@ -113,9 +113,9 @@ Warrior (1),
         + Personality Trait: Brave -1
         + Personality Trait: Curious 3
         + Personality Trait: Trustful -3
-        + Flaw: Poor Characteristic (1)
-        + Flaw: Poor Characteristic (1)
-        + Virtue: Warrior (1)
+        + Virtue/Flaw: Poor Characteristic: Pre (1)
+        + Virtue/Flaw: Poor Characteristic: Pre (1)
+        + Virtue/Flaw: Warrior (1)
     + Inferred traits
         + Characteristic: Pre 0
         + Characteristic: Pre 0

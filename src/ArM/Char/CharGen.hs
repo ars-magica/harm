@@ -166,8 +166,7 @@ calculateVFCost a = ( sum $ filter (<0) rs, sum $ filter (>0) rs )
 
 -- | Extract the virtue/flaw cost from a ProtoType; zero for other types of traits.
 regCost :: ProtoTrait -> Int
-regCost p | isJust (virtue p) = m p * f p
-          | isJust (flaw p) = m p * f p
+regCost p | isVF (protoTrait p) = m p * f p
           | otherwise = 0
         where f = fromMaybe 0 . cost 
               m = fromMaybe 1 . multiplicity
@@ -215,7 +214,7 @@ calculateCharPoints = sum . map cScore . changes
 
 -- | Count characterics points spent on a trait
 cScore :: ProtoTrait -> Int
-cScore p | isJust (characteristic p) = f p
-         | otherwise = 0
-        where f = pyramidScore . fromMaybe 0 . score 
+cScore p = f (protoTrait p) p
+        where f (CharacteristicKey _) = pyramidScore . fromMaybe 0 . score 
+              f _ = \ _ -> 0
 

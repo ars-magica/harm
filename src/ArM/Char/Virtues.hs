@@ -30,6 +30,7 @@ module ArM.Char.Virtues (
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
+import ArM.Types.TraitKey
 import ArM.Types.Aging
 import ArM.Helper
 import ArM.GameRules
@@ -49,32 +50,32 @@ import Data.Maybe
 
 vl2 :: [ ( String, VF -> [ ProtoTrait ] ) ]
 vl2 = [ ( "Puissant (art)",
-         \ x -> [ defaultPT { art = Just $ vfDetail x, bonusScore = Just 3 } ] )
+         \ x -> [ defaultPT { protoTrait = artKey $ vfDetail x, bonusScore = Just 3 } ] )
      , ( "Puissant (ability)",
-              \ x -> [ defaultPT { ability = Just $ vfDetail x, bonusScore = Just 2 } ] )
+              \ x -> [ defaultPT { protoTrait = AbilityKey $ vfDetail x, bonusScore = Just 2 } ] )
      , ( "Affinity with (art)",
-              \ x -> [ defaultPT { art = Just $ vfDetail x, multiplyXP = Just 1.5 } ] )
+              \ x -> [ defaultPT { protoTrait = artKey $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Affinity with (ability)",
-              \ x -> [ defaultPT { ability = Just $ vfDetail x, multiplyXP = Just 1.5 } ] )
+              \ x -> [ defaultPT { protoTrait = AbilityKey $ vfDetail x, multiplyXP = Just 1.5 } ] )
      , ( "Strong Faerie Blood",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } 
-                     , defaultPT { ability = Just "Second Sight", xp = Just 5 } 
-                     , defaultPT { virtue = Just "Second Sight", cost = Just 0
+                     , defaultPT { protoTrait = AbilityKey $ "Second Sight", xp = Just 5 } 
+                     , defaultPT { protoTrait = VFKey "Second Sight" "", cost = Just 0
                                  , ptComment = Just "from Strong Faerie Blood" } 
                      ] )
      , ( "Faerie Blood",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } ] )
      , ( "Great Characteristic",
-              \ x -> [ defaultPT { characteristic = Just $ vfDetail x
+              \ x -> [ defaultPT { protoTrait = CharacteristicKey $ vfDetail x
                                , charBonuses = [(5,vfMultiplicity x)]  } ] )
      , ( "Poor Characteristic",
-              \ x -> [ defaultPT { characteristic = Just $ vfDetail x
+              \ x -> [ defaultPT { protoTrait = CharacteristicKey $ vfDetail x
                                , charBonuses = [(-5,0-vfMultiplicity x)]  } ] )
      ]
 
 
 vl1 :: [ ( String, VF -> [ ProtoTrait ] ) ]
-vl1 = [ (ab, \ _ -> [ defaultPT { ability = Just $ ab, xp = Just 5 } ] ) | ab <- snab ]
+vl1 = [ (ab, \ _ -> [ defaultPT { protoTrait = AbilityKey $ ab, xp = Just 5 } ] ) | ab <- snab ]
 
 vl3 :: [ ( String, VF -> Trait ) ]
 vl3 = [ ("Self-Confidence", \ _ -> confTrait 2 5 )

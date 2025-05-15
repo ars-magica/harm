@@ -57,8 +57,7 @@ inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
 -- VF objects
 getVF :: [ ProtoTrait ] -> [ VF ]
 getVF [] = []
-getVF (p:ps) | isJust (virtue p) = g p:getVF ps
-             | isJust (flaw p) = g p:getVF ps
+getVF (p:ps) | isVF (protoTrait p) = g p:getVF ps
              | otherwise = getVF ps
     where g = fromJust . computeTrait
 

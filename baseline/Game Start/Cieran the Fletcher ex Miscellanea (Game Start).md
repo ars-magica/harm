@@ -116,7 +116,7 @@ Weak Spontaneous Magic (0),
 | Muto | 0 | 0 | 0 |
 | Perdo | 8 | 0 | 0 |
 | Rego | 8 | 0 | 0 |
-| Animal | 0 | 0 | 0 |
+| Animàl | 0 | 0 | 0 |
 | Aquam | 0 | 0 | 0 |
 | Auram | 0 | 0 | 0 |
 | Corpus | 5 | 0 | 0 |
@@ -246,7 +246,7 @@ Total: 150 levels of spells.
         + Art: Muto 0xp; 
         + Art: Perdo 36xp; 
         + Art: Rego 36xp; 
-        + Art: Animal 0xp; 
+        + Art: Animàl 0xp; 
         + Art: Aquam 0xp; 
         + Art: Auram 0xp; 
         + Art: Corpus 15xp; 
@@ -331,23 +331,23 @@ Total: 150 levels of spells.
         + Personality Trait: Carefree 3
         + Personality Trait: Meddler 6
         + Personality Trait: Villager 2
-        + Virtue: Affinity with (art) (1)
-        + Virtue: Book Learner (1)
-        + Flaw: Carefree (-1)
-        + Virtue: Craft Magic (0) (House Virtue)
-        + Virtue: Flawless Magic (3)
-        + Flaw: Meddler (major) (-3)
-        + Virtue: Minor Magical Focus (1)
-        + Flaw: Mistaken Identity (-3) (Story flaw)
-        + Flaw: Short-Range Magic (-3)
-        + Virtue: Skilled Parens (1)
-        + Virtue: Spell Foci (0) (House Virtue)
-        + Virtue: Strong Faerie Blood (3) (Ettin Blood gives +1 to Stamina)
-        + Flaw: Weak Spontaneous Magic (0) (House Flaw)
+        + Virtue/Flaw: Affinity with (art): Imaginem (1)
+        + Virtue/Flaw: Book Learner (1)
+        + Virtue/Flaw: Carefree (-1)
+        + Virtue/Flaw: Craft Magic (0) (House Virtue)
+        + Virtue/Flaw: Flawless Magic (3)
+        + Virtue/Flaw: Meddler (major) (-3)
+        + Virtue/Flaw: Minor Magical Focus: magical arrows (1)
+        + Virtue/Flaw: Mistaken Identity (-3) (Story flaw)
+        + Virtue/Flaw: Short-Range Magic (-3)
+        + Virtue/Flaw: Skilled Parens (1)
+        + Virtue/Flaw: Spell Foci (0) (House Virtue)
+        + Virtue/Flaw: Strong Faerie Blood: Ettin blood (3) (Ettin Blood gives +1 to Stamina)
+        + Virtue/Flaw: Weak Spontaneous Magic (0) (House Flaw)
     + Inferred traits
         + Ability: Second Sight 5xp; 
         + Art: Imaginem 0xp;  x1.5xp
-        + Virtue: Second Sight (0) (from Strong Faerie Blood)
+        + Virtue/Flaw: Second Sight (0) (from Strong Faerie Blood)
         + Aging  No roll. (limit 50) (bonus 3) 
     + Warning: Undefined Source Quality. Spent 75xp.
     + Validated: Virtues and flaws balance at 10 of 10 points.
