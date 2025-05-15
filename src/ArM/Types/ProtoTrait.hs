@@ -287,6 +287,7 @@ instance TraitClass ProtoTrait where
             where err = error "No Trait for this ProtoTrait (toTrait)" 
    getTrait _ = Nothing
 
+-- | List of tentative functions converting ProtoTrait to Trait.
 computeList :: [ ProtoTrait -> Maybe Trait ]
 computeList = [ \ p -> computeTrait' (traitKey p) p
               , fmap CombatOptionTrait . combat
@@ -297,7 +298,10 @@ computeList = [ \ p -> computeTrait' (traitKey p) p
               ]
 
 
-computeTrait' :: TraitKey -> ProtoTrait -> Maybe Trait
+-- | Compute Trait from ProtoTrait if possible.
+computeTrait' :: TraitKey     -- ^ The trait's key
+              -> ProtoTrait   -- ^ The ProtoTrait 
+	      -> Maybe Trait  -- ^ Resulting Trait
 computeTrait' NoTrait _ = Nothing
 computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
            Ability { abilityName = x
