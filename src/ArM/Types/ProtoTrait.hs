@@ -78,7 +78,6 @@ findTrait k = find ( (k==) . traitKey )
 -- give the name of the trait of the relevant type only. 
 data ProtoTrait = ProtoTrait
     { protoTrait :: TraitKey
-    , spell :: Maybe String  -- ^ spell name
     , reputation :: Maybe String  -- ^ reputation contents
     , aging :: Maybe Aging        -- ^ Aging object 
     , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
@@ -87,8 +86,6 @@ data ProtoTrait = ProtoTrait
     , spec :: Maybe String        -- ^ specialisation of an ability
     , appliesTo :: Maybe TraitKey  -- ^ not used (intended for virtues/flaws applying to another trait)
     , levelCap :: Maybe Int    -- ^ cap on advancement
-    , level :: Maybe Int       -- ^ level of a spell
-    , tefo :: Maybe String     -- ^ technique/form of a spell
     , mastery :: Maybe [ String ]   -- ^ mastery options for a spell
     , flawless :: Maybe Bool   -- ^ for a spell, if flawless magic applies
     , score :: Maybe Int       -- ^ new score to replace the old one
@@ -112,7 +109,6 @@ data ProtoTrait = ProtoTrait
 -- new objects.
 defaultPT :: ProtoTrait
 defaultPT = ProtoTrait { protoTrait = NoTrait
-                             , spell = Nothing
                              , reputation = Nothing
                              , aging = Nothing
                              , possession = Nothing
@@ -121,8 +117,6 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , spec = Nothing
                              , appliesTo = Nothing
                              , levelCap = Nothing
-                             , level = Nothing
-                             , tefo = Nothing
                              , mastery = Nothing
                              , flawless = Nothing
                              , score = Nothing
@@ -170,7 +164,6 @@ instance ToJSON ProtoTrait
 instance FromJSON ProtoTrait where
     parseJSON = withObject "ProtoTrait" $ \v -> ProtoTrait
         <$> parseKey v
-        <*> v .:?  "spell"
         <*> v .:?  "reputation"
         <*> v .:?  "aging"
         <*> v .:?  "possession"
@@ -179,8 +172,6 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "spec"
         <*> v .:?  "appliesTo"
         <*> v .:?  "levelCap"
-        <*> v .:?  "level"
-        <*> v .:?  "tefo"
         <*> v .:?  "mastery"
         <*> v .:?  "flawless"
         <*> v .:?  "score"
@@ -278,8 +269,6 @@ showAging p | Nothing == aging p = ""
 instance TraitClass ProtoTrait where
    traitKey p
        | NoTrait /= (protoTrait p) = protoTrait p
-       | spell p /= Nothing = SpellKey (fote $ fromMaybe "TeFo" $ tefo p)
-                           (fromMaybe 0 $ level p ) ( fromJust $ spell p ) 
        | possession p /= Nothing = traitKey $ fromJust $ possession p
        | lab p /= Nothing = traitKey $ fromJust $ lab p
        | combat p /= Nothing = traitKey $ fromJust $ combat p
@@ -609,9 +598,7 @@ regularXP p = g (protoTrait p)
      where g (AbilityKey _) = x
            g (ArtKey _) = x
            g (SpellKey _ _ _) = x
-           g _ = x0
-           x0 | isNothing (spell p) = 0
-              | otherwise = x
+           g _ = 0
            x = fromMaybe 0 $ xp p
 
 -- | Get the virtues and flaws from a list of ProtoTrait objects, and convert them to

@@ -256,17 +256,17 @@ Total: 150 levels of spells.
         + Art: Mentem 1xp; 
         + Art: Terram 15xp; 
         + Art: Vim 3xp; 
-        + Spell: Wound without Cause 0xp Penetration
-        + Spell: Spasms of the Uncontrolled Body 0xp Penetration
-        + Spell: Lamp till Morning without Flame 0xp Still Casting
-        + Spell: Clarity of Public Speech 0xp Penetration
-        + Spell: Aura of Ennobled Presence 0xp Quiet Casting
-        + Spell: Veil of Invisibility 0xp Quite Casting
-        + Spell: Trust of the Childlike Faith 0xp Penetration
-        + Spell: Touch of Slumber 0xp Penetration
-        + Spell: Arrow of Peaceful Slumber 0xp Penetration
-        + Spell: End of the Mighty Castle 0xp Penetration
-        + Spell: Obliteration of the Metallic Barrier 0xp Penetration
+        + Spell: PeCo20 Wound without Cause 0xp Penetration
+        + Spell: ReCo5 Spasms of the Uncontrolled Body 0xp Penetration
+        + Spell: CrIg15 Lamp till Morning without Flame 0xp Still Casting
+        + Spell: CrIm10 Clarity of Public Speech 0xp Penetration
+        + Spell: MuIm10 Aura of Ennobled Presence 0xp Quiet Casting
+        + Spell: PeIm20 Veil of Invisibility 0xp Quite Casting
+        + Spell: PeMe10 Trust of the Childlike Faith 0xp Penetration
+        + Spell: ReMe5 Touch of Slumber 0xp Penetration
+        + Spell: ReMe15 Arrow of Peaceful Slumber 0xp Penetration
+        + Spell: PeTe20 End of the Mighty Castle 0xp Penetration
+        + Spell: PeTe20 Obliteration of the Metallic Barrier 0xp Penetration
         + Possession: Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
         + Possession: Dagger
         + Possession: Lantern
@@ -278,17 +278,17 @@ Total: 150 levels of spells.
         + Combat Option: Knife Knife
         + Combat Option: Longbow Longbow
     + Inferred traits
-        + Spell: Wound without Cause 0xp with flawless magic
-        + Spell: Spasms of the Uncontrolled Body 0xp with flawless magic
-        + Spell: Lamp till Morning without Flame 0xp with flawless magic
-        + Spell: Clarity of Public Speech 0xp with flawless magic
-        + Spell: Aura of Ennobled Presence 0xp with flawless magic
-        + Spell: Veil of Invisibility 0xp with flawless magic
-        + Spell: Trust of the Childlike Faith 0xp with flawless magic
-        + Spell: Touch of Slumber 0xp with flawless magic
-        + Spell: Arrow of Peaceful Slumber 0xp with flawless magic
-        + Spell: End of the Mighty Castle 0xp with flawless magic
-        + Spell: Obliteration of the Metallic Barrier 0xp with flawless magic
+        + Spell: PeCo20 Wound without Cause 0xp with flawless magic
+        + Spell: ReCo5 Spasms of the Uncontrolled Body 0xp with flawless magic
+        + Spell: CrIg15 Lamp till Morning without Flame 0xp with flawless magic
+        + Spell: CrIm10 Clarity of Public Speech 0xp with flawless magic
+        + Spell: MuIm10 Aura of Ennobled Presence 0xp with flawless magic
+        + Spell: PeIm20 Veil of Invisibility 0xp with flawless magic
+        + Spell: PeMe10 Trust of the Childlike Faith 0xp with flawless magic
+        + Spell: ReMe5 Touch of Slumber 0xp with flawless magic
+        + Spell: ReMe15 Arrow of Peaceful Slumber 0xp with flawless magic
+        + Spell: PeTe20 End of the Mighty Castle 0xp with flawless magic
+        + Spell: PeTe20 Obliteration of the Metallic Barrier 0xp with flawless magic
         + Aging 15 years; apparent 15 years. No roll. 
     + Validated: Correctly spent 150 spell levels.
     + Validated: Correctly spent 300 xp.

@@ -73,8 +73,8 @@ flawlessSpells sheet xs | hasFlawless sheet = flawlessSpells' xs
 -- Auxiliary for `flawlessSpells`
 flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
 flawlessSpells' [] = []
-flawlessSpells' (x:xs) | isNothing (spell x) = ys
-                       | otherwise = y:ys
+flawlessSpells' (x:xs) | isSpell (protoTrait x) = y:ys
+                       | otherwise = ys
     where ys = flawlessSpells' xs
           y = defaultPT { protoTrait = protoTrait x, flawless = Just True }
 

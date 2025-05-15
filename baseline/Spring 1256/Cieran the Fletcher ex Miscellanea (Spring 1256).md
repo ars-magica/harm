@@ -655,13 +655,13 @@ Total: 1309 levels of spells.
     + Lab Total 70
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: The Studious Doppleganger 0xp Quiet Casting
-        + Spell: Book of Images 0xp Quiet Casting
-        + Spell: The Shadow of Human Life 0xp Quiet Casting
+        + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
+        + Spell: CrIm15 Book of Images 0xp Quiet Casting
+        + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
     + Inferred traits
-        + Spell: The Studious Doppleganger 0xp with flawless magic
-        + Spell: Book of Images 0xp with flawless magic
-        + Spell: The Shadow of Human Life 0xp with flawless magic
+        + Spell: CrIm5 The Studious Doppleganger 0xp with flawless magic
+        + Spell: CrIm15 Book of Images 0xp with flawless magic
+        + Spell: CrIm40 The Shadow of Human Life 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1256 (2+1xp) (1 years) Teaching (Exposure)
     + *Teaching spells to Luciu*
@@ -693,14 +693,14 @@ Total: 1309 levels of spells.
     + *ReVi Spells; Train Luciu in Magic Theory (SQ 15).*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Watching Ward 0xp Quiet Casting
-        + Spell: Maintaining the Demanding Spell 0xp Quiet Casting
-        + Spell: Circular Ward Against Demons 0xp Penetration
+        + Spell: ReVi20 Watching Ward 0xp Quiet Casting
+        + Spell: ReVi21 Maintaining the Demanding Spell 0xp Quiet Casting
+        + Spell: ReVi25 Circular Ward Against Demons 0xp Penetration
         + Confidence: 0 (1)
     + Inferred traits
-        + Spell: Watching Ward 0xp with flawless magic
-        + Spell: Maintaining the Demanding Spell 0xp with flawless magic
-        + Spell: Circular Ward Against Demons 0xp with flawless magic
+        + Spell: ReVi20 Watching Ward 0xp with flawless magic
+        + Spell: ReVi21 Maintaining the Demanding Spell 0xp with flawless magic
+        + Spell: ReVi25 Circular Ward Against Demons 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1255 (2xp) (1 years) OpeningArts (Exposure)
     + *Open arts for Luciu*
@@ -760,11 +760,11 @@ Total: 1309 levels of spells.
     + *Intangible Tunnel ReVi20; diam version ReVi5 (144xp)*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: The Minute of Reckoning 0xp Quiet Casting
-        + Spell: Opening the Intangible Tunnel 0xp Quiet Casting
+        + Spell: ReVi5 The Minute of Reckoning 0xp Quiet Casting
+        + Spell: ReVi20 Opening the Intangible Tunnel 0xp Quiet Casting
     + Inferred traits
-        + Spell: The Minute of Reckoning 0xp with flawless magic
-        + Spell: Opening the Intangible Tunnel 0xp with flawless magic
+        + Spell: ReVi5 The Minute of Reckoning 0xp with flawless magic
+        + Spell: ReVi20 Opening the Intangible Tunnel 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1253 (9+4xp) Reading
     + *Bonus SQ +4 from Book Learner and Correspondent (101->114)*
@@ -809,9 +809,9 @@ Total: 1309 levels of spells.
     + *ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)*
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: Confusion of the Insane Vibrations 0xp Penetration
+        + Spell: ReIm35 Confusion of the Insane Vibrations 0xp Penetration
     + Inferred traits
-        + Spell: Confusion of the Insane Vibrations 0xp with flawless magic
+        + Spell: ReIm35 Confusion of the Insane Vibrations 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1252 (9+3xp) (1 years) Reading
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
@@ -840,13 +840,13 @@ Total: 1309 levels of spells.
     + *InIm spells below ->  281½.  Lab total 71*
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: Prying Eyes 0xp Penetration
-        + Spell: Brushstrokes Revealed 0xp Penetration
-        + Spell: Palm of Seeing (Sun duration) 0xp Penetration
+        + Spell: InIm5 Prying Eyes 0xp Penetration
+        + Spell: InIm10 Brushstrokes Revealed 0xp Penetration
+        + Spell: InIm20 Palm of Seeing (Sun duration) 0xp Penetration
     + Inferred traits
-        + Spell: Prying Eyes 0xp with flawless magic
-        + Spell: Brushstrokes Revealed 0xp with flawless magic
-        + Spell: Palm of Seeing (Sun duration) 0xp with flawless magic
+        + Spell: InIm5 Prying Eyes 0xp with flawless magic
+        + Spell: InIm10 Brushstrokes Revealed 0xp with flawless magic
+        + Spell: InIm20 Palm of Seeing (Sun duration) 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1251 (13+3xp) (1 years) Reading
     + *Summa L15Q13 + Book Learner 96 -> 112; no aging -20*
@@ -885,11 +885,11 @@ Total: 1309 levels of spells.
     + *no aging (-18); invent InHe25 Converse with Plant and Tree*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Converse with Plant and Tree 0xp Penetration
+        + Spell: InHe25 Converse with Plant and Tree 0xp Penetration
         + Reputation: Crafter of Magic [Hermetic] 20xp (From Lab Aesthetics)
         + Aging Rolled -18 (-1)  [No aging.]
     + Inferred traits
-        + Spell: Converse with Plant and Tree 0xp with flawless magic
+        + Spell: InHe25 Converse with Plant and Tree 0xp with flawless magic
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
@@ -928,11 +928,11 @@ Total: 1309 levels of spells.
     + *250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3*
     + Changing traits
         + Art: Imaginem 3xp; 
-        + Spell: Aura of the Trustful Merchant 0xp Quiet Casting
-        + Spell: Ogre's Stench 0xp Quiet Casting
+        + Spell: MuIm10 Aura of the Trustful Merchant 0xp Quiet Casting
+        + Spell: MuIm25 Ogre's Stench 0xp Quiet Casting
     + Inferred traits
-        + Spell: Aura of the Trustful Merchant 0xp with flawless magic
-        + Spell: Ogre's Stench 0xp with flawless magic
+        + Spell: MuIm10 Aura of the Trustful Merchant 0xp with flawless magic
+        + Spell: MuIm25 Ogre's Stench 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Summer 1248 (14+4xp) Reading
     + *Maine's tractatus Q14 + correspondent (245½xp)*
@@ -1060,16 +1060,16 @@ Total: 1309 levels of spells.
     + *PeVi Spells; Parma Magica to 64xp; Rolls 28-24=4 Apparent Age increases.  lab total 51. Lab text for Break the Shield.*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Fist of Fey Oblivion 0xp Penetration
-        + Spell: Fist of Magic Oblivion 0xp Penetration
-        + Spell: Break the Shield 0xp Penetration
-        + Spell: Circle of Fey Oblivion 0xp Penetration
+        + Spell: PeVi5 Fist of Fey Oblivion 0xp Penetration
+        + Spell: PeVi5 Fist of Magic Oblivion 0xp Penetration
+        + Spell: PeVi10 Break the Shield 0xp Penetration
+        + Spell: PeVi10 Circle of Fey Oblivion 0xp Penetration
         + Aging Rolled 4 (28)  [Apparent age increases]
     + Inferred traits
-        + Spell: Fist of Fey Oblivion 0xp with flawless magic
-        + Spell: Fist of Magic Oblivion 0xp with flawless magic
-        + Spell: Break the Shield 0xp with flawless magic
-        + Spell: Circle of Fey Oblivion 0xp with flawless magic
+        + Spell: PeVi5 Fist of Fey Oblivion 0xp with flawless magic
+        + Spell: PeVi5 Fist of Magic Oblivion 0xp with flawless magic
+        + Spell: PeVi10 Break the Shield 0xp with flawless magic
+        + Spell: PeVi10 Circle of Fey Oblivion 0xp with flawless magic
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
@@ -1093,9 +1093,9 @@ Total: 1309 levels of spells.
     + *CrIg Attack Spell. Parma to 57xp*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Arrow of Fiery Ribbons 0xp Penetration
+        + Spell: CrIg30 Arrow of Fiery Ribbons 0xp Penetration
     + Inferred traits
-        + Spell: Arrow of Fiery Ribbons 0xp with flawless magic
+        + Spell: CrIg30 Arrow of Fiery Ribbons 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1244 (14+3xp) (1 years) Reading
     + *Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging*
@@ -1160,13 +1160,13 @@ Total: 1309 levels of spells.
     + *Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14).*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: False Window 0xp Quiet Casting
-        + Spell: Smoke of Escaping 0xp Quiet Casting
-        + Spell: Horror Cabinet 0xp Quiet Casting
+        + Spell: CrIm5 False Window 0xp Quiet Casting
+        + Spell: CrIm5 Smoke of Escaping 0xp Quiet Casting
+        + Spell: CrIm35 Horror Cabinet 0xp Quiet Casting
     + Inferred traits
-        + Spell: False Window 0xp with flawless magic
-        + Spell: Smoke of Escaping 0xp with flawless magic
-        + Spell: Horror Cabinet 0xp with flawless magic
+        + Spell: CrIm5 False Window 0xp with flawless magic
+        + Spell: CrIm5 Smoke of Escaping 0xp with flawless magic
+        + Spell: CrIm35 Horror Cabinet 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1242 (2xp) (1 years) LabWork (Exposure)
     + *Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points.*
@@ -1223,9 +1223,9 @@ Total: 1309 levels of spells.
     + *Gift of Com. Magic Theory to 130xp*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Gift of Communication 0xp Safe Casting
+        + Spell: CrMe40 Gift of Communication 0xp Safe Casting
     + Inferred traits
-        + Spell: Gift of Communication 0xp with flawless magic
+        + Spell: CrMe40 Gift of Communication 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1240 (2xp) Teaching (Exposure)
     + *(23xp) Hiccup.*
@@ -1237,8 +1237,8 @@ Total: 1309 levels of spells.
     + Changing traits
         + Ability: Magic Theory 2xp; 
         + Characteristic: Com 2 (Heroes ritual cast once)
-        + Spell: Disguise of the Transformed Image 0xp Quite Casting
-        + Spell: Sight of the Warm Surface 0xp Quiet Casting
+        + Spell: MuIm15 Disguise of the Transformed Image 0xp Quite Casting
+        + Spell: MuIm15 Sight of the Warm Surface 0xp Quiet Casting
         + Possession: An vis (-2)
         + Possession: An vis (3)
         + Possession: Au vis (2)
@@ -1246,25 +1246,25 @@ Total: 1309 levels of spells.
         + Possession: Me vis (-16)
         + Possession: Vi vis (3)
     + Inferred traits
-        + Spell: Disguise of the Transformed Image 0xp with flawless magic
-        + Spell: Sight of the Warm Surface 0xp with flawless magic
+        + Spell: MuIm15 Disguise of the Transformed Image 0xp with flawless magic
+        + Spell: MuIm15 Sight of the Warm Surface 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1239 (2+15xp) LabWork (Exposure)
     + *Gift of Quickness. Experimentation. Discovery (15xp in MT). Magi Theory to 126xp*
     + Changing traits
         + Ability: Magic Theory 17xp; 
-        + Spell: Gift of Quickness (personal range) 0xp Safe Casting
+        + Spell: CrCo30 Gift of Quickness (personal range) 0xp Safe Casting
     + Inferred traits
-        + Spell: Gift of Quickness (personal range) 0xp with flawless magic
+        + Spell: CrCo30 Gift of Quickness (personal range) 0xp with flawless magic
     + Validated: Correctly spent 17 xp.
 + Summer 1239 (2xp) LabWork (Exposure)
     + *Com of the Heroes from text with help from Hiccup and Jimeny (CrMe 47 + Hiccup 8 [spec Creo] + Jimeny 4 = 59; with text +2 = 61) MT to 109xp*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Communication of the Heroes 0xp Safe Casting
+        + Spell: CrMe60 Communication of the Heroes 0xp Safe Casting
     + Inferred traits
-        + Spell: Communication of the Heroes 0xp with flawless magic
+        + Spell: CrMe60 Communication of the Heroes 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1239 (2xp) Teaching (Exposure)
     + *(21xp) Hiccup.  SOCP Lore*
@@ -1274,9 +1274,9 @@ Total: 1309 levels of spells.
 + Winter 1239 (6+3xp) (1 years) Reading
     + *SQ 6 doubled by flawless magic. Aegis of the Heath Mastery. Learns Safe Casting.*
     + Changing traits
-        + Spell: Aegis of the Hearth 9xp Safe Casting
+        + Spell: ReVi30 Aegis of the Hearth 9xp Safe Casting
     + Inferred traits
-        + Spell: Aegis of the Hearth 0xp with flawless magic
+        + Spell: ReVi30 Aegis of the Hearth 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 9 xp.
     + ERROR: Missing book for reading season
@@ -1284,11 +1284,11 @@ Total: 1309 levels of spells.
     + *Invent ReVi spells with help from Hiccup and Jimeny and lab text.  Lab total (ReVi) 47 + 11 (Hiccup + Jimeny) +2 text = 60.  Exposure 2xp Magic Theory (-> 107xp)*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Aegis of the Hearth 0xp Penetration
-        + Spell: Watching Ward 0xp Penetration
+        + Spell: ReVi30 Aegis of the Hearth 0xp Penetration
+        + Spell: ReVi30 Watching Ward 0xp Penetration
     + Inferred traits
-        + Spell: Aegis of the Hearth 0xp with flawless magic
-        + Spell: Watching Ward 0xp with flawless magic
+        + Spell: ReVi30 Aegis of the Hearth 0xp with flawless magic
+        + Spell: ReVi30 Watching Ward 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Summer 1238 (8xp) Adventure
     + *Plus Quest for Cautious Sorcerer. Parma Magica (4 to 55xp)*
@@ -1306,13 +1306,13 @@ Total: 1309 levels of spells.
     + *Leap of Homecoming Touch (continued)*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Leap of Homecoming (touch) 0xp Still Casting
+        + Spell: ReCo40 Leap of Homecoming (touch) 0xp Still Casting
         + Possession: In vis (16)
         + Possession: In vis (-5)
         + Possession: In vis (-3)
         + Possession: In vis (-1)
     + Inferred traits
-        + Spell: Leap of Homecoming (touch) 0xp with flawless magic
+        + Spell: ReCo40 Leap of Homecoming (touch) 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1237 (2xp) LabWork (Exposure)
@@ -1324,9 +1324,9 @@ Total: 1309 levels of spells.
     + *(101xp) Eyes of the Eagle at touch InIm30*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Eyes of the Eagle (touch) 0xp Quiet Casting
+        + Spell: InIm30 Eyes of the Eagle (touch) 0xp Quiet Casting
     + Inferred traits
-        + Spell: Eyes of the Eagle (touch) 0xp with flawless magic
+        + Spell: InIm30 Eyes of the Eagle (touch) 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1237 (2xp) Teaching (Exposure)
     + *(17xp) Hiccup*
@@ -1337,9 +1337,9 @@ Total: 1309 levels of spells.
     + *IMAGE FROM THE WIZARD TORN: Lab total InIm 50 + 10 (Hiccup/Jimeny) + 1 read imaginem*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Image from the Wizard Torn 0xp Quiet Casting
+        + Spell: ReIm30 Image from the Wizard Torn 0xp Quiet Casting
     + Inferred traits
-        + Spell: Image from the Wizard Torn 0xp with flawless magic
+        + Spell: ReIm30 Image from the Wizard Torn 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1236 (13+3xp) Reading
@@ -1353,9 +1353,9 @@ Total: 1309 levels of spells.
     + *Miner's Keen Eye (covenant service)  InTe lab total 52 (incl. Hiccup +7, Jimeny +3)*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Miner's Keen Eye (touch) 0xp Penetration
+        + Spell: InTe25 Miner's Keen Eye (touch) 0xp Penetration
     + Inferred traits
-        + Spell: Miner's Keen Eye (touch) 0xp with flawless magic
+        + Spell: InTe25 Miner's Keen Eye (touch) 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1236 (2xp) Teaching (Exposure)
     + *Hiccup 13->15*
@@ -1384,11 +1384,11 @@ Total: 1309 levels of spells.
     + *93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Sight of Conflicting Motives 0xp Quiet Casting
-        + Spell: Posing the Silent Question 0xp Quiet Casting
+        + Spell: InMe15 Sight of Conflicting Motives 0xp Quiet Casting
+        + Spell: InMe20 Posing the Silent Question 0xp Quiet Casting
     + Inferred traits
-        + Spell: Sight of Conflicting Motives 0xp with flawless magic
-        + Spell: Posing the Silent Question 0xp with flawless magic
+        + Spell: InMe15 Sight of Conflicting Motives 0xp with flawless magic
+        + Spell: InMe20 Posing the Silent Question 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1235 (2xp) Teaching (Exposure)
     + *Hiccup 11->13*
@@ -1440,19 +1440,19 @@ Total: 1309 levels of spells.
     + *Ward against Heat and Flames Parma to 51xp ; Lab Total 42 + Hiccup (6) + Familiar (4) = 52*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Ward against Heat and Flames 0xp Fast Casting
+        + Spell: ReIg25 Ward against Heat and Flames 0xp Fast Casting
     + Inferred traits
-        + Spell: Ward against Heat and Flames 0xp with flawless magic
+        + Spell: ReIg25 Ward against Heat and Flames 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Summer 1233 (2xp) LabWork (Exposure)
     + *Gift of Perception ++ Lab total 50 incl Hiccup*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: By His Works 0xp Quiet Casting
-        + Spell: Gift of Perception 0xp Quiet Casting
+        + Spell: CrMe5 By His Works 0xp Quiet Casting
+        + Spell: CrMe40 Gift of Perception 0xp Quiet Casting
     + Inferred traits
-        + Spell: By His Works 0xp with flawless magic
-        + Spell: Gift of Perception 0xp with flawless magic
+        + Spell: CrMe5 By His Works 0xp with flawless magic
+        + Spell: CrMe40 Gift of Perception 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1233 (2xp) Teaching (Exposure)
     + *Hiccup*
@@ -1474,11 +1474,11 @@ Total: 1309 levels of spells.
     + *Circle of Demon's Oblivion.  Invent both level 5 and level 15 versions. Train familiar*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Circle of Demon's Oblivion 0xp Penetration (PeVi 5 [Base 10 (generic), -1 touch]: Range: Touch, Duration: Mom, Target: Circle. Destroys ten points of might to any infernal being inside the circle.  Lab Total 42 including similar spell L15 (+6 with Hiccup).  Casting Total 27 within covenant aura (Pen +44 w/o die).)
-        + Spell: Circle of Demon's Oblivion 0xp Penetration
+        + Spell: PeVi5 Circle of Demon's Oblivion 0xp Penetration (PeVi 5 [Base 10 (generic), -1 touch]: Range: Touch, Duration: Mom, Target: Circle. Destroys ten points of might to any infernal being inside the circle.  Lab Total 42 including similar spell L15 (+6 with Hiccup).  Casting Total 27 within covenant aura (Pen +44 w/o die).)
+        + Spell: PeVi15 Circle of Demon's Oblivion 0xp Penetration
     + Inferred traits
-        + Spell: Circle of Demon's Oblivion 0xp with flawless magic
-        + Spell: Circle of Demon's Oblivion 0xp with flawless magic
+        + Spell: PeVi5 Circle of Demon's Oblivion 0xp with flawless magic
+        + Spell: PeVi15 Circle of Demon's Oblivion 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Summer 1232 (2xp) Teaching (Exposure)
     + *Train Hiccup. Parma to 45xp*
@@ -1551,22 +1551,22 @@ Total: 1309 levels of spells.
     + *CrCo spells.  Lab total 43 + Hiccup + bookstand = 51.*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Improved Purification of the Festering Wounds 0xp Penetration
-        + Spell: Restoration of the Defiled Body 0xp Penetration
+        + Spell: CrCo25 Improved Purification of the Festering Wounds 0xp Penetration
+        + Spell: CrCo25 Restoration of the Defiled Body 0xp Penetration
     + Inferred traits
-        + Spell: Improved Purification of the Festering Wounds 0xp with flawless magic
-        + Spell: Restoration of the Defiled Body 0xp with flawless magic
+        + Spell: CrCo25 Improved Purification of the Festering Wounds 0xp with flawless magic
+        + Spell: CrCo25 Restoration of the Defiled Body 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1229 (2xp) LabWork (Exposure)
     + *ReCo 43 + Hiccup + bookstand = 51. Leap of Homecoming + Frog's Legs*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Gift of the Frog's Legs 0xp Still Casting
-        + Spell: Leap of Homecoming 0xp Still Casting
+        + Spell: ReCo15 Gift of the Frog's Legs 0xp Still Casting
+        + Spell: ReCo35 Leap of Homecoming 0xp Still Casting
     + Inferred traits
-        + Spell: Gift of the Frog's Legs 0xp with flawless magic
-        + Spell: Leap of Homecoming 0xp with flawless magic
+        + Spell: ReCo15 Gift of the Frog's Legs 0xp with flawless magic
+        + Spell: ReCo35 Leap of Homecoming 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Summer 1229 (2xp) SpellInstruction (Exposure)
     + *Teaching Spells to Hiccup*
@@ -1578,11 +1578,11 @@ Total: 1309 levels of spells.
     + Changing traits
         + Ability: Hermes Lore 1xp; 
         + Ability: Magic Theory 2xp; 
-        + Spell: Circle of Undisturbed Rest 0xp Quiet Casting
-        + Spell: Willful Sidestep 0xp Quiet Casting
+        + Spell: ReIm10 Circle of Undisturbed Rest 0xp Quiet Casting
+        + Spell: ReIm20 Willful Sidestep 0xp Quiet Casting
     + Inferred traits
-        + Spell: Circle of Undisturbed Rest 0xp with flawless magic
-        + Spell: Willful Sidestep 0xp with flawless magic
+        + Spell: ReIm10 Circle of Undisturbed Rest 0xp with flawless magic
+        + Spell: ReIm20 Willful Sidestep 0xp with flawless magic
     + Validated: Correctly spent 3 xp.
 + Winter 1229 (16+3xp) (1 years) Reading
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
@@ -1610,9 +1610,9 @@ Total: 1309 levels of spells.
     + *Learn Sense of the lingering magic from lab text.  Using Bookstand of Hespera. Train Hiccup in Magic Theory. Exposure 2xp Magic Theory (-> 85xp)*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Sense of the Lingering Magic 0xp Penetration
+        + Spell: InVi30 Sense of the Lingering Magic 0xp Penetration
     + Inferred traits
-        + Spell: Sense of the Lingering Magic 0xp with flawless magic
+        + Spell: InVi30 Sense of the Lingering Magic 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1228 (13+3xp) (1 years) Reading
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
@@ -1631,9 +1631,9 @@ Total: 1309 levels of spells.
     + *Learn Wizard's Communion (MuVi 10) - Magic Theory exposure 2 using Bookstand of Hespera*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Wizard's Communion 0xp Fast Casting
+        + Spell: MuVi10 Wizard's Communion 0xp Fast Casting
     + Inferred traits
-        + Spell: Wizard's Communion 0xp with flawless magic
+        + Spell: MuVi10 Wizard's Communion 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1227 (14+3xp) Reading
     + Uses *Growing, Healing, and Creation* (No Time)
@@ -1692,9 +1692,9 @@ Total: 1309 levels of spells.
     + *Lab work. Touch version of Pit of Gaping Earth PeTe15. Exposure 2xp Magic Theory. Lab Total 30.*
     + Changing traits
         + Ability: Magic Theory 2xp; 
-        + Spell: Arrow of Gaping Earth 0xp Quiet Casting
+        + Spell: PeTe15 Arrow of Gaping Earth 0xp Quiet Casting
     + Inferred traits
-        + Spell: Arrow of Gaping Earth 0xp with flawless magic
+        + Spell: PeTe15 Arrow of Gaping Earth 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1225 (12+3xp) Reading
     + Uses *New omnibus after Bonisagus* by Unknown (No Time)
@@ -1706,9 +1706,9 @@ Total: 1309 levels of spells.
     + *Invent a touch version of Unravelling the Fabric of Imaginem lvl 13.  Exposure 2xp Second Sight. Lab Total 26.*
     + Changing traits
         + Ability: Second Sight 2xp; 
-        + Spell: Tearing the Fabric of Imaginem 0xp Quiet Casting
+        + Spell: PeVi13 Tearing the Fabric of Imaginem 0xp Quiet Casting
     + Inferred traits
-        + Spell: Tearing the Fabric of Imaginem 0xp with flawless magic
+        + Spell: PeVi13 Tearing the Fabric of Imaginem 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1224 (12+3xp) Reading
@@ -1748,34 +1748,34 @@ Total: 1309 levels of spells.
     + *Parma to 30xp.  Story (2conf pts) Lab work: InVi5 Spot the Vis + InVi5 Scales of M W + InVi20 Piercing the faerie veil (from texts) (lab total InVi 14 + Int 3 + MT 4 + Aura 5 + similar spell 4 = 30) + 2xp parma*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Scales of Magical Weight 0xp Quiet Casting
-        + Spell: Spot the Presence of Vis 0xp Quiet Casting
-        + Spell: Piercing the Faerie Veil 0xp Quiet Casting
+        + Spell: InVi5 Scales of Magical Weight 0xp Quiet Casting
+        + Spell: InVi5 Spot the Presence of Vis 0xp Quiet Casting
+        + Spell: InVi20 Piercing the Faerie Veil 0xp Quiet Casting
         + Confidence: 0 (2)
     + Inferred traits
-        + Spell: Scales of Magical Weight 0xp with flawless magic
-        + Spell: Spot the Presence of Vis 0xp with flawless magic
-        + Spell: Piercing the Faerie Veil 0xp with flawless magic
+        + Spell: InVi5 Scales of Magical Weight 0xp with flawless magic
+        + Spell: InVi5 Spot the Presence of Vis 0xp with flawless magic
+        + Spell: InVi20 Piercing the Faerie Veil 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Spring 1223 (2xp) LabWork (Exposure)
     + *Stone Tell of Mind that Sits*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Stone Tell of the Mind that Sits 0xp Penetration
+        + Spell: InTe30 Stone Tell of the Mind that Sits 0xp Penetration
         + Confidence: 0 (9) (Adjustment.  Not known when the confidence was gained.)
     + Inferred traits
-        + Spell: Stone Tell of the Mind that Sits 0xp with flawless magic
+        + Spell: InTe30 Stone Tell of the Mind that Sits 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
 + Winter 1223 (2xp) (1 years) LabWork (Exposure)
     + *Lab work: InVi5 Sense the Nature of Vis + InVi20 Piercing the magic veil (from texts) + 2xp parma*
     + Changing traits
         + Ability: Parma Magica 2xp; 
-        + Spell: Sense the Nature of Vis 0xp Quiet Casting
-        + Spell: Piercing the Magical Veil 0xp Quiet Casting
+        + Spell: InVi5 Sense the Nature of Vis 0xp Quiet Casting
+        + Spell: InVi20 Piercing the Magical Veil 0xp Quiet Casting
         + Possession: Cr vis (2)
     + Inferred traits
-        + Spell: Sense the Nature of Vis 0xp with flawless magic
-        + Spell: Piercing the Magical Veil 0xp with flawless magic
+        + Spell: InVi5 Sense the Nature of Vis 0xp with flawless magic
+        + Spell: InVi20 Piercing the Magical Veil 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1222 (13+3xp) Reading
@@ -1851,11 +1851,11 @@ Total: 1309 levels of spells.
     + *Learn fist of demon's Oblivion*
     + Changing traits
         + Ability: Latin 2xp; 
-        + Spell: Fist of Demon's Oblivion 0xp Penetration
-        + Spell: Fist of Demon's Oblivion 0xp Penetration
+        + Spell: PeVi5 Fist of Demon's Oblivion 0xp Penetration
+        + Spell: PeVi15 Fist of Demon's Oblivion 0xp Penetration
     + Inferred traits
-        + Spell: Fist of Demon's Oblivion 0xp with flawless magic
-        + Spell: Fist of Demon's Oblivion 0xp with flawless magic
+        + Spell: PeVi5 Fist of Demon's Oblivion 0xp with flawless magic
+        + Spell: PeVi15 Fist of Demon's Oblivion 0xp with flawless magic
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
 + Autumn 1219 (15+3xp) Reading
