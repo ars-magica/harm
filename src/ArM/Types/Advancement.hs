@@ -294,7 +294,9 @@ class StoryObject a => AdvancementLike a where
      spentXP = sum . map regularXP . changes
      -- | Count spell levels from an Advancement
      spentLevels :: a -> Int
-     spentLevels = sum . map ( fromMaybe 0 . level ) . changes
+     spentLevels = sum . map ( lvls . protoTrait ) . changes
+         where lvls (SpellKey _ x _) = x
+               lvls _ = 0
      addValidation :: [Validation] -> a -> a
      addProtoTrait :: [ProtoTrait] -> a -> a
      setRead :: BookDB h => h -> a -> a
