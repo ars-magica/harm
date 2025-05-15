@@ -56,20 +56,7 @@ import ArM.Debug.Trace
 import ArM.DB.Weapon
 
 -- | 
--- = Convenience functions
-
--- | Get the spell name from a TraitKey object
-spellKeyName :: TraitKey -> String
-spellKeyName ( SpellKey _ _ n ) = n
-spellKeyName _ = "Error!"
-
-
--- | Find a trait, given by a key, from a list of Trait objects.
-findTrait :: (TraitClass a) => TraitKey -> [a] -> Maybe a
-findTrait k = find ( (k==) . traitKey )
-
--- | 
--- = ProtoTrait
+-- * ProtoTrait
 
 -- | A `ProtoTrait` represents a new trait or an advancement of an existing trait
 -- as represented in the JSON input.  

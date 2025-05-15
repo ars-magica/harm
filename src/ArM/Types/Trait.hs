@@ -50,6 +50,7 @@ module ArM.Types.Trait (
          , (<:)
          , fote
          , sortTraits
+         , findTrait
          ) where
 
 import ArM.GameRules
@@ -59,21 +60,17 @@ import ArM.Types.HarmObject
 import ArM.Types.Lab
 import ArM.Types.Possession
 import ArM.Types.Aging
--- import ArM.DB.Weapon
 -- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
--- import Data.Aeson.Types
--- import qualified Data.Aeson.KeyMap as KM
--- import Data.Text.Lazy                            ( fromStrict, unpack )
--- import Control.Monad
 import Data.Maybe
-import Data.List (sortBy)
+import Data.List 
 
--- |
--- = The Trait Type
+-- * The Trait Type
 
+-- | The `Trait` type represents any kind of character trait, including
+-- equipment and other possessions.
 data Trait = AbilityTrait Ability
            | CharacteristicTrait Characteristic
            | ArtTrait Art
@@ -94,13 +91,13 @@ data Trait = AbilityTrait Ability
 instance Ord Trait where
      compare x y = compare (traitKey x) (traitKey y)
 
+-- | Is the trait included with a zero count?
 isNone :: Trait -> Bool
 isNone (VFTrait x) = count x == 0
 isNone (PossessionTrait x) = count x == 0
 isNone _ = False
 
--- |
--- = Different types of Traits
+-- ** Different types of Traits
 
 data Ability = Ability { abilityName :: String
                        , speciality :: Maybe String
@@ -143,12 +140,6 @@ data Spell = Spell { spellName :: String
                    -- , spellRecord :: Maybe SpellRecord
                    }
            deriving (Ord, Eq, Generic)
-
-{-
--- | Return a string of Technique/Form/Level classifying the Spell.
-spellTeFoLe :: Spell -> String
-spellTeFoLe sp = spellTeFo sp ++ show (spellLevel sp)
--}
 
 -- | Return a string of Form/Technique for sorting
 spellFoTe :: Spell -> String
@@ -193,8 +184,7 @@ data OtherTrait = OtherTrait { trait :: String
            deriving (Ord, Eq, Generic)
 
 
--- |
--- == Show instances
+-- ** Show instances
 
 instance Show VF  where
    show a = vfname a ++ f sp ++ " (" ++ cst ++ ")"
@@ -243,8 +233,7 @@ instance Show Reputation where
    show a = reputationName a ++ " [" ++ (repLocale a) ++ "] "
           ++ show (repScore a) ++ " (" ++ showNum (repExcessXP a) ++ ") "
 
--- |
--- == Combat Options
+-- ** Combat Options
 
 -- | A CombatOption is a combination of weapons for which to list combat stats.
 --
@@ -408,6 +397,10 @@ instance TraitClass CombatOption where
 sortTraits :: TraitClass t => [ t ] -> [ t ]
 sortTraits = sortBy f
        where f x y = compare (traitKey x) (traitKey y)
+
+-- | Find a trait, given by a key, from a list of Trait objects.
+findTrait :: (TraitClass a) => TraitKey -> [a] -> Maybe a
+findTrait k = find ( (k==) . traitKey )
 
 -- ** Class instances
 

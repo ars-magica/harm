@@ -20,15 +20,23 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( TraitKey(..), fote, isSpell, isVF, artKey, artLongName ) where
+module ArM.Types.TraitKey ( 
+      -- * The TraitKey type
+      TraitKey(..)
+      -- * Convenience functions
+      , fote
+      , isSpell
+      , isVF
+      , artKey
+      , artLongName
+      , spellKeyName
+      ) where
 
 import Data.Maybe
 import Data.List
 import Data.Aeson
 import GHC.Generics
 
-artKey :: String -> TraitKey
-artKey = ArtKey . take 2
 
 -- | A unique identifier for traits.
 -- It implement the `Ord` class, with canonical ordering on characteristics
@@ -197,18 +205,22 @@ convertProtoKey p
   | isJust (combat p) = CombatKey (fromJust $ combat p) 
   | otherwise = NoTrait
 
+-- | Is the trait a spell?
 isSpell :: TraitKey -> Bool
 isSpell (SpellKey _ _ _) = True
 isSpell  _  = False
+-- | Is the trait a virtue or flaw?
 isVF :: TraitKey -> Bool
 isVF (VFKey _ _) = True
 isVF  _  = False
 
 
+-- | Lists of all the arts in game
 arts :: [ String ]
 arts = [ "Creo", "Intellego", "Muto", "Perdo", "Rego", "Animàl", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
 
 
+-- | Get the full name of an art from the canonical two-letter abreviation.
 artLongName :: String -> String
 artLongName st = fromMaybe "" $ find ( (st'==) . take 2 ) arts
     where st' = take 2 st
@@ -216,3 +228,14 @@ artLongName st = fromMaybe "" $ find ( (st'==) . take 2 ) arts
 -- | Convert the TeFo string to Form/Technique for sorting
 fote :: String -> String
 fote tf = drop 2 tf ++ take 2 tf
+
+-- | Get the spell name from a TraitKey object
+spellKeyName :: TraitKey -> String
+spellKeyName ( SpellKey _ _ n ) = n
+spellKeyName _ = "Error!"
+
+
+-- | Construct a `TraitKey` for an art.
+-- Only the two-letter abreviation is used in the key.
+artKey :: String -> TraitKey
+artKey = ArtKey . take 2
