@@ -89,7 +89,6 @@ data ProtoTrait = ProtoTrait
     , levelCap :: Maybe Int    -- ^ cap on advancement
     , level :: Maybe Int       -- ^ level of a spell
     , tefo :: Maybe String     -- ^ technique/form of a spell
-    , locale :: Maybe String   -- ^ locale/domain of a reputation
     , mastery :: Maybe [ String ]   -- ^ mastery options for a spell
     , flawless :: Maybe Bool   -- ^ for a spell, if flawless magic applies
     , score :: Maybe Int       -- ^ new score to replace the old one
@@ -124,7 +123,6 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , levelCap = Nothing
                              , level = Nothing
                              , tefo = Nothing
-                             , locale = Nothing
                              , mastery = Nothing
                              , flawless = Nothing
                              , score = Nothing
@@ -155,12 +153,14 @@ parseConfidenceKey :: Object -> Parser TraitKey
 parseConfidenceKey v = ConfidenceKey <$> v .: "confidence" 
 parseOtherTraitKey :: Object -> Parser TraitKey
 parseOtherTraitKey v = OtherTraitKey <$> v .: "other" 
+parseReputationKey :: Object -> Parser TraitKey
+parseReputationKey v = ReputationKey <$> v .: "reputation"  <*> v .:? "locale" .!= "--"
 
 parseKey :: Object -> Parser TraitKey
 parseKey v = foldr mplus (pure NoTrait)
           [ (parseArtKey v), (parseAbilityKey v), (parseVirtueKey v), (parseFlawKey v)
           , (parsePTraitKey v), (parseCharKey v), (parseConfidenceKey v) 
-          , (parseOtherTraitKey v) ]
+          , (parseReputationKey v), (parseOtherTraitKey v) ]
 
 instance ToJSON ProtoTrait 
 instance FromJSON ProtoTrait where
@@ -177,7 +177,6 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "levelCap"
         <*> v .:?  "level"
         <*> v .:?  "tefo"
-        <*> v .:?  "locale"
         <*> v .:?  "mastery"
         <*> v .:?  "flawless"
         <*> v .:?  "score"
@@ -250,14 +249,13 @@ showPT (ConfidenceKey cn) p =
               cn ++ ": " ++ show (fromMaybe 0 (score p)) ++ " (" ++
               show ( fromMaybe 0 (points p) ) ++ ")"
 showPT (OtherTraitKey cn) p = cn ++ " " ++ show ( fromMaybe 0 ( points p ) )
+showPT (ReputationKey cn lc) p = "Reputation: " ++ cn ++
+              " [" ++ lc ++ "]" ++ showXP p
 showPT _ p 
        | spell p /= Nothing =
               "Spell: " ++ fromJust (spell p) ++ showXP p
                     ++ showMastery (mastery p) ++ showMult p
                     ++ showFlawless p
-       | reputation p /= Nothing = 
-              "Reputation: " ++ fromJust (reputation p) ++
-              " [" ++ (fromMaybe "--" $ locale p) ++ "]" ++ showXP p
        | possession p /= Nothing = "Possession: " ++ show (fromJust $ possession p)
        | lab p /= Nothing = "Lab: " ++ show (name $ fromJust $ lab p)
        | combat p /= Nothing = show (fromJust $ combat p)
@@ -279,7 +277,6 @@ instance TraitClass ProtoTrait where
        | NoTrait /= (protoTrait p) = protoTrait p
        | spell p /= Nothing = SpellKey (fote $ fromMaybe "TeFo" $ tefo p)
                            (fromMaybe 0 $ level p ) ( fromJust $ spell p ) 
-       | reputation p /= Nothing = ReputationKey (fromJust (reputation p)) (fromMaybe "" (locale p))
        | possession p /= Nothing = traitKey $ fromJust $ possession p
        | lab p /= Nothing = traitKey $ fromJust $ lab p
        | combat p /= Nothing = traitKey $ fromJust $ combat p
@@ -295,9 +292,8 @@ computeList = [ \ p -> computeTrait' (traitKey p) p
               , fmap CombatOptionTrait . combat
               , fmap EstateTrait . lab
               , fmap PossessionTrait . possession
-              , fmap AgeTrait . computeTrait
               , fmap SpellTrait . computeTrait
-              , fmap ReputationTrait . computeTrait
+              , fmap (AgeTrait . toAge) . aging
               ]
 
 
@@ -341,6 +337,14 @@ computeTrait' (OtherTraitKey n) p = Just $ OtherTraitTrait
                              , otherScore = fromMaybe 0 (score p) 
                              , otherExcess = 0 }
          where xpts = fromMaybe 0 (points p) 
+computeTrait' (ReputationKey n l) p = Just $ ReputationTrait
+           $ Reputation { reputationName = n
+                      , repLocale = l
+                      , repXP = fromMaybe 0 (xp p)
+                      , repScore = s
+                      , repExcessXP = y
+                      }
+      where (s,y) = getAbilityScore (xp p)
 computeTrait' _ _ = Nothing
 
 computeVF :: TraitKey -> ProtoTrait -> Maybe VF
@@ -451,16 +455,7 @@ instance TraitType Spell where
             um Nothing ab = ab 
             um abm ar = ar { spellMultiplier = fromMaybe 1.0 abm }
 instance TraitType Reputation where
-    computeTrait p
-       | reputation p == Nothing = Nothing
-       | otherwise = Just $
-           Reputation { reputationName = fromJust (reputation p)
-                      , repLocale = fromMaybe "" (locale p)
-                      , repXP = fromMaybe 0 (xp p)
-                      , repScore = s
-                      , repExcessXP = y
-                      }
-      where (s,y) = getAbilityScore (xp p)
+    computeTrait _ = error "No Reputation computeTrait"
     advanceTrait a x = updateRepXP y x
       where y = (repExcessXP x) + (fromMaybe 0 $ xp a)
 instance TraitType PTrait where
@@ -502,7 +497,7 @@ instance TraitType Trait where
     advanceTrait a (EstateTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (CombatOptionTrait x) =  toTrait $ advanceTrait a x
     advanceTrait a (AgeTrait x) = AgeTrait $ advanceTrait a x
-    computeTrait = Just . toTrait
+    computeTrait = error "No instance for Trait computeTrait"
 
 instance TraitType Possession where
     advanceTrait p x = addCount x ( fromMaybe 1 m )
@@ -518,8 +513,7 @@ instance TraitType CombatOption where
 instance TraitType Age where
     advanceTrait p = advanceAge ag
           where ag = fromJust $ aging p
-    computeTrait p | isNothing (aging p) = Nothing
-                   | otherwise = fmap toAge (aging p)
+    computeTrait _ = error "No computeTrait for age"
 
 -- |
 -- = Advancement
