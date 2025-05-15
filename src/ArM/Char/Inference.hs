@@ -73,13 +73,10 @@ flawlessSpells sheet xs | hasFlawless sheet = flawlessSpells' xs
 -- Auxiliary for `flawlessSpells`
 flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
 flawlessSpells' [] = []
-flawlessSpells' (x:xs) | isNothing (spell x) = ys
+flawlessSpells' (x:xs) | isSpell (protoTrait x) = ys
                        | otherwise = y:ys
     where ys = flawlessSpells' xs
-          y = defaultPT { spell = spell x, level = level x
-                                      , tefo = tefo x
-                                      , flawless = Just True
-                                      }
+          y = defaultPT { protoTrait = protoTrait x, flawless = Just True }
 
 -- | Does the character have Flawless Magic?
 hasFlawless :: CharacterState -> Bool
