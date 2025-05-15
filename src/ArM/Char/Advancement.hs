@@ -29,10 +29,7 @@ import ArM.Debug.Trace
 import Data.Maybe
 import Data.List
 
--- |
--- = Preparing the Advancement
-
-
+-- * Preparing the Advancement
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
