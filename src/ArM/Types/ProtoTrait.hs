@@ -31,7 +31,6 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , spellKeyName
                       , Weapon(..)
                       , Armour(..)
-                      , findTrait
                       , processChar
                       , regularXP
                       , getVF

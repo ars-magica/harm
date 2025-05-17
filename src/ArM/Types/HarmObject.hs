@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  ArM.Types.HarmObject
@@ -26,6 +27,8 @@ module ArM.Types.HarmObject ( HarmKey(..)
                             ) where
 
 import Data.Aeson
+import Data.Aeson.Types
+import Control.Monad
 import Data.List
 import GHC.Generics
 import ArM.Debug.Trace
@@ -41,8 +44,21 @@ data HarmKey = BookKey String
            | NoObject
            deriving ( Eq, Ord, Generic )
 
+parseBookKey :: Object -> Parser HarmKey
+parseBookKey v = BookKey <$> v .:  "book"
+parseCharacterKey :: Object -> Parser HarmKey
+parseCharacterKey v = CharacterKey <$> v .:  "character"
+parseCovenantKey :: Object -> Parser HarmKey
+parseCovenantKey v = CovenantKey <$> v .:  "covenant"
+parseLabKey :: Object -> Parser HarmKey
+parseLabKey v = LabKey <$> v .:  "lab"
+parseHarmKey :: Object -> Parser HarmKey
+parseHarmKey v = foldr mplus (pure NoObject)
+          [ (parseBookKey v), (parseCharacterKey v), (parseCovenantKey v) , (parseLabKey v) ]
+
 instance ToJSON HarmKey
-instance FromJSON HarmKey
+instance FromJSON HarmKey where
+    parseJSON = withObject "HarmKey" parseHarmKey 
 
 instance Show HarmKey where
        show (BookKey x ) = "Book: " ++ x

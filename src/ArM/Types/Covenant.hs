@@ -39,6 +39,7 @@ import ArM.Types.Library
 import ArM.Types.Character
 import ArM.Types.Lab
 import ArM.Types
+import ArM.Types.Possession
 import ArM.Helper
 
 -- * Covenant Tybe
@@ -114,14 +115,14 @@ data CovenantState = CovenantState
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
          , library :: [ Book ]
-	    -- ^ The covenant library.  This should be deprecated and
-	    -- replaced by a function extracting books from possessions,
-	    -- since Book is a special case of Possession.
+            -- ^ The covenant library.  This should be deprecated and
+            -- replaced by a function extracting books from possessions,
+            -- since Book is a special case of Possession.
          , librarycsv :: Maybe String    
-	    -- ^ File to be loaded into the library
-	    -- This should only be used temporarily, when loading the state
-	    -- from JSON.
-	 , possessions :: [ Possession ]
+            -- ^ File to be loaded into the library
+            -- This should only be used temporarily, when loading the state
+            -- from JSON.
+         , possessions :: [ Possession ]
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
 
