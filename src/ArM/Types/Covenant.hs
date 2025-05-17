@@ -114,7 +114,14 @@ data CovenantState = CovenantState
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
          , library :: [ Book ]
-         , librarycsv :: Maybe String
+	    -- ^ The covenant library.  This should be deprecated and
+	    -- replaced by a function extracting books from possessions,
+	    -- since Book is a special case of Possession.
+         , librarycsv :: Maybe String    
+	    -- ^ File to be loaded into the library
+	    -- This should only be used temporarily, when loading the state
+	    -- from JSON.
+	 , possessions :: [ Possession ]
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
 
@@ -125,6 +132,7 @@ defaultCovState = CovenantState
          , covenFolkID = []
          , library = []
          , librarycsv = Nothing
+         , possessions = []
          , labs = []
        }  
 
@@ -136,11 +144,11 @@ instance FromJSON CovenantState where
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
         <*> v `parseCollapsedList` "library"
         <*> v .:? "librarycsv"
+        <*> v `parseCollapsedList` "possessions"
         <*> v `parseCollapsedList` "labs"
 
 
--- |
--- = Advancement and Traits
+-- * Advancement and Traits
 
 -- | Advancement (changes) to a covenant.
 data CovAdvancement = CovAdvancement 
@@ -216,7 +224,7 @@ hasMember cov ch = cid `elem` chs
          chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
 
 
-
+-- | The covenant where the given character is a member
 covenant :: CharacterState -> Maybe HarmKey
 covenant = fmap CovenantKey . memberOf 
 
