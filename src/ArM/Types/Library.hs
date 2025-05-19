@@ -37,7 +37,10 @@ data BookStats = BookStats
          { topic :: TraitKey
          , quality :: Maybe Int
          , bookLevel :: Maybe Int
-         , reread :: Int
+         , reread :: Int          
+	    -- ^ Number of tractatus in the text.  This is normally 1
+	    -- and ignored for any text but tractatus, but there are a
+	    -- few canon examples of texts that count as multiple tractatus.
        }  deriving (Eq,Generic)
 instance ToJSON BookStats
 instance FromJSON BookStats where
