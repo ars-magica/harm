@@ -177,6 +177,8 @@
       },
       { "season" : "Summer 1256"
        , "story" : [ { "title" : "Tribunal 1256"
+          , "SQ" : 9 
+          , "comment" : "1 confidence per session active." 
           , "narrative" : [ "Gathering at Communova.  Tadgh the Bard and Aurelia of Mercere are announcing news, Aurelia from the covenant and Tadgh from the war in Breifne."
              , "Tim meets Savriu of Verditius, visiting from the East. Saveriu knows of the hospitalier plans, and offers a spell to erect a fortress."
              , "Sean approaches Cormoran the hedge elementalist to inquire about Irish tradition, but gets a rather non-infromative answer.  Coromoran encourages him to learn from his grandparents, but Sean who was taken into apprenticeship does not remember them. He knows that his clan was the O'Sullivan and decides to seek them out. Sean invites Cormoran to come to Elk's Run, but Cormoran does not appear thrilled."
