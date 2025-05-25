@@ -1725,7 +1725,8 @@
       ]
       }, { "mode" : "Vis study", "season" : "Spring 1257"
       , "sourceQuality" : 28
-      , "changes" : [ { "art" : "Imaginem", "xp" : 28 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 28
+                      , "bonusXP" : 1, "comment" : "with Correspondent" } 
                     , { "possession" : { "art" : "Im", "count" : -6
 		        , "comment" : "vis study" } } ]
       }, { "mode" : "Lab Work", "season" : "Summer 1257"
@@ -1735,8 +1736,30 @@
       ]
       }, { "mode" : "Lab Work", "season" : "Summer 1257"
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "comment" : "Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6"
       , "changes" : [ 
          { "ability" : "Magic Theory", "xp" : 2 }
+         , { "possession" : 
+	       { "enchantment" : { "lesseritem" :
+		   { "name" : "Cup of Purifying Drink"
+		      , "level" : 30
+		      , "technique" : "Cr"
+		      , "form" : "Co"
+		      , "range" : "Touch"
+		      , "duration" : "Moon"
+		      , "target" : "Ind"
+		      , "modifiers" : "12 uses/day"
+		      , "design" : "GL 5, +1 Touch, +3 Moon, +5 levels for uses"
+		      , "description" : [
+                       "Like *Improved Purification of the Festering Wounds*"
+                       , "works on one who drinks from the cup"
+                      ]
+		   }
+		}
+               }
+         }
+                    , { "possession" : { "art" : "Cr", "count" : -3
+		        , "comment" : "for enchantment" } }
       ]
       },
       { "mode" : "Author", "season" : "Autumn 1257"
