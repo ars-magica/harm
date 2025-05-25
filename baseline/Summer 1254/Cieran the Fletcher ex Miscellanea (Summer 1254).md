@@ -170,7 +170,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 25 | 25.5 | 10 |
+| Imaginem | 25 | 24.5 | 10 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | -2 |
@@ -837,12 +837,12 @@ Total: 1183 levels of spells.
         + Art: Imaginem 18xp; 
     + Validated: Correctly spent 18 xp.
     + Validated: Book ImaginemQ14Maine is available.
-+ Spring 1248 (14+4xp) Reading
++ Spring 1248 (14+3xp) Reading
     + *Oswald's tractatus Q14 + correspondent*
     + Uses *Mystery Visions* by Oswald of Bonisagus (No Time)
     + Changing traits
-        + Art: Imaginem 18xp; 
-    + Validated: Correctly spent 18 xp.
+        + Art: Imaginem 17xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Validated: Correctly spent 17 xp.
     + Validated: Book ImaginemQ14Oswald is available.
 + Winter 1248 (12+3xp) (1 years) Reading
     + *Summa L20Q12; no aging (-4)*
@@ -933,13 +933,13 @@ Total: 1183 levels of spells.
     + Changing traits
         + Ability: Latin 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Summer 1245 (10+4xp) Reading
++ Summer 1245 (10+3xp) Reading
     + *Summa; capped at 19 +1½xp for correspondent (191½xp)*
     + Uses *The true meaning of Sound* by Light and Shadow (No Time)
     + Changing traits
         + Art: Imaginem 13xp; 
-        + Art: Imaginem 1xp; 
-    + Validated: Correctly spent 14 xp.
+        + Art: Imaginem 0xp + 1 bonus xp;  (bonus XP from correspondent)
+    + Validated: Correctly spent 13 xp.
     + Validated: Book ImaginemL19Q10 is available.
 + Spring 1245 (15xp) Adventure
     + *4 conf pts*
@@ -1537,17 +1537,17 @@ Total: 1183 levels of spells.
         + Art: Creo 17xp; 
     + Validated: Correctly spent 17 xp.
     + Validated: Book CreoL15Q14 is available.
-+ Winter 1227 (2+1xp) (1 years) LabWork (Exposure)
++ Winter 1227 (2xp) (1 years) LabWork (Exposure)
     + *Training for Hiccup in Magic Theory (SQ 8 for Hiccup).*
     + *Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera*
     + Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.
     + Changing traits
-        + Ability: Hermes Lore 1xp; 
+        + Ability: Hermes Lore 0xp + 1 bonus xp;  (Bonus XP from Folio)
         + Ability: Magic Theory 2xp; 
         + Possession: Cr vis (-3)
     + Inferred traits
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 + Autumn 1226 (13+3xp) Reading
     + Uses *The Mind's Eye* by Sophia of Jerbiton (No Time)
     + Changing traits
@@ -1869,14 +1869,14 @@ Total: 1183 levels of spells.
     + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
     + *Training Lucius in Magic Theory (SQ 15).*
     + Lab Total 70
-    + Art: Imaginem 3xp; 
+    + Art: Imaginem 2xp + 1 bonus xp;  (with correspondent)
     + Spell: CrIm15 Book of Images 0xp Quiet Casting
     + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
     + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
 + Summer 1256 (9xp) Reading
     + Reads the new Q9 Tractatus from Vigil
     + Uses: Im-Vigil-Q9
-    + Art: Imaginem 13xp; 
+    + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
 + Winter 1257 Teaching (Exposure)
     + *Teaching Luciu*
     + Aging Rolled -1 (5)  [No aging.]

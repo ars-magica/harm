@@ -510,13 +510,12 @@
       },
       { "mode" : "Lab Work", "season" : "Winter 1227"
       , "sourceQuality" : 2
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : [ "Training for Hiccup in Magic Theory (SQ 8 for Hiccup)."
                       , "Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera"
       ]
       , "comment" : [ "Exposure 2xp Magic Theory. Bonus XP in Hermes Lore." ]
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
-                    , { "ability" : "Hermes Lore", "xp" : 1 } 
+                    , { "ability" : "Hermes Lore", "bonusXP" : 1, "comment" : "Bonus XP from Folio" } 
                     , { "possession" : { "art" : "Cr", "count" : -3
 		        , "comment" : "for the Safe Cauldron" } } ]
       },
@@ -1227,11 +1226,10 @@
       },
       { "mode" : "Reading", "season" : "Summer 1245"
       , "sourceQuality" : 10
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "usesBook" : "ImaginemL19Q10"
       , "narrative" : "Summa; capped at 19 +1½xp for correspondent (191½xp) "
       , "changes" : [ { "art" : "Imaginem", "xp" : 13, "levelCap" : 19 } 
-                    , { "art" : "Imaginem", "xp" : 1 } ]
+                    , { "art" : "Imaginem", "bonusXP" : 1, "comment" : "bonus XP from correspondent" } ]
       },
       { "mode" : "Copying", "season" : "Autumn 1245"
       , "sourceQuality" : 2
@@ -1324,9 +1322,9 @@
       { "mode" : "Reading", "season" : "Spring 1248"
       , "sourceQuality" : 14
       , "usesBook" : "ImaginemQ14Oswald"
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Oswald's tractatus Q14 + correspondent "
-      , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
+      , "changes" : [ { "art" : "Imaginem", "xp" : 17
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } ]
       },
       { "mode" : "Reading", "season" : "Summer 1248"
       , "sourceQuality" : 14

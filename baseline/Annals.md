@@ -23,7 +23,7 @@
     + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
     + *Training Lucius in Magic Theory (SQ 15).*
     + Lab Total 70
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Winter 1256
 
@@ -324,7 +324,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Oswald's tractatus Q14 + correspondent*
     + Uses *Mystery Visions* by Oswald of Bonisagus (No Time)
-    + Validated: Correctly spent 18 xp.
+    + Validated: Correctly spent 17 xp.
     + Validated: Book ImaginemQ14Oswald is available.
 
 ## Winter 1248
@@ -421,7 +421,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Summa; capped at 19 +1½xp for correspondent (191½xp)*
     + Uses *The true meaning of Sound* by Light and Shadow (No Time)
-    + Validated: Correctly spent 14 xp.
+    + Validated: Correctly spent 13 xp.
     + Validated: Book ImaginemL19Q10 is available.
 
 ## Spring 1245
@@ -941,7 +941,7 @@
     + *Training for Hiccup in Magic Theory (SQ 8 for Hiccup).*
     + *Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera*
     + Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Autumn 1226
 
