@@ -1690,6 +1690,8 @@
       , "sourceQuality" : 9
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 12, "bonusXP" : 1, "comment" : "with Correspondent" }
+         , { "confidence" : "Confidence", "points" : 1 }
+         , { "confidence" : "Confidence", "points" : -1 }
       ]
       },
       { "mode" : "Teaching", "season" : "Winter 1257"
