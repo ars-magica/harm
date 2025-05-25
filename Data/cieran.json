@@ -1733,6 +1733,16 @@
       , "changes" : [ 
          { "ability" : "Magic Theory", "xp" : 2 }
       ]
+      }, { "mode" : "Lab Work", "season" : "Summer 1257"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "changes" : [ 
+         { "ability" : "Magic Theory", "xp" : 2 }
+      ]
+      },
+      { "mode" : "Author", "season" : "Autumn 1257"
+      , "sourceQuality" : 2
+      , "narrative" : "Tractatus on Imaginem Q14: *Volume III on Imaginem*"
+      , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       }
    ]
 }
