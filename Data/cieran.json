@@ -1777,11 +1777,13 @@
             , "tefo" : "MuCo15", "level" : 15
             , "mastery" : [ "Quiet Casting" ]
          }
-         , { "spell" : "Shape of the Canine Companion"
+         , { "ability" : "Hermes Lore", "bonusXP" : 1 }
+         , { "spell" : "Shape of the Feline Grace"
             , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
-            , "description" : "As per Shape of the Woodland Prowler but turns in to a dog"
+            , "description" : "As per Shape of the Woodland Prowler but turns in to a lynx"
             , "tefo" : "MuCo(An)25", "level" : 25
             , "mastery" : [ "Quiet Casting" ]
+            , "comment" : "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
          }
       ]
       }
