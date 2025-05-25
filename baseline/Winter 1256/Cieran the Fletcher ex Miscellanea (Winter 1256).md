@@ -167,7 +167,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 6 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 27 | 21 | 5 |
+| Imaginem | 27 | 16.5 | 5 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -630,16 +630,16 @@ Total: 1249 levels of spells.
 
 ## Past Advancement
 
-+ Winter 1256 (2+1xp) (1 years) Teaching (Exposure)
++ Winter 1256 (2xp) (1 years) Teaching (Exposure)
     + *Teaching spells to Luciu*
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
     + Changing traits
-        + Art: Imaginem 3xp; 
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Aging Rolled -1 (10)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
 + Autumn 1255 (2xp) Authoring (Exposure)
     + *Author *Arrow's Flight*, an Auram Tracatus*
@@ -649,12 +649,12 @@ Total: 1249 levels of spells.
         + Possession: Co vis (6)
         + Possession: Cr vis (2)
     + Validated: Correctly spent 2 xp.
-+ Summer 1255 (12+4xp) Reading
++ Summer 1255 (12+3xp) Reading
     + Reads the new Q12 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)
     + Changing traits
-        + Art: Imaginem 16xp; 
-    + Validated: Correctly spent 16 xp.
+        + Art: Imaginem 15xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Validated: Correctly spent 15 xp.
     + Validated: Book Im-Vigil-Q12 is available.
 + Spring 1255 (2xp) LabWork (Exposure)
     + *ReVi Spells; Train Luciu in Magic Theory (SQ 15).*
@@ -733,38 +733,38 @@ Total: 1249 levels of spells.
         + Spell: ReVi5 The Minute of Reckoning 0xp with flawless magic
         + Spell: ReVi20 Opening the Intangible Tunnel 0xp with flawless magic
     + Validated: Correctly spent 2 xp.
-+ Spring 1253 (9+4xp) Reading
++ Spring 1253 (9+3xp) Reading
     + *Bonus SQ +4 from Book Learner and Correspondent (101->114)*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
-        + Art: Rego 13xp; 
-    + Validated: Correctly spent 13 xp.
+        + Art: Rego 12xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
-+ Winter 1253 (9+4xp) (1 years) Reading
++ Winter 1253 (9+3xp) (1 years) Reading
     + *Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
-        + Art: Rego 13xp; 
+        + Art: Rego 12xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Aging Rolled -21 (-1)  [No aging.]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 13 xp.
+    + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
-+ Autumn 1252 (15+1xp) Adventure
++ Autumn 1252 (15xp) Adventure
     + *Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11*
     + Changing traits
         + Ability: Faerie Lore 4xp; 
         + Ability: Hermes Lore 4xp; 
         + Ability: Latin 2xp; 
-        + Art: Imaginem 6xp; 
+        + Art: Imaginem 5xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Confidence: 0 (5)
         + Possession: Cr vis (2)
         + Possession: Im vis (4)
         + Possession: Me vis (2)
         + Possession: Te vis (3)
-    + Validated: Correctly spent 16 xp.
+    + Validated: Correctly spent 15 xp.
 + Summer 1252 (13+3xp) Reading
     + *To 83xp*
     + Uses *Magic Companion* by Bella of Bonisagus (No Time)
@@ -772,14 +772,14 @@ Total: 1249 levels of spells.
         + Art: Vim 16xp; 
     + Validated: Correctly spent 16 xp.
     + Validated: Book VimL15Q13 is available.
-+ Spring 1252 (2+1xp) LabWork (Exposure)
++ Spring 1252 (2xp) LabWork (Exposure)
     + *ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)*
     + Changing traits
-        + Art: Imaginem 3xp; 
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Spell: ReIm35 Confusion of the Insane Vibrations 0xp Penetration
     + Inferred traits
         + Spell: ReIm35 Confusion of the Insane Vibrations 0xp with flawless magic
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 + Winter 1252 (9+3xp) (1 years) Reading
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
     + Changing traits
@@ -803,10 +803,10 @@ Total: 1249 levels of spells.
         + Art: Rego 12xp; 
     + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
-+ Spring 1251 (2+1xp) LabWork (Exposure)
++ Spring 1251 (2xp) LabWork (Exposure)
     + *InIm spells below ->  281½.  Lab total 71*
     + Changing traits
-        + Art: Imaginem 3xp; 
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Spell: InIm5 Prying Eyes 0xp Penetration
         + Spell: InIm10 Brushstrokes Revealed 0xp Penetration
         + Spell: InIm20 Palm of Seeing (Sun duration) 0xp Penetration
@@ -814,7 +814,7 @@ Total: 1249 levels of spells.
         + Spell: InIm5 Prying Eyes 0xp with flawless magic
         + Spell: InIm10 Brushstrokes Revealed 0xp with flawless magic
         + Spell: InIm20 Palm of Seeing (Sun duration) 0xp with flawless magic
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 + Winter 1251 (13+3xp) (1 years) Reading
     + *Summa L15Q13 + Book Learner 96 -> 112; no aging -20*
     + Uses *Investigatione* by Perceptivus of Guernicus (No Time)
@@ -841,12 +841,12 @@ Total: 1249 levels of spells.
         + Art: Corpus 15xp; 
     + Validated: Correctly spent 15 xp.
     + Validated: Book CorpusL17Q12 is available.
-+ Spring 1250 (11+4xp) Reading
++ Spring 1250 (11+3xp) Reading
     + *Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity*
     + Uses *Approaching Silence and Invisibility* by Rudolph of Merinita at Irencilia (No Time)
     + Changing traits
-        + Art: Imaginem 15xp; 
-    + Validated: Correctly spent 15 xp.
+        + Art: Imaginem 14xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Validated: Correctly spent 14 xp.
     + Validated: Book ImaginemQ11Rudolph is available.
 + Winter 1250 (2xp) (1 years) LabWork (Exposure)
     + *no aging (-18); invent InHe25 Converse with Plant and Tree*
@@ -880,33 +880,33 @@ Total: 1249 levels of spells.
         + Art: Intellego 16xp; 
     + Validated: Correctly spent 16 xp.
     + Validated: Book IntellegoL15Q13 is available.
-+ Winter 1249 (2+1xp) (1 years) LabWork (Exposure)
++ Winter 1249 (2xp) (1 years) LabWork (Exposure)
     + *254½xp Invisibility Quartz for Sean; see below ; no aging (-18)*
     + Changing traits
-        + Art: Imaginem 3xp; 
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Possession: Me vis (4)
         + Aging Rolled -18 (0)  [No aging. Die not recorded]
     + Inferred traits
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
-+ Autumn 1248 (2+1xp) LabWork (Exposure)
++ Autumn 1248 (2xp) LabWork (Exposure)
     + *250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3*
     + Changing traits
-        + Art: Imaginem 3xp; 
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
         + Spell: MuIm10 Aura of the Trustful Merchant 0xp Quiet Casting
         + Spell: MuIm25 Ogre's Stench 0xp Quiet Casting
     + Inferred traits
         + Spell: MuIm10 Aura of the Trustful Merchant 0xp with flawless magic
         + Spell: MuIm25 Ogre's Stench 0xp with flawless magic
-    + Validated: Correctly spent 3 xp.
-+ Summer 1248 (14+4xp) Reading
+    + Validated: Correctly spent 2 xp.
++ Summer 1248 (14+3xp) Reading
     + *Maine's tractatus Q14 + correspondent (245½xp)*
     + Uses *Hibernian Musings on the Hermetic Arts - Volume 7 Imaginem* by Maine Chleitigh ex Bonisagus (No Time)
     + Changing traits
-        + Art: Imaginem 18xp; 
-    + Validated: Correctly spent 18 xp.
+        + Art: Imaginem 17xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Validated: Correctly spent 17 xp.
     + Validated: Book ImaginemQ14Maine is available.
 + Spring 1248 (14+3xp) Reading
     + *Oswald's tractatus Q14 + correspondent*
@@ -1540,17 +1540,17 @@ Total: 1249 levels of spells.
     + Changing traits
         + Ability: Teaching [apprentices] 2xp; 
     + Validated: Correctly spent 2 xp.
-+ Spring 1229 (2+1xp) LabWork (Exposure)
++ Spring 1229 (2xp) LabWork (Exposure)
     + *Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore*
     + Changing traits
-        + Ability: Hermes Lore 1xp; 
+        + Ability: Hermes Lore 0xp + 1 bonus xp;  (Bonus XP from Folio)
         + Ability: Magic Theory 2xp; 
         + Spell: ReIm10 Circle of Undisturbed Rest 0xp Quiet Casting
         + Spell: ReIm20 Willful Sidestep 0xp Quiet Casting
     + Inferred traits
         + Spell: ReIm10 Circle of Undisturbed Rest 0xp with flawless magic
         + Spell: ReIm20 Willful Sidestep 0xp with flawless magic
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 + Winter 1229 (16+3xp) (1 years) Reading
     + *Reads *Corpus Hermeticus* which Phillipedes had on loan.*
     + Changing traits

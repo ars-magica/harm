@@ -575,10 +575,10 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1229"
       , "sourceQuality" : 2
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Folio bonus in Hermes Lore" }
       , "narrative" : "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore"
       , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } 
-                    , { "ability" : "Hermes Lore", "xp" : 1 } 
+                    , { "ability" : "Hermes Lore", "bonusXP" : 1
+		    , "comment" : "Bonus XP from Folio" } 
                     , { "spell" : "Circle of Undisturbed Rest"
                        , "tefo" : "ReIm", "level" : 10
                        , "mastery" : [ "Quiet Casting" ] 
@@ -1329,15 +1329,15 @@
       { "mode" : "Reading", "season" : "Summer 1248"
       , "sourceQuality" : 14
       , "usesBook" : "ImaginemQ14Maine"
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Maine's tractatus Q14 + correspondent (245½xp) "
-      , "changes" : [ { "art" : "Imaginem", "xp" : 18 } ]
+      , "changes" : [ { "art" : "Imaginem", "xp" : 17
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1248"
       , "sourceQuality" : 2
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : " 250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 2 
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
          , { "spell" : "Ogre's Stench"
             , "tefo" : "MuIm", "level" : 25
 	    , "mastery" : [ "Quiet Casting" ]
@@ -1351,9 +1351,9 @@
       },
       { "mode" : "Lab Work", "season" : "Winter 1249"
       , "sourceQuality" : 2
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : " 254½xp Invisibility Quartz for Sean; see below ; no aging (-18)"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 2
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
          , { "aging" : { "apparentYounger" : 1
             , "die" : 0
             , "roll" : -18
@@ -1403,9 +1403,9 @@
       { "mode" : "Reading", "season" : "Spring 1250"
       , "sourceQuality" : 11
       , "usesBook" : "ImaginemQ11Rudolph"
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 15 } ]
+      , "changes" : [ { "art" : "Imaginem", "xp" : 14
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } ]
       },
       { "mode" : "Reading", "season" : "Summer 1250"
       , "sourceQuality" : 12
@@ -1434,9 +1434,9 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1251"
       , "sourceQuality" : 2
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "InIm spells below ->  281½.  Lab total 71"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 2
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
          , { "spell" : "Palm of Seeing (Sun duration)"
             , "tefo" : "InIm", "level" : 20
            , "mastery" : [ "Penetration" ] }
@@ -1474,9 +1474,9 @@
       },
       { "mode" : "Lab Work", "season" : "Spring 1252"
       , "sourceQuality" : 3
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 3 } 
+      , "changes" : [ { "art" : "Imaginem", "xp" : 2
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
          , { "spell" : "Confusion of the Insane Vibrations"
            , "tefo" : "ReIm", "level" : 35
 	    , "mastery" : [ "Penetration" ]
@@ -1491,9 +1491,9 @@
       },
       { "mode" : "Adventure", "season" : "Autumn 1252"
       , "sourceQuality" : 15
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11"
-      , "changes" : [ { "art" : "Imaginem", "xp" : 6 }
+      , "changes" : [ { "art" : "Imaginem", "xp" : 5
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
                     , { "ability" : "Faerie Lore", "xp" : 4 }
                     , { "ability" : "Latin", "xp" : 2 }
                     , { "ability" : "Hermes Lore", "xp" : 4 }
@@ -1510,10 +1510,10 @@
       },
       { "mode" : "Reading", "season" : "Winter 1253"
       , "sourceQuality" : 9
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21"
       , "usesBook" : [ "RegoL20Q9" ]
-      , "changes" : [ { "art" : "Rego", "xp" : 13 } 
+      , "changes" : [ { "art" : "Rego", "xp" : 12  
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" } 
             , { "aging" : { "apparentYounger" : 1
                , "die" : -1
                , "roll" : -21
@@ -1524,10 +1524,10 @@
       },
       { "mode" : "Reading", "season" : "Spring 1253"
       , "sourceQuality" : 9
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Bonus SQ +4 from Book Learner and Correspondent (101->114)"
       , "usesBook" : [ "RegoL20Q9" ]
-      , "changes" : [ { "art" : "Rego", "xp" : 13 } ]
+      , "changes" : [ { "art" : "Rego", "xp" : 12
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" }  ]
       },
       { "mode" : "Lab Work", "season" : "Summer 1253"
       , "sourceQuality" : 2
@@ -1635,9 +1635,9 @@
       , "comment" : "Reads the new Q12 Tractatus from Vigil"
       , "usesBook" : "Im-Vigil-Q12"
       , "sourceQuality" : 12
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "changes" : [ 
-           { "art" : "Imaginem", "xp" : 16 }
+           { "art" : "Imaginem", "xp" : 15
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" }  
       ]
       },
       { "mode" : "Author", "season" : "Autumn 1255"
@@ -1651,11 +1651,11 @@
 		        , "comment" : "allowance/salary TBC" } } ]
       },
       { "mode" : "Teaching", "season" : "Winter 1256"
-      , "bonusQuality" : { "sourceBonus" : 1, "bonusSource" : "Correspondent" }
       , "narrative" : "Teaching spells to Luciu"
       , "comment" : "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
       , "changes" : [ 
-           { "art" : "Imaginem", "xp" : 3 }
+           { "art" : "Imaginem", "xp" : 2
+	 , "bonusXP" : 1, "comment" : "Bonus XP from correspondent" }  
             , { "aging" : { "apparentYounger" : 1
                , "die" : 10
                , "roll" : -1

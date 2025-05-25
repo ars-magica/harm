@@ -33,7 +33,7 @@
 + Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
     + *Teaching spells to Luciu*
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
 
 ## Autumn 1255
@@ -55,7 +55,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Reads the new Q12 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)
-    + Validated: Correctly spent 16 xp.
+    + Validated: Correctly spent 15 xp.
     + Validated: Book Im-Vigil-Q12 is available.
 
 ## Spring 1255
@@ -168,7 +168,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Bonus SQ +4 from Book Learner and Correspondent (101->114)*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
-    + Validated: Correctly spent 13 xp.
+    + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
 
 ## Winter 1253
@@ -176,7 +176,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21*
     + Uses *Control as an art form* by Ivor ex Tremere (No Time)
-    + Validated: Correctly spent 13 xp.
+    + Validated: Correctly spent 12 xp.
     + Validated: Book RegoL20Q9 is available.
     + Validated: Aging roll made
 
@@ -184,7 +184,7 @@
 
 + Cieran the Fletcher ex Miscellanea (Adventure)
     + *Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11*
-    + Validated: Correctly spent 16 xp.
+    + Validated: Correctly spent 15 xp.
 
 ## Summer 1252
 
@@ -198,7 +198,7 @@
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)*
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Winter 1252
 
@@ -225,7 +225,7 @@
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *InIm spells below ->  281½.  Lab total 71*
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Winter 1251
 
@@ -257,7 +257,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity*
     + Uses *Approaching Silence and Invisibility* by Rudolph of Merinita at Irencilia (No Time)
-    + Validated: Correctly spent 15 xp.
+    + Validated: Correctly spent 14 xp.
     + Validated: Book ImaginemQ11Rudolph is available.
 
 ## Winter 1250
@@ -296,7 +296,7 @@
     + ERROR: Older than 35. Aging roll required.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *254½xp Invisibility Quartz for Sean; see below ; no aging (-18)*
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
 
 ## Autumn 1248
@@ -305,7 +305,7 @@
     + Validated: Correctly spent 4 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3*
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Summer 1248
 
@@ -314,7 +314,7 @@
 + Cieran the Fletcher ex Miscellanea (Reading)
     + *Maine's tractatus Q14 + correspondent (245½xp)*
     + Uses *Hibernian Musings on the Hermetic Arts - Volume 7 Imaginem* by Maine Chleitigh ex Bonisagus (No Time)
-    + Validated: Correctly spent 18 xp.
+    + Validated: Correctly spent 17 xp.
     + Validated: Book ImaginemQ14Maine is available.
 
 ## Spring 1248
@@ -879,7 +879,7 @@
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore*
-    + Validated: Correctly spent 3 xp.
+    + Validated: Correctly spent 2 xp.
 
 ## Winter 1229
 
