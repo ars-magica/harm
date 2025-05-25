@@ -1,9 +1,14 @@
 # Annals
 
+## Spring 1257
+
++ Cieran the Fletcher ex Miscellanea (Vis Study)
+    + Validated: Correctly spent 28 xp.
+
 ## Winter 1257
 
-+ Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
-    + *Teaching Luciu*
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Training Luciu in Magic Theory SQ 15*
     + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
 

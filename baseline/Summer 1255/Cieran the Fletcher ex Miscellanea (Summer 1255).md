@@ -1906,14 +1906,33 @@ Total: 1249 levels of spells.
     + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
     + Confidence: 0 (1)
     + Confidence: 0 (-1)
+    + Possession: Im vis (3)
 + Autumn 1256 LabWork (Exposure)
     + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
     + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
     + Spell: MuIm5 False Dune 0xp Quiet Casting
     + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
     + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
-+ Winter 1257 Teaching (Exposure)
-    + *Teaching Luciu*
-    + Ability: Teaching 2xp; 
++ Winter 1257 LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
+    + Ability: Magic Theory 2xp; 
+    + Spell: (An)5MuCo5 Radiance of the Golden Firefly 0xp Penetration
+    + Spell: 15MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
+    + Spell: (An)25MuCo25 Shape of the Canine Companion 0xp Quiet Casting
     + Aging Rolled -1 (5)  [No aging.]
++ Spring 1257 (28xp) Vis Study
+    + Art: Imaginem 28xp + 1 bonus xp;  (with Correspondent)
+    + Possession: Im vis (-6)
++ Summer 1257 LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
+    + Ability: Magic Theory 2xp; 
++ Summer 1257 LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
+    + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
+    + Ability: Creo 2xp; 
+    + Possession: Cup of Purifying Drink
+    + Possession: Cr vis (-3)
++ Autumn 1257 (2xp) Authoring (Exposure)
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
+    + Ability: Latin 2xp; 
 
