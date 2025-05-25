@@ -1713,28 +1713,10 @@
             , "mastery" : [ "Penetration" ]
          }
       ]
-      }, { "mode" : "Lab Work", "season" : "Winter 1257"
-      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      }, { "mode" : "Teaching", "season" : "Winter 1257"
+      , "narrative" : "Teaching Latin to Luciu SQ 21"
       , "changes" : [ 
-         { "ability" : "Magic Theory", "xp" : 2 }
-         , { "spell" : "Radiance of the Golden Firefly"
-            , "design" : "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
-            , "description" : "The skin and hair of a person glow bright like the thorax of a firefly."
-            , "tefo" : "MuCo(An)5", "level" : 5
-            , "mastery" : [ "Penetration" ]
-         }
-         , { "spell" : "Disguise of the Transformed Person"
-            , "design" : "Base 3; R: Touch (+1), D: Sun (+2), T: Ind (+0), +1 Complex Effect"
-            , "description" : "Transforms the entire person (casting requisites transform items worn and carried as Personal)."
-            , "tefo" : "MuCo15", "level" : 15
-            , "mastery" : [ "Quiet Casting" ]
-         }
-         , { "spell" : "Shape of the Canine Companion"
-            , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
-            , "description" : "As per Shape of the Woodland Prowler but turns in to a dog"
-            , "tefo" : "MuCo(An)25", "level" : 25
-            , "mastery" : [ "Quiet Casting" ]
-         }
+         { "ability" : "Teaching", "xp" : 2 }
          ,  { "aging" : { "apparentYounger" : 1
                , "die" : 5
                , "roll" : -1
@@ -1784,6 +1766,29 @@
       , "sourceQuality" : 2
       , "narrative" : "Tractatus on Imaginem Q14: *Volume III on Imaginem*"
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
+      }, { "mode" : "Lab Work", "season" : "Winter 1260"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "changes" : [ 
+         { "ability" : "Magic Theory", "xp" : 2 }
+         , { "spell" : "Radiance of the Golden Firefly"
+            , "design" : "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+            , "description" : "The skin and hair of a person glow bright like the thorax of a firefly."
+            , "tefo" : "MuCo(An)5", "level" : 5
+            , "mastery" : [ "Penetration" ]
+         }
+         , { "spell" : "Disguise of the Transformed Person"
+            , "design" : "Base 3; R: Touch (+1), D: Sun (+2), T: Ind (+0), +1 Complex Effect"
+            , "description" : "Transforms the entire person (casting requisites transform items worn and carried as Personal)."
+            , "tefo" : "MuCo15", "level" : 15
+            , "mastery" : [ "Quiet Casting" ]
+         }
+         , { "spell" : "Shape of the Canine Companion"
+            , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+            , "description" : "As per Shape of the Woodland Prowler but turns in to a dog"
+            , "tefo" : "MuCo(An)25", "level" : 25
+            , "mastery" : [ "Quiet Casting" ]
+         }
+      ]
       }
    ]
 }
