@@ -1694,9 +1694,28 @@
          , { "confidence" : "Confidence", "points" : -1 }
       ]
       },
+      { "mode" : "Lab Work", "season" : "Autumn 1256"
+      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
+         , { "spell" : "False Dune"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Quiet Casting" ]
+         }
+         , { "spell" : "Glowing Footprints of the Thief"
+            , "tefo" : "MuIm", "level" : 20
+            , "mastery" : [ "Quiet Casting" ]
+         }
+         , { "spell" : "Confound the Rival Singer"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Penetration" ]
+         }
+      ]
+      },
       { "mode" : "Teaching", "season" : "Winter 1257"
       , "narrative" : "Teaching Luciu"
       , "changes" : [ 
+         { "ability" : "Teaching", "xp" : 2 },
             { "aging" : { "apparentYounger" : 1
                , "die" : 5
                , "roll" : -1

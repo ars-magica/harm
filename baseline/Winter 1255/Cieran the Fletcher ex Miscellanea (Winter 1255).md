@@ -1881,7 +1881,16 @@ Total: 1183 levels of spells.
     + Reads the new Q9 Tractatus from Vigil
     + Uses: Im-Vigil-Q9
     + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
+    + Confidence: 0 (1)
+    + Confidence: 0 (-1)
++ Autumn 1256 LabWork (Exposure)
+    + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
+    + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
+    + Spell: MuIm5 False Dune 0xp Quiet Casting
+    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
+    + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
 + Winter 1257 Teaching (Exposure)
     + *Teaching Luciu*
+    + Ability: Teaching 2xp; 
     + Aging Rolled -1 (5)  [No aging.]
 
