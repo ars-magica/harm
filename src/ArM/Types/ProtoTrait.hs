@@ -80,7 +80,8 @@ data ProtoTrait = ProtoTrait
     , multiplyXP :: Maybe Float  -- ^ XP multiplier from affinities and similar
     , cost :: Maybe Int          -- ^ cost of a virtue or flaw
     , points :: Maybe Int        -- ^ points for confidence/true faith/etc (additive)
-    , xp :: Maybe XPType         -- ^ XP to be added to the trait
+    , xp :: Maybe XPType         -- ^ XP allocated to the trait
+    , bonusXP :: Maybe XPType    -- ^ bonus XP not subject to affinity
     , agingPts :: Maybe Int      -- ^ aging points for characteristicds (additive)
     , charBonuses :: [(Int,Int)] -- ^ bonuses from virtues to apply to a characteristic
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
@@ -107,6 +108,7 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , cost = Nothing
                              , points = Nothing
                              , xp = Nothing
+                             , bonusXP = Nothing
                              , agingPts = Nothing
                              , charBonuses = []
                              , multiplicity = Nothing
@@ -173,6 +175,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "cost"
         <*> v .:?  "points"
         <*> v .:?  "xp"
+        <*> v .:?  "bonusXP"
         <*> v .:?  "agingPts"
         <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
@@ -194,7 +197,9 @@ showSpec pt | isNothing sp = ""
             | otherwise = " [" ++ fromJust sp ++ "]"
    where sp = spec pt
 showXP :: ProtoTrait -> String
-showXP p = " " ++ showNum ( fromMaybe 0 (xp p) ) ++ "xp"
+showXP p = " " ++ showNum ( fromMaybe 0 (xp p) ) ++ "xp" ++ f (bonusXP p)
+    where f Nothing = ""
+          f (Just x) = " +" ++ show x ++ " bonus xp"
 
 showMastery :: Maybe [String] -> String
 showMastery Nothing = ""
@@ -290,16 +295,17 @@ computeTrait' :: TraitKey     -- ^ The trait's key
               -> ProtoTrait   -- ^ The ProtoTrait 
               -> Maybe Trait  -- ^ Resulting Trait
 computeTrait' NoTrait _ = Nothing
-computeTrait' (AbilityKey x) p = Just $ AbilityTrait $
-           Ability { abilityName = x
+computeTrait' (AbilityKey nm) p = Just $ AbilityTrait $
+           Ability { abilityName = nm
                 , speciality = spec p
-                , abilityXP = fromMaybe 0 (xp p)
+                , abilityXP = x
                 , abilityScore = s
                 , abilityExcessXP = y
                 , abilityBonus = fromMaybe 0 $ bonusScore p
                 , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
                 }
-      where (s,y) = getAbilityScore (xp p)
+      where (s,y) = getAbilityScore (Just x)
+            x = fromMaybe 0 (xp p) + fromMaybe 0 (bonusXP p)
 computeTrait' vf@(VFKey _ _) p = fmap VFTrait $ computeVF vf p
 computeTrait' (CharacteristicKey x) p = Just $ CharacteristicTrait $ Characteristic
                 { characteristicName = x
@@ -316,7 +322,7 @@ computeTrait' (ArtKey nam) p = Just $ ArtTrait $
                     }
      where   y = x - pyramidScore s
              s = scoreFromXP x
-             x = fromMaybe 0 (xp p) 
+             x = fromMaybe 0 (xp p) + fromMaybe 0 (bonusXP p)
 computeTrait' (PTraitKey nam) p = Just $ PTraitTrait $ PTrait { ptraitName = nam
                            , pscore = fromMaybe 0 (score p) }
 computeTrait' (ConfidenceKey nam) p = Just $ ConfidenceTrait $ Confidence { cname = nam
@@ -340,7 +346,7 @@ computeTrait' (SpellKey ft lvl sn) p =  Just $ SpellTrait $
                 Spell { spellName = sn
                       , spellLevel = lvl
                       , spellTeFo = fote ft
-                      , spellXP = fromMaybe 0 (xp p)
+                      , spellXP = x
                       , masteryScore = s
                       , masteryOptions = fromMaybe [] (mastery p)
                       , spellExcessXP = y
@@ -348,13 +354,14 @@ computeTrait' (SpellKey ft lvl sn) p =  Just $ SpellTrait $
                       , spellCastingScore = Nothing
                       , spellTComment = fromMaybe "" $ ptComment p
                       }
-         where  (s',y) = getAbilityScore (xp p)
+         where  (s',y) = getAbilityScore (Just x)
                 fless = fromMaybe False $ flawless p
                 m | fless = 2
                   | otherwise = fromMaybe 1.0 $ multiplyXP p
                 s | s' > 0 = s'
                   | fless = 1
                   | otherwise = 0
+                x = fromMaybe 0 (xp p) + fromMaybe 0 (bonusXP p)
 computeTrait' _ _ = Nothing
 
 computeVF :: TraitKey -> ProtoTrait -> Maybe VF
@@ -412,7 +419,7 @@ instance TraitType Ability where
     advanceTrait a x = 
           updateBonus (bonusScore a) $ um (multiplyXP a) $
           updateAbilitySpec (spec a) $ updateAbilityXP lim y x
-      where y = calcXP m (abilityExcessXP x) (xp a) 
+      where y = calcXP m (abilityExcessXP x) (xp a) + fromMaybe 0 (bonusXP a)
             m = abilityMultiplier x
             um Nothing ab = ab 
             um abm ab = ab { abilityMultiplier = fromMaybe 1.0 abm }
@@ -421,7 +428,7 @@ instance TraitType Art where
     advanceTrait a x = 
           updateArtBonus (bonusScore a) $ um (multiplyXP a) $ 
           updateArtXP lim y x 
-      where y = calcXP m (artExcessXP x) (xp a) 
+      where y = calcXP m (artExcessXP x) (xp a) + fromMaybe 0 (bonusXP a)
             m = artMultiplier x
             um Nothing ab = ab 
             um abm ar = ar { artMultiplier = fromMaybe 1.0 abm }
@@ -432,7 +439,7 @@ instance TraitType Spell where
                      $ um (multiplyXP a)         -- update multiplier 
                      x
       -- where y = (spellExcessXP x) + (fromMaybe 0 $ xp a)
-      where y = calcXP m (spellExcessXP x) (xp a) 
+      where y = calcXP m (spellExcessXP x) (xp a) + fromMaybe 0 (bonusXP a)
             m = spellMultiplier x
             ms = fromMaybe [] $ mastery a
             um Nothing ab = ab 
