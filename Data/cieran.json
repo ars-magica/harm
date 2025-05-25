@@ -1692,6 +1692,8 @@
            { "art" : "Imaginem", "xp" : 12, "bonusXP" : 1, "comment" : "with Correspondent" }
          , { "confidence" : "Confidence", "points" : 1 }
          , { "confidence" : "Confidence", "points" : -1 }
+         , { "possession" : { "art" : "Im", "count" : 3
+	   , "comment" : "allowance" } }
       ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1256"
@@ -1711,16 +1713,25 @@
             , "mastery" : [ "Penetration" ]
          }
       ]
-      },
-      { "mode" : "Teaching", "season" : "Winter 1257"
-      , "narrative" : "Teaching Luciu"
+      }, { "mode" : "Lab Work", "season" : "Winter 1257"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
       , "changes" : [ 
-         { "ability" : "Teaching", "xp" : 2 },
+         { "ability" : "Magic Theory", "xp" : 2 },
             { "aging" : { "apparentYounger" : 1
                , "die" : 5
                , "roll" : -1
                , "comment" : "No aging."
 	    } }
+      ]
+      }, { "mode" : "Vis study", "season" : "Spring 1257"
+      , "sourceQuality" : 28
+      , "changes" : [ { "art" : "Imaginem", "xp" : 28 } 
+                    , { "possession" : { "art" : "Im", "count" : -6
+		        , "comment" : "vis study" } } ]
+      }, { "mode" : "Lab Work", "season" : "Summer 1257"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "changes" : [ 
+         { "ability" : "Magic Theory", "xp" : 2 }
       ]
       }
    ]
