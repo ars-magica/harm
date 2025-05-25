@@ -199,7 +199,7 @@ showSpec pt | isNothing sp = ""
 showXP :: ProtoTrait -> String
 showXP p = " " ++ showNum ( fromMaybe 0 (xp p) ) ++ "xp" ++ f (bonusXP p)
     where f Nothing = ""
-          f (Just x) = " +" ++ show x ++ " bonus xp"
+          f (Just x) = " + " ++ showNum x ++ " bonus xp"
 
 showMastery :: Maybe [String] -> String
 showMastery Nothing = ""
