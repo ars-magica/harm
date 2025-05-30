@@ -1697,21 +1697,30 @@
       ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1256"
-      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
+      , "comment" : "Lab total 47 +  similar spell +5; familiar +6 -> 58"
       , "changes" : [ 
-           { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
-         , { "spell" : "False Dune"
-            , "tefo" : "MuIm", "level" : 5
-            , "mastery" : [ "Quiet Casting" ]
+         { "ability" : "Creo", "xp" : 2 }
+         , { "possession" : 
+	       { "enchantment" : { "lesseritem" :
+		   { "name" : "Threshold of the Hospital"
+		      , "level" : 29
+		      , "technique" : "Cr"
+		      , "form" : "Co"
+		      , "range" : "Touch"
+		      , "duration" : "Sun"
+		      , "target" : "Room"
+		      , "modifiers" : "12 uses/day"
+		      , "design" : "GL 4, +1 Touch, +2 Moon, +2 Room, +4 constant effect"
+		      , "description" : [
+                       "Like *Purification of the Festering Wounds* (+9 recovery bonus)"
+                       , "works on everyone as long as the stay in the room"
+                      ]
+		   }
+		}
+               }
          }
-         , { "spell" : "Glowing Footprints of the Thief"
-            , "tefo" : "MuIm", "level" : 20
-            , "mastery" : [ "Quiet Casting" ]
-         }
-         , { "spell" : "Confound the Rival Singer"
-            , "tefo" : "MuIm", "level" : 5
-            , "mastery" : [ "Penetration" ]
-         }
+                    , { "possession" : { "art" : "Cr", "count" : -3
+		        , "comment" : "for enchantment" } }
       ]
       }, { "mode" : "Teaching", "season" : "Winter 1257"
       , "narrative" : "Teaching Latin to Luciu SQ 22"
@@ -1784,6 +1793,24 @@
             , "tefo" : "MuCo(An)", "level" : 25
             , "mastery" : [ "Quiet Casting" ]
             , "comment" : "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
+         }
+      ]
+      },
+      { "mode" : "Lab Work", "season" : "Autumn 1258"
+      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
+         , { "spell" : "False Dune"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Quiet Casting" ]
+         }
+         , { "spell" : "Glowing Footprints of the Thief"
+            , "tefo" : "MuIm", "level" : 20
+            , "mastery" : [ "Quiet Casting" ]
+         }
+         , { "spell" : "Confound the Rival Singer"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Penetration" ]
          }
       ]
       }
