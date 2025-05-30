@@ -1764,6 +1764,8 @@
          }
                     , { "possession" : { "art" : "Cr", "count" : -3
 		        , "comment" : "for enchantment" } }
+                    , { "reputation" : "Friendly druid",
+                       "locale" : "Lands of O'Sullivan", "xp" : 1 }
       ]
       },
       { "mode" : "Author", "season" : "Autumn 1257"
