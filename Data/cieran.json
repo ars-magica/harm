@@ -1719,7 +1719,7 @@
 		}
                }
          }
-                    , { "possession" : { "art" : "Cr", "count" : -3
+                    , { "possession" : { "art" : "Co", "count" : -3
 		        , "comment" : "for enchantment" } }
       ]
       }, { "mode" : "Teaching", "season" : "Winter 1257"
@@ -1762,7 +1762,7 @@
 		}
                }
          }
-                    , { "possession" : { "art" : "Cr", "count" : -3
+                    , { "possession" : { "art" : "Co", "count" : -3
 		        , "comment" : "for enchantment" } }
                     , { "reputation" : "Friendly druid",
                        "locale" : "Lands of O'Sullivan", "xp" : 1 }
