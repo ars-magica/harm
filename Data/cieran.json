@@ -1737,7 +1737,10 @@
       , "changes" : [ { "art" : "Imaginem", "xp" : 28
                       , "bonusXP" : 1, "comment" : "with Correspondent" } 
                     , { "possession" : { "art" : "Im", "count" : -6
-		        , "comment" : "vis study" } } ]
+		        , "comment" : "vis study" } } 
+                    , { "reputation" : "Friendly druid",
+                       "locale" : "Lands of O'Sullivan", "xp" : 1 }
+      ]
       }, { "mode" : "Lab Work", "season" : "Summer 1257"
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
       , "comment" : "Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6"
@@ -1764,8 +1767,6 @@
          }
                     , { "possession" : { "art" : "Co", "count" : -3
 		        , "comment" : "for enchantment" } }
-                    , { "reputation" : "Friendly druid",
-                       "locale" : "Lands of O'Sullivan", "xp" : 1 }
       ]
       },
       { "mode" : "Author", "season" : "Autumn 1257"
@@ -1798,7 +1799,8 @@
          }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Autumn 1258"
+      { "mode" : "Lab Work", "season" : "Spring 1258"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
       , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
