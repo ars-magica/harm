@@ -35,11 +35,11 @@ Saga
 Size
 : 0
 
-## Summer 1255
+## Winter 1258
 
-+ **Age:** 63 years (apparent age 51) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
++ **Age:** 66 years (apparent age 52) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
 + **Confidence**: 1 (33)
-+ **Warping**: 1 (9)
++ **Warping**: 2 (2)
 + **Characteristics:** 
 Int +3, 
 Per +1, 
@@ -55,7 +55,7 @@ Meddler 6,
 Villager 2, 
 + **Reputations:** 
 Crafter of Magic [Hermetic] 2 (5) , 
-Friendly druid [Lands of O'Sullivan] 3 (4) , 
+Friendly druid [Lands of O'Sullivan] 3 (5) , 
 Monster hunter [Village in Provence] 1 (0) , 
 + **Virtues and Flaws:** 
 Affinity with (art) [Imaginem] (1), 
@@ -88,17 +88,18 @@ Weak Spontaneous Magic (0),
     + Craft: Cooking [Cookies] 3 (0xp)
     + Craft: Fletching [Arrows] 3 (0xp)
     + Craft: Rope. [  --  ] 2 (0xp)
+    + Creo [  --  ] 0 (4xp)
     + Etiquette [  --  ] 0 (2xp)
     + Faerie Lore [Dark fey] 2 (5xp)
     + Finesse [Precision] 1 (0xp)
     + Folk Ken [Villagers] 1 (5xp)
     + Hermes Code [Stonehenge] 1 (0xp)
-    + Hermes Lore [Hibernia] 1 (6xp)
+    + Hermes Lore [Hibernia] 1 (7xp)
     + Infernal Lore [Undead] 1 (0xp)
-    + Latin [Hermetic Usage] 4 (12xp)
+    + Latin [Hermetic Usage] 4 (16xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
-    + Magic Theory [Spells] 7 (8xp)
+    + Magic Theory [Spells] 7 (10xp)
     + Native Language: Irish [Leinster] 5 (0xp)
     + Parma Magica [Mentem] 5 (0xp)
     + Penetration [Rego] 1 (0xp)
@@ -106,12 +107,12 @@ Weak Spontaneous Magic (0),
     + SOCP Lore [Self initiation] 4 +2 (2xp)
     + Second Sight [Faerie Illusions] 3 (0xp)
     + Stealth [Hiding] 1 (0xp)
-    + Teaching [apprentices] 2 (8xp)
+    + Teaching [apprentices] 2 (10xp)
     + Thrown Weapon [Dart] 1 (0xp)
 + Vis
-    + Cr vis (5)
+    + Cr vis (7)
     + Ig vis (3)
-    + Im vis (5)
+    + Im vis (2)
     + Me vis (10)
     + Rego Vis from Jerome's body (2)
     + Te vis (3)
@@ -129,6 +130,12 @@ Weak Spontaneous Magic (0),
     + Tress's Covenant
     + Tribunal Location (at polite distance)
 + Magic Items
+    + Cup of Purifying Drink  (CrCo30) lesser enchanted device
+        + Range: Touch, Duration: Moon, Target: Ind
+        + 12 uses/day
+        + *Like *Improved Purification of the Festering Wounds**
+        + *works on one who drinks from the cup*
+        + "GL 5, +1 Touch, +3 Moon, +5 levels for uses"
     + Porter’s Glove  (ReTe15) lesser enchanted device
         + Range: Touch, Duration: Conc, Target: Ind
         + 24 uses/day
@@ -141,6 +148,12 @@ Weak Spontaneous Magic (0),
         + *This enchanted chisel shapes and forms stone as if a well-equipped stone- mason were carving it. The device may be used to carve blocks from a quarry (hence the Part Target). The wielder’s Dexterity + Finesse roll substitutes for a mason’s Craft roll (with +3 to the comparable Ease Factor).*
         + *It is a Simple task for a Mason to cut a plain block, so the basic Finesse Ease Factor to use this device to cut blocks for building is 6. Grogs deputed to the task can usually be trusted to carve blocks of approximately regular shape, though they may need trimming to fit, when used.*
         + "GL 2, +1 stone, +1 Touch, +1 Part, +10 levels unlimited uses"
+    + Threshold of the Hospital  (CrCo29) lesser enchanted device
+        + Range: Touch, Duration: Sun, Target: Room
+        + 12 uses/day
+        + *Like *Purification of the Festering Wounds* (+9 recovery bonus)*
+        + *works on everyone as long as the stay in the room*
+        + "GL 4, +1 Touch, +2 Moon, +2 Room, +4 constant effect"
 + Equipment
     + Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog's tooth
     + Lantern
@@ -155,7 +168,7 @@ Weak Spontaneous Magic (0),
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
-| Creo | 17 | 10 | 5 |
+| Creo | 17 | 10 | 7 |
 | Intellego | 14 | 7 | 0 |
 | Muto | 8 | 0 | 0 |
 | Perdo | 8 | 0 | 0 |
@@ -166,7 +179,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 27 | 12.5 | 5 |
+| Imaginem | 29 | 25.5 | 2 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -191,6 +204,9 @@ Weak Spontaneous Magic (0),
     + Increases the caster's Quickness by one point up to a maximum of 0.
     + Base 30
     + Custom variant
++ *Disguise of the Transformed Person* MuCo15 (0)
++ *Disguise of the Transformed Person* MuCo15 (0)
+    + Mastery: 1 (0xp) 
 + *Wound without Cause* PeCo20 (23)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
@@ -244,105 +260,124 @@ Weak Spontaneous Magic (0),
     + Keeps heat and fire at bay, unable to approach within 1 pace of the target. This renders the target immune to damage from flames or heat of intensity less than that of molten iron. The target gets a +15 Soak against all fire-related damage. Any fire doing less than +15 damage per round doesn’t penetrate the ward. Such fires simply dim at the protected person’s passing and flare back up after he or she is gone.
     + Base 4, +2 for up to +15 damage, +1 Touch, +2 Sun
     + [ArM5:143]
-+ *False Window* CrIm5 (48)
++ *False Window* CrIm5 (50)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + This spell allows the magus to trace the frame of a door or window and create a miniature that seems to show something that lies beyond the frame. A Perception + Finesse roll is required to craft a convincing illusion. The Ease Factor is 9 if the image seems to show a room, 12 if it seems to show a structure, or 15 if it seems to run to the horizon. These numbers already include the reduction for limiting the viewer’s line of sight, but could be reduced or increased by familiarity with the depicted scene.  Many casters of False Window add an additional magnitude, so that figures within the image appear to move, and the pattern of light changes to suit the time of day, but this simpler version creates only a static image. This spell also models similar spells for the other senses: a mirror that plays a tune, provided its face is not turned toward a wall, is an example. Directly created species like these are resisted by the Parma Magica.
     + Base 2, +2 Sun or Ring, +1 Individual
     + [HoH:S:68]
-+ *Smoke of Escaping* CrIm5 (48)
++ *Smoke of Escaping* CrIm5 (50)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Diam; Target: Ind
     + Creates the illusion of a thick cloud of red smoke in the caster’s vicinity.
     + Base 1, +1 Touch, +1 Diameter, +1 size, +1 impenetrable to sight
     + [MoH:124]
-+ *Clarity of Public Speech* CrIm10 (48)
++ *The Studious Doppleganger* CrIm5 (50)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Sun; Target: Ind
+    + This spell creates a static copy of the caster, which sits on a stool and appears to be studying a book. The image is only visual.
+    + Base 1, +1 Touch, +2 Sun, +1 intricacy
+    + [App:47]
++ *Clarity of Public Speech* CrIm10 (50)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Sun; Target: Room
-+ *Horror Cabinet* CrIm35 (45)
++ *Book of Images* CrIm15 (50)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Ring; Target: Ind
+    + This spell creates moving sounds and images that are stored in a circle (such as a drawn circle on paper) as long as it is intact. With this spell it is possible to create a whole book or gallery of fantastic images and talking pictures, but only if proper Finesse rolls are made.
+    + Base 2, +1 Touch, +2 Ring, +1 moving images, +1 intricacy
+    + [MoH:124]
++ *Horror Cabinet* CrIm35 (47)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. Re
     + Range: Touch; Duration: Moon; Target: Room
     + Fills the room with horrible, moving images of beasts, ghosts, and undead threatening to devour any intruders.  Most will run in panic (failing a brave personality roll 12+), and some (botching such roll) may be driven insane.
     + Base 3 (three senses) + Touch + Moon +Room -> L25 +1 (Rego) +1 (Complexity) -> L35
-+ *Prying Eyes* InIm5 (45)
++ *The Shadow of Human Life* CrIm40 (38)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Req. Me
+    + Range: Touch; Duration: Sun; Target: Ind
+    + The human image created (as in Phantasm of the Human Form) has limited freedom and simulated intellect. It functions as an independent human, albeit a stupid one, capable of interpreting general orders in new situations.
+    + Base 2, +1 Touch, +2 Sun, +1 intricacy, +6 Mentem requisite, for a very elaborate effect
+    + [ArM:144]
++ *Prying Eyes* InIm5 (47)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Conc; Target: Room
     + You can see inside a room, as long as you can touch one of its walls. If the room is unlit or poorly lit, you can only see as much as you could if you were inside, but magical enhancements of your senses do apply. You may change your viewpoint within the room throughout the duration of the spell.
     + Base 1, +1 Touch, +1 Concentration, +2 Room
     + [ArM5:144]
-+ *Brushstrokes Revealed* InIm10 (45)
++ *Brushstrokes Revealed* InIm10 (47)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Ring; Target: Circle
     + This spell makes the species cast by an object within the circle more vivid, so that the magus can see tiny details that are otherwise invisible. This spell has traditionally been used to investigate the physical construction of artworks, but nature-oriented Jerbiton magi have recently begun using it to investigate the handiwork of God, by examining the tiny structures of creation.
     + Base 3, +1 Touch, +2 Ring
     + [HoH:S:65]
-+ *Palm of Seeing (Sun duration)* InIm20 (45)
++ *Palm of Seeing (Sun duration)* InIm20 (47)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Diam; Target: Vision
     + The caster can see from the perspective of the target. This spell must Penetrate in order to sense creatures with Magic Resistance.  Ariane has learned this spell to cast down an Intangible Tunnel.
     + Base 1, +1 Touch, +1 Diameter, +4 Vision
     + [TtA:80]
-+ *Eyes of the Eagle (touch)* InIm30 (45)
++ *Eyes of the Eagle (touch)* InIm30 (47)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Vision
     + You see distant things clearly. No matter how far away something is, you can make out details as if it were only a foot or so from you. Things do not all appear to be a foot away; you can simply make out details as well as if they were. You can still judge distance accurately; in fact, more accurately than normal, to within an inch or so at a distance of several miles, since you can see as clearly as if you were judging distance a foot away.
     + Base 3, +2 Sun, +4 Vision
     + Custom variant [ArM5:145]
-+ *Aura of Ennobled Presence* MuIm10 (39)
++ *Aura of Ennobled Presence* MuIm10 (41)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target appears more forceful, authoritative, and believable.  Numerous subtle changes in appearance bring about this change, including a slight supernatural illumination of the face, a more erect posture, and a louder and smoother voice. The character gets a +3 on rolls to influence, lead, or convince others.
     + Base 3, +1 Touch, +2 Sun
     + [ArM5:145]
-+ *Aura of the Trustful Merchant* MuIm10 (39)
++ *Aura of the Trustful Merchant* MuIm10 (41)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Base 3, +1 Touch, +2 Sun
     + Custom
-+ *Disguise of the Transformed Image* MuIm15 (39)
++ *Disguise of the Transformed Image* MuIm15 (41)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + Makes someone look, sound, feel, and smell different, though at least passably human.
     + Base 4, +1 Touch, +2 Sun
     + [ArM5:146]
-+ *Sight of the Warm Surface* MuIm15 (39)
++ *Sight of the Warm Surface* MuIm15 (41)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Conc; Target: Vision
     + Although Imaginem magic cannot create heat, warm surfaces emit species, which humans can sense through touch. This spell transforms those into species that the eye responds to. How the warmth is seen varies by magus.
     + Base 2, +1 Touch, +1 Concentration, +4 Vision
     + [HoH:S:65]
-+ *Ogre's Stench* MuIm25 (39)
++ *Ogre's Stench* MuIm25 (41)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Group
     + You change the targets’ smell (up to 100 people) in such a disgusting and awful way that they and every person near them must make Stamina rolls against an Ease Factor of 6 or act with a –3 penalty to all rolls. If they botch, they throw up.
     + Base 1, +2 Voice, +2 Sun, +2 Group, +1 size, +2 very “detailed” smell)cw
     + [MoH:125]
-+ *Veil of Invisibility* PeIm20 (39)
++ *Veil of Invisibility* PeIm20 (41)
     + Mastery: 1 (0xp) Quite Casting
     + Range: Touch; Duration: Sun; Target: Ind
     + The target becomes completely undetectable to normal sight, regardless of what he does, but still casts a shadow.
     + Base 4, +1 Touch, +2 Sun, +1 changing image
     + [ArM5:146]
-+ *Circle of Undisturbed Rest* ReIm10 (45)
++ *Circle of Undisturbed Rest* ReIm10 (47)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Ring; Target: Circle
     + Created in conjunction with Be Rid the Tell Tale Smoke, this large circle spell is meant to be used around an encampment. The circle pre- vents iconic and echoic species from leaving the circle, making the encampment undetect- able. Perfect for ensuring privacy in unfamiliar territories, it does leave the camp as a silent black area; this is normally enough at night, when everything is dark, and Conscientia does not see the need for additional illusions. This version covers smell as well as hearing and sight.
     + Base 1, +2 Ring, +1 Touch, +2 additional sense
     + [MoH:30]
-+ *Willful Sidestep* ReIm20 (45)
++ *Willful Sidestep* ReIm20 (47)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Sun; Target: Ind; This variant of Wizard's Sidestep is the result of Original Research and was published in a Folio. Contrary to established theory, the target can end the spell at will.
     + Base 2, +1 Touch, +2 Sun, +1 changing image, +1 moved image matches changes, +1 end at will
     + Custom
-+ *Image from the Wizard Torn* ReIm30 (45)
++ *Image from the Wizard Torn* ReIm30 (47)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. In
     + Range: Per; Duration: Conc; Target: Ind
     + Your image separates from your body and moves as you do. It can speak whatever you say and do so in your voice, and you can see through its eyes. You must make an Int + Concentration stress roll for each solid object the image passes through and for each mile it travels. If you wish the image to be able to leave your sight, you must use an Arcane Connection to yourself (for example, a fingernail or a lock of hair) when you cast the spell. That connection becomes an integral part of the image, and when the spell ends, it falls to the ground wherever the image was located. As your image is away from your body, you are invisible and silent at your actual location.  The image is your image, so while you may move it in space you may not have it sit down if you are standing. Further, it appears as if illuminated by whatever light is falling on you, no matter what the level of illumination is at the image.
     + Base 15, +1 Concentration, +1 additional sense, +1 Intellego requisite
     + [ArM:147]
-+ *Confusion of the Insane Vibrations* ReIm35 (45)
++ *Confusion of the Insane Vibrations* ReIm35 (47)
     + Mastery: 1 (0xp) Penetration
     + Range: ; Duration: Sun; Target: 
 + *By His Works* CrMe5 (38)
@@ -550,8 +585,15 @@ Weak Spontaneous Magic (0),
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
++ *Radiance of the Golden Firefly* (An)MuCo5 (0)
++ *Radiance of the Golden Firefly* (An)MuCo5 (0)
+    + Mastery: 1 (0xp) 
++ *Shape of the Feline Grace* (An)MuCo25 (0)
+    + Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.
++ *Shape of the Feline Grace* (An)MuCo25 (0)
+    + Mastery: 1 (0xp) 
 
-Total: 1249 levels of spells.
+Total: 1399 levels of spells.
 
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
@@ -562,7 +604,7 @@ Total: 1249 levels of spells.
 | Corpus | 31 | 28 | 22 | 22 | 28 |
 | Herbam | 26 | 23 | 17 | 17 | 23 |
 | Ignem | 28 | 25 | 19 | 19 | 25 |
-| Imaginem | 47 | 44 | 38 | 38 | 44 |
+| Imaginem | 49 | 46 | 40 | 40 | 46 |
 | Mentem | 37 | 34 | 28 | 28 | 34 |
 | Terram | 29 | 26 | 20 | 20 | 26 |
 | Vim | 32 | 29 | 23 | 23 | 29 |
@@ -580,7 +622,7 @@ Total: 1249 levels of spells.
 | Corpus | 47 | 44 | 38 | 38 | 45 |
 | Herbam | 42 | 39 | 33 | 33 | 40 |
 | Ignem | 45 | 42 | 36 | 36 | 43 |
-| Imaginem | 63 | 60 | 54 | 54 | 61 |
+| Imaginem | 65 | 62 | 56 | 56 | 63 |
 | Mentem | 54 | 51 | 45 | 45 | 52 |
 | Terram | 45 | 42 | 36 | 36 | 43 |
 | Vim | 48 | 45 | 39 | 39 | 46 |
@@ -629,6 +671,101 @@ Total: 1249 levels of spells.
 
 ## Past Advancement
 
++ Winter 1258 (2xp) (1 years) LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
+    + Changing traits
+        + Ability: Hermes Lore 0xp + 1 bonus xp; 
+        + Ability: Magic Theory 2xp; 
+        + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp Penetration
+        + Spell: (An)MuCo25 Shape of the Feline Grace 0xp Quiet Casting (Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.)
+        + Spell: MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
+    + Inferred traits
+        + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp with flawless magic
+        + Spell: (An)MuCo25 Shape of the Feline Grace 0xp with flawless magic
+        + Spell: MuCo15 Disguise of the Transformed Person 0xp with flawless magic
+        + Warping 1 (from Longevity Ritual)
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
+    + ERROR: Older than 50. Aging roll required.
++ Autumn 1257 (2xp) Authoring (Exposure)
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
+    + Changing traits
+        + Ability: Latin 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Summer 1257 (2xp) LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
+    + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
+    + Changing traits
+        + Ability: Creo 2xp; 
+        + Possession: Co vis (-3)
+        + Possession: Cup of Purifying Drink
+    + Validated: Correctly spent 2 xp.
++ Spring 1257 (28xp) Vis Study
+    + Changing traits
+        + Art: Imaginem 28xp + 1 bonus xp;  (with Correspondent)
+        + Reputation: Friendly druid [Lands of O'Sullivan] 1xp
+        + Possession: Im vis (-6)
+    + Validated: Correctly spent 28 xp.
++ Winter 1257 (2xp) (1 years) Teaching (Exposure)
+    + *Teaching Latin to Luciu SQ 22*
+    + Changing traits
+        + Ability: Teaching 2xp; 
+        + Aging Rolled -1 (5)  [No aging.]
+    + Inferred traits
+        + Warping 1 (from Longevity Ritual)
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
+    + Validated: Aging roll made
++ Autumn 1256 (2xp) LabWork (Exposure)
+    + Lab total 47 +  similar spell +5; familiar +6 -> 58
+    + Changing traits
+        + Ability: Creo 2xp; 
+        + Possession: Co vis (-3)
+        + Possession: Threshold of the Hospital
+    + Validated: Correctly spent 2 xp.
++ Summer 1256 (9+3xp) Reading
+    + Reads the new Q9 Tractatus from Vigil
+    + Uses *No title* by N/A (No Time)
+    + Changing traits
+        + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
+        + Confidence: 0 (1)
+        + Confidence: 0 (-1)
+        + Possession: Im vis (3)
+    + Validated: Correctly spent 12 xp.
+    + Validated: Book Im-Vigil-Q9 is available.
++ Spring 1256 (2xp) LabWork (Exposure)
+    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
+    + *Training Lucius in Magic Theory (SQ 15).*
+    + Lab Total 70
+    + Changing traits
+        + Art: Imaginem 2xp + 1 bonus xp;  (with correspondent)
+        + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
+        + Spell: CrIm15 Book of Images 0xp Quiet Casting
+        + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
+    + Inferred traits
+        + Spell: CrIm5 The Studious Doppleganger 0xp with flawless magic
+        + Spell: CrIm15 Book of Images 0xp with flawless magic
+        + Spell: CrIm40 The Shadow of Human Life 0xp with flawless magic
+    + Validated: Correctly spent 2 xp.
++ Winter 1256 (2xp) (1 years) Teaching (Exposure)
+    + *Teaching spells to Luciu*
+    + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
+    + Changing traits
+        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
+        + Aging Rolled -1 (10)  [No aging.]
+    + Inferred traits
+        + Warping 1 (from Longevity Ritual)
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
+    + Validated: Aging roll made
++ Autumn 1255 (2xp) Authoring (Exposure)
+    + *Author *Arrow's Flight*, an Auram Tracatus*
+    + To 64xp in Latin
+    + Changing traits
+        + Ability: Latin 2xp; 
+        + Possession: Co vis (6)
+        + Possession: Cr vis (2)
+    + Validated: Correctly spent 2 xp.
 + Summer 1255 (12+3xp) Reading
     + Reads the new Q12 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)
@@ -1881,58 +2018,11 @@ Total: 1249 levels of spells.
 
 ## Future Advancement
 
-+ Autumn 1255 (2xp) Authoring (Exposure)
-    + *Author *Arrow's Flight*, an Auram Tracatus*
-    + To 64xp in Latin
-    + Ability: Latin 2xp; 
-    + Possession: Cr vis (2)
-    + Possession: Co vis (6)
-+ Winter 1256 Teaching (Exposure)
-    + *Teaching spells to Luciu*
-    + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
-    + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
-    + Aging Rolled -1 (10)  [No aging.]
-+ Spring 1256 LabWork (Exposure)
-    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
-    + *Training Lucius in Magic Theory (SQ 15).*
-    + Lab Total 70
-    + Art: Imaginem 2xp + 1 bonus xp;  (with correspondent)
-    + Spell: CrIm15 Book of Images 0xp Quiet Casting
-    + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
-    + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
-+ Summer 1256 (9xp) Reading
-    + Reads the new Q9 Tractatus from Vigil
-    + Uses: Im-Vigil-Q9
-    + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
-    + Confidence: 0 (1)
-    + Confidence: 0 (-1)
-    + Possession: Im vis (3)
-+ Autumn 1256 LabWork (Exposure)
++ Spring 1258 LabWork (Exposure)
+    + *Training Luciu in Magic Theory SQ 15*
     + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
     + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
     + Spell: MuIm5 False Dune 0xp Quiet Casting
     + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
     + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
-+ Winter 1257 LabWork (Exposure)
-    + *Training Luciu in Magic Theory SQ 15*
-    + Ability: Magic Theory 2xp; 
-    + Spell: (An)5MuCo5 Radiance of the Golden Firefly 0xp Penetration
-    + Spell: 15MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
-    + Spell: (An)25MuCo25 Shape of the Canine Companion 0xp Quiet Casting
-    + Aging Rolled -1 (5)  [No aging.]
-+ Spring 1257 (28xp) Vis Study
-    + Art: Imaginem 28xp + 1 bonus xp;  (with Correspondent)
-    + Possession: Im vis (-6)
-+ Summer 1257 LabWork (Exposure)
-    + *Training Luciu in Magic Theory SQ 15*
-    + Ability: Magic Theory 2xp; 
-+ Summer 1257 LabWork (Exposure)
-    + *Training Luciu in Magic Theory SQ 15*
-    + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
-    + Ability: Creo 2xp; 
-    + Possession: Cup of Purifying Drink
-    + Possession: Cr vis (-3)
-+ Autumn 1257 (2xp) Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
-    + Ability: Latin 2xp; 
 

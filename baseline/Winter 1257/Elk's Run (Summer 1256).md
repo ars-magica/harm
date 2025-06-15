@@ -6,10 +6,10 @@
 
 Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 for the purpose of this saga.
 
-## Spring 1255
+## Summer 1256
 
-+ [Cieran the Fletcher ex Miscellanea (Summer 1255)](Cieran the Fletcher ex Miscellanea (Summer 1255))
-+ [Eogan mac Eogan (Summer 1255)](Eogan mac Eogan (Summer 1255))
++ [Cieran the Fletcher ex Miscellanea (Winter 1257)](Cieran the Fletcher ex Miscellanea (Winter 1257))
++ [Eogan mac Eogan (Spring 1256)](Eogan mac Eogan (Spring 1256))
 
 ### Library
 

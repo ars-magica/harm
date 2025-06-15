@@ -1,5 +1,32 @@
 # Annals
 
+## Winter 1258
+
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Training Luciu in Magic Theory SQ 15*
+    + Validated: Correctly spent 2 xp.
+    + ERROR: Older than 50. Aging roll required.
+
+## Autumn 1257
+
++ Elk's Run
+    + An Arcane Connection from Nenagh (SQ -1)
+        + *Brid goes to Nenagh together with some gorgs to pick up an arcane connection for Tim. Tim leaps back and forth with his spell, and finally shapechanges to a raven to pick up an arcane connection to the lord himself.*
+        + *Brid learns that some businesses in town are haunted by faeries.*
+        + *THere is another raven, serving the *Mistress of Fate* who is also coming to the lord's bedroom, but to warn him.  Tim knocks it out with a spell and takes a feather as an arcane connection.*
+        + 1 confidence per active character.
+    + Changes
++ Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
+    + Validated: Correctly spent 2 xp.
+
+## Summer 1257
+
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Training Luciu in Magic Theory SQ 15*
+    + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
+    + Validated: Correctly spent 2 xp.
+
 ## Spring 1257
 
 + Cieran the Fletcher ex Miscellanea (Vis Study)
@@ -7,15 +34,15 @@
 
 ## Winter 1257
 
-+ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + *Training Luciu in Magic Theory SQ 15*
++ Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
+    + *Teaching Latin to Luciu SQ 22*
     + Validated: Correctly spent 2 xp.
     + Validated: Aging roll made
 
 ## Autumn 1256
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
+    + Lab total 47 +  similar spell +5; familiar +6 -> 58
     + Validated: Correctly spent 2 xp.
 
 ## Summer 1256
@@ -25,7 +52,7 @@
         + *Gathering at Communova.  Tadgh the Bard and Aurelia of Mercere are announcing news, Aurelia from the covenant and Tadgh from the war in Breifne.*
         + *Tim meets Savriu of Verditius, visiting from the East. Saveriu knows of the hospitalier plans, and offers a spell to erect a fortress.*
         + *Sean approaches Cormoran the hedge elementalist to inquire about Irish tradition, but gets a rather non-infromative answer.  Coromoran encourages him to learn from his grandparents, but Sean who was taken into apprenticeship does not remember them. He knows that his clan was the O'Sullivan and decides to seek them out. Sean invites Cormoran to come to Elk's Run, but Cormoran does not appear thrilled.*
-        + *Aurelia has books to sell, particularly two titles by father Joseph of Napoli, who writes about the Order from the perspective of the Order. Beibhinn buys the two books by father Joseph of Napoli, and the covenant buys the *Canon of Medicine*. Tim orders books on Etiquette and Seaon inquires about illustrated books on area lore.*
+        + *Aurelia has books to sell, particularly two titles by father Joseph of Napoli, who writes about the Order from the perspective of the Order. Beibhinn buys the two books by father Joseph of Napoli, and the covenant buys the *Canon of Medicine* (the latter for £2). Tim orders books on Etiquette and Seaon inquires about illustrated books on area lore.*
         + *Deirbhile meets Enyerita of Jerbiton at Communova, who offers to craft a staff for her in exchange for a season or two of study at Elk's Run.  She does not have the wood struck by lightning though. Deirbhile knows of the tree at Circulus Ruber, but they not being on friendly terms with Elk's Run, she does not want to approach them.  She goes to the Leth Moga camp to look for a broker, and talks Briharn, an elderly redcap, who offers to try, but he refuses to hide the identity of the client.*
         + *At the sacred council, Siofra the Wolf Walker, raised the problems of Lord Butler encrouching on the magi forest. The faerie ambassador concurred.  Ashenrise denies any involvement, although they have trade relations and run caravans through his lands.  Vigil and Lambaird, prompted by Beibhinn, speak strongly for action to preserve the magical lands.  Praesis opposes, as a matter of non-interference with the mundanes.  Others are luke-warm at best.*
         + *Tiou bargains for spells with Ellaebhinn of West Point. She gets *All the vows forgotten* PeMe 20, *Poisoning the Will* PeMe 65, and *Peering into the Mortal Mind* InMe 30 [ArM5:149] in exchange for *Communication of the Hero*, *Curse of Slumber* ReMe20, and *See the Spirits of the Night* InMe30.*

@@ -26,9 +26,9 @@ Prophecy
 Size
 : 0
 
-## Summer 1255
+## Spring 1256
 
-+ **Age:** 25 years (apparent age 25) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
++ **Age:** 26 years (apparent age 26) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
 + **Confidence**: 1 (6)
 + **Characteristics:** 
 Int +2, 
@@ -62,7 +62,7 @@ Uncertain Faith (-1),
 Warrior (1), 
 Weakness [for Dogs] (-1), 
 + **Abilities:**
-    + Animal Handling [Dogs] 5 +2 (3xp) [xp x1.5]
+    + Animal Handling [Dogs] 5 +2 (6xp) [xp x1.5]
     + Animal Ken [Canine] 4 (3xp)
     + Athletics [obstacle race] 2 (0xp)
     + Awareness [Good ears] 1 (0xp)
@@ -75,7 +75,7 @@ Weakness [for Dogs] (-1),
     + Faerie Lore [Dark Fae] 1 (1xp)
     + Guile [Fast talk] 1 (0xp)
     + Hermes Lore [  --  ] 1 (0xp)
-    + Hunt [with dogs] 5 (4xp)
+    + Hunt [with dogs] 5 (8xp)
     + Leadership [in the field] 2 (0xp)
     + Magic Lore [Ancient Myth] 1 (0xp)
     + Munster Lore [Outback] 1 (0xp)
@@ -103,6 +103,28 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
++ Spring 1256 (2xp) Training (Exposure)
+    + *Train second lymer in hunt +8 xp (+16 total).*
+    + Lymer 1-2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Winter 1256 (2xp) (1 years) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+16 total).*
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Inferred traits
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
++ Autumn 1255 (2xp) "Taming" (Other Exposure)
+    + *Train two lymers to Loyal +2, and one mastiff to +1.*
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Changing traits
+        + Ability: Animal Handling 2xp; 
+    + Validated: Correctly spent 2 xp.
 + Summer 1255 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp.*
     + Changing traits
@@ -141,21 +163,4 @@ Weakness [for Dogs] (-1),
         + Ability: Magic Lore [Ancient Myth] 5xp; 
         + Confidence: 0 (2)
     + Validated: Correctly spent 13 xp.
-
-## Future Advancement
-
-+ Autumn 1255 (2xp) "Taming" (Other Exposure)
-    + *Train two lymers to Loyal +2, and one mastiff to +1.*
-    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
-    + Ability: Animal Handling 2xp; 
-+ Winter 1256 (2xp) Training (Exposure)
-    + *Train one lymer in hunt +8 xp (+16 total).*
-    + Ability: Hunt 2xp; 
-+ Spring 1256 (2xp) Training (Exposure)
-    + *Train second lymer in hunt +8 xp (+16 total).*
-    + Lymer 1-2. Loyal +2.  Hunt 16xp.
-    + Lymer 3. Loyal +1.
-    + Greyhound 1-2. Loyal +1.
-    + Mastiff 1. Loyal +1.
-    + Ability: Hunt 2xp; 
 
