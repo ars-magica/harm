@@ -1827,7 +1827,8 @@
                     , { "possession" : { "art" : "Im", "count" : -6
 		        , "comment" : "vis study" } } 
              , { "possession" : { "acTo" : "Midsummer Fair in the Greater Alps"  } }
-             , { "possession" : { "art" : "Vi", "count" : -1
+             , { "possession" : { "acTo" : "Durenmar"  } }
+             , { "possession" : { "art" : "Vi", "count" : -2
 		        , "comment" : "for arcane connection" } } 
 	 ]
       },
