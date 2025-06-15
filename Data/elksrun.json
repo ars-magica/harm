@@ -194,8 +194,9 @@
       },
       { "season" : "Autumn 1257"
        , "story" : [ { "title" : "An Arcane Connection from Nenagh"
-          , "SQ" : -1 
-          , "comment" : "1 confidence per active character." 
+          , "SQ" : 9
+          , "comment" : [ "1 confidence per active character." 
+	     , "Tim collects Arcane connections: Butler Hair, Morrigan Raven feather" ]
           , "narrative" : [ "Brid goes to Nenagh together with some gorgs to pick up an arcane connection for Tim. Tim leaps back and forth with his spell, and finally shapechanges to a raven to pick up an arcane connection to the lord himself.",
 	       "Brid learns that some businesses in town are haunted by faeries.",
 	       "THere is another raven, serving the *Mistress of Fate* who is also coming to the lord's bedroom, but to warn him.  Tim knocks it out with a spell and takes a feather as an arcane connection."
