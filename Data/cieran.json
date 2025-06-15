@@ -1775,8 +1775,9 @@
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
       }, { "mode" : "Lab Work", "season" : "Winter 1258"
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "comment" : "Lab Total 62 incl. familiar"
       , "changes" : [ 
-         { "ability" : "Magic Theory", "xp" : 2 }
+         { "ability" : "Creo", "xp" : 2 }
          , { "spell" : "Circle of Preserved Connections"
 	    , "tefo" : "CrVi"
 	    , "level" : 30 
