@@ -1821,7 +1821,7 @@
       ]
       },
       { "mode" : "Vis study", "season" : "Summer 1258"
-	 , "narrative" : "Luciu uses the lab to fixate arcane connections"
+	 , "narrative" : "Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim"
          , "sourceQuality" : 12
          , "changes" : [ { "art" : "Imaginem", "xp" : 12 } 
                     , { "possession" : { "art" : "Im", "count" : -6
