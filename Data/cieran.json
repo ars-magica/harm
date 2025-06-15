@@ -1777,6 +1777,19 @@
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
       , "changes" : [ 
          { "ability" : "Magic Theory", "xp" : 2 }
+         , { "spell" : "Circle of Preserved Connections"
+	    , "tefo" : "CrVi"
+	    , "level" : 30 
+	    , "design" : "Base 15 [MoH:113] +2 Ring, +1 Touch"
+	 }
+      ]
+      }
+      , { "mode" : "Lab Work", "season" : "Spring 1258"
+      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
+      , "changes" : [ 
+         { "ability" : "Magic Theory", "xp" : 2 }
+
          , { "spell" : "Radiance of the Golden Firefly"
             , "design" : "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
             , "description" : "The skin and hair of a person glow bright like the thorax of a firefly."
@@ -1799,8 +1812,10 @@
          }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Spring 1258"
-      , "narrative" : "Training Luciu in Magic Theory SQ 15"
+      { "mode" : "Lab Work", "season" : "Summer 1258"
+	 , "narrative" : "Luciu uses the lab to fixate arcane connections"
+      },
+      { "mode" : "Lab Work", "season" : "Autumn 1258"
       , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
       , "changes" : [ 
            { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }

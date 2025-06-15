@@ -1,6 +1,6 @@
 {
    "title" : "Hibernia Saga (Contested Lands)"
-   , "seasons" : [ "Summer 1254", "Winter 1255",  "Winter 1256", "Winter 1257", "Winter 1258" ]
+   , "seasons" : [ "Summer 1254", "Winter 1255",  "Winter 1256", "Winter 1257", "Winter 1258", "Winter 1259" ]
    , "rootDirectory" : "pages/"
    , "description" : [
         "While the saga is being played, this site is incomplete, and serves mainly as a test case for the hArM software."
