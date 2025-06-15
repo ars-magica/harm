@@ -1692,6 +1692,8 @@
            { "art" : "Imaginem", "xp" : 12, "bonusXP" : 1, "comment" : "with Correspondent" }
          , { "confidence" : "Confidence", "points" : 1 }
          , { "confidence" : "Confidence", "points" : -1 }
+         , { "possession" : { "art" : "Te", "count" : -2
+	   , "comment" : "payment for arcane connections" } }
          , { "possession" : { "art" : "Im", "count" : 3
 	   , "comment" : "allowance" } }
       ]
@@ -1772,7 +1774,12 @@
       { "mode" : "Author", "season" : "Autumn 1257"
       , "sourceQuality" : 2
       , "narrative" : "Tractatus on Imaginem Q14: *Volume III on Imaginem*"
-      , "changes" : [ { "ability" : "Latin", "xp" : 2 } ]
+      , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
+                    , { "possession" : { "art" : "Im", "count" : 5
+		        , "comment" : "salary" } } 
+                    , { "possession" : { "art" : "Vi", "count" : 3
+		        , "comment" : "allowance" } } 
+      ]
       }, { "mode" : "Lab Work", "season" : "Winter 1258"
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
       , "comment" : "Lab Total 62 incl. familiar"
@@ -1818,7 +1825,11 @@
          , "sourceQuality" : 12
          , "changes" : [ { "art" : "Imaginem", "xp" : 12 } 
                     , { "possession" : { "art" : "Im", "count" : -6
-		        , "comment" : "vis study" } } ]
+		        , "comment" : "vis study" } } 
+             , { "possession" : { "acTo" : "Midsummer Fair in the Greater Alps"  } }
+             , { "possession" : { "art" : "Vi", "count" : -1
+		        , "comment" : "for arcane connection" } } 
+	 ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1258"
       , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
@@ -1836,6 +1847,8 @@
             , "tefo" : "MuIm", "level" : 5
             , "mastery" : [ "Penetration" ]
          }
+                    , { "possession" : { "art" : "Im", "count" : 3
+		        , "comment" : "allowance" } } 
       ]
       }
    ]
