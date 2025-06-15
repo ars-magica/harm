@@ -1813,8 +1813,12 @@
          }
       ]
       },
-      { "mode" : "Lab Work", "season" : "Summer 1258"
+      { "mode" : "Vis study", "season" : "Summer 1258"
 	 , "narrative" : "Luciu uses the lab to fixate arcane connections"
+         , "sourceQuality" : 12
+         , "changes" : [ { "art" : "Imaginem", "xp" : 12 } 
+                    , { "possession" : { "art" : "Im", "count" : -6
+		        , "comment" : "vis study" } } ]
       },
       { "mode" : "Lab Work", "season" : "Autumn 1258"
       , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
