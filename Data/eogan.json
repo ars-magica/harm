@@ -185,23 +185,17 @@
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
       },
-      { "mode" : "Exposure Training"
+      { "mode" : "Practice"
       , "season" : "Summer 1256"
-      , "sourceQuality" : 2
-      , "narrative" : "TODO Train second lymer in hunt +8 xp."
+      , "sourceQuality" : 4
       , "changes" : 
-         [ { "ability" : "Hunt", "xp": 2 }
-         ] 
+         [ { "ability" : "Storytelling", "xp": 6 } ] 
       },
-      { "mode" : "Exposure Taming"
+      { "mode" : "Practice"
       , "season" : "Autumn 1256"
-      , "sourceQuality" : 2
-      , "narrative" : "TODO Train two lymers to Loyal +2, and one mastiff to +1."
-      , "comment" : 
-      [ "The mastiff has confidence 1 and thus effective might 3. The combined might is 5." ]
+      , "sourceQuality" : 4
       , "changes" : 
-         [ { "ability" : "Animal Handling", "xp": 2 }
-         ] 
+         [ { "ability" : "Survival", "xp": 6 } ] 
       },
       { "mode" : "Exposure Training"
       , "season" : "Winter 1257"
@@ -226,23 +220,17 @@
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
       },
-      { "mode" : "Exposure Training"
+      { "mode" : "Practice"
       , "season" : "Summer 1257"
-      , "sourceQuality" : 2
-      , "narrative" : "TODO Train second lymer in hunt +8 xp."
+      , "sourceQuality" : 4
       , "changes" : 
-         [ { "ability" : "Hunt", "xp": 2 }
-         ] 
+         [ { "ability" : "Survival", "xp": 6 } ] 
       },
-      { "mode" : "Exposure Taming"
+      { "mode" : "Practice"
       , "season" : "Autumn 1257"
-      , "sourceQuality" : 2
-      , "narrative" : "TODO Train two lymers to Loyal +2, and one mastiff to +1."
-      , "comment" : 
-      [ "The mastiff has confidence 1 and thus effective might 3. The combined might is 5." ]
+      , "sourceQuality" : 4
       , "changes" : 
-         [ { "ability" : "Animal Handling", "xp": 2 }
-         ] 
+         [ { "ability" : "Survival", "xp": 6 } ] 
       },
       { "mode" : "Exposure Training"
       , "season" : "Winter 1258"
