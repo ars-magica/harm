@@ -184,6 +184,87 @@
       , "changes" : 
          [ { "ability" : "Hunt", "xp": 2 }
          ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Summer 1256"
+      , "sourceQuality" : 2
+      , "narrative" : "TODO Train second lymer in hunt +8 xp."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Taming"
+      , "season" : "Autumn 1256"
+      , "sourceQuality" : 2
+      , "narrative" : "TODO Train two lymers to Loyal +2, and one mastiff to +1."
+      , "comment" : 
+      [ "The mastiff has confidence 1 and thus effective might 3. The combined might is 5." ]
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Winter 1257"
+      , "sourceQuality" : 2
+      , "narrative" : "Train one lymer in hunt +8 xp (+24 total)."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Spring 1257"
+      , "sourceQuality" : 2
+      , "narrative" : "Train one lymer in hunt +8 xp (+32 total)."
+      , "comment" : 
+         [ "Lymer 1. Loyal +2.  Hunt 32xp."
+           , "Lymer 2. Loyal +2.  Hunt 16xp."
+            , "Lymer 3. Loyal +1."
+            , "Greyhound 1-2. Loyal +1."
+            , "Mastiff 1. Loyal +1."
+         ]
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Summer 1257"
+      , "sourceQuality" : 2
+      , "narrative" : "TODO Train second lymer in hunt +8 xp."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Taming"
+      , "season" : "Autumn 1257"
+      , "sourceQuality" : 2
+      , "narrative" : "TODO Train two lymers to Loyal +2, and one mastiff to +1."
+      , "comment" : 
+      [ "The mastiff has confidence 1 and thus effective might 3. The combined might is 5." ]
+      , "changes" : 
+         [ { "ability" : "Animal Handling", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Winter 1258"
+      , "sourceQuality" : 2
+      , "narrative" : "Train second lymer in hunt +8 xp (+24 total)."
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
+      },
+      { "mode" : "Exposure Training"
+      , "season" : "Spring 1258"
+      , "sourceQuality" : 2
+      , "narrative" : "Train second lymer in hunt +8 xp (+32 total)."
+      , "comment" : 
+         [ "Lymer 1-2. Loyal +2.  Hunt 32xp."
+            , "Lymer 3. Loyal +1."
+            , "Greyhound 1-2. Loyal +1."
+            , "Mastiff 1. Loyal +1."
+         ]
+      , "changes" : 
+         [ { "ability" : "Hunt", "xp": 2 }
+         ] 
       }
    ]
 }
