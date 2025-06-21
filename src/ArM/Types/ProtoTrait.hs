@@ -357,6 +357,7 @@ computeTrait' (SpellKey ft lv sn) p =  Just $ SpellTrait $
                       , spellMultiplier = m
                       , spellCastingScore = Nothing
                       , spellTComment = fromMaybe "" $ ptComment p
+                      , spellTRecord = spellRecord p
                       }
          where  (s',y) = getAbilityScore (Just x)
                 fless = fromMaybe False $ flawless p

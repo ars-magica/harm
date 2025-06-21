@@ -60,6 +60,7 @@ import ArM.Types.HarmObject
 import ArM.Types.Lab
 import ArM.Types.Possession
 import ArM.Types.Aging
+import ArM.DB.Spell
 -- import ArM.Debug.Trace
 
 import GHC.Generics
@@ -137,7 +138,7 @@ data Spell = Spell { spellName :: String
                    , masteryOptions :: [String] 
                    , spellCastingScore :: Maybe Int
                    , spellTComment :: String
-                   -- , spellRecord :: Maybe SpellRecord
+                   , spellTRecord :: Maybe SpellRecord
                    }
            deriving (Ord, Eq, Generic)
 
