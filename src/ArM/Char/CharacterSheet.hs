@@ -40,6 +40,7 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 import Data.List
+import Control.Monad
 
 -- import ArM.Debug.Trace
 
@@ -187,28 +188,29 @@ ritualCastingBonus' sp cs = p + a
 -- and a generic spell description from a SpellDB.
 castingScore :: SpellDB    -- ^ Spell DB with general descriptions of the spells
              -> CharacterSheet -- ^ Current character sheet
-             -> TraitKey       -- ^ Key identifying the spell
+             -> Spell          -- ^ the spell
              -> Int            -- ^ Computed casting score
-castingScore db cs k | isNothing rec' =   0
+castingScore db cs spell | isNothing rec' =   0
                      | isNothing sp' =   0
-                     | otherwise =  castingScore' cs ts fs + mf ( getTrait sp) + rb
+                     | otherwise =  castingScore' cs ts fs + mf (getTrait sp) + rb
    where sp' = findTraitCS k cs
          sp = fromJust sp'
          mf Nothing = 0
          mf (Just x) = masteryScore x
-         rec' = spellLookup k db
+         rec' = spellTRecord spell `mplus` spellLookup k db
          rec = fromJust rec'
          ts = (ArtKey $ technique rec):(map ArtKey $ techniqueReq rec)
          fs = (ArtKey $ form rec):(map ArtKey $ formReq rec)
          rb | isRitual rec = ritualCastingBonus cs
             | otherwise = 0
+         k = traitKey spell
 
 addCastingScores :: SpellDB -> CharacterSheet -> CharacterSheet
 addCastingScores db cs =  cs { spellList = spellList' }
    where spellList' = map (addCastingScore db cs) (spellList cs)
 addCastingScore :: SpellDB -> CharacterSheet -> Spell -> Spell
 addCastingScore db cs sp =  sp { spellCastingScore = sc }
-   where sc = Just $ castingScore db cs (traitKey sp) 
+   where sc = Just $ castingScore db cs sp 
 
 
 -- | Return the Lab Total a given TeFo combo.

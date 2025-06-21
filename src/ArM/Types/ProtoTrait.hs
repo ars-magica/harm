@@ -442,13 +442,15 @@ instance TraitType Spell where
     advanceTrait a x = updateSpellXP y           -- add XP and update score
                      $ updateSpellMastery ms     -- add new mastery options
                      $ um (multiplyXP a)         -- update multiplier 
-                     x
+                     $ f (spellRecord a) x
       -- where y = (spellExcessXP x) + (fromMaybe 0 $ xp a)
       where y = calcXP m (spellExcessXP x) (xp a) + fromMaybe 0 (bonusXP a)
             m = spellMultiplier x
             ms = fromMaybe [] $ mastery a
             um Nothing ab = ab 
             um abm ar = ar { spellMultiplier = fromMaybe 1.0 abm }
+            f Nothing xx = xx
+            f (Just r) xx = xx { spellTRecord = Just r }
 instance TraitType Reputation where
     advanceTrait a x = updateRepXP y x
       where y = (repExcessXP x) + (fromMaybe 0 $ xp a)

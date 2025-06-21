@@ -23,6 +23,7 @@ module ArM.Markdown ( Markdown(..)
 
 import Data.Maybe 
 import Data.List 
+import Control.Monad
 
 import ArM.Char.Character 
 import ArM.Types.ProtoTrait
@@ -38,6 +39,7 @@ import ArM.BasicIO
 import ArM.Helper
 
 import ArM.Debug.Trace
+
 
 -- |
 -- = Rendering the Character Sheet
@@ -578,7 +580,8 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
                          , OString $ "Total: " ++show (totalLevels xs)  
                             ++ " levels of spells."
                          ]
-   where ys = [ (x,spellLookup (traitKey x) db ) | x <- xs ]
+   where ys = [ (x,f x) | x <- xs ]
+         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
 -- | Return the sum of levels in the list of spells.

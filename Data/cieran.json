@@ -1786,13 +1786,19 @@
       , "changes" : [ 
          { "ability" : "Creo", "xp" : 2 }
          , { "spell" : "Circle of Preserved Connections"
+	    , "tefo" : "CrVi"
+	    , "level" : 30
             , "spellRecord" : 
               { "name" : "Circle of Preserved Connections"
 	      , "TeFo" : "CrVi"
 	      , "technique" : "Creo"
 	      , "form" : "Vim"
 	      , "level" : 30 
+	      , "range" : "Touch"
+	      , "duration" : "Ring"
+	      , "target" : "Circle"
 	      , "design" : "Base 15 [MoH:113] +2 Ring, +1 Touch"
+	      , "description" : "Increase the duration of all the arcane connections within the circle by three steps on the table [MoH:113]."
 	      }
 	 }
          ,  { "aging" : { "apparentYounger" : 1
@@ -1822,6 +1828,8 @@
          }
          , { "ability" : "Hermes Lore", "bonusXP" : 1 }
          , { "spell" : "Shape of the Feline Grace"
+	    , "tefo" : "MuCo"
+	    , "level" : 25
             , "spellRecord" : 
 	       { "name" : "Shape of the Feline Grace"
                , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"

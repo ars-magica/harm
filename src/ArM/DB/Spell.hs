@@ -17,6 +17,7 @@ module ArM.DB.Spell ( SpellRecord(..)
                        , spellLookup
                        , SpellDB
                        , isRitual
+                       , rdt
                        ) where
 
 import ArM.DB.CSV
@@ -46,7 +47,9 @@ data SpellRecord = SpellRecord
     , techniqueReq :: [String]
     , form :: String
     , formReq :: [String]
-    , rdt :: (String,String,String)   -- ^ Range/Duration/Target
+    , spellRange :: String
+    , spellDuration :: String
+    , spellTarget :: String
     , specialSpell :: [String]        -- ^ Special tags, like Ritual or Mutantum.
     , spellDescription :: String           -- ^ Freeform description of the effect
     , design :: String                -- ^ Level calculation
@@ -54,17 +57,22 @@ data SpellRecord = SpellRecord
     , cite :: String                  -- ^ Source reference
     } deriving (Ord, Eq, Generic, Show)
 
+rdt :: SpellRecord -> (String,String,String)   -- ^ Range/Duration/Target
+rdt x = (spellRange x,spellDuration x,spellTarget x)
+
 instance ToJSON SpellRecord
 instance FromJSON SpellRecord where
     parseJSON = withObject "SpellRecord" $ \v -> SpellRecord
         <$> v .: "name"
         <*> v .: "TeFo"
         <*> v .:? "level"
-        <*> v .: "technique"
+        <*> fmap (take 2) (v .: "technique")
         <*> v `parseCollapsedList` "techniqueReq" 
-        <*> v .: "form"
+        <*> fmap (take 2) (v .: "form")
         <*> v `parseCollapsedList` "formReq" 
-        <*> v .:? "rdt" .!= ("","","")
+        <*> v .:? "range" .!= ""
+        <*> v .:? "duration" .!= ""
+        <*> v .:? "target" .!= ""
         <*> v .:? "specialSpell" .!= []
         <*> v .:? "description" .!= ""
         <*> v .:? "design" .!= ""
@@ -88,7 +96,9 @@ instance ArMCSV SpellRecord where
                 , techniqueReq = filter (/="") $ splitOn ";" x4
                 , form = x5
                 , formReq = filter (/="") $ splitOn ";" x6
-                , rdt = (x8, x9, x10)
+                , spellRange = x8
+                , spellDuration = x9
+                , spellTarget = x10
                 , specialSpell =  filter (/="") $ splitOn ";" x11
                 , spellDescription = x12
                 , design = x13
@@ -104,7 +114,9 @@ instance ArMCSV SpellRecord where
                    , techniqueReq = []
                    , form = ""
                    , formReq = []
-                   , rdt = ("Per","Mom","Ind")
+                   , spellRange = "Per"
+                   , spellDuration = "Mom"
+                   , spellTarget = "Ind"
                    , specialSpell = []
                    , spellDescription = ""
                    , design = ""
