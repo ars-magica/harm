@@ -26,6 +26,7 @@ import Data.List.Split
 import Text.Read
 import qualified Data.Map as M
 import Data.List
+import Data.Aeson
 -- import Data.Maybe
 
 -- import ArM.Debug.Trace
@@ -52,6 +53,22 @@ data SpellRecord = SpellRecord
     , cite :: String                  -- ^ Source reference
     } deriving (Ord, Eq, Generic, Show)
 
+instance ToJSON SpellRecord
+instance FromJSON SpellRecord where
+    parseJSON = withObject "SpellRecord" $ \v -> SpellRecord
+        <$> v .: "name"
+        <*> v .: "TeFo"
+        <*> v .:? "level"
+        <*> v .: "technique"
+        <*> v .:? "techniqueReq" .!= []
+        <*> v .: "form"
+        <*> v .:? "formReq" .!= []
+        <*> v .:? "rdt" .!= ("","","")
+        <*> v .:? "specialSpell" .!= []
+        <*> v .:? "description" .!= ""
+        <*> v .:? "design" .!= ""
+        <*> v .:? "comment" .!= []
+        <*> v .:? "cite" .!= ""
 
 -- | Default SpellRecord object as a starting point for step-by-step construction.
 type SpellDB = M.Map String SpellRecord
