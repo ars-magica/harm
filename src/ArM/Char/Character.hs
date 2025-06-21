@@ -66,7 +66,7 @@ characterEntryTime c | tm == NoTime = f $ futureAdvancement c
 
 
 charAgingBonus :: CharacterLike c => c -> Int
-charAgingBonus c = ag + sum ( map snd (charAgingBonusList c) )
+charAgingBonus c = ag - sum ( map snd (charAgingBonusList c) )
     where ag = age c // 10
 
 charAgingBonusList :: CharacterLike c => c -> [ (String,Int) ]

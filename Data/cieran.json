@@ -1790,6 +1790,11 @@
 	    , "level" : 30 
 	    , "design" : "Base 15 [MoH:113] +2 Ring, +1 Touch"
 	 }
+         ,  { "aging" : { "apparentYounger" : 1
+               , "die" : 5
+               , "roll" : -1
+               , "comment" : "No aging."
+	    } }
       ]
       }
       , { "mode" : "Lab Work", "season" : "Spring 1258"
