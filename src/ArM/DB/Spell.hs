@@ -27,6 +27,7 @@ import Text.Read
 import qualified Data.Map as M
 import Data.List
 import Data.Aeson
+import Data.Aeson.Extra
 -- import Data.Maybe
 
 -- import ArM.Debug.Trace
@@ -60,9 +61,9 @@ instance FromJSON SpellRecord where
         <*> v .: "TeFo"
         <*> v .:? "level"
         <*> v .: "technique"
-        <*> v .:? "techniqueReq" .!= []
+        <*> v `parseCollapsedList` "techniqueReq" 
         <*> v .: "form"
-        <*> v .:? "formReq" .!= []
+        <*> v `parseCollapsedList` "formReq" 
         <*> v .:? "rdt" .!= ("","","")
         <*> v .:? "specialSpell" .!= []
         <*> v .:? "description" .!= ""

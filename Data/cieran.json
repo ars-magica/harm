@@ -1829,7 +1829,7 @@
                , "TeFo" : "MuCo(An)", "level" : 25
 	       , "technique" : "Muto"
 	       , "form" : "Corpus"
-	       , "formReq" : [ "Animal" ]
+	       , "formReq" : "Animal"
                , "comment" : "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
 	       }
             , "mastery" : [ "Quiet Casting" ]
