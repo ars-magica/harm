@@ -1786,9 +1786,14 @@
       , "changes" : [ 
          { "ability" : "Creo", "xp" : 2 }
          , { "spell" : "Circle of Preserved Connections"
-	    , "tefo" : "CrVi"
-	    , "level" : 30 
-	    , "design" : "Base 15 [MoH:113] +2 Ring, +1 Touch"
+            , "spellRecord" : 
+              { "name" : "Circle of Preserved Connections"
+	      , "TeFo" : "CrVi"
+	      , "technique" : "Creo"
+	      , "form" : "Vim"
+	      , "level" : 30 
+	      , "design" : "Base 15 [MoH:113] +2 Ring, +1 Touch"
+	      }
 	 }
          ,  { "aging" : { "apparentYounger" : 1
                , "die" : 5
@@ -1817,11 +1822,17 @@
          }
          , { "ability" : "Hermes Lore", "bonusXP" : 1 }
          , { "spell" : "Shape of the Feline Grace"
-            , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
-            , "description" : "As per Shape of the Woodland Prowler but turns in to a lynx"
-            , "tefo" : "MuCo(An)", "level" : 25
+            , "spellRecord" : 
+	       { "name" : "Shape of the Feline Grace"
+               , "design" : "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+               , "description" : "As per Shape of the Woodland Prowler but turns in to a lynx"
+               , "TeFo" : "MuCo(An)", "level" : 25
+	       , "technique" : "Muto"
+	       , "form" : "Corpus"
+	       , "formReq" : [ "Animal" ]
+               , "comment" : "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
+	       }
             , "mastery" : [ "Quiet Casting" ]
-            , "comment" : "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
          }
       ]
       },

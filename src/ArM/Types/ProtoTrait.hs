@@ -43,6 +43,7 @@ import ArM.Types.TraitKey
 import ArM.Types.HarmObject
 import ArM.Types.Aging
 import ArM.Types.Lab
+import ArM.DB.Spell
 
 import GHC.Generics
 import Data.Aeson
@@ -70,6 +71,7 @@ data ProtoTrait = ProtoTrait
     , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
     , spec :: Maybe String        -- ^ specialisation of an ability
     , levelCap :: Maybe Int    -- ^ cap on advancement
+    , spellRecord :: Maybe SpellRecord
     , mastery :: Maybe [ String ]   -- ^ mastery options for a spell
     , flawless :: Maybe Bool   -- ^ for a spell, if flawless magic applies
     , score :: Maybe Int       -- ^ new score to replace the old one
@@ -100,6 +102,7 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , combat = Nothing
                              , spec = Nothing
                              , levelCap = Nothing
+                             , spellRecord = Nothing
                              , mastery = Nothing
                              , flawless = Nothing
                              , score = Nothing
@@ -167,6 +170,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "combat"
         <*> v .:?  "spec"
         <*> v .:?  "levelCap"
+        <*> v .:?  "spellRecord"
         <*> v .:?  "mastery"
         <*> v .:?  "flawless"
         <*> v .:?  "score"
@@ -342,9 +346,9 @@ computeTrait' (ReputationKey n l) p = Just $ ReputationTrait
                       , repExcessXP = y
                       }
       where (s,y) = getAbilityScore (xp p)
-computeTrait' (SpellKey ft lvl sn) p =  Just $ SpellTrait $ 
+computeTrait' (SpellKey ft lv sn) p =  Just $ SpellTrait $ 
                 Spell { spellName = sn
-                      , spellLevel = lvl
+                      , spellLevel = lv
                       , spellTeFo = fote ft
                       , spellXP = x
                       , masteryScore = s
