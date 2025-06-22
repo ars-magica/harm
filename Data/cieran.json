@@ -1893,15 +1893,24 @@
       }
       , { "mode" : "Reading", "season" : "Spring 1259"
 	 , "narrative" : "Reading Animàl.  Free reading for Luciu."
+         , "usesBook" : "AnimalL10Q18"
+         , "sourceQuality" : 18
+         , "changes" : [ { "art" : "Animàl", "xp" : 21 } ]
       }
       , { "mode" : "Reading", "season" : "Summer 1259"
 	 , "narrative" : "Reading Animàl.  Free reading for Luciu."
+         , "usesBook" : "AnimalL15Q14"
+         , "sourceQuality" : 14
+         , "changes" : [ { "art" : "Animàl", "xp" : 17 } ]
       }
-      , { "mode" : "Author", "season" : "Spring 1259"
-	 , "narrative" : "Author another Imaginem tractatus"
+      , { "mode" : "Author", "season" : "Autumn 1259"
+         , "narrative" : "Tractatus on Imaginem Q14: *Mystic Visions*"
+         , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
+                    , { "possession" : { "art" : "Im", "count" : 8
+		        , "comment" : "salary and allowance" } } 
       }
       , { "mode" : "Teaching", "season" : "Winter 1260"
-	 , "narrative" : "Teaching craft to Luciu"
+	 , "narrative" : "Teaching Luciu"
       }
    ]
 }
