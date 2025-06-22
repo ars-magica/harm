@@ -1912,5 +1912,24 @@
       , { "mode" : "Teaching", "season" : "Winter 1260"
 	 , "narrative" : "Teaching Luciu"
       }
+      , { "mode" : "Reading", "season" : "Spring 1260"
+	 , "narrative" : "Reading Muto.  Luciu transcribes spells."
+         , "usesBook" : "MutoL20Q12"
+         , "sourceQuality" : 12
+         , "changes" : [ { "art" : "Muto", "xp" : 15 } ]
+      }
+      , { "mode" : "Reading", "season" : "Summer 1260"
+	 , "narrative" : "Reading Muto.  Free reading for Luciu."
+         , "usesBook" : "MutoL20Q12"
+         , "sourceQuality" : 12
+         , "changes" : [ { "art" : "Muto", "xp" : 15 } ]
+      }
+      , { "mode" : "Exposure: Lab Work", "season" : "Autumn 1260"
+	 , "narrative" : "Enchant familiar bond with shapechanging for Jimeny. Luciu assists."
+         , "changes" : [ { "ability" : "Magic Theory", "xp" : 2 } ]
+      }
+      , { "mode" : "Teaching", "season" : "Winter 1261"
+	 , "narrative" : "Teaching Luciu"
+      }
    ]
 }
