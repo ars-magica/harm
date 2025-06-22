@@ -1810,13 +1810,57 @@
       }
       , { "mode" : "Lab Work", "season" : "Spring 1258"
       , "narrative" : "Training Luciu in Magic Theory SQ 15"
-      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
+      , "comment" : [ "Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic" ]
+      , "changes" : [ 
+           { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
+         , { "spell" : "False Dune"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Quiet Casting" ]
+	    , "comment" : "From Rudolf of Irencilla"
+         }
+         , { "spell" : "Glowing Footprints of the Thief"
+            , "tefo" : "MuIm", "level" : 20
+            , "mastery" : [ "Quiet Casting" ]
+	    , "comment" : "From Rudolf of Irencilla"
+         }
+         , { "spell" : "Confound the Rival Singer"
+            , "tefo" : "MuIm", "level" : 5
+            , "mastery" : [ "Penetration" ]
+         }
+         , { "possession" : { "art" : "Im", "count" : 3
+	   , "comment" : "allowance" } } 
+      ]
+      },
+      { "mode" : "Vis study", "season" : "Summer 1258"
+	 , "narrative" : "Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim"
+         , "sourceQuality" : 12
+         , "changes" : [ { "art" : "Imaginem", "xp" : 12 
+          , "bonusXP" : 1, "comment" : "with Correspondent" }
+             , { "possession" : { "art" : "Im", "count" : -6
+		        , "comment" : "vis study" } } 
+             , { "possession" : { "acTo" : "Midsummer Fair in the Greater Alps"  } }
+             , { "possession" : { "acTo" : "Durenmar"  } }
+             , { "possession" : { "art" : "Vi", "count" : -2
+		        , "comment" : "for arcane connection" } } 
+	 ]
+      },
+      { "mode" : "Lab Work", "season" : "Autumn 1258"
+      , "narrative" : "Lab work with Luciu as assistant"
+      , "comment" : [ "Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic" ]
       , "changes" : [ 
          { "ability" : "Magic Theory", "xp" : 2 }
 
          , { "spell" : "Radiance of the Golden Firefly"
             , "design" : "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
             , "description" : "The skin and hair of a person glow bright like the thorax of a firefly."
+            , "tefo" : "MuCo(An)", "level" : 5
+            , "mastery" : [ "Penetration" ]
+         }
+         , { "spell" : "Ears of the Hound"
+            , "design" : "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+            , "description" : [
+	        "allows the target to hear a dog's range of sound", "from Una 1241"
+	    ]
             , "tefo" : "MuCo(An)", "level" : 5
             , "mastery" : [ "Penetration" ]
          }
@@ -1843,38 +1887,21 @@
             , "mastery" : [ "Quiet Casting" ]
          }
       ]
-      },
-      { "mode" : "Vis study", "season" : "Summer 1258"
-	 , "narrative" : "Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim"
-         , "sourceQuality" : 12
-         , "changes" : [ { "art" : "Imaginem", "xp" : 12 } 
-                    , { "possession" : { "art" : "Im", "count" : -6
-		        , "comment" : "vis study" } } 
-             , { "possession" : { "acTo" : "Midsummer Fair in the Greater Alps"  } }
-             , { "possession" : { "acTo" : "Durenmar"  } }
-             , { "possession" : { "art" : "Vi", "count" : -2
-		        , "comment" : "for arcane connection" } } 
-	 ]
-      },
-      { "mode" : "Lab Work", "season" : "Autumn 1258"
-      , "comment" : [ "Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic" ]
-      , "changes" : [ 
-           { "art" : "Imaginem", "xp" : 2, "bonusXP" : 1, "comment" : "with Correspondent" }
-         , { "spell" : "False Dune"
-            , "tefo" : "MuIm", "level" : 5
-            , "mastery" : [ "Quiet Casting" ]
-         }
-         , { "spell" : "Glowing Footprints of the Thief"
-            , "tefo" : "MuIm", "level" : 20
-            , "mastery" : [ "Quiet Casting" ]
-         }
-         , { "spell" : "Confound the Rival Singer"
-            , "tefo" : "MuIm", "level" : 5
-            , "mastery" : [ "Penetration" ]
-         }
-                    , { "possession" : { "art" : "Im", "count" : 3
-		        , "comment" : "allowance" } } 
-      ]
+      }
+      , { "mode" : "Teaching", "season" : "Winter 1259"
+	 , "narrative" : "Teaching craft to Luciu"
+      }
+      , { "mode" : "Reading", "season" : "Spring 1259"
+	 , "narrative" : "Reading Animàl.  Free reading for Luciu."
+      }
+      , { "mode" : "Reading", "season" : "Summer 1259"
+	 , "narrative" : "Reading Animàl.  Free reading for Luciu."
+      }
+      , { "mode" : "Author", "season" : "Spring 1259"
+	 , "narrative" : "Author another Imaginem tractatus"
+      }
+      , { "mode" : "Teaching", "season" : "Winter 1260"
+	 , "narrative" : "Teaching craft to Luciu"
       }
    ]
 }
