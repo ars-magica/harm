@@ -1773,7 +1773,7 @@
       },
       { "mode" : "Author", "season" : "Autumn 1257"
       , "sourceQuality" : 2
-      , "narrative" : "Tractatus on Imaginem Q14: *Volume III on Imaginem*"
+      , "narrative" : "Tractatus on Imaginem Q14: *Volume III on Imaginem*."
       , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
                     , { "possession" : { "art" : "Im", "count" : 5
 		        , "comment" : "salary" } } 
