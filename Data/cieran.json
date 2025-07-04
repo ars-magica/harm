@@ -1907,7 +1907,8 @@
          , "narrative" : "Tractatus on Imaginem Q14: *Mystic Visions*"
          , "changes" : [ { "ability" : "Latin", "xp" : 2 } 
                     , { "possession" : { "art" : "Im", "count" : 8
-		        , "comment" : "salary and allowance" } } 
+		        , "comment" : "salary and allowance" } }
+         ]
       }
       , { "mode" : "Teaching", "season" : "Winter 1260"
 	 , "narrative" : "Teaching Luciu"
