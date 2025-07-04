@@ -193,6 +193,12 @@
       }]
       },
       { "season" : "Autumn 1257"
+       , "story" : [ { "title" : "Brid and father Wide"
+          , "narrative" : "Father Wide's Visit, Brid Arrives"
+       }
+       ]
+      },
+      { "season" : "Autumn 1257"
        , "story" : [ { "title" : "An Arcane Connection from Nenagh"
           , "SQ" : 9
           , "comment" : [ "1 confidence per active character." 
@@ -203,6 +209,18 @@
 	  ]
       }
        ]
+      },
+      { "season" : "Winter 1258"
+         , "narrative" : [ "3 Day Rally at Vigil (off camera)" ]
+      },
+      { "season" : "Summer 1258"
+        , "story" : [ { "title" : "Queen's Quest" 
+           , "narrative" : "Portrait of the Forest Fellowship"
+        } ]
+      },
+      { "season" : "Autumn 1259"
+        , "story" : [ { "title" : "Heirs to Merlin Charm Crafting, Adventure Part III"
+        } ]
       }
    ]
 }
