@@ -217,12 +217,16 @@
         ]
       },
       { "season" : "Summer 1258"
-        , "story" : [ { "title" : "Queen's Quest" 
-           , "narrative" : [ "Portrait of the Forest Fellowship" ]
-        } ]
+      , "story" : [ 
+         { "title" : "Queen's Quest" 
+         , "narrative" : [ "Portrait of the Forest Fellowship",
+           "Initiation quest for Deirbhile" ]
+         } ]
       },
       { "season" : "Autumn 1259"
-        , "story" : [ { "title" : "Heirs to Merlin Charm Crafting, Adventure Part III"
+        , "story" : [ 
+           { "title" : "Heirs to Merlin Charm Crafting, Adventure Part III"
+           , "narrative" : [ "Continue initiation of Deirbhile" ]
         } ]
       }
    ]
