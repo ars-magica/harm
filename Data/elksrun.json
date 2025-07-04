@@ -211,7 +211,10 @@
        ]
       },
       { "season" : "Winter 1258"
-         , "narrative" : [ "3 Day Rally at Vigil (off camera)" ]
+        , "story" : [ { "title" : "Rally at Vigil" 
+        , "narrative" : [ "3 Day Rally at Vigil (off camera)" ]
+        }
+        ]
       },
       { "season" : "Summer 1258"
         , "story" : [ { "title" : "Queen's Quest" 
