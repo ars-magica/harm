@@ -76,7 +76,7 @@ class Timed a => Advance a where
     prepare = id
 
 
--- ** Saga Advancement
+-- ## Saga Advancement
 
 -- | The saga can be advanced with the same class methods as
 -- characters and covenants.  When the saga advances, all its

@@ -641,7 +641,6 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
                    ]
 
 
--- |
 -- = Saga Markdown
 
 instance Markdown Saga where
