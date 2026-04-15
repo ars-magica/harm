@@ -1,4 +1,8 @@
 
 cd Data
-for i in *; do diff $i ../../hibernia/Data/$i; done
+for i in *
+do
+   echo $i
+   diff $i ../../hibernia/Data/$i
+done
 
