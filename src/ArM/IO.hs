@@ -6,7 +6,8 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Simple utilities to read and parse ArMChar files.
+-- Description :  Simple utilities to parse ArMChar files and generate
+-- markdown sheets.
 --
 -- The functions in this module generally take a filename (String)
 -- and returns a Maybe object by attempting to parse the relevant 
@@ -96,6 +97,8 @@ writeSagaAnnals saga = writeOList fn $ ann saga
     where fn = rootDir saga ++ "/Annals.md"
           ann = OList . (OString "# Annals":) . map printMD . sagaAnnals . sagaState
 
+-- |
+-- Write markdown files for the saga and all its covenants and characters.
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
    writeOList (rootDir saga ++ "/index.md") $ printMD saga
