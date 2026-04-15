@@ -1,0 +1,3633 @@
+[character]
+charID = "Cieran"
+
+[[pregameAdvancement]]
+mode = "Virtues and Flaws"
+
+changes = [
+  { ability = "Native Language: Irish", spec = "Leinster", xp = 75 },
+  { virtue = "Craft Magic", cost = 0, comment = "House Virtue" },
+  { virtue = "Spell Foci", cost = 0, comment = "House Virtue" },
+  { flaw = "Meddler (major)", cost = -3 },
+  { flaw = "Carefree", cost = -1 },
+  { flaw = "Weak Spontaneous Magic", cost = 0, comment = "House Flaw" },
+  { virtue = "Minor Magical Focus", detail = "magical arrows", cost = 1 },
+  { virtue = "Strong Faerie Blood", detail = "Ettin blood", cost = 3,
+    comment = "Ettin Blood gives +1 to Stamina" },
+  { flaw = "Mistaken Identity", cost = -3, comment = "Story flaw" },
+  { virtue = "Flawless Magic", cost = 3 },
+  { flaw = "Short-Range Magic", cost = -3 },
+  { virtue = "Book Learner", cost = 1 },
+  { virtue = "Affinity with (art)", detail = "Imaginem", cost = 1 },
+  { virtue = "Skilled Parens", cost = 1 },
+  { ptrait = "Villager", score = 2 }, ptrait = "Carefree", score = 3 },
+  { ptrait = "Meddler", score = 6 },
+]
+
+[[pregameAdvancement]]
+mode = "Characteristics"
+[[pregameAdvancement.changes]]
+characteristic = "Int"
+score = 3
+
+[[pregameAdvancement.changes]]
+characteristic = "Per"
+score = -1
+
+[[pregameAdvancement.changes]]
+characteristic = "Pre"
+score = 0
+
+[[pregameAdvancement.changes]]
+characteristic = "Com"
+score = -1
+
+[[pregameAdvancement.changes]]
+characteristic = "Str"
+score = 2
+
+[[pregameAdvancement.changes]]
+characteristic = "Sta"
+score = 2
+bonusScore = 1
+
+[[pregameAdvancement.changes]]
+characteristic = "Dex"
+score = 2
+
+[[pregameAdvancement.changes]]
+characteristic = "Qik"
+score = -3
+
+
+[[pregameAdvancement]]
+mode = "Early Childhood"
+[[pregameAdvancement.changes]]
+ability = "Area Lore: Munster"
+spec = "Hiding Places"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Awareness"
+spec = "Searching"
+xp = 15
+
+[[pregameAdvancement.changes]]
+ability = "Brawl"
+spec = "Dodge"
+xp = 15
+
+[[pregameAdvancement.changes]]
+ability = "Folk Ken"
+spec = "Villagers"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Stealth"
+spec = "Hiding"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Second Sight"
+spec = "Faerie Illusions"
+
+
+[[pregameAdvancement]]
+mode = "Later Life"
+years = 5
+[[pregameAdvancement.changes]]
+ability = "Area Lore: Ireland"
+spec = "Legends"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Bargain"
+spec = ""
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Concentration"
+spec = "Spell Concentration"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Craft: Cooking"
+spec = "Cookies"
+xp = 30
+
+[[pregameAdvancement.changes]]
+ability = "Craft: Fletching"
+spec = "Arrows"
+xp = 30
+
+
+[[pregameAdvancement]]
+mode = "Apprenticeship"
+[[pregameAdvancement.changes]]
+art = "Creo"
+xp = 21
+
+[[pregameAdvancement.changes]]
+art = "Intellego"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Muto"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Perdo"
+xp = 36
+
+[[pregameAdvancement.changes]]
+art = "Rego"
+xp = 36
+
+[[pregameAdvancement.changes]]
+art = "Animal"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Aquam"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Auram"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Corpus"
+xp = 15
+
+[[pregameAdvancement.changes]]
+art = "Herbam"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Ignem"
+xp = 0
+
+[[pregameAdvancement.changes]]
+art = "Imaginem"
+xp = 53
+
+[[pregameAdvancement.changes]]
+art = "Mentem"
+xp = 1
+
+[[pregameAdvancement.changes]]
+art = "Terram"
+xp = 15
+
+[[pregameAdvancement.changes]]
+art = "Vim"
+xp = 3
+
+[[pregameAdvancement.changes]]
+ability = "Hermes Lore"
+spec = "Hibernia"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Artes Liberales"
+spec = "Ritual Casting"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Latin"
+spec = "Hermetic Usage"
+xp = 30
+
+[[pregameAdvancement.changes]]
+ability = "Hermes Code"
+spec = "Stonehenge"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Magic Theory"
+spec = "Spells"
+xp = 30
+
+[[pregameAdvancement.changes]]
+ability = "Parma Magica"
+spec = "Mentem"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Penetration"
+spec = "Rego"
+xp = 5
+
+[[pregameAdvancement.changes]]
+ability = "Bows"
+spec = "Longbow"
+xp = 30
+
+[[pregameAdvancement.changes]]
+ability = "Thrown Weapon"
+spec = "Dart"
+xp = 5
+
+[[pregameAdvancement.changes]]
+spell = "Wound without Cause"
+tefo = "PeCo"
+level = 20
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Spasms of the Uncontrolled Body"
+tefo = "ReCo"
+level = 5
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Lamp till Morning without Flame"
+tefo = "CrIg"
+level = 15
+mastery = [ "Still Casting",]
+
+[[pregameAdvancement.changes]]
+spell = "Veil of Invisibility"
+tefo = "PeIm"
+level = 20
+mastery = [ "Quite Casting",]
+
+[[pregameAdvancement.changes]]
+spell = "Clarity of Public Speech"
+tefo = "CrIm"
+level = 10
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Aura of Ennobled Presence"
+tefo = "MuIm"
+level = 10
+mastery = [ "Quiet Casting",]
+
+[[pregameAdvancement.changes]]
+spell = "Trust of the Childlike Faith"
+tefo = "PeMe"
+level = 10
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Arrow of Peaceful Slumber"
+tefo = "ReMe"
+level = 15
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Touch of Slumber"
+tefo = "ReMe"
+level = 5
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "Obliteration of the Metallic Barrier"
+tefo = "PeTe"
+level = 20
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+spell = "End of the Mighty Castle"
+tefo = "PeTe"
+level = 20
+mastery = [ "Penetration",]
+
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.possession]
+weapon = [ "Longbow",]
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.possession]
+weapon = [ "Dagger",]
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.possession]
+weapon = [ "Quarterstaff",]
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.possession]
+name = "Writing Materials"
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.combat]
+weapon = "Longbow"
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.combat]
+weapon = "Dodge"
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.combat]
+weapon = "Fist"
+[[pregameAdvancement.changes]]
+
+[pregameAdvancement.changes.combat]
+weapon = "Knife"
+[[pregameAdvancement.changes]]
+possession = "Lantern"
+multiplicity = 1
+
+[[pregameAdvancement.changes]]
+possession = "Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small pouch of down, small crystal, piece of amber, comb, fan, earring, small brass bell, rabbit bone, cypress wand (8\"), sea shell, glass vial, dog's tooth"
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1217"
+sourceQuality = 21
+usesBook = "RootHerbam"
+narrative = "Studies *Root of Herbam* L6 Q21 +3"
+[[futureAdvancement.changes]]
+art = "Herbam"
+xp = 24
+levelCap = 6
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1217"
+usesBook = [ "MentemL16Q13",]
+sourceQuality = 13
+narrative = "Studies Mentem L16Q13 +3"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1218"
+sourceQuality = 15
+narrative = "Studies *Root of Terram* L8Q15 +3"
+usesBook = "RootTerram"
+[[futureAdvancement.changes]]
+art = "Terram"
+xp = 18
+levelCap = 8
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.lab]
+name = "Cieran's Workshop"
+narrative = "A large house in the village, with living quarters and a workshop serving both as an Hermetic lab and a fletcher's workshop."
+[futureAdvancement.changes.lab.state]
+aura = 8
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Dedicated Building"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Aestetics"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Upkeep"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Art"
+specialisation = "Re"
+score = 1
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Servant"
+narrative = "Originally, one of the Brigands from Clon mac Noise. Selected the most Intelligent one."
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Aestetics"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Safety"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Art"
+specialisation = "Me"
+score = 1
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Safe Cauldron"
+comment = "Magic Item from Folio-1109 installed Spring 1227"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "General Quality"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Activity"
+specialisation = "Experimentation"
+score = 1
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Precious Ingredients"
+comment = [ "From 1227", "The virtue grants +1 Longevity ritual, but this is suspended to allow for use of the Bookstand of Hespera.",]
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "General Quality"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Upkeep"
+score = 2
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Major Feature: Antechamber"
+narrative = "The Antechamber is actually a small courtyard which can be accessed only through the sanctum."
+comment = "From 1228"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Aestetics"
+score = 2
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Activity"
+specialisation = "Spells"
+score = 3
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Major Focus: Antechamber"
+comment = "From 1228"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "General Quality"
+score = -2
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Activity"
+specialisation = "Spells"
+score = 4
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Hermetic Chamber Pot"
+comment = "From 1235"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Health"
+score = 1
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Faerie Ingredients"
+comment = [ "From 1238", "Provides +1 Experimentation and +1 appropriate specialisation, which is also taken for experimentation.",]
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Warping"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "General Quality"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Upkeep"
+score = -1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Activity"
+specialisation = "Experimentation"
+score = 2
+
+
+[[futureAdvancement.changes.lab.state.virtues]]
+name = "Magical Heating"
+narrative = "Fan of Summer Breezes"
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Health"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Aestetics"
+score = 1
+
+[[futureAdvancement.changes.lab.state.virtues.bonus]]
+name = "Art"
+specialisation = "Ig"
+score = 1
+
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Spring 1218"
+sourceQuality = 14
+narrative = "Jerome's Tower - covenant service"
+[[futureAdvancement.changes]]
+ability = "Infernal Lore"
+spec = "Undead"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 4
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+name = "Rego Vis from Jerome's body"
+art = "Re"
+count = 3
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+name = "Perdo Vis from Jerome's body"
+art = "Pe"
+count = 1
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1218"
+sourceQuality = 14
+usesBook = "socpL4Q14"
+narrative = "Studies book found in Jerome's Tower"
+[[futureAdvancement.changes]]
+ability = "SOCP Lore"
+spec = "Self initiation"
+xp = 17
+levelCap = 4
+
+
+[[futureAdvancement]]
+mode = "Exposure: Lab Work"
+season = "Autumn 1218"
+sourceQuality = 2
+narrative = "Enchant Bookstand of Hespera"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = 3
+comment = "salary for the Jerome's Tower job"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1219"
+sourceQuality = 13
+usesBook = "VimL15Q13"
+narrative = "Also a short story to Praesis."
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+levelCap = 15
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1219"
+sourceQuality = 10
+usesBook = "TerramL11Q10"
+[[futureAdvancement.changes]]
+art = "Terram"
+xp = 13
+levelCap = 11
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1219"
+sourceQuality = 13
+usesBook = "RegoL20Q9"
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 16
+levelCap = 10
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1219"
+sourceQuality = 15
+usesBook = "LatinL5Q15"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 18
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1220"
+sourceQuality = 2
+narrative = "Learn fist of demon's Oblivion"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Fist of Demon's Oblivion"
+tefo = "PeVi"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Fist of Demon's Oblivion"
+tefo = "PeVi"
+level = 15
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Spring 1220"
+sourceQuality = 5
+narrative = "Jerome's Tower.  Parma to 17xp"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1220"
+sourceQuality = 13
+usesBook = "VimL15Q13"
+[[futureAdvancement.changes]]
+art = "Vim"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1220"
+sourceQuality = 20
+usesBook = "RootMuto"
+[[futureAdvancement.changes]]
+art = "Muto"
+xp = 23
+levelCap = 6
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1221"
+sourceQuality = 18
+usesBook = "AquamL7Q18"
+[[futureAdvancement.changes]]
+art = "Aquam"
+xp = 21
+levelCap = 7
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Spring 1221"
+sourceQuality = 10
+narrative = "Jerome's Tower"
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1221"
+sourceQuality = 8
+usesBook = "MedicineL3Q12"
+narrative = "(Causes and Curies) half xp due to injuries = 8"
+[[futureAdvancement.changes]]
+ability = "Philosophiae"
+spec = "Ritual Casting"
+xp = 8
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1221"
+sourceQuality = 19
+usesBook = "AuramL6Q19"
+[[futureAdvancement.changes]]
+art = "Auram"
+xp = 22
+levelCap = 6
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1222"
+sourceQuality = 13
+usesBook = "IntellegoL15Q13"
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1222"
+sourceQuality = 15
+usesBook = "RootIgnem"
+[[futureAdvancement.changes]]
+art = "Ignem"
+xp = 18
+levelCap = 8
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1222"
+sourceQuality = 2
+narrative = "ReTe items (covenant service) Parma to 24xp"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1222"
+sourceQuality = 13
+usesBook = "IntellegoL15Q13"
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1223"
+sourceQuality = 2
+narrative = "Lab work: InVi5 Sense the Nature of Vis + InVi20 Piercing the magic veil (from texts) + 2xp parma"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Sense the Nature of Vis"
+tefo = "InVi"
+level = 5
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Piercing the Magical Veil"
+tefo = "InVi"
+level = 20
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 2
+comment = "allowance"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1223"
+sourceQuality = 2
+narrative = "Stone Tell of Mind that Sits "
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Stone Tell of the Mind that Sits"
+tefo = "InTe"
+level = 30
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 9
+comment = "Adjustment.  Not known when the confidence was gained."
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1223"
+sourceQuality = 2
+narrative = "Parma to 30xp.  Story (2conf pts) Lab work: InVi5 Spot the Vis + InVi5 Scales of M W + InVi20 Piercing the faerie veil (from texts) (lab total InVi 14 + Int 3 + MT 4 + Aura 5 + similar spell 4 = 30) + 2xp parma"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 2
+
+[[futureAdvancement.changes]]
+spell = "Spot the Presence of Vis"
+tefo = "InVi"
+level = 5
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Scales of Magical Weight"
+tefo = "InVi"
+level = 5
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Piercing the Faerie Veil"
+tefo = "InVi"
+level = 20
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1223"
+sourceQuality = 14
+usesBook = "AnimalL15Q14"
+[[futureAdvancement.changes]]
+art = "Animal"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1224"
+sourceQuality = 15
+usesBook = "RootIgnem"
+[[futureAdvancement.changes]]
+art = "Ignem"
+xp = 18
+levelCap = 8
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1224"
+sourceQuality = 16
+usesBook = "CorpusHermeticus"
+narrative = "Reads *Corpus Hermeticus* which Phillipedes had on loan."
+[[futureAdvancement.changes]]
+art = "Corpus"
+xp = 19
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1224"
+sourceQuality = 12
+usesBook = "MagicTheoryL5Q12"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1224"
+sourceQuality = 12
+usesBook = "MagicTheoryL5Q12"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1225"
+sourceQuality = 2
+narrative = "Invent a touch version of Unravelling the Fabric of Imaginem lvl 13.  Exposure 2xp Second Sight. Lab Total 26."
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Tearing the Fabric of Imaginem"
+tefo = "PeVi"
+level = 13
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1225"
+sourceQuality = 12
+usesBook = "MagicTheoryL5Q12"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1225"
+sourceQuality = 2
+narrative = "Lab work. Touch version of Pit of Gaping Earth PeTe15. Exposure 2xp Magic Theory. Lab Total 30."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Arrow of Gaping Earth"
+tefo = "PeTe"
+level = 15
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1225"
+sourceQuality = 13
+usesBook = "VimL15Q13"
+narrative = "Made Potions of Demon's Oblivion "
+[[futureAdvancement.changes]]
+art = "Vim"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Winter 1226"
+sourceQuality = 15
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Leadership"
+xp = 5
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 5
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 3
+comment = "old claims"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 8
+comment = "old claims"
+
+[[futureAdvancement]]
+mode = "Open Arts"
+season = "Spring 1226"
+sourceQuality = 2
+narrative = "Open arts for Hiccup."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1226"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 10
+comment = "payment for items sold at the Midsummer fair"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1226"
+sourceQuality = 13
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1227"
+sourceQuality = 2
+narrative = [ "Training for Hiccup in Magic Theory (SQ 8 for Hiccup).", "Create Safe Cauldron, using Folio-1109 for lab text and bookstand of Hespera",]
+comment = [ "Exposure 2xp Magic Theory. Bonus XP in Hermes Lore.",]
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+ability = "Hermes Lore"
+bonusXP = 1
+comment = "Bonus XP from Folio"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = -3
+comment = "for the Safe Cauldron"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1227"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1227"
+sourceQuality = 2
+narrative = "Learn Wizard's Communion (MuVi 10) - Magic Theory exposure 2 using Bookstand of Hespera"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Wizard's Communion"
+tefo = "MuVi"
+level = 10
+mastery = [ "Fast Casting",]
+
+
+[[futureAdvancement]]
+mode = "Copying"
+season = "Autumn 1227"
+sourceQuality = 2
+narrative = "Copy spells (covenant service) "
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1228"
+sourceQuality = 13
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1228"
+sourceQuality = 2
+narrative = "Learn Sense of the lingering magic from lab text.  Using Bookstand of Hespera. Train Hiccup in Magic Theory. Exposure 2xp Magic Theory (-> 85xp)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Sense of the Lingering Magic"
+tefo = "InVi"
+level = 30
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1228"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+levelCap = 19
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = 3
+comment = "sales at the Grand tribunal"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1228"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1229"
+sourceQuality = 16
+usesBook = "CorpusHermeticus"
+narrative = "Reads *Corpus Hermeticus* which Phillipedes had on loan."
+[[futureAdvancement.changes]]
+art = "Corpus"
+xp = 19
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1229"
+sourceQuality = 2
+narrative = "Training for Hiccup in Magic Theory.  (SQ 8 for Hiccup) Invent spells from Folio. Bonus XP in Hermes Lore"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+ability = "Hermes Lore"
+bonusXP = 1
+comment = "Bonus XP from Folio"
+
+[[futureAdvancement.changes]]
+spell = "Circle of Undisturbed Rest"
+tefo = "ReIm"
+level = 10
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Willful Sidestep"
+tefo = "ReIm"
+level = 20
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Exposure SpellInstruction"
+season = "Summer 1229"
+sourceQuality = 2
+narrative = "Teaching Spells to Hiccup"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+spec = "apprentices"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab work"
+season = "Autumn 1229"
+sourceQuality = 2
+narrative = "ReCo 43 + Hiccup + bookstand = 51. Leap of Homecoming + Frog's Legs"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Leap of Homecoming"
+tefo = "ReCo"
+level = 35
+mastery = [ "Still Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Gift of the Frog's Legs"
+tefo = "ReCo"
+level = 15
+mastery = [ "Still Casting",]
+
+
+[[futureAdvancement]]
+mode = "Lab work"
+season = "Winter 1230"
+sourceQuality = 2
+narrative = "CrCo spells.  Lab total 43 + Hiccup + bookstand = 51."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Restoration of the Defiled Body"
+tefo = "CrCo"
+level = 25
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Improved Purification of the Festering Wounds"
+tefo = "CrCo"
+level = 25
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1230"
+sourceQuality = 12
+narrative = "L6Q12"
+usesBook = "HiberniaL6Q12"
+[[futureAdvancement.changes]]
+ability = "Area Lore: Ireland"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Summer 1230"
+sourceQuality = 10
+narrative = "Cieran seeks a familiar"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Magic Lore"
+spec = "creatures"
+xp = 5
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 1
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -1
+comment = "gift to the fox-man"
+
+[[futureAdvancement]]
+mode = "Exposure Assistance"
+season = "Autumn 1230"
+sourceQuality = 2
+narrative = "Help Maine "
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1231"
+sourceQuality = 2
+narrative = "Enchanting Familiar "
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -9
+comment = "bind familiar"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1231"
+sourceQuality = 2
+narrative = "Teach Hiccup. Parma to 39xp"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1231"
+sourceQuality = 14
+usesBook = "socpL4Q14"
+[[futureAdvancement.changes]]
+ability = "SOCP Lore"
+spec = "Self initiation"
+xp = 17
+levelCap = 4
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1231"
+sourceQuality = 14
+narrative = "SOCP Lore. Reaching 4. "
+usesBook = "socpL4Q14"
+[[futureAdvancement.changes]]
+ability = "SOCP Lore"
+spec = "Self initiation"
+xp = 17
+levelCap = 4
+
+
+[[futureAdvancement]]
+mode = "Initiation"
+season = "Winter 1232"
+sourceQuality = 2
+narrative = "Puissant SOCP Lore."
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+virtue = "Puissant (ability)"
+detail = "SOCP Lore"
+
+[[futureAdvancement.changes]]
+flaw = "Vow"
+detail = "against harming ordinary people"
+comment = "Works a little like a restriction when broken.  Magic can be restored by appropriate penance."
+
+
+[[futureAdvancement]]
+mode = "Initiation"
+season = "Spring 1232"
+sourceQuality = 2
+narrative = "Good Teacher."
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+virtue = "Good Teacher"
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Summer 1232"
+sourceQuality = 2
+narrative = "Train Hiccup. Parma to 45xp"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1232"
+sourceQuality = 2
+narrative = "Circle of Demon's Oblivion.  Invent both level 5 and level 15 versions. Train familiar"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Circle of Demon's Oblivion"
+tefo = "PeVi"
+level = 5
+mastery = [ "Penetration",]
+comment = "PeVi 5 [Base 10 (generic), -1 touch]: Range: Touch, Duration: Mom, Target: Circle. Destroys ten points of might to any infernal being inside the circle.  Lab Total 42 including similar spell L15 (+6 with Hiccup).  Casting Total 27 within covenant aura (Pen +44 w/o die)."
+
+[[futureAdvancement.changes]]
+spell = "Circle of Demon's Oblivion"
+tefo = "PeVi"
+level = 15
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Taught"
+season = "Winter 1233"
+sourceQuality = 15
+narrative = "Hired teacher for £1. "
+[[futureAdvancement.changes]]
+ability = "Craft: Rope."
+xp = 15
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 8
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = 1
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = -16
+comment = "casting Gift of Perception twice"
+[[futureAdvancement.changes]]
+characteristic = "Per"
+score = 1
+comment = "Gift of Perception Ritual Twice"
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1233"
+sourceQuality = 2
+narrative = "Hiccup "
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1233"
+sourceQuality = 2
+narrative = "Gift of Perception ++ Lab total 50 incl Hiccup"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Gift of Perception"
+tefo = "CrMe"
+level = 40
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "By His Works"
+tefo = "CrMe"
+level = 5
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1233"
+sourceQuality = 2
+narrative = "Ward against Heat and Flames Parma to 51xp ; Lab Total 42 + Hiccup (6) + Familiar (4) = 52"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Ward against Heat and Flames"
+mastery = [ "Fast Casting",]
+tefo = "ReIg"
+level = 25
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1234"
+usesBook = "VimL15Q13"
+sourceQuality = 13
+narrative = "*Magic Companion* L15Q13 "
+[[futureAdvancement.changes]]
+art = "Vim"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1234"
+sourceQuality = 2
+narrative = "Hiccup "
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+comment = "made by Hiccup"
+[futureAdvancement.changes.possession.enchantment.lesseritem]
+name = "Stone-Cutting Knife"
+level = 15
+technique = "Re"
+form = "Te"
+range = "Touch"
+duration = "Mom"
+target = "Part"
+modifiers = "Unlimited uses"
+design = "GL 2, +1 stone, +1 Touch, +1 Part, +10 levels unlimited uses"
+description = [ "This enchanted chisel shapes and forms stone as if a well-equipped stone- mason were carving it. The device may be used to carve blocks from a quarry (hence the Part Target). The wielder’s Dexterity + Finesse roll substitutes for a mason’s Craft roll (with +3 to the comparable Ease Factor). ", "It is a Simple task for a Mason to cut a plain block, so the basic Finesse Ease Factor to use this device to cut blocks for building is 6. Grogs deputed to the task can usually be trusted to carve blocks of approximately regular shape, though they may need trimming to fit, when used. ",]
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+name = "Porter’s Glove"
+comment = "made by Hiccup"
+[futureAdvancement.changes.possession.enchantment.lesseritem]
+name = "The Enchanted Porter"
+level = 15
+technique = "Re"
+form = "Te"
+range = "Touch"
+duration = "Conc"
+target = "Ind"
+modifiers = "24 uses/day"
+design = "GL 3, +1 Touch, +1 Conc, +5 levels to maintain, +5 levels for 24 uses; based on The Unseen Porter"
+description = "This enchanted glove, when placed against an inanimate object, lifts and pushes the object as the user holds on and moves. When the user removes his gloved hand from the object, it settles to the ground"
+comment = "Pen +0, 24/day R: Touch, D: Conc, T: Ind, device maintains concentration"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1234"
+sourceQuality = 13
+usesBook = "VimL15Q13"
+narrative = "*Magic Companion* L15Q13"
+[[futureAdvancement.changes]]
+art = "Vim"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1234"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+narrative = "Maine's wedding in Clonmacnoise.  Reading  (13x1½) Imaginem."
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+
+[[futureAdvancement.changes]]
+reputation = "Friendly druid"
+locale = "Lands of O'Sullivan"
+xp = 30
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1235"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+narrative = "13x1½ -> Imaginem 105x1½xp = 157½ -> 17 (4½)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = 2
+comment = "Allowance"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1235"
+sourceQuality = 2
+narrative = "Hiccup 11->13"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1235"
+sourceQuality = 2
+narrative = "93xp->95xp; InMe spells: InMe 43 + 9 (Jimeny and Hiccup) = 52 with text"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Posing the Silent Question"
+tefo = "InMe"
+level = 20
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Sight of Conflicting Motives"
+tefo = "InMe"
+level = 15
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1235"
+usesBook = "RegoL20Q9"
+sourceQuality = 9
+narrative = " 52->64 "
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 12
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+armour = [ "Weightless Chain (Protection 9, Load 2)",]
+comment = "made by Hiccup"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = -5
+comment = "enchantments"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1236"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+narrative = "13x1½ -> Imaginem 118x1½xp = 177 -> 18 (6)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1236"
+sourceQuality = 2
+narrative = "Hiccup 13->15"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1236"
+sourceQuality = 2
+narrative = "Miner's Keen Eye (covenant service)  InTe lab total 52 (incl. Hiccup +7, Jimeny +3)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Miner's Keen Eye (touch)"
+tefo = "InTe"
+level = 25
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1236"
+sourceQuality = 13
+usesBook = "MentemL16Q13"
+narrative = " 65xp score 10 "
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1237"
+sourceQuality = 2
+narrative = "IMAGE FROM THE WIZARD TORN: Lab total InIm 50 + 10 (Hiccup/Jimeny) + 1 read imaginem"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Image from the Wizard Torn"
+tefo = "ReIm"
+level = 30
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1237"
+sourceQuality = 2
+narrative = " (17xp) Hiccup "
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1237"
+sourceQuality = 2
+narrative = " (101xp) Eyes of the Eagle at touch InIm30 "
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Eyes of the Eagle (touch)"
+tefo = "InIm"
+level = 30
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1237"
+sourceQuality = 2
+narrative = "Leap of Homecoming Touch (starting, not completed)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1238"
+sourceQuality = 2
+narrative = "Leap of Homecoming Touch (continued) "
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Leap of Homecoming (touch)"
+mastery = [ "Still Casting",]
+tefo = "ReCo"
+level = 40
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = 16
+comment = "From the Wyrm in Provence.  Not sure about the art."
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = -5
+comment = "paid for the initiation script"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = -3
+comment = "reward to Hiccup"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = -1
+comment = "paid for faerie ingredients"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1238"
+sourceQuality = 2
+narrative = " (19xp) Hiccup "
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Summer 1238"
+sourceQuality = 8
+narrative = "Plus Quest for Cautious Sorcerer. Parma Magica (4 to 55xp)"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 4
+
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 4
+
+[[futureAdvancement.changes]]
+reputation = "Monster hunter"
+locale = "Village in Provence"
+xp = 5
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1238"
+sourceQuality = 2
+narrative = "Invent ReVi spells with help from Hiccup and Jimeny and lab text.  Lab total (ReVi) 47 + 11 (Hiccup + Jimeny) +2 text = 60.  Exposure 2xp Magic Theory (-> 107xp)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Aegis of the Hearth"
+tefo = "ReVi"
+level = 30
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Watching Ward"
+tefo = "ReVi"
+level = 30
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1239"
+sourceQuality = 6
+narrative = "SQ 6 doubled by flawless magic. Aegis of the Heath Mastery. Learns Safe Casting."
+[[futureAdvancement.changes]]
+spell = "Aegis of the Hearth"
+tefo = "ReVi"
+level = 30
+mastery = [ "Safe Casting",]
+xp = 9
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1239"
+sourceQuality = 2
+narrative = " (21xp) Hiccup.  SOCP Lore"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1239"
+sourceQuality = 2
+narrative = "Com of the Heroes from text with help from Hiccup and Jimeny (CrMe 47 + Hiccup 8 [spec Creo] + Jimeny 4 = 59; with text +2 = 61) MT to 109xp"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Communication of the Heroes"
+tefo = "CrMe"
+level = 60
+mastery = [ "Safe Casting",]
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1239"
+narrative = "Gift of Quickness. Experimentation. Discovery (15xp in MT). Magi Theory to 126xp"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 17
+
+[[futureAdvancement.changes]]
+spell = "Gift of Quickness (personal range)"
+tefo = "CrCo"
+level = 30
+mastery = [ "Safe Casting",]
+
+
+[futureAdvancement.bonusQuality]
+sourceBonus = 15
+bonusSource = "Discovery from Experimentation"
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1240"
+sourceQuality = 2
+narrative = "MuIm spells with help from Hiccup and Jimeny  (without text). MuIm 50 + 12 = 62. Magic Theory to 128xp."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Sight of the Warm Surface"
+tefo = "MuIm"
+level = 15
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Disguise of the Transformed Image"
+tefo = "MuIm"
+level = 15
+mastery = [ "Quite Casting",]
+
+[[futureAdvancement.changes]]
+characteristic = "Com"
+score = 2
+comment = "Heroes ritual cast once"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "An"
+count = -2
+comment = "paid for faerie ingredients"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "An"
+count = 3
+comment = "allowance"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Au"
+count = 2
+comment = "old claims"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = 3
+comment = "allowance"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 16
+comment = "old claims"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = -16
+comment = "ritual casting"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Spring 1240"
+sourceQuality = 2
+narrative = " (23xp) Hiccup."
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1240"
+sourceQuality = 2
+narrative = "Gift of Com. Magic Theory to 130xp "
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Gift of Communication"
+tefo = "CrMe"
+level = 40
+mastery = [ "Safe Casting",]
+
+
+[[futureAdvancement]]
+mode = "Initiation"
+season = "Autumn 1240"
+sourceQuality = 2
+narrative = "Cautious Sorcerer "
+[[futureAdvancement.changes]]
+ability = "SOCP Lore"
+xp = 2
+
+[[futureAdvancement.changes]]
+virtue = "Cautious Sorcerer"
+
+
+[[futureAdvancement]]
+mode = "Exposure Fixate AC"
+season = "Winter 1241"
+sourceQuality = 2
+narrative = "Fixate AC"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = -6
+comment = "to fixate arcane connections"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Cieran's Workshop"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Tress's Covenant"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Standing Stones in Brittany"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Qui Sonant (at polite distance)"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Tribunal Location (at polite distance)"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Killaloe (secluded location in the woods 250-500 paces downstream.)"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1241"
+sourceQuality = 2
+narrative = "Fan of Summer Breezes CrAu(Ig)19"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Au"
+count = -2
+comment = "for the enchantment"
+
+[[futureAdvancement]]
+mode = "Copying"
+season = "Summer 1241"
+sourceQuality = 2
+narrative = "Copy lab tests (covenant service)."
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1241"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+narrative = "17xp Creo  <-  *Growing, Healing, and Creation* -> 72xp (score 11)"
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1242"
+sourceQuality = 2
+narrative = "Horror Cabinet Spell  2xp Exposure Magic Theory -> 136xp (score 6)(covenant service).  Lab Total Cr(Re)Im 61 (spells) Experiment adds 7+ with maximum risk Nocturnal +2 gives Rolled *no benefit* lab total 63(66) gaining 28/31 points."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+other = "Warping"
+points = 1
+comment = "One botch some time before 1242."
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 2
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "An"
+count = 1
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "An"
+count = -1
+comment = "faerie rituals"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Ig"
+count = 3
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 8
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1242"
+sourceQuality = 2
+narrative = "Horror Cabinet Item continued with extra spells  2xp Exposure Magic Theory. Lab Total 61. Level 35+10=45. Earn 16 points; need 17(14)."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Horror Cabinet"
+tefo = "CrIm"
+level = 35
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "False Window"
+tefo = "CrIm"
+level = 5
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Smoke of Escaping"
+tefo = "CrIm"
+level = 5
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Exposure Assistance"
+season = "Summer 1242"
+sourceQuality = 2
+narrative = "Lab Assistance. Longevity Ritual.  Exposure Magic Theory -> 7 (140xp)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+longevity = 22
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = -2
+comment = "payment to Main for the LR"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+name = "Perdo Vis from Jerome's body"
+art = "Pe"
+count = -1
+comment = "payment to Main for the LR"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = -1
+comment = "payment to Main for the LR"
+
+[[futureAdvancement]]
+mode = "Lab work"
+season = "Autumn 1242"
+sourceQuality = 2
+narrative = "Horror Cabinet Item  2xp Exposure Magic Theory"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1243"
+sourceQuality = 13
+narrative = " *The Mind's Eye* L16Q13 -> 81xp ; No aging"
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = 0
+comment = "No aging. Rolls not recorded"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Pe"
+count = 1
+comment = "allowance (net, paying 1p for faerie ingredients)"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1243"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+narrative = " *Growing, Healing, and Creation* L15Q14 -> 89xp "
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1243"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+narrative = " *Growing, Healing, and Creation* L15Q14 -> 106xp "
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1243"
+sourceQuality = 14
+usesBook = "CreoL15Q14"
+narrative = " *Growing, Healing, and Creation* L15Q14 capped 15 for +14xp -> 120xp "
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+levelCap = 15
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1244"
+sourceQuality = 14
+usesBook = "CreoQ14Maine"
+narrative = "Maine's Tractatus on Creo Vol I (to 16  or 137xp); No apparent aging"
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 17
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = 0
+comment = "No aging. Rolls not recorded"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1244"
+sourceQuality = 2
+narrative = "CrIg Attack Spell. Parma to 57xp "
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Arrow of Fiery Ribbons"
+mastery = [ "Penetration",]
+tefo = "CrIg"
+level = 30
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Summer 1244"
+sourceQuality = 10
+narrative = "Midsummer Fair: Parma Magica (5), Folk Ken (5) + one confidence point "
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Folk Ken"
+xp = 5
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 1
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = 18
+comment = "earned at the Midsumer fair"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1244"
+sourceQuality = 8
+usesBook = "FaerieQ8Dark"
+narrative = " *Dark Fey of the East* "
+[[futureAdvancement.changes]]
+ability = "Faerie Lore"
+spec = "Dark fey"
+xp = 11
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1245"
+sourceQuality = 2
+narrative = "PeVi Spells; Parma Magica to 64xp; Rolls 28-24=4 Apparent Age increases.  lab total 51. Lab text for Break the Shield."
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Fist of Fey Oblivion"
+tefo = "PeVi"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Fist of Magic Oblivion"
+tefo = "PeVi"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Circle of Fey Oblivion"
+tefo = "PeVi"
+level = 10
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Break the Shield"
+tefo = "PeVi"
+level = 10
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 0
+die = 28
+roll = 4
+comment = "Apparent age increases"
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Spring 1245"
+sourceQuality = 15
+narrative = " 4 conf pts "
+[[futureAdvancement.changes]]
+ability = "Second Sight"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Faerie Lore"
+xp = 5
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 4
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = 2
+comment = "from Vincenzo's body"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 12
+comment = "salary (4p) and allowance (8p) 1244-47"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = -4
+comment = "Faerie Ingredients 1244-47"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1245"
+sourceQuality = 10
+usesBook = "ImaginemL19Q10"
+narrative = "Summa; capped at 19 +1½xp for correspondent (191½xp) "
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 13
+levelCap = 19
+
+[[futureAdvancement.changes]]
+art = "Imaginem"
+bonusXP = 1
+comment = "bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Copying"
+season = "Autumn 1245"
+sourceQuality = 2
+narrative = "Copy spell texts; 2xp Latin; see below"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1246"
+sourceQuality = 13
+narrative = "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15; no aging"
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = 0
+comment = "No aging. Rolls not recorded"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1246"
+sourceQuality = 13
+narrative = "Win/Spr/Sum 1246: 3x16 Mentem (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1246"
+sourceQuality = 13
+narrative = "Win/Spr/Sum 1246: 3x16 (Mentem L16Q13); 3x (13+3) = 42xp (81->123) 15"
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1246"
+sourceQuality = 13
+narrative = "13 (capped) Mentem L16Q13 to 16 "
+usesBook = "MentemL16Q13"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 16
+levelCap = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1247"
+sourceQuality = 14
+narrative = "Maine's Tractatus + Book Learner; 8-24=-16 no aging"
+usesBook = "MentemQ14Maine"
+[[futureAdvancement.changes]]
+art = "Mentem"
+xp = 17
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 8
+roll = -16
+comment = "No aging. Rolls not recorded"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1247"
+sourceQuality = 11
+usesBook = "CreoQ11Igneous1239"
+narrative = "Tractatus *On the Spark*"
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 14
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1247"
+sourceQuality = 9
+usesBook = [ "CreoQ9Vivianus",]
+[[futureAdvancement.changes]]
+art = "Creo"
+xp = 12
+
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1247"
+sourceQuality = 2
+narrative = "CrMe rituals x3 for Com to +5; (58xp) Tractatus on Corpus Q14 "
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+characteristic = "Com"
+score = 5
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = -20
+comment = "For the Heroes ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = -4
+comment = "For the Heroes ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = -14
+comment = "Traded for Mentem for the ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Pe"
+count = -1
+comment = "Traded for Mentem for the ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = -4
+comment = "Traded for Mentem for the ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Mu"
+count = -2
+comment = "Traded for Mentem for the ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = -2
+comment = "Traded for Mentem for the ritual"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+name = "Rego Vis from Jerome's body"
+art = "Re"
+count = -1
+comment = "Traded for Mentem for the ritual"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1248"
+sourceQuality = 12
+narrative = "Summa L20Q12; no aging (-4) "
+usesBook = "MutoL20Q12"
+[[futureAdvancement.changes]]
+art = "Muto"
+xp = 15
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = -4
+comment = "No aging. Die not recorded"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1248"
+sourceQuality = 14
+usesBook = "ImaginemQ14Oswald"
+narrative = "Oswald's tractatus Q14 + correspondent "
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 17
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1248"
+sourceQuality = 14
+usesBook = "ImaginemQ14Maine"
+narrative = "Maine's tractatus Q14 + correspondent (245½xp) "
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 17
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1248"
+sourceQuality = 2
+narrative = " 250xp incl. affinity and correspondent; MuIm Lab total 62.  Warping roll 3"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+spell = "Ogre's Stench"
+tefo = "MuIm"
+level = 25
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Aura of the Trustful Merchant"
+tefo = "MuIm"
+level = 10
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1249"
+sourceQuality = 2
+narrative = " 254½xp Invisibility Quartz for Sean; see below ; no aging (-18)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = -18
+comment = "No aging. Die not recorded"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 4
+comment = "Payment from Sean"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1249"
+sourceQuality = 13
+usesBook = "IntellegoL15Q13"
+narrative = "Summa L15Q13 (to 80xp: 12) "
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1249"
+sourceQuality = 13
+usesBook = "IntellegoL15Q13"
+narrative = "Summa L15Q13"
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1249"
+sourceQuality = 2
+narrative = "Tractatus on Imaginem Q14"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1250"
+sourceQuality = 2
+narrative = "no aging (-18); invent InHe25 Converse with Plant and Tree"
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Converse with Plant and Tree"
+mastery = [ "Penetration",]
+tefo = "InHe"
+level = 25
+
+[[futureAdvancement.changes]]
+reputation = "Crafter of Magic"
+locale = "Hermetic"
+xp = 20
+comment = "From Lab Aesthetics"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = -1
+roll = -18
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1250"
+sourceQuality = 11
+usesBook = "ImaginemQ11Rudolph"
+narrative = "Tractatus Q11 *Approaching Silence and Invisibility* with Book Learner, Correspondence, and Affinity"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 14
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1250"
+sourceQuality = 12
+usesBook = "CorpusL17Q12"
+narrative = "Summa L17Q12 + Book Learner 53 -> 68 "
+[[futureAdvancement.changes]]
+art = "Corpus"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Autumn 1250"
+sourceQuality = 13
+usesBook = [ "IntellegoL15Q13",]
+narrative = "Summa L15Q13 + Book Learner 80 -> 96"
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1251"
+sourceQuality = 13
+usesBook = [ "IntellegoL15Q13",]
+narrative = "Summa L15Q13 + Book Learner 96 -> 112; no aging -20"
+[[futureAdvancement.changes]]
+art = "Intellego"
+xp = 16
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = -1
+roll = -20
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1251"
+sourceQuality = 2
+narrative = "InIm spells below ->  281½.  Lab total 71"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+spell = "Palm of Seeing (Sun duration)"
+tefo = "InIm"
+level = 20
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Brushstrokes Revealed"
+tefo = "InIm"
+level = 10
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Prying Eyes"
+tefo = "InIm"
+level = 5
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1251"
+sourceQuality = 9
+usesBook = [ "RegoL20Q9",]
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 12
+
+
+[[futureAdvancement]]
+mode = "Author Book"
+season = "Autumn 1251"
+sourceQuality = 2
+narrative = "Authoring *Imaginary Horrors* drawing on the work with the Cathach protection."
+[[futureAdvancement.changes]]
+ability = "Parma Magica"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1252"
+sourceQuality = 9
+usesBook = [ "RegoL20Q9",]
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 12
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = -1
+roll = -16
+comment = "No aging."
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 12
+comment = "Allowance"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1252"
+sourceQuality = 3
+narrative = "ReIm35 CONFUSION OF THE INSANE VIBRATIONS (no text) (sun duration)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+spell = "Confusion of the Insane Vibrations"
+tefo = "ReIm"
+level = 35
+mastery = [ "Penetration",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1252"
+sourceQuality = 13
+narrative = "To 83xp"
+usesBook = "VimL15Q13"
+[[futureAdvancement.changes]]
+art = "Vim"
+xp = 16
+
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Autumn 1252"
+sourceQuality = 15
+narrative = "Imaginem 286 + 9 = 295 (5+correspondence&affinity), Faerie Lore 16+4=20, Latin 58+2=60, OoH Lore 7+4=11"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 5
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+ability = "Faerie Lore"
+xp = 4
+
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+ability = "Hermes Lore"
+xp = 4
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 5
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 2
+comment = "from the dark faerie in Provence, net reimbursed 3p to Tiou"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 4
+comment = "from the dark faerie in Provence"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = 3
+comment = "from the dark faerie in Provence"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 2
+comment = "from the dark faerie in Provence"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Winter 1253"
+sourceQuality = 9
+narrative = "Bonus SQ +4 from Book Learner and Correspondent (88->101).  Aging roll -21"
+usesBook = [ "RegoL20Q9",]
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 12
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = -1
+roll = -21
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1253"
+sourceQuality = 9
+narrative = "Bonus SQ +4 from Book Learner and Correspondent (101->114)"
+usesBook = [ "RegoL20Q9",]
+[[futureAdvancement.changes]]
+art = "Rego"
+xp = 12
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1253"
+sourceQuality = 2
+narrative = "Intangible Tunnel ReVi20; diam version ReVi5 (144xp)"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Opening the Intangible Tunnel"
+tefo = "ReVi"
+level = 20
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "The Minute of Reckoning"
+tefo = "ReVi"
+level = 5
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1253"
+sourceQuality = 2
+narrative = "Rego Tracatus (62xp)"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 4
+comment = "allowance/salary"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Me"
+count = 4
+comment = "allowance/salary"
+
+[[futureAdvancement]]
+mode = "Adventure"
+season = "Winter 1254"
+sourceQuality = 7
+narrative = [ "Sheriff Gui of the Worcesters.  Area of the Daisee clan.", "After the incident at the mine, Cieran was allowed to ride an old nag, owned by an old man Angus.",]
+[[futureAdvancement.changes]]
+ability = "Finesse"
+spec = "Precision"
+xp = 5
+
+[[futureAdvancement.changes]]
+ability = "Etiquette"
+xp = 2
+
+[[futureAdvancement.changes]]
+reputation = "Friendly druid"
+locale = "Lands of O'Sullivan"
+xp = 4
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 4
+roll = -1
+comment = "No aging."
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 2
+
+
+[[futureAdvancement]]
+mode = "Vis study"
+season = "Spring 1254"
+sourceQuality = 16
+narrative = " (319xp)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 16
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -5
+comment = "vis study"
+
+[[futureAdvancement]]
+mode = "Vis study"
+season = "Summer 1254"
+sourceQuality = 21
+narrative = " (350½xp)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 21
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -5
+comment = "vis study"
+
+[[futureAdvancement]]
+mode = "Vis study"
+season = "Autumn 1254"
+sourceQuality = 14
+narrative = "  (371½xp)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 14
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 3
+comment = "Allowance"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -5
+comment = "vis study"
+
+[[futureAdvancement]]
+mode = "Opening Arts"
+season = "Winter 1255"
+sourceQuality = 2
+narrative = "Open arts for Luciu"
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "In"
+count = -3
+comment = "Correction"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Mu"
+count = 2
+comment = "Correction"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "An"
+count = -1
+comment = "Correction"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = 2
+comment = "Correction"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 0
+roll = -1
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1255"
+sourceQuality = 2
+narrative = "ReVi Spells; Train Luciu in Magic Theory (SQ 15)."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Circular Ward Against Demons"
+tefo = "ReVi"
+level = 25
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Maintaining the Demanding Spell"
+tefo = "ReVi"
+level = 21
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "Watching Ward"
+tefo = "ReVi"
+level = 20
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 1
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1255"
+comment = "Reads the new Q12 Tractatus from Vigil"
+usesBook = "Im-Vigil-Q12"
+sourceQuality = 12
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 15
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1255"
+sourceQuality = 2
+narrative = "Author *Arrow's Flight*, an Auram Tracatus"
+comment = "To 64xp in Latin"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Cr"
+count = 2
+comment = "allowance/salary"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Co"
+count = 6
+comment = "allowance/salary TBC"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Winter 1256"
+narrative = "Teaching spells to Luciu"
+comment = "Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "Bonus XP from correspondent"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 10
+roll = -1
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1256"
+narrative = [ "CrIm spells (376xp).  Studious Doppleganger w/o text.", "Training Lucius in Magic Theory (SQ 15).",]
+comment = "Lab Total 70"
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "with correspondent"
+
+[[futureAdvancement.changes]]
+spell = "Book of Images"
+tefo = "CrIm"
+level = 15
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "The Shadow of Human Life"
+tefo = "CrIm"
+level = 40
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+spell = "The Studious Doppleganger"
+tefo = "CrIm"
+level = 5
+mastery = [ "Quiet Casting",]
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1256"
+comment = "Reads the new Q9 Tractatus from Vigil"
+usesBook = "Im-Vigil-Q9"
+sourceQuality = 9
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 12
+bonusXP = 1
+comment = "with Correspondent"
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = 1
+
+[[futureAdvancement.changes]]
+confidence = "Confidence"
+points = -1
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Te"
+count = -2
+comment = "payment for arcane connections"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 3
+comment = "allowance"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1256"
+comment = "Lab total 47 +  similar spell +5; familiar +6 -> 58"
+[[futureAdvancement.changes]]
+ability = "Creo"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession.enchantment.lesseritem]
+name = "Threshold of the Hospital"
+level = 29
+technique = "Cr"
+form = "Co"
+range = "Touch"
+duration = "Sun"
+target = "Room"
+modifiers = "12 uses/day"
+design = "GL 4, +1 Touch, +2 Moon, +2 Room, +4 constant effect"
+description = [ "Like *Purification of the Festering Wounds* (+9 recovery bonus)", "works on everyone as long as the stay in the room",]
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Co"
+count = -3
+comment = "for enchantment"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Winter 1257"
+narrative = "Teaching Latin to Luciu SQ 22"
+[[futureAdvancement.changes]]
+ability = "Teaching"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 5
+roll = -1
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Vis study"
+season = "Spring 1257"
+sourceQuality = 28
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 28
+bonusXP = 1
+comment = "with Correspondent"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -6
+comment = "vis study"
+[[futureAdvancement.changes]]
+reputation = "Friendly druid"
+locale = "Lands of O'Sullivan"
+xp = 1
+
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Summer 1257"
+narrative = "Training Luciu in Magic Theory SQ 15"
+comment = "Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6"
+[[futureAdvancement.changes]]
+ability = "Creo"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession.enchantment.lesseritem]
+name = "Cup of Purifying Drink"
+level = 30
+technique = "Cr"
+form = "Co"
+range = "Touch"
+duration = "Moon"
+target = "Ind"
+modifiers = "12 uses/day"
+design = "GL 5, +1 Touch, +3 Moon, +5 levels for uses"
+description = [ "Like *Improved Purification of the Festering Wounds*", "works on one who drinks from the cup",]
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Co"
+count = -3
+comment = "for enchantment"
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1257"
+sourceQuality = 2
+narrative = "Tractatus on Imaginem Q14: *Volume III on Imaginem*."
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 5
+comment = "salary"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = 3
+comment = "allowance"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Winter 1258"
+narrative = "Training Luciu in Magic Theory SQ 15"
+comment = "Lab Total 62 incl. familiar"
+[[futureAdvancement.changes]]
+ability = "Creo"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Circle of Preserved Connections"
+tefo = "CrVi"
+level = 30
+
+[futureAdvancement.changes.spellRecord]
+name = "Circle of Preserved Connections"
+TeFo = "CrVi"
+technique = "Creo"
+form = "Vim"
+level = 30
+range = "Touch"
+duration = "Ring"
+target = "Circle"
+design = "Base 15 [MoH:113] +2 Ring, +1 Touch"
+description = "Increase the duration of all the arcane connections within the circle by three steps on the table [MoH:113]."
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.aging]
+apparentYounger = 1
+die = 5
+roll = -1
+comment = "No aging."
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Spring 1258"
+narrative = "Training Luciu in Magic Theory SQ 15"
+comment = [ "Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic",]
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 2
+bonusXP = 1
+comment = "with Correspondent"
+
+[[futureAdvancement.changes]]
+spell = "False Dune"
+tefo = "MuIm"
+level = 5
+mastery = [ "Quiet Casting",]
+comment = "From Rudolf of Irencilla"
+
+[[futureAdvancement.changes]]
+spell = "Glowing Footprints of the Thief"
+tefo = "MuIm"
+level = 20
+mastery = [ "Quiet Casting",]
+comment = "From Rudolf of Irencilla"
+
+[[futureAdvancement.changes]]
+spell = "Confound the Rival Singer"
+tefo = "MuIm"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 3
+comment = "allowance"
+
+[[futureAdvancement]]
+mode = "Vis study"
+season = "Summer 1258"
+narrative = "Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim"
+sourceQuality = 12
+[[futureAdvancement.changes]]
+art = "Imaginem"
+xp = 12
+bonusXP = 1
+comment = "with Correspondent"
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = -6
+comment = "vis study"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Midsummer Fair in the Greater Alps"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+acTo = "Durenmar"
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Vi"
+count = -2
+comment = "for arcane connection"
+
+[[futureAdvancement]]
+mode = "Lab Work"
+season = "Autumn 1258"
+narrative = "Lab work with Luciu as assistant"
+comment = [ "Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic",]
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+[[futureAdvancement.changes]]
+spell = "Radiance of the Golden Firefly"
+design = "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+description = "The skin and hair of a person glow bright like the thorax of a firefly."
+tefo = "MuCo(An)"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Ears of the Hound"
+design = "Base 2; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+description = [ "allows the target to hear a dog's range of sound", "from Una 1241",]
+tefo = "MuCo(An)"
+level = 5
+mastery = [ "Penetration",]
+
+[[futureAdvancement.changes]]
+spell = "Disguise of the Transformed Person"
+design = "Base 3; R: Touch (+1), D: Sun (+2), T: Ind (+0), +1 Complex Effect"
+description = "Transforms the entire person (casting requisites transform items worn and carried as Personal)."
+tefo = "MuCo"
+level = 15
+mastery = [ "Quiet Casting",]
+
+[[futureAdvancement.changes]]
+ability = "Hermes Lore"
+bonusXP = 1
+
+[[futureAdvancement.changes]]
+spell = "Shape of the Feline Grace"
+tefo = "MuCo"
+level = 25
+mastery = [ "Quiet Casting",]
+
+[futureAdvancement.changes.spellRecord]
+name = "Shape of the Feline Grace"
+design = "Base 10; R: Touch (+1), D: Sun (+2), T: Ind (+0)"
+description = "As per Shape of the Woodland Prowler but turns in to a lynx"
+TeFo = "MuCo(An)"
+level = 25
+technique = "Muto"
+form = "Corpus"
+formReq = "Animal"
+comment = "Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted."
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Winter 1259"
+narrative = "Teaching craft to Luciu"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1259"
+narrative = "Reading Animàl.  Free reading for Luciu."
+usesBook = "AnimalL10Q18"
+sourceQuality = 18
+[[futureAdvancement.changes]]
+art = "Animàl"
+xp = 21
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1259"
+narrative = "Reading Animàl.  Free reading for Luciu."
+usesBook = "AnimalL15Q14"
+sourceQuality = 14
+[[futureAdvancement.changes]]
+art = "Animàl"
+xp = 17
+
+
+[[futureAdvancement]]
+mode = "Author"
+season = "Autumn 1259"
+narrative = "Tractatus on Imaginem Q14: *Mystic Visions*"
+[[futureAdvancement.changes]]
+ability = "Latin"
+xp = 2
+
+[[futureAdvancement.changes]]
+
+[futureAdvancement.changes.possession]
+art = "Im"
+count = 8
+comment = "salary and allowance"
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Winter 1260"
+narrative = "Teaching Luciu"
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Spring 1260"
+narrative = "Reading Muto.  Luciu transcribes spells."
+usesBook = "MutoL20Q12"
+sourceQuality = 12
+[[futureAdvancement.changes]]
+art = "Muto"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Reading"
+season = "Summer 1260"
+narrative = "Reading Muto.  Free reading for Luciu."
+usesBook = "MutoL20Q12"
+sourceQuality = 12
+[[futureAdvancement.changes]]
+art = "Muto"
+xp = 15
+
+
+[[futureAdvancement]]
+mode = "Exposure: Lab Work"
+season = "Autumn 1260"
+narrative = "Enchant familiar bond with shapechanging for Jimeny. Luciu assists."
+[[futureAdvancement.changes]]
+ability = "Magic Theory"
+xp = 2
+
+
+[[futureAdvancement]]
+mode = "Teaching"
+season = "Winter 1261"
+narrative = "Teaching Luciu"
+
+[concept]
+name = "Cieran the Fletcher"
+charType = "Magus"
+house = "ex Miscellanea"
+concept = "Rusticanus Fletcher"
+quirk = "Meddler.  Happily gives away charged items."
+appearance = "Cheerful, moving slowly and carefully.  Dresses like a craftsman, with a sturdy leather apron and tool belt."
+born = 1192
+player = "George"
+portrait = "cieran.jpeg"
+
+[concept.charGlance]
+
+[concept.charData]
+Size = 0
+Nationality = "Irish"
+"Alma Mater" = "Stonehenge"
+Covenant = "Elk's Run"
+Saga = "Contested Lands"
+"Casting Sigil" = "A gentle gust of air"
