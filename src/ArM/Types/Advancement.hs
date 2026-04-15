@@ -407,7 +407,9 @@ fmlx f aa = inf `mplus` exa
 
 -- |
 -- A Validation is a message reporting either an error or a successful test.
-data Validation = ValidationError String | Validated String | ValidationWarning String
+data Validation = ValidationError String 
+                | Validated String 
+                | ValidationWarning String
    deriving (Eq,Generic)
 
 instance Show Validation where

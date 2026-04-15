@@ -50,16 +50,18 @@ import ArM.Helper
 -- Other instances exist for internal use in the Saga instance.
 class Timed a => Advance a where
 
-    -- | Next season - if this is undefined (e.g. at GameStart), the time of the next
-    -- advancement is returned.
+    -- | Next season - if this is undefined (e.g. at GameStart),
+    -- the time of the next advancement is returned.
     nextSeason :: a -> SeasonTime
     nextSeason c | ssn == GameStart = ns
                  | ssn == NoTime = ns
                  | otherwise = seasonNext ssn
        where ssn = season c
              ns = nextAdvancement c
+
     -- | Next season with an advancement defined
     nextAdvancement :: a -> SeasonTime
+
     -- | Compute the initial state if no state is recorded.
     -- The prepare function is applied when the object is read from file.
     -- It is handled differently from in-game advancement, because character
@@ -120,7 +122,8 @@ jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next s
              -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
 jointAdvance saga = completeJoint . validateStep . validateBookUse . advJoint . nextJoint saga
 
-validateStep :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+validateStep :: ([AdvancementStep],[AdvancementStep]) 
+             -> ([AdvancementStep],[AdvancementStep]) 
 validateStep (xs,ys) = (xs,map f ys)
     where f (CharStep c (Just a)) = CharStep c $ Just $ validate c a
           f step = step
@@ -238,7 +241,8 @@ instance StepAdvance Covenant where
               fs = futureCovAdvancement cov
               new = cov { futureCovAdvancement = as }
    completeStepMaybe (CovStep c Nothing) = Just c 
-   completeStepMaybe (CovStep c (Just a)) = Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
+   completeStepMaybe (CovStep c (Just a)) = 
+        Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
@@ -278,7 +282,8 @@ instance Advance Covenant where
 -- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
-validateBookUse :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+validateBookUse :: ([AdvancementStep],[AdvancementStep]) 
+                -> ([AdvancementStep],[AdvancementStep]) 
 validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 
 -- | Check if a tractatus is read for the second time

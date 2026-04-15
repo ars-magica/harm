@@ -80,7 +80,6 @@ instance FromJSON Character where
         <*> v .:? "futureAdvancement" .!= []
 
 
--- | 
 -- == Name and identity
 
 instance KeyObject Character where
@@ -109,7 +108,6 @@ data CharacterType = Magus | Companion | Grog
        deriving (Eq,Generic,Show)
 instance ToJSON CharacterType
 instance FromJSON CharacterType
-
 
 
 -- | The CharacterConcept is the timeless information about the character.

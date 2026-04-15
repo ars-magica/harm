@@ -36,6 +36,7 @@ import ArM.DB.Weapon
 -- = Saga type
 
 -- | A Saga as it is processed in memory.
+-- The Saga object includes covenant and character objects.
 -- Multiple files have to be loaded to generate a Saga object from a `SagaFile`.
 data Saga = Saga 
          { sagaFile :: SagaFile
@@ -46,13 +47,18 @@ data Saga = Saga
          , armour :: ArmourDB
        }  deriving (Eq)
 
+-- | Return the description of the saga, as stored in the `SagaFile` object.
 sagaDesc :: Saga -> [ String ]
 sagaDesc = sagaDescription . sagaFile
+-- | Return the saga title, as stored in the `SagaFile` object.
 sagaTitle :: Saga -> String
 sagaTitle = title . sagaFile
+-- | Return root directory, as stored in the `SagaFile` object.
 rootDir :: Saga -> String
 rootDir = fromMaybe "" . rootDirectory . sagaFile
 
+-- | Get the seasons for which character states should be generated.
+-- The seasons are listed chronologically with the latest season first.
 stateSeasons :: Saga -> [ SeasonTime ]
 stateSeasons = reverse . (GameStart:) . seasons . sagaFile
 

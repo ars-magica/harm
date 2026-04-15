@@ -43,13 +43,16 @@ import ArM.Debug.Trace
 
 -- |
 -- = Read Saga Files
--- | Read a saga from JSON.  Return Maybe SagaFile
+-- | Read a saga from JSON.  Return Maybe SagaFile.
 readSagaFile :: String -- ^ Filename
              -> IO (Maybe SagaFile)
 readSagaFile fn = LB.readFile fn >>= return . decode
 
--- | Load the saga and its constituent objects from the given file.
+-- | Load the saga and all its constituent objects from the given file.
+--
 -- This calls both `readSagaFile` and `loadSaga`.
+-- Characters and covenants are loaded and advanced.
+-- The `Saga` object contains a list of characters and one of convenants.
 readSaga :: String -- ^ Filename
          -> IO (Maybe Saga)
 readSaga fn = readSagaFile fn >>= passMaybe loadSaga

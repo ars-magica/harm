@@ -142,14 +142,13 @@ showlistMD s xs = OList [ OString s
                         , toOList $ (map (++", ") $ map show xs)
                         ]
  
--- |
 -- = Markdown for the Character types
--- 
+ 
+-- |
 -- The `CharacterConcept` is set as a description list.
 -- 
 -- This may cause problems with long text values.  It would be worth distinguishing
 -- between more fields and use a differfent formatting where long text is expected.
-
 instance Markdown Character where
    printMD  c = OList
             [ bs 
