@@ -12,8 +12,7 @@ if __name__ == "__main__":
     parser.add_argument("outfile", type=str, help="Output file.")
     args = parser.parse_args()
 
-    with open(args.infile, 'rb') as f:
-        data = toml.load(f)
+    data = toml.load(args.infile)
     with open(args.outfile, 'w') as f:
         json.dump(data, f)
 
