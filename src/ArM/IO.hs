@@ -28,6 +28,8 @@ import qualified Data.ByteString as B
 import qualified Data.CSV as CSV
 import Text.ParserCombinators.Parsec
 
+import System.FilePath (splitExtension)
+
 import System.Directory
 
 import ArM.Advancement
@@ -48,7 +50,35 @@ import ArM.Debug.Trace
 -- | Read a saga from JSON.  Return Maybe SagaFile.
 readSagaFile :: String -- ^ Filename
              -> IO (Maybe SagaFile)
-readSagaFile fn = B.readFile fn >>= return . Yaml.decode
+readSagaFile = readHarmFile
+
+-- | Read and parse an object from a JSON or YAML file.
+-- The filename has to end in .yaml or .yml for YAML and .json for JSON.
+readHarmFile :: FromJSON t => String -> IO (Maybe t)
+readHarmFile = readHarmFile' . typedFile
+
+-- | Read and parse an object from a JSON or YAML file.
+-- This is a helper for `readHarmFile`
+readHarmFile' :: FromJSON t => TypedFileName -> IO (Maybe t)
+readHarmFile' (YAML fn) = B.readFile fn >>= return . Yaml.decode
+readHarmFile' (JSON fn) = LB.readFile fn >>= return . decode
+readHarmFile' (UnknownType fn) = error "Unknown file extension"
+
+-- | Typed filename to distinguish YAML and JSON files. 
+data TypedFileName = YAML String | JSON String | UnknownType String
+
+-- | Check file extension
+typedFile :: String -> TypedFileName
+typedFile fn | getExtension fn == ".yaml" = YAML fn
+             | getExtension fn == ".yml" = YAML fn
+             | getExtension fn == ".json" = JSON fn
+             | otherwise = UnknownType fn
+
+
+-- | Get the file extension from a filename
+getExtension :: String  -- ^ Filename
+             -> String  -- ^ File extension
+getExtension = snd . splitExtension
 
 -- | Load the saga and all its constituent objects from the given file.
 --
@@ -123,7 +153,7 @@ writeSaga saga = do
 readArM :: (Advance c, FromJSON c)
         => String -- ^ Filename
         -> IO (Maybe c)
-readArM fn = LB.readFile fn >>= return . prepMaybe . decode
+readArM fn = readHarmFile fn >>= return . prepMaybe 
       where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
             prepMaybe (Just x) = Just $ prepare x
 
