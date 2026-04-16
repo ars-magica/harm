@@ -51,6 +51,8 @@ data Covenant = Covenant
          , covenantState :: Maybe CovenantState
          , pastCovAdvancement :: [ AugCovAdvancement ]
          , futureCovAdvancement :: [ CovAdvancement ]
+         , covenantDesign :: [ CovAdvancement ]
+         , covenantPregame :: [ AugCovAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance Timed Covenant where
     season = fromMaybe NoTime . fmap covTime . covenantState
@@ -62,6 +64,8 @@ instance FromJSON Covenant where
         <*> v .:? "state"
         <*> v .:? "history" .!= []
         <*> v .:? "plan" .!= []
+        <*> v .:? "design" .!= []
+        <*> v .:? "pregame" .!= []
 
 instance BookDB Covenant where
    lookupBook k = join . fmap (lookupBook k) . covenantState 
