@@ -101,7 +101,7 @@ common harm-deps
                        , ArM.Helper
                        , Data.Aeson.Generic
                        , Data.OList
-  build-depends:       cassava >= 0.5.3
+  build-depends:       cassava >= 0.5.4
                        , vector >= 0.13
                        , parsec >= 3.1
                        , MissingH >= 1.6
