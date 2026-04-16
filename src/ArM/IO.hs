@@ -24,6 +24,7 @@ import Data.List
 import Data.Aeson 
 import qualified Data.Yaml as Yaml
 import qualified Data.ByteString.Lazy as LB
+import qualified Data.ByteString as B
 import qualified Data.CSV as CSV
 import Text.ParserCombinators.Parsec
 
@@ -47,7 +48,7 @@ import ArM.Debug.Trace
 -- | Read a saga from JSON.  Return Maybe SagaFile.
 readSagaFile :: String -- ^ Filename
              -> IO (Maybe SagaFile)
-readSagaFile fn = LB.readFile fn >>= return . Yaml.decode
+readSagaFile fn = B.readFile fn >>= return . Yaml.decode
 
 -- | Load the saga and all its constituent objects from the given file.
 --
