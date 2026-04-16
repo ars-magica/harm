@@ -11,7 +11,10 @@ description:
      actual state of the character at a given time is computed.
 
      The libraries are designed with the intention of creating client/server
-     systems with different interactie and non-interactive clients.
+     systems with different interactive and non-interactive clients.
+
+     The Data.* modules are designed to be generic, while the ArM.*
+     modules are specific to Ars Magica.
 
 name:                harm
 version:             0.1.0.0
