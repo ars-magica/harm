@@ -13,6 +13,9 @@
 -- generic list of label/value pairs, where the value may be a String or an
 -- Int.  This supports custom fields in character sheets.
 --
+-- Essentially, `KeyPairList` is a simplified version of `KeyMap` from
+-- Aeson, and it may be redundant.  
+--
 -----------------------------------------------------------------------------
 module ArM.Types.KeyPair ( FieldValue(..)
                               , KeyPair(..)
