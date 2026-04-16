@@ -26,10 +26,10 @@ Prophecy
 Size
 : 0
 
-## Winter 1255
+## Winter 1258
 
-+ **Age:** 25 years (apparent age 25) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
-+ **Confidence**: 1 (5)
++ **Age:** 28 years (apparent age 28) Aging Bonus: +2 (Longevity Ritual 0, Personal Bonus 0, Living Conditions 0, Lab Health Bonus 0)
++ **Confidence**: 1 (6)
 + **Characteristics:** 
 Int +2, 
 Per 0, 
@@ -62,18 +62,20 @@ Uncertain Faith (-1),
 Warrior (1), 
 Weakness [for Dogs] (-1), 
 + **Abilities:**
-    + Animal Handling [Dogs] 5 +2 (3xp) [xp x1.5]
+    + Animal Handling [Dogs] 5 +2 (6xp) [xp x1.5]
     + Animal Ken [Canine] 4 (3xp)
     + Athletics [obstacle race] 2 (0xp)
     + Awareness [Good ears] 1 (0xp)
     + Bargain [Livestock] 2 (0xp)
     + Bows [Shortbow] 4 (0xp)
     + Brawl [Dirty fighting] 1 (0xp)
+    + Carouse [  --  ] 1 (0xp)
     + Charm [Animals] 1 (0xp)
     + Covenant Lore [Hierarchies] 2 (0xp)
-    + Faerie Lore [Dark Fae] 1 (0xp)
+    + Faerie Lore [Dark Fae] 1 (1xp)
     + Guile [Fast talk] 1 (0xp)
-    + Hunt [with dogs] 5 (2xp)
+    + Hermes Lore [  --  ] 1 (0xp)
+    + Hunt [with dogs] 5 (14xp)
     + Leadership [in the field] 2 (0xp)
     + Magic Lore [Ancient Myth] 1 (0xp)
     + Munster Lore [Outback] 1 (0xp)
@@ -81,7 +83,8 @@ Weakness [for Dogs] (-1),
     + Ride [Horse training] 4 (0xp)
     + Single Weapon [Shortspear] 1 (0xp)
     + Stealth [Hiding] 1 (0xp)
-    + Survival [Hills] 2 (0xp)
+    + Storytelling [  --  ] 1 (1xp)
+    + Survival [Hills] 3 (3xp)
 + Vis
 + Weapons
     + Round Shield
@@ -101,6 +104,81 @@ Weakness [for Dogs] (-1),
 
 ## Past Advancement
 
++ Winter 1258 (2xp) (1 years) Training (Exposure)
+    + *Train second lymer in hunt +8 xp (+24 total).*
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Inferred traits
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
++ Autumn 1257 (4+2xp) Practice
+    + Changing traits
+        + Ability: Survival 6xp; 
+    + Validated: Correctly spent 6 xp.
++ Summer 1257 (4+2xp) Practice
+    + Changing traits
+        + Ability: Survival 6xp; 
+    + Validated: Correctly spent 6 xp.
++ Spring 1257 (2xp) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+32 total).*
+    + Lymer 1. Loyal +2.  Hunt 32xp.
+    + Lymer 2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Winter 1257 (2xp) (1 years) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+24 total).*
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Inferred traits
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
++ Autumn 1256 (4+2xp) Practice
+    + Changing traits
+        + Ability: Survival 6xp; 
+    + Validated: Correctly spent 6 xp.
++ Summer 1256 (4+2xp) Practice
+    + Changing traits
+        + Ability: Storytelling 6xp; 
+    + Validated: Correctly spent 6 xp.
++ Spring 1256 (2xp) Training (Exposure)
+    + *Train second lymer in hunt +8 xp (+16 total).*
+    + Lymer 1-2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Winter 1256 (2xp) (1 years) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+16 total).*
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Inferred traits
+        + Aging 1 years; apparent 1 years. No roll. 
+    + Validated: Correctly spent 2 xp.
++ Autumn 1255 (2xp) "Taming" (Other Exposure)
+    + *Train two lymers to Loyal +2, and one mastiff to +1.*
+    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
+    + Changing traits
+        + Ability: Animal Handling 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Summer 1255 (2xp) Training (Exposure)
+    + *Train second lymer in hunt +8 xp.*
+    + Changing traits
+        + Ability: Hunt 2xp; 
+    + Validated: Correctly spent 2 xp.
++ Spring 1255 (8+3xp) Adventure
+    + *Eogan discussed horse training and possible trade with the visitors from Lambaird.*
+    + Changing traits
+        + Ability: Carouse 5xp; 
+        + Ability: Faerie Lore 1xp; 
+        + Ability: Hermes Lore 5xp; 
+        + Confidence: 0 (1)
+    + Validated: Correctly spent 11 xp.
 + Winter 1255 (2xp) (1 years) Training (Exposure)
     + *Train one lymer in hunt +8 xp.*
     + Changing traits
@@ -129,51 +207,6 @@ Weakness [for Dogs] (-1),
 
 ## Future Advancement
 
-+ Spring 1255 (8xp) Adventure
-    + *Eogan discussed horse training and possible trade with the visitors from Lambaird.*
-    + Ability: Hermes Lore 5xp; 
-    + Ability: Carouse 5xp; 
-    + Ability: Faerie Lore 1xp; 
-    + Confidence: 0 (1)
-+ Summer 1255 (2xp) Training (Exposure)
-    + *Train second lymer in hunt +8 xp.*
-    + Ability: Hunt 2xp; 
-+ Autumn 1255 (2xp) "Taming" (Other Exposure)
-    + *Train two lymers to Loyal +2, and one mastiff to +1.*
-    + The mastiff has confidence 1 and thus effective might 3. The combined might is 5.
-    + Ability: Animal Handling 2xp; 
-+ Winter 1256 (2xp) Training (Exposure)
-    + *Train one lymer in hunt +8 xp (+16 total).*
-    + Ability: Hunt 2xp; 
-+ Spring 1256 (2xp) Training (Exposure)
-    + *Train second lymer in hunt +8 xp (+16 total).*
-    + Lymer 1-2. Loyal +2.  Hunt 16xp.
-    + Lymer 3. Loyal +1.
-    + Greyhound 1-2. Loyal +1.
-    + Mastiff 1. Loyal +1.
-    + Ability: Hunt 2xp; 
-+ Summer 1256 (4xp) Practice
-    + Ability: Storytelling 6xp; 
-+ Autumn 1256 (4xp) Practice
-    + Ability: Survival 6xp; 
-+ Winter 1257 (2xp) Training (Exposure)
-    + *Train one lymer in hunt +8 xp (+24 total).*
-    + Ability: Hunt 2xp; 
-+ Spring 1257 (2xp) Training (Exposure)
-    + *Train one lymer in hunt +8 xp (+32 total).*
-    + Lymer 1. Loyal +2.  Hunt 32xp.
-    + Lymer 2. Loyal +2.  Hunt 16xp.
-    + Lymer 3. Loyal +1.
-    + Greyhound 1-2. Loyal +1.
-    + Mastiff 1. Loyal +1.
-    + Ability: Hunt 2xp; 
-+ Summer 1257 (4xp) Practice
-    + Ability: Survival 6xp; 
-+ Autumn 1257 (4xp) Practice
-    + Ability: Survival 6xp; 
-+ Winter 1258 (2xp) Training (Exposure)
-    + *Train second lymer in hunt +8 xp (+24 total).*
-    + Ability: Hunt 2xp; 
 + Spring 1258 (2xp) Training (Exposure)
     + *Train second lymer in hunt +8 xp (+32 total).*
     + Lymer 1-2. Loyal +2.  Hunt 32xp.

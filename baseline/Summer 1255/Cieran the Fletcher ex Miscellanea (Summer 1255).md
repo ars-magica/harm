@@ -35,11 +35,11 @@ Saga
 Size
 : 0
 
-## Winter 1256
+## Summer 1255
 
-+ **Age:** 64 years (apparent age 51) Aging Bonus: -20 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
++ **Age:** 63 years (apparent age 51) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
 + **Confidence**: 1 (33)
-+ **Warping**: 2 (0)
++ **Warping**: 1 (9)
 + **Characteristics:** 
 Int +3, 
 Per +1, 
@@ -95,7 +95,7 @@ Weak Spontaneous Magic (0),
     + Hermes Code [Stonehenge] 1 (0xp)
     + Hermes Lore [Hibernia] 1 (6xp)
     + Infernal Lore [Undead] 1 (0xp)
-    + Latin [Hermetic Usage] 4 (14xp)
+    + Latin [Hermetic Usage] 4 (12xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
     + Magic Theory [Spells] 7 (8xp)
@@ -109,8 +109,7 @@ Weak Spontaneous Magic (0),
     + Teaching [apprentices] 2 (8xp)
     + Thrown Weapon [Dart] 1 (0xp)
 + Vis
-    + Co vis (6)
-    + Cr vis (7)
+    + Cr vis (5)
     + Ig vis (3)
     + Im vis (5)
     + Me vis (10)
@@ -156,7 +155,7 @@ Weak Spontaneous Magic (0),
 
 | Art  | Score | XP | Vis |
 | -: | -: | -: | -: |
-| Creo | 17 | 10 | 7 |
+| Creo | 17 | 10 | 5 |
 | Intellego | 14 | 7 | 0 |
 | Muto | 8 | 0 | 0 |
 | Perdo | 8 | 0 | 0 |
@@ -164,10 +163,10 @@ Weak Spontaneous Magic (0),
 | Animàl | 5 | 2 | 0 |
 | Aquam | 6 | 0 | 0 |
 | Auram | 6 | 0 | 0 |
-| Corpus | 11 | 2 | 6 |
+| Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 27 | 16.5 | 5 |
+| Imaginem | 27 | 12.5 | 5 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -630,25 +629,6 @@ Total: 1249 levels of spells.
 
 ## Past Advancement
 
-+ Winter 1256 (2xp) (1 years) Teaching (Exposure)
-    + *Teaching spells to Luciu*
-    + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
-    + Changing traits
-        + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
-        + Aging Rolled -1 (10)  [No aging.]
-    + Inferred traits
-        + Warping 1 (from Longevity Ritual)
-        + Aging 1 years; apparent 1 years. No roll. 
-    + Validated: Correctly spent 2 xp.
-    + Validated: Aging roll made
-+ Autumn 1255 (2xp) Authoring (Exposure)
-    + *Author *Arrow's Flight*, an Auram Tracatus*
-    + To 64xp in Latin
-    + Changing traits
-        + Ability: Latin 2xp; 
-        + Possession: Co vis (6)
-        + Possession: Cr vis (2)
-    + Validated: Correctly spent 2 xp.
 + Summer 1255 (12+3xp) Reading
     + Reads the new Q12 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)
@@ -1901,6 +1881,17 @@ Total: 1249 levels of spells.
 
 ## Future Advancement
 
++ Autumn 1255 (2xp) Authoring (Exposure)
+    + *Author *Arrow's Flight*, an Auram Tracatus*
+    + To 64xp in Latin
+    + Ability: Latin 2xp; 
+    + Possession: Cr vis (2)
+    + Possession: Co vis (6)
++ Winter 1256 Teaching (Exposure)
+    + *Teaching spells to Luciu*
+    + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
+    + Art: Imaginem 2xp + 1 bonus xp;  (Bonus XP from correspondent)
+    + Aging Rolled -1 (10)  [No aging.]
 + Spring 1256 LabWork (Exposure)
     + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
     + *Training Lucius in Magic Theory (SQ 15).*
@@ -1915,13 +1906,13 @@ Total: 1249 levels of spells.
     + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
     + Confidence: 0 (1)
     + Confidence: 0 (-1)
-    + Possession: Te vis (-2)
     + Possession: Im vis (3)
 + Autumn 1256 LabWork (Exposure)
-    + Lab total 47 +  similar spell +5; familiar +6 -> 58
-    + Ability: Creo 2xp; 
-    + Possession: Threshold of the Hospital
-    + Possession: Co vis (-3)
+    + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
+    + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
+    + Spell: MuIm5 False Dune 0xp Quiet Casting
+    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
+    + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
 + Winter 1257 Teaching (Exposure)
     + *Teaching Latin to Luciu SQ 22*
     + Ability: Teaching 2xp; 
@@ -1929,75 +1920,20 @@ Total: 1249 levels of spells.
 + Spring 1257 (28xp) Vis Study
     + Art: Imaginem 28xp + 1 bonus xp;  (with Correspondent)
     + Possession: Im vis (-6)
-    + Reputation: Friendly druid [Lands of O'Sullivan] 1xp
 + Summer 1257 LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
     + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
     + Ability: Creo 2xp; 
     + Possession: Cup of Purifying Drink
-    + Possession: Co vis (-3)
+    + Possession: Cr vis (-3)
 + Autumn 1257 (2xp) Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Volume III on Imaginem*.*
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
     + Ability: Latin 2xp; 
-    + Possession: Im vis (5)
-    + Possession: Vi vis (3)
-+ Winter 1258 LabWork (Exposure)
++ Winter 1260 LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
-    + Lab Total 62 incl. familiar
-    + Ability: Creo 2xp; 
-    + Spell: CrVi30 Circle of Preserved Connections 0xp
-    + Aging Rolled -1 (5)  [No aging.]
-+ Spring 1258 LabWork (Exposure)
-    + *Training Luciu in Magic Theory SQ 15*
-    + Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic
-    + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
-    + Spell: MuIm5 False Dune 0xp Quiet Casting (From Rudolf of Irencilla)
-    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting (From Rudolf of Irencilla)
-    + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
-    + Possession: Im vis (3)
-+ Summer 1258 (12xp) Vis Study
-    + *Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim*
-    + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
-    + Possession: Im vis (-6)
-    + Possession: AC to Midsummer Fair in the Greater Alps
-    + Possession: AC to Durenmar
-    + Possession: Vi vis (-2)
-+ Autumn 1258 LabWork (Exposure)
-    + *Lab work with Luciu as assistant*
-    + Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic
     + Ability: Magic Theory 2xp; 
     + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp Penetration
-    + Spell: (An)MuCo5 Ears of the Hound 0xp Penetration
     + Spell: MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
     + Ability: Hermes Lore 0xp + 1 bonus xp; 
-    + Spell: MuCo25 Shape of the Feline Grace 0xp Quiet Casting
-+ Winter 1259 Teaching (Exposure)
-    + *Teaching craft to Luciu*
-+ Spring 1259 (18xp) Reading
-    + *Reading Animàl.  Free reading for Luciu.*
-    + Uses: AnimalL10Q18
-    + Art: Animàl 21xp; 
-+ Summer 1259 (14xp) Reading
-    + *Reading Animàl.  Free reading for Luciu.*
-    + Uses: AnimalL15Q14
-    + Art: Animàl 17xp; 
-+ Autumn 1259 Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Mystic Visions**
-    + Ability: Latin 2xp; 
-    + Possession: Im vis (8)
-+ Winter 1260 Teaching (Exposure)
-    + *Teaching Luciu*
-+ Spring 1260 (12xp) Reading
-    + *Reading Muto.  Luciu transcribes spells.*
-    + Uses: MutoL20Q12
-    + Art: Muto 15xp; 
-+ Summer 1260 (12xp) Reading
-    + *Reading Muto.  Free reading for Luciu.*
-    + Uses: MutoL20Q12
-    + Art: Muto 15xp; 
-+ Autumn 1260 LabWork (Exposure)
-    + *Enchant familiar bond with shapechanging for Jimeny. Luciu assists.*
-    + Ability: Magic Theory 2xp; 
-+ Winter 1261 Teaching (Exposure)
-    + *Teaching Luciu*
+    + Spell: (An)MuCo25 Shape of the Feline Grace 0xp Quiet Casting (Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.)
 

@@ -1,27 +1,141 @@
 # Annals
 
-## Winter 1258
+## Winter 1261
+
++ Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
+    + *Teaching Luciu*
+    + ERROR: Underspent 0xp of 2.
+    + ERROR: Older than 50. Aging roll required.
+
+## Autumn 1260
 
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
-    + *Training Luciu in Magic Theory SQ 15*
+    + *Enchant familiar bond with shapechanging for Jimeny. Luciu assists.*
     + Validated: Correctly spent 2 xp.
+
+## Summer 1260
+
++ Cieran the Fletcher ex Miscellanea (Reading)
+    + *Reading Muto.  Free reading for Luciu.*
+    + Uses *Transformations* by Jason ex Mercere (No Time)
+    + Validated: Correctly spent 15 xp.
+    + Validated: Book MutoL20Q12 is available.
+
+## Spring 1260
+
++ Cieran the Fletcher ex Miscellanea (Reading)
+    + *Reading Muto.  Luciu transcribes spells.*
+    + Uses *Transformations* by Jason ex Mercere (No Time)
+    + Validated: Correctly spent 15 xp.
+    + Validated: Book MutoL20Q12 is available.
+
+## Winter 1260
+
++ Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
+    + *Teaching Luciu*
+    + ERROR: Underspent 0xp of 2.
     + ERROR: Older than 50. Aging roll required.
+
+## Autumn 1259
+
++ Elk's Run
+    + Heirs to Merlin Charm Crafting, Adventure Part III(no source quality)
+        + *Continue initiation of Deirbhile*
+    + Changes
++ Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
+    + *Tractatus on Imaginem Q14: *Mystic Visions**
+    + Validated: Correctly spent 2 xp.
+
+## Summer 1259
+
++ Cieran the Fletcher ex Miscellanea (Reading)
+    + *Reading Animàl.  Free reading for Luciu.*
+    + Uses *The Beings of Eden* by Victoria of Merinita (No Time)
+    + Validated: Correctly spent 17 xp.
+    + Validated: Book AnimalL15Q14 is available.
+
+## Spring 1259
+
++ Cieran the Fletcher ex Miscellanea (Reading)
+    + *Reading Animàl.  Free reading for Luciu.*
+    + Uses *The keeping of Bees* by Fedelmid An T-Eigse Measceal (No Time)
+    + Validated: Correctly spent 21 xp.
+    + Validated: Book AnimalL10Q18 is available.
+
+## Winter 1259
+
++ Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
+    + *Teaching craft to Luciu*
+    + ERROR: Underspent 0xp of 2.
+    + ERROR: Older than 50. Aging roll required.
+
+## Autumn 1258
+
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Lab work with Luciu as assistant*
+    + Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic
+    + Validated: Correctly spent 2 xp.
+
+## Summer 1258
+
++ Elk's Run
+    + Queen's Quest(no source quality)
+        + *Portrait of the Forest Fellowship*
+        + *Initiation quest for Deirbhile*
+    + Changes
++ Cieran the Fletcher ex Miscellanea (Vis Study)
+    + *Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim*
+    + Validated: Correctly spent 12 xp.
+
+## Spring 1258
+
++ Eogan mac Eogan (Training (Exposure))
+    + *Train second lymer in hunt +8 xp (+32 total).*
+    + Lymer 1-2. Loyal +2.  Hunt 32xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Validated: Correctly spent 2 xp.
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Training Luciu in Magic Theory SQ 15*
+    + Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic
+    + Validated: Correctly spent 2 xp.
+
+## Winter 1258
+
++ Elk's Run
+    + Rally at Vigil(no source quality)
+        + *3 Day Rally at Vigil (off camera)*
+    + Changes
++ Eogan mac Eogan (Training (Exposure))
+    + *Train second lymer in hunt +8 xp (+24 total).*
+    + Validated: Correctly spent 2 xp.
++ Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
+    + *Training Luciu in Magic Theory SQ 15*
+    + Lab Total 62 incl. familiar
+    + Validated: Correctly spent 2 xp.
+    + Validated: Aging roll made
 
 ## Autumn 1257
 
 + Elk's Run
-    + An Arcane Connection from Nenagh (SQ -1)
+    + An Arcane Connection from Nenagh (SQ 9)
         + *Brid goes to Nenagh together with some gorgs to pick up an arcane connection for Tim. Tim leaps back and forth with his spell, and finally shapechanges to a raven to pick up an arcane connection to the lord himself.*
         + *Brid learns that some businesses in town are haunted by faeries.*
         + *THere is another raven, serving the *Mistress of Fate* who is also coming to the lord's bedroom, but to warn him.  Tim knocks it out with a spell and takes a feather as an arcane connection.*
         + 1 confidence per active character.
+        + Tim collects Arcane connections: Butler Hair, Morrigan Raven feather
     + Changes
++ Eogan mac Eogan (Practice)
+    + Validated: Correctly spent 6 xp.
 + Cieran the Fletcher ex Miscellanea (Authoring (Exposure))
-    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem*.*
     + Validated: Correctly spent 2 xp.
 
 ## Summer 1257
 
++ Eogan mac Eogan (Practice)
+    + Validated: Correctly spent 6 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + *Training Luciu in Magic Theory SQ 15*
     + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
@@ -29,11 +143,26 @@
 
 ## Spring 1257
 
++ Elk's Run
+    + Brid and father Wide(no source quality)
+        + *Father Wide's Visit, Brid Arrives*
+    + Changes
++ Eogan mac Eogan (Training (Exposure))
+    + *Train one lymer in hunt +8 xp (+32 total).*
+    + Lymer 1. Loyal +2.  Hunt 32xp.
+    + Lymer 2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Vis Study)
     + Validated: Correctly spent 28 xp.
 
 ## Winter 1257
 
++ Eogan mac Eogan (Training (Exposure))
+    + *Train one lymer in hunt +8 xp (+24 total).*
+    + Validated: Correctly spent 2 xp.
 + Cieran the Fletcher ex Miscellanea (Teaching (Exposure))
     + *Teaching Latin to Luciu SQ 22*
     + Validated: Correctly spent 2 xp.
@@ -41,6 +170,8 @@
 
 ## Autumn 1256
 
++ Eogan mac Eogan (Practice)
+    + Validated: Correctly spent 6 xp.
 + Cieran the Fletcher ex Miscellanea (LabWork (Exposure))
     + Lab total 47 +  similar spell +5; familiar +6 -> 58
     + Validated: Correctly spent 2 xp.
@@ -61,6 +192,8 @@
         + *During the last night, Tious receives an invitation for a new Cabal, to meet at the Brazen Head in Dublin at the Autumn Equinox.*
         + 1 confidence per session active.
     + Changes
++ Eogan mac Eogan (Practice)
+    + Validated: Correctly spent 6 xp.
 + Cieran the Fletcher ex Miscellanea (Reading)
     + Reads the new Q9 Tractatus from Vigil
     + Uses *No title* by N/A (No Time)

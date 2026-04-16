@@ -17,7 +17,7 @@ title: Ars Magica - Hibernia saga
 email: your-email@example.invalid
 description: >- # this means to ignore newlines until "baseurl:"
   A saga testing the armchar project.
-baseurl: "hibernia" # the subpath of your site, e.g. /blog
+baseurl: "/hibernia" # the subpath of your site, e.g. /blog
 url: "https://ars-magica.github.io/" 
 
 github_username:  lokearm
