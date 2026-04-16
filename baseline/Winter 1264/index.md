@@ -1,11 +1,11 @@
-# Hibernia Saga (Contested Lands) - Winter 1257
+# Hibernia Saga (Contested Lands) - Winter 1264
 
-+ [Cieran the Fletcher ex Miscellanea (Winter 1257)](Cieran the Fletcher ex Miscellanea (Winter 1257))
-+ [Eogan mac Eogan (Winter 1257)](Eogan mac Eogan (Winter 1257))
++ [Cieran the Fletcher ex Miscellanea (Winter 1261)](Cieran the Fletcher ex Miscellanea (Winter 1261))
++ [Eogan mac Eogan (Spring 1258)](Eogan mac Eogan (Spring 1258))
 + [Tessa Tanagh (Winter 1249)](Tessa Tanagh (Winter 1249))
 + [Rowan (Game Start)](Rowan (Game Start))
 
-+ [Elk's Run (Summer 1256)](Elk's Run (Summer 1256))
++ [Elk's Run (Autumn 1259)](Elk's Run (Autumn 1259))
 
 ## Advancement Errors
 
@@ -23,6 +23,15 @@
     + Older than 35. Aging roll required.
 + Tessa Tanagh: Winter 1249 "" (Other Exposure)
     + Older than 35. Aging roll required.
++ Cieran: Winter 1259 Teaching (Exposure)
+    + Underspent 0xp of 2.
+    + Older than 50. Aging roll required.
++ Cieran: Winter 1260 Teaching (Exposure)
+    + Underspent 0xp of 2.
+    + Older than 50. Aging roll required.
++ Cieran: Winter 1261 Teaching (Exposure)
+    + Underspent 0xp of 2.
+    + Older than 50. Aging roll required.
 + Rowan: Later Life
     + Underspent 260xp of 335.
 + Rowan: Virtues and Flaws

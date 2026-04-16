@@ -37,7 +37,7 @@ Size
 
 ## Winter 1258
 
-+ **Age:** 66 years (apparent age 52) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
++ **Age:** 66 years (apparent age 51) Aging Bonus: -20 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
 + **Confidence**: 1 (33)
 + **Warping**: 2 (2)
 + **Characteristics:** 
@@ -88,18 +88,18 @@ Weak Spontaneous Magic (0),
     + Craft: Cooking [Cookies] 3 (0xp)
     + Craft: Fletching [Arrows] 3 (0xp)
     + Craft: Rope. [  --  ] 2 (0xp)
-    + Creo [  --  ] 0 (4xp)
+    + Creo [  --  ] 1 (1xp)
     + Etiquette [  --  ] 0 (2xp)
     + Faerie Lore [Dark fey] 2 (5xp)
     + Finesse [Precision] 1 (0xp)
     + Folk Ken [Villagers] 1 (5xp)
     + Hermes Code [Stonehenge] 1 (0xp)
-    + Hermes Lore [Hibernia] 1 (7xp)
+    + Hermes Lore [Hibernia] 1 (6xp)
     + Infernal Lore [Undead] 1 (0xp)
     + Latin [Hermetic Usage] 4 (16xp)
     + Leadership [  --  ] 1 (0xp)
     + Magic Lore [creatures] 1 (0xp)
-    + Magic Theory [Spells] 7 (10xp)
+    + Magic Theory [Spells] 7 (8xp)
     + Native Language: Irish [Leinster] 5 (0xp)
     + Parma Magica [Mentem] 5 (0xp)
     + Penetration [Rego] 1 (0xp)
@@ -112,10 +112,11 @@ Weak Spontaneous Magic (0),
 + Vis
     + Cr vis (7)
     + Ig vis (3)
-    + Im vis (2)
+    + Im vis (7)
     + Me vis (10)
     + Rego Vis from Jerome's body (2)
-    + Te vis (3)
+    + Te vis
+    + Vi vis (3)
 + Weapons
     + Dagger
     + Longbow
@@ -179,10 +180,10 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 0 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 29 | 25.5 | 2 |
+| Imaginem | 29 | 25.5 | 7 |
 | Mentem | 17 | 0 | 10 |
-| Terram | 9 | 1 | 3 |
-| Vim | 12 | 5 | 0 |
+| Terram | 9 | 1 | 1 |
+| Vim | 12 | 5 | 3 |
 
 ## Grimoire
 
@@ -204,9 +205,6 @@ Weak Spontaneous Magic (0),
     + Increases the caster's Quickness by one point up to a maximum of 0.
     + Base 30
     + Custom variant
-+ *Disguise of the Transformed Person* MuCo15 (0)
-+ *Disguise of the Transformed Person* MuCo15 (0)
-    + Mastery: 1 (0xp) 
 + *Wound without Cause* PeCo20 (23)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Mom; Target: Ind
@@ -459,6 +457,11 @@ Weak Spontaneous Magic (0),
     + Shatters a barrier of metal or stone up to one foot thick. Those within one pace of the barrier, on the opposite side from you, take +10 Damage. Alchemically refined and magical metals may be able to withstand this spell.
     + Base 5, +1 Touch, +1 size, +1 Rego to fling the fragments away
     + [ArM5:155]
++ *Circle of Preserved Connections* CrVi30 (33)
+    + Mastery: 1 (0xp) 
+    + Range: Touch; Duration: Ring; Target: Circle
+    + Increase the duration of all the arcane connections within the circle by three steps on the table [MoH:113].
+    + Base 15 [MoH:113] +2 Ring, +1 Touch
 + *Scales of Magical Weight* InVi5 (30)
     + Mastery: 1 (0xp) Quiet Casting
     + Range: Touch; Duration: Mom; Target: Ind
@@ -585,15 +588,8 @@ Weak Spontaneous Magic (0),
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
-+ *Radiance of the Golden Firefly* (An)MuCo5 (0)
-+ *Radiance of the Golden Firefly* (An)MuCo5 (0)
-    + Mastery: 1 (0xp) 
-+ *Shape of the Feline Grace* (An)MuCo25 (0)
-    + Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.
-+ *Shape of the Feline Grace* (An)MuCo25 (0)
-    + Mastery: 1 (0xp) 
 
-Total: 1399 levels of spells.
+Total: 1339 levels of spells.
 
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
@@ -673,24 +669,23 @@ Total: 1399 levels of spells.
 
 + Winter 1258 (2xp) (1 years) LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
+    + Lab Total 62 incl. familiar
     + Changing traits
-        + Ability: Hermes Lore 0xp + 1 bonus xp; 
-        + Ability: Magic Theory 2xp; 
-        + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp Penetration
-        + Spell: (An)MuCo25 Shape of the Feline Grace 0xp Quiet Casting (Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.)
-        + Spell: MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
+        + Ability: Creo 2xp; 
+        + Spell: CrVi30 Circle of Preserved Connections 0xp
+        + Aging Rolled -1 (5)  [No aging.]
     + Inferred traits
-        + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp with flawless magic
-        + Spell: (An)MuCo25 Shape of the Feline Grace 0xp with flawless magic
-        + Spell: MuCo15 Disguise of the Transformed Person 0xp with flawless magic
+        + Spell: CrVi30 Circle of Preserved Connections 0xp with flawless magic
         + Warping 1 (from Longevity Ritual)
         + Aging 1 years; apparent 1 years. No roll. 
     + Validated: Correctly spent 2 xp.
-    + ERROR: Older than 50. Aging roll required.
+    + Validated: Aging roll made
 + Autumn 1257 (2xp) Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem*.*
     + Changing traits
         + Ability: Latin 2xp; 
+        + Possession: Im vis (5)
+        + Possession: Vi vis (3)
     + Validated: Correctly spent 2 xp.
 + Summer 1257 (2xp) LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
@@ -731,6 +726,7 @@ Total: 1399 levels of spells.
         + Confidence: 0 (1)
         + Confidence: 0 (-1)
         + Possession: Im vis (3)
+        + Possession: Te vis (-2)
     + Validated: Correctly spent 12 xp.
     + Validated: Book Im-Vigil-Q9 is available.
 + Spring 1256 (2xp) LabWork (Exposure)
@@ -2020,9 +2016,55 @@ Total: 1399 levels of spells.
 
 + Spring 1258 LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
-    + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
+    + Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic
     + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
-    + Spell: MuIm5 False Dune 0xp Quiet Casting
-    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
+    + Spell: MuIm5 False Dune 0xp Quiet Casting (From Rudolf of Irencilla)
+    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting (From Rudolf of Irencilla)
     + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
+    + Possession: Im vis (3)
++ Summer 1258 (12xp) Vis Study
+    + *Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim*
+    + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
+    + Possession: Im vis (-6)
+    + Possession: AC to Midsummer Fair in the Greater Alps
+    + Possession: AC to Durenmar
+    + Possession: Vi vis (-2)
++ Autumn 1258 LabWork (Exposure)
+    + *Lab work with Luciu as assistant*
+    + Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic
+    + Ability: Magic Theory 2xp; 
+    + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp Penetration
+    + Spell: (An)MuCo5 Ears of the Hound 0xp Penetration
+    + Spell: MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
+    + Ability: Hermes Lore 0xp + 1 bonus xp; 
+    + Spell: MuCo25 Shape of the Feline Grace 0xp Quiet Casting
++ Winter 1259 Teaching (Exposure)
+    + *Teaching craft to Luciu*
++ Spring 1259 (18xp) Reading
+    + *Reading Animàl.  Free reading for Luciu.*
+    + Uses: AnimalL10Q18
+    + Art: Animàl 21xp; 
++ Summer 1259 (14xp) Reading
+    + *Reading Animàl.  Free reading for Luciu.*
+    + Uses: AnimalL15Q14
+    + Art: Animàl 17xp; 
++ Autumn 1259 Authoring (Exposure)
+    + *Tractatus on Imaginem Q14: *Mystic Visions**
+    + Ability: Latin 2xp; 
+    + Possession: Im vis (8)
++ Winter 1260 Teaching (Exposure)
+    + *Teaching Luciu*
++ Spring 1260 (12xp) Reading
+    + *Reading Muto.  Luciu transcribes spells.*
+    + Uses: MutoL20Q12
+    + Art: Muto 15xp; 
++ Summer 1260 (12xp) Reading
+    + *Reading Muto.  Free reading for Luciu.*
+    + Uses: MutoL20Q12
+    + Art: Muto 15xp; 
++ Autumn 1260 LabWork (Exposure)
+    + *Enchant familiar bond with shapechanging for Jimeny. Luciu assists.*
+    + Ability: Magic Theory 2xp; 
++ Winter 1261 Teaching (Exposure)
+    + *Teaching Luciu*
 

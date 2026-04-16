@@ -146,4 +146,33 @@ Weakness [for Dogs] (-1),
     + Greyhound 1-2. Loyal +1.
     + Mastiff 1. Loyal +1.
     + Ability: Hunt 2xp; 
++ Summer 1256 (4xp) Practice
+    + Ability: Storytelling 6xp; 
++ Autumn 1256 (4xp) Practice
+    + Ability: Survival 6xp; 
++ Winter 1257 (2xp) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+24 total).*
+    + Ability: Hunt 2xp; 
++ Spring 1257 (2xp) Training (Exposure)
+    + *Train one lymer in hunt +8 xp (+32 total).*
+    + Lymer 1. Loyal +2.  Hunt 32xp.
+    + Lymer 2. Loyal +2.  Hunt 16xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Ability: Hunt 2xp; 
++ Summer 1257 (4xp) Practice
+    + Ability: Survival 6xp; 
++ Autumn 1257 (4xp) Practice
+    + Ability: Survival 6xp; 
++ Winter 1258 (2xp) Training (Exposure)
+    + *Train second lymer in hunt +8 xp (+24 total).*
+    + Ability: Hunt 2xp; 
++ Spring 1258 (2xp) Training (Exposure)
+    + *Train second lymer in hunt +8 xp (+32 total).*
+    + Lymer 1-2. Loyal +2.  Hunt 32xp.
+    + Lymer 3. Loyal +1.
+    + Greyhound 1-2. Loyal +1.
+    + Mastiff 1. Loyal +1.
+    + Ability: Hunt 2xp; 
 

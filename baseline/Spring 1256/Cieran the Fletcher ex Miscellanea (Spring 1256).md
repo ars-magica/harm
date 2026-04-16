@@ -35,9 +35,9 @@ Saga
 Size
 : 0
 
-## Winter 1256
+## Spring 1256
 
-+ **Age:** 64 years (apparent age 51) Aging Bonus: -20 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
++ **Age:** 64 years (apparent age 51) Aging Bonus: +32 (Longevity Ritual +22, Personal Bonus +3, Living Conditions 0, Lab Health Bonus +1)
 + **Confidence**: 1 (33)
 + **Warping**: 2 (0)
 + **Characteristics:** 
@@ -167,7 +167,7 @@ Weak Spontaneous Magic (0),
 | Corpus | 11 | 2 | 6 |
 | Herbam | 6 | 0 | 0 |
 | Ignem | 8 | 0 | 3 |
-| Imaginem | 27 | 16.5 | 5 |
+| Imaginem | 27 | 20.5 | 5 |
 | Mentem | 17 | 0 | 10 |
 | Terram | 9 | 1 | 3 |
 | Vim | 12 | 5 | 0 |
@@ -257,15 +257,34 @@ Weak Spontaneous Magic (0),
     + Creates the illusion of a thick cloud of red smoke in the caster’s vicinity.
     + Base 1, +1 Touch, +1 Diameter, +1 size, +1 impenetrable to sight
     + [MoH:124]
++ *The Studious Doppleganger* CrIm5 (48)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Sun; Target: Ind
+    + This spell creates a static copy of the caster, which sits on a stool and appears to be studying a book. The image is only visual.
+    + Base 1, +1 Touch, +2 Sun, +1 intricacy
+    + [App:47]
 + *Clarity of Public Speech* CrIm10 (48)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Sun; Target: Room
++ *Book of Images* CrIm15 (48)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Range: Touch; Duration: Ring; Target: Ind
+    + This spell creates moving sounds and images that are stored in a circle (such as a drawn circle on paper) as long as it is intact. With this spell it is possible to create a whole book or gallery of fantastic images and talking pictures, but only if proper Finesse rolls are made.
+    + Base 2, +1 Touch, +2 Ring, +1 moving images, +1 intricacy
+    + [MoH:124]
 + *Horror Cabinet* CrIm35 (45)
     + Mastery: 1 (0xp) Quiet Casting
     + Req. Re
     + Range: Touch; Duration: Moon; Target: Room
     + Fills the room with horrible, moving images of beasts, ghosts, and undead threatening to devour any intruders.  Most will run in panic (failing a brave personality roll 12+), and some (botching such roll) may be driven insane.
     + Base 3 (three senses) + Touch + Moon +Room -> L25 +1 (Rego) +1 (Complexity) -> L35
++ *The Shadow of Human Life* CrIm40 (38)
+    + Mastery: 1 (0xp) Quiet Casting
+    + Req. Me
+    + Range: Touch; Duration: Sun; Target: Ind
+    + The human image created (as in Phantasm of the Human Form) has limited freedom and simulated intellect. It functions as an independent human, albeit a stupid one, capable of interpreting general orders in new situations.
+    + Base 2, +1 Touch, +2 Sun, +1 intricacy, +6 Mentem requisite, for a very elaborate effect
+    + [ArM:144]
 + *Prying Eyes* InIm5 (45)
     + Mastery: 1 (0xp) Penetration
     + Range: Touch; Duration: Conc; Target: Room
@@ -552,7 +571,7 @@ Weak Spontaneous Magic (0),
     + Range: Touch; Duration: Spec; Target: Ind; Ritual
     + [ArM5:162]
 
-Total: 1249 levels of spells.
+Total: 1309 levels of spells.
 
 
 | Casting Total | Creo | Intellego | Muto | Perdo | Rego |
@@ -630,6 +649,20 @@ Total: 1249 levels of spells.
 
 ## Past Advancement
 
++ Spring 1256 (2xp) LabWork (Exposure)
+    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
+    + *Training Lucius in Magic Theory (SQ 15).*
+    + Lab Total 70
+    + Changing traits
+        + Art: Imaginem 2xp + 1 bonus xp;  (with correspondent)
+        + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
+        + Spell: CrIm15 Book of Images 0xp Quiet Casting
+        + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
+    + Inferred traits
+        + Spell: CrIm5 The Studious Doppleganger 0xp with flawless magic
+        + Spell: CrIm15 Book of Images 0xp with flawless magic
+        + Spell: CrIm40 The Shadow of Human Life 0xp with flawless magic
+    + Validated: Correctly spent 2 xp.
 + Winter 1256 (2xp) (1 years) Teaching (Exposure)
     + *Teaching spells to Luciu*
     + Lab Total 70 including +1 General Quality, 8 aura, and +7 familiar (with Imaginem Spec)
@@ -1901,27 +1934,19 @@ Total: 1249 levels of spells.
 
 ## Future Advancement
 
-+ Spring 1256 LabWork (Exposure)
-    + *CrIm spells (376xp).  Studious Doppleganger w/o text.*
-    + *Training Lucius in Magic Theory (SQ 15).*
-    + Lab Total 70
-    + Art: Imaginem 2xp + 1 bonus xp;  (with correspondent)
-    + Spell: CrIm15 Book of Images 0xp Quiet Casting
-    + Spell: CrIm40 The Shadow of Human Life 0xp Quiet Casting
-    + Spell: CrIm5 The Studious Doppleganger 0xp Quiet Casting
 + Summer 1256 (9xp) Reading
     + Reads the new Q9 Tractatus from Vigil
     + Uses: Im-Vigil-Q9
     + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
     + Confidence: 0 (1)
     + Confidence: 0 (-1)
-    + Possession: Te vis (-2)
     + Possession: Im vis (3)
 + Autumn 1256 LabWork (Exposure)
-    + Lab total 47 +  similar spell +5; familiar +6 -> 58
-    + Ability: Creo 2xp; 
-    + Possession: Threshold of the Hospital
-    + Possession: Co vis (-3)
+    + Lab Total 55 + Familiar 7 + Spell Spec 8 = 70, but it is halved due to Short Range Magic
+    + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
+    + Spell: MuIm5 False Dune 0xp Quiet Casting
+    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting
+    + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
 + Winter 1257 Teaching (Exposure)
     + *Teaching Latin to Luciu SQ 22*
     + Ability: Teaching 2xp; 
@@ -1929,75 +1954,20 @@ Total: 1249 levels of spells.
 + Spring 1257 (28xp) Vis Study
     + Art: Imaginem 28xp + 1 bonus xp;  (with Correspondent)
     + Possession: Im vis (-6)
-    + Reputation: Friendly druid [Lands of O'Sullivan] 1xp
 + Summer 1257 LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
     + Lab total 47 + amber +3 on Corpus; similar spell +5; familiar +6
     + Ability: Creo 2xp; 
     + Possession: Cup of Purifying Drink
-    + Possession: Co vis (-3)
+    + Possession: Cr vis (-3)
 + Autumn 1257 (2xp) Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Volume III on Imaginem*.*
+    + *Tractatus on Imaginem Q14: *Volume III on Imaginem**
     + Ability: Latin 2xp; 
-    + Possession: Im vis (5)
-    + Possession: Vi vis (3)
-+ Winter 1258 LabWork (Exposure)
++ Winter 1260 LabWork (Exposure)
     + *Training Luciu in Magic Theory SQ 15*
-    + Lab Total 62 incl. familiar
-    + Ability: Creo 2xp; 
-    + Spell: CrVi30 Circle of Preserved Connections 0xp
-    + Aging Rolled -1 (5)  [No aging.]
-+ Spring 1258 LabWork (Exposure)
-    + *Training Luciu in Magic Theory SQ 15*
-    + Lab Total 57 + Familiar 7 + Spell Spec 8 = 72, but it is halved due to Short Range Magic
-    + Art: Imaginem 2xp + 1 bonus xp;  (with Correspondent)
-    + Spell: MuIm5 False Dune 0xp Quiet Casting (From Rudolf of Irencilla)
-    + Spell: MuIm20 Glowing Footprints of the Thief 0xp Quiet Casting (From Rudolf of Irencilla)
-    + Spell: MuIm5 Confound the Rival Singer 0xp Penetration
-    + Possession: Im vis (3)
-+ Summer 1258 (12xp) Vis Study
-    + *Luciu uses the lab to fixate arcane connections, including to Lord Protector for Tiou and the raven for Tim*
-    + Art: Imaginem 12xp + 1 bonus xp;  (with Correspondent)
-    + Possession: Im vis (-6)
-    + Possession: AC to Midsummer Fair in the Greater Alps
-    + Possession: AC to Durenmar
-    + Possession: Vi vis (-2)
-+ Autumn 1258 LabWork (Exposure)
-    + *Lab work with Luciu as assistant*
-    + Lab Total 32 + Familiar 7 + Spell Spec 8 + Luciu 5? = 52+, but it is halved due to Short Range Magic
     + Ability: Magic Theory 2xp; 
     + Spell: (An)MuCo5 Radiance of the Golden Firefly 0xp Penetration
-    + Spell: (An)MuCo5 Ears of the Hound 0xp Penetration
     + Spell: MuCo15 Disguise of the Transformed Person 0xp Quiet Casting
     + Ability: Hermes Lore 0xp + 1 bonus xp; 
-    + Spell: MuCo25 Shape of the Feline Grace 0xp Quiet Casting
-+ Winter 1259 Teaching (Exposure)
-    + *Teaching craft to Luciu*
-+ Spring 1259 (18xp) Reading
-    + *Reading Animàl.  Free reading for Luciu.*
-    + Uses: AnimalL10Q18
-    + Art: Animàl 21xp; 
-+ Summer 1259 (14xp) Reading
-    + *Reading Animàl.  Free reading for Luciu.*
-    + Uses: AnimalL15Q14
-    + Art: Animàl 17xp; 
-+ Autumn 1259 Authoring (Exposure)
-    + *Tractatus on Imaginem Q14: *Mystic Visions**
-    + Ability: Latin 2xp; 
-    + Possession: Im vis (8)
-+ Winter 1260 Teaching (Exposure)
-    + *Teaching Luciu*
-+ Spring 1260 (12xp) Reading
-    + *Reading Muto.  Luciu transcribes spells.*
-    + Uses: MutoL20Q12
-    + Art: Muto 15xp; 
-+ Summer 1260 (12xp) Reading
-    + *Reading Muto.  Free reading for Luciu.*
-    + Uses: MutoL20Q12
-    + Art: Muto 15xp; 
-+ Autumn 1260 LabWork (Exposure)
-    + *Enchant familiar bond with shapechanging for Jimeny. Luciu assists.*
-    + Ability: Magic Theory 2xp; 
-+ Winter 1261 Teaching (Exposure)
-    + *Teaching Luciu*
+    + Spell: (An)MuCo25 Shape of the Feline Grace 0xp Quiet Casting (Side effect: the target gets the personality trait Individualist +3 (individualist and proud like a feline) after the spell ends, for twice the duration that the spell lasted.)
 
