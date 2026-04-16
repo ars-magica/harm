@@ -18,7 +18,6 @@ module ArM.Internal.Book ( RawBook(..)
                          , readBookCSV
                          ) where
 
-import Data.Maybe
 import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
 
@@ -30,7 +29,7 @@ data RawBook = RawBook
              , trait :: !String
              , stats :: !String
              , title :: !String
-             , author :: !String
+             , creator :: !String
              , comment :: !String
              , copies :: !Int
              , language :: !String
@@ -44,13 +43,13 @@ instance FromNamedRecord RawBook where
                        <*> r .: "trait"
                        <*> r .: "stats"
                        <*> r .: "title"
-                       <*> r .: "author"
+                       <*> r .: "creator"
                        <*> r .: "comment"
                        <*> r .: "copies"
                        <*> r .: "language"
 
-readBookCSV :: String -> IO (Maybe (V.Vector RawBook))
+readBookCSV :: String -> IO [RawBook]
 readBookCSV fn = BL.readFile fn >>= (f . decodeByName)
-   where f (Left err) = putStr err >> return Nothing
-         f (Right (_,v)) = return (Just v)
+   where f (Left err) = putStr err >> return []
+         f (Right (_,v)) = return $ V.toList v
 

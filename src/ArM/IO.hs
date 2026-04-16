@@ -31,6 +31,7 @@ import ArM.Advancement
 import ArM.Markdown
 import ArM.Types.Covenant
 import ArM.Types.Saga
+import ArM.Types.Library
 import ArM.Types
 import ArM.DB.CSV
 import ArM.DB.Weapon()
@@ -128,13 +129,11 @@ loadCovenant Nothing  = trace "loadCovenant -> Nothing" $ return Nothing
 loadCovenant (Just c)
     | isNothing st' = trace "loadCovenant -> Nothing to load" $ return $ Just c
     | isNothing fn = trace "loadCovenant -> Nothing to load" $ return $ Just c
-    | otherwise = parseFromFile CSV.csvFile (fromJust fn) >>=
-       ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = g lib } } )
+    | otherwise = readBookCSV (fromJust fn) >>=
+       ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = lib } } )
        where fn = librarycsv st
              st = fromJust st'
              st' = covenantState c
-             g (Left _) = []
-             g (Right x) = sort $ map fromCSVline x
 
 -- |
 -- = Write Character Sheets

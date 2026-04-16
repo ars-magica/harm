@@ -20,6 +20,7 @@ module ArM.Types.Library ( BookStats(..)
                          , originalID
                          , originalTome
                          , originalKey
+                         , readBookCSV
                          ) where
 
 import Data.Aeson
@@ -30,12 +31,12 @@ import Data.Text  (splitOn,unpack,pack)
 import Text.Read 
 import Control.Monad
 
-import ArM.DB.CSV
 import Data.Csv
 import ArM.Types.TraitKey
 import ArM.Types
 import ArM.Helper
 import ArM.Debug.Trace
+import qualified ArM.Internal.Book as IB
 
 -- * Types
 
@@ -221,25 +222,7 @@ makeBookStats x y z = BookStats
          , reread = 1
          } where (l,q) = readStats z
 
-instance ArMCSV Book where
-   fromCSVline (x0:x1:x2:x3':x4:x5:x6:x7:x8:_) =
-      defaultObject { bookID = y 
-                , bookTitle = x4
-                , bookStats = [ makeBookStats x1 x2 x3 ]
-                , bookCreator = x5
-                , bookAnnotation = [x6]
-                , bookCount = fromMaybe 1 $ readMaybe x7
-                , bookLanguage = lng
-                }
-                where y | xid == "" = trim x2 ++ x3 ++ " " ++ trim x4
-                        | otherwise = xid
-                      xid = trim x0
-                      x3 = trim x3'
-                      lng' = trim x8
-                      lng | lng' == "" = Nothing
-                          | otherwise = Just lng'
-   fromCSVline _ = defaultObject
-   defaultObject = Book
+defaultBook = Book
      { bookID = ""
      , bookTitle = ""
      , bookStats = [ ] 
@@ -252,8 +235,20 @@ instance ArMCSV Book where
      , bookAnnotation = []
      , bookLanguage = Nothing
      , bookCount = 1 }
-   getID = bookID
 
+fromRawBook :: IB.RawBook -> Book
+fromRawBook rb = 
+      defaultBook { bookID = IB.key  rb
+                , bookTitle = IB.title rb
+                , bookStats = [ makeBookStats (IB.traittype rb) (IB.trait rb) (IB.stats rb) ]
+                , bookCreator = IB.creator rb
+                , bookAnnotation = [ IB.comment rb ]
+                , bookCount = IB.copies rb
+                , bookLanguage = Just $ IB.language rb
+                }
+
+readBookCSV :: String -> IO [Book]
+readBookCSV fn = IB.readBookCSV fn >>= return . map fromRawBook
 
 -- * Descriptions of a reading season
 
