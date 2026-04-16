@@ -35,7 +35,7 @@ import ArM.Types.Saga
 import ArM.Types
 import ArM.DB.Spell
 import ArM.GameRules
-import ArM.BasicIO
+import Data.OList
 import ArM.Helper
 
 import ArM.Debug.Trace

@@ -35,7 +35,7 @@ import ArM.Types
 import ArM.DB.CSV
 import ArM.DB.Weapon()
 import ArM.SeasonDisplay
-import ArM.BasicIO
+import Data.OList
 import ArM.Helper
 
 import ArM.Debug.Trace

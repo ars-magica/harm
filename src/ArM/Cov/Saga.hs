@@ -22,7 +22,6 @@ module ArM.Cov.Saga ( Saga(..)
                     , covenFolk
                     ) where
 
--- import Data.Maybe 
 import Data.List 
 
 import ArM.Advancement
@@ -30,7 +29,7 @@ import ArM.Types.Covenant
 import ArM.Char.Character
 import ArM.Types
 import ArM.Types.Saga
-import ArM.BasicIO
+import Data.OList
 import ArM.Helper
 
 -- import ArM.Debug.Trace

@@ -21,7 +21,7 @@ import ArM.Cov.Saga
 import ArM.Types.Covenant
 import ArM.Types
 import ArM.Markdown
-import ArM.BasicIO
+import Data.OList
 
 -- import ArM.Debug.Trace
 
