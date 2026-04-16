@@ -7,6 +7,12 @@
 --
 -- Description :  Generic file reader for JSON and YAML.
 --
+-- This module exploits the fact that the Yaml module reuses the
+-- ToJSON/FromJSON instances from Aeson to process Yaml files.
+-- The `readObject` function checks the file extension and uses
+-- the decoder from the appropriate library to parse either YAML
+-- or JSON.
+--
 -----------------------------------------------------------------------------
 module Data.Aeson.Generic (readObject) where
 
