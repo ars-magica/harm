@@ -123,7 +123,7 @@ instance Show SeasonTime where
    show NoTime =  "No Time"
 
 showKey' :: SeasonTime -> String
-showKey' GameStart = "9990_GameStart"
+showKey' GameStart = "0010_GameStart"
 showKey' (SeasonTime s y) = show y ++ "_" ++ show s ++ show y
 showKey' NoTime =  "9999_NoTime"
 showKey :: Timed a => a  -> String
