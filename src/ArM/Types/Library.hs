@@ -74,7 +74,7 @@ instance Ord BookStats where
 -- An antology will have a non-empty `antologyOf` field, listing
 -- all the constituent works.
 --
--- A book may have one or more `BookStats` values.  An antology
+-- A book may have one or more `BookStat` values.  An antology
 -- should not have book stats, since the book stats are properties
 -- of each constituent work.  A copy may or may not have book stats.
 -- If it does not, it inherits stats from the original.
@@ -86,7 +86,7 @@ data Book = Book
      , bookDate :: SeasonTime     -- ^ Time the copy was made            
      , antologyOf :: [ Book ]     -- ^ The book is an antology of multiple books
      , copiedFrom :: Maybe String   -- ^ Book copied or Nothing for an original manuscript
-     , bookLocation :: Maybe String     -- ^ Location whre the book was written or copied
+     , bookLocation :: Maybe String     -- ^ Location where the book was written or copied
      , bookNarrative :: [ String ]   -- ^ Additional information in free text
      , bookAnnotation :: [ String ]   -- ^ Additional information in free text
      , bookLanguage  :: Maybe String  -- ^ Language of the book
