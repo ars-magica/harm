@@ -73,6 +73,7 @@ common harm-deps
                        , ArM.Types.Saga
                        , ArM.Types.KeyPair
                        , ArM.Types.Library
+                       , ArM.Internal.Book
                        , ArM.Types.Character
                        , ArM.Types.Advancement
                        , ArM.Advancement
@@ -101,6 +102,7 @@ common harm-deps
                        , Data.Aeson.Generic
                        , Data.OList
   build-depends:       cassava >= 0.5.3
+                       , vector >= 0.13
                        , parsec >= 3.1
                        , MissingH >= 1.6
 

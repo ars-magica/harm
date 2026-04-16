@@ -14,7 +14,13 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Library where
+module ArM.Types.Library ( BookStats(..)
+                         , Book(..)
+                         , BookDB(..)
+                         , originalID
+                         , originalTome
+                         , originalKey
+                         ) where
 
 import Data.Aeson
 import Data.Aeson.Extra
@@ -25,6 +31,7 @@ import Text.Read
 import Control.Monad
 
 import ArM.DB.CSV
+import Data.Csv
 import ArM.Types.TraitKey
 import ArM.Types
 import ArM.Helper
@@ -166,11 +173,6 @@ originalTome db b
    | otherwise = originalTome db (fromJust b')
    where b' = join $ fmap (bookLookup db) (copiedFrom b)
 
-{-
-bookTraitStats :: Book -> TraitKey -> Maybe BookStats
-bookTraitStats b k = find ( (==k) . topic ) $ bookStats b
--}
-
 -- | The original author of a given book
 originalTitle :: Book -> String
 originalTitle = bookTitle 
@@ -219,7 +221,6 @@ makeBookStats x y z = BookStats
          , reread = 1
          } where (l,q) = readStats z
 
-
 instance ArMCSV Book where
    fromCSVline (x0:x1:x2:x3':x4:x5:x6:x7:x8:_) =
       defaultObject { bookID = y 
@@ -264,11 +265,5 @@ data ReadingID = ReadingID
      , topicRead :: TraitKey
      } deriving (Eq,Show,Generic)
 instance ToJSON ReadingID
-instance FromJSON ReadingID {- where
-    parseJSON = withObject "ReadingID" $ \v -> ReadingID
-                    <$> v .:  "tome" 
-                    <*> v .:? "part"
-                    <*> fmap AbilityKey ( v .:? "ability" )
-                    <*> fmap ArtKey ( v .:? "art" )
--}
+instance FromJSON ReadingID 
 

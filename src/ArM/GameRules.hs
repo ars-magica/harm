@@ -12,7 +12,7 @@
 -- of the software design.
 --
 -----------------------------------------------------------------------------
-module ArM.GameRules ( XPType(..)
+module ArM.GameRules ( XPType
                      , pyramidScore
                      , GenericXPType(..)
                      ) where

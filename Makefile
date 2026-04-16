@@ -10,9 +10,5 @@ bin/harm: .force
 doc: .force
 	cabal haddock harm  
 
-install: bin/harm doc
+install: bin/harm 
 	cp --copy-contents $< $I/bin
-	ls -l $J
-	rsync -av $D $J/doc/
-
-		
