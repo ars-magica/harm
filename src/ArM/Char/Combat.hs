@@ -17,9 +17,10 @@
 -- for `show`, sorting, and JSON.
 --
 -----------------------------------------------------------------------------------
-module ArM.Char.Combat where
+module ArM.Char.Combat ( CombatLine(..)
+                       , computeCombatStats
+                       ) where
 
--- import ArM.Helper
 import ArM.Char.CharacterSheet
 import ArM.Types.Trait
 import ArM.Types.TraitKey

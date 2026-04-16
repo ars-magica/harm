@@ -17,7 +17,16 @@
 -- the aging roll.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Aging where
+module ArM.Types.Aging ( Age(..)
+                       , Aging
+                       , advanceAge
+                       , toAge
+                       , agingLimit
+                       , agingBonus
+                       , defaultAging
+                       , addYears
+                       , agingRoll
+                       ) where
 
 import ArM.Helper
 -- import ArM.Types.TraitKey

@@ -12,7 +12,10 @@
 -- of the software design.
 --
 -----------------------------------------------------------------------------
-module ArM.GameRules where
+module ArM.GameRules ( XPType(..)
+                     , pyramidScore
+                     , GenericXPType(..)
+                     ) where
 
 import Data.Maybe
 

@@ -27,7 +27,7 @@ trim = f . f
 -- |
 -- Division of integers, rounding up
 (//) :: Integral a => a -> a -> a
-(//) x y = (x+1) `div` y
+(//) x y = (x+y-1) `div` y
 
 -- |
 -- Remove elements from the second list from the first.
