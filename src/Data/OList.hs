@@ -6,9 +6,11 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Simple utilities to read and write files.
+-- Description :  Hierarchically organised text.
 --
--- This module contains convenience functions for file output.
+-- The `OList` type contains nested lists of strings, which can easily
+-- be output as nested bullet lists, or as sections and subsection,
+-- in markdown or other markup languages.
 --
 -----------------------------------------------------------------------------
 module Data.OList ( OList(..)
