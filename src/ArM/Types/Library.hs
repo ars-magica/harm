@@ -214,7 +214,11 @@ readTopic' "Ability" y  = AbilityKey $ trim y
 -- readTopic' "Spell" y  = SpellKey $ trim y
 readTopic' _ y  = AbilityKey $ trim y
 
-makeBookStats :: String -> String -> String -> BookStats
+
+makeBookStats :: String   -- ^ trait type
+              -> String   -- ^ trait label
+              -> String   -- ^ Stat String
+              -> BookStats -- ^ Book stat object
 makeBookStats x y z = BookStats 
          { topic = readTopic x y
          , quality = q
@@ -222,6 +226,7 @@ makeBookStats x y z = BookStats
          , reread = 1
          } where (l,q) = readStats z
 
+-- | A default book object, providing defaults for fields not available in the CSV format.
 defaultBook = Book
      { bookID = ""
      , bookTitle = ""
@@ -236,6 +241,8 @@ defaultBook = Book
      , bookLanguage = Nothing
      , bookCount = 1 }
 
+-- | Translate from the `RawBook` format used by the CSV parser to 
+-- the `Book` format.
 fromRawBook :: IB.RawBook -> Book
 fromRawBook rb = 
       defaultBook { bookID = IB.key  rb
@@ -247,6 +254,7 @@ fromRawBook rb =
                 , bookLanguage = Just $ IB.language rb
                 }
 
+-- | Parse the given file and return a list of books.
 readBookCSV :: String -> IO [Book]
 readBookCSV fn = IB.readBookCSV fn >>= return . map fromRawBook
 

@@ -8,10 +8,10 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Types to represent Characters and functions for advancement.
+-- Description :  Parse books from CSV.
 --
--- This module contains types to process characters, including 
--- persistence in JSON and advancement.
+-- The `readBookCSV` returns a list of `RawBook` objects which directly
+-- maps from the CSV format.  
 --
 -----------------------------------------------------------------------------
 module ArM.Internal.Book ( RawBook(..)
@@ -23,6 +23,7 @@ import qualified Data.ByteString.Lazy as BL
 
 import Data.Csv
 
+-- | Book type directly mapping the CSV format.
 data RawBook = RawBook 
              { key :: !String
              , traittype :: !String
@@ -36,6 +37,7 @@ data RawBook = RawBook
              }
 
 
+-- | Vanilla parser based on the cassava library.
 instance FromNamedRecord RawBook where
     parseNamedRecord r = RawBook 
                        <$> r .: "key" 
@@ -48,7 +50,9 @@ instance FromNamedRecord RawBook where
                        <*> r .: "copies"
                        <*> r .: "language"
 
-readBookCSV :: String -> IO [RawBook]
+-- | Parse the given file and return a list of `RawBook` objects.
+readBookCSV :: String        -- ^ CSV file
+            -> IO [RawBook]  -- ^ List of books
 readBookCSV fn = BL.readFile fn >>= (f . decodeByName)
    where f (Left err) = putStr err >> return []
          f (Right (_,v)) = return $ V.toList v
