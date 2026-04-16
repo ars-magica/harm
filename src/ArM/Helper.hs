@@ -124,8 +124,11 @@ markdownLink :: String -> String -> String
 markdownLink txt lnk = "[" ++ txt ++ "](" ++ URI.encode lnk ++ ")"
 
 -- | Set a link for github pages
+--
+-- This works for Jupyter Books, but other Markdown dialects
+-- may require different formatting.
 pagesLink :: String -> String
-pagesLink lnk = "[" ++ lnk ++ "](" ++ lnk ++ ")"
+pagesLink lnk = "[](" ++ URI.encode lnk ++ ")"
 
 -- | Set a wikilink
 wikiLink :: String -> String

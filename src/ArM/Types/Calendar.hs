@@ -18,6 +18,7 @@ module ArM.Types.Calendar ( SeasonTime(..)
                           , seasonPrev
                           , (>*)
                           , Timed(..)
+                          , showKey
                           ) where
 
 import Data.Text.Lazy                            ( fromStrict, unpack )
@@ -120,6 +121,13 @@ instance Show SeasonTime where
    show GameStart = "Game Start"
    show (SeasonTime s y) = show s ++ " " ++ show y
    show NoTime =  "No Time"
+
+showKey' :: SeasonTime -> String
+showKey' GameStart = "9990_GameStart"
+showKey' (SeasonTime s y) = show y ++ "_" ++ show s ++ show y
+showKey' NoTime =  "9999_NoTime"
+showKey :: Timed a => a  -> String
+showKey = showKey' . season
 
 instance Ord SeasonTime where
     (<=) NoTime _ = False

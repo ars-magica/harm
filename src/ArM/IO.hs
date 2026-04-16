@@ -88,7 +88,7 @@ writeSagaState saga =
    writeObjects dir saga (characters st) >>
    writeObjects dir saga (covenants st)
        where dir = rootDir saga ++ fn ++ "/"
-             fn = show $ seasonTime st
+             fn = showKey st
              st = sagaState saga
 
 writeSagaStates :: [Saga] -> IO ()
@@ -97,7 +97,7 @@ writeSagaStates (x:xs) = writeSagaState x >> writeSagaStates xs
 
 writeSagaAnnals :: Saga -> IO ()
 writeSagaAnnals saga = writeOList fn $ ann saga
-    where fn = rootDir saga ++ "/Annals.md"
+    where fn = rootDir saga ++ "/0001_Annals.md"
           ann = OList . (OString "# Annals":) . map printMD . sagaAnnals . sagaState
 
 -- |

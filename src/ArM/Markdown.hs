@@ -650,13 +650,12 @@ instance Markdown Saga where
                 , OList $ map OString $ sagaDesc saga
                 , OString ""
                 ]
-        , OList $ [ OString $ "+ " ++ pagesLink (show x) | x <- stateSeasons saga ] 
+        , OList $ [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- stateSeasons saga ] 
         , OList [
           OString "" 
-          , OString $ "+ " ++ pagesLink "Annals"
+          , OString $ "+ " ++ "[](0001_Annals)"
           , OString "" 
         ]
-        , OString "+ [JSON Syntax Errors](syntaxcheck.txt) in the character files"
         ]
 
 instance Markdown SagaState where
