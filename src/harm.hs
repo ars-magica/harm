@@ -7,7 +7,7 @@
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
 -- Description :  
--- harm is a command-line interface to character generation for Ars Magica.
+--    harm is a command-line interface to character generation for Ars Magica.
 --
 -- Characters and their advancement are specified in a JSON format, which
 -- is validated and converted to markdown file, showing the state of the

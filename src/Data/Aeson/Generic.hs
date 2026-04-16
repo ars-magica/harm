@@ -5,7 +5,8 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Generic file reader for JSON and YAML.
+-- Description :  
+--    Generic file reader for JSON and YAML.
 --
 -- This module exploits the fact that the Yaml module reuses the
 -- ToJSON/FromJSON instances from Aeson to process Yaml files.
