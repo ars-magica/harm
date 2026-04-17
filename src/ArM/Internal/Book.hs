@@ -22,6 +22,7 @@ import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
 
 import Data.Csv
+import ArM.Debug.Trace
 
 -- | Book type directly mapping the CSV format.
 data RawBook = RawBook 
@@ -53,7 +54,7 @@ instance FromNamedRecord RawBook where
 -- | Parse the given file and return a list of `RawBook` objects.
 readBookCSV :: String        -- ^ CSV file
             -> IO [RawBook]  -- ^ List of books
-readBookCSV fn = BL.readFile fn >>= (f . decodeByName)
+readBookCSV fn = BL.readFile (ttrace fn) >>= (f . decodeByName)
    where f (Left err) = putStr err >> return []
          f (Right (_,v)) = return $ V.toList v
 

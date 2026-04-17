@@ -386,7 +386,7 @@ strSQ a = showSQ (advSQ a) (totalBonusSQ a)
 --
 -- Currently not used.
 showSQ :: Maybe XPType -> XPType -> String
-showSQ Nothing 0 = " (0xp)"
+showSQ Nothing 0 = ""
 showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
 showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
 showSQ (Just x) (y) = " (" ++ showNum x ++ f y ++ "xp)"

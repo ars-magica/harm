@@ -24,10 +24,12 @@ import qualified Data.ByteString as B
 
 import System.FilePath (splitExtension)
 
+import ArM.Debug.Trace
+
 -- | Read and parse an object from a JSON or YAML file.
 -- The filename has to end in .yaml or .yml for YAML and .json for JSON.
 readObject :: A.FromJSON t => String -> IO (Maybe t)
-readObject = readObject' . typedFile
+readObject fn = trace fn $ readObject' $ typedFile fn
 
 -- | Read and parse an object from a JSON or YAML file.
 -- This is a helper for `readObject`

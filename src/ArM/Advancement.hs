@@ -239,7 +239,7 @@ instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing
                  | season adv > ns = CovStep cov Nothing
                  | otherwise = CovStep new  (Just a)
-        where a = Adv  adv NoCovAdvancement
+        where a = Adv  adv noCovAdvancement
               adv = head fs
               as = tail fs
               fs = futureCovAdvancement cov

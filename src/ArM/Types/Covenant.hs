@@ -22,6 +22,7 @@ module ArM.Types.Covenant (
            , defaultCovState
            -- * Advancement
            , CovAdvancement(..)
+           , noCovAdvancement
            -- * Convenience Functions
            , findCov
            , covenant
@@ -162,9 +163,10 @@ data CovAdvancement = CovAdvancement
      , leaving :: [ HarmKey ]
      , acquired :: [ Book ]
      , lost :: [ Book ]
-     } | NoCovAdvancement
+     } 
    deriving (Eq,Generic,Show)
-
+noCovAdvancement :: CovAdvancement
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] []
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
     parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
