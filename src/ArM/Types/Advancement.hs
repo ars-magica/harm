@@ -230,12 +230,7 @@ instance FromJSON Advancement where
 instance Timed Advancement where
      season  = advSeason
 instance StoryObject Advancement where
-     name a = showTime xps (season a) (mode a) y 
-         where xps | sx == Nothing = ""
-                   | otherwise = " (" ++ ishow sx ++ "xp)" 
-               sx = sourceQuality a
-               ishow = showNum . fromJust
-               y = years a
+     name a = showTime (strSQ a) (season a) (mode a) (years a)
      narrative  = advNarrative
      comment  = advComment
      addNarrative s x = x { advNarrative = s:narrative x }
@@ -293,6 +288,8 @@ instance ContractAdvancement Advancement where
 class (StoryObject a) => AdvancementLike a where
      -- | The type of advancement
      advMode :: a -> AdvancementType
+     -- | Source Quality
+     advSQ :: a -> Maybe XPType
      -- | Does the advancement give Exposure XP only?
      isExposure :: a -> Bool
      isExposure = f . advMode
@@ -312,6 +309,7 @@ class (StoryObject a) => AdvancementLike a where
 
 instance AdvancementLike Advancement where
      advMode = mode
+     advSQ = sourceQuality
      totalBonusSQ = sum . map sourceBonus . bonusSQ
      effectiveSQ a = fmap (+(totalBonusSQ a)) $ sourceQuality a 
      spentXP = sum . map regularXP . changes
@@ -326,6 +324,7 @@ instance AdvancementLike Advancement where
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where
      advMode = advMode . contractAdvancement
+     advSQ = advSQ . contractAdvancement
      isExposure = isExposure . contractAdvancement
      totalBonusSQ = totalBonusSQ . contractAdvancement 
      effectiveSQ = effectiveSQ . contractAdvancement
@@ -379,7 +378,13 @@ instance (Timed a, ContractAdvancement a, AdvancementLike a, StoryObject a)
     addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
     addComment s (Adv a aa) = Adv a $ addComment s aa
 
+-- | Summarise SQ for display purposes
+strSQ :: (AdvancementLike a) => a -> String
+strSQ a = showSQ (advSQ a) (totalBonusSQ a)
+
 -- | Render the source quality of an advancement
+--
+-- Currently not used.
 showSQ :: Maybe XPType -> XPType -> String
 showSQ Nothing 0 = " (0xp)"
 showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
