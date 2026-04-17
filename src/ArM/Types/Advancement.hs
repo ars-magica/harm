@@ -13,17 +13,17 @@
 -- Advancement is tricky because there are many different modes of study
 -- and many special cases.  The basic structure uses two main types:
 -- + Advancement is the changes defined by the user. 
--- + AugmentedAdvancement comprises the `Advancement` object and additional
+-- + Augmented Advancement comprises the `Advancement` object and additional
 --   inferred changes.
 --
 -- The Source Quality (SQ) is controled by several fields.
--- + AugmentedAdvancement `baseSQ` is the base source quality inferred
+-- + Augmented Advancement `baseSQ` is the base source quality inferred
 --   from other traits and general rules.
 -- + Advancement `sourceQuality` allows the user to enter the basic
 --   SQ manually.  This is required for Practice, and may be used to 
 --   override the `baseSQ`.  If it differs from `baseSQ`, a warning
 --   is issued.
--- + AugmentedAdvancement `bonusSQ` includes modifications derived
+-- + Augmented Advancement `bonusSQ` includes modifications derived
 --   automatically from virtues and flaws, and other individual
 --   circumstances.
 -- + Advancement `bonusQuality` should be used for individual modifications
@@ -34,13 +34,14 @@
 -- be acquired from the source. This applies to books, trainers, and teachers.
 --
 -- The `Advancement` object has a list of `changes` which is `ProtoTrait`
--- objects modifying existing traits.  Similarly, `AugmentedAdvancement`
+-- objects modifying existing traits.  Similarly, `Augmented Advancement`
 -- has `inferredTraits` for additional implied changes.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.Advancement ( Advancement(..) 
                              , defaultAdvancement
-                             , AugmentedAdvancement(..) 
+                             , Augmented(..) 
+                             , AugmentedAdvancement
                              , AdvancementLike(..) 
                              , AdvancementType(..) 
                              , PostProcessor(..)
@@ -264,8 +265,8 @@ instance FromJSON BonusSQ
 
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
--- AugmentedAdvanceemnt
-class StoryObject a => AdvancementLike a where
+-- Augmented Advanceemnt
+class (StoryObject a) => AdvancementLike a where
      mode :: a -> AdvancementType  -- ^ mode of study
      years :: a -> Maybe Int
      usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
@@ -323,15 +324,16 @@ instance AdvancementLike Advancement where
 -- ** The Augmented Advancement
 
 -- | Advancement with additional inferred fields
-data AugmentedAdvancement = Adv
-     { explicitAdv :: Advancement   
-     , inferredAdv :: Advancement   
+data Augmented a = Adv
+     { explicitAdv :: a   
+     , inferredAdv :: a   
      }
    deriving (Eq,Show,Generic)
+type AugmentedAdvancement = Augmented Advancement
 
-instance ToJSON AugmentedAdvancement where
+instance ToJSON a => ToJSON (Augmented a) where
     toEncoding = genericToEncoding defaultOptions
-instance FromJSON AugmentedAdvancement where
+instance FromJSON a => FromJSON (Augmented a) where
     parseJSON = withObject "AugmentedAdvancement" $ \v -> Adv
         <$> v .: "explicitAdv"
         <*> v .: "inferredAdv"
@@ -350,17 +352,18 @@ instance ToJSON PostProcessor where
    toJSON _ = "{}"
 
 
-instance Timed AugmentedAdvancement where
-     season  = advSeason . explicitAdv 
+instance Timed a => Timed (Augmented a) where
+     season  = season . explicitAdv 
 
-instance StoryObject AugmentedAdvancement where
-     name a = showTime xps (season a) (mode a) y 
+instance (Timed a, AdvancementLike a, StoryObject a) 
+      => StoryObject (Augmented a) where
+    name a = showTime xps (season a) (mode a) y 
          where xps = showSQ (sourceQuality a) (totalBonusSQ a)
                y = years a
-     narrative  = fmls narrative 
-     comment  = fmls comment 
-     addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
-     addComment s (Adv a aa) = Adv a $ addComment s aa
+    narrative  = fmls narrative 
+    comment  = fmls comment 
+    addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
+    addComment s (Adv a aa) = Adv a $ addComment s aa
 
 -- | Render the source quality of an advancement
 showSQ :: Maybe XPType -> XPType -> String
@@ -371,34 +374,32 @@ showSQ (Just x) (y) = " (" ++ showNum x ++ f y ++ "xp)"
     where f 0 = ""
           f z = "+" ++ showNum z
 
-instance AdvancementLike AugmentedAdvancement where
+instance (Timed a,AdvancementLike a) => AdvancementLike (Augmented a) where
      mode = mode . explicitAdv
-     years = fmlx advYears 
-     usesBook = fmls advUses
-     readBook = fmls advRead
-     bookUsed = fmls advBook
-     sourceQuality =  fmlx advSQ  
+     years = fmlx years 
+     usesBook = fmls usesBook
+     readBook = fmls readBook
+     bookUsed = fmls bookUsed
+     sourceQuality =  fmlx sourceQuality  
      sourceCap  = fmlx sourceCap 
-     bonusSQ = fmls advBonus 
-     changes = fmls advChanges 
+     bonusSQ = fmls bonusSQ 
+     changes = fmls changes 
      spellLevels = fmlx spellLevels 
-     teacherSQ = fmlx advTeacherSQ 
-     validation = fmls advValidation 
-     postprocessTrait = advPostprocessTrait . inferredAdv
+     teacherSQ = fmlx teacherSQ 
+     validation = fmls validation 
+     postprocessTrait = postprocessTrait . inferredAdv
      sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
                          , inferredAdv = sortAdvTraits $ inferredAdv x }
      spentXP = spentXP . explicitAdv
      spentLevels = spentLevels . explicitAdv
-     addValidation vs a = a { inferredAdv = f (inferredAdv a) }
-        where f x = x { advValidation = vs ++ advValidation x }
-     addProtoTrait vs a = a { inferredAdv = f (inferredAdv a) }
-          where f x = x { advChanges = vs ++ advChanges x }
+     addValidation vs a = a { inferredAdv = addValidation vs (inferredAdv a) }
+     addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
      setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
 
-fmls :: (Advancement -> [b]) -> AugmentedAdvancement -> [b]
+fmls :: (a -> [b]) -> Augmented a -> [b]
 fmls f a = f (inferredAdv a) ++ f (explicitAdv a) 
 
-fmlx :: Show b => (Advancement -> Maybe b) -> AugmentedAdvancement -> Maybe b
+fmlx :: Show b => (a -> Maybe b) -> Augmented a -> Maybe b
 fmlx f aa = inf `mplus` exa
    where exa =  f (explicitAdv aa)
          inf =  f (inferredAdv aa)
@@ -427,11 +428,11 @@ primaryXPTrait a | f a == [] = Nothing
    where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
 
 -- | Validate allocation of XP.
-validateXP :: AugmentedAdvancement -> AugmentedAdvancement
+validateXP :: Augmented Advancement -> Augmented Advancement
 validateXP a = addValidation (xpValidation a) a
 
 -- | Validate allocation of XP.
-xpValidation :: AugmentedAdvancement -> [ Validation ]
+xpValidation :: Augmented Advancement -> [ Validation ]
 xpValidation a 
     | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
     | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]

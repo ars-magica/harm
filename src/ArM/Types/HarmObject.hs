@@ -98,7 +98,7 @@ compareKey x y = compare (harmKey x) (harmKey y)
 -- |
 -- The `HarmObject` class establishes a common interface for `Covenant` and
 -- `Character`.
-class (Timed h, StoryObject h) => HarmObject h where
+class (Timed h,StoryObject h) => HarmObject h where
     -- | String identifying the object and its state
     stateName :: h -> String
     stateName x = name x ++ " (" ++ show (season x) ++ ")"

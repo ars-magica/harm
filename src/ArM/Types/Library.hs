@@ -21,6 +21,8 @@ module ArM.Types.Library ( BookStats(..)
                          , originalTome
                          , originalKey
                          , readBookCSV
+                         , isTractatus
+                         , bookKey
                          ) where
 
 import Data.Aeson
@@ -31,7 +33,6 @@ import Data.Text  (splitOn,unpack,pack)
 import Text.Read 
 import Control.Monad
 
-import Data.Csv
 import ArM.Types.TraitKey
 import ArM.Types
 import ArM.Helper
@@ -227,6 +228,7 @@ makeBookStats x y z = BookStats
          } where (l,q) = readStats z
 
 -- | A default book object, providing defaults for fields not available in the CSV format.
+defaultBook :: Book
 defaultBook = Book
      { bookID = ""
      , bookTitle = ""
