@@ -46,6 +46,9 @@ module ArM.Types.Advancement ( Advancement(..)
                              , AdvancementType(..) 
                              , PostProcessor(..)
                              , BonusSQ(..)
+                             -- * Covenant Advancement
+                             , CovAdvancement(..)
+                             , noCovAdvancement
                              -- * Validation
                              , Validation(..) 
                              , validateXP
@@ -438,3 +441,49 @@ xpValidation a
     where xpsum = spentXP a
           sq = fromMaybe 0 $ effectiveSQ a
           sq' =  effectiveSQ a
+
+-- * Covenant Advancement 
+
+-- | Advancement (changes) to a covenant.
+data CovAdvancement = CovAdvancement 
+     { caSeason :: SeasonTime    -- ^ season or development stage
+     , caStory :: [ Story ]   -- ^ freeform description of the activities
+     , caChanges :: [ ProtoTrait ]
+     , joining :: [ HarmKey ]
+     , leaving :: [ HarmKey ]
+     , acquired :: [ Book ]
+     , lost :: [ Book ]
+     } 
+   deriving (Eq,Generic,Show)
+
+-- | Empty `CovAdvancement` object for use as a default
+noCovAdvancement :: CovAdvancement
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] [] []
+
+instance ToJSON CovAdvancement
+instance FromJSON CovAdvancement where
+    parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
+        <$> fmap parseSeasonTime ( v .:? "season" )
+        <*> v `parseCollapsedList` "story" 
+        <*> v `parseCollapsedList` "changes" 
+        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
+        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
+        <*> v `parseCollapsedList` "acquired"
+        <*> v `parseCollapsedList` "lost"
+
+
+
+instance Timed CovAdvancement where
+   season = caSeason
+
+instance ContractAdvancement CovAdvancement where
+  contractAdvancement aug  = CovAdvancement
+     { caSeason = season aug
+     , caStory = caStory aa ++ caStory ad
+     , caChanges = caChanges aa ++ caChanges ad
+     , joining = joining aa ++ joining ad
+     , leaving = leaving aa ++ leaving ad
+     , acquired = acquired aa ++ acquired ad
+     , lost = lost aa ++ lost ad
+     } 
+     where (Adv aa ad) = aug

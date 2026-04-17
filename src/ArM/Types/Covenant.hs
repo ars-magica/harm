@@ -20,9 +20,6 @@ module ArM.Types.Covenant (
            , CovenantConcept(..)
            , CovenantState(..)
            , defaultCovState
-           -- * Advancement
-           , CovAdvancement(..)
-           , noCovAdvancement
            -- * Convenience Functions
            , findCov
            , covenant
@@ -40,7 +37,6 @@ import ArM.Types.Advancement
 import ArM.Types.Character
 import ArM.Types.Lab
 import ArM.Types
-import ArM.Types.Possession
 import ArM.Helper
 
 -- * Covenant Tybe
@@ -154,50 +150,6 @@ instance FromJSON CovenantState where
         <*> v `parseCollapsedList` "labs"
 
 
--- * Advancement and Traits
-
--- | Advancement (changes) to a covenant.
-data CovAdvancement = CovAdvancement 
-     { caSeason :: SeasonTime    -- ^ season or development stage
-     , caStory :: [ Story ]   -- ^ freeform description of the activities
-     , covChanges :: [ ProtoTrait ]
-     , joining :: [ HarmKey ]
-     , leaving :: [ HarmKey ]
-     , acquired :: [ Book ]
-     , lost :: [ Book ]
-     } 
-   deriving (Eq,Generic,Show)
-
--- | Empty `CovAdvancement` object for use as a default
-noCovAdvancement :: CovAdvancement
-noCovAdvancement = CovAdvancement NoTime [] [] [] [] [] []
-
-instance ToJSON CovAdvancement
-instance FromJSON CovAdvancement where
-    parseJSON = withObject "CovAdvancement" $ \v -> CovAdvancement
-        <$> fmap parseSeasonTime ( v .:? "season" )
-        <*> v `parseCollapsedList` "story" 
-        <*> v `parseCollapsedList` "changes" 
-        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
-        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
-        <*> v `parseCollapsedList` "acquired"
-        <*> v `parseCollapsedList` "lost"
-
-
-
-instance Timed CovAdvancement where
-   season = caSeason
-
-instance ContractAdvancement CovAdvancement where
-  contractAdvancement aug  = CovAdvancement
-     { caSeason = season aug
-     , caStory = caStory aa ++ caStory ad
-     , joining = joining aa ++ joining ad
-     , leaving = leaving aa ++ leaving ad
-     , acquired = acquired aa ++ acquired ad
-     , lost = lost aa ++ lost ad
-     } 
-     where (Adv aa ad) = aug
 
 -- * Convenience Functions
 
