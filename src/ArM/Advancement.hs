@@ -183,8 +183,8 @@ advJoint (xs,ys) = (map applyStep xs, map applyStep ys)
 -- ** Covenant and Character Advancement
 
 -- | Generic type for an advancement step for either a covenant or a character.
-data AdvancementStep = CovStep Covenant  (Maybe AugCovAdvancement)
-                     | CharStep Character (Maybe AugmentedAdvancement)
+data AdvancementStep = CovStep Covenant  (Maybe (Augmented CovAdvancement))
+                     | CharStep Character (Maybe (Augmented Advancement))
 
 
 instance BookDB AdvancementStep where
@@ -212,7 +212,14 @@ class StepAdvance c where
    -- | Get the advancement fromn a `AdvancementStep` object.
 class StepAdvanceAdv c where
    -- | Get the advancement fromn a `AdvancementStep` object.
-   stepAdvancement :: AdvancementStep -> Maybe c
+   stepAdvancement :: AdvancementStep -> Maybe (Augmented c)
+instance StepAdvanceAdv CovAdvancement where
+   stepAdvancement (CovStep _ a) = a
+   stepAdvancement _ = Nothing
+instance StepAdvanceAdv Advancement where
+   stepAdvancement (CharStep _ a) = a
+   stepAdvancement _ = Nothing
+
 instance StepAdvance Character where
    nextStep ns ch | fs == [] = CharStep ch Nothing
                  | season adv > ns = CharStep ch Nothing
@@ -228,14 +235,11 @@ instance StepAdvance Character where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
-instance StepAdvanceAdv AugmentedAdvancement where
-   stepAdvancement (CharStep _ a) = a
-   stepAdvancement _ = Nothing
 instance StepAdvance Covenant where
    nextStep ns cov | fs == [] = CovStep cov Nothing
                  | season adv > ns = CovStep cov Nothing
                  | otherwise = CovStep new  (Just a)
-        where a = AugCovAdvancement (Just adv) Nothing
+        where a = Adv  adv NoCovAdvancement
               adv = head fs
               as = tail fs
               fs = futureCovAdvancement cov
@@ -246,9 +250,6 @@ instance StepAdvance Covenant where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
-instance StepAdvanceAdv AugCovAdvancement where
-   stepAdvancement (CovStep _ a) = a
-   stepAdvancement _ = Nothing
 
 instance Advance Character where
    nextAdvancement = f . futureAdvancement

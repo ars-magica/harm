@@ -22,7 +22,6 @@ module ArM.Types.Covenant (
            , defaultCovState
            -- * Advancement
            , CovAdvancement(..)
-           , AugCovAdvancement(..)
            , contractAdvancement
            -- * Convenience Functions
            , findCov
@@ -36,6 +35,7 @@ import Data.Maybe
 import Control.Monad
 
 import ArM.Types.Library
+import ArM.Types.Advancement
 import ArM.Types.Character
 import ArM.Types.Lab
 import ArM.Types
@@ -49,10 +49,10 @@ import ArM.Helper
 data Covenant = Covenant 
          { covenantConcept :: CovenantConcept
          , covenantState :: Maybe CovenantState
-         , pastCovAdvancement :: [ AugCovAdvancement ]
+         , pastCovAdvancement :: [ Augmented CovAdvancement ]
          , futureCovAdvancement :: [ CovAdvancement ]
          , covenantDesign :: [ CovAdvancement ]
-         , covenantPregame :: [ AugCovAdvancement ]
+         , covenantPregame :: [ Augmented CovAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance Timed Covenant where
     season = fromMaybe NoTime . fmap covTime . covenantState
@@ -163,7 +163,7 @@ data CovAdvancement = CovAdvancement
      , leaving :: [ HarmKey ]
      , acquired :: [ Book ]
      , lost :: [ Book ]
-     }
+     } | NoCovAdvancement
    deriving (Eq,Generic,Show)
 
 instance ToJSON CovAdvancement
@@ -177,39 +177,21 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "lost"
 
 
--- |
--- Augmented advancement for covenants.  This comprises changes inferred
--- from the advancements of characters (and possibly other covenants)
--- as well as the advancement from the input file.
-data AugCovAdvancement = AugCovAdvancement 
-     { explicit :: Maybe CovAdvancement
-     , inferred :: Maybe CovAdvancement
-     }
-   deriving (Eq,Generic,Show)
-instance ToJSON AugCovAdvancement
-instance FromJSON AugCovAdvancement where
 
-instance Timed AugCovAdvancement where
-   season = fromMaybe NoTime . fmap caSeason . explicit
 instance Timed CovAdvancement where
    season = caSeason
 
 -- | Merge explicit and inferred advancement into onw `CovAdvancement` object
-contractAdvancement :: AugCovAdvancement -> CovAdvancement
+contractAdvancement :: Augmented CovAdvancement -> CovAdvancement
 contractAdvancement aug  = CovAdvancement
      { caSeason = season aug
-     , caStory = listFromMaybe caStory aa ++ listFromMaybe caStory ad
-     , joining = listFromMaybe joining aa ++ listFromMaybe joining ad
-     , leaving = listFromMaybe leaving aa ++ listFromMaybe leaving ad
-     , acquired = listFromMaybe acquired aa ++ listFromMaybe acquired ad
-     , lost = listFromMaybe lost aa ++ listFromMaybe lost ad
+     , caStory = caStory aa ++ caStory ad
+     , joining = joining aa ++ joining ad
+     , leaving = leaving aa ++ leaving ad
+     , acquired = acquired aa ++ acquired ad
+     , lost = lost aa ++ lost ad
      } 
-     where (AugCovAdvancement aa ad) = aug
-
--- | Auxiliary for `contractAdvancement`.  Apply a map which return
--- a list, returning an empty list for a Nothing argument.
-listFromMaybe :: ( a -> [b]) -> Maybe a -> [b]
-listFromMaybe f = fromMaybe [] . fmap f 
+     where (Adv aa ad) = aug
 
 -- * Convenience Functions
 
