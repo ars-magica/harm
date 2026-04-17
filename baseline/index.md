@@ -2,15 +2,14 @@
 
 While the saga is being played, this site is incomplete, and serves mainly as a test case for the hArM software.
 
-+ [Winter 1264](Winter 1264)
-+ [Winter 1259](Winter 1259)
-+ [Winter 1258](Winter 1258)
-+ [Winter 1257](Winter 1257)
-+ [Winter 1256](Winter 1256)
-+ [Winter 1255](Winter 1255)
-+ [Summer 1254](Summer 1254)
-+ [Game Start](Game Start)
++ [](1264_Winter1264/index)
++ [](1259_Winter1259/index)
++ [](1258_Winter1258/index)
++ [](1257_Winter1257/index)
++ [](1256_Winter1256/index)
++ [](1255_Winter1255/index)
++ [](1254_Summer1254/index)
++ [](0010_GameStart/index)
 
-+ [Annals](Annals)
++ [](0001_Annals)
 
-+ [JSON Syntax Errors](syntaxcheck.txt) in the character files
