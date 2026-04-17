@@ -54,7 +54,7 @@ prepareCharacter c | state c /= Nothing = c
 -- applied to the `CharacterState`.  It infers additional traits from 
 -- virtues and flaws, add XP limits to the advancements, and checks that
 -- the advancement does not overspend XP or exceed other limnits.
-prepareCharGen :: CharacterState -> Advancement -> AugmentedAdvancement
+prepareCharGen :: CharacterState -> Advancement -> Augmented Advancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
                   . sortAdvTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
@@ -63,25 +63,25 @@ prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advance
           where sheet = characterSheet cs
 
 -- | Calculate initial XP limits on Char Gen Advancements
-initialLimits :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+initialLimits :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 initialLimits sheet ad 
             | m == CharGen "Early Childhood" = sq 45 $ yr 5 ad
             | m == CharGen "Apprenticeship" = sq app1 $ lv app2 $ yr 15 ad
             | m == CharGen "Characteristics" = sq 0 ad
             | m == CharGen "Later Life" = sq (laterLifeSQ vfs ad) ad
             | otherwise = ad 
-      where m = mode ad
-            sq x a = a { inferredAdv = (inferredAdv a) { advSQ = Just x } }
-            yr x a = a { inferredAdv = (inferredAdv a) { advYears = Just x } }
-            lv x a = a { inferredAdv = (inferredAdv a) { advSpellLevels = Just x } }
+      where m = mode $ contractAdvancement ad
+            sq x a = a { inferredAdv = (inferredAdv a) { sourceQuality = Just x } }
+            yr x a = a { inferredAdv = (inferredAdv a) { years = Just x } }
+            lv x a = a { inferredAdv = (inferredAdv a) { spellLevels = Just x } }
             (app1,app2) = appSQ vfs
             vfs = vfList sheet
 
 -- | Infer an aging trait advancing the age according to the advancement
-agingYears :: AugmentedAdvancement -> AugmentedAdvancement
+agingYears :: Augmented Advancement -> Augmented Advancement
 agingYears x | y > 0 = addProtoTrait [ agePT y ] x
              | otherwise = x
-   where y = fromMaybe 0 $ years x
+   where y = fromMaybe 0 $ years $ contractAdvancement x
 
 
 -- | Add the Confidence trait to the character state, using 
@@ -95,19 +95,20 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 
 
 -- | Apply CharGen advancement
-applyCharGenAdv :: Advancement -> CharacterState -> (AugmentedAdvancement,CharacterState)
+applyCharGenAdv :: Advancement -> CharacterState 
+                -> (Augmented Advancement,CharacterState)
 applyCharGenAdv a cs = (a',f cs')
    where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
-         (PostProcessor g) = postprocessTrait a'
+         (PostProcessor g) = postprocessTrait $ contractAdvancement a'
          f x = x { traits = map g $ traits x }
 
 -- | Apply a list of advancements
-applyCGA :: [Advancement] -> CharacterState -> ([AugmentedAdvancement],CharacterState)
+applyCGA :: [Advancement] -> CharacterState -> ([Augmented Advancement],CharacterState)
 applyCGA a cs = applyCGA' ([],a,cs)
 
 -- | Recursive helper for `applyCGA`.
-applyCGA' :: ([AugmentedAdvancement],[Advancement],CharacterState)
-                   -> ([AugmentedAdvancement],CharacterState)
+applyCGA' :: ([Augmented Advancement],[Advancement],CharacterState)
+                   -> ([Augmented Advancement],CharacterState)
 applyCGA' (xs,[],cs) = (xs,cs)
 applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
     where (a',cs') = applyCharGenAdv y cs
@@ -119,20 +120,20 @@ applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
 -- 
 -- CharGen validation is tricky, often depending on virtues and flaws.
 -- Therefore, most functions depend also on the `CharacterSheet` in addition
--- to the `AugmentedAdvancement`.
+-- to the `Augmented Advancement`.
 
 -- | validate an advancement, adding results to the validation field
-validateCharGen :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateCharGen :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 validateCharGen sheet = validateLevels . validateXP . validateCharGen' sheet 
 
-validateCharGen' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateCharGen' :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 validateCharGen' cs a 
            | m == CharGen "Virtues and Flaws" = validateVF cs a
            | m == CharGen "Characteristics" = validateChar cs a
            | otherwise = a
-           where m = mode a
+           where m = mode $ contractAdvancement a
 
-validateVF :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateVF :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 validateVF cs a = addValidation vfvs a
          where vfvs = (vfValidation cs) (explicitAdv a)
 
@@ -174,13 +175,13 @@ regCost p | isVF (protoTrait p) = m p * f p
 
 
 -- | Validate allocation of Spell Levels.
-validateLevels :: AugmentedAdvancement -> AugmentedAdvancement
-validateLevels a | isNothing (spellLevels a) = a
+validateLevels :: Augmented Advancement -> Augmented Advancement
+validateLevels a | isNothing (spellLevels $ contractAdvancement a) = a
                  | sq > lsum = addValidation [und] a 
                  | sq < lsum = addValidation [over] a
                  | otherwise = addValidation [val] a
     where lsum = spentLevels a
-          sq = fromMaybe 0 $ spellLevels a
+          sq = fromMaybe 0 $ spellLevels $ contractAdvancement a
           val = Validated $ "Correctly spent " ++ show sq ++ " spell levels."
           over = ValidationError $ "Overspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
           und = ValidationError $ "Underspent " ++ show lsum ++ " spell levels of " ++ show sq ++ "."
@@ -190,17 +191,17 @@ validateLevels a | isNothing (spellLevels a) = a
 -- == Validation of Characteristics
 
 -- | Validate points spent on characterics.
-validateChar :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateChar :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 validateChar sheet = g . validateChar' sheet
-     where f x = x { advPostprocessTrait = PostProcessor processChar }
+     where f x = x { postprocessTrait = PostProcessor processChar }
            g x = x { inferredAdv = f $ inferredAdv x }
 
-validateChar' :: CharacterSheet -> AugmentedAdvancement -> AugmentedAdvancement
+validateChar' :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 validateChar' sheet a | m /= CharGen "Characteristics" = a
              | ex < lim = addValidation [ValidationError und] a
              | ex > lim = addValidation [ValidationError over] a
              | otherwise = addValidation [Validated val] a
-           where m = mode a
+           where m = mode $ contractAdvancement a
                  lim = getCharAllowance $ vfList sheet
                  ex = calculateCharPoints $ explicitAdv a
                  und = "Underspent " ++ (show ex) ++ " points out of "

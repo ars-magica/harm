@@ -141,15 +141,16 @@ laterLifeXP' (vf:vfs) (x,y) = laterLifeXP' vfs $ (x'+x,f y y')
                f 0 z = z
                f z _ = z
 
-laterLifeSQ' :: AugmentedAdvancement -> (XPType,XPType) -> XPType
-laterLifeSQ' ad (x,y) = t
+laterLifeSQ' :: Augmented Advancement -> (XPType,XPType) -> XPType
+laterLifeSQ' a (x,y) = t
    where t | isJust (sourceQuality ad) = fromJust (sourceQuality ad)
            | isJust (years ad) = x+y*yy
            | otherwise = x
          yy = fromIntegral $ fromMaybe 0 (years ad)
+         ad = contractAdvancement a
 
 -- | Get XP total for Later Life
-laterLifeSQ :: [VF] -> AugmentedAdvancement -> XPType
+laterLifeSQ :: [VF] -> Augmented Advancement -> XPType
 laterLifeSQ vfs ad = laterLifeSQ' ad $ laterLifeXP vfs
 
 -- | Get XP and spell level total for Apprenticeship
@@ -162,11 +163,11 @@ appSQ (x:xs) | vfname x == "Weak Parens" = (180,90)
 
 -- | Get Bonus SQ/XP for in-game advancement types, dependent
 -- on mode of study.
-vfBonusSQ :: AdvancementLike a => [VF] -> a -> [BonusSQ]
+vfBonusSQ :: [VF] -> Augmented Advancement -> [BonusSQ]
 vfBonusSQ vs a = filterNothing $ map (vfBonusSQ' a) vs
 
-vfBonusSQ' :: AdvancementLike a => a ->  VF -> Maybe BonusSQ
-vfBonusSQ' m vf = g (vfname vf) (mode m)
+vfBonusSQ' :: Augmented Advancement ->  VF -> Maybe BonusSQ
+vfBonusSQ' m vf = g (vfname vf) (mode $ contractAdvancement m)
     where  f "Apt Student" Taught = 5 :: XPType
            f "Apt Student" Trained = 5
            f "Poor Student" Taught = -3

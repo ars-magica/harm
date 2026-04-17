@@ -41,7 +41,7 @@
 module ArM.Types.Advancement ( Advancement(..) 
                              , defaultAdvancement
                              , Augmented(..) 
-                             , AugmentedAdvancement
+                             , ContractAdvancement(..)
                              , AdvancementLike(..) 
                              , AdvancementType(..) 
                              , PostProcessor(..)
@@ -163,44 +163,45 @@ dropWord (x:xs) | isSpace x = trim xs
 -- Note that standard SQ should be recorded as `advSQ`, while individual
 -- variation may be recorded as `advBonus`.
 data Advancement = Advancement
-     { advMode :: AdvancementType -- ^ mode of study
+     { mode :: AdvancementType    -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
-     , advYears :: Maybe Int      -- ^ number of years advanced
-     , advNarrative :: [ String ] -- ^ narrative description of the activities
-     , advComment :: [ String ]   -- ^ freeform description of the activities
-     , advUses :: [ String ]      -- ^ Books used exclusively by the character
-     , advRead :: [ String ]      -- ^ Original book(s) read (to check against rereads)
-     , advBook :: [ Book ]      -- ^ Books used exclusively by the character
-     , advSQ :: Maybe XPType      -- ^ Source Quality (SQ)
-     , advCap :: Maybe Int        -- ^ Source Quality (SQ)
-     , advBonus :: [ BonusSQ ]    -- ^ Bonus to Source Quality (SQ)
-     , advChanges :: [ ProtoTrait ]  -- ^ trait changes defined by player
-     , advSpellLevels :: Maybe Int   -- ^ spell level allowance
-     , advTeacherSQ :: Maybe XPType  -- ^ The SQ generated as teacher
-     , advValidation :: [Validation] -- ^ Report from validation
-     , advPostprocessTrait :: PostProcessor -- ^ Extra postprocessing for traits at the given stage
+     , years :: Maybe Int         -- ^ number of years advanced
+     , advNarrative :: [ String ]    -- ^ narrative description of the activities
+     , advComment :: [ String ]      -- ^ freeform description of the activities
+     , usesBook :: [ String ]     -- ^ Books used exclusively by the character
+     , readBook :: [ String ]     -- ^ Original book(s) read (to check against rereads)
+     , bookUsed :: [ Book ]       -- ^ Books used exclusively by the character
+     , sourceQuality :: Maybe XPType -- ^ Source Quality (SQ)
+     , sourceCap :: Maybe Int        -- ^ Source Quality (SQ)
+     , bonusSQ :: [ BonusSQ ]     -- ^ Bonus to Source Quality (SQ)
+     , changes :: [ ProtoTrait ]  -- ^ trait changes defined by player
+     , spellLevels :: Maybe Int   -- ^ spell level allowance
+     , teacherSQ :: Maybe XPType  -- ^ The SQ generated as teacher
+     , validation :: [Validation] -- ^ Report from validation
+     , postprocessTrait :: PostProcessor -- ^ Extra postprocessing for traits at the given stage
      }
    deriving (Eq,Generic,Show)
+
 
 -- | Default object for standardised initialisation of fields.
 defaultAdvancement :: Advancement
 defaultAdvancement = Advancement
-     { advMode = Exposure (OtherExposure "Undefined")
+     { mode = Exposure (OtherExposure "Undefined")
      , advSeason = NoTime
-     , advYears = Nothing
+     , years = Nothing
      , advNarrative = []
      , advComment = []
-     , advUses = []
-     , advRead = []
-     , advBook = []
-     , advSQ = Nothing
-     , advCap = Nothing
-     , advBonus = []
-     , advChanges = []
-     , advSpellLevels = Nothing
-     , advTeacherSQ = Nothing
-     , advValidation = []
-     , advPostprocessTrait = PostProcessor id
+     , usesBook = []
+     , readBook = []
+     , bookUsed = []
+     , sourceQuality = Nothing
+     , sourceCap = Nothing
+     , bonusSQ = []
+     , changes = []
+     , spellLevels = Nothing
+     , teacherSQ = Nothing
+     , validation = []
+     , postprocessTrait = PostProcessor id
      }
 
 
@@ -234,7 +235,7 @@ instance StoryObject Advancement where
                    | otherwise = " (" ++ ishow sx ++ "xp)" 
                sx = sourceQuality a
                ishow = showNum . fromJust
-               y = advYears a
+               y = years a
      narrative  = advNarrative
      comment  = advComment
      addNarrative s x = x { advNarrative = s:narrative x }
@@ -262,74 +263,85 @@ instance FromJSON BonusSQ
 
 
 -- ** The AdvancementLike Class
+class ContractAdvancement a where
+    -- | Merge explicit and inferred advancement into one object
+    contractAdvancement :: Augmented a -> a
+
+instance ContractAdvancement Advancement where
+    contractAdvancement ad = Advancement 
+          { mode = ( mode . explicitAdv ) ad
+          , advSeason = season ad
+          , years = ( fmlx years ) ad
+          , advNarrative = ( fmls narrative ) ad
+          , advComment = ( fmls comment ) ad
+          , usesBook = ( fmls usesBook ) ad
+          , readBook = ( fmls readBook ) ad
+          , bookUsed = ( fmls bookUsed ) ad
+          , sourceQuality =  ( fmlx sourceQuality ) ad
+          , sourceCap  = ( fmlx sourceCap ) ad
+          , bonusSQ = ( fmls bonusSQ ) ad
+          , changes = ( fmls changes ) ad
+          , spellLevels = ( fmlx spellLevels ) ad
+          , teacherSQ = ( fmlx teacherSQ ) ad
+          , validation = ( fmls validation ) ad
+          , postprocessTrait = ( postprocessTrait . inferredAdv ) ad
+          }
 
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- Augmented Advanceemnt
 class (StoryObject a) => AdvancementLike a where
-     mode :: a -> AdvancementType  -- ^ mode of study
-     years :: a -> Maybe Int
-     usesBook :: a -> [ String ] -- ^ Books used exclusively by the character
-     readBook :: a -> [ String ] -- ^ Original titles read
-     bookUsed :: a -> [ Book ] -- ^ Books used exclusively by the character
-     sourceQuality :: a -> Maybe XPType -- ^ Source Quality (SQ)
-     sourceCap :: a -> Maybe Int -- ^ Level cap from the source of learning
-     bonusSQ :: a -> [ BonusSQ ]
-     changes :: a -> [ ProtoTrait ]  -- ^ trait changes defined by player
-     spellLevels :: a -> Maybe Int   -- ^ spell level allowance
-     teacherSQ :: a -> Maybe XPType  -- ^ The SQ generated as teacher
-     validation :: a -> [Validation] -- ^ Report from validation
-     postprocessTrait :: a -> PostProcessor -- ^ Extra postprocessing for traits at the given stage
+     -- | Does the advancement give Exposure XP only?
      isExposure :: a -> Bool
-     isExposure = f . mode
-        where f (Exposure _) = True
-              f _ = False
      totalBonusSQ :: a -> XPType
-     totalBonusSQ = sum . map sourceBonus . bonusSQ
      effectiveSQ :: a -> Maybe XPType
-     effectiveSQ a = fmap (+(totalBonusSQ a)) $ sourceQuality a 
      -- | Sort the list of trait changes 
      sortAdvTraits :: a -> a
      -- | Count regular XP (excluding reputation) spent in an Advancement
      spentXP :: a -> XPType
-     spentXP = sum . map regularXP . changes
      -- | Count spell levels from an Advancement
      spentLevels :: a -> Int
-     spentLevels = sum . map ( lvls . protoTrait ) . changes
-         where lvls (SpellKey _ x _) = x
-               lvls _ = 0
      addValidation :: [Validation] -> a -> a
      addProtoTrait :: [ProtoTrait] -> a -> a
      setRead :: BookDB h => h -> a -> a
 
 instance AdvancementLike Advancement where
-     mode = advMode
-     years = advYears 
-     readBook = advRead
-     usesBook = advUses
-     bookUsed = advBook
-     sourceQuality  = advSQ
-     sourceCap  = advCap
-     bonusSQ = advBonus 
-     changes = advChanges
-     spellLevels = advSpellLevels 
-     teacherSQ = advTeacherSQ 
-     validation = advValidation 
-     postprocessTrait = advPostprocessTrait 
-     sortAdvTraits x = x { advChanges = sortTraits $ changes x }
-     addValidation vs a = a { advValidation = vs ++ advValidation a }
-     addProtoTrait vs a = a { advChanges = vs ++ advChanges a }
-     setRead db ad = ad { advRead = map (originalID db) (bookUsed ad) }
+     isExposure = f . mode
+        where f (Exposure _) = True
+              f _ = False
+     totalBonusSQ = sum . map sourceBonus . bonusSQ
+     effectiveSQ a = fmap (+(totalBonusSQ a)) $ sourceQuality a 
+     spentXP = sum . map regularXP . changes
+     spentLevels = sum . map ( lvls . protoTrait ) . changes
+         where lvls (SpellKey _ x _) = x
+               lvls _ = 0
+     sortAdvTraits x = x { changes = sortTraits $ changes x }
+     addValidation vs a = a { validation = vs ++ validation a }
+     addProtoTrait vs a = a { changes = vs ++ changes a }
+     setRead db ad = ad { readBook = map (originalID db) (bookUsed ad) }
+
+instance (Timed a, AdvancementLike a,ContractAdvancement a) 
+       => AdvancementLike (Augmented a) where
+     isExposure = isExposure . contractAdvancement
+     totalBonusSQ = totalBonusSQ . contractAdvancement 
+     effectiveSQ = effectiveSQ . contractAdvancement
+     spentXP = spentXP . explicitAdv
+     spentLevels = spentLevels . explicitAdv
+     sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
+                         , inferredAdv = sortAdvTraits $ inferredAdv x }
+     addValidation vs a = a { inferredAdv = addValidation vs (inferredAdv a) }
+     addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
+     setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
+
 
 -- ** The Augmented Advancement
 
--- | Advancement with additional inferred fields
+-- | Advancement with additional inferred information.
 data Augmented a = Adv
-     { explicitAdv :: a   
-     , inferredAdv :: a   
+     { explicitAdv :: a    -- ^ Explictly recorded (original) advancement
+     , inferredAdv :: a    -- ^ Inferred advancement data
      }
    deriving (Eq,Show,Generic)
-type AugmentedAdvancement = Augmented Advancement
 
 instance ToJSON a => ToJSON (Augmented a) where
     toEncoding = genericToEncoding defaultOptions
@@ -355,13 +367,11 @@ instance ToJSON PostProcessor where
 instance Timed a => Timed (Augmented a) where
      season  = season . explicitAdv 
 
-instance (Timed a, AdvancementLike a, StoryObject a) 
+instance (Timed a, ContractAdvancement a, AdvancementLike a, StoryObject a) 
       => StoryObject (Augmented a) where
-    name a = showTime xps (season a) (mode a) y 
-         where xps = showSQ (sourceQuality a) (totalBonusSQ a)
-               y = years a
-    narrative  = fmls narrative 
-    comment  = fmls comment 
+    name = name . contractAdvancement
+    narrative  = narrative . contractAdvancement
+    comment  = comment . contractAdvancement
     addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
     addComment s (Adv a aa) = Adv a $ addComment s aa
 
@@ -373,28 +383,6 @@ showSQ Nothing (x) = " (" ++ showNum x ++ "xp)"
 showSQ (Just x) (y) = " (" ++ showNum x ++ f y ++ "xp)"
     where f 0 = ""
           f z = "+" ++ showNum z
-
-instance (Timed a,AdvancementLike a) => AdvancementLike (Augmented a) where
-     mode = mode . explicitAdv
-     years = fmlx years 
-     usesBook = fmls usesBook
-     readBook = fmls readBook
-     bookUsed = fmls bookUsed
-     sourceQuality =  fmlx sourceQuality  
-     sourceCap  = fmlx sourceCap 
-     bonusSQ = fmls bonusSQ 
-     changes = fmls changes 
-     spellLevels = fmlx spellLevels 
-     teacherSQ = fmlx teacherSQ 
-     validation = fmls validation 
-     postprocessTrait = postprocessTrait . inferredAdv
-     sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
-                         , inferredAdv = sortAdvTraits $ inferredAdv x }
-     spentXP = spentXP . explicitAdv
-     spentLevels = spentLevels . explicitAdv
-     addValidation vs a = a { inferredAdv = addValidation vs (inferredAdv a) }
-     addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
-     setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
 
 fmls :: (a -> [b]) -> Augmented a -> [b]
 fmls f a = f (inferredAdv a) ++ f (explicitAdv a) 

@@ -56,7 +56,7 @@ getSeasonAnnals' t (x:xs,ys)
 -- |
 -- == Types
 
-data CharAug = CharAug Character AugmentedAdvancement
+data CharAug = CharAug Character (Augmented Advancement)
    deriving ( Show, Eq )
 instance Timed CharAug where
    season (CharAug _ a) = season a

@@ -11,7 +11,7 @@
 -- Only one function is exported: `addInference` which is used for both
 -- in-game and chargen advancement. It must be used before all other processing
 -- of the advancement, since it transforms an `Advancement` to an
--- `AugmentedAdvancement`.
+-- `Augmented Advancement`.
 --
 -----------------------------------------------------------------------------
 module ArM.Char.Inference (addInference) where
@@ -29,7 +29,7 @@ import Data.Maybe
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `CharacterState`.
-addInference :: CharacterState -> Advancement -> AugmentedAdvancement
+addInference :: CharacterState -> Advancement -> Augmented Advancement
 addInference cs a = Adv { explicitAdv = a
                         , inferredAdv = augmentAdvancement cs a }
 
@@ -38,10 +38,10 @@ addInference cs a = Adv { explicitAdv = a
 -- The ability is inferred and should not be added manually.
 augmentAdvancement :: CharacterState -> Advancement -> Advancement
 augmentAdvancement cs a = defaultAdvancement 
-        { advChanges = inferProtoTraits cs xs
+        { changes = inferProtoTraits cs xs
         , advSeason = season a
-        , advMode = mode a
-        , advYears = yf }
+        , mode = mode a
+        , years = yf }
      where xs = changes a
            yf | isWinter $ season a = Just 1
               | otherwise = Nothing

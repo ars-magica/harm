@@ -22,7 +22,6 @@ module ArM.Types.Covenant (
            , defaultCovState
            -- * Advancement
            , CovAdvancement(..)
-           , contractAdvancement
            -- * Convenience Functions
            , findCov
            , covenant
@@ -181,9 +180,8 @@ instance FromJSON CovAdvancement where
 instance Timed CovAdvancement where
    season = caSeason
 
--- | Merge explicit and inferred advancement into onw `CovAdvancement` object
-contractAdvancement :: Augmented CovAdvancement -> CovAdvancement
-contractAdvancement aug  = CovAdvancement
+instance ContractAdvancement CovAdvancement where
+  contractAdvancement aug  = CovAdvancement
      { caSeason = season aug
      , caStory = caStory aa ++ caStory ad
      , joining = joining aa ++ joining ad

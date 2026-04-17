@@ -32,7 +32,7 @@ import Data.List
 -- * Preparing the Advancement
 
 -- | Augment and amend the advancements based on current virtues and flaws.
-prepareAdvancement :: CharacterState -> Advancement -> AugmentedAdvancement
+prepareAdvancement :: CharacterState -> Advancement -> Augmented Advancement
 prepareAdvancement c = sortAdvTraits   -- sort inferred traits
                      . winterEvents c 
                      . addInference c
@@ -41,8 +41,8 @@ prepareAdvancement c = sortAdvTraits   -- sort inferred traits
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
 winterEvents :: CharacterState       -- ^ Current Character State
-             -> AugmentedAdvancement -- ^ Advancement 
-             -> AugmentedAdvancement -- ^ modified Advancement
+             -> Augmented Advancement -- ^ Advancement 
+             -> Augmented Advancement -- ^ modified Advancement
 winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
 
              | otherwise = a
@@ -62,9 +62,9 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
           yl | ageOb == Nothing = trace "No age object" 35
                  | otherwise = ageLimit $ fromJust ageOb
           warpingLR x | lr <= 0 = x
-                      | otherwise = x { advChanges = lrWarping:advChanges x }
+                      | otherwise = x { changes = lrWarping:changes x }
           addYear o x | addsYear o = x
-                      | otherwise = x { advChanges = agePT 1:advChanges x }
+                      | otherwise = x { changes = agePT 1:changes x }
           addsYear Nothing = False
           addsYear (Just x) | isNothing (addYears x) = False
                             | fromJust (addYears  x) <= 0 = False
@@ -79,8 +79,8 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
 
 
 -- | Calculate initial XP limits on Advancements
-inferSQ :: Character -> AugmentedAdvancement -> AugmentedAdvancement
-inferSQ cs ad = ad { inferredAdv = aa { advSQ = sq, advBonus = vfBonusSQ vf ad } }
+inferSQ :: Character -> Augmented Advancement -> Augmented Advancement
+inferSQ cs ad = ad { inferredAdv = aa { sourceQuality = sq, bonusSQ = vfBonusSQ vf ad } }
         where vf = vfList $ characterSheet cs
               (sq,_) = getSQ ad
               aa = inferredAdv ad
@@ -90,7 +90,7 @@ inferSQ cs ad = ad { inferredAdv = aa { advSQ = sq, advBonus = vfBonusSQ vf ad }
 -- Infer SQ for adventure from covenant
 
 {-
-bookSQ :: AugmentedAdvancement -> AugmentedAdvancement 
+bookSQ :: Augmented Advancement -> Augmented Advancement 
 bookSQ aa | isNothing stats = aa
           | isNothing tr = aa
           | otherwise = aa 
@@ -99,7 +99,7 @@ bookSQ aa | isNothing stats = aa
           ctp =  (==(fromJust tr)) . topic 
 -}
 
-getSQ :: AugmentedAdvancement -> (Maybe XPType,Maybe Int)
+getSQ :: Augmented Advancement -> (Maybe XPType,Maybe Int)
 getSQ a | isExposure ad = (Just 2,Nothing)
         -- | mode ad == Reading = rd bks
         | otherwise = mstat
@@ -124,8 +124,8 @@ lrWarping = defaultPT { protoTrait = OtherTraitKey "Warping"
 -- * In-game Validation
 --
 -- In-game validation is relatively simple, depending only on the
--- `AugmentedAdvancement`.  Currently, only XP expenditure is validated.
+-- `Augmented Advancement`.  Currently, only XP expenditure is validated.
 
 -- | Add source qualities and validate XP expenditure
-validate :: Character -> AugmentedAdvancement -> AugmentedAdvancement
+validate :: Character -> Augmented Advancement -> Augmented Advancement
 validate c = validateXP . inferSQ c

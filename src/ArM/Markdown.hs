@@ -427,7 +427,8 @@ instance Markdown OtherTrait where
 -- |
 -- = Advancements
 
-instance Markdown AugCovAdvancement where
+instance (Markdown a, ContractAdvancement a) 
+      => Markdown (Augmented a) where
    printMD = printMD . contractAdvancement
 instance Markdown CovAdvancement where
    printMD ad = OList $ sls ++ f ch
@@ -454,7 +455,7 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
              | otherwise = OString $  "acquired: " ++ showStrList (map name $ acquired a)
            lst | lost a == [] = OList []
              | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
-instance Markdown AugmentedAdvancement where
+instance AdvancementLike t => Markdown (Augmented t) where
    printMD a = indentOList $ OList $ storyOList a ++
        [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
        , chnl
@@ -479,8 +480,7 @@ instance Markdown Advancement where
          , OList $ map printMD $ changes a
          ]
 
--- |
--- == Pretty print arts
+-- ** Pretty print arts
 
 -- | Render art scores as a table
 artMD :: CharacterSheet

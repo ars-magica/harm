@@ -62,6 +62,20 @@ indentOList' :: String -> OList -> OList
 indentOList' s (OString x) = OString $ s ++ x
 indentOList' s (OList xs) = OList $ map (indentOList' ("    "++s)) xs
 
+-- | Show a string but not an empty one
+nonemptyStringMD :: String -> OList
+nonemptyStringMD "" = OList [] 
+nonemptyStringMD st = OString st
+
+-- | Render a Maybe String as an OList.
+-- Nothing becomes an empty OList and a Just object becomes a single line.
+-- Note that this is different from the generic instance for Maybe, because
+-- of the difficulties making an instance for String.
+stringMD :: Maybe String -> OList
+stringMD Nothing = OList []
+stringMD (Just x) = OString x
+
+
 -- | 
 -- == Writing OList to file
 

@@ -98,9 +98,9 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
 
 -- | Get validation messages from a given advancement.
 -- Auxiliary for `cErrors`
-aaErrors :: Character -> AugmentedAdvancement -> VList
+aaErrors :: Character -> Augmented Advancement -> VList
 aaErrors c a = (charID c, season a, augHead a, vs )
-    where vs = validation  a
+    where vs = validation  $ contractAdvancement a
 
 -- | Get validation messages from a given character.
 -- Auxiliary for `listErrors`
@@ -111,8 +111,8 @@ cErrors c = map (aaErrors c) as
          ps = pastAdvancement c
 
 -- | Format a header for `renderCharErrors`
-augHead :: AugmentedAdvancement -> String
-augHead a = augHead' (season a) (mode a)
+augHead :: Augmented Advancement -> String
+augHead a = augHead' (season a) (mode $ contractAdvancement a)
 -- | Format a header for `renderCharErrors`
 augHead' :: SeasonTime -> AdvancementType -> String
 augHead' NoTime tp = show tp

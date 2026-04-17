@@ -86,11 +86,11 @@ agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Apply advancement
 -- This function is generic, and used for both chargen and ingame 
--- advancement.  The AugmentedAdvancement has to be prepared differently,
+-- advancement.  The Augmented Advancement has to be prepared differently,
 -- using either `prepareAdvancement` or `prepareCharGen`.
-applyAdvancement :: AugmentedAdvancement
+applyAdvancement :: Augmented Advancement
                  -> CharacterState 
-                 -> (AugmentedAdvancement,CharacterState)
+                 -> (Augmented Advancement,CharacterState)
 applyAdvancement a cs = (a,cs')
     where cs' = cs { charTime = season a, traits = new }
           new = advanceTraitList change tmp

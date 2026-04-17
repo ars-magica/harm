@@ -38,9 +38,9 @@ data Character = Character
     , concept :: CharacterConcept   -- ^ concept is the timeless features of the character
     , state :: Maybe CharacterState -- ^ current state of the character
     , entryTime :: SeasonTime       -- ^ First season the character is in play
-    , pregameDesign :: [ AugmentedAdvancement ]    -- ^ chargen already processed
+    , pregameDesign :: [ Augmented Advancement ]    -- ^ chargen already processed
     , pregameAdvancement :: [ Advancement ]        -- ^ chargen left to process
-    , pastAdvancement :: [ AugmentedAdvancement ]  -- ^ past advancement (in game), most recent first
+    , pastAdvancement :: [ Augmented Advancement ]  -- ^ past advancement (in game), most recent first
     , futureAdvancement :: [ Advancement ]         -- ^ future advancement (in game), next one firstk
     }  deriving (Eq,Generic)
 
