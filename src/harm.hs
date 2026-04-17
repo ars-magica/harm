@@ -24,7 +24,7 @@ module Main where
 import System.Environment
 import System.Console.GetOpt
 
-import ArM.BasicIO (putStrLns)
+import ArM.Helper (putStrLns)
 import ArM.Debug.Time
 import ArM.IO
 

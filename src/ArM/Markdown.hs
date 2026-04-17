@@ -83,7 +83,7 @@ advancementMD c = OList [ ao, bo ]
             | otherwise = OList
                 [ OString "## Past Advancement"
                 , OString ""
-                , OList $ map printMD as
+                , OList $ map printMDaa as
                 , OString ""
                 ]
          bo | bs == [] = OList []
@@ -455,21 +455,23 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
              | otherwise = OString $  "acquired: " ++ showStrList (map name $ acquired a)
            lst | lost a == [] = OList []
              | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
-instance AdvancementLike t => Markdown (Augmented t) where
-   printMD a = indentOList $ OList $ storyOList a ++
+-- instance AdvancementLike t => Markdown (Augmented t) where
+printMDaa :: Augmented Advancement -> OList
+printMDaa a' = indentOList $ OList $ storyOList a ++
        [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a
        ]
-      where inf = sortTraits $ changes $ inferredAdv a
-            chn = sortTraits $ changes $ explicitAdv a
+      where inf = sortTraits $ changes $ inferredAdv a'
+            chn = sortTraits $ changes $ explicitAdv a'
+            a = contractAdvancement a'
             chnl | chn == [] = OList []
                  | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
             infl | inf == [] = OList []
                  | otherwise = OList [ OString "Inferred traits", OList $ map printMD inf ]
 
-usesString :: AdvancementLike a => a -> OList
+usesString :: Advancement -> OList
 usesString a | u == [] = OList []
              | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
          where u = usesBook a

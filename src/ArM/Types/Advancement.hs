@@ -291,8 +291,13 @@ instance ContractAdvancement Advancement where
 -- The AdvancementLike class gives a common API to Advancement and
 -- Augmented Advanceemnt
 class (StoryObject a) => AdvancementLike a where
+     -- | The type of advancement
+     advMode :: a -> AdvancementType
      -- | Does the advancement give Exposure XP only?
      isExposure :: a -> Bool
+     isExposure = f . advMode
+        where f (Exposure _) = True
+              f _ = False
      totalBonusSQ :: a -> XPType
      effectiveSQ :: a -> Maybe XPType
      -- | Sort the list of trait changes 
@@ -306,9 +311,7 @@ class (StoryObject a) => AdvancementLike a where
      setRead :: BookDB h => h -> a -> a
 
 instance AdvancementLike Advancement where
-     isExposure = f . mode
-        where f (Exposure _) = True
-              f _ = False
+     advMode = mode
      totalBonusSQ = sum . map sourceBonus . bonusSQ
      effectiveSQ a = fmap (+(totalBonusSQ a)) $ sourceQuality a 
      spentXP = sum . map regularXP . changes
@@ -322,6 +325,7 @@ instance AdvancementLike Advancement where
 
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where
+     advMode = advMode . contractAdvancement
      isExposure = isExposure . contractAdvancement
      totalBonusSQ = totalBonusSQ . contractAdvancement 
      effectiveSQ = effectiveSQ . contractAdvancement

@@ -18,6 +18,8 @@ module Data.OList ( OList(..)
                   , toOList
                   , foldOList
                   , indentOList
+                  , nonemptyStringMD
+                  , stringMD
                   , writeOListH
                   , writeOList
        ) where

@@ -60,7 +60,7 @@ data CharAug = CharAug Character (Augmented Advancement)
    deriving ( Show, Eq )
 instance Timed CharAug where
    season (CharAug _ a) = season a
-data CovAug = CovAug Covenant AugCovAdvancement
+data CovAug = CovAug Covenant (Augmented CovAdvancement)
    deriving ( Show, Eq )
 instance Timed CovAug where
    season (CovAug _ a) = season a
@@ -71,7 +71,7 @@ instance Timed EitherAug where
 
 
 instance StoryObject CharAug where
-   name (CharAug c a) = (name c ++ " (" ++ show (mode a) ++ ")")
+   name (CharAug c a) = (name c ++ " (" ++ show (advMode a) ++ ")")
    narrative (CharAug _ a) = narrative a
    comment (CharAug _ a) = comment a
    addNarrative s (CharAug c x) = CharAug c $ addNarrative s x 
@@ -85,10 +85,11 @@ instance StoryObject CovAug where
 -}
 
 instance Markdown CharAug where
-   printMD (CharAug c a) = OList $ storyOList (CharAug c a) ++
-       [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
+   printMD (CharAug c a') = OList $ storyOList (CharAug c a') ++
+       [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed  a
        , OList $ map (OString . show) $ validation a
        ]
+       where a = contractAdvancement a'
 instance Markdown CovAug where
    printMD (CovAug c a') = OList [ OString (name c), printMD a ]
      where a = contractAdvancement a'
