@@ -23,7 +23,6 @@ module ArM.Types.Saga ( Saga(..)
 
 import Data.Maybe 
 import Data.Aeson 
--- import Data.List 
 import GHC.Generics
 
 import ArM.Types

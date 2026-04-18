@@ -8,8 +8,13 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
--- Description :  Possession including weapons and enchanted devices
+-- Description :  Possession ranging weapons and books to enchanted devices
 --
+-- Possessions are physical objects which can be gained, lost, given away,
+-- or traded.  
+--
+-- Possessions can be held by either a covenant or a character.  For characters
+-- they are embedded in a special kind of trait.
 --
 -----------------------------------Types.------------------------------------------
 module ArM.Types.Possession ( -- * Posessions
