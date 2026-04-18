@@ -42,8 +42,8 @@ data Saga = Saga
          , sagaState :: SagaState
          , baseURL :: Maybe String
          , spells :: SpellDB
-         , weapons :: WeaponDB
-         , armour :: ArmourDB
+         , weaponsDB :: WeaponDB
+         , armourDB :: ArmourDB
        }  deriving (Eq)
 
 -- | Return the description of the saga, as stored in the `SagaFile` object.

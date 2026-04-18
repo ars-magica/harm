@@ -616,7 +616,7 @@ showRDT sp = "Range: " ++ r ++
 -- | Set the Combat Stats of the Character as an `OList`
 printCombatMD :: Saga -> CharacterSheet -> OList
 printCombatMD saga cs = OList x
-    where tab = computeCombatStats ( weapons saga ) cs
+    where tab = computeCombatStats ( weaponsDB saga ) cs
           x | tab == [] = []
             | otherwise = [ combatHead, combatBody tab ]
 

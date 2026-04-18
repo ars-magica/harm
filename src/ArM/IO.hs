@@ -29,6 +29,8 @@ import ArM.Markdown
 import ArM.Types.Covenant
 import ArM.Types.Saga
 import ArM.Types.Library
+import ArM.Types.Possession
+import ArM.Types.Advancement
 import ArM.Types
 import ArM.DB.CSV
 import ArM.DB.Weapon()
@@ -75,8 +77,8 @@ loadSaga saga = do
               }
            , baseURL = Nothing
            , spells = fromJust db 
-           , weapons = fromJust wdb
-           , armour = fromJust adb
+           , weaponsDB = fromJust wdb
+           , armourDB = fromJust adb
            }
 
 writeSagaState :: Saga -> IO ()
@@ -123,14 +125,35 @@ readArM fn = readObject fn >>= return . prepMaybe
 
 loadCovenant :: Maybe Covenant -> IO (Maybe Covenant)
 loadCovenant Nothing  = trace "loadCovenant -> Nothing" $ return Nothing
-loadCovenant (Just c)
-    | isNothing st' = trace "loadCovenant -> Nothing to load" $ return $ Just c
-    | isNothing fn = trace "loadCovenant -> Nothing to load" $ return $ Just c
+loadCovenant (Just c) = loadCovenant'' c >>= loadCovenant' >>= return . Just
+
+loadCovenant'' :: Covenant -> IO (Covenant)
+loadCovenant'' cov
+    | isNothing st' = trace "loadCovenant -> Nothing to load" $ return cov
+    | isNothing fn = trace "loadCovenant -> Nothing to load" $ return cov
     | otherwise = readBookCSV (fromJust fn) >>=
-       ( \ lib -> return $ Just $ c { covenantState = Just $ st { library = lib } } )
+       ( \ lib -> return $ cov { covenantState = Just $ st { library = lib } } )
        where fn = librarycsv st
              st = fromJust st'
-             st' = covenantState c
+             st' = covenantState cov
+loadCovenant' :: Covenant -> IO (Covenant)
+loadCovenant' cov = loadCov1 cov >>= loadCov2
+
+loadCov1 :: Covenant -> IO (Covenant)
+loadCov1 cov = mapM loadCovAdvancement (futureCovAdvancement cov)
+         >>= return . ( \x -> cov { futureCovAdvancement = x } )
+loadCov2 :: Covenant -> IO (Covenant)
+loadCov2 cov = mapM loadCovAdvancement (covenantDesign cov)
+         >>= return . ( \x -> cov { covenantDesign = x } )
+
+loadCovAdvancement :: CovAdvancement -> IO (CovAdvancement)
+loadCovAdvancement ad = loadCovAdvancement' (bookcsv ad) ad 
+
+
+loadCovAdvancement' :: Maybe String -> CovAdvancement -> IO (CovAdvancement)
+loadCovAdvancement' Nothing ad = return ad
+loadCovAdvancement' (Just fn) ad = readBookCSV fn 
+      >>= return . ( \ r -> ad { acquired' = acquired' ad ++ r } ) . wrapBooks
 
 -- |
 -- = Write Character Sheets
