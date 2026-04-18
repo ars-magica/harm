@@ -451,6 +451,8 @@ data CovAdvancement = CovAdvancement
      , caChanges :: [ ProtoTrait ]
      , joining :: [ HarmKey ]
      , leaving :: [ HarmKey ]
+     , acquired' :: [ Possession ]
+     , lost' :: [ Possession ]
      , acquired :: [ Book ]
      , lost :: [ Book ]
      } 
@@ -458,7 +460,7 @@ data CovAdvancement = CovAdvancement
 
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
-noCovAdvancement = CovAdvancement NoTime [] [] [] [] [] []
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] [] [] [] []
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
@@ -468,6 +470,8 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "changes" 
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
+        <*> v `parseCollapsedList` "acquired'"
+        <*> v `parseCollapsedList` "lost'"
         <*> v `parseCollapsedList` "acquired"
         <*> v `parseCollapsedList` "lost"
 
@@ -483,6 +487,8 @@ instance ContractAdvancement CovAdvancement where
      , caChanges = caChanges aa ++ caChanges ad
      , joining = joining aa ++ joining ad
      , leaving = leaving aa ++ leaving ad
+     , acquired' = acquired' aa ++ acquired' ad
+     , lost' = lost' aa ++ lost' ad
      , acquired = acquired aa ++ acquired ad
      , lost = lost aa ++ lost ad
      } 

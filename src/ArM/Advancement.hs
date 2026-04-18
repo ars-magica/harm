@@ -143,7 +143,7 @@ applyStep (CovStep c Nothing) = (CovStep c Nothing)
 applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
      where aa = contractAdvancement aa'
            c' = c { covenantState = Just st' }
-           st' = stepBooks aa $ stepCovenFolk aa $ fs st
+           st' = stepPossessions aa $ stepBooks aa $ stepCovenFolk aa $ fs st
            fs x = x { covTime = caSeason aa }
            st = fromMaybe defaultCovState $ covenantState c
 
@@ -155,6 +155,10 @@ stepBooks :: CovAdvancement -> CovenantState -> CovenantState
 stepBooks aa st = st { library = bid }
    where bid1 = sort $ acquired aa ++ library st 
          bid = bid1 -= ( sort $ lost aa )
+stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
+stepPossessions aa st = st { possessions = bid }
+   where bid1 = sort $ acquired' aa ++ possessions st 
+         bid = bid1 -= ( sort $ lost' aa )
 -- |
 -- Get the next advancements, preparing for joint advancement
 nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 

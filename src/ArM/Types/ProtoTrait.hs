@@ -8,7 +8,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
--- Description :  Types to Traits and advancement of Traits
+-- Description :  Advancement of Traits
 --
 -- Traits are represented as `ProtoTrait` objects in the design and
 -- advancement. A `ProtoTrait` can represent either a new trait or a
@@ -21,6 +21,10 @@
 -- ability, spell, art, etc.   Conversion between a `Trait` object and
 -- a more specific type, like `Art`, is done by the (polymorphic)
 -- `toTrait` and `getTrait` functions.
+--
+-- A list of traits `ts` is advanced by a list of prototraits `ps` by
+-- calling `advanceTraitList ps ts`, which gives an updated list of traits.
+-- The lists are assumed to be sorted.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.ProtoTrait ( module ArM.Types.Trait
@@ -66,19 +70,24 @@ import ArM.DB.Weapon
 data ProtoTrait = ProtoTrait
     { protoTrait :: TraitKey
     , aging :: Maybe Aging        -- ^ Aging object 
-    , possession :: Maybe Possession -- ^ Possesion includes weapon, vis, equipment, etc.
-    , lab :: Maybe Lab            -- ^ Possesion includes weapon, vis, equipment, etc.
-    , combat :: Maybe CombatOption -- ^ Possesion includes weapon, vis, equipment, etc.
+    , possession :: Maybe Possession 
+                 -- ^ Possesion includes weapon, vis, equipment, etc.
+    , lab :: Maybe Lab            
+                 -- ^ A Magus' laboratory
+    , combat :: Maybe CombatOption 
+                 -- ^ Possesion includes weapon, vis, equipment, etc.
     , spec :: Maybe String        -- ^ specialisation of an ability
-    , levelCap :: Maybe Int    -- ^ cap on advancement
+    , levelCap :: Maybe Int       -- ^ cap on advancement
     , spellRecord :: Maybe SpellRecord
+                 -- ^ Spell if the trait is a spell
     , mastery :: Maybe [ String ]   -- ^ mastery options for a spell
     , flawless :: Maybe Bool   -- ^ for a spell, if flawless magic applies
     , score :: Maybe Int       -- ^ new score to replace the old one
-    , bonusScore :: Maybe Int  -- ^ bonus from puissant; should also be used on initial 
-                               -- characteristics for the bonus from Strong Faerie Blood
-                               -- or Great/Poor Characteristic to keep it separate from
-                               -- the levels bought from points.
+    , bonusScore :: Maybe Int  
+                 -- ^ bonus from puissant; should also be used on initial 
+                 -- characteristics for the bonus from Strong Faerie Blood
+                 -- or Great/Poor Characteristic to keep it separate from
+                 -- the levels bought from points.
     , multiplyXP :: Maybe Float  -- ^ XP multiplier from affinities and similar
     , cost :: Maybe Int          -- ^ cost of a virtue or flaw
     , points :: Maybe Int        -- ^ points for confidence/true faith/etc (additive)
