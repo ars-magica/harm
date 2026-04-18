@@ -33,7 +33,9 @@ module ArM.Types.Possession ( -- * Posessions
                             , isWeapon
                             , isArmour
                             , isEquipment
+                            -- * Books
                             , isBook
+                            , wrapBooks
                             ) where
 
 import ArM.Types.Calendar
@@ -148,8 +150,6 @@ visArt = itemArt
 isVis :: Possession -> Bool
 isVis c = isJust $ itemArt c
 
-isBook :: Possession -> Bool
-isBook p = bookTexts p /= []
 
 isWeapon :: Possession -> Bool
 isWeapon p = (weapon p /= []) || (weaponStats p /= [])
@@ -168,6 +168,19 @@ isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
    where fs = [ isVis, isWeapon, isArmour, isAC ]
 
+-- == Books
+
+-- | Is the item a book?
+isBook :: Possession -> Bool
+isBook p = bookTexts p /= []
+
+-- | Wrap a book as a possesion
+wrapBook :: Book -> Possession
+wrapBook b = defaultPossession { bookTexts = [ b ], itemCount = bookCount b }
+
+-- | Wrap a list of books as possesions
+wrapBooks :: [Book] -> [Possession]
+wrapBooks = map wrapBook
 
 instance StoryObject MagicEffect where
    name ob = effectName ob 
@@ -294,3 +307,5 @@ instance FromJSON MagicEffect where
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "reference"  .!= ""
         <*> v .:? "season" .!= NoTime
+
+
