@@ -83,6 +83,7 @@ loadSaga saga = do
 
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
+   trace ("Create directory " ++ dir) $
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
    writeObjects dir saga (characters st) >>
