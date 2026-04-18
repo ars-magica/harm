@@ -423,3 +423,20 @@ stepBooksUsed = sort . foldl (++) [] . map ( bookUsed . contractAdvancement )
 stepBooksUsed' :: [AdvancementStep] -> [Augmented Advancement]
 stepBooksUsed' = filterNothing . map stepAdvancement
 
+
+-- ** Covenant Generation
+
+covGen :: Covenant -> Covenant
+covGen cov = foldl genStep cov' as
+   where as = covenantDesign cov
+         cov' = cov { covenantDesign = [], covenantState = f $ covenantState cov }
+         f Nothing = Just defaultCovState
+         f x = x
+
+genStep :: Covenant -> CovAdvancement -> Covenant
+genStep cov adv | isNothing st = cov
+                | otherwise = cov { covenantState = Just st'
+                            , covenantPregame = aa:covenantPregame cov }
+   where st' = stepPossessions adv $ stepBooks adv $ stepCovenFolk adv $ fromJust st
+         st = covenantState cov
+         aa = Adv adv noCovAdvancement
