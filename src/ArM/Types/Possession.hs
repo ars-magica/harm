@@ -35,6 +35,7 @@ import ArM.Types.Calendar
 import ArM.Types.HarmObject
 -- import ArM.Types.Lab
 import ArM.Types.Library
+import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Helper
 
@@ -60,6 +61,7 @@ data Possession = Possession
      { itemName :: String            -- ^ Name identifying the unique item
      -- , itemKey :: HarmKey            -- ^ Key for a unique item
      , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
+     , labTexts :: [ LabText ]       -- ^ List of lab texts in the iten (scroll/book)
      , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
      , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
      , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
@@ -77,6 +79,7 @@ defaultPossession :: Possession
 defaultPossession = Possession
      { itemName = "No Name"
      , bookTexts = []
+     , labTexts = []
      , weaponStats = []
      , weapon = []
      , armourStats = []
@@ -192,7 +195,8 @@ instance FromJSON Possession where
 parseOtherPossession :: Object -> Parser Possession
 parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
-       <*> v `parseCollapsedList` "texts" 
+       <*> v `parseCollapsedList` "books" 
+       <*> v `parseCollapsedList` "labtexts" 
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
        <*> v .:? "armourStats" .!= []
@@ -230,6 +234,10 @@ instance Show Possession where
                  | otherwise = " (" ++ show (count p) ++ ")"
 
 
+data LabText = Device MagicEffect | SpellText SpellRecord
+    deriving ( Ord, Eq, Generic )
+instance ToJSON LabText
+instance FromJSON LabText 
 
 -- | A magic effect that can be instilled in an enchanted device.
 data MagicEffect = MagicEffect
