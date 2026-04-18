@@ -12,7 +12,24 @@
 --
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Possession where
+module ArM.Types.Possession ( -- * Posessions
+                              Possession(..)
+                            , defaultPossession
+                            -- * Magic and Enchantments
+                            , Enchantment(..)
+                            , MagicEffect(..)
+                            , isMagic
+                            , isVis
+                            , isAC
+                            , effectRDT
+                            , visArt
+                            -- * Weapons and Mundane Equipment
+                            , isMundaneEquipment
+                            , isWeapon
+                            , isArmour
+                            , isEquipment
+                            , isBook
+                            ) where
 
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
@@ -56,6 +73,22 @@ data Possession = Possession
      , itemDate :: SeasonTime        -- ^ Time of creation
      }
     deriving ( Ord, Eq, Generic )
+defaultPossession :: Possession 
+defaultPossession = Possession
+     { itemName = "No Name"
+     , bookTexts = []
+     , weaponStats = []
+     , weapon = []
+     , armourStats = []
+     , armour = []
+     , enchantment = MundaneItem
+     , itemDescription = []
+     , itemComment = []
+     , itemArt = Nothing
+     , acTo = Nothing
+     , itemCount = 1
+     , itemDate = NoTime
+     }
 
 data Enchantment = LesserItem MagicEffect
                  | GreaterDevice Int [ MagicEffect ]
@@ -148,23 +181,6 @@ instance Countable Possession where
    count ob = itemCount ob
    addCount ob n  = ob { itemCount = itemCount ob + n }
 
-defaultPossession :: Possession 
-defaultPossession = Possession 
-     { itemName = ""
-     -- , itemKey = NoObject
-     , bookTexts = []
-     , weaponStats = []
-     , weapon = []
-     , armourStats = []
-     , armour = []
-     , enchantment = MundaneItem
-     , itemDescription = []
-     , itemComment = []
-     , itemArt = Nothing
-     , acTo = Nothing
-     , itemCount = 1
-     , itemDate = NoTime
-     }
 instance ToJSON Possession 
 
 instance FromJSON Possession where

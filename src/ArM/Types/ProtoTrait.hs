@@ -586,7 +586,6 @@ processChar c = c
 
 processChar' :: Characteristic -> Characteristic 
 processChar' c | charBonusList c == [] = c
-     | charBonusList c == [] = c
      | otherwise = processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
        where f = abs . fst
 processChar'' :: Characteristic -> Characteristic 
