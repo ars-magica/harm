@@ -761,3 +761,6 @@ Elk's Run is a canon covenant [CI], although it was demoted to Summer in 1220 fo
     + Artes Liberales Q12
     + in Ancient Greek
     + Key: 
+
+### Possessions
+
