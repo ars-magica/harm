@@ -50,16 +50,41 @@ import ArM.Helper
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Key
 import Data.Aeson.Extra
 import Data.Aeson.Types
 import Data.Text.Lazy                            ( fromStrict, unpack )
 import Control.Monad
+import Control.Applicative ((<|>))
 import Data.Maybe
 
 -- import ArM.Debug.Trace
 
 -- |
 -- == Weapons and other Possessions
+
+data RawPossession = CompositeItem Possession 
+                   | SimpleBook Book
+                   | SimpleItem String
+    deriving (Show)
+
+toPossesssion :: RawPossession -> Possession
+toPossesssion (CompositeItem ob) = ob
+toPossesssion (SimpleBook ob) = wrapBook ob
+toPossesssion (SimpleItem st) = setName st defaultPossession
+
+
+instance ToJSON RawPossession where
+    toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
+    toJSON (SimpleBook ob) = object [(fromString "book",toJSON ob)]
+    toJSON (SimpleItem ob) = toJSON ob
+
+instance FromJSON RawPossession where
+    parseJSON (String t) = pure $ SimpleItem (unpack (fromStrict t)) 
+    parseJSON (Object v) = (CompositeItem <$> v .: "item") 
+                         <|> (SimpleBook <$> v .: "book")
+    parseJSON _ = mzero
+
 
 -- | A `Possession` is any kind of device that can be acquired, lost,
 -- given, or traded.  It is treated like inherent traits in the data

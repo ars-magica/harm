@@ -322,7 +322,7 @@ instance AdvancementLike Advancement where
      sortAdvTraits x = x { changes = sortTraits $ changes x }
      addValidation vs a = a { validation = vs ++ validation a }
      addProtoTrait vs a = a { changes = vs ++ changes a }
-     setRead db ad = ad { readBook = map (originalID db) (bookUsed ad) }
+     setRead db ad = ad { readBook = map (bookID) (bookUsed ad) }
 
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where

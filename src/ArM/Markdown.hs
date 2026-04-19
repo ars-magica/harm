@@ -798,7 +798,7 @@ instance Markdown Book where
                  , cnt
                  , lns ]
                  ++ ans ++
-                 [ OString $ "Key: " ++ bookID book ++ cp ]
+                 [ OString $ "Key: " ++ bookID book ]
          ]
          where ans = map ( f . trim ) $ bookAnnotation book
                f "" = OList []
@@ -808,9 +808,6 @@ instance Markdown Book where
                    | otherwise = OString $ "in " ++ lng
                cnt | bookCount book == 1 = OList []
                    | otherwise = OString $ show (bookCount book) ++ " copies"
-               cp = cp' (copiedFrom book)
-               cp' (Just bk) = " (" ++ bk ++")" 
-               cp' Nothing = ""
 
 instance Markdown CovenantState where
     printMD cov = OList  

@@ -17,9 +17,6 @@
 module ArM.Types.Library ( BookStats(..)
                          , Book(..)
                          , BookDB(..)
-                         , originalID
-                         , originalTome
-                         , originalKey
                          , readBookCSV
                          , isTractatus
                          , bookKey
@@ -70,23 +67,17 @@ instance Ord BookStats where
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
                 | otherwise  = compare (quality a) (quality b)
 
--- | A book may be an original manuscript, an antology,  or a copy.
--- A copy will have a `copiedFrom` value, identifying the source.
--- An antology will have a non-empty `antologyOf` field, listing
--- all the constituent works.
+-- | A book is an original manuscript.  Antologies and copies are
+-- handled as Possession objects.
 --
--- A book may have one or more `BookStat` values.  An antology
--- should not have book stats, since the book stats are properties
--- of each constituent work.  A copy may or may not have book stats.
--- If it does not, it inherits stats from the original.
+-- A book may have one or more `BookStat` values.  A copy may or may
+-- not have book stats.  If it does not, it inherits stats from the original.
 data Book = Book
      { bookID :: String
      , bookTitle :: String
      , bookStats :: [ BookStats ] -- ^ list of stats per topic covered
-     , bookCreator :: String      -- ^ Creator of the copy or manuscript
+     , bookAuthor :: String      -- ^ Creator of the copy or manuscript
      , bookDate :: SeasonTime     -- ^ Time the copy was made            
-     , antologyOf :: [ Book ]     -- ^ The book is an antology of multiple books
-     , copiedFrom :: Maybe String   -- ^ Book copied or Nothing for an original manuscript
      , bookLocation :: Maybe String     -- ^ Location where the book was written or copied
      , bookNarrative :: [ String ]   -- ^ Additional information in free text
      , bookAnnotation :: [ String ]   -- ^ Additional information in free text
@@ -103,13 +94,13 @@ instance KeyObject Book where
    harmKey = BookKey . bookID
 instance StoryObject Book where
     name book = tis ++ aus ++ dat
-     where aut = trim $ originalAuthor book
+     where aut = trim $ bookAuthor book
            aus | aut == "" = ""
                | otherwise = " by " ++ aut
-           tit = trim $ originalTitle book
+           tit = trim $ bookTitle book
            tis | tit == "" = ""
                | otherwise = "*" ++ tit ++ "*"
-           dat = " (" ++ show (originalDate book) ++ ")"
+           dat = " (" ++ show (bookDate book) ++ ")"
     narrative = bookNarrative
     comment = bookAnnotation
 instance ToJSON Book
@@ -120,8 +111,6 @@ instance FromJSON Book where
         <*> v `parseCollapsedList` "stats" 
         <*> v .:? "creator" .!= "N/A"
         <*> v .:? "date" .!= NoTime
-        <*> v  `parseCollapsedList` "antologyOf" 
-        <*> v .:? "copiedFrom" 
         <*> v .:? "location" 
         <*> v  `parseCollapsedList` "narrative" 
         <*> v  `parseCollapsedList` "comment" 
@@ -135,13 +124,6 @@ isTractatus :: Book -> Bool
 isTractatus = f . bookStats 
     where f [] = False
           f (x:_) = isJust ( quality x ) && isNothing ( bookLevel x )
-
-{-
--- | The original of a given book (constituent book in the case of an anotology)
-originalBook :: Book -> Maybe HarmKey -> Maybe Book
-originalBook b Nothing = Just $ originalTome b
-originalBook b (Just k) = fmap originalTome $ find ( (==k) . harmKey ) $ antologyOf b
--}
 
 -- | The `BookDB` class is any type wherein one may look up books by
 -- their ID.
@@ -159,31 +141,6 @@ instance (BookDB h) => BookDB [h] where
 instance BookDB Book where
    bookLookup bk k | k == bookID bk = Just bk
                    | otherwise = Nothing
-
--- | The ID used to avoid rereading of tractatus
-originalKey :: BookDB h => h -> Book -> HarmKey
-originalKey db = harmKey . originalTome db
-
--- | The ID used to avoid rereading of tractatus
-originalID :: BookDB h => h -> Book -> String
-originalID db = bookID . originalTome db
-
--- | The original of a given tome
-originalTome :: BookDB h => h -> Book -> Book
-originalTome db b
-   | isNothing b' = b
-   | otherwise = originalTome db (fromJust b')
-   where b' = join $ fmap (bookLookup db) (copiedFrom b)
-
--- | The original author of a given book
-originalTitle :: Book -> String
-originalTitle = bookTitle 
--- | The original author of a given book
-originalAuthor :: Book -> String
-originalAuthor = bookCreator 
--- | The original date the book was authored
-originalDate :: Book -> SeasonTime
-originalDate = bookDate 
 
 -- | Get the unique identifier of an original book
 bookKey :: Book -> HarmKey
@@ -233,10 +190,8 @@ defaultBook = Book
      { bookID = ""
      , bookTitle = ""
      , bookStats = [ ] 
-     , bookCreator = ""
+     , bookAuthor = ""
      , bookDate = NoTime
-     , antologyOf = []
-     , copiedFrom = Nothing
      , bookLocation = Nothing
      , bookNarrative = []
      , bookAnnotation = []
@@ -250,7 +205,7 @@ fromRawBook rb =
       defaultBook { bookID = IB.key  rb
                 , bookTitle = IB.title rb
                 , bookStats = [ makeBookStats (IB.traittype rb) (IB.trait rb) (IB.stats rb) ]
-                , bookCreator = IB.creator rb
+                , bookAuthor = IB.creator rb
                 , bookAnnotation = [ IB.comment rb ]
                 , bookCount = IB.copies rb
                 , bookLanguage = Just $ IB.language rb
