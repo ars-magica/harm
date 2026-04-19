@@ -83,7 +83,6 @@ loadSaga saga = do
 
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
-   trace ("Create directory " ++ dir) $
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
    writeObjects dir saga (characters st) >>
@@ -126,30 +125,27 @@ class (Advance t, FromJSON t) => ReadArM t  where
     readArM :: String -- ^ Filename
             -> IO (Maybe t)
     readArM fn = readObject fn >>= loadArM >>= return . prepMaybe 
-          where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
+          where prepMaybe Nothing = Nothing
                 prepMaybe (Just x) = Just $ prepare x
 
 instance ReadArM Character
 instance ReadArM Covenant where
-
-    loadArM Nothing  = trace "loadArM (Covenant) -> Nothing" $ return Nothing
+    loadArM Nothing  =  return Nothing
     loadArM (Just cov) = loadCov1 cov >>= loadCov2 >>= return . Just
 
 loadCov1 :: Covenant -> IO (Covenant)
-loadCov1 cov = trace "loadCov1" $ mapM loadCovAdvancement (futureCovAdvancement cov)
+loadCov1 cov = mapM loadCovAdvancement (futureCovAdvancement cov)
          >>= return . ( \x -> cov { futureCovAdvancement = x } )
 loadCov2 :: Covenant -> IO (Covenant)
-loadCov2 cov = trace "loadCov2" $ mapM loadCovAdvancement (covenantDesign cov)
+loadCov2 cov = mapM loadCovAdvancement (covenantDesign cov)
          >>= return . ( \x -> cov { covenantDesign = x } )
 
 loadCovAdvancement :: CovAdvancement -> IO (CovAdvancement)
-loadCovAdvancement ad = trace (show $ season ad) 
-                      $ trace (show $ bookcsv ad) 
-                      $ loadCovAdvancement' (bookcsv ad) ad 
+loadCovAdvancement ad = loadCovAdvancement' (bookcsv ad) ad 
 
 loadCovAdvancement' :: Maybe String -> CovAdvancement -> IO (CovAdvancement)
-loadCovAdvancement' Nothing ad = trace ( "No books to load" ) $ return ad
-loadCovAdvancement' (Just fn) ad = trace ("bookcsv load "++fn) $ readBookCSV fn 
+loadCovAdvancement' Nothing ad = return ad
+loadCovAdvancement' (Just fn) ad = readBookCSV fn 
       >>= return . ( \ r -> ad { acquired' = acquired' ad ++ r } ) . wrapBooks
 
 -- |

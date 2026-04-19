@@ -320,7 +320,7 @@ acMD = f . acTo
           f (Just s) = OString ( "Arcane Connection to " ++ s )
 
 instance Markdown Possession  where
-   printMD ob = OList [ OString $ pName ob, trace "pMD" $ pMD ob ]
+   printMD ob = OList [ OString $ pName ob, pMD ob ]
    -- printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
    --            | otherwise = OString $ pName ob
 
@@ -793,7 +793,7 @@ covconceptHelper cc = filterNothing
 
 instance Markdown Book where
     printMD book = OList  
-         [ OString $ trace ( "Book MD " ++ name book ) $ name book
+         [ OString $ name book
          , OList $ [ OString $ showStrList $ map show (bookStats book) 
                  , cnt
                  , lns ]
