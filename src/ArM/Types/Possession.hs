@@ -176,7 +176,11 @@ isBook p = bookTexts p /= []
 
 -- | Wrap a book as a possesion
 wrapBook :: Book -> Possession
-wrapBook b = defaultPossession { bookTexts = [ b ], itemCount = bookCount b }
+wrapBook b = defaultPossession 
+             { bookTexts = [ b ]
+             , itemCount = bookCount b
+             , itemName = bookTitle b
+             }
 
 -- | Wrap a list of books as possesions
 wrapBooks :: [Book] -> [Possession]
