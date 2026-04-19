@@ -8,6 +8,8 @@ concept:
   name: Elk's Run
   tribunal: Hibernia
 history: []
+- design:
+  - bookcsv: Data/books.csv
 plan:
 - acquired:
     bookID: KalliasQ12Finesse
@@ -288,5 +290,3 @@ plan:
   - narrative:
     - Continue initiation of Deirbhile
     title: Heirs to Merlin Charm Crafting, Adventure Part III
-state:
-  librarycsv: Data/books.csv
