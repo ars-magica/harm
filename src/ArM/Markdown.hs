@@ -29,6 +29,7 @@ import ArM.Char.Character
 import ArM.Types.ProtoTrait
 import ArM.Char.Combat
 import ArM.Cov.Saga
+import ArM.Types.Possession
 import ArM.Types.Covenant
 import ArM.Types.Library
 import ArM.Types.Saga
@@ -283,12 +284,15 @@ listPossessions ps = OList
       , (pList ms)
       , OString "Equipment"
       , (pList es)
+      , OString "Books"
+      , (pList bk)
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
          as = filter isArmour ps
          acs = filter isAC ps
          ms = filter isMagic ps
+         bk = filter isBook ps
          es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
@@ -737,7 +741,8 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Possessions"
         , OString ""
-        , OList $ map indentOList $ map printMD $ possessions cov
+        -- , OList $ map indentOList $ map printMD $ possessions cov
+        , indentOList $ listPossessions $ possessions cov
         ]
     printSheetMD saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
@@ -750,7 +755,8 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Possessions"
         , OString ""
-        , OList $ map indentOList $ map printMD $ possessions cov
+        -- , OList $ map indentOList $ map printMD $ possessions cov
+        , indentOList $ listPossessions $ possessions cov
         ]
 
 -- |
