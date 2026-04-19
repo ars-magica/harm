@@ -22,6 +22,7 @@ module Data.OList ( OList(..)
                   , stringMD
                   , writeOListH
                   , writeOList
+                  , isEmptyOList
        ) where
 
 import System.IO as IO -- for file IO
@@ -76,6 +77,11 @@ nonemptyStringMD st = OString st
 stringMD :: Maybe String -> OList
 stringMD Nothing = OList []
 stringMD (Just x) = OString x
+
+isEmptyOList :: OList -> Bool
+isEmptyOList (OList []) = True
+isEmptyOList (OString "") = True
+isEmptyOList _ = False
 
 
 -- | 

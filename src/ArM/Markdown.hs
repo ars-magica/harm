@@ -253,8 +253,10 @@ instance Markdown Enchantment  where
    printMD MundaneItem = OString "Mundane Item" 
 
 enchantedMD :: Possession -> Enchantment -> OList
-enchantedMD ob (LesserItem eff) = OList [ OString $ pName ob ++ tf ++ "lesser enchanted device"
-                          , f $ printMD eff ]
+enchantedMD ob MundaneItem = OList []
+enchantedMD ob (LesserItem eff) = OList 
+         [ OString $ pName ob ++ tf ++ "lesser enchanted device"
+                   , f $ printMD eff ]
    where f (OList xs) = foldOList $ OList $ tail xs
          f os = os
          tf = " " ++ effectTeFo eff ++ " "
@@ -266,23 +268,73 @@ pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
 
+
+pMDlist :: [ Possession -> OList ]
+pMDlist = [ bookMD, labtextMD, weaponMD, armourMD, visMD, acMD ]
+
+weaponMD :: Possession -> OList 
+weaponMD ob | isWeapon ob = OList
+                  [ OString "Weapon Stats"
+                  , OList $ map OString $ weapon ob
+                  , OList $ map ( OString . show ) $ weaponStats ob
+                  ] 
+            | otherwise = OList []
+armourMD :: Possession -> OList 
+armourMD ob | isArmour ob = OList
+                  [ OString "Armour Stats"
+                  , OList $ map OString $ armour ob
+                  , OList $ map ( OString . show ) $ armourStats ob
+                  ] 
+            | otherwise = OList []
+
+pMD :: Possession -> OList
+pMD ob = OList $ filter isEmptyOList $ map ($ob) pMDlist
+
+labtextMD :: Possession -> OList
+labtextMD ob | labTexts  ob == []  =  OList []
+             | otherwise = OList [ OString "Lab Texts" 
+                             , OList $ map f (labTexts ob) ]
+         where f (SpellText x) = OList
+                         [ OString $ spellRecordName x
+                         , coreSpellRecordMD (Just x) ]
+               f (Device x) = printMD x
+
+visMD :: Possession -> OList
+visMD ob | isNothing (itemArt ob) = OList []
+         | otherwise = OString ( s ++ " vis: " ++ show p ++ " pawns" )
+         where s = fromJust $ itemArt ob
+               p = itemCount ob
+
+acMD :: Possession -> OList
+acMD = f . acTo
+    where f Nothing = OList []
+          f (Just s) = OString ( "Arcane Connection to " ++ s )
+
 instance Markdown Possession  where
    printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
               | otherwise = OString $ pName ob
 
-{=
-possessionMD :: Possession -> OList
-possessionMD ob OLIst
-          [ OString $ pName ob, OList $ pList pls ob ]
 
-pls = [ pListMagic, pListBook, pListLabText, pListVis ]
-pList :: Possession -> [Possession -> Maybe OList] -> [Maybe OList]
-pList ob = map ($ob)
-pListMagic ob | isMagic ob = Just $ enchantedMD ob (enchantment ob)
-              | otherwise = Nothing
+bookMD :: Possession -> OList
+bookMD = f . bookTexts
+      where f [] = OList []
+            f [x] = printMD x
+            f xs = OList [ OString "Antology of"
+                         , OList $ map printMD xs
+                         ]
 
--}
-
+-- Cases:
+-- A. Library
+--     1. Monography
+--     2. Monography with lab texts
+--     3. Antology
+--     4. Single lab text
+--     5. Collection of lab texts
+-- B. Magic Item
+--     1. Lesser
+--     2. Charged
+--     3. Greater
+--     4. Talisman
 
 
 listPossessions :: [ Possession ] -> OList

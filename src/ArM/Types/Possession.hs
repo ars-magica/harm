@@ -35,6 +35,7 @@ module ArM.Types.Possession ( -- * Posessions
                             , isEquipment
                             -- * Books
                             , isBook
+                            , LabText(..)
                             , wrapBooks
                             ) where
 
@@ -173,6 +174,10 @@ isEquipment p = not $ foldl (||) False [ f p | f <- fs ]
 -- | Is the item a book?
 isBook :: Possession -> Bool
 isBook p = bookTexts p /= []
+
+-- | Does the item contain lab texts?
+isLabText :: Possession -> Bool
+isLabText p = labTexts p /= []
 
 -- | Wrap a book as a possesion
 wrapBook :: Book -> Possession
