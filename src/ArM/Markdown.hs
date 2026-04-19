@@ -268,7 +268,22 @@ pName ob = name ob ++ cnt
 
 instance Markdown Possession  where
    printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
-              | otherwise = OString $ show ob
+              | otherwise = OString $ pName ob
+
+{=
+possessionMD :: Possession -> OList
+possessionMD ob OLIst
+          [ OString $ pName ob, OList $ pList pls ob ]
+
+pls = [ pListMagic, pListBook, pListLabText, pListVis ]
+pList :: Possession -> [Possession -> Maybe OList] -> [Maybe OList]
+pList ob = map ($ob)
+pListMagic ob | isMagic ob = Just $ enchantedMD ob (enchantment ob)
+              | otherwise = Nothing
+
+-}
+
+
 
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
@@ -282,10 +297,12 @@ listPossessions ps = OList
       , (acList acs)
       , OString "Magic Items"
       , (pList ms)
-      , OString "Equipment"
-      , (pList es)
       , OString "Books"
       , (pList bk)
+      -- Lab Texts
+      , OString "Equipment"
+      , (pList es)
+      -- Silver
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
