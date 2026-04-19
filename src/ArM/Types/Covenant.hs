@@ -127,10 +127,6 @@ data CovenantState = CovenantState
             -- ^ The covenant library.  This should be deprecated and
             -- replaced by a function extracting books from possessions,
             -- since Book is a special case of Possession.
-         , librarycsv :: Maybe String    
-            -- ^ File to be loaded into the library
-            -- This should only be used temporarily, when loading the state
-            -- from JSON.
          , possessions :: [ Possession ]
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
@@ -141,7 +137,6 @@ defaultCovState = CovenantState
          { covTime = GameStart
          , covenFolkID = []
          , library = []
-         , librarycsv = Nothing
          , possessions = []
          , labs = []
        }  
@@ -153,7 +148,6 @@ instance FromJSON CovenantState where
         <$> v .:? "season" .!= GameStart
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
         <*> v `parseCollapsedList` "library"
-        <*> v .:? "librarycsv"
         <*> v `parseCollapsedList` "possessions"
         <*> v `parseCollapsedList` "labs"
 
