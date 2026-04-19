@@ -35,6 +35,7 @@ module ArM.Types.Possession ( -- * Posessions
                             , isEquipment
                             -- * Books
                             , isBook
+                            , isLabText
                             , LabText(..)
                             , wrapBooks
                             ) where
@@ -167,7 +168,7 @@ isMundaneEquipment p = isEquipment p && (not . isMagic) p
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isVis, isWeapon, isArmour, isAC ]
+   where fs = [ isVis, isWeapon, isArmour, isAC, isBook ]
 
 -- == Books
 

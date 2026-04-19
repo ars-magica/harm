@@ -287,8 +287,17 @@ armourMD ob | isArmour ob = OList
                   ] 
             | otherwise = OList []
 
+-- | Complete description of a composite item.
+-- This is awkward for most items, particularly because names and
+-- titles tend to be duplicated, once for the `Possession` object 
+-- and once for the constituent object, but it is necessary for
+-- complex items such as enchanted books, magic swords, as well as
+-- antologies.
 pMD :: Possession -> OList
-pMD ob = OList $ filter isEmptyOList $ map ($ob) pMDlist
+pMD ob = pMDgen ob pMDlist
+
+pMDgen :: Possession -> [Possession -> OList] -> OList
+pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ob) 
 
 labtextMD :: Possession -> OList
 labtextMD ob | labTexts  ob == []  =  OList []
@@ -311,16 +320,16 @@ acMD = f . acTo
           f (Just s) = OString ( "Arcane Connection to " ++ s )
 
 instance Markdown Possession  where
-   printMD ob = OList [ OString $ pName ob , pMD ob ]
+   printMD ob = OList [ OString $ pName ob, trace "pMD" $ pMD ob ]
    -- printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
    --            | otherwise = OString $ pName ob
 
 
 bookMD :: Possession -> OList
-bookMD = f . bookTexts
-      where f [] = OList []
+bookMD =  f . bookTexts
+      where f [] =  OList []
             f [x] = printMD x
-            f xs = OList [ OString "Antology of"
+            f xs =  OList [ OString "Antology of"
                          , OList $ map printMD xs
                          ]
 
@@ -352,7 +361,8 @@ listPossessions ps = OList
       , (pList ms)
       , OString "Books"
       , (pList bk)
-      -- Lab Texts
+      , OString "Books"
+      , (pList ls)
       , OString "Equipment"
       , (pList es)
       -- Silver
@@ -363,6 +373,7 @@ listPossessions ps = OList
          acs = filter isAC ps
          ms = filter isMagic ps
          bk = filter isBook ps
+         ls = filter isLabText ps
          es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
@@ -782,7 +793,7 @@ covconceptHelper cc = filterNothing
 
 instance Markdown Book where
     printMD book = OList  
-         [ OString $ name book
+         [ OString $ trace ( "Book MD " ++ name book ) $ name book
          , OList $ [ OString $ showStrList $ map show (bookStats book) 
                  , cnt
                  , lns ]
