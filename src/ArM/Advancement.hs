@@ -255,9 +255,7 @@ instance Advance Covenant where
    nextAdvancement c = f $ futureCovAdvancement c
        where f [] = NoTime
              f (x:_) = caSeason x
-   prepare x = f x
-        where f y | isNothing (covenantState y) = y { covenantState = Just defaultCovState }
-                  | otherwise = y 
+   prepare = covGen
 
 -- * Book Management
 
