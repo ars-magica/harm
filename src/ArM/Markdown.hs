@@ -311,8 +311,10 @@ acMD = f . acTo
           f (Just s) = OString ( "Arcane Connection to " ++ s )
 
 instance Markdown Possession  where
-   printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
-              | otherwise = OString $ pName ob
+   printMD ob = [ OString $ pName ob
+                 , pMD ob ]
+   -- printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
+   --            | otherwise = OString $ pName ob
 
 
 bookMD :: Possession -> OList
