@@ -115,7 +115,10 @@ writeSaga saga = do
 
 -- ** Read Character and Covenant Data
 
+-- | The `ReadArM` class wraps loading of an object, loading of constituent
+-- files, and pregame advancement into one operaion.
 class (Advance t, FromJSON t) => ReadArM t  where
+    -- | Load constituent files, such as library CSV files for Covenants.
     loadArM :: Maybe t -> IO (Maybe t)
     loadArM = return
 
