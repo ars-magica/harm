@@ -361,7 +361,7 @@ listPossessions ps = OList
       , (pList ms)
       , OString "Books"
       , (pList bk)
-      , OString "Books"
+      , OString "Lab texts"
       , (pList ls)
       , OString "Equipment"
       , (pList es)
