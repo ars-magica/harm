@@ -142,23 +142,10 @@ applyStep (CharStep c (Just aa)) = (CharStep c' (Just a'))
 applyStep (CovStep c Nothing) = (CovStep c Nothing) 
 applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
      where aa = contractAdvancement aa'
-           c' = c { covenantState = Just st' }
-           st' = stepPossessions aa $ stepBooks aa $ stepCovenFolk aa $ fs st
+           c' = c { covenantState = Just $ stepCovState (fs st) aa }
            fs x = x { covTime = caSeason aa }
            st = fromMaybe defaultCovState $ covenantState c
 
-stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
-stepCovenFolk aa st = st { covenFolkID = cid }
-   where cid1 = sort $ joining aa ++ covenFolkID st 
-         cid = cid1 -= ( sort $ leaving aa )
-stepBooks :: CovAdvancement -> CovenantState -> CovenantState
-stepBooks aa st = st { library = bid }
-   where bid1 = sort $ acquired aa ++ library st 
-         bid = bid1 -= ( sort $ lost aa )
-stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
-stepPossessions aa st = st { possessions = bid }
-   where bid1 = sort $ acquired' aa ++ possessions st 
-         bid = bid1 -= ( sort $ lost' aa )
 -- |
 -- Get the next advancements, preparing for joint advancement
 nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -423,20 +410,3 @@ stepBooksUsed = sort . foldl (++) [] . map ( bookUsed . contractAdvancement )
 stepBooksUsed' :: [AdvancementStep] -> [Augmented Advancement]
 stepBooksUsed' = filterNothing . map stepAdvancement
 
-
--- ** Covenant Generation
-
-covGen :: Covenant -> Covenant
-covGen cov = foldl genStep cov' as
-   where as = covenantDesign cov
-         cov' = cov { covenantDesign = [], covenantState = f $ covenantState cov }
-         f Nothing = Just defaultCovState
-         f x = x
-
-genStep :: Covenant -> CovAdvancement -> Covenant
-genStep cov adv | isNothing st = cov
-                | otherwise = cov { covenantState = Just st'
-                            , covenantPregame = aa:covenantPregame cov }
-   where st' = stepPossessions adv $ stepBooks adv $ stepCovenFolk adv $ fromJust st
-         st = covenantState cov
-         aa = Adv adv noCovAdvancement

@@ -8,10 +8,14 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Types to represent Characters and functions for advancement.
+-- Description :  Types to represent Covenants and functions for advancement.
 --
--- This module contains types to process characters, including 
--- persistence in JSON and advancement.
+-- Covenants use the `CovAdvancement` type from `ArM.Types.Advancement` with
+-- some code shared with characters.  The code to advance a single step, as
+-- well as the `covGen` function advancing to Game Start, are included here.
+--
+-- InGame advancement must be done jointly for all characters and covenants,
+-- and this is handled by the `ArM.Advancement` module.
 --
 -----------------------------------------------------------------------------
 module ArM.Types.Covenant ( 
@@ -23,12 +27,16 @@ module ArM.Types.Covenant (
            -- * Convenience Functions
            , findCov
            , covenant
+           -- * Covenant Generation and Advancement
+           , covGen
+           , stepCovState
            ) where
 
 import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Maybe
+import Data.List 
 import Control.Monad
 
 import ArM.Types.ProtoTrait
@@ -173,3 +181,32 @@ hasMember cov ch = cid `elem` chs
 covenant :: CharacterState -> Maybe HarmKey
 covenant = fmap CovenantKey . memberOf 
 
+
+-- ** Covenant Generation and Advancement
+
+covGen :: Covenant -> Covenant
+covGen cov = foldl genStep cov' as
+   where as = covenantDesign cov
+         cov' = cov { covenantDesign = [] }
+
+stepCovState :: CovenantState -> CovAdvancement -> CovenantState
+stepCovState st adv = stepPossessions adv $ stepBooks adv $ stepCovenFolk adv st
+genStep :: Covenant -> CovAdvancement -> Covenant
+genStep cov adv = cov { covenantState = Just st'
+                            , covenantPregame = aa:covenantPregame cov }
+   where st' = stepCovState st adv
+         st = fromMaybe defaultCovState $ covenantState cov
+         aa = Adv adv noCovAdvancement
+
+stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
+stepCovenFolk aa st = st { covenFolkID = cid }
+   where cid1 = sort $ joining aa ++ covenFolkID st 
+         cid = cid1 -= ( sort $ leaving aa )
+stepBooks :: CovAdvancement -> CovenantState -> CovenantState
+stepBooks aa st = st { library = bid }
+   where bid1 = sort $ acquired aa ++ library st 
+         bid = bid1 -= ( sort $ lost aa )
+stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
+stepPossessions aa st = st { possessions = bid }
+   where bid1 = sort $ acquired' aa ++ possessions st 
+         bid = bid1 -= ( sort $ lost' aa )
