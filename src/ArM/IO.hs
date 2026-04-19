@@ -126,19 +126,7 @@ readArM fn = readObject fn >>= return . prepMaybe
 
 loadCovenant :: Maybe Covenant -> IO (Maybe Covenant)
 loadCovenant Nothing  = trace "loadCovenant -> Nothing" $ return Nothing
-loadCovenant (Just c) = loadCovenant'' c >>= loadCovenant' >>= return . Just
-
-loadCovenant'' :: Covenant -> IO (Covenant)
-loadCovenant'' cov
-    | isNothing st' = trace "loadCovenant -> Nothing to load" $ return cov
-    | isNothing fn = trace "loadCovenant -> Nothing to load" $ return cov
-    | otherwise = readBookCSV (fromJust fn) >>=
-       ( \ lib -> return $ cov { covenantState = Just $ st { library = lib } } )
-       where fn = librarycsv st
-             st = fromJust st'
-             st' = covenantState cov
-loadCovenant' :: Covenant -> IO (Covenant)
-loadCovenant' cov = loadCov1 cov >>= loadCov2
+loadCovenant (Just cov) = loadCov1 cov >>= loadCov2 >>= return . Just
 
 loadCov1 :: Covenant -> IO (Covenant)
 loadCov1 cov = mapM loadCovAdvancement (futureCovAdvancement cov)
@@ -150,10 +138,9 @@ loadCov2 cov = mapM loadCovAdvancement (covenantDesign cov)
 loadCovAdvancement :: CovAdvancement -> IO (CovAdvancement)
 loadCovAdvancement ad = loadCovAdvancement' (bookcsv ad) ad 
 
-
 loadCovAdvancement' :: Maybe String -> CovAdvancement -> IO (CovAdvancement)
 loadCovAdvancement' Nothing ad = return ad
-loadCovAdvancement' (Just fn) ad = trace ("load "++fn) $ readBookCSV fn 
+loadCovAdvancement' (Just fn) ad = trace ("bookcsv load "++fn) $ readBookCSV fn 
       >>= return . ( \ r -> ad { acquired' = acquired' ad ++ r } ) . wrapBooks
 
 -- |
