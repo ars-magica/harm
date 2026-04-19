@@ -1,0 +1,328 @@
+charID: Eogan mac Eogan
+concept:
+  appearance: Slender, charming guy with dark hair. The clothes are clean, but smell
+    of dog.
+  born: 1230
+  charData:
+    Background: "Born after his fathers death in Winter 1230. Astri\xF0 read a death\
+      \ prophecy for the newborn Eogan at the fair in 1230.  The covenant has always\
+      \ treated him well, in honour of his father. However, he cannot free himself\
+      \ from his father's fate and has never been able to trust the magi. His mother\
+      \ remarried and he has a couple of half-siblings in the village He has always\
+      \ found himself a bit of an outsider, but found refuge at the kennel when Una\
+      \ was not there. Seeing his aptitude with dogs, Una's mundane assistants trained\
+      \ him."
+    Prophecy: "*He shall live like his father; die like his father.*  (Astri\xF0.\
+      \ spoken at the Autumn fair 1230)"
+    Size: 0
+  charGlance: {}
+  charType: Companion
+  concept: Kennel Master
+  name: Eogan mac Eogan
+  player: George
+  portrait: eogan.jpeg
+  quirk: Avoids danger, particularly heights.
+futureAdvancement:
+- changes:
+  - ability: Faerie Lore
+    spec: Dark Fae
+    xp: 5
+  - ability: Magic Lore
+    spec: Ancient Myth
+    xp: 5
+  - ability: Animal Ken
+    xp: 3
+  - confidence: Confidence
+    points: 2
+  comment: SQ10 + Independent Study.
+  mode: Adventure
+  narrative:
+  - Eogan was approached by a man from a village half a day away, needing help with
+    a wild horse with wounds that would not heal.  The horse was chased by three dark
+    fey, a rabbit, a ram, and a wolf.  They meet a magic owl in a tree with an ancient
+    hole, saying that the hole was made by the horn of a unicorn who since lost the
+    horn to someone who made it into a weapon.  On the second visit, the tree is gone.  Tiou
+    and Sean recover the horn from a mound which also contains an Hermetic sanctum.  Eogan
+    stays out of the mound, for fear of the magi's dangers.  The aura there is faerie.
+  - 'Eogan brings: horse, spear, bow, four hunting dogs, standard grog pack.'
+  season: Summer 1254
+  sourceQuality: 10
+- changes:
+  - ability: Animal Handling
+    xp: 2
+  comment:
+  - Assume that Eogan has four each of greyhounds. lymers, and mastiffs already loyal
+    to him.  He can train these further from canon stats [LoM:51].
+  - Eogans taming total is 10.
+  - Each dog has zero confidence and thus an effective might of 1.
+  mode: Exposure Taming
+  narrative: Train three lymers and two greyhounds to Loyal +1.
+  season: Autumn 1254
+  sourceQuality: 2
+- changes:
+  - ability: Hunt
+    xp: 2
+  mode: Exposure Training
+  narrative: Train one lymer in hunt +8 xp.
+  season: Winter 1255
+  sourceQuality: 2
+- changes:
+  - ability: Hermes Lore
+    xp: 5
+  - ability: Carouse
+    xp: 5
+  - ability: Faerie Lore
+    xp: 1
+  - confidence: Confidence
+    points: 1
+  mode: Adventure
+  narrative: Eogan discussed horse training and possible trade with the visitors from
+    Lambaird.
+  season: Spring 1255
+  sourceQuality: 8
+- changes:
+  - ability: Hunt
+    xp: 2
+  mode: Exposure Training
+  narrative: Train second lymer in hunt +8 xp.
+  season: Summer 1255
+  sourceQuality: 2
+- changes:
+  - ability: Animal Handling
+    xp: 2
+  comment:
+  - The mastiff has confidence 1 and thus effective might 3. The combined might is
+    5.
+  mode: Exposure Taming
+  narrative: Train two lymers to Loyal +2, and one mastiff to +1.
+  season: Autumn 1255
+  sourceQuality: 2
+- changes:
+  - ability: Hunt
+    xp: 2
+  mode: Exposure Training
+  narrative: Train one lymer in hunt +8 xp (+16 total).
+  season: Winter 1256
+  sourceQuality: 2
+- changes:
+  - ability: Hunt
+    xp: 2
+  comment:
+  - Lymer 1-2. Loyal +2.  Hunt 16xp.
+  - Lymer 3. Loyal +1.
+  - Greyhound 1-2. Loyal +1.
+  - Mastiff 1. Loyal +1.
+  mode: Exposure Training
+  narrative: Train second lymer in hunt +8 xp (+16 total).
+  season: Spring 1256
+  sourceQuality: 2
+- changes:
+  - ability: Storytelling
+    xp: 6
+  mode: Practice
+  season: Summer 1256
+  sourceQuality: 4
+- changes:
+  - ability: Survival
+    xp: 6
+  mode: Practice
+  season: Autumn 1256
+  sourceQuality: 4
+- changes:
+  - ability: Hunt
+    xp: 2
+  mode: Exposure Training
+  narrative: Train one lymer in hunt +8 xp (+24 total).
+  season: Winter 1257
+  sourceQuality: 2
+- changes:
+  - ability: Hunt
+    xp: 2
+  comment:
+  - Lymer 1. Loyal +2.  Hunt 32xp.
+  - Lymer 2. Loyal +2.  Hunt 16xp.
+  - Lymer 3. Loyal +1.
+  - Greyhound 1-2. Loyal +1.
+  - Mastiff 1. Loyal +1.
+  mode: Exposure Training
+  narrative: Train one lymer in hunt +8 xp (+32 total).
+  season: Spring 1257
+  sourceQuality: 2
+- changes:
+  - ability: Survival
+    xp: 6
+  mode: Practice
+  season: Summer 1257
+  sourceQuality: 4
+- changes:
+  - ability: Survival
+    xp: 6
+  mode: Practice
+  season: Autumn 1257
+  sourceQuality: 4
+- changes:
+  - ability: Hunt
+    xp: 2
+  mode: Exposure Training
+  narrative: Train second lymer in hunt +8 xp (+24 total).
+  season: Winter 1258
+  sourceQuality: 2
+- changes:
+  - ability: Hunt
+    xp: 2
+  comment:
+  - Lymer 1-2. Loyal +2.  Hunt 32xp.
+  - Lymer 3. Loyal +1.
+  - Greyhound 1-2. Loyal +1.
+  - Mastiff 1. Loyal +1.
+  mode: Exposure Training
+  narrative: Train second lymer in hunt +8 xp (+32 total).
+  season: Spring 1258
+  sourceQuality: 2
+pregameAdvancement:
+- changes:
+  - ability: 'Native Language: Irish'
+    spec: Munster
+    xp: 75
+  - cost: 1
+    virtue: Warrior
+  - cost: 1
+    virtue: Independent Study
+  - cost: 1
+    detail: Animal Handling
+    virtue: Affinity with (ability)
+  - cost: 1
+    detail: Animal Handling
+    virtue: Puissant (ability)
+  - cost: 1
+    virtue: Unaging
+  - cost: 1
+    virtue: Animal Ken
+  - cost: 1
+    virtue: Alluring to Magical Beings
+  - cost: 3
+    virtue: Death Prophecy
+  - cost: 0
+    virtue: Covenfolk
+  - cost: -3
+    flaw: Black Sheep at the Covenant
+  - locale: Covenant and allies
+    reputation: Disloyal
+    xp: 15
+  - cost: -3
+    detail: train the greatest hounds of Ireland
+    flaw: Ambitious
+  - cost: -1
+    detail: for Dogs
+    flaw: Weakness
+  - cost: -1
+    flaw: 'Lesser Malediction: Vertigo'
+  - cost: -1
+    detail: for Letters
+    flaw: Ability Block
+  - cost: -1
+    flaw: Uncertain Faith
+  - ptrait: Obedient
+    score: -3
+  - ptrait: Loyal
+    score: 1
+  - ptrait: Uncertain Faith
+    score: 1
+  mode: Virtues and Flaws
+- changes:
+  - characteristic: Int
+    score: 2
+  - characteristic: Per
+    score: 0
+  - characteristic: Pre
+    score: 3
+  - characteristic: Com
+    score: 1
+  - characteristic: Str
+    score: -1
+  - characteristic: Sta
+    score: 1
+  - characteristic: Dex
+    score: 0
+  - characteristic: Qik
+    score: -2
+  mode: Characteristics
+- changes:
+  - ability: Stealth
+    spec: Hiding
+    xp: 5
+  - ability: Awareness
+    spec: Good ears
+    xp: 5
+  - ability: Survival
+    spec: Hills
+    xp: 5
+  - ability: Munster Lore
+    spec: Outback
+    xp: 5
+  - ability: Covenant Lore
+    spec: Hierarchies
+    xp: 15
+  - ability: Brawl
+    spec: Dirty fighting
+    xp: 5
+  - ability: Charm
+    spec: Animals
+    xp: 5
+  mode: Early Childhood
+- changes:
+  - ability: Animal Handling
+    spec: Dogs
+    xp: 50
+  - ability: Animal Ken
+    spec: Canine
+    xp: 45
+  - ability: Athletics
+    spec: obstacle race
+    xp: 15
+  - ability: Bargain
+    spec: Livestock
+    xp: 15
+  - ability: Guile
+    spec: Fast talk
+    xp: 5
+  - ability: Ride
+    spec: Horse training
+    xp: 50
+  - ability: Hunt
+    spec: with dogs
+    xp: 75
+  - ability: Leadership
+    spec: in the field
+    xp: 15
+  - ability: Single Weapon
+    spec: Shortspear
+    xp: 5
+  - ability: Bows
+    spec: Shortbow
+    xp: 50
+  - ability: Survival
+    spec: Hills
+    xp: 10
+  - possession:
+      weapon:
+      - Shortbow
+  - possession:
+      weapon:
+      - Shortspear
+  - possession:
+      weapon:
+      - Round Shield
+  - combat:
+      weapon: Fist
+  - combat:
+      weapon: Shortspear
+  - combat:
+      weapon: Shortbow
+  - combat:
+      ability: Single Weapon
+      name: Spear and Shield
+      shield: Round Shield
+      weapon: Shortspear
+  mode: Later Life
+  years: 19

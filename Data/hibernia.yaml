@@ -1,0 +1,23 @@
+armourFile: Data/armour.csv
+characterFiles:
+- Data/cieran.yaml
+- Data/eogan.yaml
+- Data/tessa.yaml
+- Data/rogue.yaml
+covenantFiles:
+- Data/elksrun.yaml
+description:
+- While the saga is being played, this site is incomplete, and serves mainly as a
+  test case for the hArM software.
+rootDirectory: pages/
+seasons:
+- Summer 1254
+- Winter 1255
+- Winter 1256
+- Winter 1257
+- Winter 1258
+- Winter 1259
+- Winter 1264
+spellFile: Data/spells.csv
+title: Hibernia Saga (Contested Lands)
+weaponFile: Data/weapons.csv

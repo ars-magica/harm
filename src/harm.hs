@@ -43,7 +43,7 @@ data Options = Options
 } deriving (Show)
 defaultOptions :: Options
 defaultOptions = Options 
-  { sagaFile = Just "Data/hibernia.json"
+  { sagaFile = Just "Data/hibernia.yaml"
   , outFile  = Nothing
   , jsonFile  = Nothing
   , spellDBFile = Nothing
