@@ -1,4 +1,4 @@
------------------------------------------------------------------------------ -- |
+---------------------------------------------------------------------------- -- |
 -- Module      :  ArM.IO
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
@@ -26,6 +26,7 @@ import System.Directory
 
 import ArM.Advancement
 import ArM.Markdown
+import ArM.Types.Character
 import ArM.Types.Covenant
 import ArM.Types.Saga
 import ArM.Types.Library
@@ -65,8 +66,7 @@ loadSaga saga = do
    wdb <- readDB $ weaponFile saga
    adb <- readDB $ armourFile saga
    cs <- mapM readArM $ characterFiles saga
-   cov <- ( mapM readArM ( covenantFiles saga )
-            >>= mapM loadCovenant )
+   cov <- mapM readArM ( covenantFiles saga )
    return
      $ Saga { sagaFile = saga
            , sagaState = SagaState
@@ -115,31 +115,37 @@ writeSaga saga = do
 
 -- ** Read Character and Covenant Data
 
--- | Read a character from JSON.  Return Maybe Character
-readArM :: (Advance c, FromJSON c)
-        => String -- ^ Filename
-        -> IO (Maybe c)
-readArM fn = readObject fn >>= return . prepMaybe 
-      where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
-            prepMaybe (Just x) = Just $ prepare x
+class (Advance t, FromJSON t) => ReadArM t  where
+    loadArM :: Maybe t -> IO (Maybe t)
+    loadArM = return
 
+    -- | Read a character from JSON.  Return Maybe Character
+    readArM :: String -- ^ Filename
+            -> IO (Maybe t)
+    readArM fn = readObject fn >>= loadArM >>= return . prepMaybe 
+          where prepMaybe Nothing = trace ("Failed to read "++fn) Nothing
+                prepMaybe (Just x) = Just $ prepare x
 
-loadCovenant :: Maybe Covenant -> IO (Maybe Covenant)
-loadCovenant Nothing  = trace "loadCovenant -> Nothing" $ return Nothing
-loadCovenant (Just cov) = loadCov1 cov >>= loadCov2 >>= return . Just
+instance ReadArM Character
+instance ReadArM Covenant where
+
+    loadArM Nothing  = trace "loadArM (Covenant) -> Nothing" $ return Nothing
+    loadArM (Just cov) = loadCov1 cov >>= loadCov2 >>= return . Just
 
 loadCov1 :: Covenant -> IO (Covenant)
-loadCov1 cov = mapM loadCovAdvancement (futureCovAdvancement cov)
+loadCov1 cov = trace "loadCov1" $ mapM loadCovAdvancement (futureCovAdvancement cov)
          >>= return . ( \x -> cov { futureCovAdvancement = x } )
 loadCov2 :: Covenant -> IO (Covenant)
-loadCov2 cov = mapM loadCovAdvancement (covenantDesign cov)
+loadCov2 cov = trace "loadCov2" $ mapM loadCovAdvancement (covenantDesign cov)
          >>= return . ( \x -> cov { covenantDesign = x } )
 
 loadCovAdvancement :: CovAdvancement -> IO (CovAdvancement)
-loadCovAdvancement ad = loadCovAdvancement' (bookcsv ad) ad 
+loadCovAdvancement ad = trace (show $ season ad) 
+                      $ trace (show $ bookcsv ad) 
+                      $ loadCovAdvancement' (bookcsv ad) ad 
 
 loadCovAdvancement' :: Maybe String -> CovAdvancement -> IO (CovAdvancement)
-loadCovAdvancement' Nothing ad = return ad
+loadCovAdvancement' Nothing ad = trace ( "No books to load" ) $ return ad
 loadCovAdvancement' (Just fn) ad = trace ("bookcsv load "++fn) $ readBookCSV fn 
       >>= return . ( \ r -> ad { acquired' = acquired' ad ++ r } ) . wrapBooks
 

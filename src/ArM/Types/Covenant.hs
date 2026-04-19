@@ -39,6 +39,8 @@ import Data.Maybe
 import Data.List 
 import Control.Monad
 
+import ArM.Debug.Trace
+
 import ArM.Types.ProtoTrait
 import ArM.Types.Library
 import ArM.Types.Advancement
@@ -192,7 +194,7 @@ stepCovState st adv = stepPossessions adv $ stepBooks adv $ stepCovenFolk adv st
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.
 genStep :: Covenant -> CovAdvancement -> Covenant
-genStep cov adv = cov { covenantState = Just st'
+genStep cov adv = trace "genStep" $ cov { covenantState = Just st'
                             , covenantPregame = aa:covenantPregame cov }
    where st' = stepCovState st adv
          st = fromMaybe defaultCovState $ covenantState cov
