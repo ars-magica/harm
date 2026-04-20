@@ -32,6 +32,9 @@ tags:
         + [ ] Income source
         + [ ] Vis source
         + [ ] Specialist
+    + Advancement to transfer Possessions
+    + create possession
+    + copy possession
 
 
 + Special cases.
