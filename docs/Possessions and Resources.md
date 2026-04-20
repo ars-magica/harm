@@ -23,9 +23,10 @@ tags:
 + When books are copied, they may be recorded as individual `Possession` 
   objects, tracking copyist, time of copying, and other details, or they
   may be recorded as multiple copies of the original, non-descript object.
++ `Possession` has a `qualityBonus` which may modify the book stats, in the
+  case of non-standard quality.
 
 + **TODO**
-    + A `Possession` may need to override book stats (quality variation)
     + translations of books
 
 
