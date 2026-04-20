@@ -23,10 +23,18 @@ tags:
 + When books are copied, they may be recorded as individual `Possession` 
   objects, tracking copyist, time of copying, and other details, or they
   may be recorded as multiple copies of the original, non-descript object.
++ `Possession` has a `qualityBonus` which may modify the book stats, in the
+  case of non-standard quality.
 
 + **TODO**
-    + A `Possession` may need to override book stats (quality variation)
     + translations of books
+    + Possessions for
+        + [ ] Income source
+        + [ ] Vis source
+        + [ ] Specialist
+    + Advancement to transfer Possessions
+    + create possession
+    + copy possession
 
 
 + Special cases.
@@ -41,6 +49,6 @@ tags:
     + `read:`
         + `item: possessionName`
         + `booktitle: title` or `bookid: id`
-    + `use: possessionName`
+    + `requires:` possessionName`
     + `create:` possession object
     + `copy:` possession object

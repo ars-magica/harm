@@ -97,6 +97,9 @@ instance FromJSON RawPossession where
 data Possession = Possession 
      { itemName :: String            -- ^ Name identifying the unique item
      , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
+     , qualityBonus :: Int   
+          -- ^ quality bonus applies to book stats when a copy has non-standard
+	  -- quality due to fast copying, high skill, or other factors.
      , labTexts :: [ LabText ]       -- ^ List of lab texts in the iten (scroll/book)
      , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
      , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
@@ -115,6 +118,7 @@ defaultPossession :: Possession
 defaultPossession = Possession
      { itemName = "No Name"
      , bookTexts = []
+     , qualityBonus = 0
      , labTexts = []
      , weaponStats = []
      , weapon = []
@@ -246,11 +250,11 @@ instance FromJSON Possession where
     parseJSON (Object v) = (parseOtherPossession v)
     parseJSON _ = mzero
 
-
 parseOtherPossession :: Object -> Parser Possession
 parseOtherPossession v = fmap fixPossessionName $ Possession 
        <$> v .:? "name" .!= ""
        <*> v `parseCollapsedList` "books" 
+       <*> v .:? "bonus" .!= 0
        <*> v `parseCollapsedList` "labtexts" 
        <*> v .:? "weaponStats" .!= []
        <*> v .:? "weapon" .!= []
