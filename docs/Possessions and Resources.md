@@ -28,6 +28,10 @@ tags:
 
 + **TODO**
     + translations of books
+    + Possessions for
+        + [ ] Income source
+        + [ ] Vis source
+        + [ ] Specialist
 
 
 + Special cases.
@@ -42,6 +46,6 @@ tags:
     + `read:`
         + `item: possessionName`
         + `booktitle: title` or `bookid: id`
-    + `use: possessionName`
+    + `requires:` possessionName`
     + `create:` possession object
     + `copy:` possession object

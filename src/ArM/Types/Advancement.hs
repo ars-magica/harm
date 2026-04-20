@@ -171,7 +171,7 @@ data Advancement = Advancement
      , years :: Maybe Int         -- ^ number of years advanced
      , advNarrative :: [ String ]    -- ^ narrative description of the activities
      , advComment :: [ String ]      -- ^ freeform description of the activities
-     , requires :: [ Possession ] -- ^ possessions required for exclusive use
+     , requires :: [ HarmKey ]    -- ^ possessions required for exclusive use
      , usesBook :: [ String ]     -- ^ Books used exclusively by the character
      , readBook :: [ String ]     -- ^ Original book(s) read (to check against rereads)
      , bookUsed :: [ Book ]       -- ^ Books used exclusively by the character
