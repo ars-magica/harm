@@ -59,8 +59,7 @@ import ArM.Helper
 import ArM.Types.ProtoTrait
 import ArM.Types
 import ArM.GameRules
-import ArM.Types.Functions
-import ArM.Types.Possession
+import ArM.Types.Trait
 
 import Data.Maybe 
 import Data.List 
@@ -173,7 +172,7 @@ data Advancement = Advancement
      , advNarrative :: [ String ]    -- ^ narrative description of the activities
      , advComment :: [ String ]      -- ^ freeform description of the activities
      , requires :: [ HarmKey ]    -- ^ possessions required for exclusive use
-     , reads :: [ HarmKey ]       -- ^ Books used exclusively by the character
+     , readsBook :: [ HarmKey ]       -- ^ Books used exclusively by the character
      , usesBook :: [ String ]     -- ^ Books used exclusively by the character
      , readBook :: [ String ]     -- ^ Original book(s) read (to check against rereads)
      , bookUsed :: [ Book ]       -- ^ Books used exclusively by the character
@@ -198,7 +197,7 @@ defaultAdvancement = Advancement
      , advNarrative = []
      , advComment = []
      , requires = []
-     , reads = []
+     , readsBook = []
      , usesBook = []
      , readBook = []
      , bookUsed = []
@@ -471,9 +470,6 @@ data CovAdvancement = CovAdvancement
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
 noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] [] []
-
-instance ToJSON CovAdvType
-instance FromJSON CovAdvType
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where

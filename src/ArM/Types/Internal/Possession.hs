@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Possession
+-- Module      :  ArM.Types.Internal.Possession
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,7 +17,7 @@
 -- they are embedded in a special kind of trait.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Possession ( -- * Posessions
+module ArM.Types.Internal.Possession ( -- * Posessions
                               Possession(..)
                             , defaultPossession
                             -- * Magic and Enchantments
@@ -39,12 +39,9 @@ module ArM.Types.Possession ( -- * Posessions
                             , wrapBooks
                             ) where
 
-import ArM.Types.Calendar
 import ArM.Types.HarmObject
-import ArM.Types.Trait
-import ArM.Types.Functions
+import ArM.Types.Internal.Trait
 import ArM.DB.Spell
-import ArM.DB.Weapon
 import ArM.Helper
 
 import GHC.Generics

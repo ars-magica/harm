@@ -76,9 +76,10 @@ common harm-deps
                        , ArM.Types.Advancement
                        , ArM.Advancement
                        , ArM.Types.ProtoTrait
-                       , ArM.Types.Possession
                        , ArM.Types.Trait
-                       , ArM.Types.Functions
+                       , ArM.Types.Internal.Book
+                       , ArM.Types.Internal.Possession
+                       , ArM.Types.Internal.Trait
                        , ArM.Types.Internal.Aging
                        , ArM.Types.Internal.TraitKey
                        , ArM.Types.HarmObject

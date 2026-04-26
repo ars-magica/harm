@@ -2,53 +2,28 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Functions
+-- Module      :  ArM.Types.Internal.Book
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
--- Description :  Character Traits, including Abilities, Spells, Virtues, etc..
---
--- This module proves a type for each kind of trait as well as a wrapper type,
--- `Trait` which can represent any kind of trait.
---
--- This module defines the types as well as the `TraitType` class, and instances
--- for `show`, sorting, and JSON.
+-- Description :  Functions to manage reading of Book objects from file
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Functions where 
+module ArM.Types.Internal.Book ( readBookCSV ) where
 
 import ArM.Helper
-import ArM.Types.Trait
-import ArM.Types
+import ArM.Types.Internal.Trait
+import ArM.Types.HarmObject
 import qualified ArM.Internal.Book as IB
-
-import Data.Text       (splitOn, unpack, pack)
-import Data.Maybe
-import Data.List
-import Text.Read             (readMaybe)
 
 import ArM.Debug.Trace
 
--- ** Sorting Traits
+import Data.Maybe
+import Data.Text       (splitOn, unpack, pack)
+import Text.Read             (readMaybe)
 
-(<:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
-(<:) p1 p2 = traitKey p1 < traitKey p2
-
-{-
-(>:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
-(>:) p1 p2 = p2 <: p1
--}
-
-
-sortTraits :: TraitClass t => [ t ] -> [ t ]
-sortTraits = sortBy f
-       where f x y = compare (traitKey x) (traitKey y)
-
--- | Find a trait, given by a key, from a list of Trait objects.
-findTrait :: (TraitClass a) => TraitKey -> [a] -> Maybe a
-findTrait k = find ( (k==) . traitKey )
 
 -- | Translate from the `RawBook` format used by the CSV parser to 
 -- the `Book` format.
