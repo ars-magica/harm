@@ -27,7 +27,7 @@ import System.Directory
 import ArM.Advancement
 import ArM.Markdown
 import ArM.Types.Character
-import ArM.Types.Covenant
+import ArM.Cov.Covenant
 import ArM.Types.Saga
 import ArM.Types.Library
 import ArM.Types.Possession
