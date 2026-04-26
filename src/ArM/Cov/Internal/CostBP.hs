@@ -17,10 +17,7 @@ module ArM.Cov.CostBP ( CostBP(..)) where
 import Data.List 
 
 import ArM.Types.Possession
-import ArM.Types.Covenant
 import ArM.Types.Library
-import ArM.Char.Character
-import ArM.Types
 
 class CostBP t where
    -- | Calculate the BP (Build Point) cost of the possession.

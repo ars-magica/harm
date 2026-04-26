@@ -462,12 +462,17 @@ data CovAdvancement = CovAdvancement
      , lost' :: [ Possession ]
      , acquired :: [ Book ]
      , lost :: [ Book ]
+     , caType :: String
      } 
    deriving (Eq,Generic,Show)
+
 
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
 noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] [] []
+
+instance ToJSON CovAdvType
+instance FromJSON CovAdvType
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
@@ -482,6 +487,7 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "lost'"
         <*> v `parseCollapsedList` "acquired"
         <*> v `parseCollapsedList` "lost"
+        <*> v .:? "type" .:? "In Game"
 
 
 
