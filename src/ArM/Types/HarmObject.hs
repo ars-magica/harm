@@ -38,6 +38,7 @@ import ArM.Types.Calendar
 -- It is made quite generic to support a class `KeyObject` of keyed objects
 -- without enabling multi-parameter classes.
 data HarmKey = BookKey String 
+           | PossessionKey String
            | CharacterKey String
            | CovenantKey String
            | LabKey String
@@ -46,6 +47,8 @@ data HarmKey = BookKey String
 
 parseBookKey :: Object -> Parser HarmKey
 parseBookKey v = BookKey <$> v .:  "book"
+parsePossessionKey :: Object -> Parser HarmKey
+parsePossessionKey v = PossessionKey <$> v .:  "possession"
 parseCharacterKey :: Object -> Parser HarmKey
 parseCharacterKey v = CharacterKey <$> v .:  "character"
 parseCovenantKey :: Object -> Parser HarmKey
@@ -54,7 +57,8 @@ parseLabKey :: Object -> Parser HarmKey
 parseLabKey v = LabKey <$> v .:  "lab"
 parseHarmKey :: Object -> Parser HarmKey
 parseHarmKey v = foldr mplus (pure NoObject)
-          [ (parseBookKey v), (parseCharacterKey v), (parseCovenantKey v) , (parseLabKey v) ]
+          [ (parseBookKey v), (parsePossessionKey v)
+          , (parseCharacterKey v), (parseCovenantKey v) , (parseLabKey v) ]
 
 instance ToJSON HarmKey
 instance FromJSON HarmKey where
@@ -62,6 +66,7 @@ instance FromJSON HarmKey where
 
 instance Show HarmKey where
        show (BookKey x ) = "Book: " ++ x
+       show (PossessionKey x ) = "Possession: " ++ x
        show (CharacterKey x) = "Character: " ++ x
        show (CovenantKey x) = "Covenant: " ++ x
        show (LabKey x) = "Lab: " ++ x

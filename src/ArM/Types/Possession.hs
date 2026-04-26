@@ -73,6 +73,9 @@ toPossesssion (CompositeItem ob) = ob
 toPossesssion (SimpleBook ob) = wrapBook ob
 toPossesssion (SimpleItem st) = setName st defaultPossession
 
+instance KeyObject Possession where
+   harmKey = PossessionKey . itemName
+
 
 instance ToJSON RawPossession where
     toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
@@ -93,7 +96,6 @@ instance FromJSON RawPossession where
 -- on the characters sheet.
 data Possession = Possession 
      { itemName :: String            -- ^ Name identifying the unique item
-     -- , itemKey :: HarmKey            -- ^ Key for a unique item
      , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
      , qualityBonus :: Int   
           -- ^ quality bonus applies to book stats when a copy has non-standard
