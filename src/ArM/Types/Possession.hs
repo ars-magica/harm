@@ -139,6 +139,7 @@ data Enchantment = LesserItem MagicEffect
                  | ChargedItem Int MagicEffect
                  | MundaneItem
     deriving ( Ord, Eq, Generic )
+
 instance ToJSON Enchantment 
 
 enchantmentName :: Enchantment -> String
@@ -297,6 +298,10 @@ data LabText = Device MagicEffect | SpellText SpellRecord
     deriving ( Ord, Eq, Generic )
 instance ToJSON LabText
 instance FromJSON LabText 
+
+textLevel :: LabText -> Int
+textLevel (Device ob) = effectLevel ob
+textLevel (SpellText ob) = lvl ob
 
 -- | A magic effect that can be instilled in an enchanted device.
 data MagicEffect = MagicEffect

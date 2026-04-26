@@ -8,7 +8,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Saga type with references to constituent files and objects.
+-- Description :  Functions to calculate build point costs for covenant design.
 --
 --
 -----------------------------------------------------------------------------
@@ -26,16 +26,28 @@ class CostBP t where
    -- | Calculate the BP (Build Point) cost of the possession.
    -- This is applies to covenant design [Cov].
    costBP :: t -> Int
+
 instance CostBP LabText where
-   costBP ob = error "Not implemented"
+   costBP =   (`div` 5) . (+1) . textLevel 
+
 instance CostBP BookStats where
    costBP ob = error "Not implemented"
+
 instance CostBP Enchantment where
-   costBP ob = error "Not implemented"
+   costBP MundaneItem = 0
+   costBP (LesserItem eff) = 2*mag
+      where mag = (effectLevel eff + 1) `div` 5
+   costBP (GreaterDevice eff) = 2*(mag eff + 1) `div` 5
+      where mag = sum . map . effectLevel 
+   costBP (Talisman eff) = 2*(mag eff + 1) `div` 5
+      where mag = sum . map . effectLevel 
+   costBP _ = error "Not implemented"
+
 instance CostBP Book where
    -- | The cost of a book is the sum of the costs of each book stats
    -- it provides.
    costBP = sum . costBP . bookStats
+
 instance CostBP Possession where
    costBP = sum . map ($ob)
       where cs = [ sum . map costBP . bookTexts 
