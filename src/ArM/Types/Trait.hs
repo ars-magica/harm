@@ -47,7 +47,6 @@ module ArM.Types.Trait (
          , defaultPossession
          , LabText(..)
          , visArt
-         , isVis
          , isAC
          , isNone
          -- ** Magic and Enchantments
@@ -69,14 +68,14 @@ import ArM.DB.Weapon
 import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
-import Data.Aeson.Key
+-- import Data.Aeson.Key
 import Data.Aeson.Types
 import Data.Text.Lazy  ( fromStrict, unpack )
 import Data.Maybe
 -- import Data.Text       (splitOn)
 -- import Text.Read 
 import Control.Monad
-import Control.Applicative ((<|>))
+-- import Control.Applicative ((<|>))
 
 -- * The Trait Type
 
@@ -552,22 +551,6 @@ instance FromJSON ReadingID
 -- |
 -- == Weapons and other Possessions
 
-data RawPossession = CompositeItem Possession 
-                   | SimpleBook Book
-                   | SimpleItem String
-    deriving (Show)
-
-
-instance ToJSON RawPossession where
-    toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
-    toJSON (SimpleBook ob) = object [(fromString "book",toJSON ob)]
-    toJSON (SimpleItem ob) = toJSON ob
-
-instance FromJSON RawPossession where
-    parseJSON (String t) = pure $ SimpleItem (unpack (fromStrict t)) 
-    parseJSON (Object v) = (CompositeItem <$> v .: "item") 
-                         <|> (SimpleBook <$> v .: "book")
-    parseJSON _ = mzero
 
 instance KeyObject Possession where
    harmKey = ItemKey . itemName
@@ -664,12 +647,6 @@ instance FromJSON Enchantment where
 
 visArt :: Possession -> Maybe String
 visArt = itemArt 
-
-isVis :: Possession -> Bool
-isVis c = isJust $ itemArt c
-
-
-
 
 -- == Books
 

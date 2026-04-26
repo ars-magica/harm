@@ -27,7 +27,6 @@ module ArM.Types.Possession ( -- * Posessions
                             , isVis
                             , isAC
                             , effectRDT
-                            , visArt
                             -- * Weapons and Mundane Equipment
                             , isMundaneEquipment
                             , isWeapon
@@ -62,6 +61,23 @@ import Data.Maybe
 
 -- |
 -- == Weapons and other Possessions
+
+data RawPossession = CompositeItem Possession 
+                   | SimpleBook Book
+                   | SimpleItem String
+    deriving (Show)
+
+
+instance ToJSON RawPossession where
+    toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
+    toJSON (SimpleBook ob) = object [(fromString "book",toJSON ob)]
+    toJSON (SimpleItem ob) = toJSON ob
+
+instance FromJSON RawPossession where
+    parseJSON (String t) = pure $ SimpleItem (unpack (fromStrict t)) 
+    parseJSON (Object v) = (CompositeItem <$> v .: "item") 
+                         <|> (SimpleBook <$> v .: "book")
+    parseJSON _ = mzero
 
 toPossesssion :: RawPossession -> Possession
 toPossesssion (CompositeItem ob) = ob
@@ -99,14 +115,6 @@ parseCharged v = ChargedItem
         <$> v .: "charged" 
         <*> v .: "effect" 
 
-instance FromJSON Enchantment where
-    parseJSON (Object v) = foldl mplus (parseLesser v) 
-       [ (parseGreater v), (parseTalisman v), (parseCharged v) ]
-    parseJSON _ = mzero
-
-visArt :: Possession -> Maybe String
-visArt = itemArt 
-
 isVis :: Possession -> Bool
 isVis c = isJust $ itemArt c
 
@@ -127,6 +135,27 @@ isEquipment p = not $ foldl (||) False [ f p | f <- fs ]
 
 -- == Books
 
+textLevel :: LabText -> Int
+textLevel (Device ob) = effectLevel ob
+textLevel (SpellText ob) = fromMaybe 0 $ lvl ob
+
+
+effectRDT :: MagicEffect -> String
+effectRDT eff = showStrList [ r, d, t ]
+   where r = f "Range" (effectRange eff)
+         d = f "Duration" (effectDuration eff)
+         t = f "Target" (effectTarget eff)
+         f _ "" = ""
+         f s x = s ++ ": " ++ x
+
+-- ** Books
+
+-- | Is the book a tractatus or something else?
+isTractatus :: Book -> Bool
+isTractatus = f . bookStats 
+    where f [] = False
+          f (x:_) = isJust ( quality x ) && isNothing ( bookLevel x )
+
 -- | Is the item a book?
 isBook :: Possession -> Bool
 isBook p = bookTexts p /= []
@@ -146,41 +175,3 @@ wrapBook b = defaultPossession
 -- | Wrap a list of books as possesions
 wrapBooks :: [Book] -> [Possession]
 wrapBooks = map wrapBook
-
-instance StoryObject MagicEffect where
-   name ob = effectName ob 
-   setName n x = x { effectName = n }
-   narrative ob = effectDescription ob
-   addNarrative s x = x { effectDescription = s:narrative x }
-   comment ob = effectComment ob
-   addComment s x = x { effectComment = s:comment x }
-
-instance StoryObject Possession where
-   name ob = itemName ob 
-   setName n x = x { itemName = n }
-   narrative ob = itemDescription ob
-   addNarrative s x = x { itemDescription = s:narrative x }
-   comment ob = comment ob
-   addComment s x = x { itemComment = s:comment x }
-
-instance Countable Possession where
-   count ob = itemCount ob
-   addCount ob n  = ob { itemCount = itemCount ob + n }
-
-instance ToJSON Possession 
-
-
-
-textLevel :: LabText -> Int
-textLevel (Device ob) = effectLevel ob
-textLevel (SpellText ob) = lvl ob
-
-
-effectRDT :: MagicEffect -> String
-effectRDT eff = showStrList [ r, d, t ]
-   where r = f "Range" (effectRange eff)
-         d = f "Duration" (effectDuration eff)
-         t = f "Target" (effectTarget eff)
-         f _ "" = ""
-         f s x = s ++ ": " ++ x
-

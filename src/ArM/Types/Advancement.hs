@@ -59,7 +59,8 @@ import ArM.Helper
 import ArM.Types.ProtoTrait
 import ArM.Types
 import ArM.GameRules
-import ArM.Types.Library
+import ArM.Types.Functions
+import ArM.Types.Possession
 
 import Data.Maybe 
 import Data.List 
