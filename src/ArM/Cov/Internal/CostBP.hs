@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.CostBP
+-- Module      :  ArM.Cov.Internal.CostBP
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,7 +12,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.CostBP ( CostBP(..)) where
+module ArM.Cov.Internal.CostBP ( CostBP(..)) where
 
 import Data.List 
 

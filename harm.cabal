@@ -76,11 +76,11 @@ common harm-deps
                        , ArM.Types.Character
                        , ArM.Types.Advancement
                        , ArM.Advancement
-                       , ArM.Types.Aging
                        , ArM.Types.ProtoTrait
                        , ArM.Types.Possession
                        , ArM.Types.Trait
-                       , ArM.Types.TraitKey
+                       , ArM.Types.Internal.Aging
+                       , ArM.Types.Internal.TraitKey
                        , ArM.Types.HarmObject
                        , ArM.Types.Story
                        , ArM.Types.Lab
@@ -94,6 +94,8 @@ common harm-deps
                        , ArM.Char.Virtues
                        , ArM.Markdown
                        , ArM.SeasonDisplay
+                       , ArM.Cov.Internal.CostBP
+                       , ArM.Cov.Covenant
                        , ArM.Types.Covenant
                        , ArM.Cov.Saga
                        , ArM.IO

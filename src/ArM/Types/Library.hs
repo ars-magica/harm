@@ -30,8 +30,7 @@ import Data.Text  (splitOn,unpack,pack)
 import Text.Read 
 import Control.Monad
 
-import ArM.Types.TraitKey
-import ArM.Types
+import ArM.Types.Trait
 import ArM.Helper
 import ArM.Debug.Trace
 import qualified ArM.Internal.Book as IB

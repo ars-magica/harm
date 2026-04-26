@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Aging
+-- Module      :  ArM.Types.Internal.Aging
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,7 +17,7 @@
 -- the aging roll.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Aging ( Age(..)
+module ArM.Types.Internal.Aging ( Age(..)
                        , Aging
                        , advanceAge
                        , toAge

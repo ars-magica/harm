@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.TraitKey
+-- Module      :  ArM.Types.Internal.TraitKey
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -20,7 +20,7 @@
 -- Only a few traits require additional information to disambiguate.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.TraitKey ( 
+module ArM.Types.Internal.TraitKey ( 
       -- * The TraitKey type
       TraitKey(..)
       -- * Convenience functions

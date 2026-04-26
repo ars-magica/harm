@@ -43,9 +43,7 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.Trait
-import ArM.Types.TraitKey
 import ArM.Types.HarmObject
-import ArM.Types.Aging
 import ArM.Types.Lab
 import ArM.DB.Spell
 
