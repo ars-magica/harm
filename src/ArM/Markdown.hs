@@ -31,7 +31,6 @@ import ArM.Char.Combat
 import ArM.Cov.Saga
 import ArM.Types.Possession
 import ArM.Cov.Covenant
-import ArM.Types.Library
 import ArM.Types.Saga
 import ArM.Types
 import ArM.DB.Spell

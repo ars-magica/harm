@@ -27,48 +27,60 @@ module ArM.Types.Trait (
          , Spell(..)
          , PTrait(..)
          , OtherTrait(..)
-         , Possession(..)
          , CombatOption(..)
          , Confidence(..)
          , Reputation(..)
          , Age(..)
+         -- * Convenience Functions
+         , TraitClass(..)
+         , fote
+         -- * Aging
+         , module ArM.Types.Internal.Aging
+         -- * Books
+         , BookStats(..)
+         , Book(..)
+         , defaultBook
+         , BookDB(..)
          -- * Possessions
-         , Enchantment(..)
-         , MagicEffect(..)
+         , Possession(..)
+         , defaultPossession
+         , LabText(..)
          , visArt
          , isVis
          , isWeapon
          , isArmour
          , isAC
          , isMagic
-         , isMundaneEquipment
-         , isEquipment
          , isNone
-         , effectRDT
-         -- * Convenience Functions
-         , TraitClass(..)
-         , (<:)
-         , fote
-         , sortTraits
-         , findTrait
-         -- * Aging
-	 , module ArM.Types.Internal.Aging
+         -- ** Magic and Enchantments
+         , Enchantment(..)
+         , MagicEffect(..)
          ) where
+
 
 import ArM.GameRules
 import ArM.Helper
 import ArM.Types.Internal.TraitKey
 import ArM.Types.Internal.Aging
 import ArM.Types.HarmObject
+import ArM.Types.Calendar
 import ArM.Types.Lab
-import ArM.Types.Possession
 import ArM.DB.Spell
--- import ArM.Debug.Trace
+import ArM.DB.Weapon
+
+-- import qualified ArM.Internal.Book as IB
 
 import GHC.Generics
 import Data.Aeson
+import Data.Aeson.Extra
+import Data.Aeson.Key
+import Data.Aeson.Types
+import Data.Text.Lazy  ( fromStrict, unpack )
 import Data.Maybe
-import Data.List 
+-- import Data.Text       (splitOn)
+-- import Text.Read 
+import Control.Monad
+import Control.Applicative ((<|>))
 
 -- * The Trait Type
 
@@ -386,24 +398,6 @@ instance TraitClass CombatOption where
     getTrait _ = Nothing
     toTrait = CombatOptionTrait
 
--- ** Sorting 
-
-(<:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
-(<:) p1 p2 = traitKey p1 < traitKey p2
-
-{-
-(>:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
-(>:) p1 p2 = p2 <: p1
--}
-
-
-sortTraits :: TraitClass t => [ t ] -> [ t ]
-sortTraits = sortBy f
-       where f x y = compare (traitKey x) (traitKey y)
-
--- | Find a trait, given by a key, from a list of Trait objects.
-findTrait :: (TraitClass a) => TraitKey -> [a] -> Maybe a
-findTrait k = find ( (k==) . traitKey )
 
 -- ** Class instances
 
@@ -427,3 +421,387 @@ instance ToJSON VF
 instance ToJSON Confidence 
 instance ToJSON OtherTrait 
 instance ToJSON Trait 
+
+
+
+-- * Types
+
+-- | The stats of a book as required for advancement mechanics.
+data BookStats = BookStats
+         { topic :: TraitKey
+         , quality :: Maybe Int
+         , bookLevel :: Maybe Int
+         , reread :: Int          
+            -- ^ Number of tractatus in the text.  This is normally 1
+            -- and ignored for any text but tractatus, but there are a
+            -- few canon examples of texts that count as multiple tractatus.
+       }  deriving (Eq,Generic)
+instance ToJSON BookStats
+instance FromJSON BookStats where
+    parseJSON = withObject "BookStats" $ \v -> BookStats
+        <$> v .:? "topic" .!= NoTrait
+        <*> v .:? "quality" 
+        <*> v .:? "level" 
+        <*> v .:? "reread"  .!= 1
+instance Show BookStats where
+    show b = k ++ ' ':l ++ q
+        where k = show $ topic b
+              q | isNothing (quality b) = ""
+                | otherwise = 'Q':show (fromJust $ quality b)
+              l | isNothing (bookLevel b) = ""
+                | otherwise = 'L':show (fromJust $ bookLevel b)
+instance Ord BookStats where
+    compare a b | topic a /= topic b = compare (topic a) (topic b)
+                | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
+                | otherwise  = compare (quality a) (quality b)
+
+-- | A book is an original manuscript.  Antologies and copies are
+-- handled as Possession objects.
+--
+-- A book may have one or more `BookStat` values.  A copy may or may
+-- not have book stats.  If it does not, it inherits stats from the original.
+data Book = Book
+     { bookID :: String
+     , bookTitle :: String
+     , bookStats :: [ BookStats ] -- ^ list of stats per topic covered
+     , bookAuthor :: String      -- ^ Creator of the copy or manuscript
+     , bookDate :: SeasonTime     -- ^ Time the copy was made            
+     , bookLocation :: Maybe String     -- ^ Location where the book was written or copied
+     , bookNarrative :: [ String ]   -- ^ Additional information in free text
+     , bookAnnotation :: [ String ]   -- ^ Additional information in free text
+     , bookLanguage  :: Maybe String  -- ^ Language of the book
+     , bookCount :: Int               -- ^ Number of copies 
+     } deriving (Eq,Generic,Show)
+instance Ord Book where
+    compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
+                | otherwise = compare (bookTitle a) (bookTitle b)
+instance Countable Book where
+    count = bookCount
+    addCount b n = b { bookCount = bookCount b + n }
+instance KeyObject Book where
+   harmKey = BookKey . bookID
+instance StoryObject Book where
+    name book = tis ++ aus ++ dat
+     where aut = trim $ bookAuthor book
+           aus | aut == "" = ""
+               | otherwise = " by " ++ aut
+           tit = trim $ bookTitle book
+           tis | tit == "" = ""
+               | otherwise = "*" ++ tit ++ "*"
+           dat = " (" ++ show (bookDate book) ++ ")"
+    narrative = bookNarrative
+    comment = bookAnnotation
+instance ToJSON Book
+instance FromJSON Book where
+    parseJSON = withObject "Book" $ \v -> Book
+        <$> v .:? "bookID" .!= "No ID"
+        <*> v .:? "title" .!= "No title"
+        <*> v `parseCollapsedList` "stats" 
+        <*> v .:? "creator" .!= "N/A"
+        <*> v .:? "date" .!= NoTime
+        <*> v .:? "location" 
+        <*> v  `parseCollapsedList` "narrative" 
+        <*> v  `parseCollapsedList` "comment" 
+        <*> v .:? "language" 
+        <*> v .:? "count"  .!= 1
+
+
+-- | The `BookDB` class is any type wherein one may look up books by
+-- their ID.
+class BookDB h where
+   -- | Look up a book by key (String) in a database.
+   bookLookup :: h -> String -> Maybe Book
+   bookLookup db k = lookupBook k db 
+   -- | Look up a book by key (String) in a database.
+   -- This is equivalent to `bookLookup` with the arguments swapped
+   lookupBook :: String -> h -> Maybe Book
+   lookupBook k db = bookLookup db k
+
+instance (BookDB h) => BookDB [h] where
+   lookupBook k = foldl mplus Nothing . map (\ x -> bookLookup x k) 
+instance BookDB Book where
+   bookLookup bk k | k == bookID bk = Just bk
+                   | otherwise = Nothing
+
+-- | A default book object, providing defaults for fields not available in the CSV format.
+defaultBook :: Book
+defaultBook = Book
+     { bookID = ""
+     , bookTitle = ""
+     , bookStats = [ ] 
+     , bookAuthor = ""
+     , bookDate = NoTime
+     , bookLocation = Nothing
+     , bookNarrative = []
+     , bookAnnotation = []
+     , bookLanguage = Nothing
+     , bookCount = 1 }
+
+
+-- * Descriptions of a reading season
+
+-- | Currently unused, this is one idea for describing what book and part
+-- is read in a given season.
+data ReadingID = ReadingID
+     { bookRead :: HarmKey
+     , partRead :: Maybe HarmKey
+     , topicRead :: TraitKey
+     } deriving (Eq,Show,Generic)
+instance ToJSON ReadingID
+instance FromJSON ReadingID 
+
+
+-- * Possession
+
+-- |
+-- == Weapons and other Possessions
+
+data RawPossession = CompositeItem Possession 
+                   | SimpleBook Book
+                   | SimpleItem String
+    deriving (Show)
+
+
+instance ToJSON RawPossession where
+    toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
+    toJSON (SimpleBook ob) = object [(fromString "book",toJSON ob)]
+    toJSON (SimpleItem ob) = toJSON ob
+
+instance FromJSON RawPossession where
+    parseJSON (String t) = pure $ SimpleItem (unpack (fromStrict t)) 
+    parseJSON (Object v) = (CompositeItem <$> v .: "item") 
+                         <|> (SimpleBook <$> v .: "book")
+    parseJSON _ = mzero
+
+instance KeyObject Possession where
+   harmKey = ItemKey . itemName
+
+
+-- | A `Possession` is any kind of device that can be acquired, lost,
+-- given, or traded.  It is treated like inherent traits in the data
+-- model.  Possessions comprise weapons, armour, vis, magic devices,
+-- equipment, and any physical object that should be recorded
+-- on the characters sheet.
+data Possession = Possession 
+     { itemName :: String            -- ^ Name identifying the unique item
+     , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
+     , qualityBonus :: Int   
+          -- ^ quality bonus applies to book stats when a copy has non-standard
+          -- quality due to fast copying, high skill, or other factors.
+     , labTexts :: [ LabText ]       -- ^ List of lab texts in the iten (scroll/book)
+     , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
+     , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
+     , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
+     , armour :: [ String ]          -- ^ List of standard weapon stats that apply
+     , enchantment :: Enchantment
+     , itemDescription :: [ String ] -- ^ Description of the Item
+     , itemComment :: [ String ]     -- ^ Comments, supplementing the description
+     , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
+     , acTo :: Maybe String
+     , itemCount :: Int              -- ^ Number of items possessed, default 1.
+     , itemDate :: SeasonTime        -- ^ Time of creation
+     }
+    deriving ( Ord, Eq, Generic )
+defaultPossession :: Possession 
+defaultPossession = Possession
+     { itemName = "No Name"
+     , bookTexts = []
+     , qualityBonus = 0
+     , labTexts = []
+     , weaponStats = []
+     , weapon = []
+     , armourStats = []
+     , armour = []
+     , enchantment = MundaneItem
+     , itemDescription = []
+     , itemComment = []
+     , itemArt = Nothing
+     , acTo = Nothing
+     , itemCount = 1
+     , itemDate = NoTime
+     }
+
+data Enchantment = LesserItem MagicEffect
+                 | GreaterDevice Int [ MagicEffect ]
+                 | Talisman Int [ MagicEffect ]
+                 | ChargedItem Int MagicEffect
+                 | MundaneItem
+    deriving ( Ord, Eq, Generic )
+
+instance ToJSON Enchantment 
+
+enchantmentName :: Enchantment -> String
+enchantmentName (LesserItem e) = effectName e
+enchantmentName (ChargedItem _ e) = effectName e
+enchantmentName (GreaterDevice _ (e:_)) = effectName e
+enchantmentName (Talisman _ _) = "Talisman"
+enchantmentName _ = ""
+
+{-
+parseLesser :: Object -> Parser Enchantment
+parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
+    where f Nothing = mzero
+          f (Just x) = parseJSON x
+-}
+
+parseLesser :: Object -> Parser Enchantment
+parseLesser v = LesserItem
+        <$> v .: "lesseritem" 
+
+parseGreater :: Object -> Parser Enchantment
+parseGreater v = GreaterDevice
+        <$> v .: "viscapacity" 
+        <*> v `parseCollapsedList` "effects" 
+parseTalisman :: Object -> Parser Enchantment
+parseTalisman v = GreaterDevice
+        <$> v .: "talisman" 
+        <*> v `parseCollapsedList` "effects" 
+parseCharged :: Object -> Parser Enchantment
+parseCharged v = ChargedItem
+        <$> v .: "charged" 
+        <*> v .: "effect" 
+
+instance FromJSON Enchantment where
+    parseJSON (Object v) = foldl mplus (parseLesser v) 
+       [ (parseGreater v), (parseTalisman v), (parseCharged v) ]
+    parseJSON _ = mzero
+
+visArt :: Possession -> Maybe String
+visArt = itemArt 
+
+isVis :: Possession -> Bool
+isVis c = isJust $ itemArt c
+
+
+isWeapon :: Possession -> Bool
+isWeapon p = (weapon p /= []) || (weaponStats p /= [])
+
+isArmour :: Possession -> Bool
+isArmour p = (armour p /= []) || (armourStats p /= [])
+isMagic :: Possession -> Bool
+isMagic p = enchantment p /= MundaneItem
+isAC :: Possession -> Bool
+isAC p = isJust $ acTo p
+
+
+-- == Books
+
+
+instance StoryObject MagicEffect where
+   name ob = effectName ob 
+   setName n x = x { effectName = n }
+   narrative ob = effectDescription ob
+   addNarrative s x = x { effectDescription = s:narrative x }
+   comment ob = effectComment ob
+   addComment s x = x { effectComment = s:comment x }
+
+instance StoryObject Possession where
+   name ob = itemName ob 
+   setName n x = x { itemName = n }
+   narrative ob = itemDescription ob
+   addNarrative s x = x { itemDescription = s:narrative x }
+   comment ob = comment ob
+   addComment s x = x { itemComment = s:comment x }
+
+instance Countable Possession where
+   count ob = itemCount ob
+   addCount ob n  = ob { itemCount = itemCount ob + n }
+
+instance ToJSON Possession 
+
+instance FromJSON Possession where
+    parseJSON (String t) = pure $ setName (unpack (fromStrict t)) defaultPossession 
+    parseJSON (Object v) = (parseOtherPossession v)
+    parseJSON _ = mzero
+
+parseOtherPossession :: Object -> Parser Possession
+parseOtherPossession v = fmap fixPossessionName $ Possession 
+       <$> v .:? "name" .!= ""
+       <*> v `parseCollapsedList` "books" 
+       <*> v .:? "bonus" .!= 0
+       <*> v `parseCollapsedList` "labtexts" 
+       <*> v .:? "weaponStats" .!= []
+       <*> v .:? "weapon" .!= []
+       <*> v .:? "armourStats" .!= []
+       <*> v .:? "armour" .!= []
+       <*> v .:? "enchantment" .!= MundaneItem
+       <*> v `parseCollapsedList` "description" 
+       <*> v `parseCollapsedList` "comment" 
+       <*> v .:? "art"
+       <*> v .:? "acTo" 
+       <*> v .:? "count" .!= 1
+       <*> v .:? "date"  .!= NoTime
+
+
+
+-- | Derive `itemName` from other properties, if the name is undefined.
+fixPossessionName :: Possession -> Possession 
+fixPossessionName =  fixPN getPN1 . fixPN f
+    where f p | enchantment p /= MundaneItem = enchantmentName $ enchantment p
+              | otherwise = ""
+
+fixPN :: (Possession -> String) -> Possession -> Possession 
+fixPN f p | itemName p /= "" = p
+          | otherwise = setName (f p) p
+
+getPN1 :: Possession -> String 
+getPN1 p | weapon p /= [] = head $ weapon p
+         | armour p /= [] = head $ armour p
+         | isJust (visArt p) = fromJust (visArt p) ++ " vis"
+         | isAC p = "AC to " ++ (fromJust $ acTo p)
+         | otherwise = "Item"
+
+instance Show Possession where
+    show p = name p ++ cnt
+       where cnt | count p == 1 = ""
+                 | otherwise = " (" ++ show (count p) ++ ")"
+
+
+data LabText = Device MagicEffect | SpellText SpellRecord
+    deriving ( Ord, Eq, Generic )
+instance ToJSON LabText
+instance FromJSON LabText 
+
+-- | A magic effect that can be instilled in an enchanted device.
+data MagicEffect = MagicEffect
+           { effectName :: String
+           , effectLevel :: Int
+           , effectTechnique :: String
+           , effectTechniqueReq :: [String]
+           , effectForm :: String
+           , effectFormReq :: [String]
+           , effectRange :: String        -- ^ Range
+           , effectDuration :: String     -- ^ Duration
+           , effectTarget :: String       -- ^ Target
+           , effectModifiers :: [ String ]
+           , effectTrigger :: String
+           , effectDesign :: String     -- ^ Level calculation
+           , effectDescription :: [String]
+           , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
+           , effectReference :: String  -- ^ Source reference
+           , effectDate :: SeasonTime   -- ^ Time of investment
+           }
+           deriving (Show, Eq, Ord, Generic)
+
+
+instance ToJSON MagicEffect
+instance FromJSON MagicEffect where
+    parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
+        <$> v .: "name" 
+        <*> v .: "level" 
+        <*> v .: "technique" 
+        <*> v  `parseCollapsedList` "techiqueReq" 
+        <*> v .: "form" 
+        <*> v  `parseCollapsedList` "formReq" 
+        <*> v .:? "range" .!= ""
+        <*> v .:? "duration" .!= ""
+        <*> v .:? "target" .!= ""
+        <*> v `parseCollapsedList` "modifiers" 
+        <*> v .:? "trigger"  .!= ""
+        <*> v .:? "design"  .!= ""
+        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "comment" 
+        <*> v .:? "reference"  .!= ""
+        <*> v .:? "season" .!= NoTime
+
+

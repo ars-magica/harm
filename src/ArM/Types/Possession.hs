@@ -42,8 +42,7 @@ module ArM.Types.Possession ( -- * Posessions
 
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
--- import ArM.Types.Lab
-import ArM.Types.Library
+import ArM.Types.Trait
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Helper
@@ -63,87 +62,12 @@ import Data.Maybe
 -- |
 -- == Weapons and other Possessions
 
-data RawPossession = CompositeItem Possession 
-                   | SimpleBook Book
-                   | SimpleItem String
-    deriving (Show)
-
 toPossesssion :: RawPossession -> Possession
 toPossesssion (CompositeItem ob) = ob
 toPossesssion (SimpleBook ob) = wrapBook ob
 toPossesssion (SimpleItem st) = setName st defaultPossession
 
-instance KeyObject Possession where
-   harmKey = PossessionKey . itemName
-
-
-instance ToJSON RawPossession where
-    toJSON (CompositeItem ob) = object [(fromString "item",toJSON ob)]
-    toJSON (SimpleBook ob) = object [(fromString "book",toJSON ob)]
-    toJSON (SimpleItem ob) = toJSON ob
-
-instance FromJSON RawPossession where
-    parseJSON (String t) = pure $ SimpleItem (unpack (fromStrict t)) 
-    parseJSON (Object v) = (CompositeItem <$> v .: "item") 
-                         <|> (SimpleBook <$> v .: "book")
-    parseJSON _ = mzero
-
-
--- | A `Possession` is any kind of device that can be acquired, lost,
--- given, or traded.  It is treated like inherent traits in the data
--- model.  Possessions comprise weapons, armour, vis, magic devices,
--- equipment, and any physical object that should be recorded
--- on the characters sheet.
-data Possession = Possession 
-     { itemName :: String            -- ^ Name identifying the unique item
-     , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
-     , qualityBonus :: Int   
-          -- ^ quality bonus applies to book stats when a copy has non-standard
-	  -- quality due to fast copying, high skill, or other factors.
-     , labTexts :: [ LabText ]       -- ^ List of lab texts in the iten (scroll/book)
-     , weaponStats :: [ Weapon ]     -- ^ List of applicable Weapon stat objects
-     , weapon :: [ String ]          -- ^ List of standard weapon stats that apply
-     , armourStats :: [ Armour ]     -- ^ List of applicable Weapon stat objects
-     , armour :: [ String ]          -- ^ List of standard weapon stats that apply
-     , enchantment :: Enchantment
-     , itemDescription :: [ String ] -- ^ Description of the Item
-     , itemComment :: [ String ]     -- ^ Comments, supplementing the description
-     , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
-     , acTo :: Maybe String
-     , itemCount :: Int              -- ^ Number of items possessed, default 1.
-     , itemDate :: SeasonTime        -- ^ Time of creation
-     }
-    deriving ( Ord, Eq, Generic )
-defaultPossession :: Possession 
-defaultPossession = Possession
-     { itemName = "No Name"
-     , bookTexts = []
-     , qualityBonus = 0
-     , labTexts = []
-     , weaponStats = []
-     , weapon = []
-     , armourStats = []
-     , armour = []
-     , enchantment = MundaneItem
-     , itemDescription = []
-     , itemComment = []
-     , itemArt = Nothing
-     , acTo = Nothing
-     , itemCount = 1
-     , itemDate = NoTime
-     }
-
-data Enchantment = LesserItem MagicEffect
-                 | GreaterDevice Int [ MagicEffect ]
-                 | Talisman Int [ MagicEffect ]
-                 | ChargedItem Int MagicEffect
-                 | MundaneItem
-    deriving ( Ord, Eq, Generic )
-
-instance ToJSON Enchantment 
-
-enchantmentName :: Enchantment -> String
-enchantmentName (LesserItem e) = effectName e
+enchantmentName :: Enchantment -> String enchantmentName (LesserItem e) = effectName e
 enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _) = "Talisman"
@@ -246,83 +170,12 @@ instance Countable Possession where
 
 instance ToJSON Possession 
 
-instance FromJSON Possession where
-    parseJSON (String t) = pure $ setName (unpack (fromStrict t)) defaultPossession 
-    parseJSON (Object v) = (parseOtherPossession v)
-    parseJSON _ = mzero
 
-parseOtherPossession :: Object -> Parser Possession
-parseOtherPossession v = fmap fixPossessionName $ Possession 
-       <$> v .:? "name" .!= ""
-       <*> v `parseCollapsedList` "books" 
-       <*> v .:? "bonus" .!= 0
-       <*> v `parseCollapsedList` "labtexts" 
-       <*> v .:? "weaponStats" .!= []
-       <*> v .:? "weapon" .!= []
-       <*> v .:? "armourStats" .!= []
-       <*> v .:? "armour" .!= []
-       <*> v .:? "enchantment" .!= MundaneItem
-       <*> v `parseCollapsedList` "description" 
-       <*> v `parseCollapsedList` "comment" 
-       <*> v .:? "art"
-       <*> v .:? "acTo" 
-       <*> v .:? "count" .!= 1
-       <*> v .:? "date"  .!= NoTime
-
-
-
--- | Derive `itemName` from other properties, if the name is undefined.
-fixPossessionName :: Possession -> Possession 
-fixPossessionName =  fixPN getPN1 . fixPN f
-    where f p | enchantment p /= MundaneItem = enchantmentName $ enchantment p
-              | otherwise = ""
-
-fixPN :: (Possession -> String) -> Possession -> Possession 
-fixPN f p | itemName p /= "" = p
-          | otherwise = setName (f p) p
-
-getPN1 :: Possession -> String 
-getPN1 p | weapon p /= [] = head $ weapon p
-         | armour p /= [] = head $ armour p
-         | isJust (visArt p) = fromJust (visArt p) ++ " vis"
-         | isAC p = "AC to " ++ (fromJust $ acTo p)
-         | otherwise = "Item"
-
-instance Show Possession where
-    show p = name p ++ cnt
-       where cnt | count p == 1 = ""
-                 | otherwise = " (" ++ show (count p) ++ ")"
-
-
-data LabText = Device MagicEffect | SpellText SpellRecord
-    deriving ( Ord, Eq, Generic )
-instance ToJSON LabText
-instance FromJSON LabText 
 
 textLevel :: LabText -> Int
 textLevel (Device ob) = effectLevel ob
 textLevel (SpellText ob) = lvl ob
 
--- | A magic effect that can be instilled in an enchanted device.
-data MagicEffect = MagicEffect
-           { effectName :: String
-           , effectLevel :: Int
-           , effectTechnique :: String
-           , effectTechniqueReq :: [String]
-           , effectForm :: String
-           , effectFormReq :: [String]
-           , effectRange :: String        -- ^ Range
-           , effectDuration :: String     -- ^ Duration
-           , effectTarget :: String       -- ^ Target
-           , effectModifiers :: [ String ]
-           , effectTrigger :: String
-           , effectDesign :: String     -- ^ Level calculation
-           , effectDescription :: [String]
-           , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
-           , effectReference :: String  -- ^ Source reference
-           , effectDate :: SeasonTime   -- ^ Time of investment
-           }
-           deriving (Show, Eq, Ord, Generic)
 
 effectRDT :: MagicEffect -> String
 effectRDT eff = showStrList [ r, d, t ]
@@ -331,27 +184,4 @@ effectRDT eff = showStrList [ r, d, t ]
          t = f "Target" (effectTarget eff)
          f _ "" = ""
          f s x = s ++ ": " ++ x
-
-
-
-instance ToJSON MagicEffect
-instance FromJSON MagicEffect where
-    parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
-        <$> v .: "name" 
-        <*> v .: "level" 
-        <*> v .: "technique" 
-        <*> v  `parseCollapsedList` "techiqueReq" 
-        <*> v .: "form" 
-        <*> v  `parseCollapsedList` "formReq" 
-        <*> v .:? "range" .!= ""
-        <*> v .:? "duration" .!= ""
-        <*> v .:? "target" .!= ""
-        <*> v `parseCollapsedList` "modifiers" 
-        <*> v .:? "trigger"  .!= ""
-        <*> v .:? "design"  .!= ""
-        <*> v `parseCollapsedList` "description" 
-        <*> v `parseCollapsedList` "comment" 
-        <*> v .:? "reference"  .!= ""
-        <*> v .:? "season" .!= NoTime
-
 

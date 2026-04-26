@@ -35,7 +35,6 @@ import ArM.Char.Character
 import ArM.Char.Advancement (prepareAdvancement,validate)
 import ArM.Char.CharGen (prepareCharacter)
 import ArM.Cov.Covenant
-import ArM.Types.Library
 import ArM.Types
 import ArM.Types.Saga
 import ArM.Helper

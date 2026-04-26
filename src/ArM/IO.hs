@@ -29,7 +29,6 @@ import ArM.Markdown
 import ArM.Types.Character
 import ArM.Cov.Covenant
 import ArM.Types.Saga
-import ArM.Types.Library
 import ArM.Types.Possession
 import ArM.Types.Advancement
 import ArM.Types

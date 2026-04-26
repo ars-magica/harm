@@ -71,7 +71,6 @@ common harm-deps
                        , ArM.Types.Calendar
                        , ArM.Types.Saga
                        , ArM.Types.KeyPair
-                       , ArM.Types.Library
                        , ArM.Internal.Book
                        , ArM.Types.Character
                        , ArM.Types.Advancement
