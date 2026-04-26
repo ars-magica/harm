@@ -19,8 +19,17 @@
 -----------------------------------Types.------------------------------------------
 module ArM.Types.Functions where 
 
--- import ArM.Types.Trait
+import ArM.Helper
+import ArM.Types.Trait
 import ArM.Types
+import qualified ArM.Internal.Book as IB
+
+import Data.Text       (splitOn, unpack, pack)
+import Data.Maybe
+import Data.List
+import Text.Read             (readMaybe)
+
+import ArM.Debug.Trace
 
 -- ** Sorting Traits
 

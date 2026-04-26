@@ -43,6 +43,7 @@ module ArM.Types.Possession ( -- * Posessions
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Trait
+import ArM.Types.Functions
 import ArM.DB.Spell
 import ArM.DB.Weapon
 import ArM.Helper

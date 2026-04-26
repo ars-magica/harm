@@ -66,8 +66,6 @@ import ArM.Types.Lab
 import ArM.DB.Spell
 import ArM.DB.Weapon
 
--- import qualified ArM.Internal.Book as IB
-
 import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
