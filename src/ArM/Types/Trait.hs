@@ -33,9 +33,10 @@ module ArM.Types.Trait (
          , Age(..)
          -- * Convenience Functions
          , TraitClass(..)
-         , fote
          -- * Aging
          , module ArM.Types.Internal.Aging
+         -- * TraitKey
+         , module ArM.Types.Internal.TraitKey
          -- * Books
          , BookStats(..)
          , Book(..)
@@ -47,10 +48,7 @@ module ArM.Types.Trait (
          , LabText(..)
          , visArt
          , isVis
-         , isWeapon
-         , isArmour
          , isAC
-         , isMagic
          , isNone
          -- ** Magic and Enchantments
          , Enchantment(..)
@@ -673,15 +671,6 @@ isVis :: Possession -> Bool
 isVis c = isJust $ itemArt c
 
 
-isWeapon :: Possession -> Bool
-isWeapon p = (weapon p /= []) || (weaponStats p /= [])
-
-isArmour :: Possession -> Bool
-isArmour p = (armour p /= []) || (armourStats p /= [])
-isMagic :: Possession -> Bool
-isMagic p = enchantment p /= MundaneItem
-isAC :: Possession -> Bool
-isAC p = isJust $ acTo p
 
 
 -- == Books
@@ -751,6 +740,9 @@ getPN1 p | weapon p /= [] = head $ weapon p
          | isAC p = "AC to " ++ (fromJust $ acTo p)
          | otherwise = "Item"
 
+isAC :: Possession -> Bool
+isAC p = isJust $ acTo p
+
 instance Show Possession where
     show p = name p ++ cnt
        where cnt | count p == 1 = ""
@@ -803,5 +795,3 @@ instance FromJSON MagicEffect where
         <*> v `parseCollapsedList` "comment" 
         <*> v .:? "reference"  .!= ""
         <*> v .:? "season" .!= NoTime
-
-

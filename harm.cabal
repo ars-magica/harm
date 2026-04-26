@@ -78,6 +78,7 @@ common harm-deps
                        , ArM.Types.ProtoTrait
                        , ArM.Types.Possession
                        , ArM.Types.Trait
+                       , ArM.Types.Functions
                        , ArM.Types.Internal.Aging
                        , ArM.Types.Internal.TraitKey
                        , ArM.Types.HarmObject

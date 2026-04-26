@@ -67,7 +67,8 @@ toPossesssion (CompositeItem ob) = ob
 toPossesssion (SimpleBook ob) = wrapBook ob
 toPossesssion (SimpleItem st) = setName st defaultPossession
 
-enchantmentName :: Enchantment -> String enchantmentName (LesserItem e) = effectName e
+enchantmentName :: Enchantment -> String
+enchantmentName (LesserItem e) = effectName e
 enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _) = "Talisman"
@@ -108,7 +109,6 @@ visArt = itemArt
 isVis :: Possession -> Bool
 isVis c = isJust $ itemArt c
 
-
 isWeapon :: Possession -> Bool
 isWeapon p = (weapon p /= []) || (weaponStats p /= [])
 
@@ -116,8 +116,6 @@ isArmour :: Possession -> Bool
 isArmour p = (armour p /= []) || (armourStats p /= [])
 isMagic :: Possession -> Bool
 isMagic p = enchantment p /= MundaneItem
-isAC :: Possession -> Bool
-isAC p = isJust $ acTo p
 
 isMundaneEquipment :: Possession -> Bool
 isMundaneEquipment p = isEquipment p && (not . isMagic) p
