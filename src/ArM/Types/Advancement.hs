@@ -469,7 +469,7 @@ data CovAdvancement = CovAdvancement
 
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
-noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] [] []
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] [] [] "No Advancement"
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
@@ -484,7 +484,7 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "lost'"
         <*> v `parseCollapsedList` "acquired"
         <*> v `parseCollapsedList` "lost"
-        <*> v .:? "type" .:? "In Game"
+        <*> v .:? "type" .!= "In Game"
 
 
 
@@ -503,5 +503,6 @@ instance ContractAdvancement CovAdvancement where
      , lost' = lost' aa ++ lost' ad
      , acquired = acquired aa ++ acquired ad
      , lost = lost aa ++ lost ad
+     , caType = caType aa
      } 
      where (Adv aa ad) = aug

@@ -34,7 +34,6 @@ module ArM.Char.Character (
                           , applyAdvancement 
                           , agePT
                           -- * Aging
-                          , module ArM.Types.Aging
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions
@@ -44,7 +43,6 @@ module ArM.Char.Character (
 import Data.Maybe 
 
 import ArM.Types.Advancement
-import ArM.Types.Aging
 import ArM.Char.Inference
 import ArM.Char.CharacterSheet
 import ArM.Char.Virtues

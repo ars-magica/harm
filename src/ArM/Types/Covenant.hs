@@ -33,13 +33,10 @@ import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Maybe
-import Data.List 
 import Control.Monad
 
-import ArM.Debug.Trace
-
-import ArM.Types.ProtoTrait
-import ArM.Types.Library
+import ArM.Types.Trait
+-- import ArM.Types.ProtoTrait
 import ArM.Types.Advancement
 import ArM.Types.Character
 import ArM.Types.Lab
