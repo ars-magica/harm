@@ -114,13 +114,10 @@ sheetWeapon1 db cs w = fromMaybe [] sw
 -- |
 -- Compute the CombatLine from a CombatOption without explicit ability
 implicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine -> CombatLine
-implicitAbility db cs co df
-  | ws == [] = df { combatComment = "No weapon" }
-  | otherwise = explicitAbility db cs co ab df
+implicitAbility db cs co df = f $ sheetWeapon db cs wstr
    where wstr = combatWeapon co
-         ws = sheetWeapon db cs wstr
-         w = head ws
-         ab = weaponAbility w
+         f [] = df { combatComment = "No weapon" }
+         f (x:_) = explicitAbility db cs co (weaponAbility x) df
 
 addShield :: WeaponDB -> CharacterSheet -> String -> Maybe String -> CombatLine -> CombatLine
 addShield _ _ _ Nothing df = df

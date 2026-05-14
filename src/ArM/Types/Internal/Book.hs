@@ -15,7 +15,7 @@ module ArM.Types.Internal.Book ( readBookCSV ) where
 
 import ArM.Helper
 import ArM.Types.Internal.Trait
-import ArM.Types.HarmObject
+-- import ArM.Types.HarmObject
 import qualified ArM.Internal.Book as IB
 
 import ArM.Debug.Trace
@@ -44,9 +44,11 @@ readBookCSV fn = IB.readBookCSV fn >>= return . map fromRawBook
 
 -- * Library
 
+{-
 -- | Get the unique identifier of an original book
 bookKey :: Book -> HarmKey
 bookKey = BookKey . bookID
+-}
 
 
 -- * CSV

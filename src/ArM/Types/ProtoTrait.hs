@@ -32,7 +32,6 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
                       , TraitKey(..)
                       , advanceTraitList
                       , defaultPT
-                      , spellKeyName
                       , Weapon(..)
                       , Armour(..)
                       , processChar
@@ -592,16 +591,14 @@ processChar c = c
 
 
 processChar' :: Characteristic -> Characteristic 
-processChar' c | charBonusList c == [] = c
-     | otherwise = processChar'' $ c { charBonusList = sortOn f $ charBonusList c }
-       where f = abs . fst
-processChar'' :: Characteristic -> Characteristic 
-processChar'' c | charBonusList c == [] = c
-               | otherwise  = processChar'' $ c { charScore = sc, charBonusList = xs }
-          where x = head $ charBonusList c
-                xs = tail $ charBonusList c
-                sc | fst x < 0 = max (charScore c + snd x) (fst x)
-                   | otherwise = min (charScore c + snd x) (fst x)
+processChar' c = c { charScore = sc, charBonusList = xs }
+   where (sc,xs) = processChar'' (charScore c, sortOn (abs . fst) $ charBonusList c)
+
+processChar'' :: (Int,[(Int,Int)]) -> (Int,[(Int,Int)]) 
+processChar'' (x,[]) = (x,[])
+processChar'' (y,x:xs) = (sc,x:xs)
+          where sc | fst x < 0 = max (y + snd x) (fst x)
+                   | otherwise = min (y + snd x) (fst x)
 
 -- ** Convenience Functions
 

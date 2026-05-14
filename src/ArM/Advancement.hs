@@ -36,8 +36,11 @@ import ArM.Char.Advancement (prepareAdvancement,validate)
 import ArM.Char.CharGen (prepareCharacter)
 import ArM.Cov.Covenant
 import ArM.Types
+import ArM.Types.Trait
 import ArM.Types.Saga
 import ArM.Helper
+
+import ArM.Debug.Trace
 
 -- * Advancement
 
@@ -101,17 +104,20 @@ stepSaga saga = saga { sagaState = st' }
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
-advanceSaga saga = reverse $ saga:advanceSaga' ts saga
-   where ts = seasons $ sagaFile saga
+advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
+
+-- | List of the last season of advancement for each state output.
+advSeasons :: Saga -> [SeasonTime]
+advSeasons = map seasonPrev . sort . seasons . sagaFile 
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
-advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
+advanceSaga' (t:ts) saga0 = trace (show t) $ n:advanceSaga' ts n
     where n = f t saga0
-          f ssn saga | NoTime == nextSeason saga = saga 
-                     | ssn < nextSeason saga = saga 
-                     | otherwise = f ssn $ stepSaga saga
-
+          f ssn saga | NoTime == nextSeason saga = trace "NoTime" saga 
+                     | ssn < nextSeason saga = trace (show nx) saga 
+                     | otherwise = trace ("Step " ++ show nx) $ f ssn $ stepSaga saga
+          nx = nextSeason saga0
 -- |
 -- Advance listed covenants and characters one season forward.
 -- The advancement happens jointly, with several passes, to resolve
@@ -211,29 +217,27 @@ instance StepAdvanceAdv Advancement where
    stepAdvancement _ = Nothing
 
 instance StepAdvance Character where
-   nextStep ns ch | fs == [] = CharStep ch Nothing
+   nextStep ns ch = nextStep' fs
+        where fs = futureAdvancement ch
+              nextStep' [] = CharStep ch Nothing
+              nextStep' (adv:_)  
                  | season adv > ns = CharStep ch Nothing
-                 | otherwise = CharStep new  (Just a)
-        where a = prepareAdvancement (fromJust st) adv
+                 | otherwise = CharStep new  (Just $ prepareAdvancement (fromJust st) adv)
+              new = ch { futureAdvancement = mtail fs }
               st = state ch
-              adv = head fs
-              as = tail fs
-              fs = futureAdvancement ch
-              new = ch { futureAdvancement = as }
    completeStepMaybe (CharStep c Nothing) = Just c 
    completeStepMaybe (CharStep c (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
 instance StepAdvance Covenant where
-   nextStep ns cov | fs == [] = CovStep cov Nothing
+   nextStep ns cov = nextStep' fs
+        where fs = futureCovAdvancement cov
+              nextStep' [] = CovStep cov Nothing
+              nextStep' (adv:_)  
                  | season adv > ns = CovStep cov Nothing
-                 | otherwise = CovStep new  (Just a)
-        where a = Adv  adv noCovAdvancement
-              adv = head fs
-              as = tail fs
-              fs = futureCovAdvancement cov
-              new = cov { futureCovAdvancement = as }
+                 | otherwise = CovStep new  (Just $ Adv adv noCovAdvancement)
+              new = cov { futureCovAdvancement = mtail fs }
    completeStepMaybe (CovStep c Nothing) = Just c 
    completeStepMaybe (CovStep c (Just a)) = 
         Just $ c { pastCovAdvancement = a:pastCovAdvancement c }

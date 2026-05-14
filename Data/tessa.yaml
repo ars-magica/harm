@@ -1,4 +1,4 @@
-charID: Tessa Tanagh
+charID: Tessa
 concept:
   appearance: Small frame, a ltttle stocky but agile.  Half-long, brown, straight
     hair.
@@ -18,72 +18,8 @@ futureAdvancement:
   - ability: Animal Ken
     xp: 5
   mode: Adventure
-  season: Winter 1247
+  season: Summer 1220
   sourceQuality: 10
-- changes:
-  - ability: Music
-    xp: 4
-  mode: Practice
-  season: Spring 1247
-  sourceQuality: 4
-- changes:
-  - ability: Hunt
-    xp: 2
-  mode: Exposure
-  season: Summer 1247
-  sourceQuality: 2
-- changes:
-  - ability: Music
-    xp: 4
-  mode: Practice
-  season: Autumn 1247
-  sourceQuality: 4
-- changes:
-  - ability: Swim
-    xp: 5
-  - ability: Animal Ken
-    xp: 5
-  - aging:
-      agingROll: 13
-      agingRollDie: 9
-  - agingPts: 2
-    characteristic: Int
-  - agingPts: 2
-    characteristic: Com
-  - agingPts: 1
-    characteristic: Pre
-  mode: Adventure
-  season: Winter 1248
-  sourceQuality: 10
-- changes:
-  - ability: Legerdemain
-    xp: 4
-  mode: Practice
-  season: Spring 1248
-  sourceQuality: 4
-- changes:
-  - ability: Hunt
-    xp: 2
-  mode: Exposure
-  season: Summer 1248
-  sourceQuality: 2
-- changes:
-  - ability: Legerdemain
-    xp: 4
-  mode: Practice
-  season: Autumn 1248
-  sourceQuality: 4
-- changes:
-  - ability: Awareness
-    xp: 2
-  - aging:
-      agingROll: 13
-      agingRollDie: 6
-  - agingPts: 1
-    characteristic: Pre
-  mode: Exposure
-  season: Winter 1249
-  sourceQuality: 2
 pregameAdvancement:
 - changes:
   - ability: 'Native Language: Irish'

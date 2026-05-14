@@ -19,6 +19,7 @@ module ArM.Markdown ( Markdown(..)
                     , artVisMD
                     , italicOString
                     , storyOList
+                    , enchantedMD  -- Unused
                     ) where
 
 import Data.Maybe 
@@ -29,7 +30,7 @@ import ArM.Char.Character
 import ArM.Types.ProtoTrait
 import ArM.Char.Combat
 import ArM.Cov.Saga
-import ArM.Types.Possession
+-- import ArM.Types.Trait
 import ArM.Cov.Covenant
 import ArM.Types.Saga
 import ArM.Types
@@ -252,13 +253,14 @@ instance Markdown Enchantment  where
    printMD MundaneItem = OString "Mundane Item" 
 
 enchantedMD :: Possession -> Enchantment -> OList
-enchantedMD ob MundaneItem = OList []
+enchantedMD _ MundaneItem = OList []
 enchantedMD ob (LesserItem eff) = OList 
          [ OString $ pName ob ++ tf ++ "lesser enchanted device"
                    , f $ printMD eff ]
-   where f (OList xs) = foldOList $ OList $ tail xs
+   where f (OList xs) = foldOList $ OList $ mtail xs
          f os = os
          tf = " " ++ effectTeFo eff ++ " "
+
 enchantedMD ob enc = OList [ OString $ pName ob 
                           , printMD $ enc
                            ]
@@ -296,7 +298,7 @@ pMD :: Possession -> OList
 pMD ob = pMDgen ob pMDlist
 
 pMDgen :: Possession -> [Possession -> OList] -> OList
-pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ob) 
+pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
 
 labtextMD :: Possession -> OList
 labtextMD ob | labTexts  ob == []  =  OList []
@@ -433,12 +435,12 @@ instance Markdown CharacterSheet where
 
 instance Markdown CharacterState where
    printMD c = OList
-       [ OString $ "## " ++ (show $ charTime c )
+       [ OString $ "## Character Sheet " ++ (show $ gameSeason c )
        , OString ""
        , printMD $ characterSheet c
        ]
    printSheetMD saga c = OList
-       [ OString $ "## " ++ (show $ charTime c) 
+       [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
        , OString ""
        , printSheetMD saga $ characterSheet c
        ]
@@ -746,7 +748,7 @@ instance Markdown Saga where
 
 instance Markdown SagaState where
     printMD saga = OList 
-        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (seasonTime saga)
+        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (gameSeason saga)
         , OString ""
         , characterIndex $ characters saga
         , OString ""

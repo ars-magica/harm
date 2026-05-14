@@ -25,9 +25,14 @@ import Data.OList
 
 -- import ArM.Debug.Trace
 
+-- | Return the the annals of the saga, represented as a list of 
+-- `AnnalSeason` objects, each of which comprising the events of one season.
 sagaAnnals :: SagaState -> [ AnnalSeason ]
 sagaAnnals = getSeasonAnnals . getAugMerged
 
+-- | The `AnnalSeason` object collects all events of a season,
+-- represented as a list of advancement objects for characters and
+-- covenants.
 data AnnalSeason = AnnalSeason SeasonTime [EitherAug]
 
 instance Timed AnnalSeason where

@@ -9,17 +9,26 @@
 -- Description :  
 --    harm is a command-line interface to character generation for Ars Magica.
 --
--- Characters and their advancement are specified in a JSON format, which
--- is validated and converted to markdown file, showing the state of the
+-- Characters and their advancement are specified in a JSON or YAML format,
+-- which is validated and converted to markdown file, showing the state of the
 -- characters at different points in time.
 --
 -- Covenant generation and advancement is also covered.
 --
 -- This is work in progress, and may features are missing.
 --
+-- == Implementation
+--
+-- The `main` function essentially only calls two functions from `ArM.IO`.
+-- First `readSaga` to load the saga file and all its constituent files,
+-- and the `writeSaga` to process all the advancements and write the resulting
+-- character sheets.
+--
+-- See `ArM.IO` for a description of these two files.
+--
 -----------------------------------------------------------------------------
 
-module Main where
+module Main (main) where
 
 import System.Environment
 import System.Console.GetOpt
@@ -85,6 +94,8 @@ armcharOpts argv =
          (_,_,errs) -> ioError (userError (concat errs ++ usageInfo header options))
      where header = "Usage: armchar [OPTION...] "
 
+-- | The program will read the given saga file and constituent files and
+-- generate all the character and covenant sheets requested by the saga file.
 main :: IO ()
 main = do 
      putStrLn "Starting: armchar ..."

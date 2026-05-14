@@ -37,6 +37,15 @@ module ArM.Types.Internal.Possession ( -- * Posessions
                             , isLabText
                             , LabText(..)
                             , wrapBooks
+                            , textLevel
+                            -- * Unused -- to be reviewed
+                            , toPossession  
+                            , isTractatus
+                            , parseCharged
+                            , parseTalisman
+                            , parseGreater
+                            , parseLesser
+                            , enchantmentName
                             ) where
 
 import ArM.Types.HarmObject
@@ -44,7 +53,7 @@ import ArM.Types.Internal.Trait
 import ArM.DB.Spell
 import ArM.Helper
 
-import GHC.Generics
+-- import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Key
 import Data.Aeson.Extra
@@ -76,10 +85,10 @@ instance FromJSON RawPossession where
                          <|> (SimpleBook <$> v .: "book")
     parseJSON _ = mzero
 
-toPossesssion :: RawPossession -> Possession
-toPossesssion (CompositeItem ob) = ob
-toPossesssion (SimpleBook ob) = wrapBook ob
-toPossesssion (SimpleItem st) = setName st defaultPossession
+toPossession :: RawPossession -> Possession
+toPossession (CompositeItem ob) = ob
+toPossession (SimpleBook ob) = wrapBook ob
+toPossession (SimpleItem st) = setName st defaultPossession
 
 enchantmentName :: Enchantment -> String
 enchantmentName (LesserItem e) = effectName e

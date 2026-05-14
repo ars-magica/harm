@@ -94,8 +94,6 @@ fullConceptName c = charName c ++ (f $ house c)
             f (Just x) | take 2 x == "ex" = " " ++ x
                        | otherwise  = " ex " ++ x
 
-characterSeason :: Character -> SeasonTime
-characterSeason = fromMaybe NoTime . fmap charTime . state
 
 -- |
 -- = CharacterConcept
@@ -196,5 +194,7 @@ instance FromJSON CharacterState where
         <*> v .: "charType" 
         <*> v .:? "memberOf" 
         <*> fmap maybeList ( v .:? "traits" )
+instance Timed CharacterState where
+    season = charTime 
 instance Timed Character where
-    season = characterSeason
+    season = fromMaybe NoTime . fmap season . state
