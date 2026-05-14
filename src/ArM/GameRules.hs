@@ -23,8 +23,8 @@ import Data.Maybe
 -- By RAW it should be Int, but some troupes prefer to count
 -- fractional XP when affinities are involved.  This requires
 -- changing to a floating point type.
-type XPType = Float
--- type XPType = Int
+-- type XPType = Float
+type XPType = Int
 
 -- | Calculate the XP cost for a given score on the pyramid scale
 pyramidScore :: Num a => Int -> a
