@@ -11,13 +11,8 @@ description:
   test case for the hArM software.
 rootDirectory: pages/
 seasons:
-- Summer 1254
-- Winter 1255
-- Winter 1256
-- Winter 1257
-- Winter 1258
-- Winter 1259
-- Winter 1264
+- Winter 1219
+- Winter 1220
 spellFile: Data/spells.csv
 title: Hibernia Saga (Contested Lands)
 weaponFile: Data/weapons.csv
