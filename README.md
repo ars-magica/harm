@@ -11,7 +11,6 @@ essentially
 This provides a CLI tool to produce character sheets and validation
 reports from the character defined in JSON.
 
-
 Further documentation on the
 [CLI using JSON](docs/CLI%20using%20JSON.md)
 is found in the docs hierarchy.  

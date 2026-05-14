@@ -5,9 +5,9 @@ cabal-version:       3.0
 
 description: 
      The harm module provides a CLI interface to process Ars Magica
-     characters from JSON files and produce character sheets in Markdown.
+     characters from JSON or YAML files and produce character sheets in Markdown.
 
-     The JSON file normally contains a list of advancement stages, and the
+     The JSON/YAML file normally contains a list of advancement stages, and the
      actual state of the character at a given time is computed.
 
      The libraries are designed with the intention of creating client/server
@@ -15,6 +15,9 @@ description:
 
      The Data.* modules are designed to be generic, while the ArM.*
      modules are specific to Ars Magica.
+
+     For a top down description of the implementation, one should start with
+     the `Main` module below.
 
 name:                harm
 version:             0.1.0.0
