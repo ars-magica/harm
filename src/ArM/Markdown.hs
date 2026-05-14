@@ -26,7 +26,7 @@ import Data.Maybe
 import Data.List 
 import Control.Monad
 
-import ArM.Char.Character 
+import ArM.Character 
 import ArM.Types.ProtoTrait
 import ArM.Cov.Saga
 -- import ArM.Types.Trait

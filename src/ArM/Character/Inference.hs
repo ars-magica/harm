@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Inference
+-- Module      :  ArM.Character.Inference
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -14,14 +14,14 @@
 -- `Augmented Advancement`.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Inference (addInference) where
+module ArM.Character.Inference (addInference) where
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 import ArM.Types.Character
-import ArM.Char.CharacterSheet
+import ArM.Character.CharacterSheet
 import ArM.Types
-import ArM.Char.Virtues
+import ArM.Character.Virtues
 
 import Data.Maybe 
 

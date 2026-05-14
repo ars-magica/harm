@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Validation
+-- Module      :  ArM.Character.Validation
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -16,7 +16,7 @@
 --
 -----------------------------------------------------------------------------
 
-module ArM.Char.Virtues (
+module ArM.Character.Virtues (
                         -- * Trait inference
                         inferTraits
                         -- * Bonus XP in-game

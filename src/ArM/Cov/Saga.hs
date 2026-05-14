@@ -26,7 +26,7 @@ import Data.List
 
 import ArM.Advancement
 import ArM.Types.Covenant
-import ArM.Char.Character
+import ArM.Character
 import ArM.Types
 import ArM.Types.Saga
 import Data.OList

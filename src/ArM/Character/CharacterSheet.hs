@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.CharacterSheet
+-- Module      :  ArM.Character.CharacterSheet
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -13,7 +13,7 @@
 -- such as casting totals.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.CharacterSheet ( CharacterSheet(..)
+module ArM.Character.CharacterSheet ( CharacterSheet(..)
                                , sheetArtScore
                                , sheetAbilityScore
                                , sheetCharacteristicScore

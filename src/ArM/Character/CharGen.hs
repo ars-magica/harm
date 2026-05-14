@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.CharGen
+-- Module      :  ArM.Character.CharGen
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -16,9 +16,15 @@
 -- which does not include a persistent state.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.CharGen (prepareCharacter) where
+module ArM.Character.CharGen (prepareCharacter) where
 
-import ArM.Char.Character
+import ArM.Character.Character
+import ArM.Character.CharacterSheet
+-- import ArM.Character.Advancement
+import ArM.Character.Inference
+import ArM.Character.Virtues
+import ArM.Types.Character
+import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 import ArM.Types
 import ArM.GameRules

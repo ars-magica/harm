@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Advancement
+-- Module      :  ArM.Character.Advancement
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -16,9 +16,14 @@
 -- individual character in isolation.
 --
 -----------------------------------------------------------------------------
-module ArM.Char.Advancement ( prepareAdvancement, validate ) where
+module ArM.Character.Advancement ( prepareAdvancement, validate ) where
 
-import ArM.Char.Character
+import ArM.Character.Character
+import ArM.Character.Inference
+import ArM.Character.CharacterSheet
+import ArM.Character.Virtues
+import ArM.Types.Character
+import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 -- import ArM.Types.Library
 import ArM.Types

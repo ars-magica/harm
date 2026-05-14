@@ -31,9 +31,9 @@ module ArM.Advancement ( advanceSaga
 import Data.Maybe 
 import Data.List 
 
-import ArM.Char.Character
-import ArM.Char.Advancement (prepareAdvancement,validate)
-import ArM.Char.CharGen (prepareCharacter)
+import ArM.Character
+-- import ArM.Char.Advancement (prepareAdvancement,validate)
+-- import ArM.Char.CharGen (prepareCharacter)
 import ArM.Cov.Covenant
 import ArM.Types
 import ArM.Types.Trait

@@ -66,10 +66,11 @@ common deps
 
 common harm-deps
   import:    deps
-  other-modules:       ArM.Char.Character
+  other-modules:       ArM.Character
                        -- , TestModule
-                       , ArM.Char.CharacterSheet
-                       , ArM.Char.Advancement
+                       , ArM.Character.Character
+                       , ArM.Character.CharacterSheet
+                       , ArM.Character.Advancement
                        , ArM.Types
                        , ArM.Types.Calendar
                        , ArM.Types.Saga
@@ -89,13 +90,13 @@ common harm-deps
                        , ArM.Types.Story
                        , ArM.Types.Lab
                        , ArM.Types.HarmSagaObject
-                       , ArM.Char.Combat
+                       , ArM.Character.Combat
                        , ArM.DB.CSV
                        , ArM.DB.Spell
                        , ArM.DB.Weapon
-                       , ArM.Char.CharGen
-                       , ArM.Char.Inference
-                       , ArM.Char.Virtues
+                       , ArM.Character.CharGen
+                       , ArM.Character.Inference
+                       , ArM.Character.Virtues
                        , ArM.Markdown
                        , ArM.SeasonDisplay
                        , ArM.Cov.Internal.CostBP

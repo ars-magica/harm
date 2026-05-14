@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Char.Combat
+-- Module      :  ArM.Character.Combat
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,11 +17,11 @@
 -- for `show`, sorting, and JSON.
 --
 -----------------------------------------------------------------------------------
-module ArM.Char.Combat ( CombatLine(..)
+module ArM.Character.Combat ( CombatLine(..)
                        , computeCombatStats
                        ) where
 
-import ArM.Char.CharacterSheet
+import ArM.Character.CharacterSheet
 import ArM.Types.Trait
 import ArM.DB.Weapon
 import ArM.Helper
