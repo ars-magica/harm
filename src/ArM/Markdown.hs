@@ -8,9 +8,9 @@
 --
 -- Description :  Classes and instances to make MarkDown output.
 --
--- The core of this module is the `Markdown` class and its `printMD`
+-- The core of this module is the 'Markdown' class and its 'printMD'
 -- function which renders an object in Markdown.  There is also 
--- a `LongSheet` class with a `printSheetMD` function for a more
+-- a 'LongSheet' class with a 'printSheetMD' function for a more
 -- verbose character sheet.
 --
 -----------------------------------------------------------------------------
@@ -98,7 +98,7 @@ advancementMD c = OList [ ao, bo ]
 -- |
 -- = The Markdown Class
 
--- | Class defining `printMD` to render in Markdown.
+-- | Class defining 'printMD' to render in Markdown.
 class Markdown a where
 
      -- | This is the basic function to render in Markdown
@@ -106,7 +106,7 @@ class Markdown a where
              -> OList       -- ^ list of lines for output
 
      -- | This is a hack to augment characters using extra resources
-     -- By default, it is identical to `printMD`.
+     -- By default, it is identical to 'printMD'.
      printSheetMD :: Saga      -- ^ Saga including databases for spells etc.
                 -> a         -- ^ object to render
                 -> OList     -- ^ list of lines for output
@@ -135,7 +135,7 @@ instance Markdown ProtoTrait where
    printMD = OString . show 
 
 -- | Render a list of objects as a comma-separated list on a single
--- line/paragraph.  This works for any instance of `Show`.
+-- line/paragraph.  This works for any instance of 'Show'.
 showlistMD :: Show a => String -> [a] -> OList
 showlistMD _ [] = OList []
 showlistMD s xs = OList [ OString s
@@ -145,7 +145,7 @@ showlistMD s xs = OList [ OString s
 -- = Markdown for the Character types
  
 -- |
--- The `CharacterConcept` is set as a description list.
+-- The 'CharacterConcept' is set as a description list.
 -- 
 -- This may cause problems with long text values.  It would be worth distinguishing
 -- between more fields and use a differfent formatting where long text is expected.
@@ -289,7 +289,7 @@ armourMD ob | isArmour ob = OList
 
 -- | Complete description of a composite item.
 -- This is awkward for most items, particularly because names and
--- titles tend to be duplicated, once for the `Possession` object 
+-- titles tend to be duplicated, once for the 'Possession' object 
 -- and once for the constituent object, but it is necessary for
 -- complex items such as enchanted books, magic swords, as well as
 -- antologies.
@@ -583,7 +583,7 @@ artMD' = ("":) . (h1:) . (h2:) . map artLine . sortTraits . artList
          h2 = "| -: | -: | -: |"
 
 
--- | Auxiliary for `artMD`, rendering a single line in the table
+-- | Auxiliary for 'artMD', rendering a single line in the table
 artLine :: Art -> String
 artLine ar = "| " ++ artName ar  ++ " | " ++ show (artScore ar) ++ " | " ++ showNum (artExcessXP ar) ++ " |"
 
@@ -600,7 +600,7 @@ artVisMD' = ("":) . (h1:) . (h2:) . artVisBody
    where h1 = "| Art  | Score | XP | Vis |" 
          h2 = "| -: | -: | -: | -: |"
 
--- | Auxiliar for `artVisMD'` rendering the body of the table.
+-- | Auxiliar for 'artVisMD'' rendering the body of the table.
 artVisBody :: CharacterSheet
            -> [ String ]
 artVisBody cs = map artVisLine $ mergeArt as bs
@@ -625,7 +625,7 @@ mergeArt ((x1,x2,x3,x4):xs) ((y1,y2):ys)
            f _ = trace "ERROR: Not an art in mergeArt." ""
 
 
--- | Auxiliary for `artVisMD`, rendering a single line in the table
+-- | Auxiliary for 'artVisMD', rendering a single line in the table
 artVisLine :: (TraitKey,String,Int,XPType,Int) -> String
 artVisLine (_,s,i1,i2,i3) = 
         "| " ++ s  ++ " | " ++ show i1 ++ " | " ++ showNum i2 ++ " | " ++ show i3 ++ " |"
@@ -656,7 +656,7 @@ masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
 
 
 -- | Set a list of spells.
--- Each spell is set using `spellMD`, and the result is indented as a
+-- Each spell is set using 'spellMD', and the result is indented as a
 -- hierarchical list.
 printFullGrimoire :: SpellDB -> [Spell] -> OList
 printFullGrimoire db xs = OList [ OString "## Grimoire"
@@ -667,7 +667,7 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
                             ++ " levels of spells."
                          ]
    where ys = [ (x,f x) | x <- xs ]
-         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
+         f x = spellTRecord x 'mplus' spellLookup (traitKey x) db 
 
 
 -- | Return the sum of levels in the list of spells.
@@ -698,18 +698,18 @@ showRDT sp = "Range: " ++ r ++
              "; Target: " ++ t
    where (r,d,t) = rdt sp
 
--- | Set the Combat Stats of the Character as an `OList`
+-- | Set the Combat Stats of the Character as an 'OList'
 printCombatMD :: Saga -> CharacterSheet -> OList
 printCombatMD saga cs = OList x
     where tab = computeCombatStats ( weaponsDB saga ) cs
           x | tab == [] = []
             | otherwise = [ combatHead, combatBody tab ]
 
--- | Set the table body for `printCombatMD`
+-- | Set the table body for 'printCombatMD'
 combatBody :: [CombatLine] -> OList
 combatBody = OList . map combatBodyLine
 
--- | Set a single line for `printCombatMD`
+-- | Set a single line for 'printCombatMD'
 combatBodyLine :: CombatLine -> OList
 combatBodyLine c = OString $ "| " ++ (combatLabel c) ++ 
                             " | " ++ (show $ combatInit c) ++
@@ -721,7 +721,7 @@ combatBodyLine c = OString $ "| " ++ (combatLabel c) ++
                             " | " ++ (combatComment c) ++
                             " |"
 
--- | Set the header for `printCombatMD`
+-- | Set the header for 'printCombatMD'
 combatHead :: OList
 combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
                    , OString "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
