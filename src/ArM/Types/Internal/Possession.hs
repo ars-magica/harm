@@ -44,7 +44,7 @@ import ArM.Types.Internal.Trait
 import ArM.DB.Spell
 import ArM.Helper
 
-import GHC.Generics
+-- import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Key
 import Data.Aeson.Extra

@@ -720,11 +720,19 @@ fixPN f p | itemName p /= "" = p
           | otherwise = setName (f p) p
 
 getPN1 :: Possession -> String 
+getPN1 p = fromMaybe "Item" . foldl mplus Nothing . map ($ p) $ itemNames
+{-
 getPN1 p | weapon p /= [] = head $ weapon p
          | armour p /= [] = head $ armour p
          | isJust (visArt p) = fromJust (visArt p) ++ " vis"
          | isAC p = "AC to " ++ (fromJust $ acTo p)
          | otherwise = "Item"
+-}
+mhead :: [a] -> Maybe a
+mhead (x:_) = Just x
+mhead [] = Nothing
+itemNames :: [ Possession -> Maybe String ]
+itemNames = [ mhead . weapon, mhead . armour, fmap ( "AC to " ++ ) . visArt, fmap ( ++ " vis" ) . acTo ]
 
 isAC :: Possession -> Bool
 isAC p = isJust $ acTo p
