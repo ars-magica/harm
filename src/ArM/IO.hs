@@ -9,8 +9,9 @@
 -- Some objects, like the Spell Database, are stored in CSV, others
 -- in JSON or YAML, including Character and Covenant.
 --
--- The submodules `ArM.IO.*` provide technical documentation for the
+-- The submodules ArM.IO.* provide technical documentation for the
 -- constituent functions.  
+--
 module ArM.IO (readSaga,writeSaga) where
 
 import ArM.IO.Read
@@ -25,9 +26,9 @@ import Data.OList
 
 -- | Load the saga and all its constituent objects from the given file.
 --
--- This calls both `readSagaFile` and `loadSaga`.
+-- This calls both 'readSagaFile' and 'loadSaga'.
 -- Characters and covenants are loaded and advanced.
--- The `Saga` object contains a list of characters and one of convenants.
+-- The 'Saga' object contains a list of characters and one of convenants.
 readSaga :: String -- ^ Filename
          -> IO (Maybe Saga)
 readSaga fn = readSagaFile fn >>= passMaybe loadSaga
