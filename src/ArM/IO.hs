@@ -3,8 +3,7 @@
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 -- Maintainer  :  hg+gamer@schaathun.net
--- Description :  
---    High-level functions to parse ArMChar files and generate markdown sheets.
+-- Description :  High-level functions to parse ArMChar files and generate markdown sheets.
 --
 -- |
 -- Some objects, like the Spell Database, are stored in CSV, others
