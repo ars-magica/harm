@@ -10,12 +10,16 @@
 --
 -- Description :  Types to represent Characters and functions for advancement.
 --
--- This module contains exports the types to process characters and 
--- advancement, including persistence in JSON and advancement.
+-- This module provides all the types and functions to process
+-- characters and advancement, including persistence in JSON or
+-- YAML.
 --
--- Character advancement is divided conceptually into CharGen (pre-game advancement)
--- and in-game advancement.  Functions that are specific for one or the other requires
--- the import of
+-- The implementation is split between several internal modules
+-- `ArM.Character.*`, which also provides some technical documentation.
+--
+-- Character advancement is divided conceptually into CharGen 
+-- (pre-game advancement) and in-game advancement.  The corresponding
+-- constiuent functions are found in:
 -- + `ArM.Character.CharGen` for character generation
 -- + `ArM.Character.Advancement` for in-game ddvancement
 --
