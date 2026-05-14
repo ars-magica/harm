@@ -29,7 +29,7 @@ import ArM.Char.Character
 import ArM.Types.ProtoTrait
 import ArM.Char.Combat
 import ArM.Cov.Saga
-import ArM.Types.Possession
+import ArM.Types.Trait
 import ArM.Cov.Covenant
 import ArM.Types.Saga
 import ArM.Types

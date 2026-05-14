@@ -14,7 +14,7 @@
 -----------------------------------------------------------------------------
 module ArM.Cov.Internal.CostBP ( CostBP(..) ) where
 
-import Data.List 
+-- import Data.List 
 
 import ArM.Types.Trait
 

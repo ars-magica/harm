@@ -29,7 +29,7 @@ import ArM.Markdown
 import ArM.Types.Character
 import ArM.Cov.Covenant
 import ArM.Types.Saga
-import ArM.Types.Possession
+import ArM.Types.Trait
 import ArM.Types.Advancement
 import ArM.Types
 import ArM.DB.CSV
@@ -38,7 +38,7 @@ import ArM.SeasonDisplay
 import Data.OList
 import ArM.Helper
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- |
 -- = Read Saga Files

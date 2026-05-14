@@ -59,7 +59,7 @@ import ArM.Helper
 import ArM.Types.ProtoTrait
 import ArM.Types
 import ArM.GameRules
-import ArM.Types.Trait
+-- import ArM.Types.Trait
 
 import Data.Maybe 
 import Data.List 
