@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ghc-version: ['9.10' ]
+        ghc-version: ['9.8' ]
 
     steps:
       - name: Checkout
