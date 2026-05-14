@@ -26,7 +26,7 @@ module ArM.Cov.Covenant ( module ArM.Types.Covenant
            ) where
 
 import ArM.Types.Covenant
-import ArM.Types.Trait
+-- import ArM.Types.Trait
 import ArM.Types.Advancement
 import ArM.Cov.Internal.CostBP
 import ArM.Helper

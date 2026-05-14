@@ -103,13 +103,16 @@ writeSagaAnnals saga = writeOList fn $ ann saga
 -- Write markdown files for the saga and all its covenants and characters.
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
-   writeOList (rootDir saga ++ "/index.md") $ printMD saga
+      writeOList (rootDir saga ++ "/index.md") $ printMD saga
 
-   let sagas = advanceSaga saga
+      let sagas = advanceSaga saga
 
-   writeSagaStates sagas
-   writeSagaAnnals (head sagas)
-   return () 
+      writeSagaStates sagas
+      writeSagaAnnals'  sagas
+      return () 
+  where
+     writeSagaAnnals' [] = error "Empty list of sagas" 
+     writeSagaAnnals' (x:_) = writeSagaAnnals x
 
 -- ** Read Character and Covenant Data
 

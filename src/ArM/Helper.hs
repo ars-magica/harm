@@ -155,3 +155,8 @@ showStrList (x:xs) = foldl (++) x $ map (", "++) xs
 putStrLns :: [ String ] -> IO ()
 putStrLns [] = return ()
 putStrLns (x:xs) = IO.putStrLn x >> putStrLns xs
+
+-- | Return the tail of the list, or the empty list if the list is empty.
+mtail :: [a] -> [a]
+mtail [] = []
+mtail (_:xs) = xs

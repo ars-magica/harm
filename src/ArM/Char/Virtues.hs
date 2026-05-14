@@ -31,7 +31,7 @@ module ArM.Char.Virtues (
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 -- import ArM.Types.TraitKey
-import ArM.Types.Trait
+-- import ArM.Types.Trait
 import ArM.Helper
 import ArM.GameRules
 
@@ -104,12 +104,13 @@ confTrait x y = ConfidenceTrait $ Confidence { cname = "Confidence", cscore = x,
 -- | Get the starting confidence trait, based on the given list of
 -- virtues and flaws.
 inferConfidence :: [VF] -> Trait
-inferConfidence vfs | rs == [] = confTrait 1 3
-                    | otherwise =  head rs
+inferConfidence vfs = f $ filterNothing [ app g x | (g,x) <- zip vf vfs ]
     where vf = [ Map.lookup (vfname x) confMap | x <- vfs ]
-          app Nothing _ = Nothing
-          app (Just f) x = Just $ f x
-          rs = filterNothing [ app g x | (g,x) <- zip vf vfs ]
+          -- app Nothing _ = Nothing
+          -- app (Just f) x = Just $ f x
+          app fn x = fmap ($ x) fn
+          f [] = confTrait 1 3
+          f (x:_) = x
 
 -- | Helper for `inferConfidence`
 confMap :: Map.Map String ( VF -> Trait ) 

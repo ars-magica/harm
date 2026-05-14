@@ -27,7 +27,7 @@ instance CostBP LabText where
    costBP =   (`div` 5) . (+1) . textLevel 
 
 instance CostBP BookStats where
-   costBP ob = error "Not implemented"
+   costBP _ = error "Not implemented"
 
 instance CostBP Enchantment where
    costBP MundaneItem = 0

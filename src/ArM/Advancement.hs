@@ -212,29 +212,27 @@ instance StepAdvanceAdv Advancement where
    stepAdvancement _ = Nothing
 
 instance StepAdvance Character where
-   nextStep ns ch | fs == [] = CharStep ch Nothing
+   nextStep ns ch = nextStep' fs
+        where fs = futureAdvancement ch
+              nextStep' [] = CharStep ch Nothing
+              nextStep' (adv:_)  
                  | season adv > ns = CharStep ch Nothing
-                 | otherwise = CharStep new  (Just a)
-        where a = prepareAdvancement (fromJust st) adv
+                 | otherwise = CharStep new  (Just $ prepareAdvancement (fromJust st) adv)
+              new = ch { futureAdvancement = mtail fs }
               st = state ch
-              adv = head fs
-              as = tail fs
-              fs = futureAdvancement ch
-              new = ch { futureAdvancement = as }
    completeStepMaybe (CharStep c Nothing) = Just c 
    completeStepMaybe (CharStep c (Just a)) = Just $ c { pastAdvancement = a:pastAdvancement c }
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
 instance StepAdvance Covenant where
-   nextStep ns cov | fs == [] = CovStep cov Nothing
+   nextStep ns cov = nextStep' fs
+        where fs = futureCovAdvancement cov
+              nextStep' [] = CovStep cov Nothing
+              nextStep' (adv:_)  
                  | season adv > ns = CovStep cov Nothing
-                 | otherwise = CovStep new  (Just a)
-        where a = Adv  adv noCovAdvancement
-              adv = head fs
-              as = tail fs
-              fs = futureCovAdvancement cov
-              new = cov { futureCovAdvancement = as }
+                 | otherwise = CovStep new  (Just $ Adv adv noCovAdvancement)
+              new = cov { futureCovAdvancement = mtail fs }
    completeStepMaybe (CovStep c Nothing) = Just c 
    completeStepMaybe (CovStep c (Just a)) = 
         Just $ c { pastCovAdvancement = a:pastCovAdvancement c }
