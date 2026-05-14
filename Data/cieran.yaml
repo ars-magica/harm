@@ -18,6 +18,246 @@ concept:
   player: George
   portrait: cieran.jpeg
   quirk: Meddler.  Happily gives away charged items.
+pregameAdvancement:
+- changes:
+  - ability: 'Native Language: Irish'
+    spec: Leinster
+    xp: 75
+  - comment: House Virtue
+    cost: 0
+    virtue: Craft Magic
+  - comment: House Virtue
+    cost: 0
+    virtue: Spell Foci
+  - cost: -3
+    flaw: Meddler (major)
+  - cost: -1
+    flaw: Carefree
+  - comment: House Flaw
+    cost: 0
+    flaw: Weak Spontaneous Magic
+  - cost: 1
+    detail: magical arrows
+    virtue: Minor Magical Focus
+  - comment: Ettin Blood gives +1 to Stamina
+    cost: 3
+    detail: Ettin blood
+    virtue: Strong Faerie Blood
+  - comment: Story flaw
+    cost: -3
+    flaw: Mistaken Identity
+  - cost: 3
+    virtue: Flawless Magic
+  - cost: -3
+    flaw: Short-Range Magic
+  - cost: 1
+    virtue: Book Learner
+  - cost: 1
+    detail: Imaginem
+    virtue: Affinity with (art)
+  - cost: 1
+    virtue: Skilled Parens
+  - ptrait: Villager
+    score: 2
+  - ptrait: Carefree
+    score: 3
+  - ptrait: Meddler
+    score: 6
+  mode: Virtues and Flaws
+- changes:
+  - characteristic: Int
+    score: 3
+  - characteristic: Per
+    score: -1
+  - characteristic: Pre
+    score: 0
+  - characteristic: Com
+    score: -1
+  - characteristic: Str
+    score: 2
+  - bonusScore: 1
+    characteristic: Sta
+    score: 2
+  - characteristic: Dex
+    score: 2
+  - characteristic: Qik
+    score: -3
+  mode: Characteristics
+- changes:
+  - ability: 'Area Lore: Munster'
+    spec: Hiding Places
+    xp: 5
+  - ability: Awareness
+    spec: Searching
+    xp: 15
+  - ability: Brawl
+    spec: Dodge
+    xp: 15
+  - ability: Folk Ken
+    spec: Villagers
+    xp: 5
+  - ability: Stealth
+    spec: Hiding
+    xp: 5
+  - ability: Second Sight
+    spec: Faerie Illusions
+  mode: Early Childhood
+- changes:
+  - ability: 'Area Lore: Ireland'
+    spec: Legends
+    xp: 5
+  - ability: Bargain
+    spec: ''
+    xp: 5
+  - ability: Concentration
+    spec: Spell Concentration
+    xp: 5
+  - ability: 'Craft: Cooking'
+    spec: Cookies
+    xp: 30
+  - ability: 'Craft: Fletching'
+    spec: Arrows
+    xp: 30
+  mode: Later Life
+  years: 5
+- changes:
+  - art: Creo
+    xp: 21
+  - art: Intellego
+    xp: 0
+  - art: Muto
+    xp: 0
+  - art: Perdo
+    xp: 36
+  - art: Rego
+    xp: 36
+  - art: Animal
+    xp: 0
+  - art: Aquam
+    xp: 0
+  - art: Auram
+    xp: 0
+  - art: Corpus
+    xp: 15
+  - art: Herbam
+    xp: 0
+  - art: Ignem
+    xp: 0
+  - art: Imaginem
+    xp: 53
+  - art: Mentem
+    xp: 1
+  - art: Terram
+    xp: 15
+  - art: Vim
+    xp: 3
+  - ability: Hermes Lore
+    spec: Hibernia
+    xp: 5
+  - ability: Artes Liberales
+    spec: Ritual Casting
+    xp: 5
+  - ability: Latin
+    spec: Hermetic Usage
+    xp: 30
+  - ability: Hermes Code
+    spec: Stonehenge
+    xp: 5
+  - ability: Magic Theory
+    spec: Spells
+    xp: 30
+  - ability: Parma Magica
+    spec: Mentem
+    xp: 5
+  - ability: Penetration
+    spec: Rego
+    xp: 5
+  - ability: Bows
+    spec: Longbow
+    xp: 30
+  - ability: Thrown Weapon
+    spec: Dart
+    xp: 5
+  - level: 20
+    mastery:
+    - Penetration
+    spell: Wound without Cause
+    tefo: PeCo
+  - level: 5
+    mastery:
+    - Penetration
+    spell: Spasms of the Uncontrolled Body
+    tefo: ReCo
+  - level: 15
+    mastery:
+    - Still Casting
+    spell: Lamp till Morning without Flame
+    tefo: CrIg
+  - level: 20
+    mastery:
+    - Quite Casting
+    spell: Veil of Invisibility
+    tefo: PeIm
+  - level: 10
+    mastery:
+    - Penetration
+    spell: Clarity of Public Speech
+    tefo: CrIm
+  - level: 10
+    mastery:
+    - Quiet Casting
+    spell: Aura of Ennobled Presence
+    tefo: MuIm
+  - level: 10
+    mastery:
+    - Penetration
+    spell: Trust of the Childlike Faith
+    tefo: PeMe
+  - level: 15
+    mastery:
+    - Penetration
+    spell: Arrow of Peaceful Slumber
+    tefo: ReMe
+  - level: 5
+    mastery:
+    - Penetration
+    spell: Touch of Slumber
+    tefo: ReMe
+  - level: 20
+    mastery:
+    - Penetration
+    spell: Obliteration of the Metallic Barrier
+    tefo: PeTe
+  - level: 20
+    mastery:
+    - Penetration
+    spell: End of the Mighty Castle
+    tefo: PeTe
+  - possession:
+      weapon:
+      - Longbow
+  - possession:
+      weapon:
+      - Dagger
+  - possession:
+      weapon:
+      - Quarterstaff
+  - possession:
+      name: Writing Materials
+  - combat:
+      weapon: Longbow
+  - combat:
+      weapon: Dodge
+  - combat:
+      weapon: Fist
+  - combat:
+      weapon: Knife
+  - multiplicity: 1
+    possession: Lantern
+  - possession: 'Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small
+      pouch of down, small crystal, piece of amber, comb, fan, earring, small brass
+      bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog''s tooth'
+  mode: Apprenticeship
 futureAdvancement:
 - changes:
   - art: Herbam

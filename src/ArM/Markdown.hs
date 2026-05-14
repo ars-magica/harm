@@ -435,12 +435,12 @@ instance Markdown CharacterSheet where
 
 instance Markdown CharacterState where
    printMD c = OList
-       [ OString $ "## " ++ (show $ charTime c )
+       [ OString $ "## Character Sheet " ++ (show $ charTime c )
        , OString ""
        , printMD $ characterSheet c
        ]
    printSheetMD saga c = OList
-       [ OString $ "## " ++ (show $ charTime c) 
+       [ OString $ "## Character Sheet " ++ (show $ charTime c) 
        , OString ""
        , printSheetMD saga $ characterSheet c
        ]

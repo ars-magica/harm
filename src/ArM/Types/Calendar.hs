@@ -52,10 +52,16 @@ import Text.Read             (readMaybe)
 -- ```
 -- data Season = Winter | Spring | Summer | Autumn  | NoSeason
 -- ```
--- If the Hibernian calender is used `seasonNext` has to be changed as well.
+-- If the Hibernian calender is used `seasonNext` and `seasonPrev` have
+-- to be changed as well.
 data Season = Spring | Summer | Autumn | Winter | NoSeason
      deriving (Show,Ord,Eq,Read,Generic)
 
+-- | A `SeasonTime` is a point in the narrative time, either
+-- season and year, `GameStart`, or `NoTime` for undefined.
+data SeasonTime = SeasonTime Season Int | GameStart | NoTime deriving (Eq,Generic)
+
+-- | Returns the season following the given one.
 seasonNext :: SeasonTime -> SeasonTime
 seasonNext GameStart = NoTime
 seasonNext NoTime = NoTime
@@ -65,30 +71,23 @@ seasonNext (SeasonTime Summer y) = SeasonTime Autumn y
 seasonNext (SeasonTime Autumn y) = SeasonTime Winter (y)
 seasonNext (SeasonTime NoSeason y) = SeasonTime NoSeason (y+1)
 
+-- | Returns the season preceeding the given one.
 seasonPrev :: SeasonTime -> SeasonTime
 seasonPrev GameStart = NoTime
 seasonPrev NoTime = NoTime
-seasonPrev (SeasonTime Winter y) = SeasonTime Autumn (y-1)
-seasonPrev (SeasonTime Spring y) = SeasonTime Winter y
+seasonPrev (SeasonTime Winter y) = SeasonTime Autumn y
+seasonPrev (SeasonTime Spring y) = SeasonTime Winter (y-1)
 seasonPrev (SeasonTime Summer y) = SeasonTime Spring y
 seasonPrev (SeasonTime Autumn y) = SeasonTime Summer y
 seasonPrev (SeasonTime NoSeason y) = SeasonTime NoSeason (y-1)
 
-
--- |
--- == Generic definitions 
-
--- | A `SeasonTime` is a point in the narrative time, or `NoTime` for undefined.
-data SeasonTime = SeasonTime Season Int | GameStart | NoTime deriving (Eq,Generic)
 
 instance ToJSON SeasonTime where
    toJSON = toJSON . show
 -- instance FromJSON SeasonTime 
 instance ToJSON Season
 
-
 instance FromJSON SeasonTime where
-
     parseJSON (Number n) = pure $ SeasonTime NoSeason $ round n
     parseJSON (String t) = pure $ parseST (unpack (fromStrict t))
     parseJSON _ = mzero
