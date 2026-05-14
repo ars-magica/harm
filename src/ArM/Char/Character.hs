@@ -32,8 +32,11 @@ module ArM.Char.Character (
                           , module ArM.Char.Inference
                           , module ArM.Char.Virtues
                           , applyAdvancement 
-                          , agePT
+                          -- * Combat statistics
+                          , CombatLine(..)
+                          , computeCombatStats
                           -- * Aging
+                          , agePT
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions

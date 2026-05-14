@@ -36,6 +36,9 @@ import qualified Data.Map as M
 -- |
 -- = The Trait Type
 
+-- | A `CombatLine` represents a line with combat statistics
+-- on the character sheet, including attack, defense, and damange
+-- totals.
 data CombatLine = CombatLine 
     { combatLabel :: String
     , combatInit  :: Int
