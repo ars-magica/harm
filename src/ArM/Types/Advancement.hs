@@ -328,7 +328,7 @@ instance AdvancementLike Advancement where
      sortAdvTraits x = x { changes = sortTraits $ changes x }
      addValidation vs a = a { validation = vs ++ validation a }
      addProtoTrait vs a = a { changes = vs ++ changes a }
-     setRead db ad = ad { readBook = map (bookID) (bookUsed ad) }
+     setRead _ ad = ad { readBook = map (bookID) (bookUsed ad) }
 
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where
@@ -429,9 +429,9 @@ instance FromJSON Validation
 
 -- | Find the trait earning the most XP from the advancement
 primaryXPTrait :: Advancement -> Maybe TraitKey
-primaryXPTrait a | f a == [] = Nothing
-                 | otherwise = Just $ traitKey $ head (f a)
-   where f = sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
+primaryXPTrait = f' .  sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
+    where f' [] = Nothing
+          f' (x:_) = Just $ traitKey x
 
 -- | Validate allocation of XP.
 validateXP :: Augmented Advancement -> Augmented Advancement
