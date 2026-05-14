@@ -2,19 +2,16 @@
 -- Module      :  ArM.IO
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
---
 -- Maintainer  :  hg+gamer@schaathun.net
+-- Description :  
+--    High-level functions to parse ArMChar files and generate markdown sheets.
 --
--- Description :  Simple utilities to parse ArMChar files and generate
--- markdown sheets.
---
+-- |
 -- Some objects, like the Spell Database, are stored in CSV, others
 -- in JSON or YAML, including Character and Covenant.
 --
 -- The submodules `ArM.IO.*` provide technical documentation for the
 -- constituent functions.  
---
------------------------------------------------------------------------------
 module ArM.IO (readSaga,writeSaga) where
 
 import ArM.IO.Read
