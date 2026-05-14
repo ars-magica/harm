@@ -40,6 +40,8 @@ import ArM.Types.Trait
 import ArM.Types.Saga
 import ArM.Helper
 
+import ArM.Debug.Trace
+
 -- * Advancement
 
 -- |
@@ -102,17 +104,20 @@ stepSaga saga = saga { sagaState = st' }
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
-advanceSaga saga = reverse $ saga:advanceSaga' ts saga
-   where ts = seasons $ sagaFile saga
+advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
+
+-- | List of the last season of advancement for each state output.
+advSeasons :: Saga -> [SeasonTime]
+advSeasons = map seasonPrev . sort . seasons . sagaFile 
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
-advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
+advanceSaga' (t:ts) saga0 = trace (show t) $ n:advanceSaga' ts n
     where n = f t saga0
-          f ssn saga | NoTime == nextSeason saga = saga 
-                     | ssn < nextSeason saga = saga 
-                     | otherwise = f ssn $ stepSaga saga
-
+          f ssn saga | NoTime == nextSeason saga = trace "NoTime" saga 
+                     | ssn < nextSeason saga = trace (show nx) saga 
+                     | otherwise = trace ("Step " ++ show nx) $ f ssn $ stepSaga saga
+          nx = nextSeason saga0
 -- |
 -- Advance listed covenants and characters one season forward.
 -- The advancement happens jointly, with several passes, to resolve

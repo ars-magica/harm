@@ -19,6 +19,7 @@ module ArM.Types.Calendar ( SeasonTime(..)
                           , (>*)
                           , Timed(..)
                           , showKey
+                          , gameSeason
                           ) where
 
 import Data.Text.Lazy                            ( fromStrict, unpack )
@@ -140,10 +141,10 @@ instance Ord SeasonTime where
         | otherwise = y1 <= y2
 
 -- |
--- == The Timed Class
-
+-- The Timed Class provides a standardised API for objects which has state
+-- and a time stamp in narrative time.
 class Timed a where
-   season :: a -> SeasonTime -- ^ season or development stage
+   season :: a -> SeasonTime -- ^ season of last advancement stage
    (<::) :: a -> a -> Bool 
    (<::) x y = season x < season y
    (>::) :: a -> a -> Bool 
@@ -157,6 +158,14 @@ class Timed a where
    -- | Is the Season Winter?
    isWinter :: a -> Bool
    isWinter = isWinter' . season
+
+
+-- | The `gameSeason` of an object is the season for which the object is prepared
+-- to play.  The `season` function returns the season of last advancement.
+gameSeason :: Timed a => a -> SeasonTime
+gameSeason = f . season
+   where f GameStart = GameStart
+         f x = seasonNext x
 
 instance Timed SeasonTime where
    season = id

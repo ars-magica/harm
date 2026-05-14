@@ -435,12 +435,12 @@ instance Markdown CharacterSheet where
 
 instance Markdown CharacterState where
    printMD c = OList
-       [ OString $ "## Character Sheet " ++ (show $ charTime c )
+       [ OString $ "## Character Sheet " ++ (show $ gameSeason c )
        , OString ""
        , printMD $ characterSheet c
        ]
    printSheetMD saga c = OList
-       [ OString $ "## Character Sheet " ++ (show $ charTime c) 
+       [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
        , OString ""
        , printSheetMD saga $ characterSheet c
        ]
@@ -748,7 +748,7 @@ instance Markdown Saga where
 
 instance Markdown SagaState where
     printMD saga = OList 
-        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (seasonTime saga)
+        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (gameSeason saga)
         , OString ""
         , characterIndex $ characters saga
         , OString ""
