@@ -25,7 +25,7 @@ futureAdvancement:
     xp: 24
   mode: Reading
   narrative: Studies *Root of Herbam* L6 Q21 +3
-  season: Summer 1217
+  season: Spring 1220
   sourceQuality: 21
   usesBook: RootHerbam
 - changes:
@@ -34,7 +34,7 @@ futureAdvancement:
     xp: 16
   mode: Reading
   narrative: Studies Mentem L16Q13 +3
-  season: Spring 1220
+  season: Summer 1220
   sourceQuality: 13
   usesBook:
   - MentemL16Q13
@@ -137,7 +137,7 @@ futureAdvancement:
           narrative: Fan of Summer Breezes
   mode: Reading
   narrative: Studies *Root of Terram* L8Q15 +3
-  season: Summer 1220
+  season: Autumn 1220
   sourceQuality: 15
   usesBook: RootTerram
 - changes:
@@ -158,7 +158,7 @@ futureAdvancement:
       name: Perdo Vis from Jerome's body
   mode: Adventure
   narrative: Jerome's Tower - covenant service
-  season: Autumn 1220
+  season: Winter 1220
   sourceQuality: 14
 - changes:
   - ability: SOCP Lore
@@ -167,7 +167,7 @@ futureAdvancement:
     xp: 17
   mode: Reading
   narrative: Studies book found in Jerome's Tower
-  season: Autumn 1220
+  season: Spring 1221
   sourceQuality: 14
   usesBook: socpL4Q14
 - changes:
@@ -179,7 +179,7 @@ futureAdvancement:
       count: 3
   mode: 'Exposure: Lab Work'
   narrative: Enchant Bookstand of Hespera
-  season: Winter 1220
+  season: Summer 1221
   sourceQuality: 2
 - changes:
   - art: Intellego
@@ -187,6 +187,6 @@ futureAdvancement:
     xp: 16
   mode: Reading
   narrative: Also a short story to Praesis.
-  season: Spring 1221
+  season: Autumn 1221
   sourceQuality: 13
   usesBook: VimL15Q13
