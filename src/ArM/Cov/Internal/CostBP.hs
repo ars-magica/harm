@@ -33,20 +33,20 @@ instance CostBP Enchantment where
    costBP MundaneItem = 0
    costBP (LesserItem eff) = 2*mag
       where mag = (effectLevel eff + 1) `div` 5
-   costBP (GreaterDevice eff _) = 2*(mag eff + 1) `div` 5
-      where mag = sum . map . effectLevel 
-   costBP (Talisman eff) = 2*(mag eff + 1) `div` 5
-      where mag = sum . map . effectLevel 
+   costBP (GreaterDevice _ eff) = 2*(mag eff + 1) `div` 5
+      where mag = sum . map effectLevel 
+   costBP (Talisman _ eff) = 2*(mag eff + 1) `div` 5
+      where mag = sum . map effectLevel 
    costBP _ = error "Not implemented"
 
 instance CostBP Book where
    -- | The cost of a book is the sum of the costs of each book stats
    -- it provides.
-   costBP = sum . costBP . bookStats
+   costBP = sum . map costBP . bookStats
 
 instance CostBP Possession where
    costBP ob = sum $ map ($ ob) cs
       where cs = [ sum . map costBP . bookTexts 
                  , sum . map costBP . labTexts 
-		 , costBP . enchantment
-		 ]
+                 , costBP . enchantment
+                 ]
