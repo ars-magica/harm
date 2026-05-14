@@ -48,19 +48,21 @@ import Text.Read             (readMaybe)
 (>*) = (>)
 
 -- | Season of the year.
+-- The Hibernian calendar requires a different definition.
 -- ```
--- data Season = Spring | Summer | Autumn | Winter | NoSeason
+-- data Season = Winter | Spring | Summer | Autumn  | NoSeason
 -- ```
-data Season = Winter | Spring | Summer | Autumn  | NoSeason
+-- If the Hibernian calender is used `seasonNext` has to be changed as well.
+data Season = Spring | Summer | Autumn | Winter | NoSeason
      deriving (Show,Ord,Eq,Read,Generic)
 
 seasonNext :: SeasonTime -> SeasonTime
 seasonNext GameStart = NoTime
 seasonNext NoTime = NoTime
-seasonNext (SeasonTime Winter y) = SeasonTime Spring y
+seasonNext (SeasonTime Winter y) = SeasonTime Spring (y+1)
 seasonNext (SeasonTime Spring y) = SeasonTime Summer y
 seasonNext (SeasonTime Summer y) = SeasonTime Autumn y
-seasonNext (SeasonTime Autumn y) = SeasonTime Winter (y+1)
+seasonNext (SeasonTime Autumn y) = SeasonTime Winter (y)
 seasonNext (SeasonTime NoSeason y) = SeasonTime NoSeason (y+1)
 
 seasonPrev :: SeasonTime -> SeasonTime

@@ -7,12 +7,12 @@ characterFiles:
 covenantFiles:
 - Data/elksrun.yaml
 description:
-- While the saga is being played, this site is incomplete, and serves mainly as a
-  test case for the hArM software.
+- This is a sample saga set up with the harm character generator.
+  The saga may have several covenants and characters.
 rootDirectory: pages/
 seasons:
-- Winter 1219
-- Winter 1220
+- Spring 1220
+- Spring 1221
 spellFile: Data/spells.csv
 title: Hibernia Saga (Contested Lands)
 weaponFile: Data/weapons.csv
