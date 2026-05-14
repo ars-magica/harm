@@ -37,6 +37,7 @@ module ArM.Types.Internal.Possession ( -- * Posessions
                             , isLabText
                             , LabText(..)
                             , wrapBooks
+			    , textLevel
                             ) where
 
 import ArM.Types.HarmObject
