@@ -29,8 +29,16 @@ module ArM.Character (
                           -- * The CharacterSheet Type
                           , module ArM.Types.Advancement
                           -- * Character Advancement
-                          , module ArM.Character.Inference
-                          , module ArM.Character.Virtues
+                          -- Inference
+                          , addInference
+                          -- Virtes
+                          , inferTraits
+                          , vfBonusSQ
+                          , laterLifeSQ
+                          , getCharAllowance
+                          , inferConfidence
+                          , appSQ
+                          -- Character
                           , applyAdvancement 
                           -- * Combat statistics
                           , CombatLine(..)

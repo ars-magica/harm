@@ -73,11 +73,6 @@ maybeShow = fromMaybe "" . fmap show
 
 -- * Rendering Numbers
 
--- | Show a number with decimals only if required.
-showNum :: (Show a, RealFrac a) => a -> String
-showNum x | isInt x = show ( round x :: Int )
-          | otherwise = show x
-    where isInt i = i == fromInteger (round i)
 
 -- | Show a non-zero integer with sign, or an empty string
 showBonus :: Int -> String

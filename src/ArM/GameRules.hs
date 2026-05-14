@@ -34,7 +34,7 @@ pyramidScore = fromIntegral . f
 
 -- | The class provides functions which must be implemented differently
 -- depending on the definition of XPType.
-class GenericXPType a where
+class Show a => GenericXPType a where
     getAbilityScore :: Maybe a -> (Int,a)
     -- | Calculate score from total XP, using the arts scale.
     -- For abilities, the argument should be divided by 5 beforehand.
@@ -43,6 +43,9 @@ class GenericXPType a where
     -- | Round the XPType if required.  
     -- This has to be redefined depending on the type of XPType.
     xpround :: Float -> a
+    -- | Show XP count.
+    showNum :: a -> String
+    showNum = show
 instance GenericXPType Int where
     getAbilityScore x' = (s,y) 
          where y = x - 5*pyramidScore s
@@ -60,3 +63,6 @@ instance GenericXPType Float where
     scoreFromXP x = floor $ (-1+sqrt (1+8*x))/2
     calcXP m x y = x + ( m*( fromMaybe 0 y ) )
     xpround = id
+    showNum x | isInt x = show ( round x :: Int )
+              | otherwise = show x
+        where isInt i = i == fromInteger (round i)
