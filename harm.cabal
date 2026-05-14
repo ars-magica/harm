@@ -103,6 +103,8 @@ common harm-deps
                        , ArM.Types.Covenant
                        , ArM.Cov.Saga
                        , ArM.IO
+                       , ArM.IO.Read
+                       , ArM.IO.Write
                        , ArM.Helper
                        , Data.Aeson.Generic
                        , Data.OList
