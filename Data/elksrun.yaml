@@ -21,6 +21,9 @@ plan:
       topic:
         ability: Finesse
     title: Fundamental Fast Casting
+  - item: a chest of ancient gold coins
+  - item:
+      weapon: Longbow
   joining:
   - Cieran
   season: Spring 1220
