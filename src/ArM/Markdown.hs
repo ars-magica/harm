@@ -667,7 +667,7 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
                             ++ " levels of spells."
                          ]
    where ys = [ (x,f x) | x <- xs ]
-         f x = spellTRecord x 'mplus' spellLookup (traitKey x) db 
+         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
 -- | Return the sum of levels in the list of spells.

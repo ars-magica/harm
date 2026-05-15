@@ -34,9 +34,7 @@ module ArM.Character.Character (
 import Data.Maybe 
 
 import ArM.Types.Advancement
-import ArM.Character.Inference
 import ArM.Character.CharacterSheet
-import ArM.Character.Virtues
 import ArM.Types
 import ArM.Types.ProtoTrait
 import ArM.Helper
