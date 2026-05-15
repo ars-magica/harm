@@ -18,10 +18,12 @@ module ArM.Types.Saga ( Saga(..)
                     , sagaDesc
                     , rootDir
                     , stateSeasons
+                    , advSeasons
                     ) where
 
 
 import Data.Maybe 
+import Data.List 
 import Data.Aeson 
 import GHC.Generics
 
@@ -60,6 +62,10 @@ rootDir = fromMaybe "" . rootDirectory . sagaFile
 -- The seasons are listed chronologically with the latest season first.
 stateSeasons :: Saga -> [ SeasonTime ]
 stateSeasons = reverse . (GameStart:) . seasons . sagaFile
+
+-- | List of the last season of advancement for each state output.
+advSeasons :: Saga -> [SeasonTime]
+advSeasons = map seasonPrev . sort . seasons . sagaFile 
 
 instance Show Saga where
    show saga = "Saga: " ++ sagaTitle saga

@@ -737,7 +737,8 @@ instance Markdown Saga where
                 , OList $ map OString $ sagaDesc saga
                 , OString ""
                 ]
-        , OList $ [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- stateSeasons saga ] 
+        , OList ( [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- advSeasons saga ] 
+                ++ [ OString $ "+ " ++ "[](" ++ showKey GameStart ++ "/index)" ] )
         , OList [
           OString "" 
           , OString $ "+ " ++ "[](0001_Annals)"

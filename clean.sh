@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir -p pages
 rm -rf pages/*
-( cd pages && ln -s ../Data/{Library,images,myst.yml} . )
+( cd pages && ln -s ../Data/Library ../Data/images ../Data/myst.yml . )

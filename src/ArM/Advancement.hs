@@ -104,10 +104,6 @@ stepSaga saga = saga { sagaState = st' }
 advanceSaga :: Saga -> [ Saga ]
 advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
 
--- | List of the last season of advancement for each state output.
-advSeasons :: Saga -> [SeasonTime]
-advSeasons = map seasonPrev . sort . seasons . sagaFile 
-
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
 advanceSaga' (t:ts) saga0 = trace (show t) $ n:advanceSaga' ts n
