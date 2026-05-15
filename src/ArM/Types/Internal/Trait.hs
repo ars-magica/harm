@@ -696,9 +696,9 @@ parseOtherPossession v = fmap fixPossessionName $ Possession
        <*> v .:? "bonus" .!= 0
        <*> v `parseCollapsedList` "labtexts" 
        <*> v .:? "weaponStats" .!= []
-       <*> v .:? "weapon" .!= []
+       <*> v `parseCollapsedList` "weapon"
        <*> v .:? "armourStats" .!= []
-       <*> v .:? "armour" .!= []
+       <*> v `parseCollapsedList` "armour"
        <*> v .:? "enchantment" .!= MundaneItem
        <*> v `parseCollapsedList` "description" 
        <*> v `parseCollapsedList` "comment" 

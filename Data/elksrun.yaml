@@ -10,6 +10,12 @@ concept:
 history: []
 design:
   - bookcsv: Data/books.csv
+    acquired:
+    - a chest of ancient gold coins
+    - name: Shortspear
+    - name: Longbow
+      comment: I cannot figure out how to record this as a weapon
+      weapon: Longbow
 plan:
 - acquired:
   - bookID: KalliasQ12Finesse
@@ -21,9 +27,7 @@ plan:
       topic:
         ability: Finesse
     title: Fundamental Fast Casting
-  - item: a chest of ancient gold coins
-  - item:
-      weapon: Longbow
+  - a dragon hide
   joining:
   - Cieran
   season: Spring 1220

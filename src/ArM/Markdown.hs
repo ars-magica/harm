@@ -668,17 +668,24 @@ instance Markdown CovenantState where
         , OString ""
         -- , OList $ map indentOList $ map printMD $ possessions cov
         , listPossessions $ possessions cov
+        , OString ""
+        , OString "### Raw"
+        , OString ""
+        , OList $ map ( OString . show ) $ possessions cov
         ]
     printSheetMD saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
         , OString ""
         , characterIndex $ covenFolk saga cov
         , OString ""
-        , OString ""
         , OString "### Possessions"
         , OString ""
         , OList $ map indentOList $ map printMD $ possessions cov
         -- , indentOList $ listPossessions $ possessions cov
+        , OString ""
+        , OString "### Raw"
+        , OString ""
+        , OList $ map indentOList $ map ( OString . show ) $ possessions cov
         ]
 
 -- |
