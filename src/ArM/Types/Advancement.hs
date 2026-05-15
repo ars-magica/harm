@@ -458,10 +458,8 @@ data CovAdvancement = CovAdvancement
      , joining :: [ HarmKey ]
      , leaving :: [ HarmKey ]
      , bookcsv :: Maybe String
-     , acquired' :: [ Possession ]
-     , lost' :: [ Possession ]
-     , acquired :: [ Book ]
-     , lost :: [ Book ]
+     , acquired :: [ Possession ]
+     , lost :: [ Possession ]
      , caType :: String
      } 
    deriving (Eq,Generic,Show)
@@ -469,7 +467,7 @@ data CovAdvancement = CovAdvancement
 
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
-noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] [] [] "No Advancement"
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] "No Advancement"
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
@@ -480,8 +478,6 @@ instance FromJSON CovAdvancement where
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
         <*> v .:? "bookcsv"
-        <*> v `parseCollapsedList` "acquired'"
-        <*> v `parseCollapsedList` "lost'"
         <*> v `parseCollapsedList` "acquired"
         <*> v `parseCollapsedList` "lost"
         <*> v .:? "type" .!= "In Game"
@@ -499,8 +495,6 @@ instance ContractAdvancement CovAdvancement where
      , joining = joining aa ++ joining ad
      , leaving = leaving aa ++ leaving ad
      , bookcsv = bookcsv aa
-     , acquired' = acquired' aa ++ acquired' ad
-     , lost' = lost' aa ++ lost' ad
      , acquired = acquired aa ++ acquired ad
      , lost = lost aa ++ lost ad
      , caType = caType aa

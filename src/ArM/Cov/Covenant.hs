@@ -45,7 +45,7 @@ covGen cov = foldl genStep cov' as
 -- | Apply one CovAdvancement object to the `CovenantState`.
 -- This is the same for pre-game and in-game advancement.
 stepCovState :: CovenantState -> CovAdvancement -> CovenantState
-stepCovState st adv = stepPossessions adv $ stepBooks adv $ stepCovenFolk adv st
+stepCovState st adv = stepPossessions adv $ stepCovenFolk adv st
 
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.
@@ -61,13 +61,15 @@ stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
 stepCovenFolk aa st = st { covenFolkID = cid }
    where cid1 = sort $ joining aa ++ covenFolkID st 
          cid = cid1 -= ( sort $ leaving aa )
+{-
 -- | Advance the `library` attribute of the `CovenantState`.
 stepBooks :: CovAdvancement -> CovenantState -> CovenantState
 stepBooks aa st = st { library = bid }
    where bid1 = sort $ acquired aa ++ library st 
          bid = bid1 -= ( sort $ lost aa )
+-}
 -- | Advance the `possessions` attribute of the `CovenantState`.
 stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
 stepPossessions aa st = st { possessions = bid }
-   where bid1 = sort $ acquired' aa ++ possessions st 
-         bid = bid1 -= ( sort $ lost' aa )
+   where bid1 = sort $ acquired aa ++ possessions st 
+         bid = bid1 -= ( sort $ lost aa )

@@ -93,5 +93,5 @@ loadCovAdvancement ad = loadCovAdvancement' (bookcsv ad) ad
 loadCovAdvancement' :: Maybe String -> CovAdvancement -> IO (CovAdvancement)
 loadCovAdvancement' Nothing ad = return ad
 loadCovAdvancement' (Just fn) ad = readBookCSV fn 
-      >>= return . ( \ r -> ad { acquired' = acquired' ad ++ r } ) . wrapBooks
+      >>= return . ( \ r -> ad { acquired = acquired ad ++ r } ) . wrapBooks
 

@@ -63,6 +63,8 @@ import Control.Monad
 import Control.Applicative ((<|>))
 import Data.Maybe
 
+import ArM.Debug.Trace
+
 -- import ArM.Debug.Trace
 
 -- |
@@ -133,7 +135,7 @@ isMagic :: Possession -> Bool
 isMagic p = enchantment p /= MundaneItem
 
 isMundaneEquipment :: Possession -> Bool
-isMundaneEquipment p = isEquipment p && (not . isMagic) p
+isMundaneEquipment p = trace ("** "++show p) $ isEquipment p && (not . isMagic) p
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
