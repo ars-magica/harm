@@ -1,9 +1,11 @@
 charID: Rowan
 concept:
-  appearance: ''
+  appearance: |
+    Young and slender man with suntanned face.
+
   born: 1235
   charData:
-    Background: ''
+    Background: 'Used to be out in the wild from an early age.'
     Size: -1
   charGlance: {}
   charType: Grog
@@ -18,11 +20,8 @@ pregameAdvancement:
     spec: Munster
     xp: 75
   - cost: 1
-    detail: Pre
-    flaw: Poor Characteristic
-  - cost: 1
     virtue: Warrior
-  - cost: 1
+  - cost: -1
     detail: Pre
     flaw: Poor Characteristic
   - ptrait: Trustful
@@ -76,8 +75,17 @@ pregameAdvancement:
   - ability: Single Weapon
     spec: spear
     xp: 5
+  - ability: Hunt
+    spec: Track
+    xp: 50
   - ability: Stealth
     xp: 35
+  - ability: Survival
+    xp: 15
+  - ability: Guile
+    xp: 5
+  - ability: Bows
+    xp: 5
   - ability: Throw
     spec: spear
     xp: 75

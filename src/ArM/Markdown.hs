@@ -186,10 +186,10 @@ conceptPrintMD dir c = OList
                , OString $ ": " ++ ( fromMaybe "-" $ briefConcept c )
                , OString ""
                , OString "Quirk"
-               , OString $ ": " ++ ( fromMaybe "-" $ quirk c )
+               , OString $ ": " ++ ( fromMaybe "---" $ quirk c )
                , OString ""
                , OString "Appearance" 
-               , OString $ ": " ++ ( fromMaybe "-" $ appearance c )
+               , OString $ ": " ++ ( fromMaybe "---" $ appearance c )
                , OString ""
                , OString "Born" 
                , OString brn

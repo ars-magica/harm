@@ -153,7 +153,7 @@ vfValidation sheet a
            where m = mode a
                  (f,v) = calculateVFCost a
                  imb = "Virtues and flaws are imbalanced: "
-                     ++ show v ++ " points of virtues and"
+                     ++ show v ++ " points of virtues and "
                      ++ show (-f) ++ " points of flaws."
                  over = "Exceeds limit on virtues; " ++ show v ++ suf
                  val = "Virtues and flaws balance at " ++ show v ++ suf
