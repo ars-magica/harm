@@ -142,6 +142,12 @@ isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
    where fs = [ isVis, isWeapon, isArmour, isAC, isBook ]
 
+-- ! Is the item a composite item with traits of more than one kind,
+-- such as an enchanted book, or a weapon that is an arcane connection?
+--
+-- Items which are not composite should usually be displayed in a compact 
+-- format, reflecting its kind.  Composite items may require more verbose
+-- presentation.
 isComposite :: Possession -> Bool
 isComposite x = ln fs
    where ln = (1<) . length . filter (==True) . map ($ x)
