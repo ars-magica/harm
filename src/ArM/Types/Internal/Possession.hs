@@ -28,6 +28,7 @@ module ArM.Types.Internal.Possession ( -- * Posessions
                             , isAC
                             , effectRDT
                             -- * Weapons and Mundane Equipment
+                            , isComposite
                             , isMundaneEquipment
                             , isWeapon
                             , isArmour
@@ -141,8 +142,14 @@ isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
    where fs = [ isVis, isWeapon, isArmour, isAC, isBook ]
 
+isComposite :: Possession -> Bool
+isComposite x = ln fs
+   where ln = (1<) . length . filter (==True) . map ($ x)
+         fs =  [ isVis, isWeapon, isArmour, isAC, isBook, isLabText, isMagic ]
+
 -- == Books
 
+-- | The level of a lab text, derived from the effect or spell it describes.
 textLevel :: LabText -> Int
 textLevel (Device ob) = effectLevel ob
 textLevel (SpellText ob) = fromMaybe 0 $ lvl ob

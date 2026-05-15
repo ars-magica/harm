@@ -235,15 +235,9 @@ enchantedMD ob (LesserItem eff) = OList
 enchantedMD ob enc = OList [ OString $ pName ob 
                           , printMD $ enc
                            ]
-pName :: Possession -> String
-pName ob = name ob ++ cnt
-       where cnt | count ob == 1 = ""
-                 | otherwise = " (" ++ show (count ob) ++ ")"
 
 instance Markdown Possession  where
-   printMD ob = OList [ OString $ pName ob, pMD ob ]
-   -- printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
-   --            | otherwise = OString $ pName ob
+   printMD = printPossessionMD
 
 -- Cases:
 -- A. Library
@@ -259,25 +253,30 @@ instance Markdown Possession  where
 --     4. Talisman
 
 
+-- | Make a complete list of possessions in Markdown.
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
-      [ OString "Vis"
-      , (pList vs)
-      , OString "Weapons"
-      , (pList ws)
-      , OString "Armour"
-      , (pList as)
-      , OString "Arcane Connections to:"
-      , (acList acs)
-      , OString "Magic Items"
-      , (pList ms)
-      , OString "Books"
-      , (pList bk)
-      , OString "Lab texts"
-      , (pList ls)
-      , OString "Equipment"
-      , (pList es)
-      -- Silver
+      [ OString "#### Mundane Equipment"
+      , indentOList $ OList [ OString "Weapons"
+                            , (pList ws)
+                            , OString "Armour"
+                            , (pList as)
+                            , OString "Equipment"
+                            , (pList es)
+                            -- Silver
+                            ]
+      , OString "#### Magic Gadgets"
+      , indentOList $ OList [ OString "Vis"
+                            , (pList vs)
+                            , OString "Arcane Connections to:"
+                            , (acList acs)
+                            , OString "Magic Items"
+                            , (pList ms)
+                            ]
+      , OString "#### Books"
+      , indentOList  (pList bk)
+      , OString "#### Lab texts"
+      , indentOList  (pList ls)
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
@@ -666,12 +665,8 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Possessions"
         , OString ""
-        -- , OList $ map indentOList $ map printMD $ possessions cov
         , listPossessions $ possessions cov
         , OString ""
-        , OString "### Raw"
-        , OString ""
-        , OList $ map ( OString . show ) $ possessions cov
         ]
     printSheetMD saga cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
@@ -680,16 +675,8 @@ instance Markdown CovenantState where
         , OString ""
         , OString "### Possessions"
         , OString ""
-        , OList $ map indentOList $ map printMD $ possessions cov
-        -- , indentOList $ listPossessions $ possessions cov
-        , OString ""
-        , OString "### Raw"
-        , OString ""
-        , OList $ map indentOList $ map ( OString . show ) $ possessions cov
+        , listPossessions $ possessions cov
         ]
-
--- |
--- = Lab Markdown
 
 instance Markdown Lab where
    printMD lb = indentOList $ OList 

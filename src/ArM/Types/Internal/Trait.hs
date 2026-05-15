@@ -491,7 +491,11 @@ instance StoryObject Book where
      where aut = trim $ bookAuthor book
            aus | aut == "" = ""
                | otherwise = " by " ++ aut
-           tit = trim $ bookTitle book
+           tit' = trim $ bookTitle book
+           tit | tit' /= "" = tit'
+               | bks /= [] = head bks
+               | otherwise = "No title"
+           bks = map show (bookStats book)
            tis | tit == "" = ""
                | otherwise = "*" ++ tit ++ "*"
            dat = " (" ++ show (bookDate book) ++ ")"

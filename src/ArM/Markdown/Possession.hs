@@ -14,23 +14,30 @@
 module ArM.Markdown.Possession where
 
 import ArM.Markdown.Spell
+import ArM.Types.HarmObject
 import ArM.Types.Trait
-import ArM.Types.Story
+-- import ArM.Types.Story
 import ArM.DB.Spell
 import ArM.Helper 
 import Data.OList
 import Data.Maybe
 
+-- | Render a possession in Markdown
+-- This should be exposed as `printMD` from the Markdown class.
+printPossessionMD :: Possession -> OList 
+printPossessionMD ob 
+    | isComposite ob = OList [ OString $ pName ob, pMD ob ]
+    | otherwise = pMD ob 
+
+-- | The name of a possession as displayed in Markdown 
+pName :: Possession -> String
+pName ob = name ob ++ cnt
+       where cnt | count ob == 1 = ""
+                 | otherwise = " (" ++ show (count ob) ++ ")"
+
 -- | Render a book in Markdown
 printBookMD :: Book -> OList
-printBookMD book = OList  
-         [ OString $ name book
-         , OList $ [ OString $ showStrList $ map show (bookStats book) 
-                 , cnt
-                 , lns ]
-                 ++ ans ++
-                 [ OString $ "Key: " ++ bookID book ]
-         ]
+printBookMD book = OList [ OString $ name book, OList ms ]
          where ans = map ( f . trim ) $ bookAnnotation book
                f "" = OList []
                f s = OString s
@@ -39,6 +46,13 @@ printBookMD book = OList
                    | otherwise = OString $ "in " ++ lng
                cnt | bookCount book == 1 = OList []
                    | otherwise = OString $ show (bookCount book) ++ " copies"
+               ms' = OString ("**Key** " ++ bookID book):cnt:lns:ans
+               bs = OString $ showStrList $ map show (bookStats book) 
+               ms | "" /= (trim $ bookTitle book) = bs:ms'
+                  | otherwise = ms'
+               -- k | bookID book /= "" = " [" ++ bookID book ++ "]"
+               --   | otherwise = ""
+                
 
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
