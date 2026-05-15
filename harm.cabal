@@ -98,6 +98,8 @@ common harm-deps
                        , ArM.Character.Inference
                        , ArM.Character.Virtues
                        , ArM.Markdown
+                       , ArM.Markdown.Spell
+                       , ArM.Markdown.Possession
                        , ArM.SeasonDisplay
                        , ArM.Cov.Internal.CostBP
                        , ArM.Cov.Covenant

@@ -23,8 +23,10 @@ module Data.OList ( OList(..)
                   , writeOListH
                   , writeOList
                   , isEmptyOList
+                  , italicOString
        ) where
 
+import Data.Char
 import System.IO as IO -- for file IO
 
 -- | 
@@ -98,3 +100,7 @@ writeOList fn x = do
      writeOListH handle x
      hClose handle
 
+-- | Render a string in italics, as an OString
+italicOString :: String  -> OList
+italicOString c = OString $ "*" ++ (f . f) c ++ "*"
+   where f = reverse . dropWhile isSpace

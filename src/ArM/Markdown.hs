@@ -26,6 +26,8 @@ import Data.Maybe
 import Data.List 
 import Control.Monad
 
+import ArM.Markdown.Possession 
+import ArM.Markdown.Spell
 import ArM.Character 
 import ArM.Types.ProtoTrait
 import ArM.Cov.Saga
@@ -39,10 +41,6 @@ import Data.OList
 import ArM.Helper
 
 import ArM.Debug.Trace
-
-
--- |
--- = Rendering the Character Sheet
 
 
 -- | Render the char gen design.
@@ -210,34 +208,8 @@ conceptPrintMD dir c = OList
 pList :: [ Possession ] -> OList
 pList = foldOList . OList  . map printMD . sortTraits 
 
-effectTeFo :: MagicEffect -> String
-effectTeFo eff = " (" ++ te ++ rt ++ fo ++ rf ++ show (effectLevel eff) ++ ")"
-   where te = take 2 $ effectTechnique eff
-         fo = take 2 $ effectForm eff
-         rts = effectTechniqueReq eff
-         rfs = effectFormReq eff
-         rt | rts == [] = ""
-            | otherwise = foldl (++) "" $ map (take 2) rts
-         rf | rts == [] = ""
-            | otherwise = foldl (++) "" $ map (take 2) rfs
-
 instance Markdown MagicEffect  where
-   printMD ob = OList
-       [ OString $ name ob ++ effectTeFo ob
-       , OList [ OString $ effectRDT ob
-       , nonemptyStringMD $ showStrList md
-       , trs
-       ]
-       , OList $ map italicOString $ narrative ob
-       , OList $ map OString $ comment ob
-       , OList $ [  OString $ show $ effectDesign ob 
-       , nonemptyStringMD $ effectReference ob 
-       ]
-       ]
-       where tr = effectTrigger ob
-             trs | tr == "" = OList []
-                 | otherwise = OString $ "Trigger: " ++ tr
-             md = effectModifiers ob
+   printMD = printEffectMD 
 instance Markdown Enchantment  where
    printMD (LesserItem eff) = printMD eff 
    printMD (GreaterDevice vn eff) = OList 
@@ -268,70 +240,10 @@ pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
 
-
-pMDlist :: [ Possession -> OList ]
-pMDlist = [ bookMD, labtextMD, weaponMD, armourMD, visMD, acMD ]
-
-weaponMD :: Possession -> OList 
-weaponMD ob | isWeapon ob = OList
-                  [ OString "Weapon Stats"
-                  , OList $ map OString $ weapon ob
-                  , OList $ map ( OString . show ) $ weaponStats ob
-                  ] 
-            | otherwise = OList []
-armourMD :: Possession -> OList 
-armourMD ob | isArmour ob = OList
-                  [ OString "Armour Stats"
-                  , OList $ map OString $ armour ob
-                  , OList $ map ( OString . show ) $ armourStats ob
-                  ] 
-            | otherwise = OList []
-
--- | Complete description of a composite item.
--- This is awkward for most items, particularly because names and
--- titles tend to be duplicated, once for the 'Possession' object 
--- and once for the constituent object, but it is necessary for
--- complex items such as enchanted books, magic swords, as well as
--- antologies.
-pMD :: Possession -> OList
-pMD ob = pMDgen ob pMDlist
-
-pMDgen :: Possession -> [Possession -> OList] -> OList
-pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
-
-labtextMD :: Possession -> OList
-labtextMD ob | labTexts  ob == []  =  OList []
-             | otherwise = OList [ OString "Lab Texts" 
-                             , OList $ map f (labTexts ob) ]
-         where f (SpellText x) = OList
-                         [ OString $ spellRecordName x
-                         , coreSpellRecordMD (Just x) ]
-               f (Device x) = printMD x
-
-visMD :: Possession -> OList
-visMD ob | isNothing (itemArt ob) = OList []
-         | otherwise = OString ( s ++ " vis: " ++ show p ++ " pawns" )
-         where s = fromJust $ itemArt ob
-               p = itemCount ob
-
-acMD :: Possession -> OList
-acMD = f . acTo
-    where f Nothing = OList []
-          f (Just s) = OString ( "Arcane Connection to " ++ s )
-
 instance Markdown Possession  where
    printMD ob = OList [ OString $ pName ob, pMD ob ]
    -- printMD ob | isMagic ob = enchantedMD ob (enchantment ob)
    --            | otherwise = OString $ pName ob
-
-
-bookMD :: Possession -> OList
-bookMD =  f . bookTexts
-      where f [] =  OList []
-            f [x] = printMD x
-            f xs =  OList [ OString "Antology of"
-                         , OList $ map printMD xs
-                         ]
 
 -- Cases:
 -- A. Library
@@ -631,30 +543,6 @@ artVisLine (_,s,i1,i2,i3) =
         "| " ++ s  ++ " | " ++ show i1 ++ " | " ++ showNum i2 ++ " | " ++ show i3 ++ " |"
 
 
--- |
--- == Render Spells
-
--- | Render a spell trait in Markdown
--- The result should normally be subject to indentOList to make an hierarchical
--- list.
-spellDescMD :: (Spell,Maybe SpellRecord) -> OList
-spellDescMD (s,sr) = OList [ OString $ show s
-                  , OList [ masteryMD s, f $ spellTComment s ]
-                  , coreSpellRecordMD sr
-                  ]
-     where f "" = OList [] 
-           f x = OString x
-
--- | Set all information from mastery on one line.
--- This includes mastery score, xp, and mastery options.
-masteryMD :: Spell -> OList
-masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
-            | otherwise = OString
-                          $ "Mastery: " ++ show (masteryScore s)
-                          ++ " (" ++ showNum (spellExcessXP s) ++ "xp) "
-                          ++ showStrList (masteryOptions s)
-
-
 -- | Set a list of spells.
 -- Each spell is set using 'spellMD', and the result is indented as a
 -- hierarchical list.
@@ -674,29 +562,6 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
 totalLevels :: [Spell] -> Int
 totalLevels = sum . map spellLevel
 
--- | Render the spell record as an OList
-coreSpellRecordMD :: Maybe SpellRecord -> OList
-coreSpellRecordMD Nothing = OList []
-coreSpellRecordMD sr = OList [ reqstr
-                             , OString $ (showRDT sp) ++ spstr
-                             , os (spellDescription sp)
-                             , os (design sp)
-                             , os (cite sp)
-                             ]
-   where req = techniqueReq sp ++ formReq sp
-         sp = fromJust sr
-         os "" = OList []
-         os x = OString x
-         reqstr | req == [] = OList []
-                | otherwise = OString $ "Req. " ++ showStrList req
-         spstr | [] == specialSpell sp = ""
-               | otherwise = "; " ++ showStrList (specialSpell sp)
-
-showRDT :: SpellRecord -> String
-showRDT sp = "Range: " ++ r ++
-             "; Duration: " ++ d ++
-             "; Target: " ++ t
-   where (r,d,t) = rdt sp
 
 -- | Set the Combat Stats of the Character as an 'OList'
 printCombatMD :: Saga -> CharacterSheet -> OList
@@ -793,30 +658,11 @@ covconceptHelper cc = filterNothing
 
 
 instance Markdown Book where
-    printMD book = OList  
-         [ OString $ name book
-         , OList $ [ OString $ showStrList $ map show (bookStats book) 
-                 , cnt
-                 , lns ]
-                 ++ ans ++
-                 [ OString $ "Key: " ++ bookID book ]
-         ]
-         where ans = map ( f . trim ) $ bookAnnotation book
-               f "" = OList []
-               f s = OString s
-               lng = trim $ fromMaybe "" $ bookLanguage book
-               lns | lng == "" = OList []
-                   | otherwise = OString $ "in " ++ lng
-               cnt | bookCount book == 1 = OList []
-                   | otherwise = OString $ show (bookCount book) ++ " copies"
+    printMD = printBookMD  
 
 instance Markdown CovenantState where
     printMD cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
-        , OString ""
-        , OString "### Library"
-        , OString ""
-        , OList $ map indentOList $ map printMD $ library cov
         , OString ""
         , OString "### Possessions"
         , OString ""
@@ -881,10 +727,6 @@ instance Markdown LabBonus where
    printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
 
 -- * Convenience Functions
-
--- | Render a string in italics, as an OString
-italicOString :: String  -> OList
-italicOString c = OString $ "*" ++ trim c ++ "*"
 
 storyOList :: StoryObject a => a -> [ OList ]
 storyOList ob = 
