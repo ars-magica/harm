@@ -64,9 +64,9 @@ import Control.Monad
 import Control.Applicative ((<|>))
 import Data.Maybe
 
--- |
--- == Weapons and other Possessions
-
+-- | A 'RawPossession' distinguishes between different kinds of possession,
+-- representing easier syntax patterns for the YAML files.
+-- It is was introduced to simplify parsing, but is not currently used.
 data RawPossession = CompositeItem Possession 
                    | SimpleBook Book
                    | SimpleItem String
