@@ -435,19 +435,19 @@ instance ToJSON Trait
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
          { topic :: TraitKey
-         , quality :: Maybe Int
          , bookLevel :: Maybe Int
+         , quality :: Maybe Int
          , reread :: Int          
             -- ^ Number of tractatus in the text.  This is normally 1
             -- and ignored for any text but tractatus, but there are a
             -- few canon examples of texts that count as multiple tractatus.
-       }  deriving (Eq,Generic)
+       }  deriving (Eq,Generic,Ord)
 instance ToJSON BookStats
 instance FromJSON BookStats where
     parseJSON = withObject "BookStats" $ \v -> BookStats
         <$> v .:? "topic" .!= NoTrait
-        <*> v .:? "quality" 
         <*> v .:? "level" 
+        <*> v .:? "quality" 
         <*> v .:? "reread"  .!= 1
 instance Show BookStats where
     show b = k ++ ' ':l ++ q
@@ -456,11 +456,12 @@ instance Show BookStats where
                 | otherwise = 'Q':show (fromJust $ quality b)
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
+{-
 instance Ord BookStats where
     compare a b | topic a /= topic b = compare (topic a) (topic b)
                 | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
                 | otherwise  = compare (quality a) (quality b)
-
+-}
 -- | A book is an original manuscript.  Antologies and copies are
 -- handled as Possession objects.
 --
@@ -493,8 +494,7 @@ instance StoryObject Book where
                | otherwise = " by " ++ aut
            tit' = trim $ bookTitle book
            tit | tit' /= "" = tit'
-               | bks /= [] = head bks
-               | otherwise = "No title"
+               | otherwise = fromMaybe "No title" $ mhead bks
            bks = map show (bookStats book)
            tis | tit == "" = ""
                | otherwise = "*" ++ tit ++ "*"
@@ -732,9 +732,7 @@ getPN1 p | weapon p /= [] = head $ weapon p
          | isAC p = "AC to " ++ (fromJust $ acTo p)
          | otherwise = "Item"
 -}
-mhead :: [a] -> Maybe a
-mhead (x:_) = Just x
-mhead [] = Nothing
+
 itemNames :: [ Possession -> Maybe String ]
 itemNames = [ mhead . weapon, mhead . armour, fmap ( "AC to " ++ ) . visArt, fmap ( ++ " vis" ) . acTo ]
 

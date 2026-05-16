@@ -155,3 +155,8 @@ putStrLns (x:xs) = IO.putStrLn x >> putStrLns xs
 mtail :: [a] -> [a]
 mtail [] = []
 mtail (_:xs) = xs
+
+-- | Return the head of the list or Nothing if the list is empty
+mhead :: [a] -> Maybe a
+mhead [] = Nothing
+mhead (x:_) = Just x

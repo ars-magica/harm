@@ -273,8 +273,8 @@ listPossessions ps = OList
                             , OString "Magic Items"
                             , (pList ms)
                             ]
-      , OString "#### Books"
-      , indentOList  (pList bk)
+      , OString "#### Library"
+      , indentOList $ listBooks ps
       , OString "#### Lab texts"
       , indentOList  (pList ls)
       ]
@@ -283,10 +283,19 @@ listPossessions ps = OList
          as = filter isArmour ps
          acs = filter isAC ps
          ms = filter isMagic ps
-         bk = filter isBook ps
          ls = filter isLabText ps
          es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
+
+listBooks :: [ Possession ] -> OList
+listBooks = pList . filter isBook 
+
+printLibraryMD :: Library -> OList
+printLibraryMD lib = OList [ indentOList ( pList $ antologies lib )
+                           , indentOList ( pList $ artBooks lib )
+                           , indentOList ( pList $ abilityBooks lib )
+                           , indentOList ( pList $ otherBooks lib )
+			   ]
 
 instance Markdown CharacterSheet where
    printMD c = OList 

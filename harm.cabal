@@ -97,6 +97,7 @@ common harm-deps
                        , ArM.Character.CharGen
                        , ArM.Character.Inference
                        , ArM.Character.Virtues
+		       , ArM.Sheet.Library
                        , ArM.Markdown
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession
