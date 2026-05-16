@@ -79,6 +79,13 @@ plan:
       topic:
         ability: Finesse
     title: Fundamental Fast Casting
+  - labtexts:
+        - device:
+              name: The Blanket of Healing Sleep 
+              level: 26
+              technique: Creo
+              form: Corpus
+              comment: Example effect
   - a dragon hide
   - name: Three mysterious black gems
   joining:

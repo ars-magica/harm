@@ -136,7 +136,7 @@ isMundaneEquipment p = isEquipment p && (not . isMagic) p
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isVis, isWeapon, isArmour, isAC, isBook ]
+   where fs = [ isVis, isWeapon, isArmour, isAC, isBook, isLabText ]
 
 -- ! Is the item a composite item with traits of more than one kind,
 -- such as an enchanted book, or a weapon that is an arcane connection?

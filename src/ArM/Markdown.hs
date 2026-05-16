@@ -263,16 +263,12 @@ listPossessions ps = OList
                             , OString "Magic Items"
                             , (pList ms)
                             ]
-      , OString "#### Lab texts"
-      , indentOList  (pList ls)
-      , indentOList $ OList $ map (OString . show) ls
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
          as = filter isArmour ps
          acs = filter isAC ps
          ms = filter isMagic ps
-         ls = filter isLabText ps
          es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 

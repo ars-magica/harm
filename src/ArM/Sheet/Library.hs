@@ -119,7 +119,8 @@ addGrimoires [] lib = lib
 addGrimoires (p:ps) lib = addGrimoires ps $ lib { grimoires = p:grimoires lib }
 addScrolls :: [ (LabText,Possession) ] -> Library -> Library 
 addScrolls [] lib = lib
-addScrolls ((_,p):ps) lib = addScrolls ps $ lib { spellTexts = p:spellTexts lib }
+addScrolls ((Device _,p):ps) lib = addScrolls ps $ lib { itemTexts = p:itemTexts lib }
+addScrolls ((SpellText  _,p):ps) lib = addScrolls ps $ lib { spellTexts = p:spellTexts lib }
 
 instance HarmObject Library where
 instance Timed Library where
