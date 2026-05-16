@@ -72,7 +72,7 @@ pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob)
 labtextMD :: Possession -> OList
 labtextMD ob | labTexts  ob == []  =  OList []
              | otherwise = OList [ OString "Lab Texts" 
-                             , OList $ map f (labTexts ob) ]
+                             , foldOList $ OList $ map f (labTexts ob) ]
          where f (SpellText x) = OList
                          [ OString $ spellRecordName x
                          , coreSpellRecordMD (Just x) ]
@@ -110,5 +110,5 @@ bookMD =  f . bookTexts
       where f [] =  OList []
             f [x] = printBookMD x
             f xs =  OList [ OString "Antology of"
-                         , OList $ map printBookMD xs
+                         , foldOList $ OList $ map printBookMD xs
                          ]
