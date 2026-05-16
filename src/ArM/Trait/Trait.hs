@@ -75,17 +75,16 @@ import ArM.Types.Lab
 import ArM.Trait.SpellRecord
 import ArM.Trait.Weapon
 
+import ArM.Debug.Trace
+
 import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
--- import Data.Aeson.Key
 import Data.Aeson.Types
 import Data.Text.Lazy  ( fromStrict, unpack )
 import Data.Maybe
--- import Data.Text       (splitOn)
--- import Text.Read 
 import Control.Monad
--- import Control.Applicative ((<|>))
+import Control.Applicative ((<|>))
 
 -- * The Trait Type
 
@@ -744,7 +743,10 @@ instance Show Possession where
 data LabText = Device MagicEffect | SpellText SpellRecord
     deriving ( Ord, Eq, Generic )
 instance ToJSON LabText
-instance FromJSON LabText 
+instance FromJSON LabText where
+    parseJSON (Object v) = (Device <$> v .: "device") 
+                         <|> (SpellText <$> v .: "spell")
+    parseJSON _ = trace "Failed to read LabText" mzero
 
 -- | A magic effect that can be instilled in an enchanted device.
 data MagicEffect = MagicEffect

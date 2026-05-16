@@ -265,6 +265,7 @@ listPossessions ps = OList
                             ]
       , OString "#### Lab texts"
       , indentOList  (pList ls)
+      , indentOList $ OList $ map (OString . show) ls
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps

@@ -16,15 +16,57 @@ design:
     - name: Longbow
       comment: I cannot figure out how to record this as a weapon
       weapon: Longbow
+    - name: Invisible Sling
+      labtexts:
+      - spell:
+          name: Invisible Sling
+          TeFo: ReTe
+          level: 20
+          technique: Rego
+          form: Terram
+          comment: Example lab text
     - name: The Folio of 1109
-      bookTexts:
+      books:
       - bookID: Lesser_is_Greater
-        bookTitle: Lesser is Greater
-        bookStats:
+        title: Lesser is Greater
+        stats:
           - topic:
                ability: Magic Theory
             quality: 13
-      labTexts:
+      labtexts:
+        - device:
+              name: The Blanket of Healing Sleep 
+              level: 26
+              technique: Creo
+              form: Corpus
+              comment: Example effect
+        - device:
+              name: The Vim Bin
+              level: 40
+              technique: Perdo
+              form: Vim
+              comment: Example effect
+    - name: The Duck
+      books:
+      - bookID: duck01
+        title: Controlling the water
+        stats:
+          - topic:
+               art: Rego
+            quality: 9
+      - bookID: duck02
+        title: The water controlled
+        stats:
+          - topic:
+               art: Aquam
+            quality: 9
+      labtexts:
+        - spell:
+              name: "Cloak of Duck's Feathers"
+              level: 5
+              technique: Rego
+              form: Aquam
+
 plan:
 - season: Spring 1220
   acquired:
