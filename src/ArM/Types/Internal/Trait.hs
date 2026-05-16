@@ -285,14 +285,11 @@ instance FromJSON CombatOption where
                     <*> v .:   "weapon"
                     <*> v .:?  "shield"
                     <*> v .:?  "ability"
--- |
--- * TraitClass 
-
--- | `TraitClass` provides the functions to get the search key (TraitKey),
+-- | 'TraitClass' provides the functions to get the search key (TraitKey),
 -- to wrap and unwrap traits in the generic `Trait` type, and to filter
 -- traits of different types.
 -- 
--- `ProtoTrait` and its constituent types may also implement TraitClass
+-- 'ProtoTrait' and its constituent types may also implement TraitClass
 -- but `getTrait` may then always return Nothing.
 class TraitClass t where
     -- | Get the key of the trait
