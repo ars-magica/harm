@@ -12,12 +12,22 @@ design:
   - bookcsv: Data/books.csv
     acquired:
     - a chest of ancient gold coins
-    - name: Shortspear
+    - weapon: Shortspear
     - name: Longbow
       comment: I cannot figure out how to record this as a weapon
       weapon: Longbow
+    - name: The Folio of 1109
+      bookTexts:
+      - bookID: Lesser_is_Greater
+        bookTitle: Lesser is Greater
+        bookStats:
+          - topic:
+               ability: Magic Theory
+            quality: 13
+      labTexts:
 plan:
-- acquired:
+- season: Spring 1220
+  acquired:
   - bookID: KalliasQ12Finesse
     comment: This copy was made 1217 by the chief librarian to replace the below
     copiedFrom: KalliasQ11Finesse
@@ -28,10 +38,11 @@ plan:
         ability: Finesse
     title: Fundamental Fast Casting
   - a dragon hide
+  - name: Three mysterious black gems
   joining:
   - Cieran
-  season: Spring 1220
-- acquired:
+- season: Summer 1220
+  acquired:
     antologyOf:
     - bookID: MTQ13folio1109
       narrative:
@@ -58,4 +69,3 @@ plan:
   joining:
   - Tessa
   - Rowan
-  season: Summer 1220
