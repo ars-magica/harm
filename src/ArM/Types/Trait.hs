@@ -29,16 +29,82 @@
 --
 -----------------------------------Types.------------------------------------------
 module ArM.Types.Trait ( 
-         -- * Types
-         module ArM.Types.Internal.Trait
-         -- * Sorting
+         -- * The Trait Type
+         Trait(..)
+         , Ability(..)
+         , Characteristic(..)
+         , Art(..)
+         , VF(..)
+         , Spell(..)
+         , PTrait(..)
+         , OtherTrait(..)
+         , CombatOption(..)
+         , Confidence(..)
+         , Reputation(..)
+
+         -- * Convenience Functions
+         , TraitClass(..)
+         
+         -- ** Sorting
          , (<:)
+         , (>:)
          , sortTraits
          , findTrait
-         -- * Functions on Books
-         , module ArM.Types.Internal.Book
-         -- * Functions on Possessions
-         , module ArM.Types.Internal.Possession
+
+         -- * Aging
+         , Age(..)
+         , Aging
+         , advanceAge
+         , toAge
+         , agingLimit
+         , agingBonus
+         , defaultAging
+         , addYears
+         , agingRoll
+
+         -- * TraitKey
+         , TraitKey(..)
+
+         -- ** Convenience functions
+         , fote
+         , isSpell
+         , isVF
+         , artKey
+         , artLongName
+         , spellKeyName
+
+         -- * Possessions
+         , Possession(..)
+         , defaultPossession
+         , visArt
+         , isNone
+
+         -- ** Magic and Enchantments
+         , Enchantment(..)
+         , MagicEffect(..)
+         , isMagic
+         , isVis
+         , isAC
+         , effectRDT
+
+         -- ** Weapons and Mundane Equipment
+         , isComposite
+         , isMundaneEquipment
+         , isWeapon
+         , isArmour
+         , isEquipment
+
+         -- ** Books
+         , BookStats(..)
+         , Book(..)
+         , defaultBook
+         , BookDB(..)
+         , isBook
+         , isLabText
+         , LabText(..)
+         , wrapBooks
+         , textLevel
+         , readBookCSV
          ) where
 
 import ArM.Types.Internal.Trait
@@ -47,18 +113,18 @@ import ArM.Types.Internal.Possession
 
 import Data.List
 
-
 -- ** Sorting Traits
 
+-- | Compare two objects by their `traitKey`
 (<:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
 (<:) p1 p2 = traitKey p1 < traitKey p2
 
-{-
+-- | Compare two objects by their `traitKey`
 (>:) :: (TraitClass t1, TraitClass t2) => t1 -> t2 -> Bool
 (>:) p1 p2 = p2 <: p1
--}
 
 
+-- | Sort a list of traits by their 'traitKey'.
 sortTraits :: TraitClass t => [ t ] -> [ t ]
 sortTraits = sortBy f
        where f x y = compare (traitKey x) (traitKey y)
