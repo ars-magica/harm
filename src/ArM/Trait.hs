@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Trait
+-- Module      :  ArM.Trait
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -28,7 +28,7 @@
 -- is the case for `LabText` objects.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Trait ( 
+module ArM.Trait ( 
          -- * The Trait Type
          Trait(..)
          , Ability(..)
@@ -105,11 +105,21 @@ module ArM.Types.Trait (
          , wrapBooks
          , textLevel
          , readBookCSV
+
+         -- * Weapon
+         , Weapon(..)
+         , Armour(..)
+         -- * SpellRecord
+         , SpellRecord(..)
+         , isRitual
+         , rdt
          ) where
 
-import ArM.Types.Internal.Trait
-import ArM.Types.Internal.Book
-import ArM.Types.Internal.Possession
+import ArM.Trait.Trait
+import ArM.Trait.SpellRecord
+import ArM.Trait.Weapon
+import ArM.Trait.Book
+import ArM.Trait.Possession
 
 import Data.List
 

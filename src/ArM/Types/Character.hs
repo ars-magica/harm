@@ -20,10 +20,9 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
-import ArM.Types.ProtoTrait
 import ArM.Types.Advancement
+import ArM.Trait
 import ArM.Types
--- import ArM.Debug.Trace
 import ArM.Helper
 
 

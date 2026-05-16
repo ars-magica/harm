@@ -20,13 +20,13 @@ module ArM.Character.CharGen (prepareCharacter) where
 
 import ArM.Character.Character
 import ArM.Character.CharacterSheet
--- import ArM.Character.Advancement
 import ArM.Character.Inference
 import ArM.Character.Virtues
 import ArM.Types.Character
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 import ArM.Types
+import ArM.Trait
 import ArM.GameRules
 
 import Data.Maybe 

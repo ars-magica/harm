@@ -27,13 +27,10 @@
 -- The lists are assumed to be sorted.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.ProtoTrait ( module ArM.Types.Trait
-                      , ProtoTrait(..)
+module ArM.Types.ProtoTrait ( ProtoTrait(..)
                       , TraitKey(..)
                       , advanceTraitList
                       , defaultPT
-                      , Weapon(..)
-                      , Armour(..)
                       , processChar
                       , regularXP
                       , getVF
@@ -41,10 +38,9 @@ module ArM.Types.ProtoTrait ( module ArM.Types.Trait
 
 import ArM.GameRules
 import ArM.Helper
-import ArM.Types.Trait
+import ArM.Trait
 import ArM.Types.HarmObject
 import ArM.Types.Lab
-import ArM.DB.Spell
 
 import GHC.Generics
 import Data.Aeson
@@ -54,7 +50,6 @@ import Data.List
 import Control.Monad
 
 import ArM.Debug.Trace
-import ArM.DB.Weapon
 
 -- | 
 -- * ProtoTrait

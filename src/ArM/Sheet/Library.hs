@@ -15,7 +15,7 @@
 module ArM.Sheet.Library where
 
 import ArM.Types
-import ArM.Types.Trait
+import ArM.Trait
 import ArM.Types.Covenant
 import ArM.Types.HarmObject()
 import ArM.Helper

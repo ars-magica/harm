@@ -13,9 +13,8 @@
 -----------------------------------------------------------------------------
 module ArM.Markdown.Spell where
 
-import ArM.Types.Trait
+import ArM.Trait
 import ArM.Types.Story
-import ArM.DB.Spell
 import ArM.GameRules
 import ArM.Helper
 import Data.OList

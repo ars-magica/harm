@@ -35,8 +35,7 @@ import Data.Aeson.Extra
 import Data.Maybe
 import Control.Monad
 
-import ArM.Types.Trait
--- import ArM.Types.ProtoTrait
+import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types.Character
 import ArM.Types.Lab

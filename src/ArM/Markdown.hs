@@ -31,12 +31,12 @@ import ArM.Markdown.Spell
 import ArM.Character 
 import ArM.Types.ProtoTrait
 import ArM.Cov.Saga
--- import ArM.Types.Trait
 import ArM.Cov.Covenant
 import ArM.Types.Saga
 import ArM.Types
 import ArM.Sheet.Library
-import ArM.DB.Spell
+import ArM.Trait
+import ArM.DB
 import ArM.GameRules
 import Data.OList
 import ArM.Helper

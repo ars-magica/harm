@@ -80,19 +80,19 @@ common harm-deps
                        , ArM.Types.Advancement
                        , ArM.Advancement
                        , ArM.Types.ProtoTrait
-                       , ArM.Types.Trait
-                       , ArM.Types.Internal.Book
-                       , ArM.Types.Internal.Possession
-                       , ArM.Types.Internal.Trait
-                       , ArM.Types.Internal.Aging
-                       , ArM.Types.Internal.TraitKey
+                       , ArM.Trait
+                       , ArM.Trait.Book
+                       , ArM.Trait.Possession
+                       , ArM.Trait.Trait
+                       , ArM.Trait.Aging
+                       , ArM.Trait.TraitKey
                        , ArM.Types.HarmObject
                        , ArM.Types.Story
                        , ArM.Types.Lab
+                       , ArM.Trait.Weapon
                        , ArM.Character.Combat
                        , ArM.DB.CSV
-                       , ArM.DB.Spell
-                       , ArM.DB.Weapon
+                       , ArM.DB
                        , ArM.Character.CharGen
                        , ArM.Character.Inference
                        , ArM.Character.Virtues
@@ -105,6 +105,7 @@ common harm-deps
                        , ArM.Cov.Covenant
                        , ArM.Types.Covenant
                        , ArM.Cov.Saga
+                       , ArM.Trait.SpellRecord
                        , ArM.IO
                        , ArM.IO.Read
                        , ArM.IO.Write

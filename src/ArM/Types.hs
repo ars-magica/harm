@@ -16,13 +16,11 @@
 -----------------------------------------------------------------------------
 module ArM.Types ( module ArM.Types.KeyPair
                  , module ArM.Types.Calendar
-                 , module ArM.Types.Internal.TraitKey
                  , module ArM.Types.HarmObject
                  , module ArM.Types.Story
                  , module ArM.Types.Lab
                  ) where
 
-import ArM.Types.Internal.TraitKey
 import ArM.Types.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.HarmObject

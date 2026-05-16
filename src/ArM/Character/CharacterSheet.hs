@@ -33,7 +33,8 @@ module ArM.Character.CharacterSheet ( CharacterSheet(..)
 import ArM.Types.ProtoTrait
 import ArM.Types.Character
 import ArM.Types.Lab
-import ArM.DB.Spell
+import ArM.Trait
+import ArM.DB
 import ArM.Helper
 
 import GHC.Generics

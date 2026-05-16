@@ -30,8 +30,7 @@ import GHC.Generics
 import ArM.Types
 import ArM.Types.Covenant
 import ArM.Types.Character
-import ArM.DB.Spell
-import ArM.DB.Weapon
+import ArM.DB
 
 -- |
 -- = Saga type

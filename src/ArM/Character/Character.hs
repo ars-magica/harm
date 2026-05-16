@@ -37,6 +37,7 @@ import ArM.Types.Advancement
 import ArM.Character.CharacterSheet
 import ArM.Types
 import ArM.Types.ProtoTrait
+import ArM.Trait
 import ArM.Helper
 import ArM.Types.Character
 

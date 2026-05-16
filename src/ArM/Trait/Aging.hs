@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Internal.Aging
+-- Module      :  ArM.Trait.Aging
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,7 +17,7 @@
 -- the aging roll.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Internal.Aging ( Age(..)
+module ArM.Trait.Aging ( Age(..)
                        , Aging
                        , advanceAge
                        , toAge
@@ -29,9 +29,6 @@ module ArM.Types.Internal.Aging ( Age(..)
                        ) where
 
 import ArM.Helper
--- import ArM.Types.TraitKey
--- import ArM.Types.HarmObject
--- import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson

@@ -21,11 +21,10 @@ import ArM.Advancement
 import ArM.Types.Character
 import ArM.Cov.Covenant
 import ArM.Types.Saga
-import ArM.Types.Trait
+import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types
 import ArM.DB.CSV
-import ArM.DB.Weapon()
 import ArM.Helper
 
 -- * Read Saga Files

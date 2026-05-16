@@ -30,8 +30,7 @@ module ArM.Character.Virtues (
 
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
--- import ArM.Types.TraitKey
--- import ArM.Types.Trait
+import ArM.Trait
 import ArM.Helper
 import ArM.GameRules
 

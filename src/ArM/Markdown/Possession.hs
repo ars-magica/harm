@@ -15,9 +15,7 @@ module ArM.Markdown.Possession where
 
 import ArM.Markdown.Spell
 import ArM.Types.HarmObject
-import ArM.Types.Trait
--- import ArM.Types.Story
-import ArM.DB.Spell
+import ArM.Trait
 import ArM.Helper 
 import Data.OList
 import Data.Maybe

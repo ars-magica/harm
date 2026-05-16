@@ -21,6 +21,7 @@ import ArM.Types.ProtoTrait
 import ArM.Types.Character
 import ArM.Character.CharacterSheet
 import ArM.Types
+import ArM.Trait
 import ArM.Character.Virtues
 
 import Data.Maybe 

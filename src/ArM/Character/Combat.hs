@@ -22,8 +22,8 @@ module ArM.Character.Combat ( CombatLine(..)
                        ) where
 
 import ArM.Character.CharacterSheet
-import ArM.Types.Trait
-import ArM.DB.Weapon
+import ArM.Trait
+import ArM.DB
 import ArM.Helper
 
 import GHC.Generics

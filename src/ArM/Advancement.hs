@@ -34,7 +34,7 @@ import Data.List
 import ArM.Character
 import ArM.Cov.Covenant
 import ArM.Types
-import ArM.Types.Trait
+import ArM.Trait
 import ArM.Types.Saga
 import ArM.Helper
 

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Internal.Trait
+-- Module      :  ArM.Trait.Trait
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -28,7 +28,7 @@
 -- is the case for `LabText` objects.
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Internal.Trait ( 
+module ArM.Trait.Trait ( 
          -- * The Trait Types
          Trait(..)
          , Ability(..)
@@ -45,9 +45,9 @@ module ArM.Types.Internal.Trait (
          -- * Convenience Functions
          , TraitClass(..)
          -- * Aging
-         , module ArM.Types.Internal.Aging
+         , module ArM.Trait.Aging
          -- * TraitKey
-         , module ArM.Types.Internal.TraitKey
+         , module ArM.Trait.TraitKey
          -- * Books
          , BookStats(..)
          , Book(..)
@@ -68,13 +68,13 @@ module ArM.Types.Internal.Trait (
 
 import ArM.GameRules
 import ArM.Helper
-import ArM.Types.Internal.TraitKey
-import ArM.Types.Internal.Aging
+import ArM.Trait.TraitKey
+import ArM.Trait.Aging
 import ArM.Types.HarmObject
 import ArM.Types.Calendar
 import ArM.Types.Lab
-import ArM.DB.Spell
-import ArM.DB.Weapon
+import ArM.Trait.SpellRecord
+import ArM.Trait.Weapon
 
 import GHC.Generics
 import Data.Aeson

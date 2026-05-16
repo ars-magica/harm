@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Internal.Book
+-- Module      :  ArM.Trait.Book
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -11,11 +11,10 @@
 -- Description :  Functions to manage reading of Book objects from file
 --
 -----------------------------------Types.------------------------------------------
-module ArM.Types.Internal.Book ( readBookCSV ) where
+module ArM.Trait.Book ( readBookCSV ) where
 
 import ArM.Helper
-import ArM.Types.Internal.Trait
--- import ArM.Types.HarmObject
+import ArM.Trait.Trait
 import qualified ArM.Internal.Book as IB
 
 import ArM.Debug.Trace
