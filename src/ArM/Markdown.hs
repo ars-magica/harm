@@ -283,7 +283,7 @@ bulletWithHeader h xs = OList [ OString h, f xs ]
 
 
 instance Markdown Library where
-   printMD lib = OList [ OString "# Library"
+   printMD lib = OList [ OString ("# " ++ stateName lib)
                        , bulletWithHeader "## Antologies" (antologies lib )
                        , bulletWithHeader "## Arts" (artBooks lib )
                        , bulletWithHeader "## Abilities" (abilityBooks lib )
