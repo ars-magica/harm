@@ -21,6 +21,8 @@ import ArM.Helper
 import Data.List
 import Data.Maybe
 
+-- * Processing Books
+
 -- | The 'KeyedBook' is a possession representing a book together with
 -- various key indicators for sorting and classification.
 type KeyedBook = ( Bool, TraitKey, Maybe BookStats, Bool, Possession ) 
@@ -44,6 +46,8 @@ bookSortKey = mhead . foldl (++) [] . map bookStats . bookTexts
 posBookTopic :: Possession -> [ TraitKey ]
 posBookTopic = uniqueSort . map topic . posBookStat
 
+-- * The Library Object
+
 -- | A library organises books (represented as 'Possession' objects) into sections.
 data Library = Library { libraryName :: String
                        , libraryTime :: SeasonTime
@@ -51,11 +55,14 @@ data Library = Library { libraryName :: String
                        , artBooks :: [ Possession ]
                        , abilityBooks :: [ Possession ]
                        , otherBooks :: [ Possession ]  
+                       , grimoires :: [ Possession ]  
+                       , spellTexts :: [ Possession ]  
+                       , itemTexts :: [ Possession ]  
                          -- ^ books which do not fit in the other sections (should be emoty)
                        }
 -- | Empty library
 defaultLibrary :: Library
-defaultLibrary = Library "Anonymous Library" NoTime [] [] [] []
+defaultLibrary = Library "Anonymous Library" NoTime [] [] [] [] [] [] []
 
 -- | Sort a list of possessions into an organised library, ignoring non-book
 -- possessions.
