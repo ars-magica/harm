@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.KeyPair
+-- Module      :  Data.KeyPair
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -17,7 +17,7 @@
 -- Aeson, and it may be redundant.  
 --
 -----------------------------------------------------------------------------
-module ArM.Types.KeyPair ( FieldValue(..)
+module Data.KeyPair ( FieldValue(..)
                               , KeyPair(..)
                               , KeyPairList(..)
                               ) where

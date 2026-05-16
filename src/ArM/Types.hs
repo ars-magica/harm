@@ -14,14 +14,14 @@
 -- advancement, including persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types ( module ArM.Types.KeyPair
+module ArM.Types ( module Data.KeyPair
                  , module ArM.Types.Calendar
                  , module ArM.Types.HarmObject
                  , module ArM.Types.Story
                  , module ArM.Types.Lab
                  ) where
 
-import ArM.Types.KeyPair
+import Data.KeyPair
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
 import ArM.Types.Story
