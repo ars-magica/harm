@@ -20,6 +20,7 @@
 -----------------------------------------------------------------------------
 module ArM.Types.HarmObject ( HarmKey(..)
                             , HarmObject(..)
+                            , HarmSagaObject(..)
                             , KeyObject(..)
                             , StoryObject(..)
                             , Countable(..)
@@ -31,8 +32,15 @@ import Data.Aeson.Types
 import Control.Monad
 import Data.List
 import GHC.Generics
+
 import ArM.Debug.Trace
 import ArM.Types.Calendar
+
+import ArM.Types.Saga
+import ArM.Types.Covenant
+import ArM.Types.Character
+import ArM.Types.Lab
+import ArM.Helper
 
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
@@ -116,9 +124,13 @@ class (Timed h,StoryObject h) => HarmObject h where
 -- Defaults assume a non-countable object, with count equal to one, and
 -- adding to the count is an error. 
 class Countable c where
+   -- | Number of copies of the object
    count :: c -> Int
    count _ = 1
-   addCount :: c -> Int -> c
+   -- | Increase the count by the given number
+   addCount :: c   -- ^ Object to update
+            -> Int -- ^ Increment
+            -> c   -- ^ Updated object
    addCount x _ = trace "Cannot add count to unique objects." x
 
 -- | Common interface for objects that have a narrative aspect.
@@ -134,7 +146,30 @@ class StoryObject ob where
    comment :: ob -> [ String ]
    comment _ = []
 
+   -- | add a narrative to the given object
    addNarrative :: String -> ob -> ob
    addNarrative _ = id
+   -- | add a comment to the given object
    addComment :: String -> ob -> ob
    addComment _ = id
+
+
+
+-- | It is possibly to search for a 'HarmObject' by 'HarmKey' throughout
+-- a 'Saga' object.  The 'HarmSagaObject' class enables this.
+--
+-- **Caveat** This is not tested and not used at present.
+class KeyObject h => HarmSagaObject h where
+   -- | Get an object by key from a `SagaState` object
+   harmGet :: Saga -> HarmKey -> Maybe h
+
+instance HarmSagaObject Covenant where
+   harmGet saga k = harmFind k $ covenants $ sagaState saga
+instance HarmSagaObject Character where
+   harmGet saga k = harmFind k $ characters $ sagaState saga
+instance HarmSagaObject Lab where
+   harmGet saga k = g $ map ( harmFind k . labs ) css
+      where g [] = Nothing
+            g (Nothing:xs) = g xs
+            g (Just x:_) = Just x
+            css = filterNothing $ map covenantState ( covenants $ sagaState saga )

@@ -89,7 +89,6 @@ common harm-deps
                        , ArM.Types.HarmObject
                        , ArM.Types.Story
                        , ArM.Types.Lab
-                       , ArM.Types.HarmSagaObject
                        , ArM.Character.Combat
                        , ArM.DB.CSV
                        , ArM.DB.Spell

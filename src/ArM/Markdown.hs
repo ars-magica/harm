@@ -35,6 +35,7 @@ import ArM.Cov.Saga
 import ArM.Cov.Covenant
 import ArM.Types.Saga
 import ArM.Types
+import ArM.Sheet.Library
 import ArM.DB.Spell
 import ArM.GameRules
 import Data.OList
@@ -239,18 +240,6 @@ enchantedMD ob enc = OList [ OString $ pName ob
 instance Markdown Possession  where
    printMD = printPossessionMD
 
--- Cases:
--- A. Library
---     1. Monography
---     2. Monography with lab texts
---     3. Antology
---     4. Single lab text
---     5. Collection of lab texts
--- B. Magic Item
---     1. Lesser
---     2. Charged
---     3. Greater
---     4. Talisman
 
 
 -- | Make a complete list of possessions in Markdown.
@@ -295,7 +284,21 @@ printLibraryMD lib = OList [ indentOList ( pList $ antologies lib )
                            , indentOList ( pList $ artBooks lib )
                            , indentOList ( pList $ abilityBooks lib )
                            , indentOList ( pList $ otherBooks lib )
-			   ]
+                           ]
+
+bulletWithHeader :: Markdown a => String -> [a] -> OList
+bulletWithHeader _ [] = OList []
+bulletWithHeader h xs = OList [ OString h, f xs ]
+         where f = indentOList . foldOList . OList  . map printMD 
+
+
+instance Markdown Library where
+   printMD lib = OList [ OString "# Library"
+                       , bulletWithHeader "## Antologies" (antologies lib )
+                       , bulletWithHeader "## Arts" (artBooks lib )
+                       , bulletWithHeader "## Abilities" (abilityBooks lib )
+                       , bulletWithHeader "## Other works" (otherBooks lib )
+                       ]
 
 instance Markdown CharacterSheet where
    printMD c = OList 
