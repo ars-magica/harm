@@ -290,6 +290,9 @@ instance Markdown Library where
                        , bulletWithHeader "## Arts" (artBooks lib )
                        , bulletWithHeader "## Abilities" (abilityBooks lib )
                        , bulletWithHeader "## Other works" (otherBooks lib )
+                       , bulletWithHeader "## Grimoires" (grimoires lib )
+                       , bulletWithHeader "## Spell Lab Texts" (spellTexts lib )
+                       , bulletWithHeader "## Enchantment Lab Texts" (itemTexts lib )
                        ]
 
 instance Markdown CharacterSheet where

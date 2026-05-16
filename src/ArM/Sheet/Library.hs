@@ -50,12 +50,16 @@ posBookTopic = uniqueSort . map topic . posBookStat
 
 -- | Filter out grimoires, that is books with multiple lab texts
 filterGrimoires :: [ Possession ] -> [ Possession ]
-filterGrimoires = filter ( (1<) . length . labTexts ) 
+filterGrimoires = sort . filter (not . isBook) . filter ( (1<) . length . labTexts ) 
 
 -- | Filter out scrolls, that is items with a single lab text
-filterScrolls :: [ Possession ] -> [ Possession ]
-filterScrolls = filter ( (1==) . length . labTexts ) 
-
+filterScrolls ::  [ Possession ] -> [ (LabText,Possession) ]
+filterScrolls = sort . f2 . f1 . filter ( (1==) . length . labTexts ) 
+    where f2 [] = []
+          f2 (([],_):xs) = f2 xs
+          f2 ((x:[],ps):xs) = (x,ps):f2 xs
+          f2 ((_,_):xs) = f2 xs
+          f1 x = zip (map labTexts x) x
 
 -- * The Library Object
 
@@ -101,10 +105,18 @@ addBook l (_,_,_,_,p) = l { otherBooks = p:otherBooks l }
 
 -- | get the library from a given 'Covenant'.
 getLibrary :: Covenant -> Library
-getLibrary cov = addBooks lib ps
+getLibrary cov = addScrolls s $ addGrimoires g $ addBooks lib ps
    where lib = defaultLibrary { libraryName = "Library at " ++ name cov
                               , libraryTime = season cov }
          ps = fromMaybe [] $ fmap possessions  $ covenantState cov
+         g = filterGrimoires ps
+         s = filterScrolls ps
+addGrimoires :: [ Possession ] -> Library -> Library 
+addGrimoires [] lib = lib
+addGrimoires (p:ps) lib = addGrimoires ps $ lib { grimoires = p:grimoires lib }
+addScrolls :: [ (LabText,Possession) ] -> Library -> Library 
+addScrolls [] lib = lib
+addScrolls ((_,p):ps) lib = addScrolls ps $ lib { spellTexts = p:spellTexts lib }
 
 instance HarmObject Library where
 instance Timed Library where
