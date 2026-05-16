@@ -63,10 +63,10 @@ design:
       labtexts:
         - spell:
               name: "Cloak of Duck's Feathers"
+              TeFo: ReAq
               level: 5
               technique: Rego
               form: Aquam
-
 plan:
 - season: Spring 1220
   acquired:

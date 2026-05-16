@@ -21,12 +21,6 @@ import ArM.Helper
 import Data.List
 import Data.Maybe
 
-{-
- - Book categories
- - - Art
- - - Ability
- -}
-
 -- | The 'KeyedBook' is a possession representing a book together with
 -- various key indicators for sorting and classification.
 type KeyedBook = ( Bool, TraitKey, Maybe BookStats, Bool, Possession ) 
@@ -71,7 +65,7 @@ groupBooks = addBooks defaultLibrary
 -- | Sort a list of possessions into an the given 'Library' object,
 -- ignoring non-book possessions.
 addBooks :: Library -> [ Possession ] -> Library
-addBooks lib = addBooks' lib . sort . filterBooks
+addBooks lib = addBooks' lib . reverse . sort . filterBooks
 
 -- | Auxiliary for addBooks
 addBooks' :: Library -> [ KeyedBook ] -> Library
@@ -81,8 +75,8 @@ addBooks' l (p:ps) = addBooks' (addBook l p) ps
 -- | Auxiliary for addBooks'
 addBook :: Library -> KeyedBook -> Library
 addBook l (True,_,_,_,p) = l { antologies = p:antologies l }
-addBook l (False,ArtKey _,_,_,p) = l { artBooks = p:artBooks l }
-addBook l (False,AbilityKey _,_,_,p) = l { abilityBooks = p:abilityBooks l }
+addBook l (False,ArtKey _,_,_,p) =  l { artBooks = p:artBooks l }
+addBook l (False,AbilityKey _,_,_,p) =  l { abilityBooks = p:abilityBooks l }
 addBook l (_,_,_,_,p) = l { otherBooks = p:otherBooks l }
 
 -- | get the library from a given 'Covenant'.

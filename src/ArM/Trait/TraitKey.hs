@@ -118,22 +118,26 @@ instance Ord TraitKey where
 
 -- | List of arts defined in *Ars Magica*
 artIdx :: String -> Int
-artIdx "Cr" = 1
-artIdx "In" = 2
-artIdx "Mu" = 3
-artIdx "Pe" = 4
-artIdx "Re" = 5
-artIdx "An" = 11
-artIdx "Aq" = 12
-artIdx "Au" = 13
-artIdx "Co" = 14
-artIdx "He" = 15
-artIdx "Ig" = 16
-artIdx "Im" = 17
-artIdx "Me" = 18
-artIdx "Te" = 19
-artIdx "Vi" = 20
-artIdx _    = 100
+artIdx = artIdx' . take 2
+
+-- | Auxiliary for 'artIdx'
+artIdx' :: String -> Int
+artIdx' "Cr" = 1
+artIdx' "In" = 2
+artIdx' "Mu" = 3
+artIdx' "Pe" = 4
+artIdx' "Re" = 5
+artIdx' "An" = 11
+artIdx' "Aq" = 12
+artIdx' "Au" = 13
+artIdx' "Co" = 14
+artIdx' "He" = 15
+artIdx' "Ig" = 16
+artIdx' "Im" = 17
+artIdx' "Me" = 18
+artIdx' "Te" = 19
+artIdx' "Vi" = 20
+artIdx' _    = 100
 
 charIdx :: String -> Int
 charIdx "Int" = 1

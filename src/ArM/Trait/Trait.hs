@@ -425,8 +425,6 @@ instance ToJSON Trait
 
 
 
--- * Types
-
 -- | The stats of a book as required for advancement mechanics.
 data BookStats = BookStats
          { topic :: TraitKey
@@ -436,7 +434,12 @@ data BookStats = BookStats
             -- ^ Number of tractatus in the text.  This is normally 1
             -- and ignored for any text but tractatus, but there are a
             -- few canon examples of texts that count as multiple tractatus.
-       }  deriving (Eq,Generic,Ord)
+       }  deriving (Eq,Generic)
+instance Ord BookStats where
+   compare a b | topic a /= topic b = compare (topic a) (topic b)
+   compare a b | bookLevel a /= bookLevel b = compare (bookLevel b) (bookLevel a)
+   compare a b | quality a /= quality b = compare (quality b) (quality a)
+   compare a b | otherwise = compare (reread b) (reread a)
 instance ToJSON BookStats
 instance FromJSON BookStats where
     parseJSON = withObject "BookStats" $ \v -> BookStats

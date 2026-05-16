@@ -32,9 +32,9 @@ CorpusQ11Bonaventure,Art,Corpus    , Q11    , Motion of Man , Bonaventure of Mer
 CorpusQ9Sebastian,Art,Corpus    , Q9     , Some more thoughts on the body ,  Sebastian ex Bonisagus , Tractatus ,1,
 CorpusQ7Vitor,Art,Corpus    , Q7     , Secrets of Longevity ,  Vitor ex Mercere ,"Tractatus in bad shape, copied and rebound it will have Q8",1,
 RootHerbam,Art,Herbam, L6Q21,Roots First,Horatio of Bonisagus,"Root of the art.  Written by a Diedne magus, this book was saved during the Schism book, and a clever magus recognising its quality rebound it with a false cover sheet. It was widely copied and distributed and gained a reputation as a Root of the Art, and nobody seems to know its dark secret.",1,
-HerbamL5Q15,Art,Herbam,L5Q15, An Apprentice Primer in Herbam , Sabastian ex Bonisagus , ,1,
-MaineHerbam,Art,Herbam    , Q14    , Hibernian Musings on the Hermetic Arts - Volume 5 Herbam , Maine Chleitigh ex Bonisagus , ,2,
-HerbamQ12Gaelic,Art,Herbam    , Q12    , , ,From Panchia A'27 ,1,Gaelic
+HerbamL5Q15,Art,Herbam,L5Q15,An Apprentice Primer in Herbam , Sabastian ex Bonisagus , ,1,
+MaineHerbam,Art,Herbam,Q14, Hibernian Musings on the Hermetic Arts - Volume 5 Herbam , Maine Chleitigh ex Bonisagus , ,2,
+HerbamQ12Gaelic,Art,Herbam,Q12, , ,From Panchia A'27 ,1,Gaelic
 RootIgnem,Art,Ignem     , L8Q15  , Burning for Beginners , Elaine of Flambeau , Root of the art ,1,
 IgnemL5Q15,Art,Ignem     , L5Q15  , An Apprentice Primer in Ignem , Sabastian ex Bonisagus , ,1,
 MaineIgnem,Art,Ignem     , Q14    , Hibernian Musings on the Hermetic Arts - Volume 6 Ignem , Maine Chleitigh ex Bonisagus , ,1,
