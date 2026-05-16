@@ -281,7 +281,7 @@ listPossessions ps = OList
 bulletWithHeader :: Markdown a => String -> [a] -> OList
 bulletWithHeader _ [] = OList []
 bulletWithHeader h xs = OList [ OString h, f xs ]
-         where f = indentOList . foldOList . OList  . map printMD 
+         where f = indentOList . foldOList . OList . map printMD 
 
 
 instance Markdown Library where

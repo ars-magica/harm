@@ -46,19 +46,32 @@ bookSortKey = mhead . foldl (++) [] . map bookStats . bookTexts
 posBookTopic :: Possession -> [ TraitKey ]
 posBookTopic = uniqueSort . map topic . posBookStat
 
+-- * Lab Texts
+
+-- | Filter out grimoires, that is books with multiple lab texts
+filterGrimoires :: [ Possession ] -> [ Possession ]
+filterGrimoires = filter ( (1<) . length . labTexts ) 
+
+-- | Filter out scrolls, that is items with a single lab text
+filterScrolls :: [ Possession ] -> [ Possession ]
+filterScrolls = filter ( (1==) . length . labTexts ) 
+
+
 -- * The Library Object
 
 -- | A library organises books (represented as 'Possession' objects) into sections.
 data Library = Library { libraryName :: String
                        , libraryTime :: SeasonTime
-                       , antologies :: [ Possession ]  -- ^ books covering multiple topics
+                       , antologies :: [ Possession ]  
+                         -- ^ books covering multiple topics
                        , artBooks :: [ Possession ]
                        , abilityBooks :: [ Possession ]
                        , otherBooks :: [ Possession ]  
                        , grimoires :: [ Possession ]  
                        , spellTexts :: [ Possession ]  
                        , itemTexts :: [ Possession ]  
-                         -- ^ books which do not fit in the other sections (should be emoty)
+                         -- ^ books which do not fit in the other sections 
+                         -- (should be empty)
                        }
 -- | Empty library
 defaultLibrary :: Library
