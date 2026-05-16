@@ -15,7 +15,7 @@ module ArM.Trait.Book ( readBookCSV ) where
 
 import ArM.Helper
 import ArM.Trait.Trait
-import qualified ArM.Internal.Book as IB
+import qualified ArM.Trait.RawBook as IB
 
 import ArM.Debug.Trace
 

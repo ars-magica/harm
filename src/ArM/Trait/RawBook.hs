@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Internal.Book
+-- Module      :  ArM.Trait.RawBook
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -14,7 +14,7 @@
 -- maps from the CSV format.  
 --
 -----------------------------------------------------------------------------
-module ArM.Internal.Book ( RawBook(..)
+module ArM.Trait.RawBook ( RawBook(..)
                          , readBookCSV
                          ) where
 
