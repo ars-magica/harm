@@ -8,6 +8,7 @@
 -- 
 -- Description :  The ArMCSV class supports parsing a type from CSV files.
 --
+-- This is an internal module. The 'ArMCSV' class is exposed from "ArM.DB".
 --
 -----------------------------------------------------------------------------
 module ArM.DB.CSV where
