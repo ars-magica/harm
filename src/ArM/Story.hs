@@ -29,7 +29,6 @@ module ArM.Story ( Story(..)
                  , HarmKey(..)
                  , HarmObject(..)
                  , KeyObject(..)
-                 , StoryObject(..)
                  , Countable(..)
                  , compareKey
                  ) where
