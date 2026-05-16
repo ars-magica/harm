@@ -26,7 +26,7 @@ import ArM.Types.Character
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
 import ArM.Trait
-import ArM.Types
+import ArM.Story
 import ArM.GameRules
 
 import ArM.Debug.Trace

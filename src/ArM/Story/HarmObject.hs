@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.HarmObject
+-- Module      :  ArM.Story.HarmObject
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -18,7 +18,7 @@
 -- + Classes to provide common APIs
 --
 -----------------------------------------------------------------------------
-module ArM.Types.HarmObject ( HarmKey(..)
+module ArM.Story.HarmObject ( HarmKey(..)
                             , HarmObject(..)
                             , KeyObject(..)
                             , StoryObject(..)
@@ -33,7 +33,7 @@ import Data.List
 import GHC.Generics
 
 import ArM.Debug.Trace
-import ArM.Types.Calendar
+import ArM.Story.Calendar
 
 
 -- | A unique identifier for objects.

@@ -14,10 +14,9 @@
 -----------------------------------------------------------------------------
 module ArM.Sheet.Library where
 
-import ArM.Types
 import ArM.Trait
 import ArM.Types.Covenant
-import ArM.Types.HarmObject()
+import ArM.Story
 import ArM.Helper
 import Data.List
 import Data.Maybe

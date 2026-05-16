@@ -39,7 +39,7 @@ module ArM.Types.ProtoTrait ( ProtoTrait(..)
 import ArM.GameRules
 import ArM.Helper
 import ArM.Trait
-import ArM.Types.HarmObject
+import ArM.Story
 import ArM.Types.Lab
 
 import GHC.Generics

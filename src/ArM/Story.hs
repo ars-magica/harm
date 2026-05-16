@@ -2,21 +2,40 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Story
+-- Module      :  ArM.Story
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  The Story type to add narrative and SQ to covenant advancement.
+-- Description :  Types to handle the narrative and temporal aspects of stories.
+-- 
+-- This module includes the calendar as well as the `StoryObject` class
+-- which supports narrative text.  It also includes the `HarmObject` class
+-- for more generic story objects.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Story ( Story(..)
-                       , StoryObject(..)
-                       ) where
+module ArM.Story ( Story(..)
+                 , StoryObject(..)
+                 , SeasonTime(..)
+                 , Season(..)
+                 , parseSeasonTime
+                 , seasonNext
+                 , seasonPrev
+                 , (>*)
+                 , Timed(..)
+                 , showKey
+                 , gameSeason
+                 , HarmKey(..)
+                 , HarmObject(..)
+                 , KeyObject(..)
+                 , StoryObject(..)
+                 , Countable(..)
+                 , compareKey
+                 ) where
 
-import ArM.Types.Calendar
-import ArM.Types.HarmObject
+import ArM.Story.Calendar
+import ArM.Story.HarmObject
 import Data.Aeson 
 import Data.Aeson.Extra
 import GHC.Generics

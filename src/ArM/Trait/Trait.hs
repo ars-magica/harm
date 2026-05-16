@@ -70,8 +70,7 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Trait.TraitKey
 import ArM.Trait.Aging
-import ArM.Types.HarmObject
-import ArM.Types.Calendar
+import ArM.Story
 import ArM.Types.Lab
 import ArM.Trait.SpellRecord
 import ArM.Trait.Weapon

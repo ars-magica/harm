@@ -27,7 +27,7 @@ import Data.List
 import Data.Aeson 
 import GHC.Generics
 
-import ArM.Types
+import ArM.Story
 import ArM.Types.Covenant
 import ArM.Types.Character
 import ArM.DB

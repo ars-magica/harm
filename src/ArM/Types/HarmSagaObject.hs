@@ -20,7 +20,7 @@ module ArM.Types.HarmSagaObject where
 -- import GHC.Generics
 -- import ArM.Debug.Trace
 import ArM.Types.Saga
-import ArM.Types.HarmObject
+import ArM.Story
 import ArM.Types.Covenant
 import ArM.Types.Character
 import ArM.Types.Lab

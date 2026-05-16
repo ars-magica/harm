@@ -23,6 +23,7 @@ import Data.Maybe
 import ArM.Types.Advancement
 import ArM.Trait
 import ArM.Types
+import ArM.Story
 import ArM.Helper
 
 

@@ -25,7 +25,7 @@ import ArM.Character.Virtues
 import ArM.Types.Character
 import ArM.Types.Advancement
 import ArM.Types.ProtoTrait
-import ArM.Types
+import ArM.Story
 import ArM.Trait
 import ArM.GameRules
 

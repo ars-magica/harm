@@ -27,7 +27,7 @@ import Data.List
 import ArM.Advancement
 import ArM.Types.Covenant
 import ArM.Character
-import ArM.Types
+import ArM.Story
 import ArM.Types.Saga
 import Data.OList
 import ArM.Helper

@@ -57,10 +57,9 @@ module ArM.Types.Advancement ( Advancement(..)
 
 import ArM.Helper
 import ArM.Types.ProtoTrait
-import ArM.Types
+import ArM.Story
 import ArM.Trait
 import ArM.GameRules
--- import ArM.Types.Trait
 
 import Data.Maybe 
 import Data.List 

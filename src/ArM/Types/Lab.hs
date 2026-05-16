@@ -21,8 +21,7 @@ import Data.Maybe
 import Data.List
 
 import ArM.Helper
-import ArM.Types.HarmObject
-import ArM.Types.Calendar
+import ArM.Story
 
 -- import ArM.Debug.Trace
 

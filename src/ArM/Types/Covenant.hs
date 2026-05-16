@@ -39,8 +39,9 @@ import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types.Character
 import ArM.Types.Lab
-import ArM.Types
+import ArM.Story
 import ArM.Helper
+import Data.KeyPair
 
 -- * Covenant Tybe
 

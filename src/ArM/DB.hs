@@ -12,8 +12,8 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.DB ( armourDB
-              , weaponDB
+module ArM.DB ( mkArmourDB
+              , mkWeaponDB
               , spellDB
               , spellLookup
               , SpellDB
@@ -32,11 +32,11 @@ type ArmourDB = M.Map String Armour
 
 -- | Create a `Data.Map.Map` of Weapon objects.  
 -- The input is the output from `Data.CSV.csvFile`
-weaponDB :: [[String]] -> WeaponDB
-weaponDB = M.fromList . map ( \ x -> (weaponName x,x) ) . map fromCSVline
+mkWeaponDB :: [[String]] -> WeaponDB
+mkWeaponDB = M.fromList . map ( \ x -> (weaponName x,x) ) . map fromCSVline
 
-armourDB :: [[String]] -> ArmourDB
-armourDB = M.fromList . map ( \ x -> (armourName x,x) ) . map fromCSVline
+mkArmourDB :: [[String]] -> ArmourDB
+mkArmourDB = M.fromList . map ( \ x -> (armourName x,x) ) . map fromCSVline
 
 -- | Default SpellRecord object as a starting point for step-by-step construction.
 type SpellDB = M.Map String SpellRecord

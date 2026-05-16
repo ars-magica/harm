@@ -68,11 +68,13 @@ common harm-deps
   import:    deps
   other-modules:       ArM.Character
                        -- , TestModule
+                       , ArM.Story.Calendar
+                       , ArM.Story.HarmObject
+                       , ArM.Story
                        , ArM.Character.Character
                        , ArM.Character.CharacterSheet
                        , ArM.Character.Advancement
                        , ArM.Types
-                       , ArM.Types.Calendar
                        , ArM.Types.Saga
                        , Data.KeyPair
                        , ArM.Trait.RawBook
@@ -86,8 +88,6 @@ common harm-deps
                        , ArM.Trait.Trait
                        , ArM.Trait.Aging
                        , ArM.Trait.TraitKey
-                       , ArM.Types.HarmObject
-                       , ArM.Types.Story
                        , ArM.Types.Lab
                        , ArM.Trait.Weapon
                        , ArM.Character.Combat

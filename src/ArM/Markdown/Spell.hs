@@ -14,7 +14,7 @@
 module ArM.Markdown.Spell where
 
 import ArM.Trait
-import ArM.Types.Story
+import ArM.Story
 import ArM.GameRules
 import ArM.Helper
 import Data.OList

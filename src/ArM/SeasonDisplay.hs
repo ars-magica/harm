@@ -19,7 +19,7 @@ import ArM.Types.Advancement
 import ArM.Types.Character 
 import ArM.Cov.Saga
 import ArM.Types.Covenant
-import ArM.Types
+import ArM.Story
 import ArM.Markdown
 import Data.OList
 

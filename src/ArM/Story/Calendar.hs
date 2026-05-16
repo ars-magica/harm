@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Calendar
+-- Module      :  ArM.Story.Calendar
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -11,7 +11,7 @@
 -- Description :  Narrative time, incl. SeasonTime type
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Calendar ( SeasonTime(..)
+module ArM.Story.Calendar ( SeasonTime(..)
                           , Season(..)
                           , parseSeasonTime
                           , seasonNext
@@ -37,16 +37,14 @@ import Text.Read             (readMaybe)
 -- Several things may have to change for the standard calendar with Winter as the last season
 -- of the year.  We have tried to collect these definitions here.
 
--- |
--- == Hibernian Calendar
-
 -- | This comparison is used to check if a character is past the age limit where
--- aging rolls are required.
+-- aging rolls are required.  The definition should be changed for the Hibernian
+-- calendar.
 -- ```
--- (*>) = (>=)
+-- (>*) = (>)
 -- ```
 (>*) :: Ord a => a -> a -> Bool
-(>*) = (>)
+(>*) = (>=)
 
 -- | Season of the year.
 -- The Hibernian calendar requires a different definition.

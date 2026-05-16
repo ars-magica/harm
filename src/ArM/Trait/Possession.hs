@@ -49,7 +49,7 @@ module ArM.Trait.Possession ( -- * Posessions
                             , enchantmentName
                             ) where
 
-import ArM.Types.HarmObject
+import ArM.Story
 import ArM.Trait.Trait
 import ArM.Trait.SpellRecord
 import ArM.Helper
