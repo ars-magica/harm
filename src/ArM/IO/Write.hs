@@ -19,7 +19,7 @@ import System.Directory
 
 import ArM.Markdown
 import ArM.SeasonDisplay
-import ArM.Sheet.Library
+import ArM.Sheet
 import ArM.Types.Saga
 import ArM.Story
 

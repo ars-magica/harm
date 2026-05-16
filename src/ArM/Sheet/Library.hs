@@ -50,11 +50,14 @@ posBookTopic = uniqueSort . map topic . posBookStat
 
 -- | Filter out grimoires, that is books with multiple lab texts
 filterGrimoires :: [ Possession ] -> [ Possession ]
-filterGrimoires = sort . filter (not . isBook) . filter ( (1<) . length . labTexts ) 
+filterGrimoires = sort . nonBook . filter ( (1<) . length . labTexts ) 
+
+nonBook :: [ Possession ] -> [ Possession ]
+nonBook = filter ( not . isBook )
 
 -- | Filter out scrolls, that is items with a single lab text
 filterScrolls ::  [ Possession ] -> [ (LabText,Possession) ]
-filterScrolls = sort . f2 . f1 . filter ( (1==) . length . labTexts ) 
+filterScrolls = sort . f2 . f1 . nonBook . filter ( (1==) . length . labTexts ) 
     where f2 [] = []
           f2 (([],_):xs) = f2 xs
           f2 ((x:[],ps):xs) = (x,ps):f2 xs
