@@ -111,6 +111,7 @@ module ArM.Trait (
          , Armour(..)
          -- * SpellRecord
          , SpellRecord(..)
+         , defaultSpellRecord
          , isRitual
          , rdt
          ) where

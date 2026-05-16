@@ -98,7 +98,7 @@ armcharOpts argv =
 -- generate all the character and covenant sheets requested by the saga file.
 main :: IO ()
 main = do 
-     putStrLn "Starting: armchar ..."
+     putStrLn "Starting: harm ..."
      printTime
      args <- getArgs
      (opt,n) <- armcharOpts args
