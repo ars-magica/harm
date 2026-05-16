@@ -25,6 +25,7 @@ import Data.Maybe
 printPossessionMD :: Possession -> OList 
 printPossessionMD ob 
     | isComposite ob = OList [ OString $ pName ob, pMD ob ]
+    | isLabText ob = simpleLabTextMD ob
     | otherwise = pMD ob 
 
 -- | The name of a possession as displayed in Markdown 
@@ -48,8 +49,6 @@ printBookMD book = OList [ OString $ name book, OList ms ]
                bs = OString $ showStrList $ map show (bookStats book) 
                ms | "" /= (trim $ bookTitle book) = bs:ms'
                   | otherwise = ms'
-               -- k | bookID book /= "" = " [" ++ bookID book ++ "]"
-               --   | otherwise = ""
                 
 
 -- | List of functions to make Markdown output.
@@ -70,13 +69,22 @@ pMDgen :: Possession -> [Possession -> OList] -> OList
 pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
 
 labtextMD :: Possession -> OList
-labtextMD ob | labTexts  ob == []  =  OList []
-             | otherwise = OList [ OString "Lab Texts" 
-                             , foldOList $ OList $ map f (labTexts ob) ]
-         where f (SpellText x) = OList
+labtextMD ob = OList [ OString "Lah Texts"
+                             , foldOList $ OList $ map textMD (labTexts ob) ]
+
+simpleLabTextMD :: Possession -> OList
+simpleLabTextMD ob = simpleLabTextMD' ob (labTexts ob)
+
+simpleLabTextMD' :: Possession -> [LabText] -> OList
+simpleLabTextMD' _ [] =  OList []
+simpleLabTextMD' _ [x] = textMD x
+simpleLabTextMD' ob xs = OList [ OString $ "*" ++ pName ob ++ "*"
+                             , foldOList $ OList $ map textMD xs ]
+textMD :: LabText -> OList
+textMD (SpellText x) = OList
                          [ OString $ spellRecordName x
                          , coreSpellRecordMD (Just x) ]
-               f (Device x) = printEffectMD x
+textMD (Device x) = printEffectMD x
 
 weaponMD :: Possession -> OList 
 weaponMD ob | isWeapon ob = OList
