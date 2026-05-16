@@ -262,8 +262,6 @@ listPossessions ps = OList
                             , OString "Magic Items"
                             , (pList ms)
                             ]
-      , OString "#### Library"
-      , indentOList $ listBooks ps
       , OString "#### Lab texts"
       , indentOList  (pList ls)
       ]
@@ -276,16 +274,8 @@ listPossessions ps = OList
          es = filter isMundaneEquipment ps
          acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
-listBooks :: [ Possession ] -> OList
-listBooks = pList . filter isBook 
 
-printLibraryMD :: Library -> OList
-printLibraryMD lib = OList [ indentOList ( pList $ antologies lib )
-                           , indentOList ( pList $ artBooks lib )
-                           , indentOList ( pList $ abilityBooks lib )
-                           , indentOList ( pList $ otherBooks lib )
-                           ]
-
+-- | Set a header line followed by a bullet list
 bulletWithHeader :: Markdown a => String -> [a] -> OList
 bulletWithHeader _ [] = OList []
 bulletWithHeader h xs = OList [ OString h, f xs ]
@@ -651,7 +641,7 @@ instance Markdown Covenant where
         , OString ""
         , printMD $ covenantConcept cov
         , OString ""
-        , printSheetMD saga $ covenantState cov
+        , printCovenantStateMD saga cov
         ]
 
 instance Markdown CovenantConcept where
@@ -680,15 +670,24 @@ instance Markdown CovenantState where
         , listPossessions $ possessions cov
         , OString ""
         ]
-    printSheetMD saga cov = OList  
-        [ OString $ "## " ++ (show $ covTime cov)
+
+-- | Print the covenant state of the given covenant
+printCovenantStateMD :: Saga -> Covenant -> OList
+printCovenantStateMD saga cov = OList  
+        [ OString $ "## " ++ (show $ season cov)
         , OString ""
-        , characterIndex $ covenFolk saga cov
+        , characterIndex $ fmaybe (covenFolk saga) (covenantState cov)
+        , OString ""
+        , OString (pagesLink $ stateName $ getLibrary cov)
         , OString ""
         , OString "### Possessions"
         , OString ""
-        , listPossessions $ possessions cov
+        , listPossessions $ fmaybe possessions (covenantState cov)
         ]
+
+fmaybe :: ( a -> [b] ) -> Maybe a -> [b]
+fmaybe x = fromMaybe [] . fmap x
+
 
 instance Markdown Lab where
    printMD lb = indentOList $ OList 

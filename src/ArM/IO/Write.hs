@@ -19,6 +19,7 @@ import System.Directory
 
 import ArM.Markdown
 import ArM.SeasonDisplay
+import ArM.Sheet.Library
 import ArM.Types.Saga
 import ArM.Types.Calendar
 import ArM.Types.HarmObject
@@ -42,7 +43,8 @@ writeSagaState saga =
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
    writeObjects dir saga (characters st) >>
-   writeObjects dir saga (covenants st)
+   writeObjects dir saga (covenants st) >>
+   writeObjects dir saga (map getLibrary $ covenants st)
        where dir = rootDir saga ++ fn ++ "/"
              fn = showKey st
              st = sagaState saga

@@ -86,7 +86,7 @@ addBook l (False,ArtKey _,_,_,p) = l { artBooks = p:artBooks l }
 addBook l (False,AbilityKey _,_,_,p) = l { abilityBooks = p:abilityBooks l }
 addBook l (_,_,_,_,p) = l { otherBooks = p:otherBooks l }
 
--- | get the library from a given covenant
+-- | get the library from a given 'Covenant'.
 getLibrary :: Covenant -> Library
 getLibrary cov = addBooks lib ps
    where lib = defaultLibrary { libraryName = "Library at " ++ name cov

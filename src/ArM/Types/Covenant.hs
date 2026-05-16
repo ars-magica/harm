@@ -56,7 +56,10 @@ data Covenant = Covenant
          , covenantPregame :: [ Augmented CovAdvancement ]
        }  deriving (Eq,Generic,Show)
 instance Timed Covenant where
-    season = fromMaybe NoTime . fmap covTime . covenantState
+    season = fromMaybe NoTime . fmap season . covenantState
+
+instance Timed CovenantState where
+    season = covTime
 
 instance ToJSON Covenant 
 instance FromJSON Covenant where
