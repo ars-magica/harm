@@ -20,8 +20,18 @@ import ArM.Helper
 import Data.OList
 import Data.Maybe
 
--- | Render a possession in Markdown
+-- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
+--
+-- Different display templates are used for different kinds of
+-- possessions.
+--
+-- Composite objects require a full and verbose format, with the
+-- name of the possession as header.  Non-composite objects will
+-- ignore the name of the 'Possession' object.
+--
+-- Lab texts have a simplified display to show only the spell in the
+-- case of a singleton.
 printPossessionMD :: Possession -> OList 
 printPossessionMD ob 
     | isComposite ob = OList [ OString $ pName ob, pMD ob ]
@@ -34,7 +44,8 @@ pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
 
--- | Render a book in Markdown
+-- | Render a book in Markdown.
+-- This should be exposed as `printMD` from the Markdown class.
 printBookMD :: Book -> OList
 printBookMD book = OList [ OString $ name book, OList ms ]
          where ans = map ( f . trim ) $ bookAnnotation book

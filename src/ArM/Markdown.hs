@@ -232,7 +232,7 @@ enchantedMD ob (LesserItem eff) = OList
                    , f $ printMD eff ]
    where f (OList xs) = foldOList $ OList $ mtail xs
          f os = os
-         tf = " " ++ effectTeFo eff ++ " "
+         tf = " (" ++ teforql eff ++ ") "
 
 enchantedMD ob enc = OList [ OString $ pName ob 
                           , printMD $ enc

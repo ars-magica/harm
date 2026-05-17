@@ -165,6 +165,18 @@ class StoryObject a => SpellLike a where
    -- | Return the TeFo and Level in abbreviated format.
    tefol :: a -> String
    tefol s = tefo s ++ (fromMaybe "*" $ fmap show $ level s)
+   -- | Return the TeFo Level with requisites.
+   teforq :: a -> String
+   teforq s = ( magicTechnique s ++ rt ++ magicForm s ++ rf 
+              ++ show (level s) )
+      where rt = f $ reqTechnique s
+            rf = f $ reqForm s
+            f = b . foldl (++) "" . map (take 2)
+            b "" = ""
+            b x = "(" ++ x ++ ")"
+   -- | Return the TeFo and Level with requisites.
+   teforql :: a -> String
+   teforql s = teforq s ++ (fromMaybe "*" $ fmap show $ level s)
    -- | Return the TeFo in abbreviated format without requisistes.
    tefo :: a -> String
    tefo x = magicTechnique x ++ magicForm x

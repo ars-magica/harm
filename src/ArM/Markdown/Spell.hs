@@ -36,6 +36,7 @@ textMD = fromHList . textH
 effectDetails :: MagicEffect -> [ HList ]
 effectDetails x = filter (not . isEmptyHList) $ filterNothing $ map ($ x ) ls
   where ls = [ Just . toHList' . requirements
+             , Just . toHList' . showRDT
              , effectMP "Description" . map italic . narrative
              , effectMP "Comment" . comment
              , Just . toHList' . effectDesign
@@ -50,20 +51,26 @@ spellDetails :: SpellRecord -> [ String ]
 spellDetails sp = filter (/="") $ map ($ sp) ls
   where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
 
+-- | Enclose the string in asterixes, indicating italics in Markdown.
+-- The idea is to be able to override this function for other output formats.
 italic :: String -> String
 italic "" = ""
 italic x = "*" ++ x ++ "*"
 
+-- | List the spell stats, incl. range/duration/target and any
+-- special tags like ritual.
 spellStats :: SpellRecord -> String
 spellStats sp = (showRDT sp) ++ spstr
    where spstr | [] == specialSpell sp = ""
                | otherwise = "; " ++ showStrList (specialSpell sp)
 
+-- | Show any requisites for the effect.
 requirements :: SpellLike a => a -> String
 requirements sp | req == [] = ""
                 | otherwise = "Req. " ++ showStrList req
    where req = reqTechnique sp ++ reqForm sp
 
+-- | Show range/duration/target of the spell or effect
 showRDT :: SpellLike a => a -> String
 showRDT sp = "Range: " ++ r ++
              "; Duration: " ++ d ++
@@ -100,7 +107,7 @@ masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
 -- | Render a magic effect declaration in Markdown
 printEffectMD :: MagicEffect -> OList
 printEffectMD ob = OList
-       [ OString $ name ob ++ effectTeFo ob
+       [ OString $ name ob ++ " (" ++ teforql ob ++ ")"
        , OList [ OString $ effectRDT ob
        , nonemptyStringMD $ showStrList md
        , trs
@@ -115,15 +122,4 @@ printEffectMD ob = OList
              trs | tr == "" = OList []
                  | otherwise = OString $ "Trigger: " ++ tr
              md = effectModifiers ob
-
-effectTeFo :: MagicEffect -> String
-effectTeFo eff = " (" ++ te ++ rt ++ fo ++ rf ++ show (effectLevel eff) ++ ")"
-   where te = take 2 $ effectTechnique eff
-         fo = take 2 $ effectForm eff
-         rts = effectTechniqueReq eff
-         rfs = effectFormReq eff
-         rt | rts == [] = ""
-            | otherwise = foldl (++) "" $ map (take 2) rts
-         rf | rts == [] = ""
-            | otherwise = foldl (++) "" $ map (take 2) rfs
 

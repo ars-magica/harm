@@ -82,6 +82,8 @@ plan:
   - labtexts:
         - device:
               name: The Blanket of Healing Sleep 
+              range: Touch
+              target: Ind
               level: 26
               technique: Creo
               form: Corpus
