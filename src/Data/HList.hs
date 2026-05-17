@@ -14,9 +14,11 @@
 --
 -----------------------------------------------------------------------------
 module Data.HList ( HList(..)
-                  , headHList
                   , toHList
+                  , toHList'
+                  , fromHList
                   , indentHList
+                  , isEmptyHList 
        ) where
 
 import Data.OList
@@ -30,10 +32,6 @@ import Data.OList
 -- `indentOList` function.
 data HList = HList String [ HList ] 
 
-headHList :: String -> [ String ] -> OList
-headHList _ [] = OList []
-headHList s xs = OList [ OString s, OList $ map OString xs ]
-
 -- | Convert a list of Strings to a OList object
 toHList :: [ String ] -> HList
 toHList [] = HList "" []
@@ -45,6 +43,10 @@ toHList' s = HList s []
 fromHList :: HList -> OList
 fromHList (HList x []) = OString x
 fromHList (HList x ys) = OList $ OString x:OList (map fromHList ys):[]
+
+isEmptyHList :: HList -> Bool
+isEmptyHList (HList "" []) = True
+isEmptyHList _ = False
 
 
 -- | Render an OList as a hierarchical markdown list

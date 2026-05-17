@@ -62,7 +62,6 @@ module ArM.Trait.Trait (
          , isNone
          -- ** Magic and Enchantments
          , Enchantment(..)
-         , MagicEffect(..)
          ) where
 
 
@@ -664,13 +663,6 @@ visArt = itemArt
 -- == Books
 
 
-instance StoryObject MagicEffect where
-   name ob = effectName ob 
-   setName n x = x { effectName = n }
-   narrative ob = effectDescription ob
-   addNarrative s x = x { effectDescription = s:narrative x }
-   comment ob = effectComment ob
-   addComment s x = x { effectComment = s:comment x }
 
 instance StoryObject Possession where
    name ob = itemName ob 
@@ -751,44 +743,3 @@ instance FromJSON LabText where
                          <|> (SpellText <$> v .: "spell")
     parseJSON _ = trace "Failed to read LabText" mzero
 
--- | A magic effect that can be instilled in an enchanted device.
-data MagicEffect = MagicEffect
-           { effectName :: String
-           , effectLevel :: Int
-           , effectTechnique :: String
-           , effectTechniqueReq :: [String]
-           , effectForm :: String
-           , effectFormReq :: [String]
-           , effectRange :: String        -- ^ Range
-           , effectDuration :: String     -- ^ Duration
-           , effectTarget :: String       -- ^ Target
-           , effectModifiers :: [ String ]
-           , effectTrigger :: String
-           , effectDesign :: String     -- ^ Level calculation
-           , effectDescription :: [String]
-           , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
-           , effectReference :: String  -- ^ Source reference
-           , effectDate :: SeasonTime   -- ^ Time of investment
-           }
-           deriving (Show, Eq, Ord, Generic)
-
-
-instance ToJSON MagicEffect
-instance FromJSON MagicEffect where
-    parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
-        <$> v .: "name" 
-        <*> v .: "level" 
-        <*> v .: "technique" 
-        <*> v  `parseCollapsedList` "techiqueReq" 
-        <*> v .: "form" 
-        <*> v  `parseCollapsedList` "formReq" 
-        <*> v .:? "range" .!= ""
-        <*> v .:? "duration" .!= ""
-        <*> v .:? "target" .!= ""
-        <*> v `parseCollapsedList` "modifiers" 
-        <*> v .:? "trigger"  .!= ""
-        <*> v .:? "design"  .!= ""
-        <*> v `parseCollapsedList` "description" 
-        <*> v `parseCollapsedList` "comment" 
-        <*> v .:? "reference"  .!= ""
-        <*> v .:? "season" .!= NoTime

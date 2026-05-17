@@ -81,7 +81,6 @@ module ArM.Trait (
 
          -- ** Magic and Enchantments
          , Enchantment(..)
-         , MagicEffect(..)
          , isMagic
          , isVis
          , isAC
@@ -111,9 +110,10 @@ module ArM.Trait (
          , Armour(..)
          -- * SpellRecord
          , SpellRecord(..)
+         , MagicEffect(..)
+         , SpellLike(..)
          , defaultSpellRecord
          , isRitual
-         , rdt
          ) where
 
 import ArM.Trait.Trait

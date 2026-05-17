@@ -80,11 +80,6 @@ simpleLabTextMD' _ [] =  OList []
 simpleLabTextMD' _ [x] = textMD x
 simpleLabTextMD' ob xs = OList [ OString $ "*" ++ pName ob ++ "*"
                              , foldOList $ OList $ map textMD xs ]
-textMD :: LabText -> OList
-textMD (SpellText x) = OList
-                         [ OString $ spellRecordName x
-                         , coreSpellRecordMD (Just x) ]
-textMD (Device x) = printEffectMD x
 
 weaponMD :: Possession -> OList 
 weaponMD ob | isWeapon ob = OList

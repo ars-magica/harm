@@ -19,37 +19,61 @@ import ArM.GameRules
 import ArM.Helper
 import Data.OList
 import Data.HList
-import Data.Maybe
+-- import Data.Maybe
 
-{-
+
+-- | Render the lab text in markdown HList format.
 textH :: LabText -> HList
-textH (SpellText x) = HList
-                         ( "*" ++ spellRecordName x ++ "*" )
-                         ( coreSpellRecordMD (Just x) )
-textH (Device x) = printEffectMD x
--}
+textH (SpellText x) = HList ( spellSignatureMD x ) ( map f $ spellDetails x )
+    where f y = HList y []
+textH (Device x) = HList ( spellSignatureMD x ) ( effectDetails x )
 
--- | Render the spell record as an OList
-coreSpellRecordMD :: Maybe SpellRecord -> OList
-coreSpellRecordMD Nothing = OList []
-coreSpellRecordMD sr = OList [ reqstr
-                             , OString $ (showRDT sp) ++ spstr
-                             , nonemptyStringMD (spellDescription sp)
-                             , nonemptyStringMD (design sp)
-                             , nonemptyStringMD (cite sp)
-                             ]
-   where req = techniqueReq sp ++ formReq sp
-         sp = fromJust sr
-         reqstr | req == [] = OList []
-                | otherwise = OString $ "Req. " ++ showStrList req
-         spstr | [] == specialSpell sp = ""
+-- | Render the lab text in markdown OList format.
+textMD :: LabText -> OList
+textMD = fromHList . textH
+
+
+effectDetails :: MagicEffect -> [ HList ]
+effectDetails x = filter (not . isEmptyHList) $ filterNothing $ map ($ x ) ls
+  where ls = [ Just . toHList' . requirements
+             , effectMP "Description" . map italic . narrative
+             , effectMP "Comment" . comment
+             , Just . toHList' . effectDesign
+             , Just . toHList' . effectReference ]
+
+effectMP :: String -> [String] -> Maybe HList 
+effectMP _ [] = Nothing
+effectMP _ [x] = Just $ HList x []
+effectMP h xs = Just $ HList h $ map toHList' xs
+
+spellDetails :: SpellRecord -> [ String ]
+spellDetails sp = filter (/="") $ map ($ sp) ls
+  where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
+
+italic :: String -> String
+italic "" = ""
+italic x = "*" ++ x ++ "*"
+
+spellStats :: SpellRecord -> String
+spellStats sp = (showRDT sp) ++ spstr
+   where spstr | [] == specialSpell sp = ""
                | otherwise = "; " ++ showStrList (specialSpell sp)
 
-showRDT :: SpellRecord -> String
+requirements :: SpellLike a => a -> String
+requirements sp | req == [] = ""
+                | otherwise = "Req. " ++ showStrList req
+   where req = reqTechnique sp ++ reqForm sp
+
+showRDT :: SpellLike a => a -> String
 showRDT sp = "Range: " ++ r ++
              "; Duration: " ++ d ++
              "; Target: " ++ t
    where (r,d,t) = rdt sp
+
+-- | Render the spell record as an OList
+coreSpellRecordMD :: Maybe SpellRecord -> OList
+coreSpellRecordMD Nothing = OList []
+coreSpellRecordMD (Just sp) = OList $ map OString $ spellDetails sp
 
 -- | Render a spell trait in Markdown
 -- The result should normally be subject to indentOList to make an hierarchical

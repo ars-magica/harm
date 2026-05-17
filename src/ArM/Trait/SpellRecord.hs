@@ -12,14 +12,13 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Trait.SpellRecord ( SpellRecord(..)
-                       , defaultSpellRecord
-                       , isRitual
-                       , rdt
-                       ) where
+module ArM.Trait.SpellRecord where
+   -- SpellRecord(..), MagicEffect(..), defaultSpellRecord, isRitual, rdt
 
 import GHC.Generics
+import ArM.Story
 import Data.List
+import Data.Maybe
 import Data.Aeson
 import Data.Aeson.Extra
 
@@ -65,9 +64,6 @@ defaultSpellRecord = SpellRecord
     , cite = ""
     } 
 
--- | The range/duration/target of the given spell
-rdt :: SpellRecord -> (String,String,String)   -- ^ Range/Duration/Target
-rdt x = (spellRange x,spellDuration x,spellTarget x)
 
 instance ToJSON SpellRecord
 instance FromJSON SpellRecord where
@@ -95,4 +91,106 @@ isRitual = f . find tf . specialSpell
     where tf = (=="Ritual") 
           f Nothing = False
           f (Just _) = True
+
+-- | A magic effect that can be instilled in an enchanted device.
+data MagicEffect = MagicEffect
+           { effectName :: String
+           , effectLevel :: Int
+           , effectTechnique :: String
+           , effectTechniqueReq :: [String]
+           , effectForm :: String
+           , effectFormReq :: [String]
+           , effectRange :: String        -- ^ Range
+           , effectDuration :: String     -- ^ Duration
+           , effectTarget :: String       -- ^ Target
+           , effectModifiers :: [ String ]
+           , effectTrigger :: String
+           , effectDesign :: String     -- ^ Level calculation
+           , effectDescription :: [String]
+           , effectComment :: [String]    -- ^ Freeform remarks that do not fit elsewhere
+           , effectReference :: String  -- ^ Source reference
+           , effectDate :: SeasonTime   -- ^ Time of investment
+           }
+           deriving (Show, Eq, Ord, Generic)
+
+
+instance ToJSON MagicEffect
+instance FromJSON MagicEffect where
+    parseJSON = withObject "MagicEffect" $ \v -> MagicEffect
+        <$> v .: "name" 
+        <*> v .: "level" 
+        <*> v .: "technique" 
+        <*> v  `parseCollapsedList` "techiqueReq" 
+        <*> v .: "form" 
+        <*> v  `parseCollapsedList` "formReq" 
+        <*> v .:? "range" .!= ""
+        <*> v .:? "duration" .!= ""
+        <*> v .:? "target" .!= ""
+        <*> v `parseCollapsedList` "modifiers" 
+        <*> v .:? "trigger"  .!= ""
+        <*> v .:? "design"  .!= ""
+        <*> v `parseCollapsedList` "description" 
+        <*> v `parseCollapsedList` "comment" 
+        <*> v .:? "reference"  .!= ""
+        <*> v .:? "season" .!= NoTime
+
+instance StoryObject SpellRecord where
+   name ob = spellRecordName ob 
+   setName n x = x { spellRecordName = n }
+   narrative ob = [ spellDescription ob ]
+   addNarrative s x = x { spellDescription = prependString (narrative x) s }
+   comment ob = [ spellComment ob ]
+   addComment s x = x { spellComment = prependString (comment x) s }
+
+-- | This is a bit clonky.  
+-- StoryObject usually assumes that comments and narratives are lists of strings,
+-- but for 'SpellRecord', it is just a string, and `prependString` is just a workaround
+-- for this.
+prependString :: [String] -> String -> String
+prependString [] s = s
+prependString (x:xs) s = prependString xs (s ++ "\n\n" ++ x)
+
+instance StoryObject MagicEffect where
+   name ob = effectName ob 
+   setName n x = x { effectName = n }
+   narrative ob = effectDescription ob
+   addNarrative s x = x { effectDescription = s:narrative x }
+   comment ob = effectComment ob
+   addComment s x = x { effectComment = s:comment x }
+
+class StoryObject a => SpellLike a where
+   -- | Return the spell signature with name and TeFo/level, in markdown format.
+   spellSignatureMD :: a -> String
+   spellSignatureMD s = "*" ++ name s ++ "* (" ++ tefol s ++ ")"
+   -- | Return the TeFo and Level in abbreviated format.
+   tefol :: a -> String
+   tefol s = tefo s ++ (fromMaybe "*" $ fmap show $ level s)
+   -- | Return the TeFo in abbreviated format without requisistes.
+   tefo :: a -> String
+   tefo x = magicTechnique x ++ magicForm x
+   -- | Return the level
+   level :: a -> Maybe Int
+   -- | The range/duration/target of the given spell
+   rdt :: a -> (String,String,String)   -- ^ Range/Duration/Target
+   magicTechnique :: a -> String
+   magicForm :: a -> String
+   reqTechnique :: a -> [ String ]
+   reqForm:: a -> [ String ]
+
+
+instance SpellLike SpellRecord where
+   level = lvl
+   rdt x = (spellRange x,spellDuration x,spellTarget x)
+   magicTechnique = take 2 . technique
+   magicForm = take 2 . form
+   reqTechnique = techniqueReq
+   reqForm = formReq
+
+instance SpellLike MagicEffect where
+   level = Just . effectLevel
+   rdt x = (effectRange x,effectDuration x,effectTarget x)
+   magicTechnique = take 2 . effectTechnique
+   magicForm = take 2 . effectForm
+   reqTechnique = effectTechniqueReq
+   reqForm = effectFormReq
 
