@@ -51,16 +51,24 @@ maybeHList "" = Nothing
 maybeHList s = Just $ HList s []
 
 
+-- | Convert a 'HList' to an 'OList'.
+-- This aims to make `fromHList . indentHList` and `indentOList . fromHList`
+-- equivalent.
 fromHList :: HList -> OList
 fromHList (HList "" []) = OList []
 fromHList (HList x []) = OString x
 fromHList (HList x ys) = OList $ OString x:(OList $ fromHHList ys):[]
 
+-- | Convert a list of 'HList' to a list of 'OList'.
+-- This is an auxiliary for `fromHList`.
 fromHHList :: [HList] -> [OList]
 fromHHList [] = []
 fromHHList (HList x xs:hs) = OString x:OList (fromHHList xs):fromHHList hs
 
 
+-- | Is the `HList` empty?
+-- It is considered empty if both the header string and the
+-- list of subsidiaries are empty.
 isEmptyHList :: HList -> Bool
 isEmptyHList (HList "" []) = True
 isEmptyHList _ = False
