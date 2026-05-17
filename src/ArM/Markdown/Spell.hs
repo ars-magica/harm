@@ -18,21 +18,28 @@ import ArM.Story
 import ArM.GameRules
 import ArM.Helper
 import Data.OList
+import Data.HList
 import Data.Maybe
+
+{-
+textH :: LabText -> HList
+textH (SpellText x) = HList
+                         ( "*" ++ spellRecordName x ++ "*" )
+                         ( coreSpellRecordMD (Just x) )
+textH (Device x) = printEffectMD x
+-}
 
 -- | Render the spell record as an OList
 coreSpellRecordMD :: Maybe SpellRecord -> OList
 coreSpellRecordMD Nothing = OList []
 coreSpellRecordMD sr = OList [ reqstr
                              , OString $ (showRDT sp) ++ spstr
-                             , os (spellDescription sp)
-                             , os (design sp)
-                             , os (cite sp)
+                             , nonemptyStringMD (spellDescription sp)
+                             , nonemptyStringMD (design sp)
+                             , nonemptyStringMD (cite sp)
                              ]
    where req = techniqueReq sp ++ formReq sp
          sp = fromJust sr
-         os "" = OList []
-         os x = OString x
          reqstr | req == [] = OList []
                 | otherwise = OString $ "Req. " ++ showStrList req
          spstr | [] == specialSpell sp = ""
