@@ -69,8 +69,9 @@ pMDgen :: Possession -> [Possession -> OList] -> OList
 pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
 
 labtextMD :: Possession -> OList
-labtextMD ob = OList [ OString "Lah Texts"
-                             , foldOList $ OList $ map textMD (labTexts ob) ]
+labtextMD = OList . f . labTexts
+   where f [] = []
+         f ls = [ OString "Lab Texts", foldOList $ OList $ map textMD ls ]
 
 simpleLabTextMD :: Possession -> OList
 simpleLabTextMD ob = simpleLabTextMD' ob (labTexts ob)
