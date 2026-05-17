@@ -242,8 +242,6 @@ enchantedMD ob enc = OList [ OString $ pName ob
 instance Markdown Possession  where
    printMD = printPossessionMD
 
-
-
 -- | Make a complete list of possessions in Markdown.
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
@@ -661,7 +659,7 @@ covconceptHelper cc = filterNothing
 
 
 instance Markdown Book where
-    printMD = printBookMD  
+    printMD = fromHList . printBookH
 
 instance Markdown CovenantState where
     printMD cov = OList  

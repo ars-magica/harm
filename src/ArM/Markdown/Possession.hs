@@ -21,6 +21,8 @@ import Data.OList
 import Data.HList
 import Data.Maybe
 
+import ArM.Debug.Trace
+
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 --
@@ -45,11 +47,8 @@ pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
 
--- | Render a book in Markdown.
--- This should be exposed as `printMD` from the Markdown class.
-printBookMD :: Book -> OList
-printBookMD = fromHList . printBookH
 {-
+printBookMD :: Book -> OList
 printBookMD book = OList [ OString $ name book, OList ms ]
          where ans = map ( f . trim ) $ bookAnnotation book
                f "" = OList []
@@ -64,6 +63,8 @@ printBookMD book = OList [ OString $ name book, OList ms ]
                ms | "" /= (trim $ bookTitle book) =  bs:ms'
                   | otherwise =  ms'
 -}
+-- | Render a book in Markdown.
+-- This should be exposed as `printMD` from the Markdown class.
 printBookH :: Book -> HList
 printBookH book = HList (name book) (map (\x->HList x []) lns) 
    where
@@ -79,8 +80,12 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
 pMDlist :: [ Possession -> OList ]
-pMDlist = [ bookMD, labtextMD, weaponMD, armourMD, visMD, acMD ]
+pMDlist = [ hMD . bookH
+          , hMD . labtextH
+          , weaponMD, armourMD, visMD, acMD ]
 
+hMD :: Maybe HList -> OList
+hMD = fromMaybe (OList []) . fmap fromHList 
 -- | Complete description of a composite item.
 -- This is awkward for most items, particularly because names and
 -- titles tend to be duplicated, once for the 'Possession' object 
@@ -93,10 +98,15 @@ pMD ob = pMDgen ob pMDlist
 pMDgen :: Possession -> [Possession -> OList] -> OList
 pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
 
-labtextMD :: Possession -> OList
-labtextMD = OList . f . labTexts
-   where f [] = []
-         f ls = [ OString "Lab Texts", foldOList $ OList $ map textMD ls ]
+pHgen :: Possession -> [Possession -> Maybe HList] -> HList
+pHgen ob = HList (name ob) . filterNothing . map ($ ob) 
+
+
+
+labtextH :: Possession -> Maybe HList
+labtextH = f . labTexts
+   where f [] = Nothing
+         f ls = Just $ HList "Lab Texts" ( map textH ls )
 
 simpleLabTextMD :: Possession -> OList
 simpleLabTextMD = fromMaybe (OList []) . fmap fromHList . simpleLabTextH
@@ -138,10 +148,8 @@ acMD = f . acTo
     where f Nothing = OList []
           f (Just s) = OString ( "Arcane Connection to " ++ s )
 
-bookMD :: Possession -> OList
-bookMD =  f . bookTexts
-      where f [] =  OList []
-            f [x] = printBookMD x
-            f xs =  OList [ OString "Antology of"
-                         , foldOList $ OList $ map printBookMD xs
-                         ]
+bookH :: Possession -> Maybe HList
+bookH ob =  (f . bookTexts) ob
+      where f [] =  Nothing
+            f [x] = Just $ printBookH x
+            f xs =  Just $ HList "Antology of" $ ttrace $ map printBookH xs

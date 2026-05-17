@@ -45,9 +45,11 @@ headOList :: String -> [ String ] -> OList
 headOList _ [] = OList []
 headOList s xs = OList [ OString s, OList $ map OString xs ]
 
--- | Convert a list of Strings to a OList object
-toOList :: [ String ] -> OList
+
+-- | Convert to an OList object
+toOList :: [String] -> OList
 toOList = OList . map OString 
+
 
 -- | Fold the first layer of a nested OList
 foldOList :: OList -> OList

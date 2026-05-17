@@ -32,6 +32,7 @@ import Data.OList
 -- Hierarchical bullet points can be made from a vanilla OList with the
 -- `indentOList` function.
 data HList = HList String [ HList ] 
+   deriving (Show)
 
 -- | Convert a list of Strings to a OList object
 toHList :: [ String ] -> HList
@@ -49,9 +50,16 @@ maybeHList :: String -> Maybe HList
 maybeHList "" = Nothing
 maybeHList s = Just $ HList s []
 
+
 fromHList :: HList -> OList
+fromHList (HList "" []) = OList []
 fromHList (HList x []) = OString x
-fromHList (HList x ys) = OList $ OString x:OList (map fromHList ys):[]
+fromHList (HList x ys) = OList $ OString x:(OList $ fromHHList ys):[]
+
+fromHHList :: [HList] -> [OList]
+fromHHList [] = []
+fromHHList (HList x xs:hs) = OString x:OList (fromHHList xs):fromHHList hs
+
 
 isEmptyHList :: HList -> Bool
 isEmptyHList (HList "" []) = True
@@ -67,3 +75,14 @@ indentHList' s (HList x ys) = HList x' ys'
      where x' = s ++ x
            ys' = map (indentHList' ("    "++s)) ys
 
+{-
+class ToOList a where
+   -- | Convert to an OList object
+   toOList :: a -> OList
+instance ToOList a => ToOList [a] where
+   toOList = OList . map toOList 
+instance ToOList HList where
+   toOList = fromHList
+instance ToOList (Maybe HList) where
+   toOList = fromHList . filterNothing 
+-}
