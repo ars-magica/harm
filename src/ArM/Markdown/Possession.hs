@@ -82,7 +82,10 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
 pMDlist :: [ Possession -> OList ]
 pMDlist = [ hMD . bookH
           , hMD . labtextH
-          , weaponMD, armourMD, visMD, acMD ]
+          , weaponMD
+          , armourMD
+          , hMD . visH
+          , hMD . acH ]
 
 hMD :: Maybe HList -> OList
 hMD = fromMaybe (OList []) . fmap fromHList 
@@ -136,17 +139,15 @@ armourMD ob | isArmour ob = OList
                   ] 
             | otherwise = OList []
 
-
-visMD :: Possession -> OList
-visMD ob | isNothing (itemArt ob) = OList []
-         | otherwise = OString ( s ++ " vis: " ++ show p ++ " pawns" )
+visH :: Possession -> Maybe HList
+visH ob | isNothing (itemArt ob) = Nothing
+        | otherwise = Just $ HList ( s ++ " vis: " ++ show p ++ " pawns" ) []
          where s = fromJust $ itemArt ob
                p = itemCount ob
 
-acMD :: Possession -> OList
-acMD = f . acTo
-    where f Nothing = OList []
-          f (Just s) = OString ( "Arcane Connection to " ++ s )
+-- | Render arcane connection.
+acH :: Possession -> Maybe HList
+acH = fmap (\ s -> HList ( "Arcane Connection to " ++ s ) [] ) . acTo
 
 bookH :: Possession -> Maybe HList
 bookH ob =  (f . bookTexts) ob
