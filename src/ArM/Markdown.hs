@@ -40,6 +40,7 @@ import ArM.Trait
 import ArM.DB
 import ArM.GameRules
 import Data.OList
+import Data.HList
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -211,7 +212,7 @@ pList :: [ Possession ] -> OList
 pList = foldOList . OList  . map printMD . sortTraits 
 
 instance Markdown MagicEffect  where
-   printMD = printEffectMD 
+   printMD = fromHList . effectH 
 instance Markdown Enchantment  where
    printMD (LesserItem eff) = printMD eff 
    printMD (GreaterDevice vn eff) = OList 

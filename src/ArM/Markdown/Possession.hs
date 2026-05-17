@@ -18,6 +18,7 @@ import ArM.Story
 import ArM.Trait
 import ArM.Helper 
 import Data.OList
+import Data.HList
 import Data.Maybe
 
 -- | Render a possession in Markdown.
@@ -47,6 +48,8 @@ pName ob = name ob ++ cnt
 -- | Render a book in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 printBookMD :: Book -> OList
+printBookMD = fromHList . printBookH
+{-
 printBookMD book = OList [ OString $ name book, OList ms ]
          where ans = map ( f . trim ) $ bookAnnotation book
                f "" = OList []
@@ -58,10 +61,21 @@ printBookMD book = OList [ OString $ name book, OList ms ]
                    | otherwise = OString $ show (bookCount book) ++ " copies"
                ms' = OString ("**Key** " ++ bookID book):cnt:lns:ans
                bs = OString $ showStrList $ map show (bookStats book) 
-               ms | "" /= (trim $ bookTitle book) = bs:ms'
-                  | otherwise = ms'
+               ms | "" /= (trim $ bookTitle book) =  bs:ms'
+                  | otherwise =  ms'
+-}
+printBookH :: Book -> HList
+printBookH book = HList (name book) (map (\x->HList x []) lns) 
+   where
+      lns = filter (/="") $ statline:keyline:cnt:lng:ans
+      keyline = "**Key** " ++ bookID book
+      statline | "" /= (trim $ bookTitle book) =  ""
+               | otherwise = showStrList $ map show (bookStats book) 
+      lng = trim $ fromMaybe "" $ bookLanguage book
+      ans = map trim $ bookAnnotation book
+      cnt | bookCount book == 1 = ""
+          | otherwise = show (bookCount book) ++ " copies"
                 
-
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
 pMDlist :: [ Possession -> OList ]
@@ -85,13 +99,17 @@ labtextMD = OList . f . labTexts
          f ls = [ OString "Lab Texts", foldOList $ OList $ map textMD ls ]
 
 simpleLabTextMD :: Possession -> OList
-simpleLabTextMD ob = simpleLabTextMD' ob (labTexts ob)
+simpleLabTextMD = fromMaybe (OList []) . fmap fromHList . simpleLabTextH
 
-simpleLabTextMD' :: Possession -> [LabText] -> OList
-simpleLabTextMD' _ [] =  OList []
-simpleLabTextMD' _ [x] = textMD x
-simpleLabTextMD' ob xs = OList [ OString $ "*" ++ pName ob ++ "*"
-                             , foldOList $ OList $ map textMD xs ]
+simpleLabTextH :: Possession -> Maybe HList
+simpleLabTextH ob = simpleLabTextH' ob (labTexts ob)
+
+simpleLabTextH' :: Possession -> [LabText] -> Maybe HList
+simpleLabTextH' _ [] =  Nothing
+simpleLabTextH' _ [x] = Just $ textH x
+simpleLabTextH' ob xs = Just $ HList nm ( map textH xs )
+         where nm | "" == name ob = "Grimoire"
+                  | otherwise = name ob
 
 weaponMD :: Possession -> OList 
 weaponMD ob | isWeapon ob = OList

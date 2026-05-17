@@ -15,10 +15,11 @@
 -----------------------------------------------------------------------------
 module Data.HList ( HList(..)
                   , toHList
-                  , toHList'
+                  , maybeHList
                   , fromHList
                   , indentHList
                   , isEmptyHList 
+                  , pushTitle
        ) where
 
 import Data.OList
@@ -35,10 +36,18 @@ data HList = HList String [ HList ]
 -- | Convert a list of Strings to a OList object
 toHList :: [ String ] -> HList
 toHList [] = HList "" []
+toHList ("":xs) = toHList xs
 toHList (x:xs) = HList x $ map toHList' xs
 
 toHList' :: String -> HList
 toHList' s = HList s []
+
+pushTitle :: String -> HList -> HList
+pushTitle s (HList x xs) = HList s (HList x []:xs)
+
+maybeHList :: String -> Maybe HList
+maybeHList "" = Nothing
+maybeHList s = Just $ HList s []
 
 fromHList :: HList -> OList
 fromHList (HList x []) = OString x

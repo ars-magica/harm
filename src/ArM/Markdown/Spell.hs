@@ -6,9 +6,10 @@
 -- License     :  see LICENSE
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  MarkDown output for Possession.
+-- Description :  MarkDown output for Spells, Lab Texts, and Magic Effects.
 --
--- This is an internal module.
+-- This is an internal module.  Relevant definitions are intended to be 
+-- exposed from "ArM.Markdown".
 --
 -----------------------------------------------------------------------------
 module ArM.Markdown.Spell where
@@ -22,31 +23,47 @@ import Data.HList
 -- import Data.Maybe
 
 
+
 -- | Render the lab text in markdown HList format.
 textH :: LabText -> HList
-textH (SpellText x) = HList ( spellSignatureMD x ) ( map f $ spellDetails x )
+textH (SpellText x) = spellH x
+textH (Device x) = effectH x
+
+-- | Render the 'MagicEffect in markdown HList format.
+effectH :: MagicEffect -> HList
+effectH x = HList ( spellSignatureMD x ) ( effectDetails x )
+
+-- | Render the 'SpellRecord' in markdown HList format.
+spellH :: SpellRecord -> HList
+spellH x = HList ( spellSignatureMD x ) ( map f $ spellDetails x )
     where f y = HList y []
-textH (Device x) = HList ( spellSignatureMD x ) ( effectDetails x )
 
 -- | Render the lab text in markdown OList format.
 textMD :: LabText -> OList
 textMD = fromHList . textH
 
-
+-- | Render the details of a 'MagicEffect' (auxiliary for 'textH').
 effectDetails :: MagicEffect -> [ HList ]
 effectDetails x = filter (not . isEmptyHList) $ filterNothing $ map ($ x ) ls
-  where ls = [ Just . toHList' . requirements
-             , Just . toHList' . showRDT
+  where ls = [ maybeHList . requirements
+             , maybeHList . showRDT
+             , maybeHList . showStrList . effectModifiers
              , effectMP "Description" . map italic . narrative
+             , maybeHList . trs . effectTrigger
              , effectMP "Comment" . comment
-             , Just . toHList' . effectDesign
-             , Just . toHList' . effectReference ]
+             , maybeHList . effectDesign
+             , maybeHList . effectReference ]
+        trs "" = ""
+        trs y = "Trigger: " ++ y
 
+-- | Render comment and narrative of 'MagicEffect'
+-- (auxiliary for 'effectDetails').
 effectMP :: String -> [String] -> Maybe HList 
 effectMP _ [] = Nothing
 effectMP _ [x] = Just $ HList x []
-effectMP h xs = Just $ HList h $ map toHList' xs
+effectMP h xs = Just $ HList h $ map ( \ s -> HList s [] ) xs
 
+-- | Render the details of a 'SpellRecord' (auxiliary for 'spellH').
 spellDetails :: SpellRecord -> [ String ]
 spellDetails sp = filter (/="") $ map ($ sp) ls
   where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
@@ -103,23 +120,4 @@ masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
                           ++ showStrList (masteryOptions s)
 
 
-
--- | Render a magic effect declaration in Markdown
-printEffectMD :: MagicEffect -> OList
-printEffectMD ob = OList
-       [ OString $ name ob ++ " (" ++ teforql ob ++ ")"
-       , OList [ OString $ effectRDT ob
-       , nonemptyStringMD $ showStrList md
-       , trs
-       ]
-       , OList $ map italicOString $ narrative ob
-       , OList $ map OString $ comment ob
-       , OList $ [  OString $ show $ effectDesign ob 
-       , nonemptyStringMD $ effectReference ob 
-       ]
-       ]
-       where tr = effectTrigger ob
-             trs | tr == "" = OList []
-                 | otherwise = OString $ "Trigger: " ++ tr
-             md = effectModifiers ob
 
