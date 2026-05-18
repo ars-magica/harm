@@ -67,11 +67,6 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
                 
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
-pMDlist :: [ Possession -> OList ]
-pMDlist = map (hMD .) pHlist
-
--- | List of functions to make Markdown output.
--- Each function in the list provides output for one kind of Possession.
 pHlist :: [ Possession -> Maybe HList ]
 pHlist = [ bookH, labtextH, weaponH,  armourH,  visH, acH ]
 
@@ -91,7 +86,6 @@ pH ob = pHgen ob pHlist
 -- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
 pHgen ob = HList (pName ob) . filterNothing . map ($ ob) 
-
 
 labtextH :: Possession -> Maybe HList
 labtextH = f . labTexts
