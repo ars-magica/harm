@@ -14,8 +14,9 @@ design:
     - a chest of ancient gold coins
     - art: Creo
       count: 5
-      comment: Bright read gems with 1p vis each.
+      description: Bright read gems with 1p vis each.
     - acTo: The pine tree copse in the Pennines
+      comment: Darius collected this when he first met Lise.
     - weapon: Shortspear
     - name: Longbow
       comment: I cannot figure out how to record this as a weapon

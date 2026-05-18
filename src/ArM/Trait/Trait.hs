@@ -686,7 +686,7 @@ instance StoryObject Possession where
    setName n x = x { itemName = Just n }
    narrative ob = itemDescription ob
    addNarrative s x = x { itemDescription = s:narrative x }
-   comment ob = comment ob
+   comment ob = itemComment ob
    addComment s x = x { itemComment = s:comment x }
 
 instance Countable Possession where

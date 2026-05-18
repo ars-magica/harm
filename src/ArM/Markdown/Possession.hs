@@ -46,8 +46,8 @@ printPossessionH ob
     | isJust (itemName ob) = pH ob
     | isBook ob = hfm "Empty book" $ bookH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
-    | isAC ob = hfm "Bogus arcane connection" $ trace "HO" $ ttrace $ acH ob
-    | isVis ob = hfm "Bogus vis" $ trace "VIS" $ visH ob
+    | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
+    | isVis ob = hfm "Bogus vis" $ visHsimple ob
     | otherwise = pH ob 
 
 hfm :: String -> Maybe HList -> HList
@@ -76,7 +76,7 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
 pHlist :: [ Possession -> Maybe HList ]
-pHlist = [ bookH, labtextH, weaponH,  armourH,  visH, acH ]
+pHlist = bookH:labtextH:weaponH:armourH:visH:acH:genList
 
 -- | Convert HList output to OList outputa.
 hMD :: Maybe HList -> OList
@@ -128,9 +128,44 @@ visH ob | isNothing (itemArt ob) = Nothing
          where s = fromJust $ itemArt ob
                p = itemCount ob
 
+
 -- | Render arcane connection.
 acH :: Possession -> Maybe HList
 acH = fmap (\ s -> HList ( "Arcane Connection to " ++ s ) [] ) . acTo
+
+narrativeH :: Possession -> Maybe HList
+narrativeH = effectMP "Background" . map italic . narrative
+
+commentH :: Possession -> Maybe HList
+commentH = effectMP "Comment" . comment
+
+countH :: Possession -> Maybe HList
+countH = f . count
+    where f 1 = Nothing
+          f x = Just $ HList (show x ++ " pieces") []
+dateH :: Possession -> Maybe HList
+dateH = f . itemDate
+    where f NoTime = Nothing
+          f x = Just $ HList (show x) []
+
+genList :: [ Possession -> Maybe HList ]
+genList = [ narrativeH, commentH, countH, dateH ]
+
+pHsimple :: String -> Possession -> [Possession -> Maybe HList] -> HList
+pHsimple s ob = HList s . filterNothing . map ($ ob) 
+
+-- | Render arcane connection.
+acHsimple :: Possession -> Maybe HList
+acHsimple ob = fmap f $ acTo ob
+   where f target = pHsimple target ob genList
+
+visHsimple :: Possession -> Maybe HList
+visHsimple ob 
+  | isNothing (itemArt ob) = Nothing
+  | otherwise = Just $ pHsimple v ob genList
+      where v = s ++ " vis: " ++ show p ++ " pawns" 
+            s = fromJust $ itemArt ob
+            p = itemCount ob
 
 bookH :: Possession -> Maybe HList
 bookH ob =  (f . bookTexts) ob
