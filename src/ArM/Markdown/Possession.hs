@@ -20,8 +20,6 @@ import ArM.Helper
 import Data.HList
 import Data.Maybe
 
-import ArM.Debug.Trace
-
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 --
@@ -42,7 +40,7 @@ printPossessionH :: Possession -> HList
 printPossessionH ob 
     | isComposite ob = pH ob
     | isJust (itemName ob) = pH ob
-    | isBook ob = hfm "Empty book" $ bookH ob
+    | isBook ob = hfm "Empty book" $ bookHsimple ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
     | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
     | isVis ob = hfm "Bogus vis" $ visHsimple ob
@@ -57,14 +55,12 @@ printPossessionH ob
 printBookH :: Book -> HList
 printBookH book = HList (name book) (map (\x->HList x []) lns) 
    where
-      lns = filter (/="") $ statline:keyline:cnt:lng:ans
+      lns = filter (/="") $ statline:keyline:lng:ans
       keyline = "**Key** " ++ bookID book
       statline | "" /= (trim $ bookTitle book) =  ""
                | otherwise = showStrList $ map show (bookStats book) 
       lng = trim $ fromMaybe "" $ bookLanguage book
       ans = map trim $ bookAnnotation book
-      cnt | bookCount book == 1 = ""
-          | otherwise = show (bookCount book) ++ " copies"
 
 -- * Render composite items
 
@@ -101,6 +97,10 @@ bookH ob =  (f . bookTexts) ob
       where f [] =  Nothing
             f [x] = Just $ printBookH x
             f xs =  Just $ HList "Antology of" $ map printBookH xs
+
+bookHsimple :: Possession -> Maybe HList
+bookHsimple ob = fmap (appendToHList xtra) $ bookH ob
+   where xtra = genEntries ob
 
 -- | Render lab texts in a possession.
 labtextH :: Possession -> Maybe HList
@@ -192,7 +192,8 @@ genList' = [ narrativeH, commentH, countH, dateH ]
 
 -- | Render a possession that is only lab texts
 simpleLabTextH :: Possession -> Maybe HList
-simpleLabTextH ob = simpleLabTextH' ob (labTexts ob)
+simpleLabTextH ob = fmap (appendToHList xtra) $ simpleLabTextH' ob (labTexts ob)
+   where xtra = genEntries ob
 
 -- | Auxiliary for `simpleLabTextH`.
 simpleLabTextH' :: Possession -> [LabText] -> Maybe HList
@@ -219,3 +220,6 @@ visHsimple ob
       where v = s ++ " vis: " ++ show p ++ " pawns" 
             s = fromJust $ itemArt ob
             p = itemCount ob
+
+genEntries :: Possession -> [ HList ]
+genEntries ob = filterNothing $ map ($ ob) genList'

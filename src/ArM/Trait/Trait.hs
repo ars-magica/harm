@@ -589,6 +589,7 @@ data Possession = Possession
      , itemDescription :: [ String ] -- ^ Description of the Item
      , itemComment :: [ String ]     -- ^ Comments, supplementing the description
      , itemArt :: Maybe String       -- ^ Relevant art if the item is raw vis
+     , pawns :: Int                  -- ^ pawns of vis per item
      , acTo :: Maybe String
      , itemCount :: Int              -- ^ Number of items possessed, default 1.
      , itemDate :: SeasonTime        -- ^ Time of creation
@@ -608,6 +609,7 @@ defaultPossession = Possession
      , itemDescription = []
      , itemComment = []
      , itemArt = Nothing
+     , pawns = 0
      , acTo = Nothing
      , itemCount = 1
      , itemDate = NoTime
@@ -716,6 +718,7 @@ parseOtherPossession v = Possession
        <*> v `parseCollapsedList` "description" 
        <*> v `parseCollapsedList` "comment" 
        <*> v .:? "art"
+       <*> v .:? "pawns"  .!= 0
        <*> v .:? "acTo" 
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime

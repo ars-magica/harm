@@ -20,6 +20,7 @@ module Data.HList ( HList(..)
                   , indentHList
                   , isEmptyHList 
                   , pushTitle
+                  , appendToHList
        ) where
 
 import Data.OList
@@ -50,6 +51,10 @@ pushTitle s (HList x xs) = HList s (HList x []:xs)
 maybeHList :: String -> Maybe HList
 maybeHList "" = Nothing
 maybeHList s = Just $ HList s []
+
+appendToHList :: [ HList ] -> HList -> HList
+appendToHList ys (HList s xs) = HList s (xs++ys)
+
 
 
 -- | Convert a 'HList' to an 'OList'.
