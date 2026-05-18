@@ -1,0 +1,432 @@
+charID: Cieran
+concept:
+  appearance: Cheerful, moving slowly and carefully.  Dresses like a craftsman, with
+    a sturdy leather apron and tool belt.
+  born: 1192
+  charData:
+    Alma Mater: Stonehenge
+    Casting Sigil: A gentle gust of air
+    Covenant: Elk's Run
+    Nationality: Irish
+    Saga: Contested Lands
+    Size: 0
+  charGlance: {}
+  charType: Magus
+  concept: Rusticanus Fletcher
+  house: ex Miscellanea
+  name: Cieran the Fletcher
+  player: George
+  portrait: cieran.jpeg
+  quirk: Meddler.  Happily gives away charged items.
+pregameAdvancement:
+- changes:
+  - ability: 'Native Language: Irish'
+    spec: Leinster
+    xp: 75
+  - comment: House Virtue
+    cost: 0
+    virtue: Craft Magic
+  - comment: House Virtue
+    cost: 0
+    virtue: Spell Foci
+  - cost: -3
+    flaw: Meddler (major)
+  - cost: -1
+    flaw: Carefree
+  - comment: House Flaw
+    cost: 0
+    flaw: Weak Spontaneous Magic
+  - cost: 1
+    detail: magical arrows
+    virtue: Minor Magical Focus
+  - comment: Ettin Blood gives +1 to Stamina
+    cost: 3
+    detail: Ettin blood
+    virtue: Strong Faerie Blood
+  - comment: Story flaw
+    cost: -3
+    flaw: Mistaken Identity
+  - cost: 3
+    virtue: Flawless Magic
+  - cost: -3
+    flaw: Short-Range Magic
+  - cost: 1
+    virtue: Book Learner
+  - cost: 1
+    detail: Imaginem
+    virtue: Affinity with (art)
+  - cost: 1
+    virtue: Skilled Parens
+  - ptrait: Villager
+    score: 2
+  - ptrait: Carefree
+    score: 3
+  - ptrait: Meddler
+    score: 6
+  mode: Virtues and Flaws
+- changes:
+  - characteristic: Int
+    score: 3
+  - characteristic: Per
+    score: -1
+  - characteristic: Pre
+    score: 0
+  - characteristic: Com
+    score: -1
+  - characteristic: Str
+    score: 2
+  - bonusScore: 1
+    characteristic: Sta
+    score: 2
+  - characteristic: Dex
+    score: 2
+  - characteristic: Qik
+    score: -3
+  mode: Characteristics
+- changes:
+  - ability: 'Area Lore: Munster'
+    spec: Hiding Places
+    xp: 5
+  - ability: Awareness
+    spec: Searching
+    xp: 15
+  - ability: Brawl
+    spec: Dodge
+    xp: 15
+  - ability: Folk Ken
+    spec: Villagers
+    xp: 5
+  - ability: Stealth
+    spec: Hiding
+    xp: 5
+  - ability: Second Sight
+    spec: Faerie Illusions
+  mode: Early Childhood
+- changes:
+  - ability: 'Area Lore: Ireland'
+    spec: Legends
+    xp: 5
+  - ability: Bargain
+    spec: ''
+    xp: 5
+  - ability: Concentration
+    spec: Spell Concentration
+    xp: 5
+  - ability: 'Craft: Cooking'
+    spec: Cookies
+    xp: 30
+  - ability: 'Craft: Fletching'
+    spec: Arrows
+    xp: 30
+  mode: Later Life
+  years: 5
+- changes:
+  - art: Creo
+    xp: 21
+  - art: Intellego
+    xp: 0
+  - art: Muto
+    xp: 0
+  - art: Perdo
+    xp: 36
+  - art: Rego
+    xp: 36
+  - art: Animal
+    xp: 0
+  - art: Aquam
+    xp: 0
+  - art: Auram
+    xp: 0
+  - art: Corpus
+    xp: 15
+  - art: Herbam
+    xp: 0
+  - art: Ignem
+    xp: 0
+  - art: Imaginem
+    xp: 53
+  - art: Mentem
+    xp: 1
+  - art: Terram
+    xp: 15
+  - art: Vim
+    xp: 3
+  - ability: Hermes Lore
+    spec: Hibernia
+    xp: 5
+  - ability: Artes Liberales
+    spec: Ritual Casting
+    xp: 5
+  - ability: Latin
+    spec: Hermetic Usage
+    xp: 30
+  - ability: Hermes Code
+    spec: Stonehenge
+    xp: 5
+  - ability: Magic Theory
+    spec: Spells
+    xp: 30
+  - ability: Parma Magica
+    spec: Mentem
+    xp: 5
+  - ability: Penetration
+    spec: Rego
+    xp: 5
+  - ability: Bows
+    spec: Longbow
+    xp: 30
+  - ability: Thrown Weapon
+    spec: Dart
+    xp: 5
+  - level: 20
+    mastery:
+    - Penetration
+    spell: Wound without Cause
+    tefo: PeCo
+  - level: 5
+    mastery:
+    - Penetration
+    spell: Spasms of the Uncontrolled Body
+    tefo: ReCo
+  - level: 15
+    mastery:
+    - Still Casting
+    spell: Lamp till Morning without Flame
+    tefo: CrIg
+  - level: 20
+    mastery:
+    - Quite Casting
+    spell: Veil of Invisibility
+    tefo: PeIm
+  - level: 10
+    mastery:
+    - Penetration
+    spell: Clarity of Public Speech
+    tefo: CrIm
+  - level: 10
+    mastery:
+    - Quiet Casting
+    spell: Aura of Ennobled Presence
+    tefo: MuIm
+  - level: 10
+    mastery:
+    - Penetration
+    spell: Trust of the Childlike Faith
+    tefo: PeMe
+  - level: 15
+    mastery:
+    - Penetration
+    spell: Arrow of Peaceful Slumber
+    tefo: ReMe
+  - level: 5
+    mastery:
+    - Penetration
+    spell: Touch of Slumber
+    tefo: ReMe
+  - level: 20
+    mastery:
+    - Penetration
+    spell: Obliteration of the Metallic Barrier
+    tefo: PeTe
+  - level: 20
+    mastery:
+    - Penetration
+    spell: End of the Mighty Castle
+    tefo: PeTe
+  - possession:
+      weapon:
+      - Longbow
+  - possession:
+      weapon:
+      - Dagger
+  - possession:
+      weapon:
+      - Quarterstaff
+  - possession:
+      name: Writing Materials
+  - combat:
+      weapon: Longbow
+  - combat:
+      weapon: Dodge
+  - combat:
+      weapon: Fist
+  - combat:
+      weapon: Knife
+  - multiplicity: 1
+    possession: Lantern
+  - possession: 'Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small
+      pouch of down, small crystal, piece of amber, comb, fan, earring, small brass
+      bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog''s tooth'
+  mode: Apprenticeship
+futureAdvancement:
+- changes:
+  - art: Herbam
+    levelCap: 6
+    xp: 24
+  mode: Reading
+  narrative: Studies *Root of Herbam* L6 Q21 +3
+  season: Spring 1220
+  sourceQuality: 21
+  usesBook: RootHerbam
+- changes:
+  - art: Mentem
+    levelCap: 16
+    xp: 16
+  mode: Reading
+  narrative: Studies Mentem L16Q13 +3
+  season: Summer 1220
+  sourceQuality: 13
+  usesBook:
+  - MentemL16Q13
+- changes:
+  - art: Terram
+    levelCap: 8
+    xp: 18
+  - lab:
+      name: Cieran's Workshop
+      narrative: A large house in the village, with living quarters and a workshop
+        serving both as an Hermetic lab and a fletcher's workshop.
+      state:
+        aura: 8
+        virtues:
+        - bonus:
+          - name: Aestetics
+            score: 1
+          - name: Upkeep
+            score: 1
+          - name: Art
+            score: 1
+            specialisation: Re
+          name: Dedicated Building
+        - bonus:
+          - name: Aestetics
+            score: 1
+          - name: Safety
+            score: 1
+          - name: Art
+            score: 1
+            specialisation: Me
+          name: Servant
+          narrative: Originally, one of the Brigands from Clon mac Noise. Selected
+            the most Intelligent one.
+        - bonus:
+          - name: General Quality
+            score: 1
+          - name: Activity
+            score: 1
+            specialisation: Experimentation
+          comment: Magic Item from Folio-1109 installed Spring 1227
+          name: Safe Cauldron
+        - bonus:
+          - name: General Quality
+            score: 1
+          - name: Upkeep
+            score: 2
+          comment:
+          - From 1227
+          - The virtue grants +1 Longevity ritual, but this is suspended to allow
+            for use of the Bookstand of Hespera.
+          name: Precious Ingredients
+        - bonus:
+          - name: Aestetics
+            score: 2
+          - name: Activity
+            score: 3
+            specialisation: Spells
+          comment: From 1228
+          name: 'Major Feature: Antechamber'
+          narrative: The Antechamber is actually a small courtyard which can be accessed
+            only through the sanctum.
+        - bonus:
+          - name: General Quality
+            score: -2
+          - name: Activity
+            score: 4
+            specialisation: Spells
+          comment: From 1228
+          name: 'Major Focus: Antechamber'
+        - bonus:
+          - name: Health
+            score: 1
+          comment: From 1235
+          name: Hermetic Chamber Pot
+        - bonus:
+          - name: Warping
+            score: 1
+          - name: General Quality
+            score: 1
+          - name: Upkeep
+            score: -1
+          - name: Activity
+            score: 2
+            specialisation: Experimentation
+          comment:
+          - From 1238
+          - Provides +1 Experimentation and +1 appropriate specialisation, which is
+            also taken for experimentation.
+          name: Faerie Ingredients
+        - bonus:
+          - name: Health
+            score: 1
+          - name: Aestetics
+            score: 1
+          - name: Art
+            score: 1
+            specialisation: Ig
+          name: Magical Heating
+          narrative: Fan of Summer Breezes
+  mode: Reading
+  narrative: Studies *Root of Terram* L8Q15 +3
+  season: Autumn 1220
+  sourceQuality: 15
+  usesBook: RootTerram
+- changes:
+  - ability: Infernal Lore
+    spec: Undead
+    xp: 5
+  - ability: Parma Magica
+    xp: 5
+  - ability: Second Sight
+    xp: 4
+  - possession:
+      art: Re
+      count: 3
+      name: Rego Vis from Jerome's body
+  - possession:
+      art: Pe
+      count: 1
+      name: Perdo Vis from Jerome's body
+  mode: Adventure
+  narrative: Jerome's Tower - covenant service
+  season: Winter 1220
+  sourceQuality: 14
+- changes:
+  - ability: SOCP Lore
+    levelCap: 4
+    spec: Self initiation
+    xp: 17
+  mode: Reading
+  narrative: Studies book found in Jerome's Tower
+  season: Spring 1221
+  sourceQuality: 14
+  usesBook: socpL4Q14
+- changes:
+  - ability: Parma Magica
+    xp: 2
+  - possession:
+      art: Te
+      comment: salary for the Jerome's Tower job
+      count: 3
+  mode: 'Exposure: Lab Work'
+  narrative: Enchant Bookstand of Hespera
+  season: Summer 1221
+  sourceQuality: 2
+- changes:
+  - art: Intellego
+    levelCap: 15
+    xp: 16
+  mode: Reading
+  narrative: Also a short story to Praesis.
+  season: Autumn 1221
+  sourceQuality: 13
+  usesBook: VimL15Q13

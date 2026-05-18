@@ -37,12 +37,6 @@ import ArM.Debug.Trace
 -- case of a singleton.
 printPossessionMD :: Possession -> OList 
 printPossessionMD = fromHList . printPossessionH
-{-
-    | isComposite ob = OList [ OString $ pName ob, pMD ob ]
-    | isBook ob = pMD ob
-    | isLabText ob = simpleLabTextMD ob
-    | otherwise = pMD ob 
--}
 
 printPossessionH :: Possession -> HList 
 printPossessionH ob 
@@ -91,27 +85,18 @@ hMD = fromMaybe (OList []) . fmap fromHList
 -- and once for the constituent object, but it is necessary for
 -- complex items such as enchanted books, magic swords, as well as
 -- antologies.
-pMD :: Possession -> OList
-pMD ob = pMDgen ob pMDlist
-
 pH :: Possession -> HList
 pH ob = pHgen ob pHlist
 
-pMDgen :: Possession -> [Possession -> OList] -> OList
-pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
-
+-- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
 pHgen ob = HList (pName ob) . filterNothing . map ($ ob) 
-
 
 
 labtextH :: Possession -> Maybe HList
 labtextH = f . labTexts
    where f [] = Nothing
          f ls = Just $ HList "Lab Texts" ( map textH ls )
-
-simpleLabTextMD :: Possession -> OList
-simpleLabTextMD = fromMaybe (OList []) . fmap fromHList . simpleLabTextH
 
 simpleLabTextH :: Possession -> Maybe HList
 simpleLabTextH ob = simpleLabTextH' ob (labTexts ob)
