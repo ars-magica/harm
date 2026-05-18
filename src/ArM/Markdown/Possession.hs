@@ -38,8 +38,16 @@ import ArM.Debug.Trace
 printPossessionMD :: Possession -> OList 
 printPossessionMD ob 
     | isComposite ob = OList [ OString $ pName ob, pMD ob ]
+    | isBook ob = pMD ob
     | isLabText ob = simpleLabTextMD ob
     | otherwise = pMD ob 
+
+printPossessionH :: Possession -> HList 
+printPossessionH ob 
+    | isComposite ob = pH ob
+    | isBook ob = pH ob
+    | isLabText ob = fromMaybe (HList "" []) $ simpleLabTextH ob
+    | otherwise = pH ob 
 
 -- | The name of a possession as displayed in Markdown 
 pName :: Possession -> String
@@ -47,22 +55,6 @@ pName ob = name ob ++ cnt
        where cnt | count ob == 1 = ""
                  | otherwise = " (" ++ show (count ob) ++ ")"
 
-{-
-printBookMD :: Book -> OList
-printBookMD book = OList [ OString $ name book, OList ms ]
-         where ans = map ( f . trim ) $ bookAnnotation book
-               f "" = OList []
-               f s = OString s
-               lng = trim $ fromMaybe "" $ bookLanguage book
-               lns | lng == "" = OList []
-                   | otherwise = OString $ "in " ++ lng
-               cnt | bookCount book == 1 = OList []
-                   | otherwise = OString $ show (bookCount book) ++ " copies"
-               ms' = OString ("**Key** " ++ bookID book):cnt:lns:ans
-               bs = OString $ showStrList $ map show (bookStats book) 
-               ms | "" /= (trim $ bookTitle book) =  bs:ms'
-                  | otherwise =  ms'
--}
 -- | Render a book in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 printBookH :: Book -> HList
@@ -80,15 +72,17 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
 -- | List of functions to make Markdown output.
 -- Each function in the list provides output for one kind of Possession.
 pMDlist :: [ Possession -> OList ]
-pMDlist = [ hMD . bookH
-          , hMD . labtextH
-          , hMD . weaponH
-          , hMD . armourH
-          , hMD . visH
-          , hMD . acH ]
+pMDlist = map (hMD .) pHlist
 
+-- | List of functions to make Markdown output.
+-- Each function in the list provides output for one kind of Possession.
+pHlist :: [ Possession -> Maybe HList ]
+pHlist = [ bookH, labtextH, weaponH,  armourH,  visH, acH ]
+
+-- | Convert HList output to OList outputa.
 hMD :: Maybe HList -> OList
 hMD = fromMaybe (OList []) . fmap fromHList 
+
 -- | Complete description of a composite item.
 -- This is awkward for most items, particularly because names and
 -- titles tend to be duplicated, once for the 'Possession' object 
@@ -98,11 +92,14 @@ hMD = fromMaybe (OList []) . fmap fromHList
 pMD :: Possession -> OList
 pMD ob = pMDgen ob pMDlist
 
+pH :: Possession -> HList
+pH ob = pHgen ob pHlist
+
 pMDgen :: Possession -> [Possession -> OList] -> OList
 pMDgen ob = foldOList . OList . filter (not . isEmptyOList) . map ($ ob) 
 
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
-pHgen ob = HList (name ob) . filterNothing . map ($ ob) 
+pHgen ob = HList (pName ob) . filterNothing . map ($ ob) 
 
 
 
