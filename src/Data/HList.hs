@@ -23,6 +23,7 @@ module Data.HList ( HList(..)
        ) where
 
 import Data.OList
+import ArM.Debug.Trace
 
 -- | Nested lists of strings.
 -- This is intended to build output files, where each atomic object is rendered 
@@ -38,7 +39,7 @@ data HList = HList String [ HList ]
 toHList :: [ String ] -> HList
 toHList [] = HList "" []
 toHList ("":xs) = toHList xs
-toHList (x:xs) = HList x $ map toHList' xs
+toHList (x:xs) = HList (trace ("[toHList] "++x) x) $ map toHList' xs
 
 toHList' :: String -> HList
 toHList' s = HList s []

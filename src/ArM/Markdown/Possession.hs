@@ -82,8 +82,8 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
 pMDlist :: [ Possession -> OList ]
 pMDlist = [ hMD . bookH
           , hMD . labtextH
-          , weaponMD
-          , armourMD
+          , hMD . weaponH
+          , hMD . armourH
           , hMD . visH
           , hMD . acH ]
 
@@ -124,20 +124,17 @@ simpleLabTextH' ob xs = Just $ HList nm ( map textH xs )
          where nm | "" == name ob = "Grimoire"
                   | otherwise = name ob
 
-weaponMD :: Possession -> OList 
-weaponMD ob | isWeapon ob = OList
-                  [ OString "Weapon Stats"
-                  , OList $ map OString $ weapon ob
-                  , OList $ map ( OString . show ) $ weaponStats ob
-                  ] 
-            | otherwise = OList []
-armourMD :: Possession -> OList 
-armourMD ob | isArmour ob = OList
-                  [ OString "Armour Stats"
-                  , OList $ map OString $ armour ob
-                  , OList $ map ( OString . show ) $ armourStats ob
-                  ] 
-            | otherwise = OList []
+weaponH :: Possession -> Maybe HList 
+weaponH ob | isArmour ob = Just $ ttrace $ toHList ("Weapon Stats":(a1++a2))
+           | otherwise = trace "No Weapon" Nothing
+           where a1 = weapon ob
+                 a2 = map show $ weaponStats ob
+
+armourH :: Possession -> Maybe HList 
+armourH ob | isArmour ob = Just $ ttrace $ toHList ("Armour Stats":(a1++a2))
+           | otherwise = trace "No Armour" Nothing
+           where a1 = armour ob
+                 a2 = map show $ armourStats ob
 
 visH :: Possession -> Maybe HList
 visH ob | isNothing (itemArt ob) = Nothing
@@ -153,4 +150,4 @@ bookH :: Possession -> Maybe HList
 bookH ob =  (f . bookTexts) ob
       where f [] =  Nothing
             f [x] = Just $ printBookH x
-            f xs =  Just $ HList "Antology of" $ ttrace $ map printBookH xs
+            f xs =  Just $ HList "Antology of" $ map printBookH xs
