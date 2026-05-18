@@ -165,8 +165,6 @@ effectRDT eff = showStrList [ r, d, t ]
          f _ "" = ""
          f s x = s ++ ": " ++ x
 
--- ** Books
-
 -- | Is the book a tractatus or something else?
 isTractatus :: Book -> Bool
 isTractatus = f . bookStats 
@@ -186,7 +184,6 @@ wrapBook :: Book -> Possession
 wrapBook b = defaultPossession 
              { bookTexts = [ b ]
              , itemCount = bookCount b
-             , itemName = bookTitle b
              }
 
 -- | Wrap a list of books as possesions

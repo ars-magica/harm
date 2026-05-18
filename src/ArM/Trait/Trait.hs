@@ -565,7 +565,7 @@ instance FromJSON ReadingID
 
 
 instance KeyObject Possession where
-   harmKey = ItemKey . itemName
+   harmKey = ItemKey . inferItemName
 
 
 -- | A `Possession` is any kind of device that can be acquired, lost,
@@ -574,7 +574,7 @@ instance KeyObject Possession where
 -- equipment, and any physical object that should be recorded
 -- on the characters sheet.
 data Possession = Possession 
-     { itemName :: String            -- ^ Name identifying the unique item
+     { itemName :: Maybe String      -- ^ Name identifying the unique item
      , bookTexts :: [ Book ]         -- ^ List of included texts, if the item is a Book
      , qualityBonus :: Int   
           -- ^ quality bonus applies to book stats when a copy has non-standard
@@ -595,7 +595,7 @@ data Possession = Possession
     deriving ( Ord, Eq, Generic )
 defaultPossession :: Possession 
 defaultPossession = Possession
-     { itemName = "No Name"
+     { itemName = Nothing
      , bookTexts = []
      , qualityBonus = 0
      , labTexts = []
@@ -660,13 +660,44 @@ instance FromJSON Enchantment where
 visArt :: Possession -> Maybe String
 visArt = itemArt 
 
--- == Books
+-- | Name of the 'Possession' item, inferring it from constituent data
+-- if the 'Possession' has no name of its own.
+inferItemName :: Possession -> String
+inferItemName ob = f $ itemName ob
+   where f (Just x) = x
+         f Nothing = ( fromMaybe "Unnamed Item" 
+                     $ foldl mplus Nothing $ inferItemNameCandidates ob )
 
+inferItemNameCandidates :: Possession -> [Maybe String]
+inferItemNameCandidates ob = map ($ ob) [ fmap name . mhead . bookTexts ]
 
+{-
+-- | Derive `itemName` from other properties, if the name is undefined.
+fixPossessionName :: Possession -> Possession 
+fixPossessionName =  fixPN getPN1 . fixPN f
+    where f p | enchantment p /= MundaneItem = enchantmentName $ enchantment p
+              | otherwise = ""
+
+fixPN :: (Possession -> String) -> Possession -> Possession 
+fixPN f p | itemName p /= "" = p
+          | otherwise = setName (f p) p
+
+getPN1 :: Possession -> String 
+getPN1 p = fromMaybe "Item" . foldl mplus Nothing . map ($ p) $ itemNames
+
+getPN1 p | weapon p /= [] = head $ weapon p
+         | armour p /= [] = head $ armour p
+         | isJust (visArt p) = fromJust (visArt p) ++ " vis"
+         | isAC p = "AC to " ++ (fromJust $ acTo p)
+         | otherwise = "Item"
+
+itemNames :: [ Possession -> Maybe String ]
+itemNames = [ mhead . weapon, mhead . armour, fmap ( "AC to " ++ ) . visArt, fmap ( ++ " vis" ) . acTo ]
+-}
 
 instance StoryObject Possession where
-   name ob = itemName ob 
-   setName n x = x { itemName = n }
+   name ob = inferItemName ob 
+   setName n x = x { itemName = Just n }
    narrative ob = itemDescription ob
    addNarrative s x = x { itemDescription = s:narrative x }
    comment ob = comment ob
@@ -684,8 +715,8 @@ instance FromJSON Possession where
     parseJSON _ = mzero
 
 parseOtherPossession :: Object -> Parser Possession
-parseOtherPossession v = fmap fixPossessionName $ Possession 
-       <$> v .:? "name" .!= ""
+parseOtherPossession v = Possession 
+       <$> v .:? "name"
        <*> v `parseCollapsedList` "books" 
        <*> v .:? "bonus" .!= 0
        <*> v `parseCollapsedList` "labtexts" 
@@ -701,30 +732,6 @@ parseOtherPossession v = fmap fixPossessionName $ Possession
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime
 
-
-
--- | Derive `itemName` from other properties, if the name is undefined.
-fixPossessionName :: Possession -> Possession 
-fixPossessionName =  fixPN getPN1 . fixPN f
-    where f p | enchantment p /= MundaneItem = enchantmentName $ enchantment p
-              | otherwise = ""
-
-fixPN :: (Possession -> String) -> Possession -> Possession 
-fixPN f p | itemName p /= "" = p
-          | otherwise = setName (f p) p
-
-getPN1 :: Possession -> String 
-getPN1 p = fromMaybe "Item" . foldl mplus Nothing . map ($ p) $ itemNames
-{-
-getPN1 p | weapon p /= [] = head $ weapon p
-         | armour p /= [] = head $ armour p
-         | isJust (visArt p) = fromJust (visArt p) ++ " vis"
-         | isAC p = "AC to " ++ (fromJust $ acTo p)
-         | otherwise = "Item"
--}
-
-itemNames :: [ Possession -> Maybe String ]
-itemNames = [ mhead . weapon, mhead . armour, fmap ( "AC to " ++ ) . visArt, fmap ( ++ " vis" ) . acTo ]
 
 isAC :: Possession -> Bool
 isAC p = isJust $ acTo p

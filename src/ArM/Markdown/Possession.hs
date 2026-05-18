@@ -29,9 +29,11 @@ import ArM.Debug.Trace
 -- Different display templates are used for different kinds of
 -- possessions.
 --
--- Composite objects require a full and verbose format, with the
--- name of the possession as header.  Non-composite objects will
--- ignore the name of the 'Possession' object.
+-- 1.  Composite objects require a full and verbose format, with the
+-- name of the possession as header.  
+--
+-- Non-composite objects will often infer the header, instead of using
+-- the possesion `name`.
 --
 -- Lab texts have a simplified display to show only the spell in the
 -- case of a singleton.
