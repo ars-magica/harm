@@ -14,6 +14,7 @@ design:
     - a chest of ancient gold coins
     - art: Creo
       count: 5
+      pawns: 1
       description: Bright read gems with 1p vis each.
     - acTo: The pine tree copse in the Pennines
       comment: Darius collected this when he first met Lise.

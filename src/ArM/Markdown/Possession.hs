@@ -153,7 +153,7 @@ visH :: Possession -> Maybe HList
 visH ob | isNothing (itemArt ob) = Nothing
         | otherwise = Just $ HList ( s ++ " vis: " ++ show p ++ " pawns" ) []
          where s = fromJust $ itemArt ob
-               p = itemCount ob
+               p = pawns ob
 
 
 -- | Render arcane connection data.
@@ -219,7 +219,9 @@ visHsimple ob
   | otherwise = Just $ pHsimple v ob genList'
       where v = s ++ " vis: " ++ show p ++ " pawns" 
             s = fromJust $ itemArt ob
-            p = itemCount ob
+            p = pawns ob
 
+-- | Render the general entries for Possession display.
+-- This is used to append to book and lab text displays.
 genEntries :: Possession -> [ HList ]
 genEntries ob = filterNothing $ map ($ ob) genList'
