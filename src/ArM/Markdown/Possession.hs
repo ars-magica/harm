@@ -40,26 +40,18 @@ import ArM.Debug.Trace
 -- 3. Lab texts have a dedicated function to make sure that the typical
 -- case of a single scroll with one effect is handled without fuss.
 --
-printPossessionMD :: Possession -> OList 
-printPossessionMD = fromHList . printPossessionH
-
 printPossessionH :: Possession -> HList 
 printPossessionH ob 
     | isComposite ob = pH ob
     | isJust (itemName ob) = pH ob
     | isBook ob = hfm "Empty book" $ bookH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
-    | isAC ob = hfm "Bogus arcane connection" $ acH ob
-    | isVis ob = hfm "Bogus vis" $ visH ob
+    | isAC ob = hfm "Bogus arcane connection" $ trace "HO" $ ttrace $ acH ob
+    | isVis ob = hfm "Bogus vis" $ trace "VIS" $ visH ob
     | otherwise = pH ob 
 
 hfm :: String -> Maybe HList -> HList
 hfm s = fromMaybe (HList s [])
-
-{- Remains to handle here:
- - * weapon
- - * armour
- -}
 
 -- | The name of a possession as displayed in Markdown 
 pName :: Possession -> String

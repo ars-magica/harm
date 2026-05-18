@@ -23,7 +23,6 @@ module ArM.Markdown ( Markdown(..)
                     ) where
 
 import Data.Maybe 
-import Data.List 
 import Control.Monad
 
 import ArM.Markdown.Possession 
@@ -240,7 +239,7 @@ enchantedMD ob enc = OList [ OString $ pName ob
                            ]
 
 instance Markdown Possession  where
-   printMD = printPossessionMD
+   printMD = fromHList . printPossessionH
 
 -- | Make a complete list of possessions in Markdown.
 listPossessions :: [ Possession ] -> OList
@@ -258,7 +257,7 @@ listPossessions ps = OList
       , indentOList $ OList [ OString "Vis"
                             , (pList vs)
                             , OString "Arcane Connections"
-                            , (acList acs)
+                            , (pList acs)
                             , OString "Magic Items"
                             , (pList ms)
                             ]
@@ -269,7 +268,6 @@ listPossessions ps = OList
          acs = filter isAC ps
          ms = filter isMagic ps
          es = filter isMundaneEquipment ps
-         acList = OList . map OString . sort . map (fromMaybe "??" . acTo ) 
 
 
 -- | Set a header line followed by a bullet list
