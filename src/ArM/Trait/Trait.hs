@@ -474,7 +474,9 @@ data Book = Book
      , bookNarrative :: [ String ]   -- ^ Additional information in free text
      , bookAnnotation :: [ String ]   -- ^ Additional information in free text
      , bookLanguage  :: Maybe String  -- ^ Language of the book
-     , bookCount :: Int               -- ^ Number of copies 
+     , bookCount :: Int               
+     -- ^ Number of copies. This should only be used when reading a book database.
+     -- In a `Possession` object, the count is handled by `itemCount`.
      } deriving (Eq,Generic,Show)
 instance Ord Book where
     compare a b | bookStats a /= bookStats b = compare (bookStats a) (bookStats b)
