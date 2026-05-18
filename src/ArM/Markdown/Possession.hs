@@ -31,21 +31,35 @@ import ArM.Debug.Trace
 --
 -- 1.  Composite objects require a full and verbose format, with the
 -- name of the possession as header.  
+-- 2.  Possession objects with an 'itemName' will also use the full
+-- format.
 --
 -- Non-composite objects will often infer the header, instead of using
 -- the possesion `name`.
 --
--- Lab texts have a simplified display to show only the spell in the
--- case of a singleton.
+-- 3. Lab texts have a dedicated function to make sure that the typical
+-- case of a single scroll with one effect is handled without fuss.
+--
 printPossessionMD :: Possession -> OList 
 printPossessionMD = fromHList . printPossessionH
 
 printPossessionH :: Possession -> HList 
 printPossessionH ob 
     | isComposite ob = pH ob
-    | isBook ob = pH ob
-    | isLabText ob = fromMaybe (HList "" []) $ simpleLabTextH ob
+    | isJust (itemName ob) = pH ob
+    | isBook ob = hfm "Empty book" $ bookH ob
+    | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
+    | isAC ob = hfm "Bogus arcane connection" $ acH ob
+    | isVis ob = hfm "Bogus vis" $ visH ob
     | otherwise = pH ob 
+
+hfm :: String -> Maybe HList -> HList
+hfm s = fromMaybe (HList s [])
+
+{- Remains to handle here:
+ - * weapon
+ - * armour
+ -}
 
 -- | The name of a possession as displayed in Markdown 
 pName :: Possession -> String

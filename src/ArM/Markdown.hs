@@ -257,7 +257,7 @@ listPossessions ps = OList
       , OString "#### Magic Gadgets"
       , indentOList $ OList [ OString "Vis"
                             , (pList vs)
-                            , OString "Arcane Connections to:"
+                            , OString "Arcane Connections"
                             , (acList acs)
                             , OString "Magic Items"
                             , (pList ms)
