@@ -36,11 +36,13 @@ import ArM.Debug.Trace
 -- Lab texts have a simplified display to show only the spell in the
 -- case of a singleton.
 printPossessionMD :: Possession -> OList 
-printPossessionMD ob 
+printPossessionMD = fromHList . printPossessionH
+{-
     | isComposite ob = OList [ OString $ pName ob, pMD ob ]
     | isBook ob = pMD ob
     | isLabText ob = simpleLabTextMD ob
     | otherwise = pMD ob 
+-}
 
 printPossessionH :: Possession -> HList 
 printPossessionH ob 
