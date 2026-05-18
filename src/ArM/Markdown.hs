@@ -276,7 +276,6 @@ bulletWithHeader _ [] = OList []
 bulletWithHeader h xs = OList [ OString h, f xs ]
          where f = indentOList . foldOList . OList . map printMD 
 
-
 instance Markdown Library where
    printMD lib = OList [ OString ("# " ++ stateName lib)
                        , bulletWithHeader "## Antologies" (antologies lib )
@@ -317,7 +316,7 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
                , indentOList $ OList $ [ OString "**Abilities:**"
                         , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , indentOList $ listPossessions $ possessionList c
+               , listPossessions $ possessionList c
                -- , indentOList $ OList $ [ OString "**Possessions:**"
                         -- , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
                , OString ""
