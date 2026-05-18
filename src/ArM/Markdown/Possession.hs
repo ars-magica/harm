@@ -17,7 +17,6 @@ import ArM.Markdown.Spell
 import ArM.Story
 import ArM.Trait
 import ArM.Helper 
-import Data.OList
 import Data.HList
 import Data.Maybe
 
@@ -47,6 +46,8 @@ printPossessionH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
     | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
     | isVis ob = hfm "Bogus vis" $ visHsimple ob
+    | isArmour ob = hfm "Bogus armour" $ armourHsimple ob
+    | isWeapon ob = hfm "Bogus weapon" $ weaponHsimple ob
     | otherwise = pH ob 
      -- hfm :: String -> Maybe HList -> HList
   where hfm s = fromMaybe (HList s [])
@@ -110,17 +111,42 @@ labtextH = f . labTexts
 
 -- | Render weapon data.
 weaponH :: Possession -> Maybe HList 
-weaponH ob | isArmour ob = Just $ ttrace $ toHList ("Weapon Stats":(a1++a2))
-           | otherwise = trace "No Weapon" Nothing
+weaponH ob | length a2 > 0 = Just $ toHList ("Weapon Stats":a1++a2)
+           | isWeapon ob = Just $ HList ("Weapon Stats: " ++ showStrList a1) []
+           | otherwise = Nothing
            where a1 = weapon ob
                  a2 = map show $ weaponStats ob
 
+-- | Render weapon data.
+weaponHsimple :: Possession -> Maybe HList 
+weaponHsimple ob 
+    | isJust (itemName ob) = Just $ pH ob
+    | length a2 > 0 = Just $ pH ob
+    | length a > 1  = Just $ pH ob
+    | length a == 1 = Just $ pHsimple (pName ob) ob genList
+    | otherwise = Nothing
+           where a1 = weapon ob
+                 a2 = map show $ weaponStats ob
+                 a = a1++a2
+
 -- | Render armour data.
-armourH :: Possession -> Maybe HList 
-armourH ob | isArmour ob = Just $ ttrace $ toHList ("Armour Stats":(a1++a2))
-           | otherwise = trace "No Armour" Nothing
+armourHsimple :: Possession -> Maybe HList 
+armourHsimple ob 
+    | isJust (itemName ob) = Just $ pH ob
+    | length a2 > 0 = Just $ pH ob
+    | length a > 1  = Just $ pH ob
+    | length a == 1 = Just $ pHsimple (pName ob) ob genList
+    | otherwise = Nothing
            where a1 = armour ob
                  a2 = map show $ armourStats ob
+                 a = a1++a2
+-- | Render armour data.
+armourH :: Possession -> Maybe HList 
+armourH ob | isArmour ob = Just $ toHList ("Armour Stats":a)
+           | otherwise = Nothing
+           where a1 = armour ob
+                 a2 = map show $ armourStats ob
+                 a = a1++a2
 
 -- | Render raw vis.
 visH :: Possession -> Maybe HList
@@ -158,7 +184,11 @@ dateH = f . itemDate
 
 -- | List of functions to render common elements of possessions
 genList :: [ Possession -> Maybe HList ]
-genList = [ narrativeH, commentH, countH, dateH ]
+genList = [ narrativeH, commentH, dateH ]
+
+-- | List of functions to render common elements of possessions with count
+genList' :: [ Possession -> Maybe HList ]
+genList' = [ narrativeH, commentH, countH, dateH ]
 
 -- | Render a possession that is only lab texts
 simpleLabTextH :: Possession -> Maybe HList
@@ -179,13 +209,13 @@ pHsimple s ob = HList s . filterNothing . map ($ ob)
 -- | Render a possesion that s just an arcane connection.
 acHsimple :: Possession -> Maybe HList
 acHsimple ob = fmap f $ acTo ob
-   where f target = pHsimple target ob genList
+   where f target = pHsimple target ob genList'
 
 -- | Render a possesion that is just raw vis
 visHsimple :: Possession -> Maybe HList
 visHsimple ob 
   | isNothing (itemArt ob) = Nothing
-  | otherwise = Just $ pHsimple v ob genList
+  | otherwise = Just $ pHsimple v ob genList'
       where v = s ++ " vis: " ++ show p ++ " pawns" 
             s = fromJust $ itemArt ob
             p = itemCount ob

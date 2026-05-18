@@ -18,9 +18,11 @@ design:
     - acTo: The pine tree copse in the Pennines
       comment: Darius collected this when he first met Lise.
     - weapon: Shortspear
-    - name: Longbow
-      comment: I cannot figure out how to record this as a weapon
-      weapon: Longbow
+    - weapon: Longbow
+      comment: Cieran brought this from Wales.
+    - name: Jewelled Longsword
+      weapon: Longsword
+      comment: This is pretty and expensive, but the combat properties are ordinary.
     - labtexts:
       - spell:
           name: Invisible Sling
