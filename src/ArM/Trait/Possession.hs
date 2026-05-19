@@ -96,13 +96,6 @@ enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _) = "Talisman"
 enchantmentName _ = ""
 
-{-
-parseLesser :: Object -> Parser Enchantment
-parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
-    where f Nothing = mzero
-          f (Just x) = parseJSON x
--}
-
 parseLesser :: Object -> Parser Enchantment
 parseLesser v = LesserItem
         <$> v .: "lesseritem" 
@@ -128,8 +121,12 @@ isWeapon p = (weapon p /= []) || (weaponStats p /= [])
 
 isArmour :: Possession -> Bool
 isArmour p = (armour p /= []) || (armourStats p /= [])
+
 isMagic :: Possession -> Bool
 isMagic p = enchantment p /= MundaneItem
+
+isAC :: Possession -> Bool
+isAC p = isJust $ acTo p
 
 isMundaneEquipment :: Possession -> Bool
 isMundaneEquipment p = isEquipment p && (not . isMagic) p

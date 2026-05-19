@@ -58,7 +58,6 @@ module ArM.Trait.Trait (
          , defaultPossession
          , LabText(..)
          , visArt
-         , isAC
          , isNone
          -- ** Magic and Enchantments
          , Enchantment(..)
@@ -755,9 +754,6 @@ parseOtherPossession v = Possession
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime
 
-
-isAC :: Possession -> Bool
-isAC p = isJust $ acTo p
 
 instance Show Possession where
     show p = name p ++ cnt
