@@ -22,6 +22,8 @@ tags:
 	+ [ ] Books acquired
 
 + [ ] Covenant traits
-    + [ ] health
-    + [ ] aura
-    + [ ] reputation ?
+    + [ ] OtherTrait
+        + [ ] health
+        + [ ] aura
+    + [ ] VF (hooks and boons)
+    + [ ] Reputation ?
