@@ -392,8 +392,6 @@ strSQ :: (AdvancementLike a) => a -> String
 strSQ a = showSQ (advSQ a) (totalBonusSQ a)
 
 -- | Render the source quality of an advancement
---
--- Currently not used.
 showSQ :: Maybe XPType -> XPType -> String
 showSQ Nothing 0 = ""
 showSQ (Just x) 0 = " (" ++ showNum x ++ "xp)"
@@ -481,8 +479,6 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "acquired"
         <*> v `parseCollapsedList` "lost"
         <*> v .:? "type" .!= "In Game"
-
-
 
 instance Timed CovAdvancement where
    season = caSeason

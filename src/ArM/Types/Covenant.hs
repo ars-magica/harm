@@ -26,7 +26,6 @@ module ArM.Types.Covenant (
            , defaultCovState
            -- * Convenience Functions
            , findCov
-           , covenant
            ) where
 
 import GHC.Generics
@@ -122,6 +121,7 @@ instance Show CovenantConcept where
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
+         , caTraits :: [ Trait ]
          , library :: [ Book ]
             -- ^ The covenant library.  This should be deprecated and
             -- replaced by a function extracting books from possessions,
@@ -149,7 +149,6 @@ instance FromJSON CovenantState where
         <*> v `parseCollapsedList` "library"
         <*> v `parseCollapsedList` "possessions"
         <*> v `parseCollapsedList` "labs"
-
 
 
 -- * Convenience Functions
