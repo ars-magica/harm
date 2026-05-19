@@ -176,6 +176,9 @@ data Reputation = Reputation { reputationName :: String  -- ^ contents of the re
                              ,  repExcessXP :: XPType    -- ^ XP towards next level in the reputation
                              }
            deriving (Ord, Eq, Generic)
+
+-- | Virtues and flaws.  The same data type is used for both virtues and
+-- flaws as well as covenant hooks and boons.
 data VF = VF { vfname :: String    -- ^ name of the virtue/flaw
              , vfDetail :: String  -- ^ detail, where the virtue/flaw has options
              , vfcost :: Int       -- ^ cost, should be zero for free/inferred virtues/flaws
