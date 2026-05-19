@@ -19,6 +19,21 @@ description:
      For a top down description of the implementation, one should start with
      the `Main` module below.
 
+     ** Inter-dependencies
+
+     The following are the most fundamental modules, listed in order
+     of dependency, so that no module depends on modules further down in
+     the list.
+
+     + Helper modules.  
+         + "Data.*" is independent of "ArM.*" 
+         + "ArM.Helper" depends only on "Data.*"
+         + "ArM.Debug.*" has no dependencies 
+     + Main modules.
+         + "ArM.GameRules" has no dependencies 
+         + "ArM.Story" depends only on "ArM.Story.*"
+         + "ArM.Trait" depends only on "ArM.Trait.*" and "ArM.Story"
+
 name:                harm
 version:             0.1.0.0
 -- synopsis:
