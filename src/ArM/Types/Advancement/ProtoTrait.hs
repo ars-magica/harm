@@ -374,7 +374,9 @@ computeVF (VFKey x d) p = Just $ VF
                     { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
-                    , vfComment = fromMaybe "" $ ptComment p }
+                    , vfComment = fromMaybe "" $ ptComment p 
+                    , vfNarrative = []
+                    }
 computeVF _ _ = Nothing
 
 -- * Advancement - the TraitType class
