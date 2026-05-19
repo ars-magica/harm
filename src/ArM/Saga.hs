@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.Saga
+-- Module      :  ArM.Saga
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,7 +12,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.Saga ( Saga(..)
+module ArM.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
                     , characterIndex
@@ -20,11 +20,16 @@ module ArM.Cov.Saga ( Saga(..)
                     , advancementErrors
                     , advancementErrorsLimit
                     , covenFolk
+                    -- * Advancement
+                    , advanceSaga 
+                    , Advance(..)
+                    , StepAdvance(..)
+                    , Validation(..)
                     ) where
 
 import Data.List 
 
-import ArM.Advancement
+import ArM.Saga.Advancement
 import ArM.Types.Harm
 import ArM.Character
 import ArM.Story

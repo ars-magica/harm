@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Advancement
+-- Module      :  ArM.Saga.Advancement
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -22,7 +22,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Advancement ( advanceSaga 
+module ArM.Saga.Advancement ( advanceSaga 
                        , Advance(..)
                        , StepAdvance(..)
                        , Validation(..)
@@ -32,13 +32,11 @@ import Data.Maybe
 import Data.List 
 
 import ArM.Character
-import ArM.Cov.Covenant
+import ArM.Covenant
 import ArM.Story
 import ArM.Trait
 import ArM.Types.Harm
 import ArM.Helper
-
-import ArM.Debug.Trace
 
 -- * Advancement
 
@@ -106,12 +104,11 @@ advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
 
 advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
 advanceSaga' [] _ = []
-advanceSaga' (t:ts) saga0 = trace (show t) $ n:advanceSaga' ts n
+advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
     where n = f t saga0
-          f ssn saga | NoTime == nextSeason saga = trace "NoTime" saga 
-                     | ssn < nextSeason saga = trace (show nx) saga 
-                     | otherwise = trace ("Step " ++ show nx) $ f ssn $ stepSaga saga
-          nx = nextSeason saga0
+          f ssn saga | NoTime == nextSeason saga = saga 
+                     | ssn < nextSeason saga = saga 
+                     | otherwise = f ssn $ stepSaga saga
 -- |
 -- Advance listed covenants and characters one season forward.
 -- The advancement happens jointly, with several passes, to resolve

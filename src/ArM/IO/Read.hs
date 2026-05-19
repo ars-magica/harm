@@ -17,7 +17,7 @@ import Data.Aeson.Generic (readObject)
 
 import Data.Maybe 
 
-import ArM.Advancement
+import ArM.Saga
 import ArM.Types.Harm
 import ArM.Trait
 import ArM.Types.Advancement

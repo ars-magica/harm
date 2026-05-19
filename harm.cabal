@@ -40,13 +40,12 @@ description:
          + "ArM.Types.Harm" introduces 'Saga', 'Covenant', and 'Character'
      + Processing
          + "ArM.Character" covers operations on characters
-	 + The 'ArM.Cov.*' modules are not yet refactored properly.
-         + "ArM.Advancement" covers 'Saga' level advancement and joint
+	 + 'ArM.Covenant" covers operations on Covenants
+         + "ArM.Saga" covers 'Saga' level advancement and joint
 	   advancement of covenants and characters.
      + Formatting and IO
          + 'ArM.Sheet' formats data for output, without choosing an output format
          + 'ArM.Markdown'
-         + 'ArM.SeasonDisplay' (should be moved in under Markdown)
          + 'ArM.IO'
 
 name:                harm
@@ -111,7 +110,6 @@ common harm-deps
                        , ArM.Types.Harm.Covenant
                        , Data.KeyPair
                        , ArM.Trait.RawBook
-                       , ArM.Advancement
                        , ArM.Types.Advancement
                        , ArM.Types.Advancement.ProtoTrait
                        , ArM.Trait
@@ -130,13 +128,16 @@ common harm-deps
 		       , ArM.Sheet
 		       , ArM.Sheet.Library
                        , ArM.Markdown
+                       , ArM.Markdown.Markdown
                        , ArM.Markdown.HList
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession
-                       , ArM.SeasonDisplay
-                       , ArM.Cov.Internal.CostBP
-                       , ArM.Cov.Covenant
-                       , ArM.Cov.Saga
+                       , ArM.Markdown.SeasonDisplay
+                       , ArM.Covenant.CostBP
+                       , ArM.Covenant.Covenant
+                       , ArM.Covenant
+                       , ArM.Saga
+                       , ArM.Saga.Advancement
                        , ArM.Trait.SpellRecord
                        , ArM.IO
                        , ArM.IO.Read

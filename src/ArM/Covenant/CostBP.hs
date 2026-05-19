@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.Internal.CostBP
+-- Module      :  ArM.Covenant.CostBP
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,7 +12,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.Internal.CostBP ( CostBP(..) ) where
+module ArM.Covenant.CostBP ( CostBP(..) ) where
 
 import ArM.Trait
 
