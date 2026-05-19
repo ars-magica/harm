@@ -21,23 +21,33 @@ description:
 
      ** Inter-dependencies
 
-     The following are the most fundamental modules, listed in order
-     of dependency, so that no module depends on modules further down in
-     the list.
-
-     Subdirectories are typically used for internal modules which are
-     expossed via the higher-level modules.
+     The following list covers the modules intended for external use,
+     listed in order of dependency, so that no module depends on modules
+     further down in the list.  Subdirectories are typically used for 
+     internal modules which are expossed via the higher-level modules.
 
      + Helper modules.  
          + "Data.*" is independent of "ArM.*" 
          + "ArM.Helper" depends only on "Data.*"
          + "ArM.Debug.*" has no dependencies 
-     + Main modules.
+     + Data model 
          + "ArM.GameRules" has no dependencies 
          + "ArM.Story" depends only on "ArM.Story.*"
          + "ArM.Trait" depends only on "ArM.Trait.*" and "ArM.Story"
+         + "ArM.DB" depends on "ArM.Trait".
+	   The DB model is not properly used at present.
          + "ArM.Types.Advancement" introduces 'ProtoTrait' and 'Advancement'
-         + "ArM.Types.Saga" introduces 'Saga', 'Covenant', and 'Character'
+         + "ArM.Types.Harm" introduces 'Saga', 'Covenant', and 'Character'
+     + Processing
+         + "ArM.Character" covers operations on characters
+	 + The 'ArM.Cov.*' modules are not yet refactored properly.
+         + "ArM.Advancement" covers 'Saga' level advancement and joint
+	   advancement of covenants and characters.
+     + Formatting and IO
+         + 'ArM.Sheet' formats data for output, without choosing an output format
+         + 'ArM.Markdown'
+         + 'ArM.SeasonDisplay' (should be moved in under Markdown)
+         + 'ArM.IO'
 
 name:                harm
 version:             0.1.0.0
