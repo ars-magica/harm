@@ -35,7 +35,7 @@ import ArM.Character
 import ArM.Cov.Covenant
 import ArM.Story
 import ArM.Trait
-import ArM.Types.Saga
+import ArM.Types.Harm
 import ArM.Helper
 
 import ArM.Debug.Trace

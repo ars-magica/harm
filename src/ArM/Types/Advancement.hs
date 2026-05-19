@@ -53,10 +53,18 @@ module ArM.Types.Advancement ( Advancement(..)
                              , Validation(..) 
                              , validateXP
                              , primaryXPTrait
+                             -- * ProtoTrait
+                             , ProtoTrait(..)
+                             , TraitKey(..)
+                             , advanceTraitList
+                             , defaultPT
+                             , processChar
+                             , regularXP
+                             , getVF
                              ) where
 
 import ArM.Helper
-import ArM.Types.ProtoTrait
+import ArM.Types.Advancement.ProtoTrait
 import ArM.Story
 import ArM.Trait
 import ArM.GameRules

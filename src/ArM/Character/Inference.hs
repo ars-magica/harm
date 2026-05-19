@@ -17,8 +17,7 @@
 module ArM.Character.Inference (addInference) where
 
 import ArM.Types.Advancement
-import ArM.Types.ProtoTrait
-import ArM.Types.Character
+import ArM.Types.Harm
 import ArM.Character.CharacterSheet
 import ArM.Story
 import ArM.Trait

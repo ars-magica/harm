@@ -35,12 +35,10 @@ import Data.Maybe
 
 import ArM.Types.Advancement
 import ArM.Character.CharacterSheet
-import ArM.Types
 import ArM.Story
-import ArM.Types.ProtoTrait
 import ArM.Trait
 import ArM.Helper
-import ArM.Types.Character
+import ArM.Types.Harm
 
 -- |
 -- = Convenience Functions for Character Properties

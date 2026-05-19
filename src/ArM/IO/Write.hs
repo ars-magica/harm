@@ -20,7 +20,7 @@ import System.Directory
 import ArM.Markdown
 import ArM.SeasonDisplay
 import ArM.Sheet
-import ArM.Types.Saga
+import ArM.Types.Harm
 import ArM.Story
 
 import Data.OList

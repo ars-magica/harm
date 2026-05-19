@@ -18,15 +18,13 @@
 -- and this is handled by the `ArM.Advancement` module.
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.Covenant ( module ArM.Types.Covenant
-           , CostBP
+module ArM.Cov.Covenant ( CostBP
            -- * Covenant Generation and Advancement
            , covGen
            , stepCovState
            ) where
 
-import ArM.Types.Covenant
--- import ArM.Types.Trait
+import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Cov.Internal.CostBP
 import ArM.Helper

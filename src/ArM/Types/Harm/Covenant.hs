@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Covenant
+-- Module      :  ArM.Types.Harm.Covenant
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -18,7 +18,7 @@
 -- and this is handled by the `ArM.Advancement` module.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Covenant ( 
+module ArM.Types.Harm.Covenant ( 
            -- * The Covenant Type
            Covenant(..)
            , CovenantConcept(..)
@@ -36,8 +36,7 @@ import Control.Monad
 
 import ArM.Trait
 import ArM.Types.Advancement
-import ArM.Types.Character
-import ArM.Types.Lab
+import ArM.Types.Harm.Character
 import ArM.Story
 import ArM.Helper
 import Data.KeyPair

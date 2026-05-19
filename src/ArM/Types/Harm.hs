@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.HarmSagaObject
+-- Module      :  ArM.Types.Harm
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -13,13 +13,36 @@
 -- declares instances for many types which import on HarmObject.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.HarmSagaObject where
+module ArM.Types.Harm ( HarmSagaObject(..)
+                      -- * Character
+                      , Character(..)
+                      , CharacterConcept(..)
+                      , CharacterState(..)
+                      , CharacterType(..)
+                      , defaultCS
+                      , fullConceptName
+                      -- * Covenant
+                      , Covenant(..)
+                      , CovenantConcept(..)
+                      , CovenantState(..)
+                      , defaultCovState
+                      , findCov
+                      , covenant
+                      -- * Saga
+                      , Saga(..)
+                      , SagaFile(..)
+                      , SagaState(..)
+                      , sagaDesc
+                      , rootDir
+                      , stateSeasons
+                      , advSeasons
+                      ) where
 
-import ArM.Types.Saga
+import ArM.Trait
+import ArM.Types.Harm.Saga
 import ArM.Story
-import ArM.Types.Covenant
-import ArM.Types.Character
-import ArM.Types.Lab
+import ArM.Types.Harm.Covenant
+import ArM.Types.Harm.Character
 import ArM.Helper
 
 

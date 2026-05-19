@@ -28,11 +28,8 @@ import Control.Monad
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
 import ArM.Character 
-import ArM.Types.ProtoTrait
 import ArM.Cov.Saga
-import ArM.Cov.Covenant
-import ArM.Types.Saga
-import ArM.Types
+import ArM.Types.Harm
 import ArM.Story
 import ArM.Sheet
 import ArM.Trait

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.ProtoTrait
+-- Module      :  ArM.Types.Advancement.ProtoTrait
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -27,7 +27,7 @@
 -- The lists are assumed to be sorted.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.ProtoTrait ( ProtoTrait(..)
+module ArM.Types.Advancement.ProtoTrait ( ProtoTrait(..)
                       , TraitKey(..)
                       , advanceTraitList
                       , defaultPT
@@ -40,7 +40,6 @@ import ArM.GameRules
 import ArM.Helper
 import ArM.Trait
 import ArM.Story
-import ArM.Types.Lab
 
 import GHC.Generics
 import Data.Aeson

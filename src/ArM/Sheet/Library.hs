@@ -15,7 +15,7 @@
 module ArM.Sheet.Library where
 
 import ArM.Trait
-import ArM.Types.Covenant
+import ArM.Types.Harm
 import ArM.Story
 import ArM.Helper
 import Data.List

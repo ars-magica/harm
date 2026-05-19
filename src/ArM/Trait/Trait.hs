@@ -70,7 +70,7 @@ import ArM.Helper
 import ArM.Trait.TraitKey
 import ArM.Trait.Aging
 import ArM.Story
-import ArM.Types.Lab
+import ArM.Trait.Lab
 import ArM.Trait.SpellRecord
 import ArM.Trait.Weapon
 

@@ -29,7 +29,6 @@ module ArM.Character.Virtues (
                         ) where
 
 import ArM.Types.Advancement
-import ArM.Types.ProtoTrait
 import ArM.Trait
 import ArM.Helper
 import ArM.GameRules

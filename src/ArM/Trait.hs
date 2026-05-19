@@ -114,8 +114,23 @@ module ArM.Trait (
          , SpellLike(..)
          , defaultSpellRecord
          , isRitual
+         -- * Lab
+         , Lab(..)
+         , LabState(..)
+         , LabVirtue(..)
+         , LabBonus(..)
+         , gq
+         , getLabArt
+         , health
+         , usedSize
+         , labVirtueLimit
+         , totalBonus
+         , labSafety
+         , safety
+         , baseSafety
          ) where
 
+import ArM.Trait.Lab
 import ArM.Trait.Trait
 import ArM.Trait.SpellRecord
 import ArM.Trait.Weapon

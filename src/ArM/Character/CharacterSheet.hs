@@ -30,9 +30,8 @@ module ArM.Character.CharacterSheet ( CharacterSheet(..)
                                , ceremonialCastingBonus
                                ) where
 
-import ArM.Types.ProtoTrait
-import ArM.Types.Character
-import ArM.Types.Lab
+import ArM.Types.Advancement
+import ArM.Types.Harm
 import ArM.Trait
 import ArM.DB
 import ArM.Helper

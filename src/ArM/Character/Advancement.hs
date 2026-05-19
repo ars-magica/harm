@@ -22,9 +22,8 @@ import ArM.Character.Character
 import ArM.Character.Inference
 import ArM.Character.CharacterSheet
 import ArM.Character.Virtues
-import ArM.Types.Character
+import ArM.Types.Harm
 import ArM.Types.Advancement
-import ArM.Types.ProtoTrait
 import ArM.Trait
 import ArM.Story
 import ArM.GameRules

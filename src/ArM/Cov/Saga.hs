@@ -25,10 +25,9 @@ module ArM.Cov.Saga ( Saga(..)
 import Data.List 
 
 import ArM.Advancement
-import ArM.Types.Covenant
+import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
-import ArM.Types.Saga
 import Data.OList
 import ArM.Helper
 

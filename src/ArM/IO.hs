@@ -19,7 +19,7 @@ import ArM.IO.Write
 
 import ArM.Markdown
 import ArM.Advancement
-import ArM.Types.Saga
+import ArM.Types.Harm
 import ArM.Helper
 
 import Data.OList

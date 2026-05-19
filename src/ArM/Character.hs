@@ -27,7 +27,11 @@
 -----------------------------------------------------------------------------
 module ArM.Character (
                           -- * The Character Type
-                          module ArM.Types.Character
+                          Character(..)
+                          , CharacterConcept(..)
+                          , CharacterState(..)
+                          , CharacterType(..)
+                          , defaultCS
                           -- * The CharacterSheet Type
                           , module ArM.Character.CharacterSheet
                           -- * The CharacterSheet Type
@@ -60,7 +64,7 @@ module ArM.Character (
                           ) where
 
 import ArM.Types.Advancement
-import ArM.Types.Character
+import ArM.Types.Harm
 import ArM.Character.Inference
 import ArM.Character.CharacterSheet
 import ArM.Character.Virtues

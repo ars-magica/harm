@@ -25,6 +25,9 @@ description:
      of dependency, so that no module depends on modules further down in
      the list.
 
+     Subdirectories are typically used for internal modules which are
+     expossed via the higher-level modules.
+
      + Helper modules.  
          + "Data.*" is independent of "ArM.*" 
          + "ArM.Helper" depends only on "Data.*"
@@ -33,6 +36,8 @@ description:
          + "ArM.GameRules" has no dependencies 
          + "ArM.Story" depends only on "ArM.Story.*"
          + "ArM.Trait" depends only on "ArM.Trait.*" and "ArM.Story"
+         + "ArM.Types.Advancement" introduces 'ProtoTrait' and 'Advancement'
+         + "ArM.Types.Saga" introduces 'Saga', 'Covenant', and 'Character'
 
 name:                harm
 version:             0.1.0.0
@@ -89,21 +94,22 @@ common harm-deps
                        , ArM.Character.Character
                        , ArM.Character.CharacterSheet
                        , ArM.Character.Advancement
-                       , ArM.Types
-                       , ArM.Types.Saga
+                       , ArM.Types.Harm
+                       , ArM.Types.Harm.Character
+                       , ArM.Types.Harm.Saga
+                       , ArM.Trait.Lab
+                       , ArM.Types.Harm.Covenant
                        , Data.KeyPair
                        , ArM.Trait.RawBook
-                       , ArM.Types.Character
-                       , ArM.Types.Advancement
                        , ArM.Advancement
-                       , ArM.Types.ProtoTrait
+                       , ArM.Types.Advancement
+                       , ArM.Types.Advancement.ProtoTrait
                        , ArM.Trait
                        , ArM.Trait.Book
                        , ArM.Trait.Possession
                        , ArM.Trait.Trait
                        , ArM.Trait.Aging
                        , ArM.Trait.TraitKey
-                       , ArM.Types.Lab
                        , ArM.Trait.Weapon
                        , ArM.Character.Combat
                        , ArM.DB.CSV
@@ -120,7 +126,6 @@ common harm-deps
                        , ArM.SeasonDisplay
                        , ArM.Cov.Internal.CostBP
                        , ArM.Cov.Covenant
-                       , ArM.Types.Covenant
                        , ArM.Cov.Saga
                        , ArM.Trait.SpellRecord
                        , ArM.IO

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Character
+-- Module      :  ArM.Types.Harm.Character
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -14,7 +14,7 @@
 -- persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Character where
+module ArM.Types.Harm.Character where
 
 import GHC.Generics
 import Data.Aeson

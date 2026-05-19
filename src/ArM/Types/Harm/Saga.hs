@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Saga
+-- Module      :  ArM.Types.Harm.Saga
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,7 +12,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Saga ( Saga(..)
+module ArM.Types.Harm.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
                     , sagaDesc
@@ -28,8 +28,8 @@ import Data.Aeson
 import GHC.Generics
 
 import ArM.Story
-import ArM.Types.Covenant
-import ArM.Types.Character
+import ArM.Types.Harm.Covenant
+import ArM.Types.Harm.Character
 import ArM.DB
 
 -- |

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Types.Lab
+-- Module      :  ArM.Trait.Lab
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,7 +12,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Types.Lab where
+module ArM.Trait.Lab where
 
 import GHC.Generics
 import Data.Aeson
