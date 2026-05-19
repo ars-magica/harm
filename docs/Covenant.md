@@ -20,3 +20,8 @@ tags:
 + [ ] Advancement
 	+ [ ] Members coming and going
 	+ [ ] Books acquired
+
++ [ ] Covenant traits
+    + [ ] health
+    + [ ] aura
+    + [ ] reputation ?
