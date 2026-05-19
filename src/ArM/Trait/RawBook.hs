@@ -20,6 +20,7 @@ module ArM.Trait.RawBook ( RawBook(..)
 
 import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
+import ArM.Helper
 
 import Data.Csv
 import ArM.Debug.Trace
@@ -48,8 +49,12 @@ instance FromNamedRecord RawBook where
                        <*> r .: "title"
                        <*> r .: "creator"
                        <*> r .: "comment"
-                       <*> r .: "copies"
+                       <*> fmap fix (r .: "copies")
                        <*> r .: "language"
+             where fix = fix' . trim
+                   fix' "" = 1
+                   fix' x = read x
+                   -- | The `fix` interprets a blank string as 1.
 
 -- | Parse the given file and return a list of `RawBook` objects.
 readBookCSV :: String        -- ^ CSV file

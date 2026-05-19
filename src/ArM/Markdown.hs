@@ -207,8 +207,6 @@ conceptPrintMD dir c = OList
                 imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
                 nm = fullConceptName c
 
-pList :: [ Possession ] -> OList
-pList = foldOList . OList  . map printMD . sortTraits 
 
 instance Markdown MagicEffect  where
    printMD = fromHList . effectH 
@@ -241,7 +239,7 @@ enchantedMD ob enc = OList [ OString $ pName ob
 instance Markdown Possession  where
    printMD = fromHList . printPossessionH
 
--- | Make a complete list of possessions in Markdown.
+-- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
       [ OString "#### Mundane Equipment"
@@ -268,7 +266,8 @@ listPossessions ps = OList
          acs = filter isAC ps
          ms = filter isMagic ps
          es = filter isMundaneEquipment ps
-
+         -- pList :: [ Possession ] -> OList
+         pList = foldOList . OList  . map printMD . sortTraits 
 
 -- | Set a header line followed by a bullet list
 bulletWithHeader :: Markdown a => String -> [a] -> OList
@@ -682,6 +681,7 @@ printCovenantStateMD saga cov = OList
         , listPossessions $ fmaybe possessions (covenantState cov)
         ]
 
+--
 fmaybe :: ( a -> [b] ) -> Maybe a -> [b]
 fmaybe x = fromMaybe [] . fmap x
 
