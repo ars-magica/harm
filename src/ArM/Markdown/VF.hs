@@ -19,9 +19,10 @@ import ArM.Story
 import ArM.Helper
 import Data.HList
 
-import ArM.Debug.Trace
-
 -- | Render a 'VF' object
 vfH :: VF -> HList 
-vfH ob = HList (ttrace $ name ob) hs
-   where hs = filterNothing [ narrativeH ob , commentH ob ]
+vfH ob = HList n hs
+   where hs = filterNothing [ f (count ob), narrativeH ob , commentH ob ]
+         n = name ob ++ " (" ++ show (vfcost ob) ++ ")"
+         f 1 = Nothing
+         f x = Just $ HList ( "Taken " ++ show x ++ " times." ) []

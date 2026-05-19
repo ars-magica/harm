@@ -13,6 +13,7 @@ design:
     boonhook:
       - name: Aura
         cost: 1
+        count: 2
       - name: Castle
         cost: -3
   - type: Build Points

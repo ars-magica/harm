@@ -202,7 +202,7 @@ instance Countable VF where
 instance StoryObject VF where
    name ob = vfname ob ++ f (vfDetail ob)
        where f "" = ""
-             f x = " (" ++ x ++ ")"
+             f x = " [" ++ x ++ "]"
    setName n x = x { vfname = n }
    narrative ob = vfNarrative ob
    addNarrative s x = x { vfNarrative = s:narrative x }
