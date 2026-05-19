@@ -206,7 +206,9 @@ instance StoryObject VF where
    setName n x = x { vfname = n }
    narrative ob = vfNarrative ob
    addNarrative s x = x { vfNarrative = s:narrative x }
-   comment ob = [vfComment ob]
+   comment ob = f $ vfComment ob
+       where f "" = []
+             f x = [x]
    addComment s x = x { vfComment = prependString (comment x) s }
 
 
