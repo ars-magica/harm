@@ -14,9 +14,6 @@
 -- advancement, including persistence in JSON and advancement.
 --
 -----------------------------------------------------------------------------
-module ArM.Types ( module Data.KeyPair
-                 , module ArM.Types.Lab
-                 ) where
+module ArM.Types ( module ArM.Types.Lab ) where
 
-import Data.KeyPair
 import ArM.Types.Lab

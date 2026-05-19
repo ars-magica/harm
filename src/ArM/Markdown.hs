@@ -38,9 +38,11 @@ import ArM.Sheet
 import ArM.Trait
 import ArM.DB
 import ArM.GameRules
+import ArM.Helper
+
 import Data.OList
 import Data.HList
-import ArM.Helper
+import Data.KeyPair
 
 import ArM.Debug.Trace
 

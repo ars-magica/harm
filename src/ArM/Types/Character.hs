@@ -20,9 +20,10 @@ import GHC.Generics
 import Data.Aeson
 import Data.Maybe
 
+import Data.KeyPair
+
 import ArM.Types.Advancement
 import ArM.Trait
-import ArM.Types
 import ArM.Story
 import ArM.Helper
 

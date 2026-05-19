@@ -24,8 +24,8 @@ module ArM.Types.Covenant (
            , CovenantConcept(..)
            , CovenantState(..)
            , defaultCovState
-           -- * Convenience Functions
            , findCov
+           , covenant
            ) where
 
 import GHC.Generics
@@ -72,8 +72,13 @@ instance FromJSON Covenant where
 
 instance BookDB Covenant where
    lookupBook k = join . fmap (lookupBook k) . covenantState 
+
 instance BookDB CovenantState where
-   lookupBook k = lookupBook k . library
+    lookupBook k = lookupBook k . library
+
+library :: CovenantState -> [ Book ]
+library = foldl (++) [] . map bookTexts . filter isBook . possessions
+
 
 instance KeyObject Covenant where
     harmKey = CovenantKey . name
@@ -122,10 +127,6 @@ data CovenantState = CovenantState
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
          , caTraits :: [ Trait ]
-         , library :: [ Book ]
-            -- ^ The covenant library.  This should be deprecated and
-            -- replaced by a function extracting books from possessions,
-            -- since Book is a special case of Possession.
          , possessions :: [ Possession ]
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
@@ -135,7 +136,7 @@ defaultCovState :: CovenantState
 defaultCovState = CovenantState 
          { covTime = GameStart
          , covenFolkID = []
-         , library = []
+         , caTraits = []
          , possessions = []
          , labs = []
        }  
@@ -146,7 +147,7 @@ instance FromJSON CovenantState where
     parseJSON = withObject "CovenantState" $ \v -> CovenantState
         <$> v .:? "season" .!= GameStart
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
-        <*> v `parseCollapsedList` "library"
+        <*> v `parseCollapsedList` "caTraits"
         <*> v `parseCollapsedList` "possessions"
         <*> v `parseCollapsedList` "labs"
 
