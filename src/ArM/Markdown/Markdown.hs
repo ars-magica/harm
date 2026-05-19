@@ -27,6 +27,7 @@ import Control.Monad
 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
+import ArM.Markdown.VF
 import ArM.Character 
 import ArM.Saga
 import ArM.Types.Harm
@@ -675,12 +676,17 @@ printCovenantStateMD saga cov = OList
         , OString ""
         , OString (pagesLink $ stateName $ getLibrary cov)
         , OString ""
+        , OString "### Boons and Hooks"
+        , OString ""
+        , OList $ map ( indentHList . vfH ) ( fmaybe boonhook $ covenantState cov )
+        , OString ""
         , OString "### Possessions"
         , OString ""
         , listPossessions $ fmaybe possessions (covenantState cov)
         ]
 
---
+-- | Apply a function returning a list on a maybe object, returning the empty
+-- list if the object is Nothing.
 fmaybe :: ( a -> [b] ) -> Maybe a -> [b]
 fmaybe x = fromMaybe [] . fmap x
 

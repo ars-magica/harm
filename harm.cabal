@@ -129,6 +129,7 @@ common harm-deps
 		       , ArM.Sheet.Library
                        , ArM.Markdown
                        , ArM.Markdown.Markdown
+                       , ArM.Markdown.VF
                        , ArM.Markdown.HList
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession

@@ -55,6 +55,8 @@ import Text.Read             (readMaybe)
 -- to be changed as well.
 data Season = Spring | Summer | Autumn | Winter | NoSeason
      deriving (Show,Ord,Eq,Read,Generic)
+instance FromJSON Season
+instance ToJSON Season
 
 -- | A `SeasonTime` is a point in the narrative time, either
 -- season and year, `GameStart`, or `NoTime` for undefined.
@@ -83,8 +85,6 @@ seasonPrev (SeasonTime NoSeason y) = SeasonTime NoSeason (y-1)
 
 instance ToJSON SeasonTime where
    toJSON = toJSON . show
--- instance FromJSON SeasonTime 
-instance ToJSON Season
 
 instance FromJSON SeasonTime where
     parseJSON (Number n) = pure $ SeasonTime NoSeason $ round n
