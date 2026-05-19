@@ -181,12 +181,35 @@ data VF = VF { vfname :: String    -- ^ name of the virtue/flaw
              , vfcost :: Int       -- ^ cost, should be zero for free/inferred virtues/flaws
              , vfAppliesTo :: Maybe TraitKey  -- ^ not used
              , vfMultiplicity :: Int          -- ^ number of times the virtue/flaw is take
-             , vfComment :: String              -- ^ freeform comment
+             , vfComment :: String            -- ^ freeform comment
+             , vfNarrative :: [ String ]       -- ^ freeform story narration
              }
            deriving (Ord, Eq, Generic)
+instance ToJSON VF 
+instance FromJSON VF where
+    parseJSON = withObject "VF" $ \v -> VF
+        <$> v .: "name"
+        <*> v .:? "detail" .!= ""
+        <*> v .:? "cost"  .!= 0
+        <*> v .:? "appliesTo" 
+        <*> v .:? "count" .!= 1
+        <*> v .:? "comment" .!= ""
+        <*> v .:? "narrative" .!= []
+
 instance Countable VF where
     count = vfMultiplicity
     addCount x n = x { vfMultiplicity = vfMultiplicity x + n }
+instance StoryObject VF where
+   name ob = vfname ob ++ f (vfDetail ob)
+       where f "" = ""
+             f x = " (" ++ x ++ ")"
+   setName n x = x { vfname = n }
+   narrative ob = vfNarrative ob
+   addNarrative s x = x { vfNarrative = s:narrative x }
+   comment ob = [vfComment ob]
+   addComment s x = x { vfComment = prependString (comment x) s }
+
+
 -- | The Confidence trait covers True Faith as well as Confidence,
 -- and potentially other traits where points are accumulated without
 -- limit and independently of the score.
@@ -407,7 +430,6 @@ instance FromJSON Art
 instance FromJSON Spell 
 instance FromJSON PTrait 
 instance FromJSON Reputation 
-instance FromJSON VF 
 instance FromJSON Confidence 
 instance FromJSON OtherTrait 
 instance FromJSON Trait  
@@ -417,7 +439,6 @@ instance ToJSON Art
 instance ToJSON Spell 
 instance ToJSON PTrait 
 instance ToJSON Reputation 
-instance ToJSON VF 
 instance ToJSON Confidence 
 instance ToJSON OtherTrait 
 instance ToJSON Trait 

@@ -23,7 +23,6 @@ module ArM.Covenant.Covenant where
 import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Helper
-import ArM.Debug.Trace
 import Data.Maybe
 import Data.List
 
