@@ -15,7 +15,7 @@ design:
         cost: 1
       - name: Castle
         cost: -3
-  - type: Buld Points
+  - type: Build Points
     bookcsv: Data/books.csv
     acquired:
     - a chest of ancient gold coins

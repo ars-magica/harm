@@ -74,7 +74,6 @@ mergeBH (x:xs) (y:ys)
     | otherwise  = y { vfMultiplicity = n}:mergeBH xs ys
     where n = count x + count y
 
-
 -- | Advance the `possessions` attribute of the `CovenantState`.
 stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
 stepPossessions aa st = st { possessions = bid }

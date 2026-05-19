@@ -661,6 +661,10 @@ instance Markdown CovenantState where
     printMD cov = OList  
         [ OString $ "## " ++ (show $ covTime cov)
         , OString ""
+        , OString "### Boons and Hooks"
+        , OString ""
+        , OList $ map ( indentHList . vfH ) ( boonhook cov )
+        , OString ""
         , OString "### Possessions"
         , OString ""
         , listPossessions $ possessions cov

@@ -484,7 +484,7 @@ instance FromJSON CovAdvancement where
         <*> v `parseCollapsedList` "story" 
         <*> v `parseCollapsedList` "changes" 
         <*> v `parseCollapsedList` "traits" 
-        <*> v `parseCollapsedList` "boonbook" 
+        <*> v `parseCollapsedList` "boonhook" 
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
         <*> v .:? "bookcsv"
