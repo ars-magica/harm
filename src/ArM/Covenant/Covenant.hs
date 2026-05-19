@@ -22,6 +22,8 @@ module ArM.Covenant.Covenant where
 
 import ArM.Types.Harm
 import ArM.Types.Advancement
+import ArM.Trait
+import ArM.Story
 import ArM.Helper
 import Data.Maybe
 import Data.List
@@ -37,7 +39,7 @@ covGen cov = foldl genStep cov' as
 -- | Apply one CovAdvancement object to the `CovenantState`.
 -- This is the same for pre-game and in-game advancement.
 stepCovState :: CovenantState -> CovAdvancement -> CovenantState
-stepCovState st adv = stepPossessions adv $ stepCovenFolk adv st
+stepCovState st adv = stepBH adv $ stepPossessions adv $ stepCovenFolk adv st
 
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.
@@ -53,6 +55,25 @@ stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
 stepCovenFolk aa st = st { covenFolkID = cid }
    where cid1 = sort $ joining aa ++ covenFolkID st 
          cid = cid1 -= ( sort $ leaving aa )
+
+-- | Update boons and hooks
+stepBH :: CovAdvancement -> CovenantState -> CovenantState
+stepBH aa st = st { boonhook = mergeBH bh1 bh2 }
+   where bh1 = sort $ boonhook st 
+         bh2 = sort $ bhChanges aa
+
+-- | merge the new and the old list of boons and hooks.
+-- Auxiliary for `stepBH`.
+mergeBH :: [VF] -> [VF] -> [VF]
+mergeBH [] xs = xs
+mergeBH xs [] = xs
+mergeBH (x:xs) (y:ys) 
+    | traitKey x < traitKey y = x:mergeBH xs (y:ys)
+    | traitKey x > traitKey y = y:mergeBH (x:xs) ys
+    | n == 0 = mergeBH (x:xs) ys
+    | otherwise  = y { vfMultiplicity = n}:mergeBH xs ys
+    where n = count x + count y
+
 
 -- | Advance the `possessions` attribute of the `CovenantState`.
 stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
