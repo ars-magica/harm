@@ -20,6 +20,7 @@ module ArM.Character.Advancement ( prepareAdvancement, validate ) where
 
 import ArM.Character.Character
 import ArM.Character.Inference
+import ArM.Character.Validation
 import ArM.Character.CharacterSheet
 import ArM.Character.Virtues
 import ArM.Types.Harm

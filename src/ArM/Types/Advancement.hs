@@ -51,8 +51,6 @@ module ArM.Types.Advancement ( Advancement(..)
                              , noCovAdvancement
                              -- * Validation
                              , Validation(..) 
-                             , validateXP
-                             , primaryXPTrait
                              , addValidation
                              -- * ProtoTrait
                              , ProtoTrait(..)
@@ -70,7 +68,6 @@ import ArM.Story
 import ArM.Trait
 import ArM.GameRules
 
-import Data.Maybe 
 import Data.List 
 import Data.Char 
 import Data.Aeson 
@@ -431,27 +428,6 @@ instance Show Validation where
 
 instance ToJSON Validation
 instance FromJSON Validation
-
--- | Find the trait earning the most XP from the advancement
-primaryXPTrait :: Advancement -> Maybe TraitKey
-primaryXPTrait = f' .  sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
-    where f' [] = Nothing
-          f' (x:_) = Just $ traitKey x
-
--- | Validate allocation of XP.
-validateXP :: Augmented Advancement -> Augmented Advancement
-validateXP a = addValidation (xpValidation a) a
-
--- | Validate allocation of XP.
-xpValidation :: Augmented Advancement -> [ Validation ]
-xpValidation a 
-    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
-    | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
-    where xpsum = spentXP a
-          sq = fromMaybe 0 $ effectiveSQ a
-          sq' =  effectiveSQ a
 
 -- * Covenant Advancement 
 
