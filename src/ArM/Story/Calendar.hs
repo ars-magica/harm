@@ -127,7 +127,7 @@ showKey' GameStart = "0010_GameStart"
 showKey' (SeasonTime s y) = show y ++ "_" ++ show s ++ show y
 showKey' NoTime =  "9999_NoTime"
 showKey :: Timed a => a  -> String
-showKey = showKey' . season
+showKey = showKey' . gameSeason
 
 instance Ord SeasonTime where
     (<=) NoTime _ = False
