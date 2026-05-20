@@ -48,23 +48,23 @@ prepareAdvancement c = sortAdvTraits   -- sort inferred traits
 winterEvents :: CharacterState       -- ^ Current Character State
              -> Augmented Advancement -- ^ Advancement 
              -> Augmented Advancement -- ^ modified Advancement
-winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
-             | otherwise = a
+winterEvents c a 
+    | isWinter a = addVal $ a { inferredAdv = addAug $ inferredAdv a }
+    | otherwise = a
     where ageOb = ageObject c
           y = age c
           ad = explicitAdv a
-          aa = inferredAdv a
           -- check for aging roll is made if required
-          aa' = validateAging (y >* yl) agingOb  
-                  $ addYear agingOb                  -- add a yer of aging
-                  $ warpingLR aa                     -- add warping point for LR
           pt = find ( (AgeKey ==) . traitKey ) $ changes ad
+          -- Update stats
+          addAug = addYear agingOb                -- add a yer of aging
+                 . warpingLR                      -- add warping point for LR
           agingOb | isNothing pt = Nothing
                       | otherwise = aging $ fromJust pt
           lr | ageOb == Nothing = 0
-                 | otherwise = longevityRitual $ fromJust ageOb
+             | otherwise = longevityRitual $ fromJust ageOb
           yl | ageOb == Nothing = trace "No age object" 35
-                 | otherwise = ageLimit $ fromJust ageOb
+             | otherwise = ageLimit $ fromJust ageOb
           warpingLR x | lr <= 0 = x
                       | otherwise = x { changes = lrWarping:changes x }
           addYear o x | addsYear o = x
@@ -73,6 +73,8 @@ winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
           addsYear (Just x) | isNothing (addYears x) = False
                             | fromJust (addYears  x) <= 0 = False
                             | otherwise = True
+          -- Validation
+          addVal = validateAging (y >* yl) agingOb  
           validateAging False _ =  id
           validateAging True Nothing = addValidation  [err]
           validateAging True (Just ob) 

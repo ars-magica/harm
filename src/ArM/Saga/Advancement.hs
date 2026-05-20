@@ -227,7 +227,7 @@ instance StepAdvance Covenant where
               nextStep' [] = CovStep cov Nothing
               nextStep' (adv:_)  
                  | season adv > ns = CovStep cov Nothing
-                 | otherwise = CovStep new  (Just $ Adv adv noCovAdvancement)
+                 | otherwise = CovStep new  (Just $ Adv adv noCovAdvancement [])
               new = cov { futureCovAdvancement = mtail fs }
    completeStepMaybe (CovStep c Nothing) = Just c 
    completeStepMaybe (CovStep c (Just a)) = 
