@@ -18,6 +18,7 @@ module ArM.Saga ( Saga(..)
                     , characterIndex
                     , covenantIndex
                     , advancementErrors
+                    , advancementNotices
                     , advancementErrorsLimit
                     , covenFolk
                     -- * Advancement
@@ -34,6 +35,7 @@ import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
 import Data.OList
+import Data.OList
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -46,14 +48,21 @@ import ArM.Debug.Trace
 --
 -- CharGen errors are only included at GameStart and ignored later.
 advancementErrors :: SagaState -> OList
-advancementErrors saga | errors == [] = OString "No errors"
+advancementErrors = advancementE isValError
+
+advancementE :: (Validation->Bool) -> SagaState -> OList
+advancementE f saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
     where formatOutput (cid,_,ssn,vs) = 
-              headOList ( show cid ++ ": " ++ ssn ) (mapmsg vs ) 
+              headOList ( show cid ++ ": " ++ ssn ) (map show $ filter f vs)
           errors = errorList saga
-          mapmsg [] = []
-          mapmsg ((ValidationError x):xs) = x:mapmsg xs
-          mapmsg (_:xs) = mapmsg xs
+
+advancementNotices :: SagaState -> OList
+advancementNotices = advancementE (not . isValError)
+
+isValError :: Validation -> Bool
+isValError (ValidationError _) = True
+isValError _ = False
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season

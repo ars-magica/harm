@@ -619,6 +619,10 @@ instance Markdown SagaState where
         , OString "## Advancement Errors"
         , OString ""
         , indentOList $ foldOList $  advancementErrors saga
+        , OString ""
+        , OString "## Advancement Notices"
+        , OString ""
+        , indentOList $ foldOList $  advancementNotices saga
         ]
 
 -- |
