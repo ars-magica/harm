@@ -10,6 +10,13 @@
 --
 -- Description :  Narrative time, incl. SeasonTime type
 --
+-- It is important to note that characters and covenants record their time
+-- as the last season of advancement.  For display purposes, it is generally
+-- better to display the next season of play.  This latter time is given
+-- by the `gameSeason`.  Also `showKey`, which is used to generate the 
+-- directory names which also enter the table of contents in Jupyter Book,
+-- give next season of play.
+--
 -----------------------------------------------------------------------------
 module ArM.Story.Calendar ( SeasonTime(..)
                           , Season(..)
