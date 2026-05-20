@@ -104,7 +104,7 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
 -- Auxiliary for `cErrors`
 aaErrors :: Character -> Augmented Advancement -> VList
 aaErrors c a = (charID c, season a, augHead a, vs )
-    where vs = validation  $ contractAdvancement a
+    where vs = validation  a
 
 -- | Get validation messages from a given character.
 -- Auxiliary for `listErrors`

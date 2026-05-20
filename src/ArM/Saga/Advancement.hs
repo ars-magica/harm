@@ -347,14 +347,16 @@ addBook _ step = step
 -- Not implemented yet.
 addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
 addBook' Nothing y  = y
-addBook' (Just cov) y = y { inferredAdv = f bs $ inferredAdv y }
+addBook' (Just cov) y = f bs y 
     where u = usesBook $ contractAdvancement y
           bk = map (bookLookup cov) u
           bs = zip u bk
           f [] aa = aa
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ aa { bookUsed = b:bookUsed aa }
+          f ((_,Just b):xs) aa = f xs $ addB aa b
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
+          addB' ba b = ba { bookUsed = b:bookUsed ba }
 
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
