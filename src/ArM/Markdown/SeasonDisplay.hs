@@ -83,7 +83,7 @@ instance StoryObject CovAug where
 instance Markdown CharAug where
    printMD (CharAug c a') = OList $ storyOList (CharAug c a') ++
        [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed  a
-       , OList $ map (OString . show) $ validation a
+       , OList $ map (OString . show) $ validation a'
        ]
        where a = contractAdvancement a'
 instance Markdown CovAug where

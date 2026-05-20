@@ -31,7 +31,9 @@ import Data.Maybe
 -- and the existing `CharacterState`.
 addInference :: CharacterState -> Advancement -> Augmented Advancement
 addInference cs a = Adv { explicitAdv = a
-                        , inferredAdv = augmentAdvancement cs a }
+                        , inferredAdv = augmentAdvancement cs a 
+                        , validation = []
+                        }
 
 -- | Infer traits from new virtues and flaws and add them to the advancement.
 -- This typically applies to virtues providing supernatural abilities.

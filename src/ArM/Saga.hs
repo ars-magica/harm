@@ -36,7 +36,7 @@ import ArM.Story
 import Data.OList
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- == Error reports
@@ -49,7 +49,7 @@ advancementErrors :: SagaState -> OList
 advancementErrors saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
     where formatOutput (cid,_,ssn,vs) = 
-              headOList ( cid ++ ": " ++ ssn ) (mapmsg vs ) 
+              headOList ( show cid ++ ": " ++ ssn ) (mapmsg vs ) 
           errors = errorList saga
           mapmsg [] = []
           mapmsg ((ValidationError x):xs) = x:mapmsg xs
@@ -57,7 +57,7 @@ advancementErrors saga | errors == [] = OString "No errors"
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season
-type VList = (String,SeasonTime,String,[Validation])
+type VList = (HarmKey,SeasonTime,String,[Validation])
 
 -- | Did the `VList` object occur after the given season?
 errorAfter :: VList -> SeasonTime -> Bool
@@ -67,9 +67,9 @@ errorAfter (_,vs,_,_) s = vs > s
 -- a given saga state
 errorList :: SagaState -> [VList]
 errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
-    where cs = characters saga
-          cvs = map cErrors  cs
-          vvs = g cvs 
+    where cvs = map cErrors $ characters saga
+          covvs = map covErrors  $ covenants saga
+          vvs = ttrace $ g (cvs ++ covvs)
           g = f . filterVList . foldl (++) [] 
           f [] = []
           f ((_,_,_,[]):xs) = f xs
@@ -91,7 +91,7 @@ filterError [] = []
 advancementErrorsLimit :: SeasonTime ->  SagaState -> OList
 advancementErrorsLimit ssn saga = OList $ map formatOutput errors
     where formatOutput (cid,_,sn,vs) = OList 
-              [ OString ( cid ++ ": " ++ sn ),
+              [ OString ( show cid ++ ": " ++ sn ),
               OList $ map msg vs ]
           errors = f $ errorList saga
           msg (ValidationError x) = OString x
@@ -102,25 +102,31 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
 
 -- | Get validation messages from a given advancement.
 -- Auxiliary for `cErrors`
-aaErrors :: Character -> Augmented Advancement -> VList
-aaErrors c a = (charID c, season a, augHead a, vs )
-    where vs = validation  $ contractAdvancement a
+aaErrors :: ContractAdvancement a => HarmKey -> Augmented a -> VList
+aaErrors c a = (c, season a, augHead a, vs )
+    where vs = validation  a
 
 -- | Get validation messages from a given character.
 -- Auxiliary for `listErrors`
 cErrors :: Character -> [VList]
-cErrors c = map (aaErrors c) as
+cErrors c = map (aaErrors $ harmKey c) as
    where as | ps == [] = pregameDesign c
             | otherwise = ps
          ps = pastAdvancement c
 
+-- | Get validation messages from a given covenant.
+-- Auxiliary for `listErrors`
+covErrors :: Covenant -> [VList]
+covErrors c = map (aaErrors $ harmKey c) as
+   where as | ps == [] = covenantPregame c
+            | otherwise = ps
+         ps = pastCovAdvancement c
+
 -- | Format a header for `renderCharErrors`
-augHead :: Augmented Advancement -> String
-augHead a = augHead' (season a) (mode $ contractAdvancement a)
--- | Format a header for `renderCharErrors`
-augHead' :: SeasonTime -> AdvancementType -> String
-augHead' NoTime tp = show tp
-augHead' x tp = (show x  ++ " " ++ show tp)
+augHead :: ContractAdvancement a => Augmented a -> String
+augHead a = f (season a) (advancementmode a)
+   where f NoTime tp = tp
+         f x tp = (show x  ++ " " ++ tp)
 
 
 -- | 

@@ -45,10 +45,10 @@ stepCovState st adv = stepBH adv $ stepPossessions adv $ stepCovenFolk adv st
 -- This is an auxiliary for `covGen`.
 genStep :: Covenant -> CovAdvancement -> Covenant
 genStep cov adv = cov { covenantState = Just st'
-                            , covenantPregame = aa:covenantPregame cov }
+                      , covenantPregame = aa:covenantPregame cov }
    where st' = stepCovState st adv
          st = fromMaybe defaultCovState $ covenantState cov
-         aa = Adv adv noCovAdvancement
+         aa = Adv adv noCovAdvancement []
 
 -- | Advance the `covenfolk` attribute of the `CovenantState`.
 stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState

@@ -124,6 +124,7 @@ common harm-deps
                        , ArM.DB
                        , ArM.Character.CharGen
                        , ArM.Character.Inference
+                       , ArM.Character.Validation
                        , ArM.Character.Virtues
 		       , ArM.Sheet
 		       , ArM.Sheet.Library

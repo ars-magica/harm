@@ -455,7 +455,7 @@ printMDaa a' = indentOList $ OList $ storyOList a ++
        [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
        , chnl
        , infl
-       , OList $ map (OString . show) $ validation a
+       , OList $ map (OString . show) $ validation a'
        ]
       where inf = sortTraits $ changes $ inferredAdv a'
             chn = sortTraits $ changes $ explicitAdv a'

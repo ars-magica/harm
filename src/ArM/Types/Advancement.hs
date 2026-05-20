@@ -49,10 +49,10 @@ module ArM.Types.Advancement ( Advancement(..)
                              -- * Covenant Advancement
                              , CovAdvancement(..)
                              , noCovAdvancement
+                             , GenAdvancement(..)
                              -- * Validation
                              , Validation(..) 
-                             , validateXP
-                             , primaryXPTrait
+                             , addValidation
                              -- * ProtoTrait
                              , ProtoTrait(..)
                              , TraitKey(..)
@@ -69,8 +69,6 @@ import ArM.Story
 import ArM.Trait
 import ArM.GameRules
 
-import Data.Maybe 
-import Data.List 
 import Data.Char 
 import Data.Aeson 
 import Data.Aeson.Extra
@@ -190,7 +188,6 @@ data Advancement = Advancement
      , changes :: [ ProtoTrait ]  -- ^ trait changes defined by player
      , spellLevels :: Maybe Int   -- ^ spell level allowance
      , teacherSQ :: Maybe XPType  -- ^ The SQ generated as teacher
-     , validation :: [Validation] -- ^ Report from validation
      , postprocessTrait :: PostProcessor -- ^ Extra postprocessing for traits at the given stage
      }
    deriving (Eq,Generic,Show)
@@ -215,7 +212,6 @@ defaultAdvancement = Advancement
      , changes = []
      , spellLevels = Nothing
      , teacherSQ = Nothing
-     , validation = []
      , postprocessTrait = PostProcessor id
      }
 
@@ -241,7 +237,6 @@ instance FromJSON Advancement where
         <*> v `parseCollapsedList` "changes"
         <*> v .:? "spellLevels"
         <*> v .:? "teacherSQ"
-        <*> v `parseCollapsedList` "validation"
         <*> v .:? "postProcessTrait" .!= PostProcessor id
 
 instance Timed Advancement where
@@ -275,7 +270,7 @@ instance FromJSON BonusSQ
 
 
 -- ** The AdvancementLike Class
-class ContractAdvancement a where
+class GenAdvancement a => ContractAdvancement a where
     -- | Merge explicit and inferred advancement into one object
     contractAdvancement :: Augmented a -> a
 
@@ -295,14 +290,13 @@ instance ContractAdvancement Advancement where
           , changes = ( fmls changes ) ad
           , spellLevels = ( fmlx spellLevels ) ad
           , teacherSQ = ( fmlx teacherSQ ) ad
-          , validation = ( fmls validation ) ad
           , postprocessTrait = ( postprocessTrait . inferredAdv ) ad
           }
 
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- Augmented Advanceemnt
-class (StoryObject a) => AdvancementLike a where
+class (Timed a,StoryObject a) => AdvancementLike a where
      -- | The type of advancement
      advMode :: a -> AdvancementType
      -- | Source Quality
@@ -320,7 +314,6 @@ class (StoryObject a) => AdvancementLike a where
      spentXP :: a -> XPType
      -- | Count spell levels from an Advancement
      spentLevels :: a -> Int
-     addValidation :: [Validation] -> a -> a
      addProtoTrait :: [ProtoTrait] -> a -> a
      setRead :: BookDB h => h -> a -> a
 
@@ -334,7 +327,6 @@ instance AdvancementLike Advancement where
          where lvls (SpellKey _ x _) = x
                lvls _ = 0
      sortAdvTraits x = x { changes = sortTraits $ changes x }
-     addValidation vs a = a { validation = vs ++ validation a }
      addProtoTrait vs a = a { changes = vs ++ changes a }
      setRead _ ad = ad { readBook = map (bookID) (bookUsed ad) }
 
@@ -349,7 +341,6 @@ instance (Timed a, AdvancementLike a,ContractAdvancement a)
      spentLevels = spentLevels . explicitAdv
      sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
                          , inferredAdv = sortAdvTraits $ inferredAdv x }
-     addValidation vs a = a { inferredAdv = addValidation vs (inferredAdv a) }
      addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
      setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
 
@@ -360,8 +351,12 @@ instance (Timed a, AdvancementLike a,ContractAdvancement a)
 data Augmented a = Adv
      { explicitAdv :: a    -- ^ Explictly recorded (original) advancement
      , inferredAdv :: a    -- ^ Inferred advancement data
+     , validation :: [Validation] -- ^ Report from validation
      }
    deriving (Eq,Show,Generic)
+
+addValidation :: [Validation] -> Augmented a -> Augmented a
+addValidation vs a = a { validation = vs ++ validation a }
 
 instance ToJSON a => ToJSON (Augmented a) where
     toEncoding = genericToEncoding defaultOptions
@@ -369,6 +364,7 @@ instance FromJSON a => FromJSON (Augmented a) where
     parseJSON = withObject "AugmentedAdvancement" $ \v -> Adv
         <$> v .: "explicitAdv"
         <*> v .: "inferredAdv"
+        <*> v .: "validation"
 
 -- |
 -- Type of function used to post-process traits after advancement.
@@ -392,8 +388,8 @@ instance (Timed a, ContractAdvancement a, AdvancementLike a, StoryObject a)
     name = name . contractAdvancement
     narrative  = narrative . contractAdvancement
     comment  = comment . contractAdvancement
-    addNarrative s (Adv a aa) = Adv a $ addNarrative s aa
-    addComment s (Adv a aa) = Adv a $ addComment s aa
+    addNarrative s a = a { inferredAdv = addNarrative s $ inferredAdv a }
+    addComment s a = a { inferredAdv = addComment s $ inferredAdv a }
 
 -- | Summarise SQ for display purposes
 strSQ :: (AdvancementLike a) => a -> String
@@ -432,27 +428,6 @@ instance Show Validation where
 
 instance ToJSON Validation
 instance FromJSON Validation
-
--- | Find the trait earning the most XP from the advancement
-primaryXPTrait :: Advancement -> Maybe TraitKey
-primaryXPTrait = f' .  sortOn ((*(-1)) . fromMaybe (-1) . xp) . filter (isJust . xp) . changes
-    where f' [] = Nothing
-          f' (x:_) = Just $ traitKey x
-
--- | Validate allocation of XP.
-validateXP :: Augmented Advancement -> Augmented Advancement
-validateXP a = addValidation (xpValidation a) a
-
--- | Validate allocation of XP.
-xpValidation :: Augmented Advancement -> [ Validation ]
-xpValidation a 
-    | isNothing sq' && xpsum > 0 = [ ValidationWarning $ "Undefined Source Quality. Spent " ++ showNum xpsum ++ "xp." ]
-    | sq > xpsum = [ ValidationError $ "Underspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | sq < xpsum = [ ValidationError $ "Overspent " ++ showNum xpsum ++ "xp of " ++ showNum sq ++ "." ]
-    | otherwise = [ Validated $ "Correctly spent " ++ showNum sq ++ " xp." ]
-    where xpsum = spentXP a
-          sq = fromMaybe 0 $ effectiveSQ a
-          sq' =  effectiveSQ a
 
 -- * Covenant Advancement 
 
@@ -509,4 +484,14 @@ instance ContractAdvancement CovAdvancement where
      , lost = lost aa ++ lost ad
      , caType = caType aa
      } 
-     where (Adv aa ad) = aug
+     where (Adv aa ad _) = aug
+
+class (Timed a) => GenAdvancement a where
+    advancementmode :: a -> String
+instance GenAdvancement Advancement where
+    advancementmode = show . mode
+instance GenAdvancement CovAdvancement where
+    advancementmode = caType
+instance (GenAdvancement a,ContractAdvancement a)
+        => GenAdvancement (Augmented a) where
+    advancementmode = advancementmode . contractAdvancement
