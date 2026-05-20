@@ -23,27 +23,37 @@ module ArM.Covenant.Validation where
 import ArM.Types.Advancement
 import ArM.Covenant.CostBP
 import ArM.Trait
+import ArM.Helper
 
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
-covGenValidation a = bpValidation bp ++ bhValidation bh
+covGenValidation a = filterNothing [ bpValidation bp
+                   , lossValidation ls, bhValidation bh ]
     where bp = acquired $ contractAdvancement a
+          ls = lost $ contractAdvancement a
           bh = bhChanges $ contractAdvancement a
 
-bpValidation :: [ Possession ] -> [ Validation ]
-bpValidation = bpVal . sum . map costBP 
+lossValidation :: [ Possession ] -> Maybe Validation
+lossValidation = f . sum . map costBP 
+   where f 0 = Nothing
+         f x = Just $ Validated $ "Lost possession for " ++ show x ++ " build points."
 
-bpVal :: Int -> [ Validation ]
-bpVal 0 = []
-bpVal x = [Validated $ "Spent " ++ show x ++ " build points."]
+bpValidation :: [ Possession ] -> Maybe Validation
+bpValidation = f . sum . map costBP 
+   where f 0 = Nothing
+         f x = Just $ Validated $ "Spent " ++ show x ++ " build points."
 
-bhValidation :: [ VF ] -> [ Validation ]
+bhValidation :: [ VF ] -> Maybe Validation 
 bhValidation vf 
-    | h == b = [ Validated $ "Hooks and boons balance at " ++ show h ++ " points." ]
-    | h < b = [ ValidationError ( "Overspent; " ++ show b ++ "p boons against " 
-                              ++ show h ++ "p hooks." ) ]
-    | otherwise = [ ValidationError ( "Underspent; " ++ show h ++ "p hooks against " 
-                              ++ show b ++  "p boons." ) ]
+    | h == b = f h
+    | h < b = Just $ ValidationError ( "Overspent; "
+                   ++ show b ++ "p boons against " 
+                   ++ show h ++ "p hooks." ) 
+    | otherwise = Just $ ValidationError ( "Underspent; " 
+                       ++ show h ++ "p hooks against " 
+                       ++ show b ++ "p boons." ) 
    where hooks = filter ( (<0) . vfcost ) vf
          boons = filter ( (>0) . vfcost ) vf
          h = sum $ map vfcost hooks
          b = sum $ map vfcost boons
+         f 0 = Nothing
+         f x = Just $ Validated $ "Hooks and boons balance at " ++ show x ++ " points."
