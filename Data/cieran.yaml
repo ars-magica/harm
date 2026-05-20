@@ -19,7 +19,8 @@ concept:
   portrait: cieran.jpeg
   quirk: Meddler.  Happily gives away charged items.
 pregameAdvancement:
-- changes:
+- mode: Virtues and Flaws
+  changes:
   - ability: 'Native Language: Irish'
     spec: Leinster
     xp: 75
@@ -63,8 +64,8 @@ pregameAdvancement:
     score: 3
   - ptrait: Meddler
     score: 6
-  mode: Virtues and Flaws
-- changes:
+- mode: Characteristics
+  changes:
   - characteristic: Int
     score: 3
   - characteristic: Per
@@ -82,8 +83,8 @@ pregameAdvancement:
     score: 2
   - characteristic: Qik
     score: -3
-  mode: Characteristics
-- changes:
+- mode: Early Childhood
+  changes:
   - ability: 'Area Lore: Munster'
     spec: Hiding Places
     xp: 5
@@ -101,8 +102,8 @@ pregameAdvancement:
     xp: 5
   - ability: Second Sight
     spec: Faerie Illusions
-  mode: Early Childhood
-- changes:
+- mode: Later Life
+  changes:
   - ability: 'Area Lore: Ireland'
     spec: Legends
     xp: 5
@@ -118,9 +119,9 @@ pregameAdvancement:
   - ability: 'Craft: Fletching'
     spec: Arrows
     xp: 30
-  mode: Later Life
   years: 5
-- changes:
+- mode: Apprenticeship
+  changes:
   - art: Creo
     xp: 21
   - art: Intellego
@@ -257,7 +258,6 @@ pregameAdvancement:
   - possession: 'Casting tools: Mirror, Copper ring, Cow horn, Leather glove, small
       pouch of down, small crystal, piece of amber, comb, fan, earring, small brass
       bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog''s tooth'
-  mode: Apprenticeship
 futureAdvancement:
 - changes:
   - art: Herbam
@@ -410,23 +410,14 @@ futureAdvancement:
   season: Spring 1221
   sourceQuality: 14
   usesBook: socpL4Q14
-- changes:
+- season: Summer 1221
+  mode: 'Exposure: Lab Work'
+  changes:
   - ability: Parma Magica
     xp: 2
   - possession:
       art: Te
       comment: salary for the Jerome's Tower job
       count: 3
-  mode: 'Exposure: Lab Work'
   narrative: Enchant Bookstand of Hespera
-  season: Summer 1221
   sourceQuality: 2
-- changes:
-  - art: Intellego
-    levelCap: 15
-    xp: 16
-  mode: Reading
-  narrative: Also a short story to Praesis.
-  season: Autumn 1221
-  sourceQuality: 13
-  usesBook: VimL15Q13

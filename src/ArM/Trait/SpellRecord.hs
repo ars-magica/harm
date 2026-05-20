@@ -17,6 +17,7 @@ module ArM.Trait.SpellRecord where
 
 import GHC.Generics
 import ArM.Story
+import ArM.Helper
 import Data.List
 import Data.Maybe
 import Data.Aeson
@@ -142,13 +143,6 @@ instance StoryObject SpellRecord where
    comment ob = [ spellComment ob ]
    addComment s x = x { spellComment = prependString (comment x) s }
 
--- | This is a bit clonky.  
--- StoryObject usually assumes that comments and narratives are lists of strings,
--- but for 'SpellRecord', it is just a string, and `prependString` is just a workaround
--- for this.
-prependString :: [String] -> String -> String
-prependString [] s = s
-prependString (x:xs) s = prependString xs (s ++ "\n\n" ++ x)
 
 instance StoryObject MagicEffect where
    name ob = effectName ob 

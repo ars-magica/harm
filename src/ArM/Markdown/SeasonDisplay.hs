@@ -9,16 +9,12 @@
 -- Description :  Joint season logs for all characters and covenants.
 --
 -----------------------------------------------------------------------------
-module ArM.SeasonDisplay ( sagaAnnals
-                         , AnnalSeason(..)
-                         ) where
-
--- import Data.Maybe 
+module ArM.Markdown.SeasonDisplay where
 
 import ArM.Types.Advancement
 import ArM.Types.Harm 
 import ArM.Story
-import ArM.Markdown
+import ArM.Markdown.Markdown
 import Data.OList
 
 -- import ArM.Debug.Trace

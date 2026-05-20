@@ -9,7 +9,15 @@ concept:
   tribunal: Hibernia
 history: []
 design:
-  - bookcsv: Data/books.csv
+  - type: Boons and Hooks
+    boonhook:
+      - name: Aura
+        cost: 1
+        count: 2
+      - name: Castle
+        cost: -3
+  - type: Build Points
+    bookcsv: Data/books.csv
     acquired:
     - a chest of ancient gold coins
     - art: Creo

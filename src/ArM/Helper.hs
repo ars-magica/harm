@@ -160,3 +160,11 @@ mtail (_:xs) = xs
 mhead :: [a] -> Maybe a
 mhead [] = Nothing
 mhead (x:_) = Just x
+
+-- | This is a bit clonky.  
+-- StoryObject usually assumes that comments and narratives are lists of strings,
+-- but for 'SpellRecord', it is just a string, and `prependString` is just a workaround
+-- for this.
+prependString :: [String] -> String -> String
+prependString [] s = s
+prependString (x:xs) s = prependString xs (s ++ "\n\n" ++ x)

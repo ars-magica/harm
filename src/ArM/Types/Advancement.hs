@@ -460,7 +460,9 @@ xpValidation a
 data CovAdvancement = CovAdvancement 
      { caSeason :: SeasonTime    -- ^ season or development stage
      , caStory :: [ Story ]   -- ^ freeform description of the activities
-     , caChanges :: [ ProtoTrait ]
+     , caChanges :: [ OtherTrait ]
+     , newTraits :: [ OtherTrait ]
+     , bhChanges :: [ VF ]
      , joining :: [ HarmKey ]
      , leaving :: [ HarmKey ]
      , bookcsv :: Maybe String
@@ -473,7 +475,7 @@ data CovAdvancement = CovAdvancement
 
 -- | Empty `CovAdvancement` object for use as a default
 noCovAdvancement :: CovAdvancement
-noCovAdvancement = CovAdvancement NoTime [] [] [] [] Nothing [] [] "No Advancement"
+noCovAdvancement = CovAdvancement NoTime [] [] [] [] [] [] Nothing [] [] "No Advancement"
 
 instance ToJSON CovAdvancement
 instance FromJSON CovAdvancement where
@@ -481,6 +483,8 @@ instance FromJSON CovAdvancement where
         <$> fmap parseSeasonTime ( v .:? "season" )
         <*> v `parseCollapsedList` "story" 
         <*> v `parseCollapsedList` "changes" 
+        <*> v `parseCollapsedList` "traits" 
+        <*> v `parseCollapsedList` "boonhook" 
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "joining" )
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "leaving" )
         <*> v .:? "bookcsv"
@@ -496,6 +500,8 @@ instance ContractAdvancement CovAdvancement where
      { caSeason = season aug
      , caStory = caStory aa ++ caStory ad
      , caChanges = caChanges aa ++ caChanges ad
+     , newTraits = newTraits aa ++ newTraits ad
+     , bhChanges = bhChanges aa ++ bhChanges ad
      , joining = joining aa ++ joining ad
      , leaving = leaving aa ++ leaving ad
      , bookcsv = bookcsv aa

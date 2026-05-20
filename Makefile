@@ -12,3 +12,6 @@ doc: .force
 
 install: bin/harm 
 	cp --copy-contents $< $I/bin
+
+wc:
+	find src -name "*.hs" | xargs wc

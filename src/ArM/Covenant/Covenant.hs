@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Cov.Covenant
+-- Module      :  ArM.Covenant.Covenant
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -18,17 +18,13 @@
 -- and this is handled by the `ArM.Advancement` module.
 --
 -----------------------------------------------------------------------------
-module ArM.Cov.Covenant ( CostBP
-           -- * Covenant Generation and Advancement
-           , covGen
-           , stepCovState
-           ) where
+module ArM.Covenant.Covenant where
 
 import ArM.Types.Harm
 import ArM.Types.Advancement
-import ArM.Cov.Internal.CostBP
+import ArM.Trait
+import ArM.Story
 import ArM.Helper
-import ArM.Debug.Trace
 import Data.Maybe
 import Data.List
 
@@ -43,12 +39,12 @@ covGen cov = foldl genStep cov' as
 -- | Apply one CovAdvancement object to the `CovenantState`.
 -- This is the same for pre-game and in-game advancement.
 stepCovState :: CovenantState -> CovAdvancement -> CovenantState
-stepCovState st adv = stepPossessions adv $ stepCovenFolk adv st
+stepCovState st adv = stepBH adv $ stepPossessions adv $ stepCovenFolk adv st
 
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.
 genStep :: Covenant -> CovAdvancement -> Covenant
-genStep cov adv = trace "genStep" $ cov { covenantState = Just st'
+genStep cov adv = cov { covenantState = Just st'
                             , covenantPregame = aa:covenantPregame cov }
    where st' = stepCovState st adv
          st = fromMaybe defaultCovState $ covenantState cov
@@ -59,13 +55,25 @@ stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
 stepCovenFolk aa st = st { covenFolkID = cid }
    where cid1 = sort $ joining aa ++ covenFolkID st 
          cid = cid1 -= ( sort $ leaving aa )
-{-
--- | Advance the `library` attribute of the `CovenantState`.
-stepBooks :: CovAdvancement -> CovenantState -> CovenantState
-stepBooks aa st = st { library = bid }
-   where bid1 = sort $ acquired aa ++ library st 
-         bid = bid1 -= ( sort $ lost aa )
--}
+
+-- | Update boons and hooks
+stepBH :: CovAdvancement -> CovenantState -> CovenantState
+stepBH aa st = st { boonhook = mergeBH bh1 bh2 }
+   where bh1 = sort $ boonhook st 
+         bh2 = sort $ bhChanges aa
+
+-- | merge the new and the old list of boons and hooks.
+-- Auxiliary for `stepBH`.
+mergeBH :: [VF] -> [VF] -> [VF]
+mergeBH [] xs = xs
+mergeBH xs [] = xs
+mergeBH (x:xs) (y:ys) 
+    | traitKey x < traitKey y = x:mergeBH xs (y:ys)
+    | traitKey x > traitKey y = y:mergeBH (x:xs) ys
+    | n == 0 = mergeBH (x:xs) ys
+    | otherwise  = y { vfMultiplicity = n}:mergeBH xs ys
+    where n = count x + count y
+
 -- | Advance the `possessions` attribute of the `CovenantState`.
 stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
 stepPossessions aa st = st { possessions = bid }

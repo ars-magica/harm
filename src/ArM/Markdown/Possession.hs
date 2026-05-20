@@ -14,6 +14,7 @@
 module ArM.Markdown.Possession where
 
 import ArM.Markdown.Spell
+import ArM.Markdown.HList
 import ArM.Story
 import ArM.Trait
 import ArM.Helper 
@@ -160,13 +161,6 @@ visH ob | isNothing (itemArt ob) = Nothing
 acH :: Possession -> Maybe HList
 acH = fmap (\ s -> HList ( "Arcane Connection to " ++ s ) [] ) . acTo
 
--- | Render the narrative comment.
-narrativeH :: Possession -> Maybe HList
-narrativeH = effectMP "Background" . map italic . narrative
-
--- | Render the comment.
-commentH :: Possession -> Maybe HList
-commentH = effectMP "Comment" . comment
 
 -- | Render number of pieces.
 countH :: Possession -> Maybe HList

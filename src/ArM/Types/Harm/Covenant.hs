@@ -125,7 +125,8 @@ instance Show CovenantConcept where
 data CovenantState = CovenantState 
          { covTime :: SeasonTime
          , covenFolkID :: [ HarmKey ]
-         , caTraits :: [ Trait ]
+         , caTraits :: [ OtherTrait ]
+         , boonhook :: [ VF ]
          , possessions :: [ Possession ]
          , labs :: [ Lab ]
        }  deriving (Eq,Generic,Show)
@@ -136,6 +137,7 @@ defaultCovState = CovenantState
          { covTime = GameStart
          , covenFolkID = []
          , caTraits = []
+         , boonhook = []
          , possessions = []
          , labs = []
        }  
@@ -146,7 +148,8 @@ instance FromJSON CovenantState where
     parseJSON = withObject "CovenantState" $ \v -> CovenantState
         <$> v .:? "season" .!= GameStart
         <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
-        <*> v `parseCollapsedList` "caTraits"
+        <*> v `parseCollapsedList` "traits"
+        <*> v `parseCollapsedList` "boonhook"
         <*> v `parseCollapsedList` "possessions"
         <*> v `parseCollapsedList` "labs"
 
