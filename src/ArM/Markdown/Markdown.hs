@@ -276,7 +276,9 @@ bulletWithHeader h xs = OList [ OString h, f xs ]
          where f = indentOList . foldOList . OList . map printMD 
 
 instance Markdown Library where
-   printMD lib = OList [ OString ("# " ++ stateName lib)
+   printMD lib = OList [ OString ("# " ++ name lib)
+                       , OString ""
+                       , OString $ "+ updated after " ++ (show $ season lib)
                        , bulletWithHeader "## Antologies" (antologies lib )
                        , bulletWithHeader "## Arts" (artBooks lib )
                        , bulletWithHeader "## Abilities" (abilityBooks lib )
@@ -343,7 +345,7 @@ instance Markdown CharacterSheet where
 
 instance Markdown CharacterState where
    printMD c = OList
-       [ OString $ "## Character Sheet " ++ (show $ gameSeason c )
+       [ OString $ "## Sheet " ++ (show $ gameSeason c )
        , OString ""
        , printMD $ characterSheet c
        ]
@@ -630,7 +632,7 @@ instance Markdown SagaState where
 
 instance Markdown Covenant where
     printMD cov = OList 
-        [ OString $ "# " ++ (covName $ covenantConcept cov )
+        [ OString $ "# " ++ (name cov )
         , OString ""
         , printMD $ covenantConcept cov
         , OString ""
@@ -663,7 +665,7 @@ instance Markdown Book where
 
 instance Markdown CovenantState where
     printMD cov = OList  
-        [ OString $ "## " ++ (show $ covTime cov)
+        [ OString $ "## Updated" ++ (show $ covTime cov)
         , OString ""
         , OString "### Boons and Hooks"
         , OString ""
