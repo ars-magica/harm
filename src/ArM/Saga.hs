@@ -57,6 +57,10 @@ advancementE f saga | errors == [] = OString "No errors"
               headOList ( show cid ++ ": " ++ ssn ) (map show $ filter f vs)
           errors = errorList saga
 
+-- | Get an `OList` of all non-error validation messages from past advancements in a
+-- saga state.
+--
+-- CharGen notices are only included at GameStart and ignored later.
 advancementNotices :: SagaState -> OList
 advancementNotices = advancementE (not . isValError)
 
