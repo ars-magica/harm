@@ -42,9 +42,8 @@ class ArMCSV t where
             g (Right x) = x
 
 instance ArMCSV SpellRecord where
-   fromCSVline (x1:x2:x3:x4:x5:x6:x7:x8:x9:x10:x11:x12:x13:x14:x15:_) =
+   fromCSVline (x1:_:x3:x4:x5:x6:x7:x8:x9:x10:x11:x12:x13:x14:x15:_) =
       defaultObject { spellRecordName = x1 
-                , spellRecordTeFo = x2
                 , lvl = readMaybe x7
                 , technique = x3
                 , techniqueReq = filter (/="") $ splitOn ";" x4
@@ -62,7 +61,6 @@ instance ArMCSV SpellRecord where
    fromCSVline _ = defaultObject
    defaultObject = SpellRecord
                    { spellRecordName = ""
-                   , spellRecordTeFo = ""
                    , lvl = Nothing
                    , technique = ""
                    , techniqueReq = []

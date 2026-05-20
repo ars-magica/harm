@@ -31,7 +31,6 @@ import Data.Aeson.Extra
 -- includes the level of the instance.
 data SpellRecord = SpellRecord
     { spellRecordName :: String -- ^ Name of the spell
-    , spellRecordTeFo :: String -- ^ Technique/Form abreviation for the spell
     , lvl :: Maybe Int       -- ^ Spell Level.  General Level Spells have Nothing.
     , technique :: String
     , techniqueReq :: [String]
@@ -49,7 +48,6 @@ data SpellRecord = SpellRecord
 defaultSpellRecord :: SpellRecord
 defaultSpellRecord = SpellRecord
     { spellRecordName = ""
-    , spellRecordTeFo = ""
     , lvl = Nothing
     , technique = ""
     , techniqueReq = []
@@ -70,7 +68,6 @@ instance ToJSON SpellRecord
 instance FromJSON SpellRecord where
     parseJSON = withObject "SpellRecord" $ \v -> SpellRecord
         <$> v .: "name"
-        <*> v .: "TeFo"
         <*> v .:? "level"
         <*> fmap (take 2) (v .: "technique")
         <*> v `parseCollapsedList` "techniqueReq" 
