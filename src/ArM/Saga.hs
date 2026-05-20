@@ -49,7 +49,7 @@ advancementErrors :: SagaState -> OList
 advancementErrors saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
     where formatOutput (cid,_,ssn,vs) = 
-              headOList ( cid ++ ": " ++ ssn ) (mapmsg vs ) 
+              headOList ( show cid ++ ": " ++ ssn ) (mapmsg vs ) 
           errors = errorList saga
           mapmsg [] = []
           mapmsg ((ValidationError x):xs) = x:mapmsg xs
@@ -57,7 +57,7 @@ advancementErrors saga | errors == [] = OString "No errors"
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season
-type VList = (String,SeasonTime,String,[Validation])
+type VList = (HarmKey,SeasonTime,String,[Validation])
 
 -- | Did the `VList` object occur after the given season?
 errorAfter :: VList -> SeasonTime -> Bool
@@ -91,7 +91,7 @@ filterError [] = []
 advancementErrorsLimit :: SeasonTime ->  SagaState -> OList
 advancementErrorsLimit ssn saga = OList $ map formatOutput errors
     where formatOutput (cid,_,sn,vs) = OList 
-              [ OString ( cid ++ ": " ++ sn ),
+              [ OString ( show cid ++ ": " ++ sn ),
               OList $ map msg vs ]
           errors = f $ errorList saga
           msg (ValidationError x) = OString x
@@ -102,8 +102,8 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
 
 -- | Get validation messages from a given advancement.
 -- Auxiliary for `cErrors`
-aaErrors :: Character -> Augmented Advancement -> VList
-aaErrors c a = (charID c, season a, augHead a, vs )
+aaErrors :: ContractAdvancement a => Character -> Augmented a -> VList
+aaErrors c a = (harmKey c, season a, augHead a, vs )
     where vs = validation  a
 
 -- | Get validation messages from a given character.
