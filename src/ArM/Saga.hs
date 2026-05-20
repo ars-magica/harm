@@ -35,7 +35,6 @@ import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
 import Data.OList
-import Data.OList
 import ArM.Helper
 
 import ArM.Debug.Trace
@@ -83,20 +82,10 @@ errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
     where cvs = map cErrors $ characters saga
           covvs = map covErrors  $ covenants saga
           vvs = ttrace $ g (cvs ++ covvs)
-          g = f . filterVList . foldl (++) [] 
+          g = f . foldl (++) [] 
           f [] = []
           f ((_,_,_,[]):xs) = f xs
           f (x:xs) = x:f xs
-
--- | Extract only errors from a list of `VList` objects.
-filterVList :: [VList] -> [VList]
-filterVList = map ( \ (a,b,c,d) -> (a,b,c,filterError d) ) 
-
--- | Get errors from a list of Validation objects
-filterError :: [Validation] -> [Validation]
-filterError (Validated _:xs) = filterError xs
-filterError (x:xs) = x:filterError xs
-filterError [] = []
 
 -- | Exctract a list of validation errors after a given time 
 -- This is not currently used, but could be used to ignore old

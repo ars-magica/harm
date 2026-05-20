@@ -622,7 +622,7 @@ instance Markdown SagaState where
         , OString ""
         , OString "## Advancement Notices"
         , OString ""
-        , indentOList $ foldOList $  advancementNotices saga
+        , indentOList $ foldOList $ advancementNotices saga
         ]
 
 -- |

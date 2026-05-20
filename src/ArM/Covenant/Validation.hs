@@ -24,9 +24,10 @@ import ArM.Types.Advancement
 import ArM.Covenant.CostBP
 import ArM.Trait
 import ArM.Helper
+import ArM.Debug.Trace
 
 covAddValidation :: Augmented CovAdvancement -> Augmented CovAdvancement 
-covAddValidation a = a { validation = covGenValidation a ++ validation a }
+covAddValidation a = ttrace $ a { validation = covGenValidation a ++ validation a }
 
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
 covGenValidation a = filterNothing [ bpValidation bp
