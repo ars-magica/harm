@@ -48,7 +48,6 @@ winterEvents :: CharacterState       -- ^ Current Character State
              -> Augmented Advancement -- ^ Advancement 
              -> Augmented Advancement -- ^ modified Advancement
 winterEvents c a | isWinter a = Adv { explicitAdv = ad, inferredAdv = aa' }
-
              | otherwise = a
     where ageOb = ageObject c
           y = age c
