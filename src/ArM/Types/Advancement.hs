@@ -49,6 +49,7 @@ module ArM.Types.Advancement ( Advancement(..)
                              -- * Covenant Advancement
                              , CovAdvancement(..)
                              , noCovAdvancement
+                             , GenAdvancement(..)
                              -- * Validation
                              , Validation(..) 
                              , addValidation
@@ -68,7 +69,6 @@ import ArM.Story
 import ArM.Trait
 import ArM.GameRules
 
-import Data.List 
 import Data.Char 
 import Data.Aeson 
 import Data.Aeson.Extra
@@ -270,7 +270,7 @@ instance FromJSON BonusSQ
 
 
 -- ** The AdvancementLike Class
-class ContractAdvancement a where
+class GenAdvancement a => ContractAdvancement a where
     -- | Merge explicit and inferred advancement into one object
     contractAdvancement :: Augmented a -> a
 
@@ -296,7 +296,7 @@ instance ContractAdvancement Advancement where
 -- |
 -- The AdvancementLike class gives a common API to Advancement and
 -- Augmented Advanceemnt
-class (StoryObject a) => AdvancementLike a where
+class (Timed a,StoryObject a) => AdvancementLike a where
      -- | The type of advancement
      advMode :: a -> AdvancementType
      -- | Source Quality
@@ -485,3 +485,13 @@ instance ContractAdvancement CovAdvancement where
      , caType = caType aa
      } 
      where (Adv aa ad _) = aug
+
+class (Timed a) => GenAdvancement a where
+    advancementmode :: a -> String
+instance GenAdvancement Advancement where
+    advancementmode = show . mode
+instance GenAdvancement CovAdvancement where
+    advancementmode = caType
+instance (GenAdvancement a,ContractAdvancement a)
+        => GenAdvancement (Augmented a) where
+    advancementmode = advancementmode . contractAdvancement

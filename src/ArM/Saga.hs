@@ -115,12 +115,10 @@ cErrors c = map (aaErrors c) as
          ps = pastAdvancement c
 
 -- | Format a header for `renderCharErrors`
-augHead :: Augmented Advancement -> String
-augHead a = augHead' (season a) (mode $ contractAdvancement a)
--- | Format a header for `renderCharErrors`
-augHead' :: SeasonTime -> AdvancementType -> String
-augHead' NoTime tp = show tp
-augHead' x tp = (show x  ++ " " ++ show tp)
+augHead :: ContractAdvancement a => Augmented a -> String
+augHead a = f (season a) (advancementmode a)
+   where f NoTime tp = tp
+         f x tp = (show x  ++ " " ++ tp)
 
 
 -- | 
