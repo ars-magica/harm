@@ -36,7 +36,7 @@ import ArM.Story
 import Data.OList
 import ArM.Helper
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- |
 -- == Error reports
@@ -67,9 +67,9 @@ errorAfter (_,vs,_,_) s = vs > s
 -- a given saga state
 errorList :: SagaState -> [VList]
 errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
-    where cs = characters saga
-          cvs = map cErrors  cs
-          vvs = g cvs 
+    where cvs = map cErrors $ characters saga
+          covvs = map covErrors  $ covenants saga
+          vvs = ttrace $ g (cvs ++ covvs)
           g = f . filterVList . foldl (++) [] 
           f [] = []
           f ((_,_,_,[]):xs) = f xs
@@ -102,17 +102,25 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
 
 -- | Get validation messages from a given advancement.
 -- Auxiliary for `cErrors`
-aaErrors :: ContractAdvancement a => Character -> Augmented a -> VList
-aaErrors c a = (harmKey c, season a, augHead a, vs )
+aaErrors :: ContractAdvancement a => HarmKey -> Augmented a -> VList
+aaErrors c a = (c, season a, augHead a, vs )
     where vs = validation  a
 
 -- | Get validation messages from a given character.
 -- Auxiliary for `listErrors`
 cErrors :: Character -> [VList]
-cErrors c = map (aaErrors c) as
+cErrors c = map (aaErrors $ harmKey c) as
    where as | ps == [] = pregameDesign c
             | otherwise = ps
          ps = pastAdvancement c
+
+-- | Get validation messages from a given covenant.
+-- Auxiliary for `listErrors`
+covErrors :: Covenant -> [VList]
+covErrors c = map (aaErrors $ harmKey c) as
+   where as | ps == [] = covenantPregame c
+            | otherwise = ps
+         ps = pastCovAdvancement c
 
 -- | Format a header for `renderCharErrors`
 augHead :: ContractAdvancement a => Augmented a -> String
