@@ -22,6 +22,7 @@ module ArM.Covenant.Covenant where
 
 import ArM.Types.Harm
 import ArM.Types.Advancement
+import ArM.Covenant.Validation
 import ArM.Trait
 import ArM.Story
 import ArM.Helper
@@ -48,7 +49,7 @@ genStep cov adv = cov { covenantState = Just st'
                       , covenantPregame = aa:covenantPregame cov }
    where st' = stepCovState st adv
          st = fromMaybe defaultCovState $ covenantState cov
-         aa = Adv adv noCovAdvancement []
+         aa = covAddValidation $ Adv adv noCovAdvancement []
 
 -- | Advance the `covenfolk` attribute of the `CovenantState`.
 stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState

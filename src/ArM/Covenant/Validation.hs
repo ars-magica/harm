@@ -25,6 +25,9 @@ import ArM.Covenant.CostBP
 import ArM.Trait
 import ArM.Helper
 
+covAddValidation :: Augmented CovAdvancement -> Augmented CovAdvancement 
+covAddValidation a = a { validation = covGenValidation a ++ validation a }
+
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
 covGenValidation a = filterNothing [ bpValidation bp
                    , lossValidation ls, bhValidation bh ]

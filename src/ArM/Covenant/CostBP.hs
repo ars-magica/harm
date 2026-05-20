@@ -15,6 +15,8 @@
 module ArM.Covenant.CostBP ( CostBP(..) ) where
 
 import ArM.Trait
+import ArM.Debug.Trace
+import Data.Maybe
 
 class CostBP t where
    -- | Calculate the BP (Build Point) cost of the possession.
@@ -25,7 +27,13 @@ instance CostBP LabText where
    costBP =   (`div` 5) . (+1) . textLevel 
 
 instance CostBP BookStats where
-   costBP _ = error "Not implemented"
+   costBP b = q (quality b) + ll (topic b)
+      where l = fromMaybe 0 $ bookLevel b
+            q Nothing = trace ("Error: No quality") 0
+            q (Just x) = x 
+            ll (AbilityKey _) = 5*l
+            ll (ArtKey _) = l
+            ll x = trace ("Error: book has topic " ++ show x) 0
 
 instance CostBP Enchantment where
    costBP MundaneItem = 0
