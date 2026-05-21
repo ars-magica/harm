@@ -257,7 +257,7 @@ silverH ob | silver ob == 0 = Nothing
          where p = silver ob
 
 incomeH :: Possession -> Maybe HList
-incomeH ob | isVisSrc ob = Just $ hlist (incomeS ob) 
+incomeH ob | silverYield ob /= 0 = Just $ hlist (incomeS ob) 
           | otherwise = Nothing
 
 -- | One line description of a vis source.

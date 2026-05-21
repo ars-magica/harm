@@ -243,7 +243,10 @@ instance Markdown Possession  where
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
       [ OString "#### Mundane Equipment"
-      , indentOList $ OList [ OString "Weapons"
+      , indentOList $ OList [ OString "Silver"
+                            , (pList $ filter ( (/=0) . silver ) ps)
+                            , (pList $ filter ( (/=0) . silverYield ) ps)
+                            , OString "Weapons"
                             , (pList ws)
                             , OString "Armour"
                             , (pList as)
