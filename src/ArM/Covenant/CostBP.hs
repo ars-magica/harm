@@ -15,6 +15,7 @@
 module ArM.Covenant.CostBP ( CostBP(..) ) where
 
 import ArM.Trait
+import ArM.Helper
 import ArM.Debug.Trace
 import Data.Maybe
 
@@ -55,8 +56,8 @@ instance CostBP Possession where
       where cs = [ sum . map costBP . bookTexts 
                  , sum . map costBP . labTexts 
                  , costBP . enchantment
-		 , visBP
-		 , (// 10) . silver
+                 , visBP
+                 , (// 10) . silver
                  ]
 
 -- | Build points for vis stock and vis sources

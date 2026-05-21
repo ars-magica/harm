@@ -15,6 +15,7 @@
 -----------------------------------------------------------------------------
 module Data.HList ( HList(..)
                   , toHList
+                  , hlist
                   , maybeHList
                   , fromHList
                   , indentHList
@@ -40,10 +41,10 @@ data HList = HList String [ HList ]
 toHList :: [ String ] -> HList
 toHList [] = HList "" []
 toHList ("":xs) = toHList xs
-toHList (x:xs) = HList (trace ("[toHList] "++x) x) $ map toHList' xs
+toHList (x:xs) = HList (trace ("[toHList] "++x) x) $ map hlist xs
 
-toHList' :: String -> HList
-toHList' s = HList s []
+hlist :: String -> HList
+hlist s = HList s []
 
 pushTitle :: String -> HList -> HList
 pushTitle s (HList x xs) = HList s (HList x []:xs)

@@ -151,11 +151,21 @@ armourH ob | isArmour ob = Just $ toHList ("Armour Stats":a)
 
 -- | Render raw vis.
 visH :: Possession -> Maybe HList
-visH ob | isNothing (itemArt ob) = Nothing
-        | otherwise = Just $ HList ( s ++ " vis: " ++ show p ++ " pawns" ) []
+visH ob | pawns ob == 0 = Nothing
+        | otherwise = Just $ hlist ( " vis: " ++ show p ++ " pawns" )
          where s = fromJust $ itemArt ob
                p = pawns ob
 
+visrcH :: Possession -> Maybe HList
+visrcH ob 
+   | pawns ob == 0 = Nothing
+   | otherwise = Just $ HList ( " Vis source: " ++ show p ++ " pawns per year" ) ls
+         where s = fromJust $ itemArt ob
+               p = visYield ob
+               ls = filterNothing [ vistimeH ob ]
+
+vistimeH :: Possession -> Maybe HList
+vistimeH = fmap (hlist . ("(Harveste in " ++) . show) . visTime
 
 -- | Render arcane connection data.
 acH :: Possession -> Maybe HList
@@ -209,11 +219,19 @@ acHsimple ob = fmap f $ acTo ob
 -- | Render a possesion that is just raw vis
 visHsimple :: Possession -> Maybe HList
 visHsimple ob 
-  | isNothing (itemArt ob) = Nothing
+  | pawns ob == 0 = Nothing
   | otherwise = Just $ pHsimple v ob genList'
       where v = s ++ " vis: " ++ show p ++ " pawns" 
             s = fromJust $ itemArt ob
             p = pawns ob
+
+visrcHsimple :: Possession -> Maybe HList
+visrcHsimple ob 
+   | pawns ob == 0 = Nothing
+   | otherwise = Just $ HList ( " Vis source: " ++ show p ++ " pawns per year" ) ls
+         where s = fromJust $ itemArt ob
+               p = visYield ob
+               ls = filterNothing $ map ($ ob) ( vistimeH:genList' )
 
 -- | Render the general entries for Possession display.
 -- This is used to append to book and lab text displays.
