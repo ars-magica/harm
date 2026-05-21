@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Saga.Advancement
+-- Module      :  ArM.Saga.Adv
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -27,7 +27,7 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Saga.Advancement ( advanceSaga 
+module ArM.Saga.Adv ( advanceSaga 
                        , Advance(..)
                        , StepAdvance(..)
                        , Validation(..)
@@ -35,6 +35,7 @@ module ArM.Saga.Advancement ( advanceSaga
 
 import Data.Maybe 
 import Data.List 
+import qualified Data.Map as M
 
 import ArM.Character
 import ArM.Covenant
@@ -58,11 +59,11 @@ class Timed a => Advance a where
     -- | Next season - if this is undefined (e.g. at GameStart),
     -- the time of the next advancement is returned.
     nextSeason :: a -> SeasonTime
-    nextSeason c | ssn == GameStart = ns
-                 | ssn == NoTime = ns
-                 | otherwise = seasonNext ssn
-       where ssn = season c
-             ns = nextAdvancement c
+    nextSeason c = f $ season c 
+       where ns = nextAdvancement c
+             f GameStart = ns
+             f NoTime = ns
+             f ssn = seasonNext ssn
 
     -- | Next season with an advancement defined
     nextAdvancement :: a -> SeasonTime
@@ -88,6 +89,25 @@ instance Advance Saga where
       where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
             covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
             st = sagaState saga
+
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
+instance Advance Covenant where
+   nextAdvancement c = f $ futureCovAdvancement c
+       where f [] = NoTime
+             f (x:_) = caSeason x
+   prepare = covGen
+
+instance Advance Character where
+   nextAdvancement = f . futureAdvancement
+       where f [] = NoTime
+             f (x:_) = season x
+   prepare = prepareCharacter
+
+-- OK above
+
+data InterimSaga = InterimSaga Saga
 
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
 class StepAdvance c where
@@ -133,14 +153,6 @@ instance StepAdvance Character where
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
 
--- |
--- The `Advance` instance is very similar to that of `Character`, but has to
--- be implemented separately to account for different advancement classes.
-instance Advance Covenant where
-   nextAdvancement c = f $ futureCovAdvancement c
-       where f [] = NoTime
-             f (x:_) = caSeason x
-   prepare = covGen
 
 instance StepAdvance Covenant where
    nextStep ns cov = nextStep' fs
@@ -157,11 +169,6 @@ instance StepAdvance Covenant where
    stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
 
-instance Advance Character where
-   nextAdvancement = f . futureAdvancement
-       where f [] = NoTime
-             f (x:_) = season x
-   prepare = prepareCharacter
 
 -- |
 -- ** Covenant and Character Advancement

@@ -35,7 +35,6 @@ import GHC.Generics
 import ArM.Debug.Trace
 import ArM.Story.Calendar
 
-
 -- | A unique identifier for objects.
 -- It is made quite generic to support a class `KeyObject` of keyed objects
 -- without enabling multi-parameter classes.
