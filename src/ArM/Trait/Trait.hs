@@ -759,7 +759,7 @@ parseOtherPossession v = Possession
        <*> v .:? "yield"  .!= 0
        <*> v .:? "acTo" 
        <*> v .:? "silver" .!= 0
-       <*> v .:? "silverYield" .!= 0
+       <*> v .:? "income" .!= 0
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime
 

@@ -19,6 +19,18 @@ design:
   - type: Build Points
     bookcsv: Data/books.csv
     acquired:
+    - name: Cattle
+      income: 100
+    - name: Savings
+      silver: 64
+    - name: The flowers of vis
+      art: Herbam
+      yield: 3
+      harvest: Summer
+      narrative: When the daffodills flower in the field behind the covenant,
+         there is always three large specimens, each bearing one pawn of Herbam vis.
+         The vis dissipates when they flowers decay, but can be transferred to another
+         vessel in the lab in the usual way.
     - a chest of ancient gold coins
     - art: Creo
       count: 5

@@ -37,8 +37,6 @@ import ArM.Story
 import Data.OList
 import ArM.Helper
 
-import ArM.Debug.Trace
-
 -- |
 -- == Error reports
 
@@ -81,7 +79,7 @@ errorList :: SagaState -> [VList]
 errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
     where cvs = map cErrors $ characters saga
           covvs = map covErrors  $ covenants saga
-          vvs = ttrace $ g (cvs ++ covvs)
+          vvs = g (cvs ++ covvs)
           g = f . foldl (++) [] 
           f [] = []
           f ((_,_,_,[]):xs) = f xs

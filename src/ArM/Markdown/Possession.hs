@@ -21,6 +21,8 @@ import ArM.Helper
 import Data.HList
 import Data.Maybe
 
+import ArM.Debug.Trace
+
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 --
@@ -41,13 +43,15 @@ printPossessionH :: Possession -> HList
 printPossessionH ob 
     | isComposite ob = pH ob
     | isJust (itemName ob) = pH ob
-    | isBook ob = hfm "Empty book" $ bookHsimple ob
+    | isBook ob = hfm "Empty book" $ addGen bookH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
     | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
     | isVis ob = hfm "Bogus vis" $ visHsimple ob
-    | isVisSrc ob = hfm "Bogus vis" $ visrcHsimple ob
+    | isVisSrc ob = ttrace $ hfm "Bogus vis" $ visrcHsimple ob
     | isArmour ob = hfm "Bogus armour" $ armourHsimple ob
     | isWeapon ob = hfm "Bogus weapon" $ weaponHsimple ob
+    | silver ob /= 0 = hfm "Bogus silver" $ addGen silverH ob
+    | silverYield ob /= 0 = hfm "Bogus income" $ addGen incomeH ob
     | otherwise = pH ob 
      -- hfm :: String -> Maybe HList -> HList
   where hfm s = fromMaybe (HList s [])
@@ -85,7 +89,7 @@ pName ob = name ob ++ cnt
 -- Each function in the list provides output for one kind of Possession.
 -- Count is not included as this is set in the possession header.
 pHlist :: [ Possession -> Maybe HList ]
-pHlist = [ bookH, labtextH, weaponH, armourH, visH, visrcH, acH, narrativeH, commentH, dateH ]
+pHlist = [ bookH, labtextH, weaponH, armourH, silverH, incomeH, visH, visrcH, acH, narrativeH, commentH, dateH ]
 
 -- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
@@ -158,17 +162,20 @@ visH ob | pawns ob == 0 = Nothing
                p = pawns ob
 
 visrcH :: Possession -> Maybe HList
-visrcH ob | isVisSrc ob = Just $ HList (visrc ob) ls
+visrcH ob | isVisSrc ob = Just $ hlist (visrc ob) 
           | otherwise = Nothing
-         where ls = filterNothing [ vistimeH ob ]
 
 vistimeH :: Possession -> Maybe HList
 vistimeH = fmap (hlist . ("(Harveste in " ++) . show) . visTime
 
+-- | One line description of a vis source.
 visrc :: Possession -> String
-visrc ob = "Vis source: " ++ show p ++ " pawns " ++ s ++ " per year" 
-         where s = fromJust $ itemArt ob
+visrc ob = "Vis source: " ++ show p ++ " pawns " ++ s ++ " per year" ++ h
+         where s = fromMaybe "unknown art" $ itemArt ob
                p = visYield ob
+               h = f $ visTime ob
+               f Nothing = ""
+               f (Just x) = " (harvest in " ++ show x ++ ")"
 
 -- | Render arcane connection data.
 acH :: Possession -> Maybe HList
@@ -229,11 +236,32 @@ visHsimple ob
             p = pawns ob
 
 visrcHsimple :: Possession -> Maybe HList
-visrcHsimple ob | isVisSrc ob = Just $ HList ( visrc ob ) ls
+visrcHsimple ob | isVisSrc ob = Just $ pHsimple ( visrc ob ) ob genList'
                 | otherwise = Nothing
-         where ls = filterNothing $ map ($ ob) ( vistimeH:genList' )
 
 -- | Render the general entries for Possession display.
 -- This is used to append to book and lab text displays.
 genEntries :: Possession -> [ HList ]
 genEntries ob = filterNothing $ map ($ ob) genList'
+
+addGen :: ( Possession -> Maybe HList ) -> Possession -> Maybe HList
+addGen f ob = fmap (appendToHList ls) $ f ob
+     where ls = genEntries ob
+
+-- | Income
+--
+-- | Render silver vis.
+silverH :: Possession -> Maybe HList
+silverH ob | silver ob == 0 = Nothing
+           | otherwise = Just $ hlist ( show p ++ " mythic pounds" )
+         where p = silver ob
+
+incomeH :: Possession -> Maybe HList
+incomeH ob | isVisSrc ob = Just $ hlist (incomeS ob) 
+          | otherwise = Nothing
+
+-- | One line description of a vis source.
+incomeS :: Possession -> String
+incomeS ob = "Income source: " ++ show p ++ " mythic pounds per year" 
+         where p = silverYield ob
+
