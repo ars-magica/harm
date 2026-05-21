@@ -15,6 +15,7 @@ aliases:
 	+ [[Advancement in the YAML Model]]
 	+ [[Validation Rules]]
 	+ [[Books and Reading]]
+	+ [[Joint Advancement]]
 + Technical
 	+ [[Aeson]]
 
