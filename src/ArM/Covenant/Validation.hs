@@ -24,17 +24,16 @@ import ArM.Types.Advancement
 import ArM.Covenant.CostBP
 import ArM.Trait
 import ArM.Helper
-import ArM.Debug.Trace
 
 covAddValidation :: Augmented CovAdvancement -> Augmented CovAdvancement 
-covAddValidation a = ttrace $ a { validation = covGenValidation a ++ validation a }
+covAddValidation a =  a { validation = covGenValidation a ++ validation a }
 
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
 covGenValidation a = filterNothing [ bpValidation bp
                    , lossValidation ls, bhValidation bh ]
     where bp = acquired $ inferredAdv a
           ls = lost $ inferredAdv a
-	  bh = bhChanges $ inferredAdv a
+          bh = bhChanges $ inferredAdv a
 
 lossValidation :: [ Possession ] -> Maybe Validation
 lossValidation = f . sum . map costBP 

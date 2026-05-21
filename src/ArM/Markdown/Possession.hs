@@ -45,6 +45,7 @@ printPossessionH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
     | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
     | isVis ob = hfm "Bogus vis" $ visHsimple ob
+    | isVisSrc ob = hfm "Bogus vis" $ visrcHsimple ob
     | isArmour ob = hfm "Bogus armour" $ armourHsimple ob
     | isWeapon ob = hfm "Bogus weapon" $ weaponHsimple ob
     | otherwise = pH ob 
@@ -84,7 +85,7 @@ pName ob = name ob ++ cnt
 -- Each function in the list provides output for one kind of Possession.
 -- Count is not included as this is set in the possession header.
 pHlist :: [ Possession -> Maybe HList ]
-pHlist = [ bookH, labtextH, weaponH, armourH, visH, acH, narrativeH, commentH, dateH ]
+pHlist = [ bookH, labtextH, weaponH, armourH, visH, visrcH, acH, narrativeH, commentH, dateH ]
 
 -- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
@@ -152,20 +153,22 @@ armourH ob | isArmour ob = Just $ toHList ("Armour Stats":a)
 -- | Render raw vis.
 visH :: Possession -> Maybe HList
 visH ob | pawns ob == 0 = Nothing
-        | otherwise = Just $ hlist ( " vis: " ++ show p ++ " pawns" )
+        | otherwise = Just $ hlist ( s ++ " vis: " ++ show p ++ " pawns" )
          where s = fromJust $ itemArt ob
                p = pawns ob
 
 visrcH :: Possession -> Maybe HList
-visrcH ob 
-   | pawns ob == 0 = Nothing
-   | otherwise = Just $ HList ( " Vis source: " ++ show p ++ " pawns per year" ) ls
-         where s = fromJust $ itemArt ob
-               p = visYield ob
-               ls = filterNothing [ vistimeH ob ]
+visrcH ob | isVisSrc ob = Just $ HList (visrc ob) ls
+          | otherwise = Nothing
+         where ls = filterNothing [ vistimeH ob ]
 
 vistimeH :: Possession -> Maybe HList
 vistimeH = fmap (hlist . ("(Harveste in " ++) . show) . visTime
+
+visrc :: Possession -> String
+visrc ob = "Vis source: " ++ show p ++ " pawns " ++ s ++ " per year" 
+         where s = fromJust $ itemArt ob
+               p = visYield ob
 
 -- | Render arcane connection data.
 acH :: Possession -> Maybe HList
@@ -226,12 +229,9 @@ visHsimple ob
             p = pawns ob
 
 visrcHsimple :: Possession -> Maybe HList
-visrcHsimple ob 
-   | pawns ob == 0 = Nothing
-   | otherwise = Just $ HList ( " Vis source: " ++ show p ++ " pawns per year" ) ls
-         where s = fromJust $ itemArt ob
-               p = visYield ob
-               ls = filterNothing $ map ($ ob) ( vistimeH:genList' )
+visrcHsimple ob | isVisSrc ob = Just $ HList ( visrc ob ) ls
+                | otherwise = Nothing
+         where ls = filterNothing $ map ($ ob) ( vistimeH:genList' )
 
 -- | Render the general entries for Possession display.
 -- This is used to append to book and lab text displays.

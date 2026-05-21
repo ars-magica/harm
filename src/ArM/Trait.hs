@@ -83,6 +83,7 @@ module ArM.Trait (
          , Enchantment(..)
          , isMagic
          , isVis
+         , isVisSrc
          , isAC
          , effectRDT
 

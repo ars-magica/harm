@@ -25,6 +25,7 @@ module ArM.Trait.Possession ( -- * Posessions
                             , MagicEffect(..)
                             , isMagic
                             , isVis
+                            , isVisSrc
                             , isAC
                             , effectRDT
                             -- * Weapons and Mundane Equipment
@@ -114,7 +115,10 @@ parseCharged v = ChargedItem
         <*> v .: "effect" 
 
 isVis :: Possession -> Bool
-isVis c = isJust $ itemArt c
+isVis = (/=0) . pawns 
+
+isVisSrc :: Possession -> Bool
+isVisSrc = (/=0) . visYield 
 
 isWeapon :: Possession -> Bool
 isWeapon p = (weapon p /= []) || (weaponStats p /= [])
