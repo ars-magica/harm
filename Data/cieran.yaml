@@ -267,7 +267,8 @@ futureAdvancement:
   narrative: Studies *Root of Herbam* L6 Q21 +3
   season: Spring 1220
   sourceQuality: 21
-  usesBook: RootHerbam
+  reads:
+    book: RootHerbam
 - changes:
   - art: Mentem
     levelCap: 16
@@ -276,8 +277,8 @@ futureAdvancement:
   narrative: Studies Mentem L16Q13 +3
   season: Summer 1220
   sourceQuality: 13
-  usesBook:
-  - MentemL16Q13
+  reads:
+    book: MentemL16Q13
 - changes:
   - art: Terram
     levelCap: 8
@@ -379,8 +380,10 @@ futureAdvancement:
   narrative: Studies *Root of Terram* L8Q15 +3
   season: Autumn 1220
   sourceQuality: 15
-  usesBook: RootTerram
-- changes:
+  reads: 
+     book: RootTerram
+- season: Winter 1220
+  changes:
   - ability: Infernal Lore
     spec: Undead
     xp: 5
@@ -398,18 +401,8 @@ futureAdvancement:
       name: Perdo Vis from Jerome's body
   mode: Adventure
   narrative: Jerome's Tower - covenant service
-  season: Winter 1220
   sourceQuality: 14
-- changes:
-  - ability: SOCP Lore
-    levelCap: 4
-    spec: Self initiation
-    xp: 17
-  mode: Reading
-  narrative: Studies book found in Jerome's Tower
-  season: Spring 1221
-  sourceQuality: 14
-  usesBook: socpL4Q14
+- season: Spring 1221
 - season: Summer 1221
   mode: 'Exposure: Lab Work'
   changes:

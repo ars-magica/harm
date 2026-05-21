@@ -305,21 +305,50 @@ addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
    where cov =  findCov x cvs
 addBook _ step = step
 
+isBK :: HarmKey -> Bool
+isBK (BookKey _) = True
+isBK  _ = False
+isIK :: HarmKey -> Bool
+isIK (ItemKey _) = True
+isIK  _ = False
+
 -- |
 -- Find and add books with stats to add to the character advancement.
 -- Not implemented yet.
 addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
-addBook' Nothing y  = y
-addBook' (Just cov) y = f bs y 
-    where u = usesBook $ contractAdvancement y
-          bk = map (bookLookup cov) u
+addBook' cov y = addBook'' cov y bkey ikey 
+    where bkey = filter isBK $ readsBook $ contractAdvancement y
+          ikey = filter isIK $ readsBook $ contractAdvancement y
+
+addBook'' :: Maybe Covenant -> Augmented Advancement 
+          -> AdvancementType -> [HarmKey] -> [HarmKey] 
+          -> Augmented Advancement 
+addBook'' _ aa Reading [] [] = addValidation val aa
+    where val = ValidationWarning "No book defined for reading"
+addBook'' _ aa _ [] [] = aa
+addBook'' cov aa Reading xs [] = addBook3 cov aa xs item
+    where item = fmap (bookLookup cov) (mhead xs)
+addBook'' cov aa Reading xs ys = addBook3 cov aa xs item
+    where item = fmap (bookLookup cov) (mhead ys)
+addBook'' _ aa _ _ _ = addValidation val aa
+    where val = ValidationError "Book specified for non-reading season"
+
+addBook3 :: Maybe Covenant -> Augmented Advancement 
+          -> AdvancementType -> [HarmKey] -> Maybe Possession
+          -> Augmented Advancement 
+addBook3 cov aa Reading xs [] = aa
+
+{-
+          bk = fmap (bookLookup cov) key
+          key = mhead ikey <|> mhead bkey
           bs = zip u bk
           f [] aa = aa
           f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
           f ((_,Just b):xs) aa = f xs $ addB aa b
           nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
           addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
-          addB' ba b = ba { bookUsed = b:bookUsed ba }
+          addB' ba b = ba { bookRead = b:bookRead ba }
+-}
 
 -- |
 -- ** Other Book steps
@@ -390,7 +419,7 @@ bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
 bookCollision' _ step@(CovStep _ _) = step
 bookCollision' _ step@(CharStep _ Nothing) = step
 bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
-    where bks = bookUsed  $ contractAdvancement ad
+    where bks = bookRead  $ contractAdvancement ad
           ad' = addValidation vs ad
           vs = bkCollisions bcs bks
 
@@ -416,7 +445,7 @@ stepCountBooks = countRepetitions . stepBooksUsed
 
 -- | Get a list of books used in the seqason
 stepBooksUsed :: [AdvancementStep] -> [Book]
-stepBooksUsed = sort . foldl (++) [] . map ( bookUsed . contractAdvancement ) 
+stepBooksUsed = sort . foldl (++) [] . map ( bookRead . contractAdvancement ) 
               .  stepBooksUsed' 
 
 -- | Auxiliary for `stepBooksUsed`.  This is required to force typing
