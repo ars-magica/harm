@@ -618,6 +618,11 @@ data Possession = Possession
      , visTime :: Maybe Season       -- ^ time of harvest for a vis source
      , visYield :: Int               -- ^ pawns of vis per year for a vis source
      , acTo :: Maybe String
+     , silver :: Int                 
+        -- ^ Money in mythic pounds.  This should not be used to record the value,
+        -- but to indicate that the possession is coins.
+     , silverYield :: Int                 
+        -- ^ Annual income in mythic pounds
      , itemCount :: Int              -- ^ Number of items possessed, default 1.
      , itemDate :: SeasonTime        -- ^ Time of creation
      }
@@ -640,6 +645,8 @@ defaultPossession = Possession
      , visTime = Nothing
      , visYield = 0
      , acTo = Nothing
+     , silver = 0
+     , silverYield = 0
      , itemCount = 1
      , itemDate = NoTime
      }
@@ -751,6 +758,8 @@ parseOtherPossession v = Possession
        <*> v .:? "harvest"
        <*> v .:? "yield"  .!= 0
        <*> v .:? "acTo" 
+       <*> v .:? "silver" .!= 0
+       <*> v .:? "silverYield" .!= 0
        <*> v .:? "count" .!= 1
        <*> v .:? "date"  .!= NoTime
 

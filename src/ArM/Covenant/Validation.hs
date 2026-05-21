@@ -32,9 +32,9 @@ covAddValidation a = ttrace $ a { validation = covGenValidation a ++ validation 
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
 covGenValidation a = filterNothing [ bpValidation bp
                    , lossValidation ls, bhValidation bh ]
-    where bp = acquired $ contractAdvancement a
-          ls = lost $ contractAdvancement a
-          bh = bhChanges $ contractAdvancement a
+    where bp = acquired $ inferredAdv a
+          ls = lost $ inferredAdv a
+	  bh = bhChanges $ inferredAdv a
 
 lossValidation :: [ Possession ] -> Maybe Validation
 lossValidation = f . sum . map costBP 
