@@ -278,9 +278,11 @@ mapComplete = filterNothing . map completeStepMaybe
 -- 5. **TODO** create new books on copying
 -- 5. **TODO** create new books on authoring
 
+{-
 covSort :: ([AdvancementStep],[AdvancementStep]) 
         -> [(AdvancementStep,[AdvancementStep])]
 covSort (xs,ys) =
+-}
 
 -- | Validation and inference concerning books.
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) 
