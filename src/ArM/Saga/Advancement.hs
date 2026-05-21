@@ -8,7 +8,12 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  In-gameAdvancement of Sagas, Covenants, and Characters.
+-- Description :  In-game Advancement of Sagas, Covenants, and Characters.
+--
+-- Where pre-game advancement can be done independently for each covenant
+-- and each character, in-game advancement is interdependent.  Conflicts
+-- over books and other resources must be resolved, and source qualities
+-- may be inferred from other entitites.
 --
 -- In-game advancement is managed through saga advancement, and divided into
 -- three different steps.  It depends on the `StepAdvance` class comprising
@@ -38,7 +43,8 @@ import ArM.Trait
 import ArM.Types.Harm
 import ArM.Helper
 
--- * Advancement
+-- |
+-- * Types
 
 -- |
 -- The Advance class represents objects which change state from
@@ -73,9 +79,6 @@ class Timed a => Advance a where
     prepare :: a -> a
     prepare = id
 
-
--- ## Saga Advancement
-
 -- | The saga can be advanced with the same class methods as
 -- characters and covenants.  When the saga advances, all its
 -- characters and covenants advance accordingly.
@@ -84,99 +87,6 @@ instance Advance Saga where
       where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
             covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
             st = sagaState saga
-
--- | Advance the saga forward by one season.
-stepSaga :: Saga -> Saga
-stepSaga saga = saga { sagaState = st' }
-     where st' = st { stateTitle = stateTitle st 
-                    , seasonTime = ns
-                    , covenants = cov
-                    , characters = ch
-                    }
-           st = sagaState saga
-           (cov,ch) = jointAdvance saga ((covenants st),(characters st))
-           ns = nextSeason saga
-
-
--- | Advance the Saga according to timestamp in the SagaFile.
-advanceSaga :: Saga -> [ Saga ]
-advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
-
-advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
-advanceSaga' [] _ = []
-advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
-    where n = f t saga0
-          f ssn saga | NoTime == nextSeason saga = saga 
-                     | ssn < nextSeason saga = saga 
-                     | otherwise = f ssn $ stepSaga saga
--- |
--- Advance listed covenants and characters one season forward.
--- The advancement happens jointly, with several passes, to resolve
--- inter-dependencies.
-jointAdvance :: Saga         -- ^ Saga reference, passed to know what the next season is
-             -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
-             -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
-jointAdvance saga = completeJoint . validateStep . validateBookUse . advJoint . nextJoint saga
-
-validateStep :: ([AdvancementStep],[AdvancementStep]) 
-             -> ([AdvancementStep],[AdvancementStep]) 
-validateStep (xs,ys) = (xs,map f ys)
-    where f (CharStep c (Just a)) = CharStep c $ Just $ validate c a
-          f step = step
-
-
--- | Apply the next advancement step.
---
--- The main process is defined by the `applyAdvancement` function from
--- `ArM.Char.Advancement`
-applyStep :: AdvancementStep -> AdvancementStep
-applyStep (CharStep c Nothing) = (CharStep c Nothing) 
-applyStep (CharStep c (Just aa)) = (CharStep c' (Just a')) 
-       where (a',st') = applyAdvancement aa st
-             c' = c { state = Just st' }
-             st = fromMaybe defaultCS $ state c
-applyStep (CovStep c Nothing) = (CovStep c Nothing) 
-applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
-     where aa = contractAdvancement aa'
-           c' = c { covenantState = Just $ stepCovState (fs st) aa }
-           fs x = x { covTime = caSeason aa }
-           st = fromMaybe defaultCovState $ covenantState c
-
--- |
--- Get the next advancements, preparing for joint advancement
-nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
-nextJoint saga (xs,ys) = (map (nextStep ns) xs,map (nextStep ns) ys)
-           where ns = nextSeason saga
-
--- | Complete a list of advancement steps.
-mapComplete :: StepAdvance c => [AdvancementStep] -> [c]
-mapComplete = filterNothing . map completeStepMaybe
-
--- | Complete a list of advancement steps and split characters and covenants into two lists
-mapCompleteSplit :: [AdvancementStep] -> ([Covenant],[Character])
-mapCompleteSplit xs = (mapComplete xs,mapComplete xs)
-
--- |
--- Complete the joint advancement of characters and covenants.
-completeJoint :: ([AdvancementStep],[AdvancementStep]) -> ([Covenant],[Character])
-completeJoint (xs,ys) = mapCompleteSplit (ys++xs)
-
--- |
--- Jointly advance characters and covenants.
-advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-advJoint (xs,ys) = (map applyStep xs, map applyStep ys)
-
-
--- ** Covenant and Character Advancement
-
--- | Generic type for an advancement step for either a covenant or a character.
-data AdvancementStep = CovStep Covenant  (Maybe (Augmented CovAdvancement))
-                     | CharStep Character (Maybe (Augmented Advancement))
-
-
-instance BookDB AdvancementStep where
-   bookLookup (CovStep c _) k = bookLookup c k
-   bookLookup _ _ = Nothing
 
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
 class StepAdvance c where
@@ -221,6 +131,16 @@ instance StepAdvance Character where
    completeStepMaybe _ = Nothing
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
+
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
+instance Advance Covenant where
+   nextAdvancement c = f $ futureCovAdvancement c
+       where f [] = NoTime
+             f (x:_) = caSeason x
+   prepare = covGen
+
 instance StepAdvance Covenant where
    nextStep ns cov = nextStep' fs
         where fs = futureCovAdvancement cov
@@ -243,18 +163,111 @@ instance Advance Character where
    prepare = prepareCharacter
 
 -- |
--- The `Advance` instance is very similar to that of `Character`, but has to
--- be implemented separately to account for different advancement classes.
-instance Advance Covenant where
-   nextAdvancement c = f $ futureCovAdvancement c
-       where f [] = NoTime
-             f (x:_) = caSeason x
-   prepare = covGen
+-- ** Covenant and Character Advancement
 
+-- | Generic type for an advancement step for either a covenant or a character.
+data AdvancementStep = CovStep Covenant  (Maybe (Augmented CovAdvancement))
+                     | CharStep Character (Maybe (Augmented Advancement))
+
+instance BookDB AdvancementStep where
+   bookLookup (CovStep c _) k = bookLookup c k
+   bookLookup _ _ = Nothing
+
+
+-- |
+-- * Saga Advancement
+
+-- | Advance the saga forward by one season.
+stepSaga :: Saga -> Saga
+stepSaga saga = saga { sagaState = st' }
+     where st' = st { stateTitle = stateTitle st 
+                    , seasonTime = ns
+                    , covenants = cov
+                    , characters = ch
+                    }
+           st = sagaState saga
+           (cov,ch) = jointAdvance saga ((covenants st),(characters st))
+           ns = nextSeason saga
+
+
+-- | Advance the Saga according to timestamp in the SagaFile.
+advanceSaga :: Saga -> [ Saga ]
+advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
+
+advanceSaga' :: [SeasonTime] -> Saga -> [ Saga ]
+advanceSaga' [] _ = []
+advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
+    where n = f t saga0
+          f ssn saga | NoTime == nextSeason saga = saga 
+                     | ssn < nextSeason saga = saga 
+                     | otherwise = f ssn $ stepSaga saga
+
+-- |
+-- * Joint Character and Covenant Advancement
+
+-- |
+-- Advance listed covenants and characters one season forward.
+-- The advancement happens jointly, with several passes, to resolve
+-- inter-dependencies.
+jointAdvance :: Saga   -- ^ Saga reference, passed to know what the next season is
+     -> ([Covenant],[Character]) -- ^ Lists of prior covenants and characters
+     -> ([Covenant],[Character]) -- ^ Lists of future covenants and characters
+jointAdvance saga = completeJoint . validateStep . validateBookUse . advJoint . nextJoint saga
+
+-- |
+-- Get the next advancements, preparing for joint advancement
+nextJoint :: Saga -> ([Covenant],[Character]) -> ([AdvancementStep],[AdvancementStep]) 
+nextJoint saga (xs,ys) = (map (nextStep ns) xs,map (nextStep ns) ys)
+           where ns = nextSeason saga
+-- |
+-- Jointly advance characters and covenants.
+advJoint :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+advJoint (xs,ys) = (map applyStep xs, map applyStep ys)
+
+-- | Validate individual characters.  Nothing is currently done for
+-- covenants.
+validateStep :: ([AdvancementStep],[AdvancementStep]) 
+             -> ([AdvancementStep],[AdvancementStep]) 
+validateStep (xs,ys) = (map f xs,map f ys)
+    where f (CharStep c (Just a)) = CharStep c $ Just $ validate c a
+          f step = step
+
+-- | Apply the next advancement step.
+--
+-- The main process is defined by the `applyAdvancement` function from
+-- `ArM.Char.Advancement`
+applyStep :: AdvancementStep -> AdvancementStep
+applyStep (CharStep c Nothing) = (CharStep c Nothing) 
+applyStep (CharStep c (Just aa)) = (CharStep c' (Just a')) 
+       where (a',st') = applyAdvancement aa st
+             c' = c { state = Just st' }
+             st = fromMaybe defaultCS $ state c
+applyStep (CovStep c Nothing) = (CovStep c Nothing) 
+applyStep (CovStep c (Just aa')) = (CovStep c' (Just aa')) 
+     where aa = contractAdvancement aa'
+           c' = c { covenantState = Just $ stepCovState (fs st) aa }
+           fs x = x { covTime = caSeason aa }
+           st = fromMaybe defaultCovState $ covenantState c
+
+-- |
+-- Complete the joint advancement of characters and covenants.
+completeJoint :: ([AdvancementStep],[AdvancementStep]) -> ([Covenant],[Character])
+completeJoint (xs,ys) = mapCompleteSplit (ys++xs)
+
+-- | Complete a list of advancement steps and split characters 
+-- and covenants into two lists
+mapCompleteSplit :: [AdvancementStep] -> ([Covenant],[Character])
+mapCompleteSplit xs = (mapComplete xs,mapComplete xs)
+
+-- | Polymorphic extraction of Covenant/Character objects from
+-- AdvanceStep.  This is an auxiliary for `mapCompleteSplit`.
+mapComplete :: StepAdvance a => [AdvancementStep] -> [a]
+mapComplete = filterNothing . map completeStepMaybe
+
+
+-- |
 -- * Book Management
 
--- ** Books
---
 -- $books
 -- The book validation consists of several steps.
 -- 1. `addBooks` add book objects to the character for each book key.
@@ -269,6 +282,47 @@ instance Advance Covenant where
 validateBookUse :: ([AdvancementStep],[AdvancementStep]) 
                 -> ([AdvancementStep],[AdvancementStep]) 
 validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
+
+-- |
+-- ** The addBook step
+
+-- Find books in the covenants and add to the advancements for characters
+-- who use them.
+--
+-- Note that books are currently only taken from the character's covenant.
+-- This will have to be extended to allow reading as a guest, and books
+-- borrowed from other characters or covenants.
+addBooks :: ([AdvancementStep],[AdvancementStep]) 
+         -> ([AdvancementStep],[AdvancementStep]) 
+addBooks (xs,ys) = (xs,map (addBook covs) ys)
+   where covs = filterNothing $ map stepSubjectMaybe xs
+--
+-- |
+-- Find books in the covenants and add to the advancement of the given
+-- character if they use the book.
+addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
+addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
+   where cov =  findCov x cvs
+addBook _ step = step
+
+-- |
+-- Find and add books with stats to add to the character advancement.
+-- Not implemented yet.
+addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
+addBook' Nothing y  = y
+addBook' (Just cov) y = f bs y 
+    where u = usesBook $ contractAdvancement y
+          bk = map (bookLookup cov) u
+          bs = zip u bk
+          f [] aa = aa
+          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
+          f ((_,Just b):xs) aa = f xs $ addB aa b
+          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
+          addB' ba b = ba { bookUsed = b:bookUsed ba }
+
+-- |
+-- ** Other Book steps
 
 -- | Check if a tractatus is read for the second time
 bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
@@ -323,40 +377,6 @@ bookSQ' step = step
 bookAdvSQ :: Augmented Advancement -> Augmented Advancement
 bookAdvSQ = id
 
--- |
--- Find books in the covenants and add to the advancements for characters
--- who use them.
---
--- Note that books are currently only taken from the character's covenant.
--- This will have to be extended to allow reading as a guest, and books
--- borrowed from other characters or covenants.
-addBooks :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-addBooks (xs,ys) = (xs,map (addBook covs) ys)
-   where covs = filterNothing $ map stepSubjectMaybe xs
-
--- |
--- Find books in the covenants and add to the advancement of the given
--- character if they use the book.
-addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
-addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
-   where cov =  findCov x cvs
-addBook _ step = step
-
--- |
--- Find and add books with stats to add to the character advancement.
--- Not implemented yet.
-addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
-addBook' Nothing y  = y
-addBook' (Just cov) y = f bs y 
-    where u = usesBook $ contractAdvancement y
-          bk = map (bookLookup cov) u
-          bs = zip u bk
-          f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ addB aa b
-          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
-          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
-          addB' ba b = ba { bookUsed = b:bookUsed ba }
 
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
