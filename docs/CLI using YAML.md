@@ -11,9 +11,10 @@ aliases:
 	+ [[Character Generation Process]]
 	+ [[JSON Char Gen Process.canvas|JSON Char Gen Process]] (canvas)
 	+ [[Combat Stats]]
-	+ [[Types for JSON]]
-	+ [[Advancement in the JSON Model]]
+	+ [[Types for YAML]]
+	+ [[Advancement in the YAML Model]]
 	+ [[Validation Rules]]
+	+ [[Books and Reading]]
 + Technical
 	+ [[Aeson]]
 

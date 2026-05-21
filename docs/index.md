@@ -12,7 +12,7 @@ ArM character generator implemented in declarative programming
 using Haskell.  
 
 + [[Original Approach with Ontologies]]
-+ **Current approach**:  [[CLI using JSON]]
++ **Current approach**:  [[CLI using YAML]]
 + [[Roadmap]]
 
 + [ars-magica at github](https://github.com/ars-magica) is the organisation owning the relevant repoes.
