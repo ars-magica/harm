@@ -88,6 +88,21 @@ instance Advance Saga where
             covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
             st = sagaState saga
 
+instance Advance Character where
+   nextAdvancement = f . futureAdvancement
+       where f [] = NoTime
+             f (x:_) = season x
+   prepare = prepareCharacter
+
+-- |
+-- The `Advance` instance is very similar to that of `Character`, but has to
+-- be implemented separately to account for different advancement classes.
+instance Advance Covenant where
+   nextAdvancement c = f $ futureCovAdvancement c
+       where f [] = NoTime
+             f (x:_) = caSeason x
+   prepare = covGen
+
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
 class StepAdvance c where
    -- | Create the next `AdvancementStep` object for a character or covenant.
@@ -132,14 +147,6 @@ instance StepAdvance Character where
    stepSubjectMaybe (CharStep c _) = Just c 
    stepSubjectMaybe _ = Nothing
 
--- |
--- The `Advance` instance is very similar to that of `Character`, but has to
--- be implemented separately to account for different advancement classes.
-instance Advance Covenant where
-   nextAdvancement c = f $ futureCovAdvancement c
-       where f [] = NoTime
-             f (x:_) = caSeason x
-   prepare = covGen
 
 instance StepAdvance Covenant where
    nextStep ns cov = nextStep' fs
@@ -156,14 +163,17 @@ instance StepAdvance Covenant where
    stepSubjectMaybe (CovStep c _) = Just c
    stepSubjectMaybe _ = Nothing
 
-instance Advance Character where
-   nextAdvancement = f . futureAdvancement
-       where f [] = NoTime
-             f (x:_) = season x
-   prepare = prepareCharacter
 
 -- |
 -- ** Covenant and Character Advancement
+
+stepMembers :: SagaState -> SagaState
+stepMembers s = st { covenants = map stepCovenFolk (covenants st) }
+
+stepMemberShip :: SagaState -> SagaState
+stepMemberShip st = st
+     where cs = map (\ x -> x { memberOf = Nothing } ) $ characters st 
+ 
 
 -- | Generic type for an advancement step for either a covenant or a character.
 data AdvancementStep = CovStep Covenant  (Maybe (Augmented CovAdvancement))

@@ -40,7 +40,7 @@ covGen cov = foldl genStep cov' as
 -- | Apply one CovAdvancement object to the `CovenantState`.
 -- This is the same for pre-game and in-game advancement.
 stepCovState :: CovenantState -> CovAdvancement -> CovenantState
-stepCovState st adv = stepBH adv $ stepPossessions adv $ stepCovenFolk adv st
+stepCovState st adv = stepBH adv $ stepPossessions adv st
 
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.

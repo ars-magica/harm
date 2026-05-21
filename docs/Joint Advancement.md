@@ -7,15 +7,21 @@
 3. Joint advancement
 
 Operate on saga.
-1. Apply joining and leaving to all covenants
-2. Clear `memberOf` and put characters in Map
-3. Put covenants in map and update `memberOf` for each member
-	1. flag contradicgtions
-4. For each covenant
+1. CovenFolk: Apply joining and leaving to all covenants  $\to$ `stepCovenFolk`
+2. Update membership
+	1. Clear `memberOf` 
+	2. For each covenants update `memberOf` for each member
+	3. flag contradicgtions
+3. Character advancement
+	1. Inference
+	2. Individual advancement
+	3. Validation
+4. Joint advancement
+5. For each covenant
 	1. resolve resources[^1]
-5. For each Character
-	1. infer SQ
 6. For each Character
+	1. infer SQ
+7. For each Character
 	1. advance traits
 
 [^1]:  Add a «read at covenant» field, defaulting to `memberOf`
