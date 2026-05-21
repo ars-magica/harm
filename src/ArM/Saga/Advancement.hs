@@ -41,6 +41,7 @@ import ArM.Covenant
 import ArM.Story
 import ArM.Trait
 import ArM.Types.Harm
+import ArM.Saga.DB
 import ArM.Helper
 
 -- |
@@ -173,7 +174,6 @@ instance BookDB AdvancementStep where
    bookLookup (CovStep c _) k = bookLookup c k
    bookLookup _ _ = Nothing
 
-
 -- |
 -- * Saga Advancement
 
@@ -270,7 +270,7 @@ mapComplete = filterNothing . map completeStepMaybe
 
 -- $books
 -- The book validation consists of several steps.
--- 1. `addBooks` add book objects to the character for each book key.
+-- 1. `addBooks` add book objects using the key recorded.
 --    A ValidationError is created if the book is not found.
 -- 2. `bookCollision` checks for conflicting use requests
 -- 3. **TODO** `bookSQ` checks the source quality, if the book is read
@@ -305,56 +305,141 @@ addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
    where cov =  findCov x cvs
 addBook _ step = step
 
-isBK :: HarmKey -> Bool
-isBK (BookKey _) = True
-isBK  _ = False
-isIK :: HarmKey -> Bool
-isIK (ItemKey _) = True
-isIK  _ = False
-
 -- |
 -- Find and add books with stats to add to the character advancement.
--- Not implemented yet.
+-- This step in the chain will split book and possession keys
 addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
-addBook' cov y = addBook'' cov y bkey ikey 
+addBook' cov y = addBook'' cov y (mode $ contractAdvancement y) bkey ikey 
     where bkey = filter isBK $ readsBook $ contractAdvancement y
           ikey = filter isIK $ readsBook $ contractAdvancement y
+          isBK (BookKey _) = True
+          isBK  _ = False
+          isIK (ItemKey _) = True
+          isIK  _ = False
 
+-- | Auxiliar for `addBook;`.
+-- Look up possession by possession ID or book ID, adding errors and warnings
+-- for inconsistent use. 
 addBook'' :: Maybe Covenant -> Augmented Advancement 
           -> AdvancementType -> [HarmKey] -> [HarmKey] 
           -> Augmented Advancement 
 addBook'' _ aa Reading [] [] = addValidation val aa
-    where val = ValidationWarning "No book defined for reading"
+    where val = [ ValidationWarning "No book defined for reading" ]
+addBook'' Nothing aa Reading _ _ = addValidation val aa
+    where val = [ ValidationWarning "Book not found (no covenant)" ]
+addBook'' (Just cov) aa Reading xs [] = addBook3 aa xs item
+    where item = tmp $ fmap (bookLookup cov) (mhead xs)
+addBook'' (Just cov) aa Reading xs ys = addBook3 aa xs item
+    where item = tmp $ fmap (bookLookup cov) (mhead ys)
 addBook'' _ aa _ [] [] = aa
-addBook'' cov aa Reading xs [] = addBook3 cov aa xs item
-    where item = fmap (bookLookup cov) (mhead xs)
-addBook'' cov aa Reading xs ys = addBook3 cov aa xs item
-    where item = fmap (bookLookup cov) (mhead ys)
 addBook'' _ aa _ _ _ = addValidation val aa
-    where val = ValidationError "Book specified for non-reading season"
+    where val = [ ValidationError "Book specified for non-reading season" ]
 
-addBook3 :: Maybe Covenant -> Augmented Advancement 
-          -> AdvancementType -> [HarmKey] -> Maybe Possession
+tmp (Just (Just x)) = Just x
+tmp _ = Nothing
+
+-- | Auxliary for `addBook''`.  Process the Maybe Book as looked up by
+-- `addBook''`.
+addBook3 :: Augmented Advancement 
+          -> [HarmKey] -> Maybe Possession
           -> Augmented Advancement 
-addBook3 cov aa Reading xs [] = aa
+addBook3 aa _ Nothing = addValidation val aa
+    where val = [ ValidationError "Book not found" ]
+addBook3 aa [] (Just item) = g (primaryXPTrait $ explicitAdv aa') 
+    where val1 = [ ValidationError "Tome does not contain texts on the given topic." ]
+          val2 = [ ValidationError "Cannot determine topic studied." ]
+          f Nothing = addValidation val1 aa'
+          f (Just y) = setBook y aa'
+          g Nothing = addValidation val2 aa'
+          g (Just y) = f $ bookByTopic y $ bookTexts item
+          aa' = addRequired item aa
+addBook3 aa (x:[]) (Just item) = f $ filter ((x==) . harmKey) (bookTexts item)
+    where val = [ ValidationError "Tome does not contain the text specified." ]
+          f [] = addValidation val aa'
+          f (y:_) = setBook y aa'
+          aa' = addRequired item aa
+addBook3 aa _ _ = addValidation val aa
+    where val = [ ValidationError "More than one book text specified." ]
 
-{-
-          bk = fmap (bookLookup cov) key
-          key = mhead ikey <|> mhead bkey
-          bs = zip u bk
-          f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ addB aa b
-          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
-          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
-          addB' ba b = ba { bookRead = b:bookRead ba }
--}
+bookByTopic :: TraitKey -> [ Book ] -> Maybe Book
+bookByTopic k = mhead . filter (bookHasTopic k)
+
+bookHasTopic :: TraitKey -> Book -> Bool
+bookHasTopic k = f . filter ((==k) . topic) . bookStats
+     where f [] = False
+           f _ = True
+
+setBook :: Book -> Augmented Advancement -> Augmented Advancement
+setBook y a = a { inferredAdv = (inferredAdv a) { bookRead = Just y } }
+
+addRequired :: Possession -> Augmented Advancement -> Augmented Advancement
+addRequired y a = a { inferredAdv = ia { requires = harmKey y:requires ia } }
+   where ia = inferredAdv a
+
+-- |
+-- ** Book Collisions
+
+-- | Add validation errors to Character advancements where a book
+-- is oversubscribed.
+bookCollision :: ([AdvancementStep],[AdvancementStep]) 
+              -> ([AdvancementStep],[AdvancementStep]) 
+bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
+    where cbs = stepCountBooks chs
+
+-- | Count uses of books in an advancement step
+stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
+               -> [(Book,Int)]       -- ^ List of books with number of users
+stepCountBooks = countRepetitions . stepBooksUsed
+
+-- | Get a list of books used in the seqason
+stepBooksUsed :: [AdvancementStep] -> [Book]
+stepBooksUsed = filterNothing . map ( bookRead . contractAdvancement ) 
+              . filterNothing . map stepAdvancement
+
+-- | Add validation errors to one Character advancement, given a list
+-- of counted book uses.
+bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
+bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
+    where bks = f $ bookRead  $ contractAdvancement ad
+          ad' = addValidation vs ad
+          vs = bkCollisions bcs bks
+          f Nothing = [] 
+          f (Just x) = [x]
+bookCollision' _ step = step
+
+-- | Check for oversubscribed books reporting as a list of Validation
+-- objects.
+bkCollisions :: [(Book,Int)]  -- ^ List of books and numbers of subscribers.
+             -> [Book]        -- ^ List of books to check for oversubscription.
+             -> [Validation]  -- ^ Verification or error for each book checked.
+bkCollisions bcs bks = f bcs $ sort bks 
+   where  f [] _ = []
+          f _ [] = []
+          f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
+                          | fst c > b = f (c:cs) bs
+                          | otherwise = val (snd c) b:f cs bs
+          val c b | count b < c = ValidationError $ name b ++ " is oversubscribed"
+                  | otherwise = Validated $ "Book " ++ bookID b ++ " is available."
+
+
+
+
+
+-- |
+-- ** Check for rereading
+
+-- | Get a list of all books read by a character
+allBooksRead :: Character -> [ Book ]
+allBooksRead = filterNothing . map ( bookRead . contractAdvancement ) . pastAdvancement 
 
 -- |
 -- ** Other Book steps
 
 -- | Check if a tractatus is read for the second time
 bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
+bookRepeat = id
+
+{-
 bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
 
 -- | Check a single character to see if they reread a tractatus 
@@ -363,6 +448,7 @@ bookRepeat' db (CharStep c (Just ad)) | md == Reading
       = valRepeat $ CharStep c (Just $ valRead $ setRead db ad)
    where md = mode $ contractAdvancement ad
 bookRepeat' _ step = step
+-}
 
 valRepeat :: AdvancementStep -> AdvancementStep
 valRepeat (CharStep c Nothing) = (CharStep c Nothing)
@@ -374,7 +460,7 @@ valRepeat (CharStep c (Just ad)) = (CharStep c (Just ad'))
 valRepeat step = step
 
 valRead :: Augmented Advancement -> Augmented Advancement 
-valRead ad = g ad $ readBook $ contractAdvancement ad
+valRead ad = g ad $ readsBook $ contractAdvancement ad
     where g x [] = addValidation nobk x
           g x [_] = x
           g x (_:_:_) = addValidation xbk x
@@ -406,50 +492,4 @@ bookSQ' step = step
 bookAdvSQ :: Augmented Advancement -> Augmented Advancement
 bookAdvSQ = id
 
-
--- | Add validation errors to Character advancements where a book
--- is oversubscribed.
-bookCollision :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
-    where cbs = stepCountBooks chs
-
--- | Add validation errors to one Character advancement, given a list
--- of counted book uses.
-bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
-bookCollision' _ step@(CovStep _ _) = step
-bookCollision' _ step@(CharStep _ Nothing) = step
-bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
-    where bks = bookRead  $ contractAdvancement ad
-          ad' = addValidation vs ad
-          vs = bkCollisions bcs bks
-
-
--- | Check for oversubscribed books reporting as a list of Validation
--- objects.
-bkCollisions :: [(Book,Int)]  -- ^ List of books and numbers of subscribers.
-             -> [Book]        -- ^ List of books to check for oversubscription.
-             -> [Validation]  -- ^ Verification or error for each book checked.
-bkCollisions bcs bks = f bcs $ sort bks 
-   where  f [] _ = []
-          f _ [] = []
-          f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
-                          | fst c > b = f (c:cs) bs
-                          | otherwise = val (snd c) b:f cs bs
-          val c b | count b < c = ValidationError $ name b ++ " is oversubscribed"
-                  | otherwise = Validated $ "Book " ++ bookID b ++ " is available."
-
--- | Count uses of books in an advancement step
-stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
-               -> [(Book,Int)]       -- ^ List of books with number of users
-stepCountBooks = countRepetitions . stepBooksUsed
-
--- | Get a list of books used in the seqason
-stepBooksUsed :: [AdvancementStep] -> [Book]
-stepBooksUsed = sort . foldl (++) [] . map ( bookRead . contractAdvancement ) 
-              .  stepBooksUsed' 
-
--- | Auxiliary for `stepBooksUsed`.  This is required to force typing
--- in intermediate steps.
-stepBooksUsed' :: [AdvancementStep] -> [Augmented Advancement]
-stepBooksUsed' = filterNothing . map stepAdvancement
 

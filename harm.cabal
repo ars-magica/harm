@@ -141,6 +141,7 @@ common harm-deps
                        , ArM.Covenant
                        , ArM.Saga
                        , ArM.Saga.Advancement
+                       , ArM.Saga.DB
                        , ArM.Trait.SpellRecord
                        , ArM.IO
                        , ArM.IO.Read

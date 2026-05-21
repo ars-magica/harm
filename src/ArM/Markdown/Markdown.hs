@@ -459,7 +459,7 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
 -- instance AdvancementLike t => Markdown (Augmented t) where
 printMDaa :: Augmented Advancement -> OList
 printMDaa a' = indentOList $ OList $ storyOList a ++
-       [ OList $ map (OString . ("Uses "++) . name ) $ bookUsed a
+       [ OString $ "Uses "++ (show $ bookRead a)
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a'
@@ -473,9 +473,9 @@ printMDaa a' = indentOList $ OList $ storyOList a ++
                  | otherwise = OList [ OString "Inferred traits", OList $ map printMD inf ]
 
 usesString :: Advancement -> OList
-usesString a | u == [] = OList []
-             | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
-         where u = usesBook a
+usesString a | u == "" = OList []
+             | otherwise = OList [ OString $ "Uses: " ++ u ]
+         where u = show $ readsBook a
 
 instance Markdown Advancement where
    printMD a = indentOList $ OList $ storyOList a ++

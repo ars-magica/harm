@@ -32,7 +32,6 @@ import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Maybe
-import Control.Monad
 
 import ArM.Trait
 import ArM.Types.Advancement
@@ -68,15 +67,6 @@ instance FromJSON Covenant where
         <*> v .:? "plan" .!= []
         <*> v .:? "design" .!= []
         <*> v .:? "pregame" .!= []
-
-instance BookDB Covenant where
-   lookupBook k = join . fmap (lookupBook k) . covenantState 
-
-instance BookDB CovenantState where
-    lookupBook k = lookupBook k . library
-
-library :: CovenantState -> [ Book ]
-library = foldl (++) [] . map bookTexts . filter isBook . possessions
 
 
 instance KeyObject Covenant where

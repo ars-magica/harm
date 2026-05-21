@@ -52,7 +52,6 @@ module ArM.Trait.Trait (
          , BookStats(..)
          , Book(..)
          , defaultBook
-         , BookDB(..)
          -- * Possessions
          , Possession(..)
          , defaultPossession
@@ -540,22 +539,6 @@ instance FromJSON Book where
         <*> v .:? "count"  .!= 1
 
 
--- | The `BookDB` class is any type wherein one may look up books by
--- their ID.
-class BookDB h where
-   -- | Look up a book by key (String) in a database.
-   bookLookup :: h -> String -> Maybe Book
-   bookLookup db k = lookupBook k db 
-   -- | Look up a book by key (String) in a database.
-   -- This is equivalent to `bookLookup` with the arguments swapped
-   lookupBook :: String -> h -> Maybe Book
-   lookupBook k db = bookLookup db k
-
-instance (BookDB h) => BookDB [h] where
-   lookupBook k = foldl mplus Nothing . map (\ x -> bookLookup x k) 
-instance BookDB Book where
-   bookLookup bk k | k == bookID bk = Just bk
-                   | otherwise = Nothing
 
 -- | A default book object, providing defaults for fields not available in the CSV format.
 defaultBook :: Book
@@ -666,13 +649,6 @@ enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _) = "Talisman"
 enchantmentName _ = ""
-
-{-
-parseLesser :: Object -> Parser Enchantment
-parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
-    where f Nothing = mzero
-          f (Just x) = parseJSON x
--}
 
 parseLesser :: Object -> Parser Enchantment
 parseLesser v = LesserItem

@@ -58,6 +58,7 @@ module ArM.Character (
                           -- * Convenience Functions
                           , characterEntryTime
                           , prepareCharacter
+                          , primaryXPTrait
                           -- * Advancement
                           , prepareAdvancement
                           , validate
@@ -66,6 +67,7 @@ module ArM.Character (
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Character.Inference
+import ArM.Character.Validation
 import ArM.Character.CharacterSheet
 import ArM.Character.Virtues
 import ArM.Character.Combat

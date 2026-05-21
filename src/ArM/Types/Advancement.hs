@@ -309,7 +309,6 @@ class (Timed a,StoryObject a) => AdvancementLike a where
      -- | Count spell levels from an Advancement
      spentLevels :: a -> Int
      addProtoTrait :: [ProtoTrait] -> a -> a
-     setRead :: BookDB h => h -> a -> a
 
 instance AdvancementLike Advancement where
      advMode = mode
@@ -322,8 +321,6 @@ instance AdvancementLike Advancement where
                lvls _ = 0
      sortAdvTraits x = x { changes = sortTraits $ changes x }
      addProtoTrait vs a = a { changes = vs ++ changes a }
-     -- setRead _ ad = ad { readsBook = map (bookID) (bookUsed ad) }
-     setRead _ = id
 
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where
@@ -337,8 +334,6 @@ instance (Timed a, AdvancementLike a,ContractAdvancement a)
      sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
                          , inferredAdv = sortAdvTraits $ inferredAdv x }
      addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
-     setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
-
 
 -- ** The Augmented Advancement
 

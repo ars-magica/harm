@@ -98,7 +98,6 @@ module ArM.Trait (
          , BookStats(..)
          , Book(..)
          , defaultBook
-         , BookDB(..)
          , isBook
          , isLabText
          , LabText(..)
