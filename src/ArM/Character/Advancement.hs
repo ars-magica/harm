@@ -11,7 +11,7 @@
 -- Description :  In-game character ddvancement.
 --
 -- Only a single function, `prepareAdvancement`, is exported.
--- It applice to in-game character advancement only.
+-- It applies to in-game character advancement only.
 -- Its purpose is to make those inferences which can be made on the
 -- individual character in isolation.
 --

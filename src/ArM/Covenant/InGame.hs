@@ -23,19 +23,19 @@ import ArM.Helper
 import Data.Maybe
 
 -- | Initialise `Covenant` object for advancement
-initAdvancement :: SeasonTime -> Covenant -> Covenant
-initAdvancement t c = c { pastCovAdvancement = x:pastCovAdvancement c
+initCovAdvancement :: SeasonTime -> Covenant -> Covenant
+initCovAdvancement t c = c { pastCovAdvancement = x:pastCovAdvancement c
                         , futureCovAdvancement = xs 
                         , covenantState = Just $ f (covenantState c) t
                         }
-     where (x,xs) = iaHead t $ futureCovAdvancement c
+     where (x,xs) = icaHead t $ futureCovAdvancement c
            f Nothing y = defaultCovState { covTime = y }
            f (Just s) y = s { covTime = y }
 
 -- | Make initial inferences on the advancement.
 -- Currently no inference is made.
-iaPrepare :: CovAdvancement -> Augmented CovAdvancement
-iaPrepare a = Adv a noCovAdvancement []
+icaPrepare :: CovAdvancement -> Augmented CovAdvancement
+icaPrepare a = Adv a noCovAdvancement []
 
 -- | Empty augmented advancement object with the given time stamp
 noAdvT :: SeasonTime -> Augmented CovAdvancement
@@ -47,9 +47,9 @@ noAdv :: Augmented CovAdvancement
 noAdv = noAdvT NoTime
 
 -- | Take the head off the future advancement if the time is right.
-iaHead :: SeasonTime -> [CovAdvancement] -> (Augmented CovAdvancement,[CovAdvancement])
-iaHead t [] = (noAdvT t,[])
-iaHead t (x:xs) | season x == t = (iaPrepare x,xs)
+icaHead :: SeasonTime -> [CovAdvancement] -> (Augmented CovAdvancement,[CovAdvancement])
+icaHead t [] = (noAdvT t,[])
+icaHead t (x:xs) | season x == t = (icaPrepare x,xs)
                 | otherwise = (noAdvT t,xs)
 
 -- | Get the current contracted advancement being processed.

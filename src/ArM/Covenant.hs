@@ -22,7 +22,7 @@ module ArM.Covenant ( CostBP(..)
            -- * Covenant Generation and Advancement
            , covGen
            , stepCovState
-           , initAdvancement
+           , initCovAdvancement
            , cvgCovenFolk
            ) where
 

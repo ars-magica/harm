@@ -61,6 +61,7 @@ module ArM.Character (
                           -- * Advancement
                           , prepareAdvancement
                           , validate
+                          , initAdvancement
                           ) where
 
 import ArM.Types.Advancement
@@ -72,3 +73,4 @@ import ArM.Character.Combat
 import ArM.Character.CharGen
 import ArM.Character.Character
 import ArM.Character.Advancement
+import ArM.Character.InGame

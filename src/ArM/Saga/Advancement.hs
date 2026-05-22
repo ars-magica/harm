@@ -201,19 +201,18 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepMembership . stepCovenFolk
+stepSagaState = stepInit . stepMembership . stepCovenFolk
 
+-- | Initialise characters
+stepInit :: SagaState -> SagaState
+stepInit st = st { characters = M.map f $ characters st }
+     where f = initAdvancement (season st) 
+
+-- | Initialise covenants and update covenfolk
 stepCovenFolk :: SagaState -> SagaState
 stepCovenFolk st = st { covenants = M.map f $ covenants st }
-     where f = cvgCovenFolk .  initAdvancement (season st) 
+     where f = cvgCovenFolk .  initCovAdvancement (season st) 
 
-{- 
-     where st' = st { covenants = cov
-                    , characters = ch
-                    }
-           st = sagaState saga
-           -- (cov,ch) = jointAdvance saga ((covenants st),(characters st))
--}
 
 stepMembership :: SagaState -> SagaState
 stepMembership st = st { characters = ch }
@@ -222,6 +221,8 @@ stepMembership st = st { characters = ch }
           f x = x { memberOf = Nothing } 
           ch' = M.map clear $ characters st
 
+-- | For each covenant in the list, update all its covenfolk with new `memberOf`
+-- value.
 updateMembership :: M.Map String Character -> [Covenant] -> M.Map String Character
 updateMembership ch [] = ch
 updateMembership ch (x:xs) = updateMembership (updateMembership' ch y i) xs
@@ -238,6 +239,7 @@ updateMembership' ch (_:ks) ck = updateMembership' ch'  ks ck
     -- The error could have been put as a Validation, but then we would 
     -- have to rewrite the functions to have a covenant to put it into.
 
+-- | Update the `memberOf` attribute of a `Character` object.
 updateCharMembership :: HarmKey -> Character -> Character
 updateCharMembership (CovenantKey k) ch 
     | isNothing m = updateCharacterState f ch
@@ -254,6 +256,14 @@ updateCharMembership _ ch = addCharacterValidation val ch
 
 -- |
 -- * Joint Character and Covenant Advancement
+
+{- 
+     where st' = st { covenants = cov
+                    , characters = ch
+                    }
+           st = sagaState saga
+           -- (cov,ch) = jointAdvance saga ((covenants st),(characters st))
+-}
 
 -- |
 -- Advance listed covenants and characters one season forward.
