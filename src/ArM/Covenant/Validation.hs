@@ -26,7 +26,7 @@ import ArM.Trait
 import ArM.Helper
 
 covAddValidation :: Augmented CovAdvancement -> Augmented CovAdvancement 
-covAddValidation a =  a { validation = covGenValidation a ++ validation a }
+covAddValidation a =  addValidation ( covGenValidation a) a 
 
 covGenValidation :: Augmented CovAdvancement -> [ Validation ]
 covGenValidation a = filterNothing [ bpValidation bp

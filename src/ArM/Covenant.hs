@@ -22,7 +22,10 @@ module ArM.Covenant ( CostBP(..)
            -- * Covenant Generation and Advancement
            , covGen
            , stepCovState
+           , initAdvancement
+           , cvgCovenFolk
            ) where
 
 import ArM.Covenant.Covenant
 import ArM.Covenant.CostBP
+import ArM.Covenant.InGame

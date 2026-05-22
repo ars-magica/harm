@@ -136,6 +136,7 @@ common harm-deps
                        , ArM.Markdown.Possession
                        , ArM.Markdown.SeasonDisplay
                        , ArM.Covenant.CostBP
+                       , ArM.Covenant.InGame
                        , ArM.Covenant.Validation
                        , ArM.Covenant.Covenant
                        , ArM.Covenant

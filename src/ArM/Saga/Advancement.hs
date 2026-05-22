@@ -178,18 +178,7 @@ instance BookDB AdvancementStep where
 
 -- |
 -- * Saga Advancement
-
--- | Advance the saga forward by one season.
-stepSaga :: Saga -> Saga
-stepSaga saga = saga { sagaState = st' }
-     where st' = st { seasonTime = ns
-                    -- , covenants = cov
-                    -- , characters = ch
-                    }
-           st = sagaState saga
-           -- (cov,ch) = jointAdvance saga ((covenants st),(characters st))
-           ns = nextSeason saga
-
+--
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
 advanceSaga saga = reverse $ saga:advanceSaga' (advSeasons saga) saga
@@ -201,6 +190,29 @@ advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
           f ssn saga | NoTime == nextSeason saga = saga 
                      | ssn < nextSeason saga = saga 
                      | otherwise = f ssn $ stepSaga saga
+
+-- | 
+-- ** Advancement step
+
+-- | Advance the saga forward by one season.
+stepSaga :: Saga -> Saga
+stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
+     where f x = x { seasonTime = nextSeason saga }
+
+-- | Advance the sagaState forward by one season.
+stepSagaState :: SagaState -> SagaState
+stepSagaState st = st
+{- 
+     where st' = st { covenants = cov
+                    , characters = ch
+                    }
+           st = sagaState saga
+           -- (cov,ch) = jointAdvance saga ((covenants st),(characters st))
+-}
+
+stepMembership :: SagaState -> SagaState
+stepMembership st = st { covenants = M.map cvgCovenFolk $ covenants st }
+
 
 -- |
 -- * Joint Character and Covenant Advancement
