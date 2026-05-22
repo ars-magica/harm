@@ -15,7 +15,6 @@
 module ArM.Types.Harm.Saga ( Saga(..)
                     , SagaFile(..)
                     , SagaState(..)
-                    , sagaDesc
                     , rootDir
                     , stateSeasons
                     , advSeasons
@@ -47,12 +46,6 @@ data Saga = Saga
          , armourDB :: ArmourDB
        }  deriving (Eq)
 
--- | Return the description of the saga, as stored in the `SagaFile` object.
-sagaDesc :: Saga -> [ String ]
-sagaDesc = sagaDescription . sagaFile
--- | Return the saga title, as stored in the `SagaFile` object.
-sagaTitle :: Saga -> String
-sagaTitle = title . sagaFile
 -- | Return root directory, as stored in the `SagaFile` object.
 rootDir :: Saga -> String
 rootDir = fromMaybe "" . rootDirectory . sagaFile
@@ -67,13 +60,11 @@ advSeasons :: Saga -> [SeasonTime]
 advSeasons = map seasonPrev . sort . seasons . sagaFile 
 
 instance Show Saga where
-   show saga = "Saga: " ++ sagaTitle saga
+   show saga = "Saga: " ++ name saga
 
 instance Timed Saga where
     season = seasonTime . sagaState
-instance StoryObject Saga where
-    name = sagaTitle
-    narrative = sagaDesc
+
 instance HarmObject Saga where
     stateName s = name s ++ " - " ++ (show $ season $ sagaState s)
 
@@ -101,6 +92,7 @@ data SagaFile = SagaFile
          , currentSeason :: SeasonTime
          , rootDirectory :: Maybe String
          , sagaDescription :: [String]
+         , sagaNarrative :: [String]
          , covenantFiles :: [String]
          , characterFiles :: [String]
          , spellFile :: String
@@ -116,8 +108,25 @@ instance FromJSON SagaFile where
        <*> v .:? "currentSeason" .!= NoTime
        <*> v .:? "rootDirectory" 
        <*> v .:? "description"  .!= []
+       <*> v .:? "narrative"  .!= []
        <*> v .:? "covenantFiles" .!= []
        <*> v .:? "characterFiles" .!= []
        <*> v .:? "spellFile" .!= "spells.csv"
        <*> v .:? "weaponFile" .!= "weapons.csv"
        <*> v .:? "armourFile" .!= "armour.csv"
+
+instance StoryObject SagaFile where
+   name = title
+   setName n x = x { title = n }
+   narrative = sagaNarrative
+   comment = sagaDescription
+   addNarrative s x = x { sagaNarrative = s:sagaNarrative x }
+   addComment s x = x { sagaDescription = s:sagaDescription x }
+
+instance StoryObject Saga where
+   name = name . sagaFile
+   setName n s = s { sagaFile = setName n $ sagaFile s }
+   narrative = narrative . sagaFile
+   comment = comment . sagaFile
+   addNarrative s x = x { sagaFile = addNarrative s $ sagaFile x }
+   addComment s x = x { sagaFile = addComment s $ sagaFile x }
