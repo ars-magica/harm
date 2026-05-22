@@ -40,19 +40,15 @@ loadSaga saga = do
    adb <- readDB $ armourFile saga
    cs <- mapM readArM $ characterFiles saga
    cov <- mapM readArM ( covenantFiles saga )
-   return
-     $ Saga { sagaFile = saga
-           , sagaState = SagaState
-              { stateTitle = title saga
-              , covenants =  filterNothing cov  
-              , characters = filterNothing cs  
-              , seasonTime = GameStart
-              }
-           , baseURL = Nothing
-           , spells = fromJust db 
-           , weaponsDB = fromJust wdb
-           , armourDB = fromJust adb
-           }
+   return $ Saga
+          { sagaFile = saga
+          , sagaState = newSagaState ( title saga ) 
+                        ( filterNothing cov ) ( filterNothing cs )
+          , baseURL = Nothing
+          , spells = fromJust db 
+          , weaponsDB = fromJust wdb
+          , armourDB = fromJust adb
+          }
 
 
 -- ** Read Character and Covenant Data

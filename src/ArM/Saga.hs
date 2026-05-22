@@ -26,6 +26,9 @@ module ArM.Saga ( Saga(..)
                     , Advance(..)
                     , StepAdvance(..)
                     , Validation(..)
+                    -- * Convenience
+                    , characterList
+                    , covenantList
                     ) where
 
 import Data.List 
@@ -34,8 +37,13 @@ import ArM.Saga.Advancement
 import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
-import Data.OList
 import ArM.Helper
+
+import Data.OList
+import qualified Data.Map as M
+
+characterList = M.elems . characters
+covenantList = M.elems . covenants
 
 -- |
 -- == Error reports
@@ -77,8 +85,8 @@ errorAfter (_,vs,_,_) s = vs > s
 -- a given saga state
 errorList :: SagaState -> [VList]
 errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
-    where cvs = map cErrors $ characters saga
-          covvs = map covErrors  $ covenants saga
+    where cvs = map cErrors $ characterList saga
+          covvs = map covErrors  $ covenantList saga
           vvs = g (cvs ++ covvs)
           g = f . foldl (++) [] 
           f [] = []
@@ -161,6 +169,6 @@ covenFolk saga cov = lookupCharacters s $ f cov
 -- |
 -- Find `Character` objects for a list of character IDs, from the given `Saga`.
 lookupCharacters :: Saga -> [ HarmKey ] -> [ Character ]
-lookupCharacters saga is = map ( \ i -> harmLookup i cs ) is
-    where cs = characters $ sagaState saga
+lookupCharacters saga is = filterNothing $ map ( \ i -> harmLookup i cs ) is
+    where cs = sagaState saga
 

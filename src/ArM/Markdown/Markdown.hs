@@ -619,9 +619,9 @@ instance Markdown SagaState where
     printMD saga = OList 
         [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (gameSeason saga)
         , OString ""
-        , characterIndex $ characters saga
+        , characterIndex $ characterList saga
         , OString ""
-        , covenantIndex $ covenants saga
+        , covenantIndex $ covenantList saga
         , OString ""
         , OString "## Advancement Errors"
         , OString ""

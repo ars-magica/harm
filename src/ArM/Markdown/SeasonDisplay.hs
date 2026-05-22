@@ -14,6 +14,7 @@ module ArM.Markdown.SeasonDisplay where
 import ArM.Types.Advancement
 import ArM.Types.Harm 
 import ArM.Story
+import ArM.Saga
 import ArM.Markdown.Markdown
 import Data.OList
 
@@ -112,8 +113,8 @@ getAugMerged' st = ( mergeTimed xs, mergeTimed ys )
 
 getAug :: SagaState -> ( [ [ CharAug ] ], [ [ CovAug ] ] )
 getAug st = ( chrh, covh )
-    where covh = map covAdv $ covenants st
-          chrh = map chAdv  $ characters st
+    where covh = map covAdv $ covenantList st
+          chrh = map chAdv  $ characterList st
 
 covAdv :: Covenant -> [ CovAug ]
 covAdv c =  map (CovAug c) $ pastCovAdvancement c

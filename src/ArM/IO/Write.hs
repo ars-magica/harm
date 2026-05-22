@@ -21,6 +21,7 @@ import ArM.Markdown
 import ArM.Sheet
 import ArM.Types.Harm
 import ArM.Story
+import ArM.Saga
 
 import Data.OList
 
@@ -40,9 +41,9 @@ writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
    createDirectoryIfMissing True dir >>
    writeOList (dir ++ "index.md") (printMD st) >>
-   writeObjects dir saga (characters st) >>
-   writeObjects dir saga (covenants st) >>
-   writeObjects dir saga (map getLibrary $ covenants st)
+   writeObjects dir saga (characterList st) >>
+   writeObjects dir saga (covenantList st) >>
+   writeObjects dir saga (map getLibrary $ covenantList st)
        where dir = rootDir saga ++ fn ++ "/"
              fn = showKey st
              st = sagaState saga

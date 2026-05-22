@@ -36,7 +36,7 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , rootDir
                       , stateSeasons
                       , advSeasons
-                      , newState
+                      , newSagaState
                       ) where
 
 import ArM.Trait
@@ -93,10 +93,10 @@ instance HarmSagaObject Lab where
             g ob = (harmKey ob,ob)
 
 -- | Create a new CharacterState, giving covenants and characters as list
-newState :: String -> [Covenant] -> [Character] -> SagaState
-newState t cvs chs = SagaState
+newSagaState :: String -> [Covenant] -> [Character] -> SagaState
+newSagaState t cvs chs = SagaState
          { stateTitle = t
-         , seasonTime = NoTime
+         , seasonTime = GameStart
          , covenants = toDB cvs
          , characters = toDB chs
          }
