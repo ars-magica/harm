@@ -32,7 +32,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , Saga(..)
                       , SagaFile(..)
                       , SagaState(..)
-                      , sagaDesc
                       , rootDir
                       , stateSeasons
                       , advSeasons

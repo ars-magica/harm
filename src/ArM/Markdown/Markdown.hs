@@ -603,7 +603,8 @@ instance Markdown Saga where
     printMD saga = OList 
         [ OList [ OString $ "# " ++ name saga
                 , OString ""
-                , OList $ map OString $ sagaDesc saga
+                , OList $ map italicOString $ narrative saga
+                , OList $ map OString $ comment saga
                 , OString ""
                 ]
         , OList ( [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- advSeasons saga ] 
