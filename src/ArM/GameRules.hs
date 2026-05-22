@@ -11,6 +11,9 @@
 -- Simple and generic functions for ArM Rules.  Should be independent
 -- of the software design.
 --
+-- Special attention should be made to `XPType` which can be redefined
+-- to `Float` to carry over fractional XP.
+--
 -----------------------------------------------------------------------------
 module ArM.GameRules ( XPType
                      , pyramidScore

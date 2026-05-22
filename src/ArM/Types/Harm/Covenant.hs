@@ -161,7 +161,7 @@ instance FromJSON CovenantState where
 -- The covenant is identified by checking if the character is
 -- listed as a member (covenFolkID).
 findCov :: Character -> [Covenant] -> Maybe Covenant
-findCov ch cs = maybeHead xs
+findCov ch cs = mhead xs
     where xs = filter (`hasMember` ch) cs
 
 -- |

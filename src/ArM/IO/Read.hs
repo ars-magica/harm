@@ -44,8 +44,8 @@ loadSaga saga = do
      $ Saga { sagaFile = saga
            , sagaState = SagaState
               { stateTitle = title saga
-              , covenants =  sort $ filterNothing cov  
-              , characters = sort $ filterNothing cs  
+              , covenants =  filterNothing cov  
+              , characters = filterNothing cs  
               , seasonTime = GameStart
               }
            , baseURL = Nothing

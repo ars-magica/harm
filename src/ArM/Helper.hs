@@ -8,6 +8,7 @@
 -- 
 -- Description :  Generic and simple helper functions
 --
+-- The functions in this module have nothing to do with Ars magica.
 --
 -----------------------------------------------------------------------------
 module ArM.Helper where
@@ -30,7 +31,7 @@ trim = f . f
 (//) :: Integral a => a -> a -> a
 (//) x y = (x+y-1) `div` y
 
--- |
+-- | Difference of sorted listes.
 -- Remove elements from the second list from the first.
 -- Both lists have to be sorted.
 (-=) :: Ord a => [a] -> [a] -> [a] 
@@ -46,11 +47,6 @@ trim = f . f
 showstat :: Show a => Maybe a -> String
 showstat Nothing = "N/A"
 showstat (Just x) = show x
-
--- | return the head of a list or Nothing if the list is empty
-maybeHead :: [a] -> Maybe a
-maybeHead [] = Nothing
-maybeHead (x:_) = Just x
 
 -- | Get a list from a maybe-list, mapping Nothing to the empty list.
 maybeList :: Maybe [a] -> [a]

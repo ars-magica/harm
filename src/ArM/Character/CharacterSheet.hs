@@ -321,7 +321,7 @@ instance CharacterLike CharacterSheet where
     age = f . ageObject
       where f Nothing = -1
             f (Just x) = ageYears  x
-    ageObject = maybeHead . fst . filterTrait . csTraits
+    ageObject = mhead . fst . filterTrait . csTraits
     characterSheet = id
 
 -- |
