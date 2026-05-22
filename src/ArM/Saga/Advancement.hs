@@ -201,7 +201,8 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState st = st
+stepSagaState st = st { covenants = M.map f $ covenants st }
+     where f = cvgCovenFolk .  initAdvancement (season st) 
 {- 
      where st' = st { covenants = cov
                     , characters = ch

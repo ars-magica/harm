@@ -42,7 +42,9 @@ import ArM.Helper
 import Data.OList
 import qualified Data.Map as M
 
+characterList :: SagaState -> [Character]
 characterList = M.elems . characters
+covenantList :: SagaState -> [Covenant]
 covenantList = M.elems . covenants
 
 -- |

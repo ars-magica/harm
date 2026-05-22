@@ -13,25 +13,25 @@ New principle for characters and covenants
 + **Consider** a new `consistent` flag which is false during an advancement step
 
 for this process we need functions to
-1. getCurrentAdvancement
-2. updateCurrrentAdvancement
-3. prepare advancement
+1. `cvgCurrentAdv` to get Current Advancement
 
 Operate on saga.
-1. Bump saga season
-2. For each covenant
-	1. prepare advancement 
-	2. bump season
-	3. Apply joining and leaving 
-3. Clear `memberOf` and put characters in Map
-4. For each covenant, for each member
+1. For each covenant
+	1. `initAdvancement` (Covenant)
+		1. `iaPrepare`  to make augmented advancement
+			1. inference may be added later
+		2. move advancement from future to past
+		3. Bump saga season
+	2. `cvgCovenFolk` Apply joining and leaving 
+2. Clear `memberOf` and put characters in Map
+3. For each covenant, for each member
 	1. update `memberOf` 
 	2. flag contradicgtions if `memberOf` is already set
-5. For each covenant
+4. For each covenant
 	1. resolve resources[^1]
-6. For each Character
+5. For each Character
 	1. infer SQ
-7. For each Character
+6. For each Character
 	1. advance traits
 
 [^1]:  Add a «read at covenant» field, defaulting to `memberOf`
