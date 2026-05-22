@@ -174,7 +174,7 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepVal . stepAdv . stepMembership . stepCovenFolk . stepInit 
+stepSagaState = stepVal . stepAdv . stepBook . stepMembership . stepCovenFolk . stepInit 
 
 -- | Initialise characters
 stepInit :: SagaState -> SagaState
@@ -258,9 +258,10 @@ stepValCov st = st
 -- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
+stepBook :: SagaState -> SagaState
+stepBook = addBooks
+
 {-
-validateBookUse :: ([AdvancementStep],[AdvancementStep]) 
-                -> ([AdvancementStep],[AdvancementStep]) 
 validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 -}
 
@@ -273,36 +274,8 @@ validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 -- Note that books are currently only taken from the character's covenant.
 -- This will have to be extended to allow reading as a guest, and books
 -- borrowed from other characters or covenants.
-{-
-addBooks :: ([AdvancementStep],[AdvancementStep]) 
-         -> ([AdvancementStep],[AdvancementStep]) 
-addBooks (xs,ys) = (xs,map (addBook covs) ys)
-   where covs = filterNothing $ map stepSubjectMaybe xs
--}
-
--- |
--- Find books in the covenants and add to the advancement of the given
--- character if they use the book.
-addBook :: [Covenant] -> AdvancementStep -> AdvancementStep
-addBook cvs (CharStep x aa) = CharStep x (fmap (addBook' cov) aa)
-   where cov =  findCov x cvs
-addBook _ step = step
-
--- |
--- Find and add books with stats to add to the character advancement.
--- Not implemented yet.
-addBook' :: Maybe Covenant -> Augmented Advancement -> Augmented Advancement
-addBook' Nothing y  = y
-addBook' (Just cov) y = f bs y 
-    where u = usesBook $ contractAdvancement y
-          bk = map (bookLookup cov) u
-          bs = zip u bk
-          f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ addB aa b
-          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
-          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
-          addB' ba b = ba { bookUsed = b:bookUsed ba }
+addBooks :: SagaState -> SagaState
+addBooks st = st { characters = M.map (chgBook st) $ characters st }
 
 -- |
 -- ** Other Book steps

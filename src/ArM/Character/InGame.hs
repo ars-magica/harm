@@ -19,6 +19,7 @@ import ArM.Types.Advancement
 import ArM.Character.Advancement
 import ArM.Character.Character
 import ArM.Story
+import ArM.Trait
 import ArM.Processing
 import ArM.Helper
 import Data.Maybe
@@ -62,3 +63,27 @@ chgStep ch = setCharacterState st $ setAdvancement aa ch
 
 chgValidate :: Character -> Character
 chgValidate ch = updateCharacterAdv (validate ch) ch
+
+chgBook :: SagaState -> Character -> Character
+chgBook st ch = updateCharacterAdv (addBook st ch) ch
+
+-- |
+-- Find and add books with stats to add to the character advancement.
+-- Not implemented yet.
+addBook :: SagaState -> Character -> Augmented Advancement -> Augmented Advancement
+addBook _ _ = id
+{-
+addBook st ch y = f bs y 
+    where u = usesBook $ contractAdvancement y
+          bk = findBook st ch u
+          bs = zip u bk
+          f [] aa = aa
+          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
+          f ((_,Just b):xs) aa = f xs $ addB aa b
+          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
+          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
+          addB' ba b = ba { bookUsed = b:bookUsed ba }
+
+findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
+findBook _ _ _ = Nothing
+-}
