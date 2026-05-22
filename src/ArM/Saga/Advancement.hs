@@ -201,7 +201,7 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepInit . stepMembership . stepCovenFolk
+stepSagaState = stepMembership . stepCovenFolk . stepInit 
 
 -- | Initialise characters
 stepInit :: SagaState -> SagaState

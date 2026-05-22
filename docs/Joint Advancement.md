@@ -15,24 +15,28 @@ New principle for characters and covenants
 for this process we need functions to
 1. `cvgCurrentAdv` to get Current Advancement
 
-Operate on saga.
-1. `stepCovenFolk` : for each covenant
-	1. `initAdvancement` (Covenant)
+Operate on saga (`stepSaga`)
+1. Bump saga season
+2. `stepInit` : for each character
+	1. `initAdvancement` 
+		1. `prepareAdvancement`  to make augmented advancement with inference
+		2. move advancement from future to past
+3. `stepCovenFolk` : for each covenant
+	1. `initCovAdvancement` 
 		1. `iaPrepare`  to make augmented advancement
 			1. inference may be added later
 		2. move advancement from future to past
-		3. Bump saga season
 	2. `cvgCovenFolk` Apply joining and leaving 
-2. `stepMembership`
+4. `stepMembership`
 	1. Clear `memberOf` from all characters
 	2. `updateMembership` : For each covenant, for each member
 		1. update `memberOf` 
 		2. flag contradicgtions if `memberOf` is already set
-3. For each covenant
+5. For each covenant
 	1. resolve resources[^1]
-4. For each Character
+6. For each Character
 	1. infer SQ
-5. For each Character
+7. For each Character
 	1. advance traits
 
 [^1]:  Add a «read at covenant» field, defaulting to `memberOf`
