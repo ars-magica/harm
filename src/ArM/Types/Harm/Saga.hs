@@ -122,4 +122,3 @@ instance FromJSON SagaFile where
        <*> v .:? "spellFile" .!= "spells.csv"
        <*> v .:? "weaponFile" .!= "weapons.csv"
        <*> v .:? "armourFile" .!= "armour.csv"
-

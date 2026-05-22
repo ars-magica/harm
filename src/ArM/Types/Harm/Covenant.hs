@@ -175,4 +175,3 @@ hasMember cov ch = cid `elem` chs
 -- | The covenant where the given character is a member
 covenant :: CharacterState -> Maybe HarmKey
 covenant = fmap CovenantKey . memberOf 
-
