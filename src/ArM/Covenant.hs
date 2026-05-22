@@ -24,6 +24,7 @@ module ArM.Covenant ( CostBP(..)
            , stepCovState
            , initCovAdvancement
            , cvgCovenFolk
+           , cvgStep
            ) where
 
 import ArM.Covenant.Covenant

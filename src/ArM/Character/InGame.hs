@@ -17,6 +17,7 @@ module ArM.Character.InGame where
 import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Character.Advancement
+import ArM.Character.Character
 import ArM.Story
 import ArM.Processing
 import ArM.Helper
@@ -50,5 +51,14 @@ iaHead t st (x:xs) | season x == t = (prepareAdvancement st x,xs)
                    | otherwise = (noAdvT t,xs)
 
 -- | Get the current contracted advancement being processed.
-chgCurrentAdv :: Character -> Advancement
-chgCurrentAdv = contractAdvancement . fromMaybe noAdv . mhead . pastAdvancement
+chgCurrentAdv :: Character -> Augmented Advancement
+chgCurrentAdv = fromMaybe noAdv . mhead . pastAdvancement
+
+chgStep :: Character -> Character
+chgStep ch = setCharacterState st $ setAdvancement aa ch
+   where aa' = chgCurrentAdv ch
+         st' = fromMaybe defaultCS $ state ch
+         (aa,st) = applyAdvancement aa' st'
+
+chgValidate :: Character -> Character
+chgValidate ch = updateCharacterAdv (validate ch) ch

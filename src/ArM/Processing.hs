@@ -63,3 +63,7 @@ updateCharacterAdv f s
 addCharacterValidation :: [Validation] -> Character -> Character
 addCharacterValidation val = updateCharacterAdv (addValidation val)
 
+setCharacterState :: CharacterState -> Character -> Character
+setCharacterState st ch = ch { state = Just st }
+setAdvancement :: Augmented Advancement -> Character -> Character
+setAdvancement aa ch = ch { pastAdvancement = aa:(mtail $ pastAdvancement ch) }

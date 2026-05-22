@@ -60,3 +60,9 @@ cvgCurrentAdv = contractAdvancement . fromMaybe noAdv . mhead . pastCovAdvanceme
 cvgCovenFolk :: Covenant -> Covenant
 cvgCovenFolk c = updateCovenantState (stepCovenFolk (cvgCurrentAdv c)) c
 
+-- | Apply one CovAdvancement object to the `CovenantState`.
+-- This is the same for pre-game and in-game advancement.
+cvgStep :: Covenant -> Covenant
+cvgStep c = updateCovenantState f c
+    where f = stepBH adv . stepPossessions adv 
+          adv = cvgCurrentAdv c

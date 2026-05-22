@@ -62,6 +62,8 @@ module ArM.Character (
                           , prepareAdvancement
                           , validate
                           , initAdvancement
+                          , chgStep
+                          , chgValidate
                           ) where
 
 import ArM.Types.Advancement
