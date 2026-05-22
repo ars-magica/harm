@@ -142,7 +142,12 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepVal . stepAdv . stepBook . stepMembership . stepCovenFolk . stepInit 
+stepSagaState = stepVal        -- validate characters and covenants individually
+              . stepAdv        -- advance characters and covenants individually
+              . stepBook       -- Look up books and check for conflict (joint step) 
+              . stepMembership -- Update characters to reflect covenant affiliation
+              . stepCovenFolk  -- Initialise covenants and update covenfolk
+              . stepInit       -- Initialise individual characters for advancement
 
 -- | Initialise characters
 stepInit :: SagaState -> SagaState
