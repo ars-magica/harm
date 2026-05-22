@@ -26,6 +26,7 @@ import Data.Maybe
 import Data.List 
 import Data.Aeson 
 import GHC.Generics
+import qualified Data.Map as M
 
 import ArM.Story
 import ArM.Types.Harm.Covenant
@@ -82,8 +83,8 @@ instance HarmObject Saga where
 data SagaState = SagaState 
          { stateTitle :: String
          , seasonTime :: SeasonTime
-         , covenants :: [Covenant]
-         , characters :: [Character]
+         , covenants :: M.Map String Covenant
+         , characters :: M.Map String Character
          }  deriving (Eq,Show)
 
 instance Timed SagaState where
@@ -121,5 +122,4 @@ instance FromJSON SagaFile where
        <*> v .:? "spellFile" .!= "spells.csv"
        <*> v .:? "weaponFile" .!= "weapons.csv"
        <*> v .:? "armourFile" .!= "armour.csv"
-
 

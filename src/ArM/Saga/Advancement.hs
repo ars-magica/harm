@@ -35,6 +35,7 @@ module ArM.Saga.Advancement ( advanceSaga
 
 import Data.Maybe 
 import Data.List 
+import qualified Data.Map as M
 
 import ArM.Character
 import ArM.Covenant
@@ -84,8 +85,9 @@ class Timed a => Advance a where
 -- characters and covenants advance accordingly.
 instance Advance Saga where
    nextAdvancement saga  = min charnext covnext 
-      where charnext = foldl min NoTime [ nextAdvancement x | x <- characters st ]
-            covnext = foldl min NoTime [ nextAdvancement x | x <- covenants st ]
+      where charnext = M.foldr min NoTime $ M.map nextAdvancement $ characters st 
+            covnext = M.foldr min NoTime $ M.map nextAdvancement $ covenants st 
+            -- covnext = M.foldr min NoTime [ nextAdvancement x | x <- covenants st ]
             st = sagaState saga
 
 -- | `StepAdvance` is the class of types to which `AdvancementStep` applies.

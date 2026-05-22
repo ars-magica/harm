@@ -161,6 +161,6 @@ covenFolk saga cov = lookupCharacters s $ f cov
 -- |
 -- Find `Character` objects for a list of character IDs, from the given `Saga`.
 lookupCharacters :: Saga -> [ HarmKey ] -> [ Character ]
-lookupCharacters saga is = harmLookup is cs
-    where cs = sortOnKey $ characters $ sagaState saga
+lookupCharacters saga is = map ( \ i -> harmLookup i cs ) is
+    where cs = characters $ sagaState saga
 
