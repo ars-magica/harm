@@ -24,7 +24,6 @@ module ArM.Saga ( Saga(..)
                     -- * Advancement
                     , advanceSaga 
                     , Advance(..)
-                    , StepAdvance(..)
                     , Validation(..)
                     -- * Convenience
                     , characterList

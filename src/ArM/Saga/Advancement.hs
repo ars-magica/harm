@@ -28,7 +28,6 @@
 -----------------------------------------------------------------------------
 module ArM.Saga.Advancement ( advanceSaga 
                        , Advance(..)
-                       , StepAdvance(..)
                        , Validation(..)
                        ) where
 
@@ -90,29 +89,6 @@ instance Advance Saga where
             -- covnext = M.foldr min NoTime [ nextAdvancement x | x <- covenants st ]
             st = sagaState saga
 
--- | `StepAdvance` is the class of types to which `AdvancementStep` applies.
-class StepAdvance c where
-   -- | Create the next `AdvancementStep` object for a character or covenant.
-   nextStep :: SeasonTime -> c -> AdvancementStep
-class StepAdvanceAdv c where
-   -- | Get the advancement fromn a `AdvancementStep` object.
-   stepAdvancement :: AdvancementStep -> Maybe (Augmented c)
-instance StepAdvanceAdv CovAdvancement where
-   stepAdvancement (CovStep _ a) = a
-   stepAdvancement _ = Nothing
-instance StepAdvanceAdv Advancement where
-   stepAdvancement (CharStep _ a) = a
-   stepAdvancement _ = Nothing
-
-instance StepAdvance Character where
-   nextStep ns ch = nextStep' fs
-        where fs = futureAdvancement ch
-              nextStep' [] = CharStep ch Nothing
-              nextStep' (adv:_)  
-                 | season adv > ns = CharStep ch Nothing
-                 | otherwise = CharStep new  (Just $ prepareAdvancement (fromJust st) adv)
-              new = ch { futureAdvancement = mtail fs }
-              st = state ch
 
 -- |
 -- The `Advance` instance is very similar to that of `Character`, but has to
@@ -123,14 +99,6 @@ instance Advance Covenant where
              f (x:_) = caSeason x
    prepare = covGen
 
-instance StepAdvance Covenant where
-   nextStep ns cov = nextStep' fs
-        where fs = futureCovAdvancement cov
-              nextStep' [] = CovStep cov Nothing
-              nextStep' (adv:_)  
-                 | season adv > ns = CovStep cov Nothing
-                 | otherwise = CovStep new  (Just $ Adv adv noCovAdvancement [])
-              new = cov { futureCovAdvancement = mtail fs }
 
 instance Advance Character where
    nextAdvancement = f . futureAdvancement
@@ -333,6 +301,7 @@ bookSQ' step = step
 bookAdvSQ :: Augmented Advancement -> Augmented Advancement
 bookAdvSQ = id
 
+{-
 
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
@@ -374,9 +343,5 @@ stepCountBooks = countRepetitions . stepBooksUsed
 stepBooksUsed :: [AdvancementStep] -> [Book]
 stepBooksUsed = sort . foldl (++) [] . map ( bookUsed . contractAdvancement ) 
               .  stepBooksUsed' 
-
--- | Auxiliary for `stepBooksUsed`.  This is required to force typing
--- in intermediate steps.
-stepBooksUsed' :: [AdvancementStep] -> [Augmented Advancement]
-stepBooksUsed' = filterNothing . map stepAdvancement
+-}
 
