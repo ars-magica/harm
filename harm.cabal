@@ -39,6 +39,8 @@ description:
          + "ArM.Types.Advancement" introduces 'ProtoTrait' and 'Advancement'
          + "ArM.Types.Harm" introduces 'Saga', 'Covenant', and 'Character'
      + Processing
+         + "ArM.Processing" includes processes that are common to Character and
+           Covenant
          + "ArM.Character" covers operations on characters
 	 + 'ArM.Covenant" covers operations on Covenants
          + "ArM.Saga" covers 'Saga' level advancement and joint
@@ -141,6 +143,7 @@ common harm-deps
                        , ArM.Covenant
                        , ArM.Saga
                        , ArM.Saga.Advancement
+                       , ArM.Processing
                        , ArM.Trait.SpellRecord
                        , ArM.IO
                        , ArM.IO.Read

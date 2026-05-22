@@ -19,7 +19,6 @@ module ArM.Types.Harm.Saga ( Saga(..)
                     , rootDir
                     , stateSeasons
                     , advSeasons
-                    , updateSagaState
                     ) where
 
 
@@ -122,7 +121,3 @@ instance FromJSON SagaFile where
        <*> v .:? "spellFile" .!= "spells.csv"
        <*> v .:? "weaponFile" .!= "weapons.csv"
        <*> v .:? "armourFile" .!= "armour.csv"
-
--- | Apply the given function to the SagaState
-updateSagaState :: ( SagaState -> SagaState ) -> Saga -> Saga
-updateSagaState f s = s { sagaState = f ( sagaState s ) }

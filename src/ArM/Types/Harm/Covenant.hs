@@ -24,7 +24,6 @@ module ArM.Types.Harm.Covenant (
            , CovenantConcept(..)
            , CovenantState(..)
            , defaultCovState
-           , updateCovenantState
            , findCov
            , covenant
            ) where
@@ -176,7 +175,3 @@ hasMember cov ch = cid `elem` chs
 -- | The covenant where the given character is a member
 covenant :: CharacterState -> Maybe HarmKey
 covenant = fmap CovenantKey . memberOf 
-
--- | Apply the given function to the CovenantState
-updateCovenantState :: ( CovenantState -> CovenantState ) -> Covenant -> Covenant
-updateCovenantState f s = s { covenantState = fmap f ( covenantState s ) }

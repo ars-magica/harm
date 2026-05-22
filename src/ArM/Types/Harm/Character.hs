@@ -199,7 +199,3 @@ instance Timed CharacterState where
     season = charTime 
 instance Timed Character where
     season = fromMaybe NoTime . fmap season . state
-
--- | Apply the given function to the CovenantState
-updateCharacterState :: ( CharacterState -> CharacterState ) -> Character -> Character
-updateCharacterState f s = s { state = fmap f ( state s ) }

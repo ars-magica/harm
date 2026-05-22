@@ -21,7 +21,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , CharacterType(..)
                       , defaultCS
                       , fullConceptName
-                      , updateCharacterState
                       -- * Covenant
                       , Covenant(..)
                       , CovenantConcept(..)
@@ -29,7 +28,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , defaultCovState
                       , findCov
                       , covenant
-                      , updateCovenantState
                       -- * Saga
                       , Saga(..)
                       , SagaFile(..)
@@ -38,7 +36,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , rootDir
                       , stateSeasons
                       , advSeasons
-                      , updateSagaState
                       ) where
 
 import ArM.Trait
