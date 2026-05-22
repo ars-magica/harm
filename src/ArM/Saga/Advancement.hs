@@ -39,6 +39,7 @@ import qualified Data.Map as M
 
 import ArM.Character
 import ArM.Covenant
+import ArM.Processing
 import ArM.Story
 import ArM.Trait
 import ArM.Types.Harm
@@ -200,7 +201,7 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepCovenFolk
+stepSagaState = stepMembership . stepCovenFolk
 
 stepCovenFolk :: SagaState -> SagaState
 stepCovenFolk st = st { covenants = M.map f $ covenants st }
@@ -216,11 +217,10 @@ stepCovenFolk st = st { covenants = M.map f $ covenants st }
 
 stepMembership :: SagaState -> SagaState
 stepMembership st = st { characters = ch }
-    where ch = updateMembership ch' cv
+    where ch = updateMembership ch' $ M.elems $ covenants st
           clear x = x { state = fmap f (state x) }
           f x = x { memberOf = Nothing } 
           ch' = M.map clear $ characters st
-          cv = M.elems $ covenants st
 
 updateMembership :: M.Map String Character -> [Covenant] -> M.Map String Character
 updateMembership ch [] = ch
@@ -235,10 +235,22 @@ updateMembership' ch (CharacterKey k:ks) ck = updateMembership' ch' ks ck
     where ch' = M.adjust (updateCharMembership ck) k ch
 updateMembership' ch (_:ks) ck = updateMembership' ch'  ks ck
     where ch' = error "Non-character key for covenfolk"
+    -- The error could have been put as a Validation, but then we would 
+    -- have to rewrite the functions to have a covenant to put it into.
 
 updateCharMembership :: HarmKey -> Character -> Character
-updateCharMembership (CovenantKey k) ch = ch
-updateCharMembership _ ch = ch
+updateCharMembership (CovenantKey k) ch 
+    | isNothing m = updateCharacterState f ch
+    | otherwise   =  addCharacterValidation val ch
+    where val = [ValidationError $ "Character is member of two covenants: "
+                ++ k ++ " and " ++ fromJust m  ++ "."
+                ]
+          m = ff $ fmap memberOf $ state ch
+          f x = x { memberOf = Just k }
+          ff (Just (Just x)) = Just x  
+          ff _ = Nothing
+updateCharMembership _ ch = addCharacterValidation val ch
+   where val = [ValidationError "Programming error: Non-covenant key for character."]
 
 -- |
 -- * Joint Character and Covenant Advancement

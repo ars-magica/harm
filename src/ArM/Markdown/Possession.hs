@@ -21,8 +21,6 @@ import ArM.Helper
 import Data.HList
 import Data.Maybe
 
-import ArM.Debug.Trace
-
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
 --
@@ -47,7 +45,7 @@ printPossessionH ob
     | isLabText ob = hfm "Empty lab text" $ simpleLabTextH ob
     | isAC ob = hfm "Bogus arcane connection" $ acHsimple ob
     | isVis ob = hfm "Bogus vis" $ visHsimple ob
-    | isVisSrc ob = ttrace $ hfm "Bogus vis" $ visrcHsimple ob
+    | isVisSrc ob = hfm "Bogus vis" $ visrcHsimple ob
     | isArmour ob = hfm "Bogus armour" $ armourHsimple ob
     | isWeapon ob = hfm "Bogus weapon" $ weaponHsimple ob
     | silver ob /= 0 = hfm "Bogus silver" $ addGen silverH ob

@@ -44,7 +44,7 @@ loadSaga saga = do
    cov <- mapM readArM ( covenantFiles saga )
    return $ trace "Saga" $ Saga
           { sagaFile = saga
-          , sagaState = ttrace $ newSagaState ( title saga ) 
+          , sagaState = newSagaState ( title saga ) 
                         ( filterNothing cov ) ( filterNothing cs )
           , baseURL = Nothing
           , spells = fromJust db 
