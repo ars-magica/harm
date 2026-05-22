@@ -71,7 +71,55 @@ chgBook st ch = updateCharacterAdv (addBook st ch) ch
 -- Find and add books with stats to add to the character advancement.
 -- Not implemented yet.
 addBook :: SagaState -> Character -> Augmented Advancement -> Augmented Advancement
-addBook _ _ = id
+addBook st ch aa = addBook' st ch aa (mode ca) bkey ikey
+    where bs = readsBook ca
+          ca = contractAdvancement aa
+          bkey = filter isBK bs
+          ikey = filter isIK bs
+          isBK (BookKey _) = True
+          isBK  _ = False
+          isIK (ItemKey _) = True
+          isIK  _ = False
+
+-- | Auxiliar for `addBook`.
+-- Look up possession by possession ID or book ID, adding errors and warnings
+-- for inconsistent use. 
+addBook' :: SagaState -> Character
+          -> Augmented Advancement 
+          -> AdvancementType -> [HarmKey] -> [HarmKey] 
+          -> Augmented Advancement 
+addBook' _ _ aa Reading [] [] = addValidation val aa
+    where val = [ ValidationWarning "No book defined for reading" ]
+addBook' st ch aa Reading xs [] = addBook2 aa xs item
+    where item = tmp $ fmap (bookLookup cov) (mhead xs)
+addBook' st ch aa Reading xs ys = addBook2 aa xs item
+    where item = tmp $ fmap (bookLookup cov) (mhead ys)
+addBook' _ _ aa _ [] [] = aa -- No books - no reading
+addBook' _ _ aa _ _ _ = addValidation val aa
+    where val = [ ValidationError "Book specified for non-reading season" ]
+
+tmp (Just (Just x)) = Just x
+tmp _ = Nothing
+
+addBook2 :: Augmented Advancement -> [ HarmKey ] -> Maybe Possession
+addBook2 aa _ Nothing = addValidation val aa
+    where val = [ ValidationError "Book not found" ]
+addBook2 aa [] (Just item) = g (primaryXPTrait $ explicitAdv aa') 
+    where val1 = [ ValidationError "Tome does not contain texts on the given topic." ]
+          val2 = [ ValidationError "Cannot determine topic studied." ]
+          f Nothing = addValidation val1 aa'
+          f (Just y) = setBook y aa'
+          g Nothing = addValidation val2 aa'
+          g (Just y) = f $ bookByTopic y $ bookTexts item
+          aa' = addRequired item aa
+addBook2 aa (x:[]) (Just item) = f $ filter ((x==) . harmKey) (bookTexts item)
+    where val = [ ValidationError "Tome does not contain the text specified." ]
+          f [] = addValidation val aa'
+          f (y:_) = setBook y aa'
+          aa' = addRequired item aa
+addBook2 aa _ _ = addValidation val aa
+    where val = [ ValidationError "More than one book text specified." ]
+
 {-
 addBook st ch y = f bs y 
     where u = usesBook $ contractAdvancement y
@@ -87,3 +135,24 @@ addBook st ch y = f bs y
 findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
 findBook _ _ _ = Nothing
 -}
+
+-- ** Convenience functiosn
+
+-- | Find a book by topic from a list
+bookByTopic :: TraitKey -> [ Book ] -> Maybe Book
+bookByTopic k = mhead . filter (bookHasTopic k)
+
+-- | Check if the book covers a given topic
+bookHasTopic :: TraitKey -> Book -> Bool
+bookHasTopic k = f . filter ((==k) . topic) . bookStats
+     where f [] = False
+           f _ = True
+
+-- | Set the `bookRead` field
+setBook :: Book -> Augmented Advancement -> Augmented Advancement
+setBook y a = a { inferredAdv = (inferredAdv a) { bookRead = Just y } }
+
+-- | Add a required `Possesion` to an advancement
+addRequired :: Possession -> Augmented Advancement -> Augmented Advancement
+addRequired y a = a { inferredAdv = ia { requires = harmKey y:requires ia } }
+   where ia = inferredAdv a
