@@ -21,9 +21,11 @@ import ArM.Saga
 import ArM.Types.Harm
 import ArM.Trait
 import ArM.Types.Advancement
-import ArM.Story
+-- import ArM.Story
 import ArM.DB
 import ArM.Helper
+
+import ArM.Debug.Trace
 
 -- * Read Saga Files
 -- 
@@ -40,9 +42,9 @@ loadSaga saga = do
    adb <- readDB $ armourFile saga
    cs <- mapM readArM $ characterFiles saga
    cov <- mapM readArM ( covenantFiles saga )
-   return $ Saga
+   return $ trace "Saga" $ Saga
           { sagaFile = saga
-          , sagaState = newSagaState ( title saga ) 
+          , sagaState = ttrace $ newSagaState ( title saga ) 
                         ( filterNothing cov ) ( filterNothing cs )
           , baseURL = Nothing
           , spells = fromJust db 

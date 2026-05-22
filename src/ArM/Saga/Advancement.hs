@@ -181,17 +181,14 @@ instance BookDB AdvancementStep where
 
 -- | Advance the saga forward by one season.
 stepSaga :: Saga -> Saga
-stepSaga saga = saga
-{- { sagaState = st' }
-     where st' = st { stateTitle = stateTitle st 
-                    , seasonTime = ns
-                    , covenants = cov
-                    , characters = ch
+stepSaga saga = saga { sagaState = st' }
+     where st' = st { seasonTime = ns
+                    -- , covenants = cov
+                    -- , characters = ch
                     }
            st = sagaState saga
-           (cov,ch) = jointAdvance saga ((covenants st),(characters st))
+           -- (cov,ch) = jointAdvance saga ((covenants st),(characters st))
            ns = nextSeason saga
--}
 
 -- | Advance the Saga according to timestamp in the SagaFile.
 advanceSaga :: Saga -> [ Saga ]
