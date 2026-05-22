@@ -175,7 +175,6 @@ instance BookDB AdvancementStep where
    bookLookup (CovStep c _) k = bookLookup c k
    bookLookup _ _ = Nothing
 
-
 -- |
 -- * Saga Advancement
 --
@@ -201,8 +200,12 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 
 -- | Advance the sagaState forward by one season.
 stepSagaState :: SagaState -> SagaState
-stepSagaState st = st { covenants = M.map f $ covenants st }
+stepSagaState = stepCovenFolk
+
+stepCovenFolk :: SagaState -> SagaState
+stepCovenFolk st = st { covenants = M.map f $ covenants st }
      where f = cvgCovenFolk .  initAdvancement (season st) 
+
 {- 
      where st' = st { covenants = cov
                     , characters = ch
@@ -212,8 +215,30 @@ stepSagaState st = st { covenants = M.map f $ covenants st }
 -}
 
 stepMembership :: SagaState -> SagaState
-stepMembership st = st { covenants = M.map cvgCovenFolk $ covenants st }
+stepMembership st = st { characters = ch }
+    where ch = updateMembership ch' cv
+          clear x = x { state = fmap f (state x) }
+          f x = x { memberOf = Nothing } 
+          ch' = M.map clear $ characters st
+          cv = M.elems $ covenants st
 
+updateMembership :: M.Map String Character -> [Covenant] -> M.Map String Character
+updateMembership ch [] = ch
+updateMembership ch (x:xs) = updateMembership (updateMembership' ch y i) xs
+      where y = fromMaybe [] $ fmap covenFolkID $ covenantState x
+            i = harmKey x
+
+updateMembership' :: M.Map String Character -> [ HarmKey ] -> HarmKey 
+                  -> M.Map String Character
+updateMembership' ch [] ck = ch
+updateMembership' ch (CharacterKey k:ks) ck = updateMembership' ch' ks ck
+    where ch' = M.adjust (updateCharMembership ck) k ch
+updateMembership' ch (_:ks) ck = updateMembership' ch'  ks ck
+    where ch' = error "Non-character key for covenfolk"
+
+updateCharMembership :: HarmKey -> Character -> Character
+updateCharMembership (CovenantKey k) ch = ch
+updateCharMembership _ ch = ch
 
 -- |
 -- * Joint Character and Covenant Advancement

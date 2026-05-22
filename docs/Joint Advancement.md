@@ -16,7 +16,7 @@ for this process we need functions to
 1. `cvgCurrentAdv` to get Current Advancement
 
 Operate on saga.
-1. For each covenant
+1. `stepCovenFolk` : for each covenant
 	1. `initAdvancement` (Covenant)
 		1. `iaPrepare`  to make augmented advancement
 			1. inference may be added later
