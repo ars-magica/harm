@@ -253,6 +253,7 @@ addBooks st = st { characters = M.map (chgBook st) $ characters st }
 -- |
 -- ** Other Book steps
 
+{-
 -- | Check if a tractatus is read for the second time
 bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
 bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
@@ -281,6 +282,7 @@ valRead ad = g ad $ readBook $ contractAdvancement ad
           nobk = [ ValidationError $ "Missing book for reading season" ]
           xbk = [ ValidationError $ "Superfluous books for reading season" ]
           
+-}
 
 {-
 bookRepeat'' xs x = f x

@@ -178,10 +178,8 @@ data Advancement = Advancement
      , advNarrative :: [ String ]    -- ^ narrative description of the activities
      , advComment :: [ String ]      -- ^ freeform description of the activities
      , requires :: [ HarmKey ]    -- ^ possessions required for exclusive use
-     , readsBook :: [ HarmKey ]       -- ^ Books used exclusively by the character
-     , usesBook :: [ String ]     -- ^ Books used exclusively by the character
-     , readBook :: [ String ]     -- ^ Original book(s) read (to check against rereads)
-     , bookUsed :: [ Book ]       -- ^ Books used exclusively by the character
+     , readsBook :: [ HarmKey ]      -- ^ Books used exclusively by the character
+     , bookRead :: Maybe Book        -- ^ Books used exclusively by the character
      , sourceQuality :: Maybe XPType -- ^ Source Quality (SQ)
      , sourceCap :: Maybe Int        -- ^ Source Quality (SQ)
      , bonusSQ :: [ BonusSQ ]     -- ^ Bonus to Source Quality (SQ)
@@ -203,9 +201,7 @@ defaultAdvancement = Advancement
      , advComment = []
      , requires = []
      , readsBook = []
-     , usesBook = []
-     , readBook = []
-     , bookUsed = []
+     , bookRead = Nothing
      , sourceQuality = Nothing
      , sourceCap = Nothing
      , bonusSQ = []
@@ -228,9 +224,7 @@ instance FromJSON Advancement where
         <*> v `parseCollapsedList` "comment" 
         <*> v `parseCollapsedList` "requires"
         <*> v `parseCollapsedList` "reads"
-        <*> v `parseCollapsedList` "usesBook"
-        <*> v `parseCollapsedList` "readBook"
-        <*> v `parseCollapsedList` "bookUsed"
+        <*> v .:? "book"
         <*> v .:? "sourceQuality"
         <*> v .:? "sourceCap"
         <*> v `parseCollapsedList` "bonusQuality"
@@ -281,9 +275,9 @@ instance ContractAdvancement Advancement where
           , years = ( fmlx years ) ad
           , advNarrative = ( fmls narrative ) ad
           , advComment = ( fmls comment ) ad
-          , usesBook = ( fmls usesBook ) ad
-          , readBook = ( fmls readBook ) ad
-          , bookUsed = ( fmls bookUsed ) ad
+          , requires = ( fmls requires ) ad
+          , readsBook = ( fmls readsBook ) ad
+          , bookRead = ( fmlx bookRead ) ad
           , sourceQuality =  ( fmlx sourceQuality ) ad
           , sourceCap  = ( fmlx sourceCap ) ad
           , bonusSQ = ( fmls bonusSQ ) ad
@@ -315,7 +309,6 @@ class (Timed a,StoryObject a) => AdvancementLike a where
      -- | Count spell levels from an Advancement
      spentLevels :: a -> Int
      addProtoTrait :: [ProtoTrait] -> a -> a
-     setRead :: BookDB h => h -> a -> a
 
 instance AdvancementLike Advancement where
      advMode = mode
@@ -328,7 +321,6 @@ instance AdvancementLike Advancement where
                lvls _ = 0
      sortAdvTraits x = x { changes = sortTraits $ changes x }
      addProtoTrait vs a = a { changes = vs ++ changes a }
-     setRead _ ad = ad { readBook = map (bookID) (bookUsed ad) }
 
 instance (Timed a, AdvancementLike a,ContractAdvancement a) 
        => AdvancementLike (Augmented a) where
@@ -342,7 +334,6 @@ instance (Timed a, AdvancementLike a,ContractAdvancement a)
      sortAdvTraits x = x { explicitAdv = sortAdvTraits $ explicitAdv x
                          , inferredAdv = sortAdvTraits $ inferredAdv x }
      addProtoTrait vs a = a { inferredAdv = addProtoTrait vs (inferredAdv a) }
-     setRead db ad = ad { inferredAdv = setRead db (inferredAdv ad) }
 
 
 -- ** The Augmented Advancement

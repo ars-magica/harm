@@ -59,11 +59,10 @@ defaultCharacter = Character { charID = "N/A"
                              , pregameAdvancement = [ ]
                              , pastAdvancement = [ ]
                              , futureAdvancement = [ ]
-       }  
+                             }  
 
 instance Show Character where
    show = show . concept 
-
 
 instance ToJSON Character where
     -- For efficiency - Not required
@@ -85,7 +84,6 @@ instance FromJSON Character where
 
 instance KeyObject Character where
     harmKey = CharacterKey . charID
-
 
 -- | Return the name of the character as a string, including house affiliation
 -- if defined.
