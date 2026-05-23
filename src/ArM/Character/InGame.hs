@@ -18,11 +18,14 @@ import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Character.Advancement
 import ArM.Character.Character
+import ArM.Character.Validation
 import ArM.Story
 import ArM.Trait
 import ArM.Processing
 import ArM.Helper
 import Data.Maybe
+import Control.Applicative
+import Control.Monad
 
 -- | Initialise `Character` object for advancement
 initAdvancement :: SeasonTime -> Character -> Character
@@ -91,17 +94,32 @@ addBook' :: SagaState -> Character
 addBook' _ _ aa Reading [] [] = addValidation val aa
     where val = [ ValidationWarning "No book defined for reading" ]
 addBook' st ch aa Reading xs [] = addBook2 aa xs item
-    where item = tmp $ fmap (bookLookup cov) (mhead xs)
+    where item = join $ fmap (findBook st ch) (mhead xs)
 addBook' st ch aa Reading xs ys = addBook2 aa xs item
-    where item = tmp $ fmap (bookLookup cov) (mhead ys)
+    where item = join $ fmap (findBook st ch) (mhead ys)
 addBook' _ _ aa _ [] [] = aa -- No books - no reading
 addBook' _ _ aa _ _ _ = addValidation val aa
     where val = [ ValidationError "Book specified for non-reading season" ]
 
-tmp (Just (Just x)) = Just x
-tmp _ = Nothing
+-- | Find a book in a saga or the character itself.
+findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
+findBook s c k = ck <|> findBookCh c k
+     where f x = findBookCov x k
+           ck = ffmap f $ memberOfCovenant s c
+           findBookCov _ _ = Nothing
+           findBookCh _ _ = Nothing
+
+-- | Apply the function and join, to get rid of nested monads.
+ffmap :: Monad m => ( a -> m b ) -> m a -> m b
+ffmap f = join . fmap f
+
+-- | Get a character's covenant by looking up the key in the saga.
+memberOfCovenant :: SagaState -> Character -> Maybe Covenant
+memberOfCovenant saga = ffmap g . fmap CovenantKey . ffmap memberOf . state 
+           where g x = harmLookup x saga
 
 addBook2 :: Augmented Advancement -> [ HarmKey ] -> Maybe Possession
+         -> Augmented Advancement 
 addBook2 aa _ Nothing = addValidation val aa
     where val = [ ValidationError "Book not found" ]
 addBook2 aa [] (Just item) = g (primaryXPTrait $ explicitAdv aa') 
