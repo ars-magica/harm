@@ -29,6 +29,7 @@ module ArM.Character.Character (
                           , charAgingBonus
                           -- * Convenience Functions
                           , characterEntryTime
+                          , characterPossessions
                           ) where
 
 import Data.Maybe 
@@ -39,6 +40,11 @@ import ArM.Story
 import ArM.Trait
 import ArM.Helper
 import ArM.Types.Harm
+
+characterPossessions :: Character -> [ Possession ]
+characterPossessions = f . state 
+         where f Nothing = []
+               f (Just st) = filterNothing $ map getTrait $ traits st
 
 -- |
 -- = Convenience Functions for Character Properties

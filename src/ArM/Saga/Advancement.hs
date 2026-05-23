@@ -32,7 +32,7 @@ module ArM.Saga.Advancement ( advanceSaga
                        ) where
 
 import Data.Maybe 
-import Data.List 
+-- import Data.List 
 import qualified Data.Map as M
 
 import ArM.Character
@@ -41,7 +41,7 @@ import ArM.Processing
 import ArM.Story
 import ArM.Trait
 import ArM.Types.Harm
-import ArM.Helper
+-- import ArM.Helper
 
 -- |
 -- * Types
@@ -239,10 +239,8 @@ validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 -}
 
 -- |
--- ** The addBook step
-
--- Find books in the covenants and add to the advancements for characters
--- who use them.
+-- Find books in the covenants or character and add to the advancements
+-- for characters who use them.
 --
 -- Note that books are currently only taken from the character's covenant.
 -- This will have to be extended to allow reading as a guest, and books

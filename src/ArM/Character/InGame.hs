@@ -103,11 +103,8 @@ addBook' _ _ aa _ _ _ = addValidation val aa
 
 -- | Find a book in a saga or the character itself.
 findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
-findBook s c k = ck <|> findBookCh c k
-     where f x = findBookCov x k
-           ck = ffmap f $ memberOfCovenant s c
-           findBookCov _ _ = Nothing
-           findBookCh _ _ = Nothing
+findBook s c k = ( lookupBook k $ characterPossessions c )
+             <|> ( ffmap (lookupBook k) $ memberOfCovenant s c )
 
 -- | Apply the function and join, to get rid of nested monads.
 ffmap :: Monad m => ( a -> m b ) -> m a -> m b
@@ -137,22 +134,6 @@ addBook2 aa (x:[]) (Just item) = f $ filter ((x==) . harmKey) (bookTexts item)
           aa' = addRequired item aa
 addBook2 aa _ _ = addValidation val aa
     where val = [ ValidationError "More than one book text specified." ]
-
-{-
-addBook st ch y = f bs y 
-    where u = usesBook $ contractAdvancement y
-          bk = findBook st ch u
-          bs = zip u bk
-          f [] aa = aa
-          f ((bid,Nothing):xs) aa = f xs $ addValidation [nobk bid] aa
-          f ((_,Just b):xs) aa = f xs $ addB aa b
-          nobk x = ValidationError $ "Book not found (" ++ x ++ ")"
-          addB ba b = ba { inferredAdv = addB' (inferredAdv ba) b }
-          addB' ba b = ba { bookUsed = b:bookUsed ba }
-
-findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
-findBook _ _ _ = Nothing
--}
 
 -- ** Convenience functiosn
 
