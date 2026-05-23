@@ -27,6 +27,8 @@ import Data.Maybe
 import Control.Applicative
 import Control.Monad
 
+import ArM.Debug.Trace
+
 -- | Initialise `Character` object for advancement
 initAdvancement :: SeasonTime -> Character -> Character
 initAdvancement t c = c { pastAdvancement = x:pastAdvancement c
@@ -167,4 +169,8 @@ chgSQ' _ = id
 
 -- | Check and update source qualities for reading
 readingSQ :: Augmented Advancement -> Augmented Advancement 
-readingSQ = id
+readingSQ = trace "Not implemented: readingSQ" 
+
+-- | Check if converge to are reread
+chgRepeat :: Character -> Character
+chgRepeat = trace "Not implemented: chgRepeat"

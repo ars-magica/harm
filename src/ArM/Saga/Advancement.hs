@@ -44,6 +44,8 @@ import ArM.Story
 import ArM.Types.Harm
 import ArM.Helper
 
+import ArM.Debug.Trace
+
 -- |
 -- * Types
 
@@ -215,7 +217,7 @@ stepVal = stepValChar . stepValCov
 stepValChar :: SagaState -> SagaState
 stepValChar = charMap chgValidate 
 stepValCov :: SagaState -> SagaState
-stepValCov = id 
+stepValCov = trace "Not implemented: stepValCov"
 
 
 -- |
@@ -294,10 +296,6 @@ bkCollisions bcs bks = f bcs $ sort bks
 -- | Add and validate source quality on reading advancements
 bookSQ :: SagaState -> SagaState
 bookSQ = charMap chgSQ
-
--- | Check if converge to are reread
-chgRepeat :: Character -> Character
-chgRepeat = id
 
 -- | Check if a tractatus is read for the second time
 bookRepeat :: SagaState -> SagaState 
