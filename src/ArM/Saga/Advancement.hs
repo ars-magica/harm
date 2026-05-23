@@ -39,7 +39,6 @@ import ArM.Character
 import ArM.Covenant
 import ArM.Processing
 import ArM.Story
-import ArM.Trait
 import ArM.Types.Harm
 -- import ArM.Helper
 
@@ -107,17 +106,6 @@ instance Advance Character where
    prepare = prepareCharacter
 
 -- |
--- ** Covenant and Character Advancement
-
--- | Generic type for an advancement step for either a covenant or a character.
-data AdvancementStep = CovStep Covenant  (Maybe (Augmented CovAdvancement))
-                     | CharStep Character (Maybe (Augmented Advancement))
-
-instance BookDB AdvancementStep where
-   bookLookup (CovStep c _) k = bookLookup c k
-   bookLookup _ _ = Nothing
-
--- |
 -- * Saga Advancement
 --
 -- | Advance the Saga according to timestamp in the SagaFile.
@@ -177,10 +165,10 @@ updateMembership ch (x:xs) = updateMembership (updateMembership' ch y i) xs
 
 updateMembership' :: M.Map String Character -> [ HarmKey ] -> HarmKey 
                   -> M.Map String Character
-updateMembership' ch [] ck = ch
+updateMembership' ch [] _ = ch
 updateMembership' ch (CharacterKey k:ks) ck = updateMembership' ch' ks ck
     where ch' = M.adjust (updateCharMembership ck) k ch
-updateMembership' ch (_:ks) ck = updateMembership' ch'  ks ck
+updateMembership' _ (_:ks) ck = updateMembership' ch'  ks ck
     where ch' = error "Non-character key for covenfolk"
     -- The error could have been put as a Validation, but then we would 
     -- have to rewrite the functions to have a covenant to put it into.
@@ -232,11 +220,7 @@ stepValCov st = st
 
 -- | Validation and inference concerning books.
 stepBook :: SagaState -> SagaState
-stepBook = addBooks
-
-{-
-validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
--}
+stepBook = bookRepeat . bookSQ . bookCollision . addBooks
 
 -- |
 -- Find books in the covenants or character and add to the advancements
@@ -248,13 +232,49 @@ validateBookUse = bookRepeat . bookSQ . bookCollision . addBooks
 addBooks :: SagaState -> SagaState
 addBooks st = st { characters = M.map (chgBook st) $ characters st }
 
+-- | Add validation errors to Character advancements where a book
+-- is oversubscribed.
+bookCollision :: SagaState -> SagaState 
+bookCollision = id
+
+{-
+bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
+    where cbs = stepCountBooks chs
+
+-- | Add validation errors to one Character advancement, given a list
+-- of counted book uses.
+bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
+bookCollision' _ step@(CovStep _ _) = step
+bookCollision' _ step@(CharStep _ Nothing) = step
+bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
+    where bks = bookUsed  $ contractAdvancement ad
+          ad' = addValidation vs ad
+          vs = bkCollisions bcs bks
+-}
+
+-- | Add and validate source quality on reading advancements
+bookSQ :: SagaState -> SagaState
+bookSQ = id
+
+{-
+bookSQ (xs,ys) = (xs,map bookSQ' ys)
+
+bookSQ' :: AdvancementStep -> AdvancementStep
+bookSQ' (CharStep c (Just ad)) = CharStep c (Just $ bookAdvSQ ad)
+bookSQ' step = step
+bookAdvSQ :: Augmented Advancement -> Augmented Advancement
+bookAdvSQ = id
+-}
+--
+-- | Check if a tractatus is read for the second time
+bookRepeat :: SagaState -> SagaState 
+bookRepeat = id
+-- bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
+
 -- |
 -- ** Other Book steps
 
 {-
--- | Check if a tractatus is read for the second time
-bookRepeat :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
 
 -- | Check a single character to see if they reread a tractatus 
 bookRepeat' :: [AdvancementStep] -> AdvancementStep -> AdvancementStep
@@ -296,33 +316,9 @@ bookRepeat'' xs x = f x
 
 -}
 
--- | Add and validate source quality on reading advancements
-bookSQ :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-bookSQ (xs,ys) = (xs,map bookSQ' ys)
-
-bookSQ' :: AdvancementStep -> AdvancementStep
-bookSQ' (CharStep c (Just ad)) = CharStep c (Just $ bookAdvSQ ad)
-bookSQ' step = step
-bookAdvSQ :: Augmented Advancement -> Augmented Advancement
-bookAdvSQ = id
 
 {-
 
--- | Add validation errors to Character advancements where a book
--- is oversubscribed.
-bookCollision :: ([AdvancementStep],[AdvancementStep]) -> ([AdvancementStep],[AdvancementStep]) 
-bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
-    where cbs = stepCountBooks chs
-
--- | Add validation errors to one Character advancement, given a list
--- of counted book uses.
-bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
-bookCollision' _ step@(CovStep _ _) = step
-bookCollision' _ step@(CharStep _ Nothing) = step
-bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
-    where bks = bookUsed  $ contractAdvancement ad
-          ad' = addValidation vs ad
-          vs = bkCollisions bcs bks
 
 
 -- | Check for oversubscribed books reporting as a list of Validation

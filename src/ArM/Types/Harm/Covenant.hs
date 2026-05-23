@@ -75,10 +75,6 @@ instance BookDB Covenant where
 instance BookDB CovenantState where
     lookupBook k = lookupBook k . possessions
 
-library :: CovenantState -> [ Book ]
-library = foldl (++) [] . map bookTexts . filter isBook . possessions
-
-
 instance KeyObject Covenant where
     harmKey = CovenantKey . name
 
