@@ -71,7 +71,8 @@ prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advance
 -- | Calculate initial XP limits on Char Gen Advancements
 initialLimits :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 initialLimits sheet ad 
-            | m == CharGen "Early Childhood" = sq 45 $ yr 5 ad
+            | m == CharGen "Early Childhood" = sq 120 $ yr 5 ad
+            -- 120 xp includes native language
             | m == CharGen "Apprenticeship" = sq app1 $ lv app2 $ yr 15 ad
             | m == CharGen "Characteristics" = sq 0 ad
             | m == CharGen "Later Life" = sq (laterLifeSQ vfs ad) ad

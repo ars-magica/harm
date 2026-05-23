@@ -21,9 +21,6 @@ concept:
 pregameAdvancement:
 - mode: Virtues and Flaws
   changes:
-  - ability: 'Native Language: Irish'
-    spec: Leinster
-    xp: 75
   - comment: House Virtue
     cost: 0
     virtue: Craft Magic
@@ -85,6 +82,9 @@ pregameAdvancement:
     score: -3
 - mode: Early Childhood
   changes:
+  - ability: 'Native Language: Irish'
+    spec: Leinster
+    xp: 75
   - ability: 'Area Lore: Munster'
     spec: Hiding Places
     xp: 5
@@ -259,15 +259,16 @@ pregameAdvancement:
       pouch of down, small crystal, piece of amber, comb, fan, earring, small brass
       bell, rabbit bone, cypress wand (8"), sea shell, glass vial, dog''s tooth'
 futureAdvancement:
-- changes:
+- season: Spring 1220
+  mode: Reading
+  changes:
   - art: Herbam
     levelCap: 6
     xp: 24
-  mode: Reading
   narrative: Studies *Root of Herbam* L6 Q21 +3
-  season: Spring 1220
   sourceQuality: 21
-  usesBook: RootHerbam
+  reads:
+    book: RootHerbam
 - changes:
   - art: Mentem
     levelCap: 16
@@ -276,8 +277,8 @@ futureAdvancement:
   narrative: Studies Mentem L16Q13 +3
   season: Summer 1220
   sourceQuality: 13
-  usesBook:
-  - MentemL16Q13
+  reads:
+    - book:  MentemL16Q13
 - changes:
   - art: Terram
     levelCap: 8
@@ -379,7 +380,8 @@ futureAdvancement:
   narrative: Studies *Root of Terram* L8Q15 +3
   season: Autumn 1220
   sourceQuality: 15
-  usesBook: RootTerram
+  reads: 
+     book: RootTerram
 - changes:
   - ability: Infernal Lore
     spec: Undead
@@ -409,7 +411,8 @@ futureAdvancement:
   narrative: Studies book found in Jerome's Tower
   season: Spring 1221
   sourceQuality: 14
-  usesBook: socpL4Q14
+  reads:
+      book: socpL4Q14
 - season: Summer 1221
   mode: 'Exposure: Lab Work'
   changes:

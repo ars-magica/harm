@@ -242,28 +242,20 @@ instance Markdown Possession  where
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessions :: [ Possession ] -> OList
 listPossessions ps = OList
-      [ OString "#### Mundane Equipment"
-      , indentOList $ OList [ OString "Silver"
-                            , (pList $ filter ( (/=0) . silver ) ps)
-                            , (pList $ filter ( (/=0) . silverYield ) ps)
-                            , OString "Weapons"
-                            , (pList ws)
-                            , OString "Armour"
-                            , (pList as)
-                            , OString "Equipment"
-                            , (pList es)
-                            -- Silver
-                            ]
-      , OString "#### Magic Gadgets"
-      , indentOList $ OList [ OString "Vis"
-                            , (pList vs)
-                            , OString "Vis sources"
-                            , (pList $ filter isVisSrc ps)
-                            , OString "Arcane Connections"
-                            , (pList acs)
-                            , OString "Magic Items"
-                            , (pList ms)
-                            ]
+      [ OString "#### Mundane Equipment" 
+      , f [ printPossessionsH "Silver"
+               (filter ( (/=0) . silver ) ps 
+               ++  filter ( (/=0) . silverYield ) ps)
+          , printPossessionsH "Weapons" ws
+          , printPossessionsH "Armour" as
+          , printPossessionsH "Equipment" es
+          ]
+      , OString "#### Magic Gadgets" 
+      , f [ printPossessionsH "Vis" vs
+          , printPossessionsH "Vis sources" $ filter isVisSrc ps
+          , printPossessionsH "Arcane Connections" acs
+          , printPossessionsH "Magic Items" ms
+          ]
       ]
    where vs = filter isVis ps
          ws = filter isWeapon ps
@@ -271,8 +263,7 @@ listPossessions ps = OList
          acs = filter isAC ps
          ms = filter isMagic ps
          es = filter isMundaneEquipment ps
-         -- pList :: [ Possession ] -> OList
-         pList = foldOList . OList  . map printMD . sortTraits 
+         f = OList . map indentHList . filterNothing
 
 -- | Set a header line followed by a bullet list
 bulletWithHeader :: Markdown a => String -> [a] -> OList
@@ -457,9 +448,10 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
            lst | lost a == [] = OList []
              | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
 -- instance AdvancementLike t => Markdown (Augmented t) where
+
 printMDaa :: Augmented Advancement -> OList
 printMDaa a' = indentOList $ OList $ storyOList a ++
-       [ (OString . ("Uses "++) . show ) $ bookRead a
+       [ OList $ filterNothing [ fmap (OString . ("Reads "++) . name ) $ bookRead a ]
        , chnl
        , infl
        , OList $ map (OString . show) $ validation a'

@@ -4,14 +4,15 @@ concept:
     of dog.
   born: 1230
   charData:
-    Background: "Born after his fathers death in Winter 1230. Astri\xF0 read a death\
-      \ prophecy for the newborn Eogan at the fair in 1230.  The covenant has always\
-      \ treated him well, in honour of his father. However, he cannot free himself\
-      \ from his father's fate and has never been able to trust the magi. His mother\
-      \ remarried and he has a couple of half-siblings in the village He has always\
-      \ found himself a bit of an outsider, but found refuge at the kennel when Una\
-      \ was not there. Seeing his aptitude with dogs, Una's mundane assistants trained\
-      \ him."
+    Background: 
+      "Born after his fathers death in Winter 1230. Astrið read a death
+      prophecy for the newborn Eogan at the fair in 1230.  The covenant has always
+      treated him well, in honour of his father. However, he cannot free himself
+      from his father's fate and has never been able to trust the magi. His mother
+      remarried and he has a couple of half-siblings in the village He has always
+      found himself a bit of an outsider, but found refuge at the kennel when Una
+      was not there. Seeing his aptitude with dogs, Una's mundane assistants trained
+      him."
     Prophecy: "*He shall live like his father; die like his father.*  (Astri\xF0.\
       \ spoken at the Autumn fair 1230)"
     Size: 0
@@ -181,9 +182,6 @@ futureAdvancement:
   sourceQuality: 2
 pregameAdvancement:
 - changes:
-  - ability: 'Native Language: Irish'
-    spec: Munster
-    xp: 75
   - cost: 1
     virtue: Warrior
   - cost: 1
@@ -247,7 +245,11 @@ pregameAdvancement:
   - characteristic: Qik
     score: -2
   mode: Characteristics
-- changes:
+- mode: Early Childhood
+  changes:
+  - ability: 'Native Language: Irish'
+    spec: Munster
+    xp: 75
   - ability: Stealth
     spec: Hiding
     xp: 5
@@ -269,7 +271,6 @@ pregameAdvancement:
   - ability: Charm
     spec: Animals
     xp: 5
-  mode: Early Childhood
 - changes:
   - ability: Animal Handling
     spec: Dogs

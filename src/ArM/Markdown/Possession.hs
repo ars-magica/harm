@@ -18,6 +18,7 @@ import ArM.Markdown.HList
 import ArM.Story
 import ArM.Trait
 import ArM.Helper 
+import Data.List
 import Data.HList
 import Data.Maybe
 
@@ -53,6 +54,10 @@ printPossessionH ob
     | otherwise = pH ob 
      -- hfm :: String -> Maybe HList -> HList
   where hfm s = fromMaybe (HList s [])
+
+printPossessionsH :: String -> [Possession] -> Maybe HList 
+printPossessionsH _ [] = Nothing
+printPossessionsH s ps = Just $ HList s $ map printPossessionH $ sort ps 
 
 -- | Render a book in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.

@@ -3,7 +3,6 @@ characterFiles:
 - Data/cieran.yaml
 - Data/eogan.yaml
 - Data/tessa.yaml
-- Data/rogue.yaml
 covenantFiles:
 - Data/elksrun.yaml
 description:
