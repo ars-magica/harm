@@ -158,4 +158,9 @@ addRequired y a = a { inferredAdv = ia { requires = harmKey y:requires ia } }
 
 -- | Infer source qualities
 chgSQ :: Character -> Character
-chgSQ = id
+chgSQ c = chgSQ' (advancementmode $ chgCurrentAdv c) c
+
+-- | Infer source qualities
+chgSQ' :: String -> Character -> Character
+chgSQ' "Reading" = id
+chgSQ' _ = id
