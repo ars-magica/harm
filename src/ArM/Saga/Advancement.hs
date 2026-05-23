@@ -167,6 +167,7 @@ stepCovenFolk st = covenMap f st
      where f = cvgCovenFolk .  initCovAdvancement (season st) 
 
 
+-- | Update characters to reflect covenant affiliation
 stepMembership :: SagaState -> SagaState
 stepMembership st = st { characters = ch }
     where ch = updateMembership ch' $ M.elems $ covenants st
