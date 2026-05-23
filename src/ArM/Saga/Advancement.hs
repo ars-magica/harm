@@ -122,6 +122,16 @@ advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
                      | ssn < nextSeason saga = saga 
                      | otherwise = f ssn $ stepSaga saga
 
+-- | Map an advancement function on every covenant
+covenMapS :: ( SagaState -> Covenant -> Covenant ) ->  SagaState -> SagaState
+covenMapS f st = covenMap (f st) st
+-- | Map an advancement function on every covenant
+covenMap :: ( Covenant -> Covenant ) ->  SagaState -> SagaState
+covenMap f st = st { covenants = M.map f $ covenants st }
+-- | Map an advancement function on every covenant
+charMap :: ( Character -> Character ) ->  SagaState -> SagaState
+charMap f st = st { characters = M.map f $ characters st }
+
 -- | 
 -- ** Advancement step
 
@@ -194,17 +204,18 @@ stepAdv :: SagaState -> SagaState
 stepAdv = stepAdvChar . stepAdvCov
 
 stepAdvChar :: SagaState -> SagaState
-stepAdvChar st = st { characters = M.map chgStep $ characters st }
+stepAdvChar = charMap chgStep 
 stepAdvCov :: SagaState -> SagaState
-stepAdvCov st = st { covenants = M.map cvgStep $ covenants st }
+stepAdvCov = covenMap cvgStep 
+
 
 stepVal :: SagaState -> SagaState
 stepVal = stepValChar . stepValCov
 
 stepValChar :: SagaState -> SagaState
-stepValChar st = st { characters = M.map chgValidate $ characters st }
+stepValChar = charMap chgValidate 
 stepValCov :: SagaState -> SagaState
-stepValCov st = st 
+stepValCov = id 
 
 
 -- |
@@ -234,10 +245,16 @@ stepBook = bookRepeat . bookSQ . bookCollision . addBooks
 addBooks :: SagaState -> SagaState
 addBooks st = st { characters = M.map (chgBook st) $ characters st }
 
+
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
 bookCollision :: SagaState -> SagaState 
-bookCollision = id
+bookCollision = covenMapS bookCollisionCov 
+
+bookCollisionCov :: SagaState -> Covenant -> Covenant
+bookCollisionCov st cv = addCovenantValidation (bkCollisions rq av) cv
+      where rq = countRequires st cv
+            av = countAvailable cv
 
 -- | Count uses of books in an advancement step
 countRequires :: SagaState
@@ -245,26 +262,34 @@ countRequires :: SagaState
               -> [(HarmKey,Int)]       -- ^ List of books with number of users
 countRequires s = countRepetitions . listRequires s
 
+-- | Count available books
+countAvailable :: Covenant  -- ^ List of character advancement steps for one season
+              -> [Possession]       -- ^ List of books with number of users
+countAvailable = fromMaybe [] . fmap possessions . covenantState
+
+
 -- | Get a list of books used in the seqason
 listRequires :: SagaState -> Covenant -> [HarmKey]
 listRequires saga = sort . foldl (++) [] 
                   . map ( requires . contractAdvancement . chgCurrentAdv ) 
                   . fromMaybe [] . fmap ( covenFolk saga ) . covenantState
 
-{-
-bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
-    where cbs = stepCountBooks chs
 
--- | Add validation errors to one Character advancement, given a list
--- of counted book uses.
-bookCollision' :: [(Book,Int)] -> AdvancementStep -> AdvancementStep
-bookCollision' _ step@(CovStep _ _) = step
-bookCollision' _ step@(CharStep _ Nothing) = step
-bookCollision' bcs (CharStep ch (Just ad)) = CharStep ch (Just ad')
-    where bks = bookUsed  $ contractAdvancement ad
-          ad' = addValidation vs ad
-          vs = bkCollisions bcs bks
--}
+
+-- | Check for oversubscribed books reporting as a list of Validation
+-- objects.
+bkCollisions :: [(HarmKey,Int)]  -- ^ List of books and numbers of subscribers.
+             -> [Possession]     -- ^ List of available books 
+             -> [Validation]  -- ^ Verification or error for each book checked.
+bkCollisions bcs bks = f bcs $ sort bks 
+   where  f [] _ = []
+          f _ [] = []
+          f (c:cs) (b:bs) | fst c < harmKey b = f cs (b:bs)
+                          | fst c > harmKey b = f (c:cs) bs
+                          | otherwise = val c b:f cs bs
+          val c b | count b < snd c = ValidationError $ name b ++ " is oversubscribed"
+                  | otherwise = Validated $ name b ++ " is available."
+
 
 -- | Add and validate source quality on reading advancements
 bookSQ :: SagaState -> SagaState
@@ -327,27 +352,6 @@ bookRepeat'' xs x = f x
                      -- | otherwise = addValidation err x
           bid = fromMaybe "" $ fmap bookID b
           err = ValidationError $ "Tractatus " ++ bid ++ " is read for the second time."
-
--}
-
-
-{-
-
-
-
--- | Check for oversubscribed books reporting as a list of Validation
--- objects.
-bkCollisions :: [(Book,Int)]  -- ^ List of books and numbers of subscribers.
-             -> [Book]        -- ^ List of books to check for oversubscription.
-             -> [Validation]  -- ^ Verification or error for each book checked.
-bkCollisions bcs bks = f bcs $ sort bks 
-   where  f [] _ = []
-          f _ [] = []
-          f (c:cs) (b:bs) | fst c < b = f cs (b:bs)
-                          | fst c > b = f (c:cs) bs
-                          | otherwise = val (snd c) b:f cs bs
-          val c b | count b < c = ValidationError $ name b ++ " is oversubscribed"
-                  | otherwise = Validated $ "Book " ++ bookID b ++ " is available."
 
 -}
 
