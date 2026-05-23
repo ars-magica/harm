@@ -162,5 +162,9 @@ chgSQ c = chgSQ' (advancementmode $ chgCurrentAdv c) c
 
 -- | Infer source qualities
 chgSQ' :: String -> Character -> Character
-chgSQ' "Reading" = id
+chgSQ' "Reading" = updateCharacterAdv readingSQ
 chgSQ' _ = id
+
+-- | Check and update source qualities for reading
+readingSQ :: Augmented Advancement -> Augmented Advancement 
+readingSQ = id
