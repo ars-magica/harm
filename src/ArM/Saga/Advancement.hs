@@ -143,22 +143,27 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
      where f x = x { seasonTime = nextSeason saga }
 
 -- | Advance the sagaState forward by one season.
+--
+-- This function comprises a series of transisions which have to be made
+-- in order.
 stepSagaState :: SagaState -> SagaState
 stepSagaState = stepVal        -- validate characters and covenants individually
-              . stepAdv        -- advance characters and covenants individually
+              . charMap chgStep   -- advance individual characters
+              . covenMap cvgStep  -- advance individual covenants
+              . charMap chgRepeat -- check for repeated reading of tractatus (ind. char.)
+              . charMap chgSQ  -- infer SQ on individual characters
               . stepBook       -- Look up books and check for conflict (joint step) 
               . stepMembership -- Update characters to reflect covenant affiliation
-              . stepCovenFolk  -- Initialise covenants and update covenfolk
+              . stepCovenFolk  -- Initialise covenants and update covenfolk  (ind. cov.)
               . stepInit       -- Initialise individual characters for advancement
 
 -- | Initialise characters
 stepInit :: SagaState -> SagaState
-stepInit st = st { characters = M.map f $ characters st }
-     where f = initAdvancement (season st) 
+stepInit st = charMap ( initAdvancement $ season st ) st
 
 -- | Initialise covenants and update covenfolk
 stepCovenFolk :: SagaState -> SagaState
-stepCovenFolk st = st { covenants = M.map f $ covenants st }
+stepCovenFolk st = covenMap f st
      where f = cvgCovenFolk .  initCovAdvancement (season st) 
 
 
@@ -202,15 +207,6 @@ updateCharMembership (CovenantKey k) ch
 updateCharMembership _ ch = addCharacterValidation val ch
    where val = [ValidationError "Programming error: Non-covenant key for character."]
 
-stepAdv :: SagaState -> SagaState
-stepAdv = stepAdvChar . stepAdvCov
-
-stepAdvChar :: SagaState -> SagaState
-stepAdvChar = charMap chgStep 
-stepAdvCov :: SagaState -> SagaState
-stepAdvCov = covenMap cvgStep 
-
-
 stepVal :: SagaState -> SagaState
 stepVal = stepValChar . stepValCov
 
@@ -235,7 +231,7 @@ stepValCov = trace "Not implemented: stepValCov"
 
 -- | Validation and inference concerning books.
 stepBook :: SagaState -> SagaState
-stepBook = bookRepeat . bookSQ . bookCollision . addBooks
+stepBook = bookCollision . addBooks
 
 -- |
 -- Find books in the covenants or character and add to the advancements
@@ -292,12 +288,4 @@ bkCollisions bcs bks = f bcs $ sort bks
           val c b | count b < snd c = ValidationError $ name b ++ " is oversubscribed"
                   | otherwise = Validated $ name b ++ " is available."
 
-
--- | Add and validate source quality on reading advancements
-bookSQ :: SagaState -> SagaState
-bookSQ = charMap chgSQ
-
--- | Check if a tractatus is read for the second time
-bookRepeat :: SagaState -> SagaState 
-bookRepeat = charMap chgRepeat
 
