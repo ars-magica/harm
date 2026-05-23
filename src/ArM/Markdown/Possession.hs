@@ -55,6 +55,8 @@ printPossessionH ob
      -- hfm :: String -> Maybe HList -> HList
   where hfm s = fromMaybe (HList s [])
 
+-- | Render a list of possessions as a HList, returning Nothing
+-- if it is empty.
 printPossessionsH :: String -> [Possession] -> Maybe HList 
 printPossessionsH _ [] = Nothing
 printPossessionsH s ps = Just $ HList s $ map printPossessionH $ sort ps 
