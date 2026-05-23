@@ -293,22 +293,17 @@ bkCollisions bcs bks = f bcs $ sort bks
 
 -- | Add and validate source quality on reading advancements
 bookSQ :: SagaState -> SagaState
-bookSQ = id
+bookSQ = charMap chgSQ
 
-{-
-bookSQ (xs,ys) = (xs,map bookSQ' ys)
+chgSQ :: Character -> Character
+chgSQ = id
 
-bookSQ' :: AdvancementStep -> AdvancementStep
-bookSQ' (CharStep c (Just ad)) = CharStep c (Just $ bookAdvSQ ad)
-bookSQ' step = step
-bookAdvSQ :: Augmented Advancement -> Augmented Advancement
-bookAdvSQ = id
--}
---
+chgRepeat :: Character -> Character
+chgRepeat = id
+
 -- | Check if a tractatus is read for the second time
 bookRepeat :: SagaState -> SagaState 
-bookRepeat = id
--- bookRepeat (xs,ys) = (xs, map (bookRepeat' xs) ys)
+bookRepeat = charMap chgRepeat
 
 -- |
 -- ** Other Book steps
