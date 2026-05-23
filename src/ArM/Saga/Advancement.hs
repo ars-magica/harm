@@ -295,11 +295,7 @@ bkCollisions bcs bks = f bcs $ sort bks
 bookSQ :: SagaState -> SagaState
 bookSQ = charMap chgSQ
 
--- | Infer source qualities
-chgSQ :: Character -> Character
-chgSQ = id
-
--- | Check if tractatus are reread
+-- | Check if converge to are reread
 chgRepeat :: Character -> Character
 chgRepeat = id
 

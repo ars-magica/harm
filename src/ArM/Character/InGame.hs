@@ -155,3 +155,7 @@ setBook y a = a { inferredAdv = (inferredAdv a) { bookRead = Just y } }
 addRequired :: Possession -> Augmented Advancement -> Augmented Advancement
 addRequired y a = a { inferredAdv = ia { requires = harmKey y:requires ia } }
    where ia = inferredAdv a
+
+-- | Infer source qualities
+chgSQ :: Character -> Character
+chgSQ = id
