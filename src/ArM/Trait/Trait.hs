@@ -544,18 +544,20 @@ instance FromJSON Book where
 -- their ID.
 class BookDB h where
    -- | Look up a book by key (String) in a database.
-   bookLookup :: h -> String -> Maybe Book
+   bookLookup :: h -> HarmKey -> Maybe Possession
    bookLookup db k = lookupBook k db 
    -- | Look up a book by key (String) in a database.
    -- This is equivalent to `bookLookup` with the arguments swapped
-   lookupBook :: String -> h -> Maybe Book
+   lookupBook :: HarmKey -> h -> Maybe Possession
    lookupBook k db = bookLookup db k
 
 instance (BookDB h) => BookDB [h] where
    lookupBook k = foldl mplus Nothing . map (\ x -> bookLookup x k) 
-instance BookDB Book where
-   bookLookup bk k | k == bookID bk = Just bk
+instance BookDB Possession where
+   bookLookup bk k | k == harmKey bk = Just bk
+                   | length bs > 0 = Just bk
                    | otherwise = Nothing
+       where bs = filter ( (==k) . harmKey ) $ bookTexts bk
 
 -- | A default book object, providing defaults for fields not available in the CSV format.
 defaultBook :: Book

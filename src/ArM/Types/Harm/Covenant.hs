@@ -73,7 +73,7 @@ instance BookDB Covenant where
    lookupBook k = join . fmap (lookupBook k) . covenantState 
 
 instance BookDB CovenantState where
-    lookupBook k = lookupBook k . library
+    lookupBook k = lookupBook k . possessions
 
 library :: CovenantState -> [ Book ]
 library = foldl (++) [] . map bookTexts . filter isBook . possessions
