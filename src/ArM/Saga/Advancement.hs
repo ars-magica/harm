@@ -32,15 +32,17 @@ module ArM.Saga.Advancement ( advanceSaga
                        ) where
 
 import Data.Maybe 
--- import Data.List 
+import Data.List 
 import qualified Data.Map as M
 
+import ArM.Saga.Saga
 import ArM.Character
 import ArM.Covenant
 import ArM.Processing
+import ArM.Trait
 import ArM.Story
 import ArM.Types.Harm
--- import ArM.Helper
+import ArM.Helper
 
 -- |
 -- * Types
@@ -237,6 +239,18 @@ addBooks st = st { characters = M.map (chgBook st) $ characters st }
 bookCollision :: SagaState -> SagaState 
 bookCollision = id
 
+-- | Count uses of books in an advancement step
+countRequires :: SagaState
+              -> Covenant  -- ^ List of character advancement steps for one season
+              -> [(HarmKey,Int)]       -- ^ List of books with number of users
+countRequires s = countRepetitions . listRequires s
+
+-- | Get a list of books used in the seqason
+listRequires :: SagaState -> Covenant -> [HarmKey]
+listRequires saga = sort . foldl (++) [] 
+                  . map ( requires . contractAdvancement . chgCurrentAdv ) 
+                  . fromMaybe [] . fmap ( covenFolk saga ) . covenantState
+
 {-
 bookCollision (cvs,chs) = (cvs,map (bookCollision' cbs) chs)
     where cbs = stepCountBooks chs
@@ -335,14 +349,5 @@ bkCollisions bcs bks = f bcs $ sort bks
           val c b | count b < c = ValidationError $ name b ++ " is oversubscribed"
                   | otherwise = Validated $ "Book " ++ bookID b ++ " is available."
 
--- | Count uses of books in an advancement step
-stepCountBooks :: [AdvancementStep]  -- ^ List of character advancement steps for one season
-               -> [(Book,Int)]       -- ^ List of books with number of users
-stepCountBooks = countRepetitions . stepBooksUsed
-
--- | Get a list of books used in the seqason
-stepBooksUsed :: [AdvancementStep] -> [Book]
-stepBooksUsed = sort . foldl (++) [] . map ( bookUsed . contractAdvancement ) 
-              .  stepBooksUsed' 
 -}
 

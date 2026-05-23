@@ -65,6 +65,7 @@ module ArM.Character (
                           , chgStep
                           , chgValidate
                           , chgBook
+                          , chgCurrentAdv
                           ) where
 
 import ArM.Types.Advancement
