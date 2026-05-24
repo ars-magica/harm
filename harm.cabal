@@ -74,6 +74,9 @@ description:
        This has just found a stable structure, which is being extended.
      + ArM.*.InGame have been set up to support ArM.Saga.Advancement.
        This is well-structured and will only grow to support new features.
+     + ArM.Character.CharGen has been cleaned up and is fairly well-structured.
+     + ArM.Character.Inference is ok; it exports only one functions which has been
+       documented.
      
      Other routines is a mesh of new and old code.
 

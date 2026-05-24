@@ -29,6 +29,12 @@ import Data.Maybe
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `Character`.
+--
+-- Currently included
+-- 1. Increasing age by 1 in Winter
+-- 2. Infer traits from virtues and flaws
+-- 3. Infer decrepitude from aging points
+-- 4. Infer the effects of Flawless magic
 addInference :: Character -> Advancement -> Augmented Advancement
 addInference cs a = Adv { explicitAdv = a
                         , inferredAdv = augmentAdvancement cs a 
