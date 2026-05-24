@@ -53,7 +53,6 @@ module ArM.Character (
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions
-                          , characterEntryTime
                           , prepareCharacter
                           -- * Advancement
                           , initAdvancement

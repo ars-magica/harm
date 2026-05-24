@@ -28,7 +28,6 @@ module ArM.Character.Character (
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions
-                          , characterEntryTime
                           , characterPossessions
                           ) where
 
@@ -46,15 +45,6 @@ characterPossessions = filterNothing . map getTrait . traits
 
 -- |
 -- = Convenience Functions for Character Properties
-
--- | The first season the character is played
-characterEntryTime :: Character -> SeasonTime
-characterEntryTime c | tm == NoTime = f $ futureAdvancement c
-                     | otherwise = tm
-     where tm = entryTime c
-           f [] = tm
-           f (x:_) = season x
-
 
 charAgingBonus :: CharacterLike c => c -> Int
 charAgingBonus c = ag - sum ( map snd (charAgingBonusList c) )

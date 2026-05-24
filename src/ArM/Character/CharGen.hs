@@ -34,9 +34,7 @@ import Data.Maybe
 
 import ArM.Debug.Trace
 
-
--- |
--- = Char Gen
+-- * Char Gen
 
 -- | Compute the initial state of the character.
 --
@@ -77,14 +75,15 @@ setEntryTime c = c { entryTime = f $ futureAdvancement c, charTime = GameStart }
 -- virtues and flaws, add XP limits to the advancements, and checks that
 -- the advancement does not overspend XP or exceed other limnits.
 prepareCharGen :: Character -> Advancement -> Augmented Advancement
-prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
-                  . sortAdvTraits      -- Restore sort order on inferred traits
-                  . agingYears              -- add years of aging as an inferred trait
-                  . initialLimits (characterSheet cs)        -- infer additional properties on the advancement
-                  . addInference cs         -- infer additional traits 
-          where sheet = characterSheet cs
+prepareCharGen cs 
+   = validateCharGen sheet   -- Validate integrity of the advancement
+   . sortAdvTraits           -- Restore sort order on inferred traits
+   . agingYears              -- add years of aging as an inferred trait
+   . initialLimits sheet     -- infer additional properties on the advancement
+   . addInference cs         -- infer additional traits 
+   where sheet = characterSheet cs
 
--- | Calculate initial XP limits on Char Gen Advancements
+-- | Calculate initial XP limits on CharGen Advancements
 initialLimits :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
 initialLimits sheet ad 
             | m == CharGen "Early Childhood" = sq 120 $ yr 5 ad
@@ -107,7 +106,9 @@ agingYears x | y > 0 = addProtoTrait [ agePT y ] x
    where y = fromMaybe 0 $ years $ contractAdvancement x
 
 
--- | Add the Confidence trait to the character state, using 
+-- | Add the Confidence trait to the character state.
+--
+-- This is the last step of CharGen, inferring confidence from the traits.
 addConfidence :: Character -> Character
 addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
           where vfs = vfList sheet
@@ -125,12 +126,9 @@ applyCharGenAdv a cs = (a',f cs')
          (PostProcessor g) = postprocessTrait $ contractAdvancement a'
          f x = x { traits = map g $ traits x }
 
-
-
-
--- |
--- = CharGen Validation
+-- * CharGen Validation
 -- 
+-- $chargenvalidation
 -- CharGen validation is tricky, often depending on virtues and flaws.
 -- Therefore, most functions depend also on the `CharacterSheet` in addition
 -- to the `Augmented Advancement`.
@@ -222,6 +220,7 @@ validateChar' sheet a | m /= CharGen "Characteristics" = a
                  over = "Overspent " ++ (show ex) ++ " points out of "
                      ++ show lim ++ " on characteristics."  
                  val = "Correctly spent " ++ (show ex) ++ " points on characteristics."  
+
 -- | Count characterics points spent in an Advancement
 calculateCharPoints :: Advancement -> Int
 calculateCharPoints = sum . map cScore . changes
