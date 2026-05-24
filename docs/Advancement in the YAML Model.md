@@ -7,15 +7,21 @@ tags:
 	
 + [[Saga Advancement Visualised.canvas|Saga Advancement Visualised]] illustrates the top level flow when a saga is loaded and processed.
 + We have to distinguish between in-game and pre-game advancement.
++ Common inference
+	+ `addInference` applies to both CharGen and InGame advancement
 
 ## In-Game Advancement May 2026
 
 + The advancement process is currently under review.
 + The pivotal module for in-game advancement is `ArM.Saga.Advancement`
-	+ `advanceSaga` creates a list of `Saga` objects by advancing to each stage required by the saga file
+	+ `advanceSaga` creates a list of `Saga` objects by advancing to each stage required by the saga file, by recursively applying `stepSaga`
 	+ `stepSaga` advances the `Saga` one season, relying on a large number of constituent functions, mostly mapping functions from 
 		+ `ArM.Character.InGame`
 		+ `ArM.Covenant.InGame`
++ `stepSaga` comprises some steps which simply map over characters/covenants and some steps which consider all the entities jointly
+	+ each step depends on the state and the current advancement being processed
+	+ the current advancement is stored at the head of past advancements, and update when required
+	+ the State includes virtues and flaws which may modify behaviour.
 + These three modules are fairly well-structured at the moment.
 + The process is elaborated in [[Joint Advancement]]
 
@@ -23,24 +29,21 @@ tags:
 
 CharGen is simpler because each character and covenant is developed independently of all others. Hence the process can be managed from the `ArM.Character` and `ArM.Covenant` independently.
 
-+ `ArM.Character.CharGen` provides the `prepareCharacter` function.
++ `ArM.Character.CharGen` provides the `prepareCharacter` function, which applies advancements recursively
++ Each advancement is prepared by `prepareCharGen` which applies
+	+ `addInference` (shared with in-game)
+			+ adding bonus
+			+ validation
+	+ `initialLimits` inferring XP and other limits
+		+ this replaces the source quality (SQ) used in-game
+	+ `agingYears` which computes age
+		+ **TODO** aging
+	+ sort traits (assumed by some steps)
+	+ `validateCharGen` which checks the limits
+		+ constituent functions for specific CharGen advancement types
 ## Validating SQ and XP use
 
-These notes are old, but probably apply to pre-game advancement.
-The solution is not implemented for in-game advancement.
-
-+ For each season, the `advance` function is called independently for each `Character` and each `Covenant`
-	+ This is not fully developed for `Covenant` yet, for `Character` it
-		+ First augments the advancement
-			+ adding limits
-			+ adding bonus
-			+ inferring additional traits
-			+ validation
-		+ Then applies the advancement
-	    + In both cases it depends on the State from previous season and Advancement from current season.
-	        + The State includes virtues and flaws which may modify behaviour.
-
-## Source Quality Calculation
+### Source Quality Calculation
 
 | Mode      | Base       | Virtue            | Other                               | Traits             |
 | :-------- | ---------- | ----------------- | ----------------------------------- | ------------------ |
@@ -58,31 +61,7 @@ The solution is not implemented for in-game advancement.
 + Bonuses may be lists, including justifications
 + Validation - compare standard SQ to autocomputed SQ
 
-
-## Advancement Object
-
-The table is not up to date.
-Currently we use `Augmented Advancement`  with an explicit and an inferred (augmented) advancement, each using the same `Advancement` Type. Additionally, the `Augmented Advancement` has  a list of `Validation` objects.
-
-| Field          | Advancement    | Augmented          | Type              | Comment                                            |     |     |     |
-| :------------- | :------------- | :----------------- | :---------------- | :------------------------------------------------- | --- | --- | --- |
-| mode           | `advMode`      |                    | `AdvancementType` | mode of study                                      |     |     |     |
-| season         | `advSeason`    |                    | `SeasonTime`      | season or development stage                        |     |     |     |
-| years          | `advYears`     | `augYears`         | `Maybe Int`       | number of years advanced                           |     |     |     |
-| narrative      | `advNarrative` | N/A                | `[ String ]`      | narrative description of the activities            |     |     |     |
-| comment        | `advComment`   | N/A                | `[ String ]`      | freeform description of the activities             |     |     |     |
-| uses book      | `advUses`      | `bookUsed`         | [ String/Book ]   | Books used exclusively by the character            |     |     |     |
-| SQ             | `advSQ`        | `baseSQ`           | `Maybe XPType`    | Source Quality (SQ)                                |     |     |     |
-| score cap      | `advCap`       | `scoreCap`         | `Maybe Int`       | advancement cap on abilities/arts                  |     |     |     |
-| Bonus SQ       | `advBonus`     |                    | `Maybe XPType`    | Bonus to Source Quality (SQ)                       |     |     |     |
-| Bonus SQ       |                | `bonusSQ`          | `XPType`          | Bonus to Source Quality from Virtues and Flaws     |     |     |     |
-| trait changes  | `advChanges`   | `inferredTraits`   | `[ ProtoTrait ]`  | trait changes defined by player                    |     |     |     |
-| SQ as teacher  |                | `teacherSQ`        | `Maybe Int`       | The SQ generated as teacher                        |     |     |     |
-| Spell levels   |                | `levelLimit`       | `Maybe Int`       | spell level allowance                              |     |     |     |
-| XP spent       | N/A            | `spentXP`          | `Maybe XPType`    | Total XP spent on advancement                      |     |     |     |
-| Postprocessing | N/A            | `postProcessTrait` | `PostProcessor`   | Extra postprocessing for traits at the given stage |     |     |     |
-
-## Study from Teacher
+### Study from Teacher
 
 Teaching has not been considered in the implementation yet.
 
@@ -97,6 +76,30 @@ Teaching has not been considered in the implementation yet.
 + How do we augment the advancements using information from the covenant and other characters?
 	+ SQ from teacher (other character)
 		+ tricky!  Inter-dependency between advancements
+
+
+## Advancement Object
+
+The table is not up to date.
+Currently we use `Augmented Advancement`  with an explicit and an inferred (augmented) advancement, each using the same `Advancement` Type. Additionally, the `Augmented Advancement` has  a list of `Validation` objects.
+
+| Field          | Advancement     | Augmented          | Type              | Comment                                            |     |     |     |
+| :------------- | :-------------- | :----------------- | :---------------- | :------------------------------------------------- | --- | --- | --- |
+| mode           | `advMode`       | (copied)           | `AdvancementType` | mode of study                                      |     |     |     |
+| season         | `advSeason`     |                    | `SeasonTime`      | season or development stage                        |     |     |     |
+| years          | `advYears`      | `augYears`         | `Maybe Int`       | number of years advanced                           |     |     |     |
+| narrative      | `advNarrative`  | N/A                | `[ String ]`      | narrative description of the activities            |     |     |     |
+| comment        | `advComment`    | N/A                | `[ String ]`      | freeform description of the activities             |     |     |     |
+| requires       | requires        | requires           | `[ HarmKey ]`     | possessions required for exclusive use             |     |     |     |
+| readsBook      | `readsBook`     | N/A                | `[ HarmKey ]`     | books read                                         |     |     |     |
+| bookRead       | N/A             | `bookRead`         | `[ Book ]`        | Book inferred from Key                             |     |     |     |
+| SQ             | `sourceQuality` | `baseSQ`           | `Maybe XPType`    | Source Quality (SQ)                                |     |     |     |
+| score cap      | `sourceCap`     | `scoreCap`         | `Maybe Int`       | advancement cap on abilities/arts                  |     |     |     |
+| Bonus SQ       | `bonusSQ`       | `bonusSQ`          | `[ BonusSQ ]`     | Bonus to Source Quality (SQ)                       |     |     |     |
+| trait changes  | `changes`       | `changes`          | `[ ProtoTrait ]`  | trait changes defined by player                    |     |     |     |
+| SQ as teacher  |                 | `teacherSQ`        | `Maybe XPType`    | The SQ generated as teacher                        |     |     |     |
+| Spell levels   |                 | `levelLimit`       | `Maybe Int`       | spell level allowance                              |     |     |     |
+| Postprocessing | N/A             | `postProcessTrait` | `PostProcessor`   | Extra postprocessing for traits at the given stage |     |     |     |
 
 
 ## Other challenges
