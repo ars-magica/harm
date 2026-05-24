@@ -84,6 +84,6 @@ flawlessSpells' (x:xs) | isSpell (protoTrait x) = y:ys
 hasFlawless :: Character -> Bool
 hasFlawless c | fms == [] = False
               | otherwise = True
-    where ts = vfList $ characterSheet c
+    where ts = vfList c
           fms = filter ((=="Flawless Magic") . vfname ) ts
 

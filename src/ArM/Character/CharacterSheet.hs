@@ -13,22 +13,7 @@
 -- such as casting totals.
 --
 -----------------------------------------------------------------------------
-module ArM.Character.CharacterSheet ( CharacterSheet(..)
-                               , sheetArtScore
-                               , sheetAbilityScore
-                               , sheetCharacteristicScore
-                               , sheetPossession
-                               , castingScore
-                               , addCastingScores
-                               , castingTotals
-                               , labTotals
-                               , CharacterLike(..)
-                               , sheetVis
-                               , characterLab
-                               , charTeacherSQ
-                               , ritualCastingBonus
-                               , ceremonialCastingBonus
-                               ) where
+module ArM.Character.CharacterSheet where
 
 import ArM.Types.Advancement
 import ArM.Types.Harm
@@ -36,124 +21,67 @@ import ArM.Trait
 import ArM.DB
 import ArM.Helper
 
-import GHC.Generics
-import Data.Aeson
 import Data.Maybe
 import Data.List
 import Control.Monad
 
 -- import ArM.Debug.Trace
 
--- | The CharacterSheet object holds a Character State with separate fields
--- for different kinds of traits
-data CharacterSheet = CharacterSheet 
-         { csType :: CharacterType
-         , vfList :: [ VF ]
-         , charList :: [ Characteristic ]
-         , abilityList :: [ Ability ]
-         , artList :: [ Art ]
-         , spellList :: [ Spell ]
-         , reputationList :: [ Reputation ]
-         , ptList :: [ PTrait ]
-         , confList :: [ Confidence ]
-         , otherList :: [ OtherTrait ]
-         , possessionList :: [ Possession ]
-         , labList :: [ Lab ]
-         , combatList :: [ CombatOption ]
-         , csTraits :: [ Trait ]
-         }  deriving (Eq,Show,Generic)
+
+vfList :: Character -> [ VF ]
+vfList = filterNothing . map getTrait . traits
+abilityList :: Character -> [ Ability ]
+abilityList = filterNothing . map getTrait . traits
+artList :: Character -> [ Art ]
+artList = filterNothing . map getTrait . traits
+spellList :: Character -> [ Spell ]
+spellList = filterNothing . map getTrait . traits
+reputationList :: Character -> [ Reputation ]
+reputationList = filterNothing . map getTrait . traits
+ptList :: Character -> [ PTrait ]
+ptList = filterNothing . map getTrait . traits
+charList :: Character -> [ Characteristic ]
+charList = filterNothing . map getTrait . traits
+confList :: Character -> [ Confidence ]
+confList  = filterNothing . map getTrait . traits
+otherList :: Character -> [ OtherTrait ]
+otherList  = filterNothing . map getTrait . traits
+
+characterPossessions :: Character -> [ Possession ]
+characterPossessions = filterNothing . map getTrait . traits 
+
+labList :: Character -> [ Lab ]
+labList  = filterNothing . map getTrait . traits
+combatList :: Character -> [ CombatOption ]
+combatList  = filterNothing . map getTrait . traits
+-- csTraits :: [ Trait ]
+-- csTraits = traits
+--
 
 -- | Return the character's lab if any
-characterLab :: CharacterLike c => c -> Maybe Lab
-characterLab = f . labList . characterSheet
+characterLab :: Character -> Maybe Lab
+characterLab = f . labList 
    where f [] = Nothing
          f (lb:_) = Just lb
 
--- | A default CharacterSheet for internal use.
-defaultSheet :: CharacterSheet 
-defaultSheet = CharacterSheet 
-         { csType = Magus
-         , vfList = [ ]
-         , charList = [ ]
-         , abilityList = [ ]
-         , artList = [ ]
-         , spellList = [ ]
-         , reputationList = []
-         , ptList = []
-         , confList = []
-         , otherList = [ ]
-         , possessionList = [ ]
-         , labList = [ ]
-         , combatList = []
-         , csTraits = [ ]
-         }  
-
-
-instance ToJSON CharacterSheet where
-    toEncoding = genericToEncoding defaultOptions
-instance FromJSON CharacterSheet 
-
-
--- | Get the CharacterSheet corresponding to a given CharacterState.
-filterCS :: Character -> CharacterSheet
-filterCS cs = defaultSheet  
-                 { csType = charType $ concept cs
-                 , vfList = x1
-                 , abilityList = x2
-                 , artList = x3
-                 , spellList = sortTraits x4
-                 , reputationList = x5
-                 , ptList = x6
-                 , charList = x7
-                 , confList = x8
-                 , otherList = x9
-                 , possessionList = x10
-                 , labList = x11
-                 , combatList = x12
-                 , csTraits = y12
-                }
-           where (x1,y1) = filterTrait $ traits cs
-                 (x2,y2) = filterTrait y1
-                 (x3,y3) = filterTrait y2
-                 (x4,y4) = filterTrait y3
-                 (x5,y5) = filterTrait y4
-                 (x6,y6) = filterTrait y5
-                 (x7,y7) = filterTrait y6
-                 (x8,y8) = filterTrait y7
-                 (x9,y9) = filterTrait y8
-                 (x10,y10) = filterTrait y9
-                 (x11,y11) = filterTrait y10
-                 (x12,y12) = filterTrait y11
-
-
-
--- | Find a trait, given by a key, from the CharacterSheet.
--- This may not be in use. 
-findTraitCS ::  TraitKey -> CharacterSheet -> Maybe Trait
-findTraitCS (AbilityKey x) = (fmap toTrait) . findTrait (AbilityKey x) . abilityList
-findTraitCS (ArtKey x) = (fmap toTrait) . findTrait (ArtKey x) . artList
-findTraitCS (SpellKey x y z) = (fmap toTrait) . findTrait (SpellKey x y z) . spellList
-findTraitCS (CharacteristicKey x) = (fmap toTrait) . findTrait (CharacteristicKey x) . charList
-findTraitCS _ = \ _ -> Nothing
-
 -- | Get a given `Possession` from the character sheet
-sheetPossession :: CharacterSheet -> TraitKey -> Maybe Possession
-sheetPossession cs k = ( findTrait k . possessionList ) cs
+sheetPossession :: Character -> TraitKey -> Maybe Possession
+sheetPossession cs k = ( findTrait k . characterPossessions ) cs
 
 -- | Get the score and speciality in a given ability.
-sheetAbilityScore :: CharacterSheet -> TraitKey -> (Int,Maybe String)
+sheetAbilityScore :: Character -> TraitKey -> (Int,Maybe String)
 sheetAbilityScore cs k | isNothing x = (0,Nothing)
                      | otherwise = (abilityScore x', speciality x') 
      where x = ( findTrait k . abilityList ) cs
            x' = fromJust x
 -- | Get a given art score 
-sheetArtScore :: CharacterSheet -> TraitKey -> Int
+sheetArtScore :: Character -> TraitKey -> Int
 sheetArtScore cs k | isNothing x = 0
                  | otherwise = artScore x'
      where x = ( findTrait k . artList ) cs
            x' = fromJust x
 -- | Get a given characteristic score 
-sheetCharacteristicScore :: CharacterSheet -> TraitKey -> Int
+sheetCharacteristicScore :: Character -> TraitKey -> Int
 sheetCharacteristicScore cs k | isNothing x = 0
                  | otherwise = charScore x'
      where x = ( findTrait k . charList ) cs
@@ -161,7 +89,7 @@ sheetCharacteristicScore cs k | isNothing x = 0
 
 
 -- | Helper for `castingScore`
-castingScore' :: CharacterSheet -> [TraitKey] -> [TraitKey] -> Int
+castingScore' :: Character -> [TraitKey] -> [TraitKey] -> Int
 castingScore' cs ts fs = t + f + sta
     where t = minl $  map (sheetArtScore cs) ts
           f = minl $  map (sheetArtScore cs) fs
@@ -169,12 +97,12 @@ castingScore' cs ts fs = t + f + sta
           minl [] = 0
           minl (x:xs) = foldl min x xs
 
-ritualCastingBonus :: CharacterSheet -> Int
+ritualCastingBonus :: Character -> Int
 ritualCastingBonus = ritualCastingBonus' "Ritual Casting"
-ceremonialCastingBonus :: CharacterSheet -> Int
+ceremonialCastingBonus :: Character -> Int
 ceremonialCastingBonus = ritualCastingBonus' "Ceremonial Casting"
 
-ritualCastingBonus' :: String -> CharacterSheet -> Int
+ritualCastingBonus' :: String -> Character -> Int
 ritualCastingBonus' sp cs = p + a
     where (p',ps) = sheetAbilityScore cs (AbilityKey "Philosophiae" ) 
           (a',as) = sheetAbilityScore cs (AbilityKey "Artes Liberales" ) 
@@ -184,16 +112,16 @@ ritualCastingBonus' sp cs = p + a
             | otherwise = p' 
 
 -- | Return the Casting Score for a given spell.
--- The function depends both on the Spell trait from the CharacterSheet
+-- The function depends both on the Spell trait from the Character
 -- and a generic spell description from a SpellDB.
 castingScore :: SpellDB    -- ^ Spell DB with general descriptions of the spells
-             -> CharacterSheet -- ^ Current character sheet
-             -> Spell          -- ^ the spell
-             -> Int            -- ^ Computed casting score
+             -> Character  -- ^ Current character sheet
+             -> Spell      -- ^ the spell
+             -> Int        -- ^ Computed casting score
 castingScore db cs spell | isNothing rec' =   0
                      | isNothing sp' =   0
                      | otherwise =  castingScore' cs ts fs + mf (getTrait sp) + rb
-   where sp' = findTraitCS k cs
+   where sp' = findTrait k (traits cs)
          sp = fromJust sp'
          mf Nothing = 0
          mf (Just x) = masteryScore x
@@ -205,23 +133,24 @@ castingScore db cs spell | isNothing rec' =   0
             | otherwise = 0
          k = traitKey spell
 
-addCastingScores :: SpellDB -> CharacterSheet -> CharacterSheet
+{-
+addCastingScores :: SpellDB -> Character -> Character
 addCastingScores db cs =  cs { spellList = spellList' }
    where spellList' = map (addCastingScore db cs) (spellList cs)
-addCastingScore :: SpellDB -> CharacterSheet -> Spell -> Spell
+addCastingScore :: SpellDB -> Character -> Spell -> Spell
 addCastingScore db cs sp =  sp { spellCastingScore = sc }
    where sc = Just $ castingScore db cs sp 
-
+-}
 
 -- | Return the Lab Total a given TeFo combo.
-labTotal :: CharacterSheet -- ^ Current character sheet
+labTotal :: Character -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
 labTotal cs te fo = labTotalBase cs te fo + labTotalBonus cs te fo
 
 -- | Return the Lab Bonuses for a given TeFo.
-labTotalBonus :: CharacterSheet -- ^ Current character sheet
+labTotalBonus :: Character -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
@@ -239,7 +168,7 @@ labTotalBonus' (Just lb) (ArtKey te) (ArtKey fo) = g + t + f
 labTotalBonus' _ _ _ = 0
 
 -- | Return the Lab Total a given TeFo combo without lab bonuses.
-labTotalBase :: CharacterSheet -- ^ Current character sheet
+labTotalBase :: Character -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
@@ -251,18 +180,18 @@ labTotalBase cs te fo = ts + fs + int + mt
 
 -- | Lab totals for each TeFo combo.
 -- This is used to render a table of lab totals on the character sheet.
-labTotals :: CharacterSheet -- ^ Current character sheet
+labTotals :: Character -- ^ Current character sheet
              -> [[Int]]     -- ^ Computed lab totals 
 labTotals cs = [ [ labTotal cs te fo | te <- techniques ] | fo <- forms ]
 
 -- | Casting totals for each TeFo combo.
 -- This is used to render a table of casting totals on the character sheet.
-castingTotals :: CharacterSheet -- ^ Current character sheet
+castingTotals :: Character -- ^ Current character sheet
              -> [[Int]]     -- ^ Computed casting totals 
 castingTotals cs = [ [ castingTotal cs te fo | te <- techniques ] | fo <- forms ]
 
 -- | Return the Lab Total a given TeFo combo.
-castingTotal :: CharacterSheet -- ^ Current character sheet
+castingTotal :: Character -- ^ Current character sheet
              -> TraitKey       -- ^ Key identifying the technique
              -> TraitKey       -- ^ Key identifying the form
              -> Int            -- ^ Computed lab total
@@ -280,8 +209,7 @@ forms :: [ TraitKey ]
 forms = [ ArtKey fo | fo <- [ "An", "Aq", "Au", "Co", "He", "Ig", "Im", "Me", "Te", "Vi" ] ]
 
 
--- |
--- = Common interface for Character, CharacterSheet, and CharacterState
+-- * Common interface for Character and CharacterState
 
 -- | Class comprising different interfaces to a Character.
 -- The class provides convenience functions.  A minimal implementation
@@ -289,7 +217,6 @@ forms = [ ArtKey fo | fo <- [ "An", "Aq", "Au", "Co", "He", "Ig", "Im", "Me", "T
 class CharacterLike ct where
      -- | The type (Magus/Companion/Grog) of character
      characterType :: ct -> CharacterType
-     characterType = characterType . characterSheet
      -- | Is the character a grog or not?
      isGrog :: ct -> Bool
      isGrog c | characterType c == Grog = True
@@ -298,32 +225,20 @@ class CharacterLike ct where
      isMagus :: ct -> Bool
      isMagus c | characterType c == Magus = True
                | otherwise = False
-     -- | Character age in years
+     ageObject :: ct -> Maybe Age
      age :: ct -> Int
-     age = age . characterSheet
-     -- | The age object (trait) of the character
-     ageObject  ::  ct -> Maybe Age
-     ageObject = ageObject . characterSheet
-     -- | The `CharacterSheet` objct representing the character (state)
-     characterSheet :: ct -> CharacterSheet
+     age = fromMaybe (-1) . fmap ageYears . ageObject
+
 instance CharacterLike Character where
      characterType = charType . concept
-     characterSheet c = cs { csType = charType (concept c) }
-         where cs = filterCS c
+     ageObject = mhead . filterNothing . map getTrait . traits
 
-instance CharacterLike CharacterSheet where
-    characterType = csType
-    age = f . ageObject
-      where f Nothing = -1
-            f (Just x) = ageYears  x
-    ageObject = mhead . fst . filterTrait . csTraits
-    characterSheet = id
 
 -- |
 -- = Vis
 
-visList :: CharacterSheet -> [Possession]
-visList = filter (isJust . visArt) . possessionList
+visList :: Character -> [Possession]
+visList = filter (isJust . visArt) . characterPossessions
 
 xVis :: Possession -> (String,Int)
 xVis p | isNothing (visArt p) = ("",0)
@@ -336,7 +251,7 @@ addVis (x:[]) = [x]
 addVis (x:y:xs) | fst x == fst y = addVis $ (fst x, snd x+snd y):xs
                 | otherwise = x:(addVis $ y:xs)
 
-sheetVis :: CharacterSheet -> [(TraitKey,Int)]
+sheetVis :: Character -> [(TraitKey,Int)]
 sheetVis = sortOn fst . map f . addVis . sort . map xVis . visList
     where f (x,y) = (ArtKey $ take 2 x,y) 
 
@@ -345,11 +260,10 @@ sheetVis = sortOn fst . map f . addVis . sort . map xVis . visList
 
 -- |
 -- Calculate the Source Quality the character generates as a teacher.
-charTeacherSQ :: CharacterLike c => c -> Int
+charTeacherSQ :: Character -> Int
 charTeacherSQ cs = 3 + com + tch
-    where sheet = characterSheet cs
-          com = sheetCharacteristicScore sheet (CharacteristicKey "Com")
-          (tch,_) = sheetAbilityScore sheet (CharacteristicKey "Teaching")
+    where com = sheetCharacteristicScore cs (CharacteristicKey "Com")
+          (tch,_) = sheetAbilityScore cs (CharacteristicKey "Teaching")
           -- add good teacher
           -- subtract flaws
           -- add speciality

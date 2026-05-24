@@ -21,6 +21,7 @@ module ArM.Character.Combat ( CombatLine(..)
                        , computeCombatStats
                        ) where
 
+import ArM.Types.Harm
 import ArM.Character.CharacterSheet
 import ArM.Trait
 import ArM.DB
@@ -68,7 +69,7 @@ data SoakLine = SoakLine
 
 
 -- | Compute a single line for the Combat Stats table
-computeCombatLine :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine
+computeCombatLine :: WeaponDB -> Character -> CombatOption -> CombatLine
 computeCombatLine db cs co
    | isNothing ab = f $ implicitAbility db cs co df
    | otherwise    = f $ explicitAbility db cs co (fromJust ab) df
@@ -77,7 +78,7 @@ computeCombatLine db cs co
            df = defaultCL { combatLabel = combatName co }
 
 -- | Add characteristics to the combat stats
-addCharacteristics :: CharacterSheet -> CombatLine -> CombatLine
+addCharacteristics :: Character -> CombatLine -> CombatLine
 addCharacteristics cs cl = cl
         { combatInit  = (+cqik) $ combatInit cl
         , combatAtk   = fmap (+cdex) $ combatAtk cl
@@ -97,7 +98,7 @@ weaponStat db p = ws
 
 -- | Look up weapon stats from a character sheets.
 -- If a possession is not found, it is looked up in the WeaponDB instead
-sheetWeapon :: WeaponDB -> CharacterSheet -> String -> [ Weapon ]
+sheetWeapon :: WeaponDB -> Character -> String -> [ Weapon ]
 sheetWeapon db cs w | ws /= [] = ws
                     | otherwise = ws'
     where ws = sheetWeapon1 db cs w
@@ -108,7 +109,7 @@ sheetWeapon2 db w | isNothing r = []
                   | otherwise = [ fromJust r ]
     where r = M.lookup w db
 
-sheetWeapon1 :: WeaponDB -> CharacterSheet -> String -> [ Weapon ]
+sheetWeapon1 :: WeaponDB -> Character -> String -> [ Weapon ]
 sheetWeapon1 db cs w = fromMaybe [] sw
     where sw' = sheetPossession cs $ PossessionKey w
           sw = fmap (weaponStat db) sw'
@@ -116,13 +117,13 @@ sheetWeapon1 db cs w = fromMaybe [] sw
 
 -- |
 -- Compute the CombatLine from a CombatOption without explicit ability
-implicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> CombatLine -> CombatLine
+implicitAbility :: WeaponDB -> Character -> CombatOption -> CombatLine -> CombatLine
 implicitAbility db cs co df = f $ sheetWeapon db cs wstr
    where wstr = combatWeapon co
          f [] = df { combatComment = "No weapon" }
          f (x:_) = explicitAbility db cs co (weaponAbility x) df
 
-addShield :: WeaponDB -> CharacterSheet -> String -> Maybe String -> CombatLine -> CombatLine
+addShield :: WeaponDB -> Character -> String -> Maybe String -> CombatLine -> CombatLine
 addShield _ _ _ Nothing df = df
 addShield db cs ab (Just sstr) df 
     | isNothing sh' = df { combatComment = "Shield not found" }
@@ -139,7 +140,7 @@ addShield db cs ab (Just sstr) df
 
 -- |
 -- Compute the CombatLine from a CombatOption with explicit ability
-explicitAbility :: WeaponDB -> CharacterSheet -> CombatOption -> String -> CombatLine -> CombatLine
+explicitAbility :: WeaponDB -> Character -> CombatOption -> String -> CombatLine -> CombatLine
 explicitAbility db cs co ab df
   | isNothing w' = df { combatComment = "No weapon" }
   | otherwise = addShield db cs ab sstr $ df
@@ -167,9 +168,9 @@ explicitAbility db cs co ab df
 
 
 -- | Compute the table of combat stas from a list of `CombatOption` objects
-computeCombatLines :: WeaponDB -> CharacterSheet -> [CombatOption] -> [CombatLine]
+computeCombatLines :: WeaponDB -> Character -> [CombatOption] -> [CombatLine]
 computeCombatLines db sh = map (computeCombatLine db sh)
 
--- | Compute the table of combat stas from a list of `CharacterSheet` objects
-computeCombatStats :: WeaponDB -> CharacterSheet -> [CombatLine]
+-- | Compute the table of combat stas from a list of `Character` objects
+computeCombatStats :: WeaponDB -> Character -> [CombatLine]
 computeCombatStats db sh = computeCombatLines db sh $ combatList sh

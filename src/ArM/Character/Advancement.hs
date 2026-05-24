@@ -77,7 +77,7 @@ winterEvents c a
 -- | Calculate initial XP limits on Advancements
 inferSQ :: Character -> Augmented Advancement -> Augmented Advancement
 inferSQ cs ad = ad { inferredAdv = aa { sourceQuality = sq, bonusSQ = vfBonusSQ vf ad } }
-        where vf = vfList $ characterSheet cs
+        where vf = vfList cs
               (sq,_) = getSQ ad
               aa = inferredAdv ad
 -- Infer SQ for Exposure = 2

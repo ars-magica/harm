@@ -28,7 +28,7 @@ module ArM.Character.Character (
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions
-                          , characterPossessions
+                          , module ArM.Character.CharacterSheet
                           ) where
 
 import Data.Maybe 
@@ -40,17 +40,15 @@ import ArM.Trait
 import ArM.Helper
 import ArM.Types.Harm
 
-characterPossessions :: Character -> [ Possession ]
-characterPossessions = filterNothing . map getTrait . traits 
 
 -- |
 -- = Convenience Functions for Character Properties
 
-charAgingBonus :: CharacterLike c => c -> Int
+charAgingBonus :: Character -> Int
 charAgingBonus c = ag - sum ( map snd (charAgingBonusList c) )
     where ag = age c // 10
 
-charAgingBonusList :: CharacterLike c => c -> [ (String,Int) ]
+charAgingBonusList :: Character -> [ (String,Int) ]
 charAgingBonusList c = [ ( "Longevity Ritual", af longevityRitual )
                        , ( "Personal Bonus", af agingRollBonus )
                        , ( "Living Conditions", cv )

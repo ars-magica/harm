@@ -170,14 +170,14 @@ printCS :: Character -> OList
 printCS c = OList
        [ OString $ "## Sheet " ++ (show $ gameSeason c )
        , OString ""
-       , printMD $ characterSheet c
+       , sheetMD c
        ]
 
 printSheetCS :: Saga -> Character -> OList
 printSheetCS saga c = OList
        [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
        , OString ""
-       , printSheetMD saga $ characterSheet c
+       , sheetSheetMD saga c
        ]
 
 instance Markdown CharacterConcept where
@@ -292,8 +292,8 @@ instance Markdown Library where
                        , bulletWithHeader "## Enchantment Lab Texts" (itemTexts lib )
                        ]
 
-instance Markdown CharacterSheet where
-   printMD c = OList 
+sheetMD :: Character -> OList
+sheetMD c = OList 
                [ briefTraits c
                , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
                , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
@@ -302,7 +302,7 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Abilities:** "  $ sortTraits $ abilityList c
                , showlistMD "+ **Arts:** "  $ sortTraits $ artList c
                , showlistMD "+ **Spells:** "  $ sortTraits $ spellList c
-               , showlistMD "+ **Possessions:** "  $ sortTraits $ possessionList c
+               , showlistMD "+ **Possessions:** "  $ sortTraits $ characterPossessions c
                , toOList $ printCastingTotals c
                , OString ""
                , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
@@ -313,7 +313,8 @@ instance Markdown CharacterSheet where
                , OString ""
                , OString "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
                ]
-   printSheetMD saga c' = OList 
+sheetSheetMD :: Saga -> Character -> OList
+sheetSheetMD saga c' = OList 
                [ briefTraits c
                , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
                , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
@@ -321,9 +322,9 @@ instance Markdown CharacterSheet where
                , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
                , indentOList $ OList $ [ OString "**Abilities:**"
                         , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , listPossessions $ possessionList c
+               , listPossessions $ characterPossessions c
                -- , indentOList $ OList $ [ OString "**Possessions:**"
-                        -- , OList (map (OString . show) ( sortTraits $ possessionList c )) ]
+                        -- , OList (map (OString . show) ( sortTraits $ characterPossessions c )) ]
                , OString ""
                , printCombatMD saga c
                , mag
@@ -352,13 +353,13 @@ instance Markdown CharacterSheet where
 -- == Markdown for Age, Confidence, Warping, and Decrepitude
 
 -- | Print age, confidence, warping, and decrepitude as bullet points
-briefTraits :: CharacterSheet -> OList
+briefTraits :: Character -> OList
 briefTraits c = OList
           [ printAge c
           , OList $ map printMD $ confList c
           , OList $ map printMD $ otherList c
           ]
-printAge :: CharacterSheet -> OList
+printAge :: Character -> OList
 printAge c | isNothing ag' = OString "**Age** undefined"
          | otherwise = OString $ "+ **Age:** " ++ show yr ++ " years (apparent age " 
             ++ show (yr - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
@@ -379,9 +380,9 @@ instance Markdown Age where
                | otherwise = " Longevity Ritual: " ++ show lrs
 
 -- | Print a table of casting totals for every TeFo combination.
-printCastingTotals :: CharacterSheet -> [String]
+printCastingTotals :: Character -> [String]
 printCastingTotals c 
-             | Magus /= csType c = []
+             | Magus /= characterType c = []
              | otherwise = "":"| Casting Total | Creo | Intellego | Muto | Perdo | Rego |":
                               "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
                               lts
@@ -391,9 +392,9 @@ printCastingTotals c
           lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
 
 -- | Print a table of casting totals for every TeFo combination.
-printLabTotals :: CharacterSheet -> [String]
+printLabTotals :: Character -> [String]
 printLabTotals c 
-             | Magus /= csType c = []
+             | Magus /= characterType c = []
              | otherwise = "":"| Lab Total | Creo | Intellego | Muto | Perdo | Rego |":
                               "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
                               lts
@@ -475,13 +476,13 @@ instance Markdown Advancement where
 -- ** Pretty print arts
 
 -- | Render art scores as a table
-artMD :: CharacterSheet
+artMD :: Character
       -> OList
 artMD c | isMagus c = toOList $ artMD' c
         | otherwise = OList []
 
 -- | Render art scores as a table
-artMD' :: CharacterSheet
+artMD' :: Character
       -> [ String ]
 artMD' = ("":) . (h1:) . (h2:) . map artLine . sortTraits . artList 
    where h1 = "| Art  | Score | XP |" 
@@ -493,20 +494,20 @@ artLine :: Art -> String
 artLine ar = "| " ++ artName ar  ++ " | " ++ show (artScore ar) ++ " | " ++ showNum (artExcessXP ar) ++ " |"
 
 -- | Render art scores and vis stocks as a table
-artVisMD :: CharacterSheet
+artVisMD :: Character
       -> OList
 artVisMD c | isMagus c = toOList $ artVisMD' c
         | otherwise = OList []
 
 -- | Render art scores and vis stocks as a table
-artVisMD' :: CharacterSheet
+artVisMD' :: Character
           -> [ String ]
 artVisMD' = ("":) . (h1:) . (h2:) . artVisBody
    where h1 = "| Art  | Score | XP | Vis |" 
          h2 = "| -: | -: | -: | -: |"
 
 -- | Auxiliar for 'artVisMD'' rendering the body of the table.
-artVisBody :: CharacterSheet
+artVisBody :: Character
            -> [ String ]
 artVisBody cs = map artVisLine $ mergeArt as bs
    where as = (map tupleArt . sortTraits . artList ) cs
@@ -557,7 +558,7 @@ totalLevels = sum . map spellLevel
 
 
 -- | Set the Combat Stats of the Character as an 'OList'
-printCombatMD :: Saga -> CharacterSheet -> OList
+printCombatMD :: Saga -> Character -> OList
 printCombatMD saga cs = OList x
     where tab = computeCombatStats ( weaponsDB saga ) cs
           x | tab == [] = []

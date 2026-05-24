@@ -81,15 +81,14 @@ setEntryTime c = c { entryTime = f $ futureAdvancement c, charTime = GameStart }
 -- the advancement does not overspend XP or exceed other limnits.
 prepareCharGen :: Character -> Advancement -> Augmented Advancement
 prepareCharGen cs 
-   = validateCharGen sheet   -- Validate integrity of the advancement
+   = validateCharGen cs      -- Validate integrity of the advancement
    . sortAdvTraits           -- Restore sort order on inferred traits
    . agingYears              -- add years of aging as an inferred trait
-   . initialLimits sheet     -- infer additional properties on the advancement
+   . initialLimits cs        -- infer additional properties on the advancement
    . addInference cs         -- infer additional traits 
-   where sheet = characterSheet cs
 
 -- | Calculate initial XP limits on CharGen Advancements
-initialLimits :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+initialLimits :: Character -> Augmented Advancement -> Augmented Advancement
 initialLimits sheet ad 
             | m == CharGen "Early Childhood" = sq 120 $ yr 5 ad
             -- 120 xp includes native language
@@ -116,9 +115,8 @@ agingYears x | y > 0 = addProtoTrait [ agePT y ] x
 -- This is the last step of CharGen, inferring confidence from the traits.
 addConfidence :: Character -> Character
 addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
-          where vfs = vfList sheet
-                sheet = characterSheet cs
-                ct | csType sheet == Grog = ConfidenceTrait $ Confidence
+          where vfs = vfList cs
+                ct | isGrog cs = ConfidenceTrait $ Confidence
                            { cname = "Confidence", cscore = 0, cpoints = 0 }
                    | otherwise = inferConfidence vfs 
 
@@ -135,26 +133,26 @@ applyCharGenAdv a cs = (a',f cs')
 -- 
 -- $chargenvalidation
 -- CharGen validation is tricky, often depending on virtues and flaws.
--- Therefore, most functions depend also on the `CharacterSheet` in addition
+-- Therefore, most functions depend also on the `Character` in addition
 -- to the `Augmented Advancement`.
 
 -- | validate an advancement, adding results to the validation field
-validateCharGen :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+validateCharGen :: Character -> Augmented Advancement -> Augmented Advancement
 validateCharGen sheet = validateLevels . validateXP . validateCharGen' sheet 
 
-validateCharGen' :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+validateCharGen' :: Character -> Augmented Advancement -> Augmented Advancement
 validateCharGen' cs a 
            | m == CharGen "Virtues and Flaws" = validateVF cs a
            | m == CharGen "Characteristics" = validateChar cs a
            | otherwise = a
            where m = mode $ contractAdvancement a
 
-validateVF :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+validateVF :: Character -> Augmented Advancement -> Augmented Advancement
 validateVF cs a = addValidation vfvs a
          where vfvs = (vfValidation cs) (explicitAdv a)
 
 -- | Validate allocation of virtues and flaws.
-vfValidation :: CharacterSheet -> Advancement -> [ Validation ]
+vfValidation :: Character -> Advancement -> [ Validation ]
 vfValidation sheet a 
              | m /= CharGen "Virtues and Flaws" = []
              | 0 /= f + v = [ ValidationError imb ]
@@ -171,8 +169,8 @@ vfValidation sheet a
                  lim = vfLimit sheet
 
 -- | Return the limit on flaw points, i.e. 3 for grogs and 10 for others.
-vfLimit :: CharacterSheet -> Int
-vfLimit sheet | Grog == csType sheet = 3
+vfLimit :: Character -> Int
+vfLimit sheet | isGrog sheet = 3
               | otherwise = 10
 
 -- | Count virtue and flaw costs from an Advancement
@@ -207,12 +205,12 @@ validateLevels a | isNothing (spellLevels $ contractAdvancement a) = a
 -- == Validation of Characteristics
 
 -- | Validate points spent on characterics.
-validateChar :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+validateChar :: Character -> Augmented Advancement -> Augmented Advancement
 validateChar sheet = g . validateChar' sheet
      where f x = x { postprocessTrait = PostProcessor processChar }
            g x = x { inferredAdv = f $ inferredAdv x }
 
-validateChar' :: CharacterSheet -> Augmented Advancement -> Augmented Advancement
+validateChar' :: Character -> Augmented Advancement -> Augmented Advancement
 validateChar' sheet a | m /= CharGen "Characteristics" = a
              | ex < lim = addValidation [ValidationError und] a
              | ex > lim = addValidation [ValidationError over] a

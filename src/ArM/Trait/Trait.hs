@@ -324,21 +324,6 @@ class TraitClass t where
     -- or Nothing if the type does not match.
     getTrait :: Trait -> Maybe t
 
-    -- | Extract traits of the given type from a generic list of Trait objects.
-    -- It returns a pair of lists with the selected traits in the first list
-    -- and the remaining traits in the other.
-    filterTrait :: [ Trait ] -> ( [ t ], [ Trait ] )
-    filterTrait ts = y where (_,y) = filterTrait' (ts,([],[]))
-
-    -- | Recursive helper for `filterTrait`
-    filterTrait' :: ( [ Trait ], ( [ t ], [ Trait ] ) )
-                  -> ( [ Trait ], ( [ t ], [ Trait ] ) )
-    filterTrait' ([],y) = ([],y)
-    filterTrait' (x:xs,(ys,zs)) | isNothing ab  = filterTrait' (xs,(ys,x:zs))
-                                | otherwise = filterTrait' (xs,(fromJust ab:ys,zs))
-        where ab = getTrait x
-
-
 instance TraitClass Trait where
     traitKey (CharacteristicTrait x) = traitKey x
     traitKey (AbilityTrait x) = traitKey x
