@@ -15,7 +15,7 @@
 module ArM.Saga ( characterIndex
                     , covenantIndex
                     , advancementErrors
-                    , advancementNotices
+                    , advancementWarnings
                     , advancementErrorsLimit
                     , covenFolk
                     -- * Advancement

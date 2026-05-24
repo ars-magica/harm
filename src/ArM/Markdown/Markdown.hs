@@ -53,7 +53,7 @@ designMD c  | as == [] = OList []
             | otherwise = OList
             [ OString "## Game start design"
             , OString ""
-            , OList $ map printMD as
+            , OList $ map printMDaa as
             , OString ""
             ]
             where as = pregameDesign c
@@ -604,9 +604,9 @@ sagaStateMD saga = OList
         , OString ""
         , indentOList $ foldOList $  advancementErrors saga
         , OString ""
-        , OString "## Advancement Notices"
+        , OString "## Advancement Warnings"
         , OString ""
-        , indentOList $ foldOList $ advancementNotices saga
+        , indentOList $ foldOList $ advancementWarnings saga
         ]
 
 -- * Covenant Markdown

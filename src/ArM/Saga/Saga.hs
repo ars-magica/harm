@@ -38,6 +38,8 @@ covenantList = M.elems . covenants
 -- CharGen errors are only included at GameStart and ignored later.
 advancementErrors :: Saga -> OList
 advancementErrors = advancementE isValError
+    where isValError (ValidationError _) = True
+          isValError _ = False
 
 advancementE :: (Validation->Bool) -> Saga -> OList
 advancementE f saga | errors == [] = OString "No errors"
@@ -50,12 +52,10 @@ advancementE f saga | errors == [] = OString "No errors"
 -- saga state.
 --
 -- CharGen notices are only included at GameStart and ignored later.
-advancementNotices :: Saga -> OList
-advancementNotices = advancementE (not . isValError)
-
-isValError :: Validation -> Bool
-isValError (ValidationError _) = True
-isValError _ = False
+advancementWarnings :: Saga -> OList
+advancementWarnings = advancementE isValWarning
+     where isValWarning (ValidationWarning _) = True
+           isValWarning _ = False
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season
