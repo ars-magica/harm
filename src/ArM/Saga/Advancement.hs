@@ -132,12 +132,7 @@ covenMap f st = st { covenants = M.map f $ covenants st }
 charMap :: ( Character -> Character ) ->  Saga -> Saga
 charMap f st = st { characters = M.map f $ characters st }
 
--- | 
 -- ** Advancement step
-
--- | Advance the saga forward by one season.
-bumpSagaSeason :: Saga -> Saga
-bumpSagaSeason saga = saga { seasonTime = nextSeason saga }
 
 -- | Advance the saga forward by one season.
 --
@@ -155,6 +150,10 @@ stepSaga = stepValCov          -- validate covenants individually
          . stepCovenFolk  -- Initialise covenants and update covenfolk  (ind. cov.)
          . stepInit       -- Initialise individual characters for advancement
          . bumpSagaSeason
+
+-- | Advance the saga forward by one season.
+bumpSagaSeason :: Saga -> Saga
+bumpSagaSeason saga = saga { seasonTime = nextSeason saga }
 
 -- | Initialise characters
 stepInit :: Saga -> Saga
