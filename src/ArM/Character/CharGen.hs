@@ -38,19 +38,16 @@ import ArM.Debug.Trace
 -- |
 -- = Char Gen
 
--- | Compute the initial state if no state is recorded.
--- The function uses `applyCGA` to process all of the pregame advancements.
--- It then calls `addConfidence` to add the confidence trait to the state
--- for the returned `Character` object
+-- | Compute the initial state of the character.
+--
+-- Pregame advancements are processed recursively with `pregameAdvancement`.
+-- Then, if the season of the character is `NoTime`, the season is update
+-- to `GameStart`, `entryTime` is set if possible, and the confidence trait
+-- is inferred and added.
 prepareCharacter :: Character -> Character
-prepareCharacter = finaliseCharGen  -- ^ checks if chargen has been 
-                 . charGen          -- ^ process any remaining pregame advancements
-
--- | Recursivel process the pragame advancements for the character.
-charGen :: Character -> Character
-charGen c 
-    | isNothing a = c
-    | otherwise = trace ts $ charGen c''
+prepareCharacter c
+    | isNothing a = finaliseCharGen c
+    | otherwise = trace ts $ prepareCharacter c''
     where as = pregameAdvancement c
           a = mhead as
           c'' = c' { pregameDesign = aa:pregameDesign c'
