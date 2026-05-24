@@ -87,10 +87,8 @@ class Timed a => Advance a where
 -- characters and covenants advance accordingly.
 instance Advance Saga where
    nextAdvancement saga  = min charnext covnext 
-      where charnext = M.foldr min NoTime $ M.map nextAdvancement $ characters st 
-            covnext = M.foldr min NoTime $ M.map nextAdvancement $ covenants st 
-            -- covnext = M.foldr min NoTime [ nextAdvancement x | x <- covenants st ]
-            st = sagaState saga
+      where charnext = M.foldr min NoTime $ M.map nextAdvancement $ characters saga 
+            covnext = M.foldr min NoTime $ M.map nextAdvancement $ covenants saga 
 
 
 -- |
@@ -125,51 +123,51 @@ advanceSaga' (t:ts) saga0 = n:advanceSaga' ts n
                      | otherwise = f ssn $ stepSaga saga
 
 -- | Map an advancement function on every covenant
-covenMapS :: ( SagaState -> Covenant -> Covenant ) ->  SagaState -> SagaState
+covenMapS :: ( Saga -> Covenant -> Covenant ) ->  Saga -> Saga
 covenMapS f st = covenMap (f st) st
 -- | Map an advancement function on every covenant
-covenMap :: ( Covenant -> Covenant ) ->  SagaState -> SagaState
+covenMap :: ( Covenant -> Covenant ) ->  Saga -> Saga
 covenMap f st = st { covenants = M.map f $ covenants st }
 -- | Map an advancement function on every covenant
-charMap :: ( Character -> Character ) ->  SagaState -> SagaState
+charMap :: ( Character -> Character ) ->  Saga -> Saga
 charMap f st = st { characters = M.map f $ characters st }
 
 -- | 
 -- ** Advancement step
 
 -- | Advance the saga forward by one season.
-stepSaga :: Saga -> Saga
-stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
-     where f x = x { seasonTime = nextSeason saga }
+bumpSagaSeason :: Saga -> Saga
+bumpSagaSeason saga = saga { seasonTime = nextSeason saga }
 
--- | Advance the sagaState forward by one season.
+-- | Advance the saga forward by one season.
 --
 -- This function comprises a series of transisions which have to be made
 -- in order.
-stepSagaState :: SagaState -> SagaState
-stepSagaState = stepValCov          -- validate covenants individually
-              . charMap chgValidate -- validate characters individually
-              . charMap chgStep   -- advance individual characters
-              . covenMap cvgStep  -- advance individual covenants
-              . charMap chgRepeat -- check for repeated reading of tractatus (ind. char.)
-              . charMap chgSQ  -- infer SQ on individual characters
-              . stepBook       -- Look up books and check for conflict (joint step) 
-              . stepMembership -- Update characters to reflect covenant affiliation
-              . stepCovenFolk  -- Initialise covenants and update covenfolk  (ind. cov.)
-              . stepInit       -- Initialise individual characters for advancement
+stepSaga :: Saga -> Saga
+stepSaga = stepValCov          -- validate covenants individually
+         . charMap chgValidate -- validate characters individually
+         . charMap chgStep   -- advance individual characters
+         . covenMap cvgStep  -- advance individual covenants
+         . charMap chgRepeat -- check for repeated reading of tractatus (ind. char.)
+         . charMap chgSQ  -- infer SQ on individual characters
+         . stepBook       -- Look up books and check for conflict (joint step) 
+         . stepMembership -- Update characters to reflect covenant affiliation
+         . stepCovenFolk  -- Initialise covenants and update covenfolk  (ind. cov.)
+         . stepInit       -- Initialise individual characters for advancement
+         . bumpSagaSeason
 
 -- | Initialise characters
-stepInit :: SagaState -> SagaState
+stepInit :: Saga -> Saga
 stepInit st = charMap ( initAdvancement $ season st ) st
 
 -- | Initialise covenants and update covenfolk
-stepCovenFolk :: SagaState -> SagaState
+stepCovenFolk :: Saga -> Saga
 stepCovenFolk st = covenMap f st
      where f = cvgCovenFolk .  initCovAdvancement (season st) 
 
 
 -- | Update characters to reflect covenant affiliation
-stepMembership :: SagaState -> SagaState
+stepMembership :: Saga -> Saga
 stepMembership st = st { characters = ch }
     where ch = updateMembership ch' $ M.elems $ covenants st
           clear x = x { memberOf = Nothing } 
@@ -205,7 +203,7 @@ updateCharMembership (CovenantKey k) ch
 updateCharMembership _ ch = addCharacterValidation val ch
    where val = [ValidationError "Programming error: Non-covenant key for character."]
 
-stepValCov :: SagaState -> SagaState
+stepValCov :: Saga -> Saga
 stepValCov = trace "Not implemented: stepValCov"
 
 
@@ -223,7 +221,7 @@ stepValCov = trace "Not implemented: stepValCov"
 -- 5. **TODO** create new books on authoring
 
 -- | Validation and inference concerning books.
-stepBook :: SagaState -> SagaState
+stepBook :: Saga -> Saga
 stepBook = bookCollision . addBooks
 
 -- |
@@ -233,28 +231,28 @@ stepBook = bookCollision . addBooks
 -- Note that books are currently only taken from the character's covenant.
 -- This will have to be extended to allow reading as a guest, and books
 -- borrowed from other characters or covenants.
-addBooks :: SagaState -> SagaState
+addBooks :: Saga -> Saga
 addBooks st = st { characters = M.map (chgBook st) $ characters st }
 
 
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
-bookCollision :: SagaState -> SagaState 
+bookCollision :: Saga -> Saga 
 bookCollision = covenMapS bookCollisionCov 
 
-bookCollisionCov :: SagaState -> Covenant -> Covenant
+bookCollisionCov :: Saga -> Covenant -> Covenant
 bookCollisionCov st cv = addCovenantValidation (bkCollisions rq av) cv
       where rq = countRequires st cv
             av = possessions cv
 
 -- | Count uses of books in an advancement step
-countRequires :: SagaState
+countRequires :: Saga
               -> Covenant  -- ^ List of character advancement steps for one season
               -> [(HarmKey,Int)]       -- ^ List of books with number of users
 countRequires s = countRepetitions . listRequires s
 
 -- | Get a list of books used in the seqason
-listRequires :: SagaState -> Covenant -> [HarmKey]
+listRequires :: Saga -> Covenant -> [HarmKey]
 listRequires saga = sort . foldl (++) [] 
                   . map ( requires . contractAdvancement . chgCurrentAdv ) 
                   . covenFolk saga

@@ -19,6 +19,7 @@ module ArM.Markdown.Markdown ( Markdown(..)
                     , artVisMD
                     , italicOString
                     , storyOList
+                    , sagaStateMD
                     , enchantedMD  -- Unused
                     ) where
 
@@ -591,9 +592,9 @@ instance Markdown Saga where
         ]
         ]
 
-instance Markdown SagaState where
-    printMD saga = OList 
-        [ OString $ "# " ++ stateTitle saga ++ " - " ++ show (gameSeason saga)
+sagaStateMD :: Saga -> OList 
+sagaStateMD saga = OList 
+        [ OString $ "# " ++ name saga ++ " - " ++ show (gameSeason saga)
         , OString ""
         , characterIndex $ characterList saga
         , OString ""

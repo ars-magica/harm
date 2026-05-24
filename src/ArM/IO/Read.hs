@@ -17,6 +17,7 @@ import Data.Aeson.Generic (readObject)
 
 import Data.Maybe 
 
+import ArM.Story
 import ArM.Saga
 import ArM.Types.Harm
 import ArM.Trait
@@ -44,8 +45,9 @@ loadSaga saga = do
    cov <- mapM readArM ( covenantFiles saga )
    return $ trace "Saga" $ Saga
           { sagaFile = saga
-          , sagaState = newSagaState ( title saga ) 
-                        ( filterNothing cov ) ( filterNothing cs )
+          , seasonTime = GameStart
+          , covenants = toDB $ filterNothing cov 
+          , characters = toDB $ filterNothing cs 
           , baseURL = Nothing
           , spells = fromJust db 
           , weaponsDB = fromJust wdb

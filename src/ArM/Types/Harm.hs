@@ -7,7 +7,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 -- 
--- Description :  Stateful objects that can be looked up in a SagaState
+-- Description :  Stateful objects that can be looked up in a Saga
 --
 -- This module is kept separate from "ArM.Types.HarmObject" because it
 -- declares instances for many types which import on HarmObject.
@@ -26,11 +26,9 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       -- * Saga
                       , Saga(..)
                       , SagaFile(..)
-                      , SagaState(..)
                       , rootDir
                       , stateSeasons
                       , advSeasons
-                      , newSagaState
                       ) where
 
 import ArM.Trait
@@ -49,9 +47,9 @@ import qualified Data.Map as M
 class KeyObject h => HarmSagaObject h where
    -- | Get an object by key from a `SagaState` object
    harmGet :: Saga -> HarmKey -> Maybe h
-   harmGet s k = harmLookup k $ sagaState s
+   harmGet s k = harmLookup k s
    -- | Look up an object in a SagaState
-   harmLookup :: HarmKey -> SagaState -> Maybe h
+   harmLookup :: HarmKey -> Saga -> Maybe h
    -- | Turn a list of objects into a Map
    toDB :: [h] -> M.Map String h
    toDB = M.fromList . toPairs
@@ -84,12 +82,3 @@ instance HarmSagaObject Lab where
       where f (LabKey k,ob) = Just (k,ob)
             f _ = Nothing
             g ob = (harmKey ob,ob)
-
--- | Create a new CharacterState, giving covenants and characters as list
-newSagaState :: String -> [Covenant] -> [Character] -> SagaState
-newSagaState t cvs chs = SagaState
-         { stateTitle = t
-         , seasonTime = GameStart
-         , covenants = toDB cvs
-         , characters = toDB chs
-         }

@@ -24,9 +24,9 @@ import ArM.Helper
 import Data.OList
 import qualified Data.Map as M
 
-characterList :: SagaState -> [Character]
+characterList :: Saga -> [Character]
 characterList = M.elems . characters
-covenantList :: SagaState -> [Covenant]
+covenantList :: Saga -> [Covenant]
 covenantList = M.elems . covenants
 
 -- |
@@ -36,10 +36,10 @@ covenantList = M.elems . covenants
 -- saga state.
 --
 -- CharGen errors are only included at GameStart and ignored later.
-advancementErrors :: SagaState -> OList
+advancementErrors :: Saga -> OList
 advancementErrors = advancementE isValError
 
-advancementE :: (Validation->Bool) -> SagaState -> OList
+advancementE :: (Validation->Bool) -> Saga -> OList
 advancementE f saga | errors == [] = OString "No errors"
                        | otherwise = OList $ map formatOutput errors
     where formatOutput (cid,_,ssn,vs) = 
@@ -50,7 +50,7 @@ advancementE f saga | errors == [] = OString "No errors"
 -- saga state.
 --
 -- CharGen notices are only included at GameStart and ignored later.
-advancementNotices :: SagaState -> OList
+advancementNotices :: Saga -> OList
 advancementNotices = advancementE (not . isValError)
 
 isValError :: Validation -> Bool
@@ -67,7 +67,7 @@ errorAfter (_,vs,_,_) s = vs > s
 
 -- | Exctract all validation errors from previous advancements at
 -- a given saga state
-errorList :: SagaState -> [VList]
+errorList :: Saga -> [VList]
 errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
     where cvs = map cErrors $ characterList saga
           covvs = map covErrors  $ covenantList saga
@@ -80,7 +80,7 @@ errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
 -- | Exctract a list of validation errors after a given time 
 -- This is not currently used, but could be used to ignore old
 -- errors when reporting recent character states.
-advancementErrorsLimit :: SeasonTime ->  SagaState -> OList
+advancementErrorsLimit :: SeasonTime ->  Saga -> OList
 advancementErrorsLimit ssn saga = OList $ map formatOutput errors
     where formatOutput (cid,_,sn,vs) = OList 
               [ OString ( show cid ++ ": " ++ sn ),
@@ -155,8 +155,4 @@ class CharDB a where
    lookupCharacters :: a -> [ HarmKey ] -> [ Character ]
 
 instance CharDB Saga where
-    lookupCharacters saga is = filterNothing $ map ( \ i -> harmLookup i cs ) is
-        where cs = sagaState saga
-
-instance CharDB SagaState where
     lookupCharacters saga is = filterNothing $ map ( \ i -> harmLookup i saga ) is

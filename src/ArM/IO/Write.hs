@@ -40,13 +40,12 @@ writeObjects dir saga cs = mapM wf  cs >> return ()
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
    createDirectoryIfMissing True dir >>
-   writeOList (dir ++ "index.md") (printMD st) >>
-   writeObjects dir saga (characterList st) >>
-   writeObjects dir saga (covenantList st) >>
-   writeObjects dir saga (map getLibrary $ covenantList st)
+   writeOList (dir ++ "index.md") (sagaStateMD saga) >>
+   writeObjects dir saga (characterList saga) >>
+   writeObjects dir saga (covenantList saga) >>
+   writeObjects dir saga (map getLibrary $ covenantList saga)
        where dir = rootDir saga ++ fn ++ "/"
-             fn = showKey st
-             st = sagaState saga
+             fn = showKey saga
 
 -- | Write the sheets for each season recorded. 
 writeSagaStates :: [Saga] -> IO ()
@@ -57,6 +56,6 @@ writeSagaStates (x:xs) = writeSagaState x >> writeSagaStates xs
 writeSagaAnnals :: Saga -> IO ()
 writeSagaAnnals saga = writeOList fn $ ann saga
     where fn = rootDir saga ++ "/0001_Annals.md"
-          ann = OList . (OString "# Annals":) . map printMD . sagaAnnals . sagaState
+          ann = OList . (OString "# Annals":) . map printMD . sagaAnnals 
 
 

@@ -27,10 +27,6 @@ import ArM.Helper
 import Data.Maybe
 
 
--- | Apply the given function to the SagaState
-updateSagaState :: ( SagaState -> SagaState ) -> Saga -> Saga
-updateSagaState f s = s { sagaState = f ( sagaState s ) }
-
 -- | Apply the given function to the Covenant
 updateCovenantAdv :: ( Augmented CovAdvancement -> Augmented CovAdvancement ) 
                   -> Covenant -> Covenant

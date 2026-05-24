@@ -20,6 +20,7 @@ module ArM.Markdown ( Markdown(..)
                     , italicOString
                     , storyOList
                     , enchantedMD  -- Unused
+                    , sagaStateMD
                     -- * SeasonDisplay
                     , sagaAnnals
                     , AnnalSeason(..)

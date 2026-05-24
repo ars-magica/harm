@@ -22,7 +22,7 @@ import Data.OList
 
 -- | Return the the annals of the saga, represented as a list of 
 -- `AnnalSeason` objects, each of which comprising the events of one season.
-sagaAnnals :: SagaState -> [ AnnalSeason ]
+sagaAnnals :: Saga -> [ AnnalSeason ]
 sagaAnnals = getSeasonAnnals . getAugMerged
 
 -- | The `AnnalSeason` object collects all events of a season,
@@ -101,17 +101,17 @@ instance Markdown EitherAug where
 -- If the merging, defined in `ArM.Char.Types.Advancement` using the lists
 -- library is stable, covenants should come first and the ordering of characters
 -- and covenants be the same in every season.
-getAugMerged :: SagaState -> [ EitherAug ]
+getAugMerged :: Saga -> [ EitherAug ]
 getAugMerged st = mergeByTime xs'  ys' 
     where (xs,ys) = getAugMerged' st
           xs' = map EChar xs
           ys' = map ECov ys
 
-getAugMerged' :: SagaState -> ( [ CharAug ], [ CovAug ] )
+getAugMerged' :: Saga -> ( [ CharAug ], [ CovAug ] )
 getAugMerged' st = ( mergeTimed xs, mergeTimed ys )
     where (xs,ys) = getAug st
 
-getAug :: SagaState -> ( [ [ CharAug ] ], [ [ CovAug ] ] )
+getAug :: Saga -> ( [ [ CharAug ] ], [ [ CovAug ] ] )
 getAug st = ( chrh, covh )
     where covh = map covAdv $ covenantList st
           chrh = map chAdv  $ characterList st

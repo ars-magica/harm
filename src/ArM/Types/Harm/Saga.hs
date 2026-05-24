@@ -14,7 +14,6 @@
 -----------------------------------------------------------------------------
 module ArM.Types.Harm.Saga ( Saga(..)
                     , SagaFile(..)
-                    , SagaState(..)
                     , rootDir
                     , stateSeasons
                     , advSeasons
@@ -40,8 +39,10 @@ import ArM.DB
 -- Multiple files have to be loaded to generate a Saga object from a `SagaFile`.
 data Saga = Saga 
          { sagaFile :: SagaFile
-         , sagaState :: SagaState
          , baseURL :: Maybe String
+         , seasonTime :: SeasonTime
+         , covenants :: M.Map String Covenant
+         , characters :: M.Map String Character
          , spells :: SpellDB
          , weaponsDB :: WeaponDB
          , armourDB :: ArmourDB
@@ -64,25 +65,12 @@ instance Show Saga where
    show saga = "Saga: " ++ name saga
 
 instance Timed Saga where
-    season = seasonTime . sagaState
+    season = seasonTime 
 
 instance HarmObject Saga where
-    stateName s = name s ++ " - " ++ (show $ season $ sagaState s)
+    stateName s = name s ++ " - " ++ (show $ season s)
 
--- | Saga state at a particular point in time, comprising characters and
--- covenants at that point.
-data SagaState = SagaState 
-         { stateTitle :: String
-         , seasonTime :: SeasonTime
-         , covenants :: M.Map String Covenant
-         , characters :: M.Map String Character
-         }  deriving (Eq,Show)
-
-instance Timed SagaState where
-    season = seasonTime
-
--- |
--- == SagaFile object
+-- ** SagaFile object
 
 -- | A Saga as it is stored on file.
 -- The main purpose here is to identify all the files used for characters and

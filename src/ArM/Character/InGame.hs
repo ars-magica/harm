@@ -75,13 +75,13 @@ chgValidate :: Character -> Character
 chgValidate ch = updateCharacterAdv (validate ch) ch
     where validate c = validateXP . inferSQ c
 
-chgBook :: SagaState -> Character -> Character
+chgBook :: Saga -> Character -> Character
 chgBook st ch = updateCharacterAdv (addBook st ch) ch
 
 -- |
 -- Find and add books with stats to add to the character advancement.
 -- Not implemented yet.
-addBook :: SagaState -> Character -> Augmented Advancement -> Augmented Advancement
+addBook :: Saga -> Character -> Augmented Advancement -> Augmented Advancement
 addBook st ch aa = addBook' st ch aa (mode ca) bkey ikey
     where bs = readsBook ca
           ca = contractAdvancement aa
@@ -95,7 +95,7 @@ addBook st ch aa = addBook' st ch aa (mode ca) bkey ikey
 -- | Auxiliar for `addBook`.
 -- Look up possession by possession ID or book ID, adding errors and warnings
 -- for inconsistent use. 
-addBook' :: SagaState -> Character
+addBook' :: Saga -> Character
           -> Augmented Advancement 
           -> AdvancementType -> [HarmKey] -> [HarmKey] 
           -> Augmented Advancement 
@@ -110,7 +110,7 @@ addBook' _ _ aa _ _ _ = addValidation val aa
     where val = [ ValidationError "Book specified for non-reading season" ]
 
 -- | Find a book in a saga or the character itself.
-findBook :: SagaState -> Character -> HarmKey -> Maybe Possession
+findBook :: Saga -> Character -> HarmKey -> Maybe Possession
 findBook s c k = ( lookupBook k $ characterPossessions c )
              <|> ( ffmap (lookupBook k) $ memberOfCovenant s c )
 
@@ -119,7 +119,7 @@ ffmap :: Monad m => ( a -> m b ) -> m a -> m b
 ffmap f = join . fmap f
 
 -- | Get a character's covenant by looking up the key in the saga.
-memberOfCovenant :: SagaState -> Character -> Maybe Covenant
+memberOfCovenant :: Saga -> Character -> Maybe Covenant
 memberOfCovenant saga = ffmap g . fmap CovenantKey . memberOf 
            where g x = harmLookup x saga
 
