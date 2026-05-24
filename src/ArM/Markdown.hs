@@ -13,6 +13,13 @@
 -- a 'LongSheet' class with a 'printSheetMD' function for a more
 -- verbose character sheet.
 --
+-- The different pages to produce are
+-- + Annals, use `sagaAnnals`
+-- + Character
+-- + Covenant
+-- + SagaA
+-- + Library
+--
 -----------------------------------------------------------------------------
 module ArM.Markdown ( Markdown(..)
                     , artMD
@@ -23,7 +30,6 @@ module ArM.Markdown ( Markdown(..)
                     , sagaStateMD
                     -- * SeasonDisplay
                     , sagaAnnals
-                    , AnnalSeason(..)
                     ) where
 
 
