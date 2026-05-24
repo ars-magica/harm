@@ -94,8 +94,7 @@ instance Markdown EitherAug where
    printMD (ECov x) = printMD x
    printMD (EChar x) = printMD x
 
--- |
--- == Getting the merged list of advancements
+-- ** Getting the merged list of advancements
 
 -- | Get a list of all past advancements in a SeasonState, sorted by time.
 -- If the merging, defined in `ArM.Char.Types.Advancement` using the lists
