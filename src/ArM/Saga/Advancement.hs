@@ -147,7 +147,8 @@ stepSaga saga = saga { sagaState = stepSagaState $ f $ sagaState saga }
 -- This function comprises a series of transisions which have to be made
 -- in order.
 stepSagaState :: SagaState -> SagaState
-stepSagaState = stepVal        -- validate characters and covenants individually
+stepSagaState = stepValCov          -- validate covenants individually
+              . charMap chgValidate -- validate characters individually
               . charMap chgStep   -- advance individual characters
               . covenMap cvgStep  -- advance individual covenants
               . charMap chgRepeat -- check for repeated reading of tractatus (ind. char.)
@@ -208,11 +209,6 @@ updateCharMembership (CovenantKey k) ch
 updateCharMembership _ ch = addCharacterValidation val ch
    where val = [ValidationError "Programming error: Non-covenant key for character."]
 
-stepVal :: SagaState -> SagaState
-stepVal = stepValChar . stepValCov
-
-stepValChar :: SagaState -> SagaState
-stepValChar = charMap chgValidate 
 stepValCov :: SagaState -> SagaState
 stepValCov = trace "Not implemented: stepValCov"
 
