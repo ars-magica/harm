@@ -203,24 +203,27 @@ readingSQ2 _ [] = addValidation val
 readingSQ2 Nothing (x:[]) = readingSQaddPT x
 readingSQ2 Nothing (x:_) = readingSQaddPT x . addValidation val
     where val = [ ValidationWarning $ "Book has several book stats; using the first one." ]
-readingSQ2 (Just pt) xs = trace "Not implemented: readingSQ2"
+readingSQ2 (Just pt) xs = readingSQstat pt xs
 
 -- | Identify correct book stats for the trait being learnt
 readingSQstat :: ProtoTrait -> [BookStats] -> Augmented Advancement 
            -> Augmented Advancement 
-readingSQstat pt xs = f pt stat
+readingSQstat pt xs = f stat
     where stat = find ( ( (==) $ protoTrait pt ) . topic ) xs
-          f pt Nothing = addValidation val
-          f _ (Just bk) = readingSQ4 bk
+          f Nothing = addValidation val
+          f (Just bk) = readingSQ4 bk
           val = [ ValidationError $ "Book does not cover the topic " ++ show (protoTrait pt) ]
 
 -- | Infer source quality from book stats
 readingSQ4 :: BookStats -> Augmented Advancement -> Augmented Advancement 
-readingSQ4 _ = trace "Not implemented: readingSQval"
+readingSQ4 _ = trace "Not implemented: readingSQ4"
 
 -- | Infer `ProtoTrait` for learning from book stats.
 readingSQaddPT :: BookStats -> Augmented Advancement -> Augmented Advancement 
-readingSQaddPT _ = trace "Not implemented: readingSQaddPT"
+readingSQaddPT bk aa = aa { inferredAdv = ia { changes = pt:changes ia } }
+    where pt = defaultPT { protoTrait = topic bk }
+          ia = inferredAdv aa
+          
 
 -- readingSQtopic :: Augmented Advancement -> Augmented Advancement 
 -- readingSQtopic aa = trace "Not implemented: readingSQtopic" aa

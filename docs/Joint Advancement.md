@@ -31,15 +31,18 @@ Operate on saga (`stepSaga`)
 	1. Clear `memberOf` from all characters
 	2. `updateMembership` : For each covenant, for each member
 		1. update `memberOf` 
-		2. flag contradicgtions if `memberOf` is already set
+		2. flag contradictions if `memberOf` is already set
 5. `stepBook`		
 	1. For each character 
 		1. deduce book use
 	2. For each covenant
 		1. resolve resources[^1]
 6. For each Character
-	1. infer SQ
+	1. `chgSQ`  $\to$ infer SQ
+	2.  `chgRepeat` $\to$ check for rereading books
 7. For each Character
-	1. advance traits
+	1. `chgStep` $\to$ advance traits individually
+8. For each Covenant
+	1. `cvgStep` $\to$ advance traits individually
 
 [^1]:  Add a «read at covenant» field, defaulting to `memberOf`

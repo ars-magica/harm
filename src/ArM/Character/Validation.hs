@@ -13,6 +13,7 @@ module ArM.Character.Validation where
 
 import ArM.Types.Advancement
 import ArM.Trait
+import ArM.Processing
 import ArM.GameRules
 import ArM.Helper
 import Data.Maybe 
@@ -25,7 +26,7 @@ primaryXPTrait = fmap traitKey . primaryXPProtoTrait
 -- | Find the trait earning the most XP from the advancement, returning the ProtoTrait
 primaryXPProtoTrait :: Advancement -> Maybe ProtoTrait
 primaryXPProtoTrait = mhead .  sortOn ((*(-1)) . fromMaybe (-1) . xp) 
-                    . filter (isJust . xp) . changes
+                    . filter (isJust . xp) . getAA . changes
 
 -- | Validate allocation of XP.
 validateXP :: Augmented Advancement -> Augmented Advancement

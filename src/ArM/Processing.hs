@@ -89,4 +89,5 @@ getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
 getAA = filter ( f . protoTrait )
     where f (AbilityKey _) = True
           f (ArtKey _) = True
+          f (SpellKey _ _ _) = True
           f _ = False
