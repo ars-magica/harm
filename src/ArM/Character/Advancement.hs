@@ -10,12 +10,15 @@
 --
 -- Description :  Auxiliary functions for character advancement.
 --
--- In game, these functions are used by `ArM.Character.InGame.prepareAdvancement`.
+-- The only function exported is `winterEvents`.
+--
+-- In game, it is used by `ArM.Character.InGame.prepareAdvancement`.
 -- 
--- Some of the functions may also apply to chargen - such as `winterEvents`.
+-- It is not directly applicable to `CharGen` but the functionality
+-- should be added also there.
 --
 -----------------------------------------------------------------------------
-module ArM.Character.Advancement where
+module ArM.Character.Advancement (winterEvents) where
 
 import ArM.Character.Character
 import ArM.Types.Harm
@@ -70,10 +73,6 @@ winterEvents c a
           err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
           val = Validated $ "Aging roll made"
 
-
-
--- |
--- == Convenience Functions
 
 -- | ProtoTrait representing the warping point from Longevity Ritual.
 lrWarping :: ProtoTrait
