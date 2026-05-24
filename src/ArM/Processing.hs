@@ -51,6 +51,17 @@ updateCharacterAdv f s
     where x = mhead $ pastAdvancement s
           xs = mtail $ pastAdvancement s
 
+-- | Apply the given function to the Character
+updateCharacterInf :: ( Advancement -> Advancement ) 
+                  -> Character -> Character
+updateCharacterInf f s 
+    | isNothing x = error "Updating non-existent covenant advancement"
+    | otherwise = s { pastAdvancement = x':xs }
+    where x = mhead $ pastAdvancement s
+          xs = mtail $ pastAdvancement s
+          adv = inferredAdv $ fromJust x
+          x' = (fromJust x) { inferredAdv = f adv }
+
 -- | Add validation errors and notices to the character, i.e. to the
 -- advancement currently being processed and stored at the head of past 
 -- advancements.

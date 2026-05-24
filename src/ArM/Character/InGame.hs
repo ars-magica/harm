@@ -80,7 +80,6 @@ chgBook st ch = updateCharacterAdv (addBook st ch) ch
 
 -- |
 -- Find and add books with stats to add to the character advancement.
--- Not implemented yet.
 addBook :: Saga -> Character -> Augmented Advancement -> Augmented Advancement
 addBook st ch aa = addBook' st ch aa (mode ca) bkey ikey
     where bs = readsBook ca
@@ -220,7 +219,8 @@ readingSQstat pt xs = f stat
 
 -- | Infer source quality from book stats
 readingSQ4 :: BookStats -> Augmented Advancement -> Augmented Advancement 
-readingSQ4 _ = trace "Not implemented: readingSQ4"
+readingSQ4 b aa = aa { inferredAdv = f $ inferredAdv aa }
+    where f x = x { sourceQuality = quality b } 
 
 -- | Infer `ProtoTrait` for learning from book stats.
 readingSQaddPT :: BookStats -> Augmented Advancement -> Augmented Advancement 
@@ -241,6 +241,7 @@ chgRepeat ch = f bk ch
            bs = filter isTractatus $ chgBooksRead ch
 
 
+-- | List of books that the character has read, with possible repetitions.
 chgBooksRead :: Character -> [ Book ]
 chgBooksRead = filterNothing . map ( bookRead . contractAdvancement ) 
              . mtail . pastAdvancement
