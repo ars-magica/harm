@@ -178,20 +178,38 @@ chgSQ' _ = id
 -- Not supported at the moment
 -- 1. Multiple topics studied
 readingSQ :: Augmented Advancement -> Augmented Advancement 
-readingSQ = readingSQsq . readingSQtopic
+readingSQ aa = readingSQ1 bk aa
+    where bk = bookRead $ contractAdvancement aa
 
-readingSQtopic :: Augmented Advancement -> Augmented Advancement 
-readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
-    where pt = getAA $ changes $ explicitAdv aa
-readingSQsq :: Augmented Advancement -> Augmented Advancement 
-readingSQsq aa = trace "Not implemented: readingSQsq" aa
-    where pt = getAA $ changes $ explicitAdv aa
+readingSQ1 :: Maybe Book -> Augmented Advancement -> Augmented Advancement 
+readingSQ1 Nothing aa = addValidation val aa
+    where val = [ ValidationWarning $ "No book for reading season" ]
+readingSQ1 (Just bk) aa = readingSQ2 pt (bookStats bk) aa
+    where pt = primaryXPProtoTrait $ explicitAdv aa
 
-getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
-getAA = filter ( f . protoTrait )
-    where f (AbilityKey _) = True
-          f (ArtKey _) = True
-          f _ = False
+readingSQ2 :: Maybe ProtoTrait -> [BookStats] -> Augmented Advancement 
+           -> Augmented Advancement 
+readingSQ2 _ [] = addValidation val
+    where val = [ ValidationWarning $ "Book has no stats" ]
+
+readingSQ2 Nothing (x:[]) = readingSQaddPT x
+readingSQ2 Nothing (x:_) = readingSQaddPT x . addValidation val
+    where val = [ ValidationWarning $ "Book has several book stats; using the first one." ]
+readingSQ2 (Just pt) xs = trace "Not implemented: readingSQ2"
+
+readingSQstat :: ProtoTrait -> [BookStats] -> Augmented Advancement 
+           -> Augmented Advancement 
+readingSQstat pt xs = error $ show stat
+    where stat = filter ( ( (==) $ protoTrait pt ) . topic ) xs
+
+readingSQaddPT :: BookStats -> Augmented Advancement -> Augmented Advancement 
+readingSQaddPT _ = trace "Not implemented: readingSQaddPT"
+
+-- readingSQtopic :: Augmented Advancement -> Augmented Advancement 
+-- readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
+-- readingSQsq :: Augmented Advancement -> Augmented Advancement 
+-- readingSQsq aa = trace "Not implemented: readingSQsq" aa
+
 
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character

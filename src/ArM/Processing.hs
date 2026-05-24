@@ -43,6 +43,9 @@ updateCovenantAdv f s
     where x = mhead $ pastCovAdvancement s
           xs = mtail $ pastCovAdvancement s
 
+-- | Add validation errors and notices to the covenant, i.e. to the
+-- advancement currently being processed and stored at the head of past 
+-- advancements.
 addCovenantValidation :: [Validation] -> Covenant -> Covenant
 addCovenantValidation val = updateCovenantAdv (addValidation val)
 
@@ -60,10 +63,30 @@ updateCharacterAdv f s
     where x = mhead $ pastAdvancement s
           xs = mtail $ pastAdvancement s
 
+-- | Add validation errors and notices to the character, i.e. to the
+-- advancement currently being processed and stored at the head of past 
+-- advancements.
 addCharacterValidation :: [Validation] -> Character -> Character
 addCharacterValidation val = updateCharacterAdv (addValidation val)
 
+-- | Replace the character state with the given one
 setCharacterState :: CharacterState -> Character -> Character
 setCharacterState st ch = ch { state = Just st }
+
+-- | Replace the advancement currently being processed with the given one.
+-- The current advancement is stored at the head of past advancements.
 setAdvancement :: Augmented Advancement -> Character -> Character
 setAdvancement aa ch = ch { pastAdvancement = aa:(mtail $ pastAdvancement ch) }
+
+-- * Convenience functions (currently not in use)
+--
+-- $processing
+-- Thes
+--
+
+-- | Extract abilities and arts from a list of `ProtoTrait` objects.
+getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
+getAA = filter ( f . protoTrait )
+    where f (AbilityKey _) = True
+          f (ArtKey _) = True
+          f _ = False
