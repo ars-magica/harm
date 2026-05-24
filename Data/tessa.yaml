@@ -78,13 +78,18 @@ pregameAdvancement:
   - ability: Brawl
     spec: Dodge
     xp: 5
-- changes:
+- mode: Later Life
+  years: 32
+  changes:
   - ability: Animal Handling
     spec: Dogs
     xp: 50
   - ability: Animal Ken
     spec: Canine
-    xp: 45
+    xp: 70
+  - ability: "Craft: Cooking"
+    spec: Camping
+    xp: 5
   - ability: Athletics
     spec: obstacle race
     xp: 30
@@ -127,5 +132,3 @@ pregameAdvancement:
   - ability: Thrown
     spec: Shortbow
     xp: 75
-  mode: Later Life
-  years: 30
