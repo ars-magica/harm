@@ -168,8 +168,24 @@ chgSQ' "Reading" = updateCharacterAdv readingSQ
 chgSQ' _ = id
 
 -- | Check and update source qualities for reading
+--
+-- May need to
+-- 1. deduce topic studied from book
+-- 2. deduce SQ from book
+-- 3. validate SQ against book
+-- 4. validate topic against book
+--
+-- Not supported at the moment
+-- 1. Multiple topics studied
 readingSQ :: Augmented Advancement -> Augmented Advancement 
-readingSQ = trace "Not implemented: readingSQ" 
+readingSQ = readingSQsq . readingSQtopic
+
+readingSQtopic :: Augmented Advancement -> Augmented Advancement 
+readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
+    where pt = changes $ explicitAdv aa
+readingSQsq :: Augmented Advancement -> Augmented Advancement 
+readingSQsq aa = trace "Not implemented: readingSQsq" aa
+    where pt = changes $ explicitAdv aa
 
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character
