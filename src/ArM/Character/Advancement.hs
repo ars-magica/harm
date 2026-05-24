@@ -18,7 +18,6 @@
 module ArM.Character.Advancement where
 
 import ArM.Character.Character
-import ArM.Character.CharacterSheet
 import ArM.Character.Virtues
 import ArM.Types.Harm
 import ArM.Types.Advancement

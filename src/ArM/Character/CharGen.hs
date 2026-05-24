@@ -24,7 +24,6 @@
 module ArM.Character.CharGen (prepareCharacter) where
 
 import ArM.Character.Character
-import ArM.Character.CharacterSheet
 import ArM.Character.Inference
 import ArM.Character.Validation
 import ArM.Character.Virtues

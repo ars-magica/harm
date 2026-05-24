@@ -151,33 +151,24 @@ showlistMD s xs = OList [ OString s
 instance Markdown Character where
    printMD  c = OList
             [ printMD $ concept  c 
-            , printCS  c 
+            , OString ""
+            , OString $ "## Sheet " ++ (show $ gameSeason c )
+            , OString ""
+            , sheetMD c
             , designMD c
             , chargenMD c
             , advancementMD c
             ]
    printSheetMD saga c = OList
             [ printMD $ concept c
-            , printSheetCS saga c
+            , OString ""
+            , OString $ "## Character Sheet " ++ (show $ gameSeason c) 
+            , OString ""
+            , sheetSheetMD saga c
             , adv
             ]
         where adv | isGameStart c = chargenMD c
                   | otherwise =  advancementMD c
-
-
-printCS :: Character -> OList
-printCS c = OList
-       [ OString $ "## Sheet " ++ (show $ gameSeason c )
-       , OString ""
-       , sheetMD c
-       ]
-
-printSheetCS :: Saga -> Character -> OList
-printSheetCS saga c = OList
-       [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
-       , OString ""
-       , sheetSheetMD saga c
-       ]
 
 instance Markdown CharacterConcept where
    printMD = conceptPrintMD "../images/"
@@ -322,8 +313,6 @@ sheetSheetMD saga c = OList
                , indentOList $ OList $ [ OString "**Abilities:**"
                         , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
                , listPossessions $ characterPossessions c
-               -- , indentOList $ OList $ [ OString "**Possessions:**"
-                        -- , OList (map (OString . show) ( sortTraits $ characterPossessions c )) ]
                , OString ""
                , printCombatMD saga c
                , mag
@@ -442,7 +431,6 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
              | otherwise = OString $  "acquired: " ++ showStrList (map name $ acquired a)
            lst | lost a == [] = OList []
              | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
--- instance AdvancementLike t => Markdown (Augmented t) where
 
 printMDaa :: Augmented Advancement -> OList
 printMDaa a' = indentOList $ OList $ storyOList a ++
