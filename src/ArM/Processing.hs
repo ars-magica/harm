@@ -10,12 +10,12 @@
 -- Description :  Basic processing on the basic types
 --
 -- These functions update constituent elements of complex objects,
--- using the same principles for covenants and characters and sometimes
--- also sagas.
+-- using the same principles for covenants and characters.
 --
--- 1. update the state object
--- 2. update the current advancement
--- 3. add validation objects to the current advancement
+-- 1. update the current advancement
+-- 2. add validation objects to the current advancement
+--
+-- There are also a few simple convenience functions
 --
 -----------------------------------------------------------------------------
 module ArM.Processing where
@@ -26,6 +26,7 @@ import ArM.Types.Advancement
 import ArM.Helper
 import Data.Maybe
 
+-- * Advancement management
 
 -- | Apply the given function to the Covenant
 updateCovenantAdv :: ( Augmented CovAdvancement -> Augmented CovAdvancement ) 
@@ -62,7 +63,7 @@ addCharacterValidation val = updateCharacterAdv (addValidation val)
 setAdvancement :: Augmented Advancement -> Character -> Character
 setAdvancement aa ch = ch { pastAdvancement = aa:(mtail $ pastAdvancement ch) }
 
--- * Convenience functions (currently not in use)
+-- * Convenience functions
 
 -- | Extract abilities and arts from a list of `ProtoTrait` objects.
 getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
