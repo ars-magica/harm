@@ -95,8 +95,7 @@ advancementMD c = OList [ ao, bo ]
                 ]
 
 
--- |
--- = The Markdown Class
+-- * The Markdown Class
 
 -- | Class defining 'printMD' to render in Markdown.
 class Markdown a where
@@ -142,7 +141,7 @@ showlistMD s xs = OList [ OString s
                         , toOList $ (map (++", ") $ map show xs)
                         ]
  
--- = Markdown for the Character types
+-- * Markdown for the Character types
  
 -- |
 -- The 'CharacterConcept' is set as a description list.
@@ -349,8 +348,7 @@ sheetSheetMD saga c = OList
                    | otherwise = OString "" 
 
 
--- |
--- == Markdown for Age, Confidence, Warping, and Decrepitude
+-- ** Markdown for Age, Confidence, Warping, and Decrepitude
 
 -- | Print age, confidence, warping, and decrepitude as bullet points
 briefTraits :: Character -> OList
@@ -414,8 +412,7 @@ instance Markdown OtherTrait where
 
 
 
--- |
--- = Advancements
+-- * Advancements
 
 instance (Markdown a, ContractAdvancement a) 
       => Markdown (Augmented a) where
@@ -587,7 +584,7 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
                    ]
 
 
--- = Saga Markdown
+-- * Saga Markdown
 
 instance Markdown Saga where
     printMD saga = OList 
@@ -623,8 +620,7 @@ instance Markdown SagaState where
         , indentOList $ foldOList $ advancementNotices saga
         ]
 
--- |
--- = Covenant Markdown
+-- * Covenant Markdown
 
 instance Markdown Covenant where
     printMD cov = OList 
