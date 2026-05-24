@@ -23,7 +23,9 @@ import ArM.Story
 import ArM.Trait
 import ArM.Processing
 import ArM.Helper
+
 import Data.Maybe
+import Data.List
 import Control.Applicative
 import Control.Monad
 
@@ -181,12 +183,18 @@ readingSQ :: Augmented Advancement -> Augmented Advancement
 readingSQ aa = readingSQ1 bk aa
     where bk = bookRead $ contractAdvancement aa
 
+-- | Adds warning if no book is specified or continues to `readingSQ2` if it is.
 readingSQ1 :: Maybe Book -> Augmented Advancement -> Augmented Advancement 
 readingSQ1 Nothing aa = addValidation val aa
     where val = [ ValidationWarning $ "No book for reading season" ]
 readingSQ1 (Just bk) aa = readingSQ2 pt (bookStats bk) aa
     where pt = primaryXPProtoTrait $ explicitAdv aa
 
+-- | Check if there are bookstats and a trait being learnt.
+-- 1. If there are no book stats, a warning is returned.
+-- 2. If there is not trait being learnt, it continues to `readingSQaddPT`,
+--    adding a warning if there are more than one set of book stats.
+-- 3. If there is a trait to learn, it continues to `readingSQstat`
 readingSQ2 :: Maybe ProtoTrait -> [BookStats] -> Augmented Advancement 
            -> Augmented Advancement 
 readingSQ2 _ [] = addValidation val
@@ -197,11 +205,20 @@ readingSQ2 Nothing (x:_) = readingSQaddPT x . addValidation val
     where val = [ ValidationWarning $ "Book has several book stats; using the first one." ]
 readingSQ2 (Just pt) xs = trace "Not implemented: readingSQ2"
 
+-- | Identify correct book stats for the trait being learnt
 readingSQstat :: ProtoTrait -> [BookStats] -> Augmented Advancement 
            -> Augmented Advancement 
-readingSQstat pt xs = error $ show stat
-    where stat = filter ( ( (==) $ protoTrait pt ) . topic ) xs
+readingSQstat pt xs = f pt stat
+    where stat = find ( ( (==) $ protoTrait pt ) . topic ) xs
+          f pt Nothing = addValidation val
+          f _ (Just bk) = readingSQ4 bk
+          val = [ ValidationError $ "Book does not cover the topic " ++ show (protoTrait pt) ]
 
+-- | Infer source quality from book stats
+readingSQ4 :: BookStats -> Augmented Advancement -> Augmented Advancement 
+readingSQ4 _ = trace "Not implemented: readingSQval"
+
+-- | Infer `ProtoTrait` for learning from book stats.
 readingSQaddPT :: BookStats -> Augmented Advancement -> Augmented Advancement 
 readingSQaddPT _ = trace "Not implemented: readingSQaddPT"
 
@@ -209,7 +226,6 @@ readingSQaddPT _ = trace "Not implemented: readingSQaddPT"
 -- readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
 -- readingSQsq :: Augmented Advancement -> Augmented Advancement 
 -- readingSQsq aa = trace "Not implemented: readingSQsq" aa
-
 
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character
