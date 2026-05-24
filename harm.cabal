@@ -50,6 +50,46 @@ description:
          + 'ArM.Markdown'
          + 'ArM.IO'
 
+     ** Current Status
+
+     The Helper modules are ok at present.  Data.HList and Data.OList could use
+     a cleanup, but they are simple and cause little confusion.
+
+     *** Data model
+
+     + ArM.GameRules is very simple and essential, and causes no concern at present.
+     + ArM.Story has consistency issues, but they are minor.
+     + ArM.Trait and ArM.Types.Advancement could use an internal overhaul,
+       but the exposed API is pretty structured and useable.
+     + ArM.Types.Harm could possibly use a review of the API
+
+     *** Processing
+
+     ArM.Processing is simple, atomic functions which require no attention at
+     the moment.
+
+     The other modules include the advancement process which is not stable at
+     the moment.
+     + ArM.Saga.Advancement provides the core routines for in-game advancement.
+       This has just found a stable structure, which is being extended.
+     + ArM.*.InGame have been set up to support ArM.Saga.Advancement.
+       This is well-structured and will only grow to support new features.
+     
+     Other routines is a mesh of new and old code.
+
+     *** Formatting and IO
+
+     + "ArM.Markdown" is a mess, but it should only be reviewed when the
+       main data model is better organised.
+     + "ArM.Sheet" is probably OK, but may be reviewed in conjunction with
+       the above.
+     + "ArM.IO" is pretty well-structured and causes no concern.
+
+
+
+
+
+
 name:                harm
 version:             0.1.0.0
 -- synopsis:
