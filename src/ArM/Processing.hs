@@ -42,7 +42,6 @@ updateCovenantAdv f s
 addCovenantValidation :: [Validation] -> Covenant -> Covenant
 addCovenantValidation val = updateCovenantAdv (addValidation val)
 
-
 -- | Apply the given function to the Character
 updateCharacterAdv :: ( Augmented Advancement -> Augmented Advancement ) 
                   -> Character -> Character
@@ -64,10 +63,6 @@ setAdvancement :: Augmented Advancement -> Character -> Character
 setAdvancement aa ch = ch { pastAdvancement = aa:(mtail $ pastAdvancement ch) }
 
 -- * Convenience functions (currently not in use)
---
--- $processing
--- Thes
---
 
 -- | Extract abilities and arts from a list of `ProtoTrait` objects.
 getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
