@@ -9,6 +9,7 @@ tags:
 + We have to distinguish between in-game and pre-game advancement.
 + Common inference
 	+ `addInference` applies to both CharGen and InGame advancement
++ See [[CharGen (Pre-Game Advancement)]]
 
 ## In-Game Advancement May 2026
 
@@ -25,23 +26,19 @@ tags:
 + These three modules are fairly well-structured at the moment.
 + The process is elaborated in [[Joint Advancement]]
 
-## CharGen (pre-game advancement)
-
-CharGen is simpler because each character and covenant is developed independently of all others. Hence the process can be managed from the `ArM.Character` and `ArM.Covenant` independently.
-
-+ `ArM.Character.CharGen` provides the `prepareCharacter` function, which applies advancements recursively
-+ Each advancement is prepared by `prepareCharGen` which applies
-	+ `addInference` (shared with in-game)
-			+ adding bonus
-			+ validation
-	+ `initialLimits` inferring XP and other limits
-		+ this replaces the source quality (SQ) used in-game
-	+ `agingYears` which computes age
-		+ **TODO** aging
-	+ sort traits (assumed by some steps)
-	+ `validateCharGen` which checks the limits
-		+ constituent functions for specific CharGen advancement types
 ## Validating SQ and XP use
+
++ In game XP allowance is governed by two components
+	+ Source Quality
+	+ BonusXP
++ explicit Source Quality is optional in most cases
++ explicit BonusXP is required for fringe cases
++ implicit Source Quality can often be deduced
+	+ Exposure - always 2
+	+ Story - from Covenant Story
+	+ Reading - from book
+	+ Teaching - from teacher
++ implicit BonusXP is typically bonuses from virtues and flaws
 
 ### Source Quality Calculation
 
