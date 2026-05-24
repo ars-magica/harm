@@ -229,4 +229,17 @@ readingSQaddPT _ = trace "Not implemented: readingSQaddPT"
 
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character
-chgRepeat = trace "Not implemented: chgRepeat"
+chgRepeat ch = f bk ch
+     where f Nothing = id
+           f (Just b) | isTractatus b = g $ find ( (==(harmKey b)) . harmKey ) bs
+                      | otherwise = id
+           g Nothing = id
+           g (Just b) = addCharacterValidation (val b)
+           val b = [ ValidationError $ "Rereading tractatus: " ++ name b ]
+           bk = bookRead $ contractAdvancement $ chgCurrentAdv ch
+           bs = filter isTractatus $ chgBooksRead ch
+
+
+chgBooksRead :: Character -> [ Book ]
+chgBooksRead = filterNothing . map ( bookRead . contractAdvancement ) 
+             . mtail . pastAdvancement

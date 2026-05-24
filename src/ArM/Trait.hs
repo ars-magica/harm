@@ -105,6 +105,7 @@ module ArM.Trait (
          , wrapBooks
          , textLevel
          , readBookCSV
+         , isTractatus
 
          -- * Weapon
          , Weapon(..)
