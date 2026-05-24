@@ -30,7 +30,7 @@ import Data.List
 import Control.Applicative
 import Control.Monad
 
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 -- | Initialise `Character` object for advancement
 initAdvancement :: SeasonTime -> Character -> Character
