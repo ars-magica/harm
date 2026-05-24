@@ -180,7 +180,7 @@ stepMembership st = st { characters = ch }
 updateMembership :: M.Map String Character -> [Covenant] -> M.Map String Character
 updateMembership ch [] = ch
 updateMembership ch (x:xs) = updateMembership (updateMembership' ch y i) xs
-      where y = fromMaybe [] $ fmap covenFolkID $ covenantState x
+      where y = covenFolkID x
             i = harmKey x
 
 updateMembership' :: M.Map String Character -> [ HarmKey ] -> HarmKey 
@@ -245,7 +245,7 @@ bookCollision = covenMapS bookCollisionCov
 bookCollisionCov :: SagaState -> Covenant -> Covenant
 bookCollisionCov st cv = addCovenantValidation (bkCollisions rq av) cv
       where rq = countRequires st cv
-            av = countAvailable cv
+            av = possessions cv
 
 -- | Count uses of books in an advancement step
 countRequires :: SagaState
@@ -253,17 +253,11 @@ countRequires :: SagaState
               -> [(HarmKey,Int)]       -- ^ List of books with number of users
 countRequires s = countRepetitions . listRequires s
 
--- | Count available books
-countAvailable :: Covenant  -- ^ List of character advancement steps for one season
-              -> [Possession]       -- ^ List of books with number of users
-countAvailable = fromMaybe [] . fmap possessions . covenantState
-
-
 -- | Get a list of books used in the seqason
 listRequires :: SagaState -> Covenant -> [HarmKey]
 listRequires saga = sort . foldl (++) [] 
                   . map ( requires . contractAdvancement . chgCurrentAdv ) 
-                  . fromMaybe [] . fmap ( covenFolk saga ) . covenantState
+                  . covenFolk saga
 
 
 

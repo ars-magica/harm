@@ -22,8 +22,6 @@ module ArM.Types.Harm.Covenant (
            -- * The Covenant Type
            Covenant(..)
            , CovenantConcept(..)
-           , CovenantState(..)
-           , defaultCovState
            , findCov
            ) where
 
@@ -31,7 +29,6 @@ import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Extra
 import Data.Maybe
-import Control.Monad
 
 import ArM.Trait
 import ArM.Types.Advancement
@@ -46,33 +43,38 @@ import Data.KeyPair
 -- lists of advancement which define the evolution of states
 data Covenant = Covenant 
          { covenantConcept :: CovenantConcept
-         , covenantState :: Maybe CovenantState
+         , covTime :: SeasonTime
+         , covenFolkID :: [ HarmKey ]
+         , caTraits :: [ OtherTrait ]
+         , boonhook :: [ VF ]
+         , possessions :: [ Possession ]
+         , labs :: [ Lab ]
          , pastCovAdvancement :: [ Augmented CovAdvancement ]
          , futureCovAdvancement :: [ CovAdvancement ]
          , covenantDesign :: [ CovAdvancement ]
          , covenantPregame :: [ Augmented CovAdvancement ]
        }  deriving (Eq,Generic,Show)
-instance Timed Covenant where
-    season = fromMaybe NoTime . fmap season . covenantState
 
-instance Timed CovenantState where
+instance Timed Covenant where
     season = covTime
 
 instance ToJSON Covenant 
 instance FromJSON Covenant where
     parseJSON = withObject "Covenant" $ \v -> Covenant
         <$> v .: "concept"
-        <*> v .:? "state"
+        <*> v .:? "season" .!= GameStart
+        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
+        <*> v `parseCollapsedList` "traits"
+        <*> v `parseCollapsedList` "boonhook"
+        <*> v `parseCollapsedList` "possessions"
+        <*> v `parseCollapsedList` "labs"
         <*> v .:? "history" .!= []
         <*> v .:? "plan" .!= []
         <*> v .:? "design" .!= []
         <*> v .:? "pregame" .!= []
 
 instance BookDB Covenant where
-   lookupBook k = join . fmap (lookupBook k) . covenantState 
-
-instance BookDB CovenantState where
-    lookupBook k = lookupBook k . possessions
+   lookupBook k = lookupBook k . possessions
 
 instance KeyObject Covenant where
     harmKey = CovenantKey . name
@@ -83,7 +85,7 @@ instance StoryObject Covenant where
     narrative = covDescription . covenantConcept
 
 -- | The covenant concept is the timeless features of the covenant,
--- as compared to the `CovenantState` which advances over time.
+-- as compared to the state which advances over time.
 data CovenantConcept = CovenantConcept 
          { covName :: String
          , covConcept :: Maybe String
@@ -115,38 +117,8 @@ instance Show CovenantConcept where
           sf (Just x ) = show x
 
 
--- | The `CovenantState` is the features of the covenant that changes
--- from season to season
-data CovenantState = CovenantState 
-         { covTime :: SeasonTime
-         , covenFolkID :: [ HarmKey ]
-         , caTraits :: [ OtherTrait ]
-         , boonhook :: [ VF ]
-         , possessions :: [ Possession ]
-         , labs :: [ Lab ]
-       }  deriving (Eq,Generic,Show)
-
--- | A default object with some fields pre-initialised.
-defaultCovState :: CovenantState 
-defaultCovState = CovenantState 
-         { covTime = GameStart
-         , covenFolkID = []
-         , caTraits = []
-         , boonhook = []
-         , possessions = []
-         , labs = []
-       }  
 
 
-instance ToJSON CovenantState
-instance FromJSON CovenantState where
-    parseJSON = withObject "CovenantState" $ \v -> CovenantState
-        <$> v .:? "season" .!= GameStart
-        <*> fmap ( map CharacterKey ) ( v `parseCollapsedList` "covenfolk" )
-        <*> v `parseCollapsedList` "traits"
-        <*> v `parseCollapsedList` "boonhook"
-        <*> v `parseCollapsedList` "possessions"
-        <*> v `parseCollapsedList` "labs"
 
 
 -- * Convenience Functions
@@ -162,8 +134,7 @@ findCov ch cs = mhead xs
 -- |
 -- Does the covenant have the character as a member?
 hasMember :: Covenant -> Character -> Bool
-hasMember cov ch = cid `elem` chs
-   where cid = harmKey ch
-         chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
+hasMember cov ch = (harmKey ch) `elem` (covenFolkID cov)
+   
 
 

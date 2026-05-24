@@ -26,7 +26,6 @@ import ArM.Covenant.Validation
 import ArM.Trait
 import ArM.Story
 import ArM.Helper
-import Data.Maybe
 import Data.List
 
 -- ** Covenant Generation and Advancement
@@ -37,28 +36,26 @@ covGen cov = foldl genStep cov' as
    where as = covenantDesign cov
          cov' = cov { covenantDesign = [] }
 
--- | Apply one CovAdvancement object to the `CovenantState`.
+-- | Apply one CovAdvancement object to the `Covenant`.
 -- This is the same for pre-game and in-game advancement.
-stepCovState :: CovenantState -> CovAdvancement -> CovenantState
+stepCovState :: Covenant -> CovAdvancement -> Covenant
 stepCovState st adv = stepBH adv $ stepPossessions adv $ stepCovenFolk adv st
 
 -- | Apply one pre-game CovAdvancement to the `Covenant`.
 -- This is an auxiliary for `covGen`.
 genStep :: Covenant -> CovAdvancement -> Covenant
-genStep cov adv = cov { covenantState = Just st'
-                      , covenantPregame = aa:covenantPregame cov }
-   where st' = stepCovState st adv
-         st = fromMaybe defaultCovState $ covenantState cov
-         aa = covAddValidation $ Adv adv noCovAdvancement []
+genStep cov adv = f $ stepCovState cov adv
+   where aa = covAddValidation $ Adv adv noCovAdvancement []
+         f x = x { covenantPregame = aa:covenantPregame x }
 
--- | Advance the `covenfolk` attribute of the `CovenantState`.
-stepCovenFolk :: CovAdvancement -> CovenantState -> CovenantState
+-- | Advance the `covenfolk` attribute of the `Covenant`.
+stepCovenFolk :: CovAdvancement -> Covenant -> Covenant
 stepCovenFolk aa st = st { covenFolkID = cid }
    where cid1 = sort $ joining aa ++ covenFolkID st 
          cid = cid1 -= ( sort $ leaving aa )
 
 -- | Update boons and hooks
-stepBH :: CovAdvancement -> CovenantState -> CovenantState
+stepBH :: CovAdvancement -> Covenant -> Covenant
 stepBH aa st = st { boonhook = mergeBH bh1 bh2 }
    where bh1 = sort $ boonhook st 
          bh2 = sort $ bhChanges aa
@@ -75,8 +72,8 @@ mergeBH (x:xs) (y:ys)
     | otherwise  = y { vfMultiplicity = n}:mergeBH xs ys
     where n = count x + count y
 
--- | Advance the `possessions` attribute of the `CovenantState`.
-stepPossessions :: CovAdvancement -> CovenantState -> CovenantState
+-- | Advance the `possessions` attribute of the `Covenant`.
+stepPossessions :: CovAdvancement -> Covenant -> Covenant
 stepPossessions aa st = st { possessions = bid }
    where bid1 = sort $ acquired aa ++ possessions st 
          bid = bid1 -= ( sort $ lost aa )

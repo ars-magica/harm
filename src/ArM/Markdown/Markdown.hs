@@ -616,7 +616,16 @@ instance Markdown Covenant where
         , OString ""
         , printMD $ covenantConcept cov
         , OString ""
-        , printMD $ covenantState cov
+        , OString $ "## Updated" ++ (show $ covTime cov)
+        , OString ""
+        , OString "### Boons and Hooks"
+        , OString ""
+        , OList $ map ( indentHList . vfH ) ( boonhook cov )
+        , OString ""
+        , OString "### Possessions"
+        , OString ""
+        , listPossessions $ possessions cov
+        , OString ""
         ]
     printSheetMD saga cov = OList 
         [ OString $ "# " ++ (covName $ covenantConcept cov )
@@ -643,9 +652,14 @@ covconceptHelper cc = filterNothing
 instance Markdown Book where
     printMD = fromHList . printBookH
 
-instance Markdown CovenantState where
-    printMD cov = OList  
-        [ OString $ "## Updated" ++ (show $ covTime cov)
+-- | Print the covenant state of the given covenant
+printCovenantStateMD :: Saga -> Covenant -> OList
+printCovenantStateMD saga cov = OList  
+        [ OString $ "## " ++ (show $ season cov)
+        , OString ""
+        , characterIndex $ covenFolk saga cov
+        , OString ""
+        , OString (pagesLink $ stateName $ getLibrary cov)
         , OString ""
         , OString "### Boons and Hooks"
         , OString ""
@@ -654,32 +668,7 @@ instance Markdown CovenantState where
         , OString "### Possessions"
         , OString ""
         , listPossessions $ possessions cov
-        , OString ""
         ]
-
--- | Print the covenant state of the given covenant
-printCovenantStateMD :: Saga -> Covenant -> OList
-printCovenantStateMD saga cov = OList  
-        [ OString $ "## " ++ (show $ season cov)
-        , OString ""
-        , characterIndex $ fmaybe (covenFolk saga) (covenantState cov)
-        , OString ""
-        , OString (pagesLink $ stateName $ getLibrary cov)
-        , OString ""
-        , OString "### Boons and Hooks"
-        , OString ""
-        , OList $ map ( indentHList . vfH ) ( fmaybe boonhook $ covenantState cov )
-        , OString ""
-        , OString "### Possessions"
-        , OString ""
-        , listPossessions $ fmaybe possessions (covenantState cov)
-        ]
-
--- | Apply a function returning a list on a maybe object, returning the empty
--- list if the object is Nothing.
-fmaybe :: ( a -> [b] ) -> Maybe a -> [b]
-fmaybe x = fromMaybe [] . fmap x
-
 
 instance Markdown Lab where
    printMD lb = indentOList $ OList 

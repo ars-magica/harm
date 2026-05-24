@@ -22,8 +22,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       -- * Covenant
                       , Covenant(..)
                       , CovenantConcept(..)
-                      , CovenantState(..)
-                      , defaultCovState
                       , findCov
                       -- * Saga
                       , Saga(..)
@@ -80,9 +78,8 @@ instance HarmSagaObject Character where
             f _ = Nothing
             g ob = (harmKey ob,ob)
 instance HarmSagaObject Lab where
-   harmLookup k saga = g $ M.mapMaybe ( harmFind k . labs ) css
+   harmLookup k saga = g $ M.mapMaybe ( harmFind k . labs ) ( covenants saga )
       where g = mhead . M.elems
-            css = M.mapMaybe covenantState ( covenants saga )
    toPair = f . g
       where f (LabKey k,ob) = Just (k,ob)
             f _ = Nothing

@@ -31,11 +31,7 @@ import Data.Maybe
 updateSagaState :: ( SagaState -> SagaState ) -> Saga -> Saga
 updateSagaState f s = s { sagaState = f ( sagaState s ) }
 
--- | Apply the given function to the CovenantState
-updateCovenantState :: ( CovenantState -> CovenantState ) -> Covenant -> Covenant
-updateCovenantState f s = s { covenantState = fmap f ( covenantState s ) }
-
--- | Apply the given function to the CovenantState
+-- | Apply the given function to the Covenant
 updateCovenantAdv :: ( Augmented CovAdvancement -> Augmented CovAdvancement ) 
                   -> Covenant -> Covenant
 updateCovenantAdv f s 
@@ -51,7 +47,7 @@ addCovenantValidation :: [Validation] -> Covenant -> Covenant
 addCovenantValidation val = updateCovenantAdv (addValidation val)
 
 
--- | Apply the given function to the CovenantState
+-- | Apply the given function to the Character
 updateCharacterAdv :: ( Augmented Advancement -> Augmented Advancement ) 
                   -> Character -> Character
 updateCharacterAdv f s 

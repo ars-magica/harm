@@ -18,7 +18,6 @@ import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Covenant.Covenant
 import ArM.Story
-import ArM.Processing
 import ArM.Helper
 import Data.Maybe
 
@@ -26,11 +25,9 @@ import Data.Maybe
 initCovAdvancement :: SeasonTime -> Covenant -> Covenant
 initCovAdvancement t c = c { pastCovAdvancement = x:pastCovAdvancement c
                         , futureCovAdvancement = xs 
-                        , covenantState = Just $ f (covenantState c) t
+                        , covTime = t
                         }
      where (x,xs) = icaHead t $ futureCovAdvancement c
-           f Nothing y = defaultCovState { covTime = y }
-           f (Just s) y = s { covTime = y }
 
 -- | Make initial inferences on the advancement.
 -- Currently no inference is made.
@@ -58,11 +55,10 @@ cvgCurrentAdv = contractAdvancement . fromMaybe noAdv . mhead . pastCovAdvanceme
 
 -- | Advance covenfolk in the covenant
 cvgCovenFolk :: Covenant -> Covenant
-cvgCovenFolk c = updateCovenantState (stepCovenFolk (cvgCurrentAdv c)) c
+cvgCovenFolk c = stepCovenFolk (cvgCurrentAdv c) c
 
 -- | Apply one CovAdvancement object to the `CovenantState`.
 -- This is the same for pre-game and in-game advancement.
 cvgStep :: Covenant -> Covenant
-cvgStep c = updateCovenantState f c
-    where f = stepBH adv . stepPossessions adv 
-          adv = cvgCurrentAdv c
+cvgStep c = stepBH adv $ stepPossessions adv c
+          where adv = cvgCurrentAdv c

@@ -19,7 +19,6 @@ import ArM.Types.Harm
 import ArM.Story
 import ArM.Helper
 import Data.List
-import Data.Maybe
 
 -- * Processing Books
 
@@ -111,7 +110,7 @@ getLibrary :: Covenant -> Library
 getLibrary cov = addScrolls s $ addGrimoires g $ addBooks lib ps
    where lib = defaultLibrary { libraryName = "Library at " ++ name cov
                               , libraryTime = season cov }
-         ps = fromMaybe [] $ fmap possessions  $ covenantState cov
+         ps = possessions cov
          g = filterGrimoires ps
          s = filterScrolls ps
 addGrimoires :: [ Possession ] -> Library -> Library 

@@ -146,7 +146,7 @@ covenantIndex = OList . map covenantIndexLine
 class CharDB a where
    -- |
    -- List of covenFolk as `Character` objects at the covenant
-   covenFolk :: a -> CovenantState -> [ Character ]
+   covenFolk :: a -> Covenant -> [ Character ]
    covenFolk saga cov = lookupCharacters s $ f cov
        where f = covenFolkID 
              s = saga
