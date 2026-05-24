@@ -8,19 +8,16 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  In-game character ddvancement.
+-- Description :  Auxiliary functions for character ddvancement.
 --
--- Only a single function, `prepareAdvancement`, is exported.
--- It applies to in-game character advancement only.
--- Its purpose is to make those inferences which can be made on the
--- individual character in isolation.
+-- In game, these functions are used by `ArM.Character.InGame.prepareAdvancement`.
+-- 
+-- Some of the functions may also apply to chargen - such as `winterEvents`.
 --
 -----------------------------------------------------------------------------
-module ArM.Character.Advancement ( prepareAdvancement, validate ) where
+module ArM.Character.Advancement where
 
 import ArM.Character.Character
-import ArM.Character.Inference
-import ArM.Character.Validation
 import ArM.Character.CharacterSheet
 import ArM.Character.Virtues
 import ArM.Types.Harm
@@ -35,13 +32,6 @@ import Data.Maybe
 import Data.List
 
 -- * Preparing the Advancement
-
--- | Augment and amend the advancements based on current virtues and flaws.
-prepareAdvancement :: CharacterState -> Advancement -> Augmented Advancement
-prepareAdvancement c = sortAdvTraits   -- sort inferred traits
-                     . winterEvents c 
-                     . addInference c
-
 
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
@@ -127,11 +117,3 @@ lrWarping = defaultPT { protoTrait = OtherTraitKey "Warping"
                       , ptComment = Just "from Longevity Ritual" }
 
 
--- * In-game Validation
---
--- In-game validation is relatively simple, depending only on the
--- `Augmented Advancement`.  Currently, only XP expenditure is validated.
-
--- | Add source qualities and validate XP expenditure
-validate :: Character -> Augmented Advancement -> Augmented Advancement
-validate c = validateXP . inferSQ c

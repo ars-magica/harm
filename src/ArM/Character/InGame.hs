@@ -19,6 +19,7 @@ import ArM.Types.Advancement
 import ArM.Character.Advancement
 import ArM.Character.Character
 import ArM.Character.Validation
+import ArM.Character.Inference
 import ArM.Story
 import ArM.Trait
 import ArM.Processing
@@ -58,6 +59,12 @@ iaHead t _ [] = (noAdvT t,[])
 iaHead t st (x:xs) | season x == t = (prepareAdvancement st x,xs)
                    | otherwise = (noAdvT t,xs)
 
+-- | Augment and amend the advancements based on current virtues and flaws.
+prepareAdvancement :: CharacterState -> Advancement -> Augmented Advancement
+prepareAdvancement c = sortAdvTraits   -- sort inferred traits
+                     . winterEvents c  -- aging
+                     . addInference c  -- source quality inference
+
 -- | Get the current contracted advancement being processed.
 chgCurrentAdv :: Character -> Augmented Advancement
 chgCurrentAdv = fromMaybe noAdv . mhead . pastAdvancement
@@ -70,6 +77,7 @@ chgStep ch = setCharacterState st $ setAdvancement aa ch
 
 chgValidate :: Character -> Character
 chgValidate ch = updateCharacterAdv (validate ch) ch
+    where validate c = validateXP . inferSQ c
 
 chgBook :: SagaState -> Character -> Character
 chgBook st ch = updateCharacterAdv (addBook st ch) ch
@@ -224,12 +232,6 @@ readingSQaddPT bk aa = aa { inferredAdv = ia { changes = pt:changes ia } }
     where pt = defaultPT { protoTrait = topic bk }
           ia = inferredAdv aa
           
-
--- readingSQtopic :: Augmented Advancement -> Augmented Advancement 
--- readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
--- readingSQsq :: Augmented Advancement -> Augmented Advancement 
--- readingSQsq aa = trace "Not implemented: readingSQsq" aa
-
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character
 chgRepeat ch = f bk ch
@@ -246,3 +248,5 @@ chgRepeat ch = f bk ch
 chgBooksRead :: Character -> [ Book ]
 chgBooksRead = filterNothing . map ( bookRead . contractAdvancement ) 
              . mtail . pastAdvancement
+
+

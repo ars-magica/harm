@@ -3,6 +3,7 @@ tags:
   - armchar/json
 ---
 
++ JSON and YAML can be used interchangeable. Because both depend on Aeson they use the same internal parser objects.
 + There are three core types of domain objects in the model
 	+ `Saga` 
 	+ `Character`

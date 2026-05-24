@@ -59,8 +59,6 @@ module ArM.Character (
                           , characterEntryTime
                           , prepareCharacter
                           -- * Advancement
-                          , prepareAdvancement
-                          , validate
                           , initAdvancement
                           , chgStep
                           , chgValidate
@@ -78,5 +76,4 @@ import ArM.Character.Virtues
 import ArM.Character.Combat
 import ArM.Character.CharGen
 import ArM.Character.Character
-import ArM.Character.Advancement
 import ArM.Character.InGame
