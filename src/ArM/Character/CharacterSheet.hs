@@ -133,14 +133,11 @@ castingScore db cs spell | isNothing rec' =   0
             | otherwise = 0
          k = traitKey spell
 
-{-
-addCastingScores :: SpellDB -> Character -> Character
-addCastingScores db cs =  cs { spellList = spellList' }
-   where spellList' = map (addCastingScore db cs) (spellList cs)
+spellsWithScores :: SpellDB -> Character -> [ Spell ]
+spellsWithScores db cs = map (addCastingScore db cs) (spellList cs)
 addCastingScore :: SpellDB -> Character -> Spell -> Spell
 addCastingScore db cs sp =  sp { spellCastingScore = sc }
    where sc = Just $ castingScore db cs sp 
--}
 
 -- | Return the Lab Total a given TeFo combo.
 labTotal :: Character -- ^ Current character sheet

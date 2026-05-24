@@ -314,7 +314,7 @@ sheetMD c = OList
                , OString "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
                ]
 sheetSheetMD :: Saga -> Character -> OList
-sheetSheetMD saga c' = OList 
+sheetSheetMD saga c = OList 
                [ briefTraits c
                , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
                , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
@@ -329,11 +329,11 @@ sheetSheetMD saga c' = OList
                , printCombatMD saga c
                , mag
                ]
-         where c = addCastingScores (spells saga) c'
-               mag | isMagus c' = OList 
+         where spellist = spellsWithScores (spells saga) c 
+               mag | isMagus c = OList 
                        [ artVisMD c
                        , OString ""
-                       , printFullGrimoire (spells saga) $ sortTraits $ spellList c 
+                       , printFullGrimoire (spells saga) $ sortTraits spellist
                        , OString ""
                        , toOList $ printCastingTotals c 
                        , OString ""
