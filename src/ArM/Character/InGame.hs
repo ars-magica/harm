@@ -182,10 +182,16 @@ readingSQ = readingSQsq . readingSQtopic
 
 readingSQtopic :: Augmented Advancement -> Augmented Advancement 
 readingSQtopic aa = trace "Not implemented: readingSQtopic" aa
-    where pt = changes $ explicitAdv aa
+    where pt = getAA $ changes $ explicitAdv aa
 readingSQsq :: Augmented Advancement -> Augmented Advancement 
 readingSQsq aa = trace "Not implemented: readingSQsq" aa
-    where pt = changes $ explicitAdv aa
+    where pt = getAA $ changes $ explicitAdv aa
+
+getAA :: [ ProtoTrait ] -> [ ProtoTrait ]
+getAA = filter ( f . protoTrait )
+    where f (AbilityKey _) = True
+          f (ArtKey _) = True
+          f _ = False
 
 -- | Check if converge to are reread
 chgRepeat :: Character -> Character
