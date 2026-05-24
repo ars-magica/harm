@@ -18,12 +18,10 @@
 module ArM.Character.Advancement where
 
 import ArM.Character.Character
-import ArM.Character.Virtues
 import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Trait
 import ArM.Story
-import ArM.GameRules
 
 import ArM.Debug.Trace
 
@@ -73,38 +71,6 @@ winterEvents c a
           val = Validated $ "Aging roll made"
 
 
--- | Calculate initial XP limits on Advancements
-inferSQ :: Character -> Augmented Advancement -> Augmented Advancement
-inferSQ cs ad = ad { inferredAdv = aa { sourceQuality = sq, bonusSQ = vfBonusSQ vf ad } }
-        where vf = vfList cs
-              (sq,_) = getSQ ad
-              aa = inferredAdv ad
--- Infer SQ for Exposure = 2
--- Infer SQ for reading from book
--- Infer SQ for taught from teacher
--- Infer SQ for adventure from covenant
-
-{-
-bookSQ :: Augmented Advancement -> Augmented Advancement 
-bookSQ aa | isNothing stats = aa
-          | isNothing tr = aa
-          | otherwise = aa 
-    where tr = ttrace $ primaryXPTrait $ advancement aa
-          stats = find ctp $ foldl (++) [] $ map bookStats $ bookUsed aa
-          ctp =  (==(fromJust tr)) . topic 
--}
-
-getSQ :: Augmented Advancement -> (Maybe XPType,Maybe Int)
-getSQ a | isExposure ad = (Just 2,Nothing)
-        -- | mode ad == Reading = rd bks
-        | otherwise = mstat
-   where ad = explicitAdv a
-         mstat = (sourceQuality ad,sourceCap ad)
-         -- rd [] = (Nothing,Nothing)
-         -- rd (bk:bs) = (fmap fromIntegral $ quality bk,bookLevel bk)
-         -- bks | usd == [] = []
-             -- | otherwise = bookStats $ head usd
-         -- usd = bookUsed a
 
 -- |
 -- == Convenience Functions

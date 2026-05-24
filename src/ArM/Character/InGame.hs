@@ -20,9 +20,11 @@ import ArM.Character.Advancement
 import ArM.Character.Character
 import ArM.Character.Validation
 import ArM.Character.Inference
+import ArM.Character.Virtues
 import ArM.Story
 import ArM.Trait
 import ArM.Processing
+import ArM.GameRules
 import ArM.Helper
 
 import Data.Maybe
@@ -71,6 +73,7 @@ chgStep ch' = setAdvancement aa ch
    where aa' = chgCurrentAdv ch'
          (aa,ch) = applyAdvancement aa' ch'
 
+-- | Infer source quality
 chgValidate :: Character -> Character
 chgValidate ch = updateCharacterAdv (validate ch) ch
     where validate c = validateXP . inferSQ c
@@ -247,3 +250,24 @@ chgBooksRead = filterNothing . map ( bookRead . contractAdvancement )
              . mtail . pastAdvancement
 
 
+-- | Infer source quality.
+--
+-- This includes
+-- 1. BonusSQ from virtues and flaws, calculated by 'vfBonusSQ'.
+-- 2. Exposure SQ calculated by 'getSQ'.
+--
+-- Source quality from reading is calculated during book management.
+--
+-- TODO
+-- 1. Infer SQ for taught from teacher
+-- 2 Infer SQ for adventure from covenant
+inferSQ :: Character -> Augmented Advancement -> Augmented Advancement
+inferSQ cs ad = ad { inferredAdv = aa { sourceQuality = sq, bonusSQ = vfBonusSQ vf ad } }
+        where vf = vfList cs
+              (sq,_) = getSQ ad
+              aa = inferredAdv ad
+
+-- | Get source quality.  Auxiliary for `inferSQ`.
+getSQ :: Augmented Advancement -> (Maybe XPType,Maybe Int)
+getSQ a | isExposure a = (Just 2,Nothing)
+        | otherwise = (Nothing,Nothing)
