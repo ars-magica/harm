@@ -8,7 +8,7 @@ title:
 
 # Roadmap
 
-**Critical Challenges**
+**Critical Chall))enges**
 + [ ] Antologies
 + [ ] Multi-Tractatus
 + [ ] Books on Spell Masteries
@@ -17,18 +17,6 @@ title:
 + [ ] Covenant membership
 + [ ] Remove lab from properties
 + [ ] Level cap on  advancement.
-
-+ Advancement $\to$  need to identify
-	+ [x] Book
-	+ [ ] Part
-	+ [ ] Original of Part
-	+ [ ] Stats
-	+ Book / Part and Original / Stats
-		+ Book for resource Conflict
-		+ Original for rereading check
-		+ Part for Stats
-		+ Stats for Advancement
-	+ Primary XP Trait
 
 **Other issues**
 + [ ] Trade and Gifts
@@ -41,43 +29,14 @@ title:
 ## Plan
 
 + [ ] Immediate
-	+ [x] Spell comments (see Cieran print)
+	+ See github
+	+ [ ] Review current [[Demo Data]]
+	+ [ ] Set up regression test
++ [ ] Might do
 	+ [ ] Split character sheet in different pages
 		+ [ ] Brief grimoire
 		+ [ ] Long grimoire in separate doc
 	+ [ ] SQ penalties (e.g. Cieran injured)
-	+ [ ] Double-check regression output
-+ [ ] Phase 1.  **Review** Hibernia Saga
-	+ [ ] Review Character JSON syntax
-	+ [ ] Review recent seasons from Hibernia  for Elk's Run
-	+ [ ] Review character sheet design (Cieran)
-		+ [ ] Advancement view
-		+ [ ] Lab totals
-		+ [ ] Comments on advancing traits (possession in particular)
-	+ [ ] Review covenant sheet and library
-	+ [ ] Review Wiki layout for AnnalSeason
-	+ [ ] Review object structure of AnnalSeason 
-	+ [ ] [[Lab object]]
-		+ [ ] Compute lab total in advancements
-		+ [ ] Advance lab (refinement and virtue installation)
-	+ [ ] Comment field on traits
-+ [ ] Phase 2. Consolidation
-	+ [ ] Validate missing seasons
-	+ [ ] Character advancement
-		+ [ ] Narrative 
-		+ [ ] Comment
-		+ [ ] Consistency of Narrative and Comment
-	+ [ ] Fix ongoing
-		+ [ ] Comment on ProtoTrait
-		+ [ ] Validation: Compare SQ
-+ [ ] Phase 3. Books
-	+ [ ] [[Reading and Books]]
-	+ [ ] Validate Reading Advancement
-	+ [ ] levelCap on ProtoTrait - where should this go?
-	+ [ ] Use of Keys and objects
-	+ [ ] Type every book with edge cases and supersede wiki
-+ [ ] Phase 4. Next steps
-	+ [ ] Specialists (copyists in particular)
 + [ ] Phase 5. [[Covenant]]
 	+ [ ] Reading and copying advancements
 		+ [ ] calculate book quality from author
@@ -116,7 +75,7 @@ title:
 	+ [ ] Remove trait when advancing
 	+ [ ] More user friendly sheets
 		+ [ ] More compact character sheets
-		+ [ ] PDF sheets
+		+ [ ] PDF sheets))))
 	+ [ ] Step 3. Virtues and Flaws - Special cases
 		+ [ ] Linguist
 		+ [ ] Inventive Genius
