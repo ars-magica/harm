@@ -10,10 +10,15 @@
 --
 -- The module exports only one function, `prepareCharacter`, which
 -- computes the character at game start, based on pre-game advancement
--- objects.
+-- objects.  
 --
--- This function should be applied when a character is read from file
--- which does not include a persistent state.
+-- This function should be applied when a character is read from file,
+-- and it is not already advanced to `GameStart`.
+--
+-- The critical point which is specific for CharGen is `prepareCharGen`
+-- which applies inference and validation to the advancement.
+-- Once that is done, it is applied by `applyAdvancement` which is common
+-- to all advancement.
 --
 -----------------------------------------------------------------------------
 module ArM.Character.CharGen (prepareCharacter) where
