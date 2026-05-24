@@ -28,8 +28,8 @@ import Data.Maybe
 -- import ArM.Debug.Trace
 
 -- | Infer traits a range of other traits, both from the new advancement
--- and the existing `CharacterState`.
-addInference :: CharacterState -> Advancement -> Augmented Advancement
+-- and the existing `Character`.
+addInference :: Character -> Advancement -> Augmented Advancement
 addInference cs a = Adv { explicitAdv = a
                         , inferredAdv = augmentAdvancement cs a 
                         , validation = []
@@ -38,7 +38,7 @@ addInference cs a = Adv { explicitAdv = a
 -- | Infer traits from new virtues and flaws and add them to the advancement.
 -- This typically applies to virtues providing supernatural abilities.
 -- The ability is inferred and should not be added manually.
-augmentAdvancement :: CharacterState -> Advancement -> Advancement
+augmentAdvancement :: Character -> Advancement -> Advancement
 augmentAdvancement cs a = defaultAdvancement 
         { changes = inferProtoTraits cs xs
         , advSeason = season a
@@ -48,7 +48,7 @@ augmentAdvancement cs a = defaultAdvancement
            yf | isWinter $ season a = Just 1
               | otherwise = Nothing
 
-inferProtoTraits :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
+inferProtoTraits :: Character -> [ProtoTrait] -> [ProtoTrait]
 inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
      where f =  inferTraits . getVF 
            g =  inferDecrepitude 
@@ -67,7 +67,7 @@ inferDecrepitude (x:xs)
 
 
 -- | Inferred spell traits if Flawless Magic applies
-flawlessSpells :: CharacterState -> [ProtoTrait] -> [ProtoTrait]
+flawlessSpells :: Character -> [ProtoTrait] -> [ProtoTrait]
 flawlessSpells sheet xs | hasFlawless sheet = flawlessSpells' xs
                         | otherwise = []
 
@@ -81,7 +81,7 @@ flawlessSpells' (x:xs) | isSpell (protoTrait x) = y:ys
           y = defaultPT { protoTrait = protoTrait x, flawless = Just True }
 
 -- | Does the character have Flawless Magic?
-hasFlawless :: CharacterState -> Bool
+hasFlawless :: Character -> Bool
 hasFlawless c | fms == [] = False
               | otherwise = True
     where ts = vfList $ characterSheet c

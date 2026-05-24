@@ -42,9 +42,7 @@ import ArM.Helper
 import ArM.Types.Harm
 
 characterPossessions :: Character -> [ Possession ]
-characterPossessions = f . state 
-         where f Nothing = []
-               f (Just st) = filterNothing $ map getTrait $ traits st
+characterPossessions = filterNothing . map getTrait . traits 
 
 -- |
 -- = Convenience Functions for Character Properties
@@ -82,8 +80,8 @@ agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 -- advancement.  The Augmented Advancement has to be prepared differently,
 -- using either `prepareAdvancement` or `prepareCharGen`.
 applyAdvancement :: Augmented Advancement
-                 -> CharacterState 
-                 -> (Augmented Advancement,CharacterState)
+                 -> Character
+                 -> (Augmented Advancement,Character)
 applyAdvancement a cs = (a,cs')
     where cs' = cs { charTime = season a, traits = new }
           new = advanceTraitList change tmp

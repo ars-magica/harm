@@ -29,9 +29,6 @@ module ArM.Character (
                           -- * The Character Type
                           Character(..)
                           , CharacterConcept(..)
-                          , CharacterState(..)
-                          , CharacterType(..)
-                          , defaultCS
                           -- * The CharacterSheet Type
                           , module ArM.Character.CharacterSheet
                           -- * The CharacterSheet Type

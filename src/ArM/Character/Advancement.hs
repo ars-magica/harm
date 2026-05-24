@@ -35,7 +35,7 @@ import Data.List
 
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
-winterEvents :: CharacterState       -- ^ Current Character State
+winterEvents :: Character             -- ^ Current Character State
              -> Augmented Advancement -- ^ Advancement 
              -> Augmented Advancement -- ^ modified Advancement
 winterEvents c a 

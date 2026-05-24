@@ -172,8 +172,7 @@ stepCovenFolk st = covenMap f st
 stepMembership :: SagaState -> SagaState
 stepMembership st = st { characters = ch }
     where ch = updateMembership ch' $ M.elems $ covenants st
-          clear x = x { state = fmap f (state x) }
-          f x = x { memberOf = Nothing } 
+          clear x = x { memberOf = Nothing } 
           ch' = M.map clear $ characters st
 
 -- | For each covenant in the list, update all its covenfolk with new `memberOf`
@@ -197,15 +196,12 @@ updateMembership' _ (_:ks) ck = updateMembership' ch'  ks ck
 -- | Update the `memberOf` attribute of a `Character` object.
 updateCharMembership :: HarmKey -> Character -> Character
 updateCharMembership (CovenantKey k) ch 
-    | isNothing m = updateCharacterState f ch
+    | isNothing m = ch { memberOf = Just k }
     | otherwise   =  addCharacterValidation val ch
     where val = [ValidationError $ "Character is member of two covenants: "
                 ++ k ++ " and " ++ fromJust m  ++ "."
                 ]
-          m = ff $ fmap memberOf $ state ch
-          f x = x { memberOf = Just k }
-          ff (Just (Just x)) = Just x  
-          ff _ = Nothing
+          m = memberOf  ch
 updateCharMembership _ ch = addCharacterValidation val ch
    where val = [ValidationError "Programming error: Non-covenant key for character."]
 

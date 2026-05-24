@@ -42,25 +42,25 @@ import Data.Maybe
 -- It then calls `addConfidence` to add the confidence trait to the state
 -- for the returned `Character` object
 prepareCharacter :: Character -> Character
-prepareCharacter c | state c /= Nothing = c
-                   | otherwise = c { state = newstate
-                                   , pregameDesign = xs
-                                   , pregameAdvancement = []
-                                   , entryTime = f $ futureAdvancement c
-                                   }
+prepareCharacter c | pregameAdvancement c == [] = c
+                   | otherwise = c' { pregameDesign = xs
+                                    , pregameAdvancement = []
+                                    , entryTime = f $ futureAdvancement c
+                                    , charTime = GameStart
+                                    }
             where as = pregameAdvancement  c 
-                  (xs,cs) = applyCGA as defaultCS { charSType = charType $ concept c }
-                  newstate = Just $ addConfidence $ cs { charTime = GameStart }
+                  (xs,cs) = applyCGA as c
+                  c' = addConfidence c
                   f [] = NoTime
                   f (x:_) = season x
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 --
 -- This function is applied by `applyCharGenAdv` before the advancement is
--- applied to the `CharacterState`.  It infers additional traits from 
+-- applied to the `Character`.  It infers additional traits from 
 -- virtues and flaws, add XP limits to the advancements, and checks that
 -- the advancement does not overspend XP or exceed other limnits.
-prepareCharGen :: CharacterState -> Advancement -> Augmented Advancement
+prepareCharGen :: Character -> Advancement -> Augmented Advancement
 prepareCharGen cs = validateCharGen sheet   -- Validate integrity of the advancement
                   . sortAdvTraits      -- Restore sort order on inferred traits
                   . agingYears              -- add years of aging as an inferred trait
@@ -92,7 +92,7 @@ agingYears x | y > 0 = addProtoTrait [ agePT y ] x
 
 
 -- | Add the Confidence trait to the character state, using 
-addConfidence :: CharacterState -> CharacterState
+addConfidence :: Character -> Character
 addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
           where vfs = vfList sheet
                 sheet = characterSheet cs
@@ -102,20 +102,20 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 
 
 -- | Apply CharGen advancement
-applyCharGenAdv :: Advancement -> CharacterState 
-                -> (Augmented Advancement,CharacterState)
+applyCharGenAdv :: Advancement -> Character 
+                -> (Augmented Advancement,Character)
 applyCharGenAdv a cs = (a',f cs')
    where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
          (PostProcessor g) = postprocessTrait $ contractAdvancement a'
          f x = x { traits = map g $ traits x }
 
 -- | Apply a list of advancements
-applyCGA :: [Advancement] -> CharacterState -> ([Augmented Advancement],CharacterState)
+applyCGA :: [Advancement] -> Character -> ([Augmented Advancement],Character)
 applyCGA a cs = applyCGA' ([],a,cs)
 
 -- | Recursive helper for `applyCGA`.
-applyCGA' :: ([Augmented Advancement],[Advancement],CharacterState)
-                   -> ([Augmented Advancement],CharacterState)
+applyCGA' :: ([Augmented Advancement],[Advancement],Character)
+                   -> ([Augmented Advancement],Character)
 applyCGA' (xs,[],cs) = (xs,cs)
 applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
     where (a',cs') = applyCharGenAdv y cs

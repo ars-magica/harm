@@ -25,7 +25,6 @@ module ArM.Types.Harm.Covenant (
            , CovenantState(..)
            , defaultCovState
            , findCov
-           , covenant
            ) where
 
 import GHC.Generics
@@ -168,6 +167,3 @@ hasMember cov ch = cid `elem` chs
          chs = fromMaybe [] $ fmap covenFolkID $ covenantState cov
 
 
--- | The covenant where the given character is a member
-covenant :: CharacterState -> Maybe HarmKey
-covenant = fmap CovenantKey . memberOf 

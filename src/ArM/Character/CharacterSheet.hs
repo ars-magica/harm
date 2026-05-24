@@ -95,9 +95,9 @@ instance FromJSON CharacterSheet
 
 
 -- | Get the CharacterSheet corresponding to a given CharacterState.
-filterCS :: CharacterState -> CharacterSheet
+filterCS :: Character -> CharacterSheet
 filterCS cs = defaultSheet  
-                 { csType = charSType cs
+                 { csType = charType $ concept cs
                  , vfList = x1
                  , abilityList = x2
                  , artList = x3
@@ -308,14 +308,9 @@ class CharacterLike ct where
      characterSheet :: ct -> CharacterSheet
 instance CharacterLike Character where
      characterType = charType . concept
-     characterSheet c | isNothing st = defaultSheet { csType = charType (concept c) }
-                      | otherwise = cs { csType = charType (concept c) }
-         where st = state c
-               cs = filterCS st'
-               st' = fromJust st 
-instance CharacterLike CharacterState where
-     characterType = charSType 
-     characterSheet = filterCS
+     characterSheet c = cs { csType = charType (concept c) }
+         where cs = filterCS c
+
 instance CharacterLike CharacterSheet where
     characterType = csType
     age = f . ageObject

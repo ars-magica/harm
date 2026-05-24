@@ -151,26 +151,34 @@ showlistMD s xs = OList [ OString s
 -- between more fields and use a differfent formatting where long text is expected.
 instance Markdown Character where
    printMD  c = OList
-            [ bs 
+            [ printMD $ concept  c 
+            , printCS  c 
             , designMD c
             , chargenMD c
             , advancementMD c
             ]
-       where 
-            bs | isNothing (state c ) = s1
-               | otherwise = OList [ s1, s2 ]
-            s1 = printMD $ concept  c 
-            s2 = printMD $ state  c 
    printSheetMD saga c = OList
             [ printMD $ concept c
-            , sf $ state c 
+            , printSheetCS saga c
             , adv
             ]
-        where sf Nothing = OList []
-              sf (Just s) = printSheetMD saga s
-              adv | isGameStart c = chargenMD c
+        where adv | isGameStart c = chargenMD c
                   | otherwise =  advancementMD c
 
+
+printCS :: Character -> OList
+printCS c = OList
+       [ OString $ "## Sheet " ++ (show $ gameSeason c )
+       , OString ""
+       , printMD $ characterSheet c
+       ]
+
+printSheetCS :: Saga -> Character -> OList
+printSheetCS saga c = OList
+       [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
+       , OString ""
+       , printSheetMD saga $ characterSheet c
+       ]
 
 instance Markdown CharacterConcept where
    printMD = conceptPrintMD "../images/"
@@ -339,17 +347,6 @@ instance Markdown CharacterSheet where
                        ]
                    | otherwise = OString "" 
 
-instance Markdown CharacterState where
-   printMD c = OList
-       [ OString $ "## Sheet " ++ (show $ gameSeason c )
-       , OString ""
-       , printMD $ characterSheet c
-       ]
-   printSheetMD saga c = OList
-       [ OString $ "## Character Sheet " ++ (show $ gameSeason c) 
-       , OString ""
-       , printSheetMD saga $ characterSheet c
-       ]
 
 -- |
 -- == Markdown for Age, Confidence, Warping, and Decrepitude

@@ -20,6 +20,7 @@
 -----------------------------------------------------------------------------
 module ArM.Processing where
 
+import ArM.Story
 import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Helper
@@ -51,10 +52,6 @@ addCovenantValidation val = updateCovenantAdv (addValidation val)
 
 
 -- | Apply the given function to the CovenantState
-updateCharacterState :: ( CharacterState -> CharacterState ) -> Character -> Character
-updateCharacterState f s = s { state = fmap f ( state s ) }
-
--- | Apply the given function to the CovenantState
 updateCharacterAdv :: ( Augmented Advancement -> Augmented Advancement ) 
                   -> Character -> Character
 updateCharacterAdv f s 
@@ -68,10 +65,6 @@ updateCharacterAdv f s
 -- advancements.
 addCharacterValidation :: [Validation] -> Character -> Character
 addCharacterValidation val = updateCharacterAdv (addValidation val)
-
--- | Replace the character state with the given one
-setCharacterState :: CharacterState -> Character -> Character
-setCharacterState st ch = ch { state = Just st }
 
 -- | Replace the advancement currently being processed with the given one.
 -- The current advancement is stored at the head of past advancements.
@@ -91,3 +84,7 @@ getAA = filter ( f . protoTrait )
           f (ArtKey _) = True
           f (SpellKey _ _ _) = True
           f _ = False
+
+-- | The covenant where the given character is a member
+covenant :: Character -> Maybe HarmKey
+covenant = fmap CovenantKey . memberOf 

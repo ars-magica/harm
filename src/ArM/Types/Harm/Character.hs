@@ -18,7 +18,6 @@ module ArM.Types.Harm.Character where
 
 import GHC.Generics
 import Data.Aeson
-import Data.Maybe
 
 import Data.KeyPair
 
@@ -37,7 +36,9 @@ import ArM.Helper
 data Character = Character 
     { charID :: String              -- ^ character ID, used to cross-reference
     , concept :: CharacterConcept   -- ^ concept is the timeless features of the character
-    , state :: Maybe CharacterState -- ^ current state of the character
+    , charTime :: SeasonTime        -- ^ last season advanced
+    , memberOf :: Maybe String      -- ^ covenant ID where the character resides
+    , traits :: [ Trait ]           -- ^ traits is the main state of the character
     , entryTime :: SeasonTime       -- ^ First season the character is in play
     , pregameDesign :: [ Augmented Advancement ]    -- ^ chargen already processed
     , pregameAdvancement :: [ Advancement ]        -- ^ chargen left to process
@@ -53,7 +54,9 @@ instance StoryObject Character where
 defaultCharacter :: Character 
 defaultCharacter = Character { charID = "N/A"
                              , concept = defaultConcept
-                             , state = Nothing
+                             , charTime = NoTime
+                             , memberOf = Nothing
+                             , traits = [ ]
                              , entryTime = NoTime
                              , pregameDesign = [ ]
                              , pregameAdvancement = [ ]
@@ -72,7 +75,9 @@ instance FromJSON Character where
     parseJSON = withObject "Character" $ \v -> Character
         <$> v .: "charID"
         <*> v .: "concept"
-        <*> v .:? "state" 
+        <*> fmap parseSeasonTime ( v .:? "season" )
+        <*> v .:? "memberOf" 
+        <*> fmap maybeList ( v .:? "traits" )
         <*> v .:? "entryTime" .!= NoTime
         <*> v .:? "pregameDesign" .!= []
         <*> v .:? "pregameAdvancement" .!= []
@@ -93,6 +98,8 @@ fullConceptName c = charName c ++ (f $ house c)
             f (Just x) | take 2 x == "ex" = " " ++ x
                        | otherwise  = " ex " ++ x
 
+instance Timed Character where
+    season = charTime 
 
 -- |
 -- = CharacterConcept
@@ -110,7 +117,7 @@ instance FromJSON CharacterType
 -- | The CharacterConcept is the timeless information about the character.
 data CharacterConcept = CharacterConcept 
          { charName :: String
-         , charType :: CharacterType
+         , charType :: CharacterType     -- ^ Magus, Companion or Grog. 
          , briefConcept :: Maybe String
          , quirk :: Maybe String
          , appearance :: Maybe String
@@ -159,41 +166,3 @@ instance Show CharacterConcept where
    show c = fullConceptName c ++ "\n"
          ++ ( show $ charGlance c ) ++ ( show $ charData c )
 
-
-
--- |
--- = CharacterState
-
--- | The Character state is the stats of the character at a particular
--- point in time.
-data CharacterState = CharacterState 
-         { charTime :: SeasonTime
-         , charSType :: CharacterType
-         , memberOf :: Maybe String
-         , traits :: [ Trait ]
-         }  deriving (Eq,Generic,Show)
-
-
--- | Default (empty) character state object.
-defaultCS :: CharacterState 
-defaultCS = CharacterState 
-         { charTime = NoTime
-         , charSType = Magus
-         , memberOf = Nothing
-         , traits = [ ]
-         }  
-
-instance ToJSON CharacterState where
-    -- For efficiency - Not required
-    toEncoding = genericToEncoding defaultOptions
-instance FromJSON CharacterState where
-    parseJSON = withObject "CharacterState" $ \v -> CharacterState
-        -- <$> v .:? "charTime"
-        <$> fmap parseSeasonTime ( v .:? "charTime" )
-        <*> v .: "charType" 
-        <*> v .:? "memberOf" 
-        <*> fmap maybeList ( v .:? "traits" )
-instance Timed CharacterState where
-    season = charTime 
-instance Timed Character where
-    season = fromMaybe NoTime . fmap season . state

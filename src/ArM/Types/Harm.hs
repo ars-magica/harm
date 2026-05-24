@@ -17,9 +17,7 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       -- * Character
                       , Character(..)
                       , CharacterConcept(..)
-                      , CharacterState(..)
                       , CharacterType(..)
-                      , defaultCS
                       , fullConceptName
                       -- * Covenant
                       , Covenant(..)
@@ -27,7 +25,6 @@ module ArM.Types.Harm ( HarmSagaObject(..)
                       , CovenantState(..)
                       , defaultCovState
                       , findCov
-                      , covenant
                       -- * Saga
                       , Saga(..)
                       , SagaFile(..)

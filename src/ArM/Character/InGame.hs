@@ -36,12 +36,9 @@ import ArM.Debug.Trace
 initAdvancement :: SeasonTime -> Character -> Character
 initAdvancement t c = c { pastAdvancement = x:pastAdvancement c
                         , futureAdvancement = xs 
-                        , state = Just $ f (state c) t
+                        , charTime = t
                         }
-     where (x,xs) = iaHead t st $ futureAdvancement c
-           f Nothing y = defaultCS { charTime = y }
-           f (Just s) y = s { charTime = y }
-           st = fromMaybe defaultCS $ state c
+     where (x,xs) = iaHead t c $ futureAdvancement c
 
 -- | Empty augmented advancement object with the given time stamp
 noAdvT :: SeasonTime -> Augmented Advancement
@@ -53,14 +50,14 @@ noAdv :: Augmented Advancement
 noAdv = noAdvT NoTime
 
 -- | Take the head off the future advancement if the time is right.
-iaHead :: SeasonTime -> CharacterState 
+iaHead :: SeasonTime -> Character 
        -> [Advancement] -> (Augmented Advancement,[Advancement])
 iaHead t _ [] = (noAdvT t,[])
 iaHead t st (x:xs) | season x == t = (prepareAdvancement st x,xs)
                    | otherwise = (noAdvT t,xs)
 
 -- | Augment and amend the advancements based on current virtues and flaws.
-prepareAdvancement :: CharacterState -> Advancement -> Augmented Advancement
+prepareAdvancement :: Character -> Advancement -> Augmented Advancement
 prepareAdvancement c = sortAdvTraits   -- sort inferred traits
                      . winterEvents c  -- aging
                      . addInference c  -- source quality inference
@@ -70,10 +67,9 @@ chgCurrentAdv :: Character -> Augmented Advancement
 chgCurrentAdv = fromMaybe noAdv . mhead . pastAdvancement
 
 chgStep :: Character -> Character
-chgStep ch = setCharacterState st $ setAdvancement aa ch
-   where aa' = chgCurrentAdv ch
-         st' = fromMaybe defaultCS $ state ch
-         (aa,st) = applyAdvancement aa' st'
+chgStep ch' = setAdvancement aa ch
+   where aa' = chgCurrentAdv ch'
+         (aa,ch) = applyAdvancement aa' ch'
 
 chgValidate :: Character -> Character
 chgValidate ch = updateCharacterAdv (validate ch) ch
@@ -124,7 +120,7 @@ ffmap f = join . fmap f
 
 -- | Get a character's covenant by looking up the key in the saga.
 memberOfCovenant :: SagaState -> Character -> Maybe Covenant
-memberOfCovenant saga = ffmap g . fmap CovenantKey . ffmap memberOf . state 
+memberOfCovenant saga = ffmap g . fmap CovenantKey . memberOf 
            where g x = harmLookup x saga
 
 addBook2 :: Augmented Advancement -> [ HarmKey ] -> Maybe Possession
