@@ -28,10 +28,11 @@ import ArM.Types.Advancement
 import ArM.Story
 import ArM.Trait
 import ArM.GameRules
+import ArM.Helper
 
 import Data.Maybe 
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 
 -- |
@@ -42,17 +43,35 @@ import Data.Maybe
 -- It then calls `addConfidence` to add the confidence trait to the state
 -- for the returned `Character` object
 prepareCharacter :: Character -> Character
-prepareCharacter c | pregameAdvancement c == [] = c
-                   | otherwise = c' { pregameDesign = xs
-                                    , pregameAdvancement = []
-                                    , entryTime = f $ futureAdvancement c
-                                    , charTime = GameStart
-                                    }
-            where as = pregameAdvancement  c 
-                  (xs,cs) = applyCGA as c
-                  c' = addConfidence c
-                  f [] = NoTime
-                  f (x:_) = season x
+prepareCharacter = finaliseCharGen  -- ^ checks if chargen has been 
+                 . charGen          -- ^ process any remaining pregame advancements
+
+-- | Recursivel process the pragame advancements for the character.
+charGen :: Character -> Character
+charGen c 
+    | isNothing a = c
+    | otherwise = trace ts $ charGen c''
+    where as = pregameAdvancement c
+          a = mhead as
+          c'' = c' { pregameDesign = aa:pregameDesign c'
+                   , pregameAdvancement = mtail as }
+          (aa,c') = applyCharGenAdv (fromJust a) c
+          ts = "CharGen: " ++ name c ++ " (" ++ advancementmode (fromJust a) ++ ")"
+
+-- | Finalising CharGen implies setting the state time to `GameStart`, set the
+-- entry time if possible, and add the confidence trait.
+-- 
+-- If the character state time is not `NoTime` this function is identity.
+finaliseCharGen :: Character -> Character
+finaliseCharGen c
+   | charTime c /= NoTime = trace ("No pregame design for "++name c) c
+   | otherwise = trace ("CharGen: "++name c) $ addConfidence $ setEntryTime c
+
+-- | Set entry time and current time of the character
+setEntryTime :: Character -> Character
+setEntryTime c = c { entryTime = f $ futureAdvancement c, charTime = GameStart }
+    where f [] = NoTime
+          f (x:_) = season x
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 --
@@ -109,16 +128,6 @@ applyCharGenAdv a cs = (a',f cs')
          (PostProcessor g) = postprocessTrait $ contractAdvancement a'
          f x = x { traits = map g $ traits x }
 
--- | Apply a list of advancements
-applyCGA :: [Advancement] -> Character -> ([Augmented Advancement],Character)
-applyCGA a cs = applyCGA' ([],a,cs)
-
--- | Recursive helper for `applyCGA`.
-applyCGA' :: ([Augmented Advancement],[Advancement],Character)
-                   -> ([Augmented Advancement],Character)
-applyCGA' (xs,[],cs) = (xs,cs)
-applyCGA' (xs,y:ys,cs) = applyCGA' (a':xs,ys,cs')
-    where (a',cs') = applyCharGenAdv y cs
 
 
 

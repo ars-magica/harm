@@ -8,7 +8,7 @@
 --
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Auxiliary functions for character ddvancement.
+-- Description :  Auxiliary functions for character advancement.
 --
 -- In game, these functions are used by `ArM.Character.InGame.prepareAdvancement`.
 -- 
