@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Saga.Saga
+-- Module      :  ArM.Markdown.Saga
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,22 +12,18 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Saga.Saga where
+module ArM.Markdown.Saga where
 
 import Data.List 
 
 import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
+import ArM.Saga
 import ArM.Helper
 
 import Data.OList
-import qualified Data.Map as M
 
-characterList :: Saga -> [Character]
-characterList = M.elems . characters
-covenantList :: Saga -> [Covenant]
-covenantList = M.elems . covenants
 
 -- |
 -- == Error reports
@@ -142,17 +138,3 @@ covenantIndex = OList . map covenantIndexLine
 
 -- |
 -- == Covenant support
-
-class CharDB a where
-   -- |
-   -- List of covenFolk as `Character` objects at the covenant
-   covenFolk :: a -> Covenant -> [ Character ]
-   covenFolk saga cov = lookupCharacters s $ f cov
-       where f = covenFolkID 
-             s = saga
-   -- |
-   -- Find `Character` objects for a list of character IDs, from the given `Saga`.
-   lookupCharacters :: a -> [ HarmKey ] -> [ Character ]
-
-instance CharDB Saga where
-    lookupCharacters saga is = filterNothing $ map ( \ i -> harmLookup i saga ) is

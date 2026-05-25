@@ -182,6 +182,7 @@ common harm-deps
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession
                        , ArM.Markdown.SeasonDisplay
+                       , ArM.Markdown.Saga
                        , ArM.Covenant.CostBP
                        , ArM.Covenant.InGame
                        , ArM.Covenant.Validation
@@ -189,7 +190,6 @@ common harm-deps
                        , ArM.Covenant
                        , ArM.Saga
                        , ArM.Saga.Advancement
-                       , ArM.Saga.Saga
                        , ArM.Processing
                        , ArM.Trait.SpellRecord
                        , ArM.IO

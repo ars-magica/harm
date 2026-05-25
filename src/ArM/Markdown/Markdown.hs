@@ -31,6 +31,7 @@ import ArM.Markdown.Possession
 import ArM.Markdown.Spell
 import ArM.Markdown.VF
 import ArM.Character 
+import ArM.Markdown.Saga
 import ArM.Saga
 import ArM.Types.Harm
 import ArM.Story
