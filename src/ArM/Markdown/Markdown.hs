@@ -20,10 +20,7 @@ module ArM.Markdown.Markdown ( printMD, printSheetMD
 
 import ArM.Markdown.HOutput 
 import ArM.Markdown.Possession 
-import ArM.Character 
 import ArM.Types.Harm
-import ArM.Story
-import ArM.Sheet
 import ArM.Trait
 import ArM.Helper
 
@@ -59,21 +56,7 @@ sagaStateMD :: Saga -> OList
 sagaStateMD = fromHList . sagaStateH
 
 
--- * Markdown for the Character types
- 
-instance HOutput Enchantment  where
-   printH (LesserItem eff) = printH eff 
-   printH (GreaterDevice vn eff) = Just $ HList 
-       ( "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)" )
-       ( filterNothing $ map printH eff )
-   printH (Talisman vn eff) = Just $ HList 
-       ( "Talisman (opened with " ++ show vn ++ "p vis)" )
-       ( filterNothing $ map printH eff )
-   printH (ChargedItem vn eff) = Just $ HList 
-       ( "Charged Item (" ++ show vn ++ "charges)" )
-       ( filterNothing [ printH eff ] )
-   printH MundaneItem = jhlist "Mundane Item" 
-
+-- | This is not used
 enchantedMD :: Possession -> Enchantment -> OList
 enchantedMD _ MundaneItem = OList []
 enchantedMD ob (LesserItem eff) = OList 
@@ -86,5 +69,4 @@ enchantedMD ob (LesserItem eff) = OList
 enchantedMD ob enc = OList [ OString $ pName ob 
                           , printMD $ enc
                            ]
-
 
