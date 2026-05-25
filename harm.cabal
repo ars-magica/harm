@@ -179,6 +179,7 @@ common harm-deps
                        , ArM.Markdown.Markdown
                        , ArM.Markdown.VF
                        , ArM.Markdown.HOutput
+                       , ArM.Markdown.HList
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession
                        , ArM.Markdown.SeasonDisplay

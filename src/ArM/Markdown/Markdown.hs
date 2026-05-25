@@ -27,6 +27,7 @@ import Data.Maybe
 import Control.Monad
 
 import ArM.Markdown.HOutput 
+import ArM.Markdown.HList 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
 import ArM.Markdown.VF
@@ -248,7 +249,7 @@ conceptPrintMD :: String -> CharacterConcept -> OList
 conceptPrintMD dir c = fromHList $ conceptPrintH dir c
 
 instance Markdown MagicEffect  where
-   printMD = fromHList . effectH 
+   printMD = defaultMD 
 instance Markdown Enchantment  where
    printMD (LesserItem eff) = printMD eff 
    printMD (GreaterDevice vn eff) = OList 
@@ -276,7 +277,7 @@ enchantedMD ob enc = OList [ OString $ pName ob
                            ]
 
 instance Markdown Possession  where
-   printMD = fromHList . printPossessionH
+   printMD = defaultMD
 
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessions :: [ Possession ] -> OList

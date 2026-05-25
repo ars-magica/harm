@@ -19,6 +19,8 @@ import Data.HList
 import Data.OList
 import Data.KeyPair
 import ArM.Markdown.Spell
+import ArM.Markdown.Possession
+import ArM.Markdown.HList
 import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types.Harm
@@ -28,28 +30,6 @@ import Control.Monad.State.Lazy
 import Data.Maybe
 import ArM.Debug.Trace
 
--- | Render the narrative comment.
-narrativeH :: StoryObject a => a -> Maybe HList
-narrativeH = effectMP "Background" . map italic . narrative
-
--- | Render the comment.
-commentH :: StoryObject a => a -> Maybe HList
-commentH = effectMP "Comment" . comment
-
-paragraphsH :: [ String ] -> HList
-paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
-
--- | Make a Maybe HLIst from a string
-jhlist :: String -> Maybe HList
-jhlist = jhlist
-
--- | Render a description list item
-dlH :: String -> String -> HList
-dlH x y = HList x [ hlist (':':' ':y), hlist "" ]
-
--- | Render a description list item
-dlMaybeH :: String -> Maybe String -> HList
-dlMaybeH x y = HList x [ hlist (':':' ':fromMaybe "---" y), hlist "" ]
 
 -- * The class
 
@@ -74,6 +54,9 @@ instance HOutput Saga where
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
 -- * More basic concepts
+
+instance HOutput Possession  where
+   printH = Just . printPossessionH
 
 instance HOutput LabText where
    printH = Just . textH
