@@ -19,11 +19,13 @@ import Data.HList
 import Data.OList
 import Data.KeyPair
 import ArM.Markdown.Spell
+import ArM.Markdown.Saga
 import ArM.Markdown.Possession
 import ArM.Markdown.HList
 import ArM.Markdown.VF
 import ArM.Sheet.Library
 import ArM.Trait
+import ArM.Character
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Story
@@ -66,6 +68,91 @@ instance HOutput Saga where
                   , hlist $ "+ " ++ "[](0001_Annals)"
                   ]
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
+
+instance HOutput Character where
+   printH  c = Just $ HList "" $ filterNothing
+            [ printH $ concept  c 
+            , hheader $ "## Sheet " ++ (show $ gameSeason c )
+            , Just $ sheetH c
+            , designH c
+            , Just $ advancementH c
+            ]
+
+-- | Render a list of objects as a comma-separated list on a single
+-- line/paragraph.  This works for any instance of 'Show'.
+showlistH :: Show a => String -> [a] -> Maybe HList
+showlistH _ [] = Nothing
+showlistH s xs = jhlist $ s ++ ( foldr (++) "" $ (map (++", ") $ map show xs) )
+
+printAgeH :: Character -> HList
+printAgeH c | isNothing ag' = hlist "**Age** undefined"
+         | otherwise = hlist $ "+ **Age:** " ++ show yr ++ " years (apparent age " 
+            ++ show (yr - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
+            ++ " (" ++ (showStrList $ map f bs) ++ ")"
+   where ag' = ageObject c
+         ag = fromJust ag'
+         yr = ageYears ag
+         f (x,y) = x ++ " " ++ showSigned y
+         bs = charAgingBonusList c
+         b = charAgingBonus c
+
+briefTraitsH :: Character -> Maybe HList
+briefTraitsH c = Just $ HList "" $ filterNothing
+          [ Just $ printAgeH c
+          , Just $ HList "" $ filterNothing $ map printH $ confList c
+          , Just $ HList "" $ filterNothing $ map printH $ otherList c
+          , showlistH "+ **Characteristics:** "  $ sortTraits $ charList c
+          , showlistH "+ **Personality Traits:** "  $ sortTraits $ ptList c
+          , showlistH "+ **Reputations:** "  $ sortTraits $ reputationList c
+          , showlistH "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
+          ]
+
+sheetH :: Character -> HList
+sheetH c = HList "" $ filterNothing
+               [ briefTraitsH c
+               , showlistH "+ **Abilities:** "  $ sortTraits $ abilityList c
+               , showlistH "+ **Arts:** "  $ sortTraits $ artList c
+               , showlistH "+ **Spells:** "  $ sortTraits $ spellList c
+               , showlistH "+ **Possessions:** "  $ sortTraits $ characterPossessions c
+               -- , toOList $ printCastingTotals c
+               , jhlist ""
+               , jhlist $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+               , jhlist "## Laboratory"
+               --j , toOList $ printLabTotals c
+               , jhlist ""
+               , jhlist "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
+               ]
+
+{-
+sheetSheetMD :: Saga -> Character -> OList
+sheetSheetMD saga c = OList 
+               [ briefTraits c
+               , indentOList $ OList $ [ OString "**Abilities:**"
+                        , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
+               , fromHList $ listPossessionsH $ characterPossessions c
+               , hlist ""
+               , printCombatMD saga c
+               , mag
+               ]
+         where spellist = spellsWithScores (spells saga) c 
+               mag | isMagus c = OList 
+                       [ artVisMD c
+                       , OString ""
+                       , printFullGrimoire (spells saga) $ sortTraits spellist
+                       , OString ""
+                       , toOList $ printCastingTotals c 
+                       , OString ""
+                       , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+                       , OString ""
+                       , OString "## Laboratory"
+                       , OString ""
+                       , toOList $ printLabTotals c 
+                       , OString ""
+                       , printSheetMD saga $ characterLab c
+                       , OString ""
+                       ]
+                   | otherwise = OString "" 
+-}
 
 instance HOutput CharacterConcept where
    printH = conceptPrintH "../images/"
@@ -198,6 +285,69 @@ instance HOutput OtherTrait where
              "+ **" ++ trait c ++ "**: " ++ show (otherScore c) ++ " ("
              ++ show (otherExcess c) ++ ")" 
 
+-- | Set a header line followed by a bullet list
+bulletWithHeaderH :: HOutput a => String -> [a] -> Maybe HList
+bulletWithHeaderH _ [] = Nothing
+bulletWithHeaderH h xs = Just $ HList h $ filterNothing $ map ( fmap indentList . printH ) xs
+
+instance HOutput Library where
+   printH lib = Just $ HList ("# " ++ name lib) $ filterNothing
+                       [ Just $ hlist $ "+ Updated after " ++ (show $ season lib)
+                       , bulletWithHeaderH "## antologies" (antologies lib )
+                       , bulletWithHeaderH "## arts" (artBooks lib )
+                       , bulletWithHeaderH "## abilities" (abilityBooks lib )
+                       , bulletWithHeaderH "## other works" (otherBooks lib )
+                       , bulletWithHeaderH "## grimoires" (grimoires lib )
+                       , bulletWithHeaderH "## spell lab texts" (spellTexts lib )
+                       , bulletWithHeaderH "## enchantment lab texts" (itemTexts lib )
+                       ]
+
+instance HOutput Advancement where
+   printH a = Just $ indentList $ HList (name a) $ filterNothing
+            [ narrativeH a
+            , commentH a
+            , usesString 
+            , f $ filterNothing $ map printH $ changes a
+            ]
+         where usesString | u == [] = Nothing
+                          | otherwise = jhlist $ "Uses: " ++ showStrList u 
+               u = map show $ readsBook a
+               f [] = Nothing
+               f xs = Just $ HList "" xs
+
+-- | Render the advancement log.
+-- This is two lists of past and future advancement objects
+advancementH :: Character -> HList
+advancementH c = HList "" [ HList "## Past Advancement" $ map augAdvH as
+                          , HList "## Future Advancement" $ filterNothing $ map printH bs
+                          ]
+   where as = pastAdvancement c
+         bs = futureAdvancement c
+
+-- | Render the char gen design.
+-- This is a list of all the pregame advancement objects.
+designH :: Character -> Maybe HList
+designH c  | as == [] = Nothing
+            | otherwise = Just $ HList "## Game start design" $ map augAdvH as
+            where as = pregameDesign c
+
+augAdvH :: Augmented Advancement -> HList
+augAdvH a' = indentList $ HList ( name a ) $ filterNothing
+           [ narrativeH a
+           , commentH a
+           , fmap (hlist . ("Reads "++) . name ) $ bookRead a
+           , chnl
+           , infl
+           , Just $ HList "" $ filterNothing $ map printH $ validation a'
+           ]
+      where inf = sortTraits $ changes $ inferredAdv a'
+            chn = sortTraits $ changes $ explicitAdv a'
+            a = contractAdvancement a'
+            chnl | chn == [] = Nothing
+                 | otherwise = Just $ HList "Changing traits" $ filterNothing $ map printH chn 
+            infl | inf == [] = Nothing
+                 | otherwise = Just $ HList "Inferred traits" $ filterNothing $ map printH inf
+
 -- * Keypair
 
 instance HOutput FieldValue where
@@ -215,3 +365,85 @@ instance HOutput a => HOutput (Maybe a) where
 instance HOutput a => HOutput [a] where
    printH [] = Nothing
    printH x = Just $ HList "" $ filterNothing $  map printH x
+
+-- * The Saga State
+
+-- | Render the state page for the Saga
+sagaStateH :: Saga -> HList 
+sagaStateH saga = HList ( "# " ++ name saga ++ " - " ++ show (gameSeason saga) )
+        [ hlist ""
+        , characterIndexH $ characterList saga
+        , covenantIndexH $ covenantList saga
+        , HList "" [ hlist "## Advancement Errors" ]
+        , errorsH saga
+        , HList "" [ hlist  "## Advancement Warnings"  ]
+        , warningsH  saga
+        ]
+
+-- * Character
+
+-- | Render the char gen design.
+-- This is a list of all the pregame advancement objects.
+chargenH :: Character -> Maybe HList
+chargenH c | as == [] = Nothing
+           | otherwise = Just $ HList "## Char Gen Advancements"
+                              $ filterNothing $ map printH as
+           where as = pregameAdvancement c
+
+-- ** Combat 
+
+-- | Set the Combat Stats of the Character as an 'OList'
+printCombatH :: Saga -> Character -> HList
+printCombatH saga cs = HList "" x
+    where tab = computeCombatStats ( weaponsDB saga ) cs
+          x | tab == [] = []
+            | otherwise = [ combatHeadH, combatBodyH tab ]
+
+-- | Set the table body for 'printCombatMD'
+combatBodyH :: [CombatLine] -> HList
+combatBodyH = HList "" . map combatBodyLineH
+
+-- | Set a single line for 'printCombatMD'
+combatBodyLineH :: CombatLine -> HList
+combatBodyLineH c = hlist $ "| " ++ (combatLabel c) ++ 
+                            " | " ++ (show $ combatInit c) ++
+                            " | " ++ (showstat $ combatAtk c) ++
+                            " | " ++ (showstat $ combatDef c) ++
+                            " | " ++ (showstat $ combatDam c) ++
+                            " | " ++ (showstat $ combatRange c) ++
+                            " | " ++ (show $ combatLoad c) ++
+                            " | " ++ (combatComment c) ++
+                            " |"
+
+-- | Set the header for 'printCombatMD'
+combatHeadH :: HList
+combatHeadH = HList ""  [ hlist "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
+                   , hlist "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
+                   ]
+
+
+-- * Errors
+
+-- | Render the validation errors from a saga
+errorsH :: Saga -> HList
+errorsH = errorsH' isValError
+    where isValError (ValidationError _) = True
+          isValError _ = False
+
+errorsH' :: (Validation -> Bool) -> Saga -> HList
+errorsH' f saga | length msgs == 0 = hlist "No messages"
+               | otherwise = HList "" msgs
+    where formatOutput (_,_,_,[]) = Nothing
+          formatOutput (cid,_,ssn,vs) = Just $ indentList $ 
+              HList ( show cid ++ ": " ++ ssn ) 
+                    $ (filterNothing $ map printH  vs) 
+          errors = errorList saga
+          msgs = filterNothing $ map ( formatOutput . g ) errors
+          g (x,y,z,vs) = (x,y,z,filter f vs)
+
+-- | Render the validation warnings from a saga
+warningsH :: Saga -> HList
+warningsH = errorsH' isValError
+    where isValError (ValidationWarning _) = True
+          isValError _ = False
+

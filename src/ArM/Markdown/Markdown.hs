@@ -27,12 +27,9 @@ import Data.Maybe
 import Control.Monad
 
 import ArM.Markdown.HOutput 
-import ArM.Markdown.HList 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
 import ArM.Character 
-import ArM.Markdown.Saga
-import ArM.Saga
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Sheet
@@ -46,7 +43,6 @@ import Data.HList
 import Data.KeyPair
 
 import ArM.Debug.Trace
-
 
 -- * The Markdown class
 
@@ -77,41 +73,6 @@ class Markdown a where
 sagaStateMD :: Saga -> OList 
 sagaStateMD = fromHList . sagaStateH
 
--- | Render the validation errors from a saga
-errorsH :: Saga -> HList
-errorsH = errorsH' isValError
-    where isValError (ValidationError _) = True
-          isValError _ = False
-
-errorsH' :: (Validation -> Bool) -> Saga -> HList
-errorsH' f saga | length msgs == 0 = hlist "No messages"
-               | otherwise = HList "" msgs
-    where formatOutput (_,_,_,[]) = Nothing
-          formatOutput (cid,_,ssn,vs) = Just $ indentList $ 
-              HList ( show cid ++ ": " ++ ssn ) 
-                    $ (filterNothing $ map printH  vs) 
-          errors = errorList saga
-          msgs = filterNothing $ map ( formatOutput . g ) errors
-          g (x,y,z,vs) = (x,y,z,filter f vs)
-
--- | Render the validation warnings from a saga
-warningsH :: Saga -> HList
-warningsH = errorsH' isValError
-    where isValError (ValidationWarning _) = True
-          isValError _ = False
-
-
--- | Render the state page for the Saga
-sagaStateH :: Saga -> HList 
-sagaStateH saga = HList ( "# " ++ name saga ++ " - " ++ show (gameSeason saga) )
-        [ hlist ""
-        , characterIndexH $ characterList saga
-        , covenantIndexH $ covenantList saga
-        , HList "" [ hlist "## Advancement Errors" ]
-        , errorsH saga
-        , HList "" [ hlist  "## Advancement Warnings"  ]
-        , warningsH  saga
-        ]
 
 instance Markdown Saga where
     printMD = defaultMD
@@ -169,23 +130,15 @@ instance Markdown KeyPairList where
 -- | Render the char gen design.
 -- This is a list of all the pregame advancement objects.
 designMD :: Character -> OList
-designMD c  | as == [] = OList []
-            | otherwise = OList
-            [ OString "## Game start design"
-            , OString ""
-            , OList $ map printMDaa as
-            , OString ""
-            ]
-            where as = pregameDesign c
+designMD = fromMaybe (OList []) . fmap fromHList . designH
 
--- | Render the CharGen advancements, both the processed and unprocessed ones.
+
+-- | Render the char gen design, i.e. a list of any unprocessed 
+-- pre-game advancement objects.
+--
+-- This is usually empty, since pre-game characters are not usuall produced.
 chargenMD :: Character -> OList
-chargenMD c = OList [ chargenMD' c, designMD c ]
-
--- | Render the char gen design.
--- This is a list of all the pregame advancement objects.
-chargenMD' :: Character -> OList
-chargenMD' c | as == [] = OList []
+chargenMD c | as == [] = OList []
             | otherwise = OList
               [ OString "## Char Gen Advancements"
               , OString ""
@@ -197,24 +150,7 @@ chargenMD' c | as == [] = OList []
 -- | Render the advancement log.
 -- This is two lists of past and future advancement objects
 advancementMD :: Character -> OList
-advancementMD c = OList [ ao, bo ]
-   where as = pastAdvancement c
-         bs = futureAdvancement c
-         ao | as == [] = OList []
-            | otherwise = OList
-                [ OString "## Past Advancement"
-                , OString ""
-                , OList $ map printMDaa as
-                , OString ""
-                ]
-         bo | bs == [] = OList []
-            | otherwise = OList
-                [ OString "## Future Advancement"
-                , OString ""
-                , OList $ map printMD bs
-                , OString ""
-                ]
-
+advancementMD = fromHList . advancementH
 
 
 -- | Render a list of objects as a comma-separated list on a single
@@ -258,24 +194,8 @@ enchantedMD ob enc = OList [ OString $ pName ob
 instance Markdown Possession  where
    printMD = defaultMD
 
--- | Set a header line followed by a bullet list
-bulletWithHeader :: Markdown a => String -> [a] -> OList
-bulletWithHeader _ [] = OList []
-bulletWithHeader h xs = OList [ OString h, f xs ]
-         where f = indentOList . foldOList . OList . map printMD 
-
 instance Markdown Library where
-   printMD lib = OList [ OString ("# " ++ name lib)
-                       , OString ""
-                       , OString $ "+ updated after " ++ (show $ season lib)
-                       , bulletWithHeader "## Antologies" (antologies lib )
-                       , bulletWithHeader "## Arts" (artBooks lib )
-                       , bulletWithHeader "## Abilities" (abilityBooks lib )
-                       , bulletWithHeader "## Other works" (otherBooks lib )
-                       , bulletWithHeader "## Grimoires" (grimoires lib )
-                       , bulletWithHeader "## Spell Lab Texts" (spellTexts lib )
-                       , bulletWithHeader "## Enchantment Lab Texts" (itemTexts lib )
-                       ]
+   printMD = defaultMD
 
 sheetMD :: Character -> OList
 sheetMD c = OList 
@@ -336,22 +256,7 @@ sheetSheetMD saga c = OList
 
 -- | Print age, confidence, warping, and decrepitude as bullet points
 briefTraits :: Character -> OList
-briefTraits c = OList
-          [ printAge c
-          , OList $ map printMD $ confList c
-          , OList $ map printMD $ otherList c
-          ]
-printAge :: Character -> OList
-printAge c | isNothing ag' = OString "**Age** undefined"
-         | otherwise = OString $ "+ **Age:** " ++ show yr ++ " years (apparent age " 
-            ++ show (yr - apparentYounger ag)  ++ ") Aging Bonus: " ++ showSigned b
-            ++ " (" ++ (showStrList $ map f bs) ++ ")"
-   where ag' = ageObject c
-         ag = fromJust ag'
-         yr = ageYears ag
-         f (x,y) = x ++ " " ++ showSigned y
-         bs = charAgingBonusList c
-         b = charAgingBonus c
+briefTraits = fromMaybe (OList []) . fmap fromHList . briefTraitsH
 
 instance Markdown Age where
    printMD = defaultMD
@@ -416,31 +321,9 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
            lst | lost a == [] = OList []
              | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
 
-printMDaa :: Augmented Advancement -> OList
-printMDaa a' = indentOList $ OList $ storyOList a ++
-       [ OList $ filterNothing [ fmap (OString . ("Reads "++) . name ) $ bookRead a ]
-       , chnl
-       , infl
-       , OList $ map (OString . show) $ validation a'
-       ]
-      where inf = sortTraits $ changes $ inferredAdv a'
-            chn = sortTraits $ changes $ explicitAdv a'
-            a = contractAdvancement a'
-            chnl | chn == [] = OList []
-                 | otherwise = OList [ OString "Changing traits", OList $ map printMD chn ]
-            infl | inf == [] = OList []
-                 | otherwise = OList [ OString "Inferred traits", OList $ map printMD inf ]
-
-usesString :: Advancement -> OList
-usesString a | u == [] = OList []
-             | otherwise = OList [ OString $ "Uses: " ++ showStrList u ]
-         where u = map show $ readsBook a
-
 instance Markdown Advancement where
-   printMD a = indentOList $ OList $ storyOList a ++
-         [ usesString a
-         , OList $ map printMD $ changes a
-         ]
+   printMD = defaultMD
+
 
 -- ** Pretty print arts
 
@@ -528,39 +411,10 @@ totalLevels = sum . map spellLevel
 
 -- | Set the Combat Stats of the Character as an 'OList'
 printCombatMD :: Saga -> Character -> OList
-printCombatMD saga cs = OList x
-    where tab = computeCombatStats ( weaponsDB saga ) cs
-          x | tab == [] = []
-            | otherwise = [ combatHead, combatBody tab ]
-
--- | Set the table body for 'printCombatMD'
-combatBody :: [CombatLine] -> OList
-combatBody = OList . map combatBodyLine
-
--- | Set a single line for 'printCombatMD'
-combatBodyLine :: CombatLine -> OList
-combatBodyLine c = OString $ "| " ++ (combatLabel c) ++ 
-                            " | " ++ (show $ combatInit c) ++
-                            " | " ++ (showstat $ combatAtk c) ++
-                            " | " ++ (showstat $ combatDef c) ++
-                            " | " ++ (showstat $ combatDam c) ++
-                            " | " ++ (showstat $ combatRange c) ++
-                            " | " ++ (show $ combatLoad c) ++
-                            " | " ++ (combatComment c) ++
-                            " |"
-
--- | Set the header for 'printCombatMD'
-combatHead :: OList
-combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
-                   , OString "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
-                   ]
-
+printCombatMD saga cs = fromHList $ printCombatH saga cs
 
 -- * Covenant Markdown
 
-
-instance Markdown CovenantConcept where
-    printMD = defaultMD
 
 instance Markdown Book where
     printMD = defaultMD
