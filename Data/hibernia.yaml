@@ -16,7 +16,7 @@ narrative:
     Three young magi join them straight out of gauntlet."
 rootDirectory: pages/
 seasons:
-- Spring 1220
+- Spring 1222
 - Spring 1221
 spellFile: Data/spells.csv
 title: Demo Saga

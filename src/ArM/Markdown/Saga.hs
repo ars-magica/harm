@@ -25,8 +25,7 @@ import ArM.Helper
 import Data.OList
 
 
--- |
--- == Error reports
+-- * Error reports
 
 -- | Get an `OList` of all error messages from past advancements in a
 -- saga state.
@@ -61,17 +60,6 @@ type VList = (HarmKey,SeasonTime,String,[Validation])
 errorAfter :: VList -> SeasonTime -> Bool
 errorAfter (_,vs,_,_) s = vs > s 
 
--- | Exctract all validation errors from previous advancements at
--- a given saga state
-errorList :: Saga -> [VList]
-errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
-    where cvs = map cErrors $ characterList saga
-          covvs = map covErrors  $ covenantList saga
-          vvs = g (cvs ++ covvs)
-          g = f . foldl (++) [] 
-          f [] = []
-          f ((_,_,_,[]):xs) = f xs
-          f (x:xs) = x:f xs
 
 -- | Exctract a list of validation errors after a given time 
 -- This is not currently used, but could be used to ignore old
@@ -89,27 +77,11 @@ advancementErrorsLimit ssn saga = OList $ map formatOutput errors
                    | otherwise = []
 
 -- | Get validation messages from a given advancement.
--- Auxiliary for `cErrors`
+-- Because the `VList` object requires a character, this is not
+-- an instance of `errorList`.
 aaErrors :: ContractAdvancement a => HarmKey -> Augmented a -> VList
 aaErrors c a = (c, season a, augHead a, vs )
     where vs = validation  a
-
--- | Get validation messages from a given character.
--- Auxiliary for `listErrors`
-cErrors :: Character -> [VList]
-cErrors c = map (aaErrors $ harmKey c) as
-   where as | ps == [] = pregameDesign c
-            | otherwise = ps
-         ps = pastAdvancement c
-
--- | Get validation messages from a given covenant.
--- Auxiliary for `listErrors`
-covErrors :: Covenant -> [VList]
-covErrors c = map (aaErrors $ harmKey c) as
-   where as | ps == [] = covenantPregame c
-            | otherwise = ps
-         ps = pastCovAdvancement c
-
 -- | Format a header for `renderCharErrors`
 augHead :: ContractAdvancement a => Augmented a -> String
 augHead a = f (season a) (advancementmode a)
@@ -117,8 +89,35 @@ augHead a = f (season a) (advancementmode a)
          f x tp = (show x  ++ " " ++ tp)
 
 
--- | 
--- == Character Index
+class ErrorList a where
+    -- | Get validation messages from a given entity.
+    errorList :: a -> [VList]
+
+instance ErrorList Character where
+    errorList c = map (aaErrors $ harmKey c) as
+       where as | ps == [] = pregameDesign c
+                | otherwise = ps
+             ps = pastAdvancement c
+
+instance ErrorList Covenant where
+    errorList c = map (aaErrors $ harmKey c) as
+        where as | ps == [] = covenantPregame c
+                 | otherwise = ps
+              ps = pastCovAdvancement c
+
+instance ErrorList Saga where
+    errorList saga = sortOn ( \ (_,x,_,_) -> x ) vvs
+        where cvs = map errorList $ characterList saga
+              covvs = map errorList  $ covenantList saga
+              vvs = g (cvs ++ covvs)
+              g = f . foldl (++) [] 
+              f [] = []
+              f ((_,_,_,[]):xs) = f xs
+              f (x:xs) = x:f xs
+
+
+
+-- * Character Index
 
 -- | Write a single item for `characterIndex`
 characterIndexLine :: Character -> OList
@@ -128,6 +127,7 @@ characterIndexLine c = OString $ "+ " ++ pagesLink (stateName c)
 characterIndex :: [Character] -> OList
 characterIndex = OList . map characterIndexLine 
 
+
 -- | Write a single item for `covenantIndex`
 covenantIndexLine :: Covenant -> OList
 covenantIndexLine c = OString $ "+ " ++ pagesLink (stateName c) 
@@ -136,5 +136,3 @@ covenantIndexLine c = OString $ "+ " ++ pagesLink (stateName c)
 covenantIndex :: [Covenant] -> OList
 covenantIndex = OList . map covenantIndexLine 
 
--- |
--- == Covenant support

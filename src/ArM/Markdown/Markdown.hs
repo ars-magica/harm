@@ -73,23 +73,45 @@ class Markdown a where
 -- + Character $\to$ `printSheetMD`
 -- + Covenatn $\to$ `printSheetMD`
 
+-- | Render the state page for the Saga
 sagaStateMD :: Saga -> OList 
-sagaStateMD saga = OList 
-        [ OString $ "# " ++ name saga ++ " - " ++ show (gameSeason saga)
-        , OString ""
-        , characterIndex $ characterList saga
-        , OString ""
-        , covenantIndex $ covenantList saga
-        , OString ""
-        , OString "## Advancement Errors"
-        , OString ""
-        , indentOList $ foldOList $  advancementErrors saga
-        , OString ""
-        , OString "## Advancement Warnings"
-        , OString ""
-        , indentOList $ foldOList $ advancementWarnings saga
-        ]
+sagaStateMD = fromHList . sagaStateH
 
+-- | Render the validation errors from a saga
+errorsH :: Saga -> HList
+errorsH = errorsH' isValError
+    where isValError (ValidationError _) = True
+          isValError _ = False
+
+errorsH' :: (Validation -> Bool) -> Saga -> HList
+errorsH' f saga | length msgs == 0 = hlist "No messages"
+               | otherwise = HList "" msgs
+    where formatOutput (_,_,_,[]) = Nothing
+          formatOutput (cid,_,ssn,vs) = Just $ indentList $ 
+              HList ( show cid ++ ": " ++ ssn ) 
+                    $ (filterNothing $ map printH  vs) 
+          errors = errorList saga
+          msgs = filterNothing $ map ( formatOutput . g ) errors
+          g (x,y,z,vs) = (x,y,z,filter f vs)
+
+-- | Render the validation warnings from a saga
+warningsH :: Saga -> HList
+warningsH = errorsH' isValError
+    where isValError (ValidationWarning _) = True
+          isValError _ = False
+
+
+-- | Render the state page for the Saga
+sagaStateH :: Saga -> HList 
+sagaStateH saga = HList ( "# " ++ name saga ++ " - " ++ show (gameSeason saga) )
+        [ hlist ""
+        , characterIndexH $ characterList saga
+        , covenantIndexH $ covenantList saga
+        , HList "" [ hlist "## Advancement Errors" ]
+        , errorsH saga
+        , HList "" [ hlist  "## Advancement Warnings"  ]
+        , warningsH  saga
+        ]
 
 instance Markdown Saga where
     printMD = defaultMD
@@ -150,7 +172,7 @@ instance Markdown CharacterConcept where
 instance Markdown Trait where
    printMD = defaultMD
 instance Markdown ProtoTrait where
-   printMD = OString . show
+   printMD = defaultMD
 
 
 -- ** Markdown for basic types

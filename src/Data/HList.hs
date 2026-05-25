@@ -19,6 +19,7 @@ module Data.HList ( HList(..)
                   , maybeHList
                   , fromHList
                   , indentHList
+                  , indentList
                   , isEmptyHList 
                   , pushTitle
                   , appendToHList
@@ -91,6 +92,12 @@ indentHList' :: String -> HList -> HList
 indentHList' s (HList x ys) = HList x' ys'
      where x' = s ++ x
            ys' = map (indentHList' ("    "++s)) ys
+
+
+-- | Render an OList as a hierarchical markdown list
+indentList :: HList -> HList
+indentList = indentHList' "+ "
+
 
 {-
 class ToOList a where

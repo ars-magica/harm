@@ -16,15 +16,11 @@
 module ArM.Markdown.HList where
 
 import Data.HList
-import Data.OList
-import Data.KeyPair
 import ArM.Markdown.Spell
-import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Helper
-import Control.Monad.State.Lazy
 import Data.Maybe
 import ArM.Debug.Trace
 
@@ -41,7 +37,7 @@ paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
 
 -- | Make a Maybe HLIst from a string
 jhlist :: String -> Maybe HList
-jhlist = jhlist
+jhlist = Just . hlist
 
 -- | Render a description list item
 dlH :: String -> String -> HList
@@ -50,4 +46,13 @@ dlH x y = HList x [ hlist (':':' ':y), hlist "" ]
 -- | Render a description list item
 dlMaybeH :: String -> Maybe String -> HList
 dlMaybeH x y = HList x [ hlist (':':' ':fromMaybe "---" y), hlist "" ]
+
+-- | Write a bullet list of links for a list of characters
+characterIndexH :: [Character] -> HList
+characterIndexH = HList "+ Characters" . map f 
+    where f = hlist . ("    + "++) . pagesLink . stateName 
+-- | Write a bullet list of links for a list of characters
+covenantIndexH :: [Covenant] -> HList
+covenantIndexH = HList "+ Covenants" . map f 
+    where f = hlist . ("    + "++) . pagesLink . stateName 
 

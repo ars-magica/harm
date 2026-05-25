@@ -28,7 +28,7 @@ import ArM.Story
 import ArM.Helper
 import Control.Monad.State.Lazy
 import Data.Maybe
-import ArM.Debug.Trace
+-- import ArM.Debug.Trace
 
 
 -- * The class
@@ -47,7 +47,7 @@ instance HOutput Saga where
    printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
       where hs1 = paragraphsH $ map italic $ narrative saga
             hs2 = paragraphsH $ comment saga
-            ts1 = [ hlist $ lnk x | x <- advSeasons saga ] 
+            ts1 = [ hlist $ lnk x | x <- reverse $ advSeasons saga ] 
             ts2 = [ hlist $ lnk GameStart 
                   , hlist $ "+ " ++ "[](0001_Annals)"
                   ]
@@ -84,6 +84,10 @@ instance HOutput LabBonus where
    printH (LabBonus x "" z) = jhlist $ x ++ " " ++ showBonus z
    printH (LabBonus _ y z) = jhlist $ y ++ " " ++ showBonus z
 
+instance HOutput Validation where
+   printH (Validated x) = jhlist $ "Validated: " ++ x
+   printH (ValidationError x) = jhlist $ "**Error:** " ++ x
+   printH (ValidationWarning x) = jhlist $ "*Warning:* " ++ x
 
 -- * Keypair
 
