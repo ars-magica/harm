@@ -18,6 +18,8 @@ module ArM.Markdown.HOutput where
 import Data.HList
 import Data.OList
 import Data.KeyPair
+import ArM.DB
+import ArM.Markdown.Magus
 import ArM.Markdown.Spell
 import ArM.Markdown.Saga
 import ArM.Markdown.Possession
@@ -31,6 +33,7 @@ import ArM.Types.Harm
 import ArM.Story
 import ArM.Saga
 import ArM.Helper
+import Control.Monad
 import Control.Monad.State.Lazy
 import Data.Maybe
 -- import ArM.Debug.Trace
@@ -139,17 +142,33 @@ sheetSheetH saga c = HList  "" $ filterNothing
                        [ hlist ""
                        -- , printFullGrimoire (spells saga) $ sortTraits spellist
                        , hlist ""
-                       -- , toOList $ printCastingTotals c 
+                       , HList "" $ map hlist $ printCastingTotals c 
                        , hlist ""
                        , hlist $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
                        , hlist ""
                        , hlist "## Laboratory"
                        , hlist ""
-                       -- , toOList $ printLabTotals c 
+                       , HList "" $ map hlist $ printLabTotals c 
                        , hlist ""
                        -- , printSheetMD saga $ characterLab c
                        ]
                    | otherwise = Nothing 
+
+-- | Set a list of spells.
+-- Each spell is set using 'spellMD', and the result is indented as a
+-- hierarchical list.
+printFullGrimoireH :: SpellDB -> [Spell] -> HList
+printFullGrimoireH db xs = HList "## Grimoire" 
+                         [ hlist ""
+                         , HList "" $ map (indentList . spellDescH) ys 
+                         , hlist ""
+                         , hlist $ "Total: " ++show (totalLevels xs)  
+                            ++ " levels of spells."
+                         ]
+   where ys = [ (x,f x) | x <- xs ]
+         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
+
+
 
 instance HOutput CharacterConcept where
    printH = conceptPrintH "../images/"

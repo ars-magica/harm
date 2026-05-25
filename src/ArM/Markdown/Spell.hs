@@ -104,6 +104,33 @@ spellDescMD (s,sr) = OList [ OString $ show s
      where f "" = OList [] 
            f x = OString x
 
+-- | Render a spell trait in Markdown
+-- The result should normally be subject to indentOList to make an hierarchical
+-- list.
+spellDescH :: (Spell,Maybe SpellRecord) -> HList
+spellDescH (s,sr) = HList "" $ filterNothing 
+                             [ Just $ HList ( show s ) $ filterNothing
+                               [ masteryH s
+                               , f $ spellTComment s ]
+                             , coreSpellRecordH sr
+                             ]
+     where f "" = Nothing
+           f x = jhlist x
+--
+-- | Render the spell record as an OList
+coreSpellRecordH :: Maybe SpellRecord -> Maybe HList
+coreSpellRecordH Nothing = Nothing
+coreSpellRecordH (Just sp) = Just $ HList "" $ map hlist $ spellDetails sp
+
+-- | Set all information from mastery on one line.
+-- This includes mastery score, xp, and mastery options.
+masteryH :: Spell -> Maybe HList
+masteryH s | 0 == masteryScore s && 0 == spellExcessXP s = Nothing
+           | otherwise = jhlist
+                          $ "Mastery: " ++ show (masteryScore s)
+                          ++ " (" ++ showNum (spellExcessXP s) ++ "xp) "
+                          ++ showStrList (masteryOptions s)
+
 -- | Set all information from mastery on one line.
 -- This includes mastery score, xp, and mastery options.
 masteryMD :: Spell -> OList
@@ -112,6 +139,4 @@ masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
                           $ "Mastery: " ++ show (masteryScore s)
                           ++ " (" ++ showNum (spellExcessXP s) ++ "xp) "
                           ++ showStrList (masteryOptions s)
-
-
 

@@ -24,6 +24,7 @@ module Data.HList ( HList(..)
                   , pushTitle
                   , appendToHList
                   , italicHString
+                  , jhlist
        ) where
 
 import Data.Char
@@ -115,3 +116,8 @@ instance ToOList (Maybe HList) where
 italicHString :: String  -> HList
 italicHString c = hlist $ "*" ++ (f . f) c ++ "*"
    where f = reverse . dropWhile isSpace
+
+-- | Make a Maybe HLIst from a string
+jhlist :: String -> Maybe HList
+jhlist = Just . hlist
+

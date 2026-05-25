@@ -33,10 +33,6 @@ commentH = effectMP "Comment" . comment
 paragraphsH :: [ String ] -> HList
 paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
 
--- | Make a Maybe HLIst from a string
-jhlist :: String -> Maybe HList
-jhlist = Just . hlist
-
 -- | Render a description list item
 dlH :: String -> String -> HList
 dlH x y = HList x [ hlist (':':' ':y), hlist "" ]
