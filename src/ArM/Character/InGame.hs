@@ -26,6 +26,7 @@ import ArM.Trait
 import ArM.Processing
 import ArM.GameRules
 import ArM.Helper
+import ArM.Debug.Trace
 
 import Data.Maybe
 import Data.List
@@ -72,7 +73,7 @@ chgStep :: Character -> Character
 chgStep ch' = trace trac $ setAdvancement aa ch
    where aa' = chgCurrentAdv ch'
          (aa,ch) = applyAdvancement aa' ch'
-         trac = show (nme ch) ++ " " ++ season aa
+         trac = "chgStep" ++ show (name ch) ++ " " ++ show (season aa)
 
 -- | Infer source quality
 chgValidate :: Character -> Character

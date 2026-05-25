@@ -172,7 +172,8 @@ bumpSagaSeason saga = saga { seasonTime = nextSeason saga }
 
 -- | Initialise characters
 stepInit :: Saga -> Saga
-stepInit st = charMap ( initAdvancement $ season st ) st
+stepInit st = st { characters = M.map g $ characters st }
+      where g = initAdvancement $ season st
 
 -- | Initialise covenants and update covenfolk
 stepCovenFolk :: Saga -> Saga
