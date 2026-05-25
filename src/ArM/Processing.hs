@@ -21,10 +21,12 @@
 module ArM.Processing where
 
 import ArM.Story
+import ArM.Trait
 import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Helper
 import Data.Maybe
+import Data.List
 
 -- * Advancement management
 

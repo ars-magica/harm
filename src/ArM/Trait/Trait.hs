@@ -324,6 +324,9 @@ class TraitClass t where
     -- | Return the specific trait from the generic Trait,
     -- or Nothing if the type does not match.
     getTrait :: Trait -> Maybe t
+    -- | Filter the specific kind of traits from a list.
+    filterTrait :: [ Trait ] -> [ t ]
+    filterTrait = filterNothing . map getTrait
 
 instance TraitClass Trait where
     traitKey (CharacteristicTrait x) = traitKey x

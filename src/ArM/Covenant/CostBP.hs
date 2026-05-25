@@ -18,6 +18,8 @@ import ArM.Trait
 import ArM.Helper
 import ArM.Debug.Trace
 import Data.Maybe
+import Data.List
+import Control.Monad
 
 class CostBP t where
    -- | Calculate the BP (Build Point) cost of the possession.
@@ -61,12 +63,23 @@ instance CostBP Possession where
                  , specBP . staff
                  ]
 
-            specBP (Just (Specialist xs)) = lmax $ map sc xs
+            specBP (Just (Specialist xs)) = specialistBP xs
             specBP _ = 0
-            sc (AbilityTrait a) = abilityScore a
-            sc _ = 0
-            lmax [] = 0
-            lmax (x:xs) = foldr max x xs
+
+specialistBP :: [ Trait ] -> Int
+specialistBP traits = teacherBP teach com mskill
+    where abis = filterTrait traits
+          com = fmap charScore . join . fmap getTrait
+              $ findTrait (CharacteristicKey "Com") traits
+          teach = fmap abilityScore $ find ((=="Teaching") . abilityName ) abis
+          skills = filter ((/="Teaching") . abilityName ) abis
+          mskill = foldr max 0  $ map abilityScore skills
+
+teacherBP :: Maybe Int -> Maybe Int -> Int -> Int
+teacherBP Nothing _ skill = skill
+teacherBP (Just teach) Nothing skill = trace "Warning: Teacher without Com's"
+                                     $ teach + skill
+teacherBP (Just teach) (Just com) skill = teach + com + skill
 
 -- | Build points for vis stock and vis sources
 visBP :: Possession -> Int
