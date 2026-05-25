@@ -68,12 +68,6 @@ spellDetails :: SpellRecord -> [ String ]
 spellDetails sp = filter (/="") $ map ($ sp) ls
   where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
 
--- | Enclose the string in asterixes, indicating italics in Markdown.
--- The idea is to be able to override this function for other output formats.
-italic :: String -> String
-italic "" = ""
-italic x = "*" ++ x ++ "*"
-
 -- | List the spell stats, incl. range/duration/target and any
 -- special tags like ritual.
 spellStats :: SpellRecord -> String

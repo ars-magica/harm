@@ -90,28 +90,8 @@ sagaStateMD saga = OList
 
 
 instance Markdown Saga where
-    printMD saga = OList 
-        [ OList [ OString $ "# " ++ name saga
-                , OString ""
-                , OList $ map italicOString $ narrative saga
-                , OList $ map OString $ comment saga
-                , OString ""
-                ]
-        , OList ( [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- advSeasons saga ] 
-                ++ [ OString $ "+ " ++ "[](" ++ showKey GameStart ++ "/index)" ] )
-        , OList [
-          OString "" 
-          , OString $ "+ " ++ "[](0001_Annals)"
-          , OString "" 
-        ]
-        ]
+    printMD = defaultMD
 
-
--- |
--- The 'CharacterConcept' is set as a description list.
--- 
--- This may cause problems with long text values.  It would be worth distinguishing
--- between more fields and use a differfent formatting where long text is expected.
 instance Markdown Character where
    printMD  c = OList
             [ printMD $ concept  c 

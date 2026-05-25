@@ -22,8 +22,10 @@ module Data.HList ( HList(..)
                   , isEmptyHList 
                   , pushTitle
                   , appendToHList
+                  , italicHString
        ) where
 
+import Data.Char
 import Data.OList
 import ArM.Debug.Trace
 
@@ -101,3 +103,8 @@ instance ToOList HList where
 instance ToOList (Maybe HList) where
    toOList = fromHList . filterNothing 
 -}
+
+-- | Render a string in italics, as an HList
+italicHString :: String  -> HList
+italicHString c = hlist $ "*" ++ (f . f) c ++ "*"
+   where f = reverse . dropWhile isSpace

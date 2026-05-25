@@ -36,6 +36,9 @@ narrativeH = effectMP "Background" . map italic . narrative
 commentH :: StoryObject a => a -> Maybe HList
 commentH = effectMP "Comment" . comment
 
+paragraphsH :: [ String ] -> HList
+paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
+
 -- | Make a Maybe HLIst from a string
 jhlist :: String -> Maybe HList
 jhlist = jhlist
@@ -73,6 +76,16 @@ instance HOutput Age where
 instance HOutput LabBonus where
    printH (LabBonus x "" z) = jhlist $ x ++ " " ++ showBonus z
    printH (LabBonus _ y z) = jhlist $ y ++ " " ++ showBonus z
+
+instance HOutput Saga where
+   printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
+      where hs1 = paragraphsH $ map italic $ narrative saga
+            hs2 = paragraphsH $ comment saga
+            ts1 = [ hlist $ lnk x | x <- advSeasons saga ] 
+            ts2 = [ hlist $ lnk GameStart 
+                  , hlist $ "+ " ++ "[](0001_Annals)"
+                  ]
+            lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
 
 -- ** Derived instances
