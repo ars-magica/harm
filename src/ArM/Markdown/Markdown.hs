@@ -30,7 +30,6 @@ import ArM.Markdown.HOutput
 import ArM.Markdown.HList 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
-import ArM.Markdown.VF
 import ArM.Character 
 import ArM.Markdown.Saga
 import ArM.Saga
@@ -68,10 +67,11 @@ class Markdown a where
 --
 -- $markdown
 -- Top-level functions are entitites with their own pages:
--- + Saga top level page $\to$ `sagaStateMD`
--- + Saga state (per season) $\to$ `printSheetMD`
+-- + Saga top level page $\to$ `printSheetMD`
+-- + Saga state (per season) $\to$ `sagaStateMD`
 -- + Character $\to$ `printSheetMD`
 -- + Covenatn $\to$ `printSheetMD`
+--
 
 -- | Render the state page for the Saga
 sagaStateMD :: Saga -> OList 
@@ -138,29 +138,8 @@ instance Markdown Character where
         where adv | isGameStart c = chargenMD c
                   | otherwise =  advancementMD c
 instance Markdown Covenant where
-    printMD cov = OList 
-        [ OString $ "# " ++ (name cov )
-        , OString ""
-        , printMD $ covenantConcept cov
-        , OString ""
-        , OString $ "## Updated" ++ (show $ covTime cov)
-        , OString ""
-        , OString "### Boons and Hooks"
-        , OString ""
-        , OList $ map ( indentHList . vfH ) ( boonhook cov )
-        , OString ""
-        , OString "### Possessions"
-        , OString ""
-        , listPossessions $ possessions cov
-        , OString ""
-        ]
-    printSheetMD saga cov = OList 
-        [ OString $ "# " ++ (covName $ covenantConcept cov )
-        , OString ""
-        , printMD $ covenantConcept cov
-        , OString ""
-        , printCovenantStateMD saga cov
-        ]
+    printMD = defaultMD
+    printSheetMD = defaultSheetMD
 
 -- ** Lower-level concepts
 
@@ -301,32 +280,6 @@ enchantedMD ob enc = OList [ OString $ pName ob
 instance Markdown Possession  where
    printMD = defaultMD
 
--- | Make a list of possessions excluding books and labtexts in Markdown.
-listPossessions :: [ Possession ] -> OList
-listPossessions ps = OList
-      [ OString "#### Mundane Equipment" 
-      , f [ printPossessionsH "Silver"
-               (filter ( (/=0) . silver ) ps 
-               ++  filter ( (/=0) . silverYield ) ps)
-          , printPossessionsH "Weapons" ws
-          , printPossessionsH "Armour" as
-          , printPossessionsH "Equipment" es
-          ]
-      , OString "#### Magic Gadgets" 
-      , f [ printPossessionsH "Vis" vs
-          , printPossessionsH "Vis sources" $ filter isVisSrc ps
-          , printPossessionsH "Arcane Connections" acs
-          , printPossessionsH "Magic Items" ms
-          ]
-      ]
-   where vs = filter isVis ps
-         ws = filter isWeapon ps
-         as = filter isArmour ps
-         acs = filter isAC ps
-         ms = filter isMagic ps
-         es = filter isMundaneEquipment ps
-         f = OList . map indentHList . filterNothing
-
 -- | Set a header line followed by a bullet list
 bulletWithHeader :: Markdown a => String -> [a] -> OList
 bulletWithHeader _ [] = OList []
@@ -376,7 +329,7 @@ sheetSheetMD saga c = OList
                , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
                , indentOList $ OList $ [ OString "**Abilities:**"
                         , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , listPossessions $ characterPossessions c
+               , fromHList $ listPossessionsH $ characterPossessions c
                , OString ""
                , printCombatMD saga c
                , mag
@@ -635,39 +588,10 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
 
 
 instance Markdown CovenantConcept where
-    printMD cc = OList $ bullets cc ++ fd (covDescription cc)
-      where bullets = map OString . map ("+ "++) . covconceptHelper
-            fd [] = []
-            fd (x:xs) = OString "":OString x:fd xs
-
-covconceptHelper :: CovenantConcept -> [ String ]
-covconceptHelper cc = filterNothing 
-   [ covConcept cc
-   , fmap ( ("**Founded** "++) . show ) (covFounded cc)
-   , fmap  ("**Appearance** "++)  (covAppearance cc)
-   ]
-
+    printMD = defaultMD
 
 instance Markdown Book where
-    printMD = fromHList . printBookH
-
--- | Print the covenant state of the given covenant
-printCovenantStateMD :: Saga -> Covenant -> OList
-printCovenantStateMD saga cov = OList  
-        [ OString $ "## " ++ (show $ season cov)
-        , OString ""
-        , characterIndex $ covenFolk saga cov
-        , OString ""
-        , OString (pagesLink $ stateName $ getLibrary cov)
-        , OString ""
-        , OString "### Boons and Hooks"
-        , OString ""
-        , OList $ map ( indentHList . vfH ) ( boonhook cov )
-        , OString ""
-        , OString "### Possessions"
-        , OString ""
-        , listPossessions $ possessions cov
-        ]
+    printMD = defaultMD
 
 instance Markdown Lab where
    printMD lb = indentOList $ OList 

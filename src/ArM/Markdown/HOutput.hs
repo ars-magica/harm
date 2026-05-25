@@ -21,10 +21,13 @@ import Data.KeyPair
 import ArM.Markdown.Spell
 import ArM.Markdown.Possession
 import ArM.Markdown.HList
+import ArM.Markdown.VF
+import ArM.Sheet.Library
 import ArM.Trait
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Story
+import ArM.Saga
 import ArM.Helper
 import Control.Monad.State.Lazy
 import Data.Maybe
@@ -38,10 +41,21 @@ import Data.Maybe
 class HOutput h where
    -- | Render an object in 'HList' format allowing markdown notation.
    printH :: h -> Maybe HList
+   -- | Render an object in 'HList' format allowing markdown notation.
+   --
+   -- The monadic version gives access to the databases in the `Saga` object
+   -- to look up details.
+   --
+   -- The default implementation ignores the monad and is equivalent to `printH`.
    printS :: h -> State Saga (Maybe HList)
    printS = return . printH
+   -- | Default implementation of `printMD` in the markdown class.
    defaultMD :: h -> OList
    defaultMD = fromMaybe (OString "") . fmap fromHList . printH
+   -- | Default implementation of `printSheetMD` in the markdown class.
+   defaultSheetMD :: Saga -> h -> OList
+   defaultSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
+                         $ evalState ( printS x ) saga
 
 instance HOutput Saga where
    printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
@@ -53,14 +67,76 @@ instance HOutput Saga where
                   ]
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
+instance HOutput Covenant where
+    printH cov = printCovenant cov Nothing
+    printS cov = get >>= f cov >>= return . printCovenant cov
+        where f x saga = return $ Just $ characterIndexH $ covenFolk saga x
+
+-- | Render the covenant.
+--
+-- If the calling function has access to the `Saga`, the list of covenfolk
+-- can be rendered with reference to characters from the database.
+-- If not, Nothing may be passed.
+printCovenant :: Covenant     -- ^ The covenant
+              -> Maybe HList  -- ^ List of covenfolk or Nothing
+              -> Maybe HList  -- ^ Rendered output
+printCovenant cov idx = Just $ HList ( "# " ++ (name cov ) ) $ filterNothing
+        [ jhlist ""
+        , printH $ covenantConcept cov
+        , hheader ( "## Updated " ++ (show $ season cov) ) 
+        , idx 
+        , jhlist ""
+        , jhlist (("+ "++) $ pagesLink $ stateName $ getLibrary cov)
+        , hheader "### Boons and Hooks" 
+        , Just $ HList "" $ map ( indentList . vfH ) ( boonhook cov )
+        , jhlist ""
+        , Just $ listPossessionsH $ possessions cov
+        ] 
+--
+
+instance HOutput CovenantConcept where
+    printH cc = Just $ HList "" $ hs1:hs2:hs
+      where hs = ( map hlist . map ("+ "++) . covconceptHelper ) cc
+            hs1 = paragraphsH $ map italic $ narrative cc
+            hs2 = paragraphsH $ comment cc
+
+-- | Make a list of possessions excluding books and labtexts in Markdown.
+listPossessionsH :: [ Possession ] -> HList
+listPossessionsH ps = HList "### Possessions"
+      [ HList "#### Mundane Equipment" 
+      $ f [ printPossessionsH "Silver"
+               (filter ( (/=0) . silver ) ps 
+               ++  filter ( (/=0) . silverYield ) ps)
+          , printPossessionsH "Weapons" $ filter isWeapon ps
+          , printPossessionsH "Armour" $ filter isArmour ps
+          , printPossessionsH "Equipment" $ filter isMundaneEquipment ps
+          ]
+      , HList "#### Magic Gadgets" 
+      $ f [ printPossessionsH "Vis" $ filter isVis ps
+          , printPossessionsH "Vis sources" $ filter isVisSrc ps
+          , printPossessionsH "Arcane Connections" $ filter isAC ps
+          , printPossessionsH "Magic Items" $ filter isMagic ps
+          ]
+      ]
+   where f = map indentList . filterNothing
+
+
+-- | Render some of the details for a `CovenantConcept`
+covconceptHelper :: CovenantConcept -> [ String ]
+covconceptHelper cc = filterNothing 
+   [ covConcept cc
+   , fmap ( ("**Founded** "++) . show ) (covFounded cc)
+   , fmap  ("**Appearance** "++)  (covAppearance cc)
+   ]
+
 -- * More basic concepts
 
 instance HOutput Possession  where
    printH = Just . printPossessionH
-
 instance HOutput LabText where
    printH = Just . textH
-
+instance HOutput Book where
+    printH = Just . printBookH
 instance HOutput SpellRecord where
    printH = Just . spellH
 instance HOutput MagicEffect where

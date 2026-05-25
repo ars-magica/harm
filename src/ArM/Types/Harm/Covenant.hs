@@ -81,8 +81,14 @@ instance KeyObject Covenant where
 
 instance HarmObject Covenant 
 instance StoryObject Covenant where
-    name = covName . covenantConcept
-    narrative = covDescription . covenantConcept
+    name = name . covenantConcept
+    narrative = narrative . covenantConcept
+    comment = comment . covenantConcept
+
+instance StoryObject CovenantConcept where
+    name = covName 
+    narrative = covDescription 
+    comment = covComment 
 
 -- | The covenant concept is the timeless features of the covenant,
 -- as compared to the state which advances over time.
@@ -90,6 +96,7 @@ data CovenantConcept = CovenantConcept
          { covName :: String
          , covConcept :: Maybe String
          , covDescription :: [ String ]
+         , covComment :: [ String ]
          , covFounded :: Maybe Int
          , covAppearance :: Maybe String
          , covTribunal :: Maybe String
@@ -104,6 +111,7 @@ instance FromJSON CovenantConcept where
         <$> v .: "name"
         <*> v .:? "concept"
         <*> v .:? "description" .!= []
+        <*> v .:? "comment" .!= []
         <*> v .:? "founded"
         <*> v .:? "appearance"
         <*> v .:? "tribunal"

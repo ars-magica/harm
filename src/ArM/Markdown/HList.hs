@@ -17,12 +17,10 @@ module ArM.Markdown.HList where
 
 import Data.HList
 import ArM.Markdown.Spell
-import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Helper
 import Data.Maybe
-import ArM.Debug.Trace
 
 -- | Render the narrative comment.
 narrativeH :: StoryObject a => a -> Maybe HList
@@ -56,3 +54,6 @@ covenantIndexH :: [Covenant] -> HList
 covenantIndexH = HList "+ Covenants" . map f 
     where f = hlist . ("    + "++) . pagesLink . stateName 
 
+-- | Render a header as a Hlist
+hheader :: String -> Maybe HList
+hheader h = Just $ HList "" [ hlist h ]
