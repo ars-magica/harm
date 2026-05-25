@@ -60,15 +60,21 @@ instance HOutput Saga where
 
 -- * Character
 
-
+-- |
+-- The non-monadic `printH` lacks Magus traits.
+-- We have simply not prioritised making a sheet that works
+-- without monadic access to the `Saga`.
+--
+-- The monadic `printS` should be used whenever possible.
+--
 instance HOutput Character where
    printH  c = trace "Unsupport - brief Character sheeet"
             $ Just $ HList "" $ filterNothing
             [ printH $ concept  c 
-            , hheader $ "## Sheet " ++ (show $ gameSeason c )
             , Just $ sheetH c
-            , designH c
+            , sheetAdv c
             , Just $ advancementH c
+            -- , magusSheetH c saga
             ]
    printS c = get >>= return . characterH c
 
@@ -76,12 +82,13 @@ characterH :: Character -> Saga -> Maybe HList
 characterH c saga = Just $ HList "" $ filterNothing
             [ printH $ concept c
             , Just $ sheetSheetH c 
-            , adv
+            , sheetAdv c
             , Just $ combatSheetH c saga
             , magusSheetH c saga
             ]
-        where adv | isGameStart c = designH c
-                  | otherwise = Just $  advancementH c
+sheetAdv :: Character -> Maybe HList
+sheetAdv c | isGameStart c = designH c
+      | otherwise = Just $  advancementH c
 
 -- | Render a list of objects as a comma-separated list on a single
 -- line/paragraph.  This works for any instance of 'Show'.
