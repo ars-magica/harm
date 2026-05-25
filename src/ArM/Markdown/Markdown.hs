@@ -85,7 +85,9 @@ instance Markdown Character where
             , OString $ "## Character Sheet " ++ (show $ gameSeason c) 
             , OString ""
             , sheetSheetMD saga c
-            , adv
+            -- , adv
+            , designMD c
+            , advancementMD c
             ]
         where adv | isGameStart c = designMD c
                   | otherwise =  advancementMD c

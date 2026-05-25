@@ -123,36 +123,33 @@ sheetH c = HList "" $ filterNothing
                , jhlist "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
                ]
 
-{-
-sheetSheetMD :: Saga -> Character -> OList
-sheetSheetMD saga c = OList 
-               [ briefTraits c
-               , indentOList $ OList $ [ OString "**Abilities:**"
-                        , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , fromHList $ listPossessionsH $ characterPossessions c
-               , hlist ""
-               , printCombatMD saga c
+sheetSheetH :: Saga -> Character -> HList
+sheetSheetH saga c = HList  "" $ filterNothing
+               [ briefTraitsH c
+               , Just $ indentList $ HList "**Abilities:**"
+                        (map (hlist . show) ( sortTraits $ abilityList c ))
+               , Just $ listPossessionsH $ characterPossessions c
+               , jhlist ""
+               , Just $ printCombatH saga c
                , mag
                ]
          where spellist = spellsWithScores (spells saga) c 
-               mag | isMagus c = OList 
-                       [ artVisMD c
-                       , OString ""
-                       , printFullGrimoire (spells saga) $ sortTraits spellist
-                       , OString ""
-                       , toOList $ printCastingTotals c 
-                       , OString ""
-                       , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
-                       , OString ""
-                       , OString "## Laboratory"
-                       , OString ""
-                       , toOList $ printLabTotals c 
-                       , OString ""
-                       , printSheetMD saga $ characterLab c
-                       , OString ""
+               mag | isMagus c = Just $ HList "" 
+                       -- [ artVisMD c
+                       [ hlist ""
+                       -- , printFullGrimoire (spells saga) $ sortTraits spellist
+                       , hlist ""
+                       -- , toOList $ printCastingTotals c 
+                       , hlist ""
+                       , hlist $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
+                       , hlist ""
+                       , hlist "## Laboratory"
+                       , hlist ""
+                       -- , toOList $ printLabTotals c 
+                       , hlist ""
+                       -- , printSheetMD saga $ characterLab c
                        ]
-                   | otherwise = OString "" 
--}
+                   | otherwise = Nothing 
 
 instance HOutput CharacterConcept where
    printH = conceptPrintH "../images/"
@@ -394,32 +391,33 @@ chargenH c | as == [] = Nothing
 
 -- | Set the Combat Stats of the Character as an 'OList'
 printCombatH :: Saga -> Character -> HList
-printCombatH saga cs = HList "" x
+printCombatH saga cs = HList "" (map hlist $ combatTable tab)
     where tab = computeCombatStats ( weaponsDB saga ) cs
-          x | tab == [] = []
-            | otherwise = [ combatHeadH, combatBodyH tab ]
+
+combatTable :: [CombatLine] -> [String]
+combatTable xs = combatHead1:combatHead2:combatBody0 xs
 
 -- | Set the table body for 'printCombatMD'
-combatBodyH :: [CombatLine] -> HList
-combatBodyH = HList "" . map combatBodyLineH
+combatBody0 :: [CombatLine] -> [String]
+combatBody0 = map combatLine
 
 -- | Set a single line for 'printCombatMD'
-combatBodyLineH :: CombatLine -> HList
-combatBodyLineH c = hlist $ "| " ++ (combatLabel c) ++ 
-                            " | " ++ (show $ combatInit c) ++
-                            " | " ++ (showstat $ combatAtk c) ++
-                            " | " ++ (showstat $ combatDef c) ++
-                            " | " ++ (showstat $ combatDam c) ++
-                            " | " ++ (showstat $ combatRange c) ++
-                            " | " ++ (show $ combatLoad c) ++
-                            " | " ++ (combatComment c) ++
-                            " |"
+combatLine :: CombatLine -> String
+combatLine c = "| " ++ (combatLabel c) ++ 
+               " | " ++ (show $ combatInit c) ++
+               " | " ++ (showstat $ combatAtk c) ++
+               " | " ++ (showstat $ combatDef c) ++
+               " | " ++ (showstat $ combatDam c) ++
+               " | " ++ (showstat $ combatRange c) ++
+               " | " ++ (show $ combatLoad c) ++
+               " | " ++ (combatComment c) ++
+               " |"
 
 -- | Set the header for 'printCombatMD'
-combatHeadH :: HList
-combatHeadH = HList ""  [ hlist "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
-                   , hlist "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
-                   ]
+combatHead1 :: String 
+combatHead1 = "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
+combatHead2 :: String 
+combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
 
 
 -- * Errors
