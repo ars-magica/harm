@@ -55,6 +55,7 @@ module ArM.Trait.Trait (
          , BookDB(..)
          -- * Possessions
          , Possession(..)
+         , Staff(..)
          , defaultPossession
          , LabText(..)
          , visArt
@@ -611,6 +612,7 @@ data Possession = Possession
      , silverYield :: Int                 
         -- ^ Annual income in mythic pounds
      , itemCount :: Int              -- ^ Number of items possessed, default 1.
+     , staff :: Maybe Staff
      , itemDate :: SeasonTime        -- ^ Time of creation
      }
     deriving ( Ord, Eq, Generic )
@@ -634,6 +636,7 @@ defaultPossession = Possession
      , acTo = Nothing
      , silver = 0
      , silverYield = 0
+     , staff = Nothing
      , itemCount = 1
      , itemDate = NoTime
      }
@@ -748,8 +751,16 @@ parseOtherPossession v = Possession
        <*> v .:? "silver" .!= 0
        <*> v .:? "income" .!= 0
        <*> v .:? "count" .!= 1
+       <*> v .:? "staff" 
        <*> v .:? "date"  .!= NoTime
 
+data Staff = Specialist [ Trait ] 
+           | Servant | Teamster | Labourer 
+           | CovenGrog [ Ability ]
+   deriving (Show, Generic, Eq, Ord)
+
+instance ToJSON Staff
+instance FromJSON Staff
 
 instance Show Possession where
     show p = name p ++ cnt

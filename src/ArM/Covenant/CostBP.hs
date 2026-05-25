@@ -58,7 +58,15 @@ instance CostBP Possession where
                  , costBP . enchantment
                  , visBP
                  , (// 10) . silver
+                 , specBP . staff
                  ]
+
+            specBP (Just (Specialist xs)) = lmax $ map sc xs
+            specBP _ = 0
+            sc (AbilityTrait a) = abilityScore a
+            sc _ = 0
+            lmax [] = 0
+            lmax (x:xs) = foldr max x xs
 
 -- | Build points for vis stock and vis sources
 visBP :: Possession -> Int

@@ -75,6 +75,7 @@ module ArM.Trait (
 
          -- * Possessions
          , Possession(..)
+         , Staff(..)
          , defaultPossession
          , visArt
          , isNone
