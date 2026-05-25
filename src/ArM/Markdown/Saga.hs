@@ -20,17 +20,12 @@ import ArM.Types.Harm
 import ArM.Character
 import ArM.Story
 import ArM.Saga
-import ArM.Helper
-
-import Data.OList
-
 
 -- * Error reports
 
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season
 type VList = (HarmKey,SeasonTime,String,[Validation])
-
 
 -- | Get validation messages from a given advancement.
 -- Because the `VList` object requires a character, this is not
@@ -43,7 +38,6 @@ augHead :: ContractAdvancement a => Augmented a -> String
 augHead a = f (season a) (advancementmode a)
    where f NoTime tp = tp
          f x tp = (show x  ++ " " ++ tp)
-
 
 class ErrorList a where
     -- | Get validation messages from a given entity.
@@ -71,24 +65,4 @@ instance ErrorList Saga where
               f ((_,_,_,[]):xs) = f xs
               f (x:xs) = x:f xs
 
-
-
--- * Character Index
-
--- | Write a single item for `characterIndex`
-characterIndexLine :: Character -> OList
-characterIndexLine c = OString $ "+ " ++ pagesLink (stateName c) 
-
--- | Write a bullet list of links for a list of characters
-characterIndex :: [Character] -> OList
-characterIndex = OList . map characterIndexLine 
-
-
--- | Write a single item for `covenantIndex`
-covenantIndexLine :: Covenant -> OList
-covenantIndexLine c = OString $ "+ " ++ pagesLink (stateName c) 
-
--- | Write a bullet list of links for a list of characters
-covenantIndex :: [Covenant] -> OList
-covenantIndex = OList . map covenantIndexLine 
 
