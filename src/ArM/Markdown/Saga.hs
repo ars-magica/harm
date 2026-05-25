@@ -27,54 +27,10 @@ import Data.OList
 
 -- * Error reports
 
--- | Get an `OList` of all error messages from past advancements in a
--- saga state.
---
--- CharGen errors are only included at GameStart and ignored later.
-advancementErrors :: Saga -> OList
-advancementErrors = advancementE isValError
-    where isValError (ValidationError _) = True
-          isValError _ = False
-
-advancementE :: (Validation->Bool) -> Saga -> OList
-advancementE f saga | errors == [] = OString "No errors"
-                       | otherwise = OList $ map formatOutput errors
-    where formatOutput (cid,_,ssn,vs) = 
-              headOList ( show cid ++ ": " ++ ssn ) (map show $ filter f vs)
-          errors = errorList saga
-
--- | Get an `OList` of all non-error validation messages from past advancements in a
--- saga state.
---
--- CharGen notices are only included at GameStart and ignored later.
-advancementWarnings :: Saga -> OList
-advancementWarnings = advancementE isValWarning
-     where isValWarning (ValidationWarning _) = True
-           isValWarning _ = False
-
 -- | Convenience type for a list of validation messages for a 
 -- given cvharacter and season
 type VList = (HarmKey,SeasonTime,String,[Validation])
 
--- | Did the `VList` object occur after the given season?
-errorAfter :: VList -> SeasonTime -> Bool
-errorAfter (_,vs,_,_) s = vs > s 
-
-
--- | Exctract a list of validation errors after a given time 
--- This is not currently used, but could be used to ignore old
--- errors when reporting recent character states.
-advancementErrorsLimit :: SeasonTime ->  Saga -> OList
-advancementErrorsLimit ssn saga = OList $ map formatOutput errors
-    where formatOutput (cid,_,sn,vs) = OList 
-              [ OString ( show cid ++ ": " ++ sn ),
-              OList $ map msg vs ]
-          errors = f $ errorList saga
-          msg (ValidationError x) = OString x
-          msg _ = OString ""
-          f [] = []
-          f (x:xs) | x `errorAfter` ssn = x:f xs
-                   | otherwise = []
 
 -- | Get validation messages from a given advancement.
 -- Because the `VList` object requires a character, this is not
