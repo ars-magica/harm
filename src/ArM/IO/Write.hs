@@ -27,7 +27,7 @@ import Data.OList
 
 -- | Write charactersheets in MarkDown
 -- File name is derived from the character name.
-writeObjects :: (HarmObject h, Markdown h) 
+writeObjects :: (HarmObject h, HOutput h) 
              => String  -- ^ Directory for the output files
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write

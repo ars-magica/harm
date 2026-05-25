@@ -14,11 +14,8 @@
 -- verbose character sheet.
 --
 -----------------------------------------------------------------------------
-module ArM.Markdown.Markdown ( Markdown(..)
-                    , italicOString
-                    , storyOList
+module ArM.Markdown.Markdown ( printMD, printSheetMD
                     , sagaStateMD
-                    , enchantedMD  -- Unused
                     ) where
 
 import ArM.Markdown.HOutput 
@@ -38,26 +35,14 @@ import Data.HList
 
 -- * The Markdown class
 
--- | Default implementation of `printMD` in the markdown class.
-defaultMD :: HOutput h => h -> OList
-defaultMD = fromMaybe (OString "") . fmap fromHList . printH
--- | Default implementation of `printSheetMD` in the markdown class.
-defaultSheetMD :: HOutput h => Saga -> h -> OList
-defaultSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
+-- | This is the basic function to render in Markdown
+printMD :: HOutput h => h -> OList
+printMD = fromMaybe (OString "") . fmap fromHList . printH
+-- | This is a hack to augment characters using extra resources
+-- By default, it is identical to 'printMD'.
+printSheetMD :: HOutput h => Saga -> h -> OList
+printSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
                       $ evalState ( printS x ) saga
-
--- | Class defining 'printMD' to render in Markdown.
-class Markdown a where
-     -- | This is the basic function to render in Markdown
-     printMD :: a           -- ^ object to render
-             -> OList       -- ^ list of lines for output
-
-     -- | This is a hack to augment characters using extra resources
-     -- By default, it is identical to 'printMD'.
-     printSheetMD :: Saga      -- ^ Saga including databases for spells etc.
-                -> a         -- ^ object to render
-                -> OList     -- ^ list of lines for output
-     printSheetMD _ = printMD
 
 -- ** Top level entities
 --
@@ -74,32 +59,20 @@ sagaStateMD :: Saga -> OList
 sagaStateMD = fromHList . sagaStateH
 
 
-instance Markdown Saga where
-    printMD = defaultMD
-instance Markdown Character where
-   printMD _ = error "Character printMD is not supported"
-   printSheetMD = defaultSheetMD
-instance Markdown Covenant where
-    printMD = defaultMD
-    printSheetMD = defaultSheetMD
-
-
 -- * Markdown for the Character types
  
-instance Markdown MagicEffect  where
-   printMD = defaultMD 
-instance Markdown Enchantment  where
-   printMD (LesserItem eff) = printMD eff 
-   printMD (GreaterDevice vn eff) = OList 
-       [ OString $ "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)"
-       , OList $ map printMD eff ]
-   printMD (Talisman vn eff) = OList 
-       [ OString $ "Talisman (opened with " ++ show vn ++ "p vis)"
-       , OList $ map printMD eff ]
-   printMD (ChargedItem vn eff) = OList 
-       [ OString $ "Charged Item (" ++ show vn ++ "charges)"
-       , OList [ printMD eff ] ]
-   printMD MundaneItem = OString "Mundane Item" 
+instance HOutput Enchantment  where
+   printH (LesserItem eff) = printH eff 
+   printH (GreaterDevice vn eff) = Just $ HList 
+       ( "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)" )
+       ( filterNothing $ map printH eff )
+   printH (Talisman vn eff) = Just $ HList 
+       ( "Talisman (opened with " ++ show vn ++ "p vis)" )
+       ( filterNothing $ map printH eff )
+   printH (ChargedItem vn eff) = Just $ HList 
+       ( "Charged Item (" ++ show vn ++ "charges)" )
+       ( filterNothing [ printH eff ] )
+   printH MundaneItem = jhlist "Mundane Item" 
 
 enchantedMD :: Possession -> Enchantment -> OList
 enchantedMD _ MundaneItem = OList []
@@ -114,27 +87,4 @@ enchantedMD ob enc = OList [ OString $ pName ob
                           , printMD $ enc
                            ]
 
-instance Markdown Possession  where
-   printMD = defaultMD
 
-instance Markdown Library where
-   printMD = defaultMD
-
--- * Advancements
-
-instance Markdown CovAdvancement where
-   printMD = defaultMD 
-
--- * Covenant Markdown
-
-instance Markdown Lab where
-   printMD = defaultMD
-
--- * Convenience Functions
-
-storyOList :: StoryObject a => a -> [ OList ]
-storyOList ob = 
-       [ OString $ name ob
-       , OList  $ map italicOString $ narrative ob
-       , OList  $ map OString $ comment ob 
-       ]

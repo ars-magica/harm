@@ -15,8 +15,10 @@ import ArM.Types.Advancement
 import ArM.Types.Harm 
 import ArM.Story
 import ArM.Saga
-import ArM.Markdown.Markdown
-import Data.OList
+import ArM.Markdown.HOutput
+import ArM.Markdown.HList
+import ArM.Helper
+import Data.HList
 
 -- import ArM.Debug.Trace
 
@@ -33,11 +35,9 @@ data AnnalSeason = AnnalSeason SeasonTime [EitherAug]
 instance Timed AnnalSeason where
    season (AnnalSeason t _) = t
 
-instance Markdown AnnalSeason where
-   printMD (AnnalSeason t xs) = OList [ b, h, b, (OList $ map ind xs) ]
-      where b = OString ""
-            h = OString $ "## " ++ show t
-            ind = indentOList . printMD
+instance HOutput AnnalSeason where
+   printH (AnnalSeason t xs) = Just $ indentList $ HList h $ filterNothing $ map printH xs
+      where h = "## " ++ show t
 
 getSeasonAnnals :: [ EitherAug ] -> [ AnnalSeason ]
 getSeasonAnnals [] = []
@@ -81,18 +81,21 @@ instance StoryObject CovAug where
    comment (CovAug _ a) = comment a
 -}
 
-instance Markdown CharAug where
-   printMD (CharAug c a') = OList $ storyOList (CharAug c a') ++
-       [ (OString . ("Uses "++) . show ) $ bookRead  a
-       , OList $ map (OString . show) $ validation a'
-       ]
+storyHList :: StoryObject a => a -> HList 
+storyHList ob = HList ( name ob ) $ filterNothing [ narrativeH ob, commentH ob ]
+
+instance HOutput CharAug where
+   printH (CharAug c a') = Just 
+       $ appendToHList ( bk:(filterNothing $ map printH $ validation a' ) )
+       $ storyHList (CharAug c a') 
        where a = contractAdvancement a'
-instance Markdown CovAug where
-   printMD (CovAug c a') = OList [ OString (name c), printMD a ]
+             bk = (hlist . ("Uses "++) . show ) $ bookRead  a
+instance HOutput CovAug where
+   printH (CovAug c a') = Just $ HList (name c) $ filterNothing [ printH a ]
      where a = contractAdvancement a'
-instance Markdown EitherAug where
-   printMD (ECov x) = printMD x
-   printMD (EChar x) = printMD x
+instance HOutput EitherAug where
+   printH (ECov x) = printH x
+   printH (EChar x) = printH x
 
 -- ** Getting the merged list of advancements
 

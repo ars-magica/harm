@@ -24,11 +24,13 @@
 -- internal.
 --
 -----------------------------------------------------------------------------
-module ArM.Markdown ( Markdown(..)
+module ArM.Markdown ( printMD, printSheetMD
                     , sagaStateMD
                     , sagaAnnals
+                    , HOutput
                     ) where
 
 
 import ArM.Markdown.Markdown 
+import ArM.Markdown.HOutput 
 import ArM.Markdown.SeasonDisplay
