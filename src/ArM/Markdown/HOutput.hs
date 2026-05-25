@@ -126,6 +126,9 @@ sheetH c = HList "" $ filterNothing
                , jhlist "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
                ]
 
+-- | Set a list of spells.
+-- Each spell is set using 'spellMD', and the result is indented as a
+-- hierarchical list.
 sheetSheetH :: Saga -> Character -> HList
 sheetSheetH saga c = HList  "" $ filterNothing
                [ briefTraitsH c
@@ -138,9 +141,9 @@ sheetSheetH saga c = HList  "" $ filterNothing
                ]
          where spellist = spellsWithScores (spells saga) c 
                mag | isMagus c = Just $ HList "" 
-                       -- [ artVisMD c
-                       [ hlist ""
-                       -- , printFullGrimoire (spells saga) $ sortTraits spellist
+                       [ artVisH c
+                       , hlist ""
+                       , printFullGrimoireH (spells saga) $ sortTraits spellist
                        , hlist ""
                        , HList "" $ map hlist $ printCastingTotals c 
                        , hlist ""
@@ -150,7 +153,7 @@ sheetSheetH saga c = HList  "" $ filterNothing
                        , hlist ""
                        , HList "" $ map hlist $ printLabTotals c 
                        , hlist ""
-                       -- , printSheetMD saga $ characterLab c
+                       , fromMaybe (hlist "") $ printH $ characterLab c
                        ]
                    | otherwise = Nothing 
 
@@ -282,6 +285,41 @@ instance HOutput Age where
                | otherwise = [ hlist $ " Longevity Ritual: " ++ show lrs ]
             h = "+ **Age:** " ++ show y ++ " years (apparent age " 
                 ++ show (y - apparentYounger c)  ++ ")" 
+
+instance HOutput Lab where
+   printH lb = Just $ indentList $ HList ( name lb ) $ filterNothing
+         [ jhlist $ "Refinement: " ++ showSigned (labRefinement $ labState lb)
+         , jhlist $ "Size: " ++ showSigned (labSize $ labState lb)
+         , jhlist $ "Used size: " ++ used ++ " out of " ++ lim
+         , jhlist $ "Safety: " ++ saf ++ " (" ++ bas ++ sfl ++ ")"
+         , jhlist $ "Aura: " ++ show (labAura $ labState lb)
+         , jhlist $ "Traits: " ++ commaList ts
+         , jhlist $ "Art Specialisations: " ++ commaList arsp
+         , jhlist $ "Activity Specialisations: " ++ commaList acsp
+         , jhlist "Description"
+         , narrativeH lb
+         , commentH lb
+         , jhlist ""
+         , Just $ HList "Virtues and Flaws" 
+                $ filterNothing $ map printH $ labVirtues $ labState lb
+         ]
+       where ts = filter ( (=="") . labSpecialisation ) tb
+             arsp = filter ( (=="Art") . labTrait ) tb
+             acsp = filter ( (=="Activity") . labTrait ) tb
+             tb = totalBonus lb
+             used = showSigned $ usedSize lb
+             lim = showSigned $ labVirtueLimit lb
+             saf = showSigned $ labSafety lb 
+             bas = showSigned $ baseSafety lb 
+             sfl = showSigned $ safety lb
+
+instance HOutput LabVirtue where
+   printH v = Just $ HList (name v) $ filterNothing
+                   [ narrativeH v
+                   , commentH v
+                   , jhlist ts 
+                   ]
+        where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
 
 instance HOutput LabBonus where
    printH (LabBonus x "" z) = jhlist $ x ++ " " ++ showBonus z

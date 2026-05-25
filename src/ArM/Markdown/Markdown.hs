@@ -15,7 +15,6 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Markdown.Markdown ( Markdown(..)
-                    , artVisMD
                     , italicOString
                     , storyOList
                     , sagaStateMD
@@ -179,38 +178,7 @@ instance Markdown Library where
    printMD = defaultMD
 
 sheetSheetMD :: Saga -> Character -> OList
-sheetSheetMD saga c = OList 
-               [ briefTraits c
-               , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
-               , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
-               , showlistMD "+ **Reputations:** "  $ sortTraits $ reputationList c
-               , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
-               , indentOList $ OList $ [ OString "**Abilities:**"
-                        , OList (map (OString . show) ( sortTraits $ abilityList c )) ]
-               , fromHList $ listPossessionsH $ characterPossessions c
-               , OString ""
-               , printCombatMD saga c
-               , mag
-               ]
-         where spellist = spellsWithScores (spells saga) c 
-               mag | isMagus c = OList 
-                       [ artVisMD c
-                       , OString ""
-                       , printFullGrimoire (spells saga) $ sortTraits spellist
-                       , OString ""
-                       , toOList $ printCastingTotals c 
-                       , OString ""
-                       , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
-                       , OString ""
-                       , OString "## Laboratory"
-                       , OString ""
-                       , toOList $ printLabTotals c 
-                       , OString ""
-                       , printSheetMD saga $ characterLab c
-                       , OString ""
-                       ]
-                   | otherwise = OString "" 
-
+sheetSheetMD saga = fromHList . sheetSheetH saga
 
 -- ** Markdown for Age, Confidence, Warping, and Decrepitude
 
@@ -280,52 +248,12 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
          f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
--- | Set the Combat Stats of the Character as an 'OList'
-printCombatMD :: Saga -> Character -> OList
-printCombatMD saga cs = fromHList $ printCombatH saga cs
-
 -- * Covenant Markdown
-
 
 instance Markdown Book where
     printMD = defaultMD
 
 instance Markdown Lab where
-   printMD lb = indentOList $ OList 
-       [ OString $ name lb
-       , OList 
-         [ OString $ "Refinement: " ++ showSigned (labRefinement $ labState lb)
-         , OString $ "Size: " ++ showSigned (labSize $ labState lb)
-         , OString $ "Used size: " ++ used ++ " out of " ++ lim
-         , OString $ "Safety: " ++ saf ++ " (" ++ bas ++ sfl ++ ")"
-         , OString $ "Aura: " ++ show (labAura $ labState lb)
-         , OString $ "Traits: " ++ commaList ts
-         , OString $ "Art Specialisations: " ++ commaList arsp
-         , OString $ "Activity Specialisations: " ++ commaList acsp
-         , OString "Description"
-         , OList $ map italicOString $ narrative lb
-         , OList $ map OString $ comment lb
-         , OString "Virtues and Flaws"
-         , foldOList $ OList $ map printMD $ labVirtues $ labState lb
-         ]
-       ]
-       where ts = filter ( (=="") . labSpecialisation ) tb
-             arsp = filter ( (=="Art") . labTrait ) tb
-             acsp = filter ( (=="Activity") . labTrait ) tb
-             tb = totalBonus lb
-             used = showSigned $ usedSize lb
-             lim = showSigned $ labVirtueLimit lb
-             saf = showSigned $ labSafety lb 
-             bas = showSigned $ baseSafety lb 
-             sfl = showSigned $ safety lb
-instance Markdown LabVirtue where
-   printMD v = OList [ OString $ name v
-                   , OList $ map italicOString $ narrative v
-                   , OList $ map OString $ comment v
-                   , OList [ OString ts ]
-                   ]
-        where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
-instance Markdown LabBonus where
    printMD = defaultMD
 
 -- * Convenience Functions
