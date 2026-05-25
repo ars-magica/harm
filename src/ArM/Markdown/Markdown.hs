@@ -168,7 +168,7 @@ instance Markdown CharacterConcept where
 instance Markdown Trait where
    printMD = defaultMD
 instance Markdown ProtoTrait where
-   printMD = defaultMD
+   printMD = OString . show
 
 
 -- ** Markdown for basic types
@@ -180,7 +180,7 @@ instance Markdown a => Markdown (Maybe a) where
    printSheetMD saga (Just x) = printSheetMD saga x
 
 instance Markdown FieldValue where
-   printMD  = OString . show
+   printMD  = defaultMD
 
 instance Markdown KeyPair where
    printMD (KeyPair x  y) = OList
@@ -720,7 +720,7 @@ instance Markdown LabVirtue where
                    ]
         where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
 instance Markdown LabBonus where
-   printMD = defaultMD
+   printMD = OString . show
 
 -- * Convenience Functions
 

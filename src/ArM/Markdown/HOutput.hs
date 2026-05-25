@@ -17,6 +17,7 @@ module ArM.Markdown.HOutput where
 
 import Data.HList
 import Data.OList
+import Data.KeyPair
 import ArM.Markdown.Spell
 import ArM.Trait
 import ArM.Types.Advancement
@@ -25,6 +26,7 @@ import ArM.Story
 import ArM.Helper
 import Control.Monad.State.Lazy
 import Data.Maybe
+import ArM.Debug.Trace
 
 -- | Render the narrative comment.
 narrativeH :: StoryObject a => a -> Maybe HList
@@ -78,3 +80,5 @@ instance HOutput LabBonus where
 instance HOutput a => HOutput (Maybe a) where
    printH Nothing = Nothing
    printH (Just x) = printH x
+instance HOutput FieldValue where
+   printH = jhlist . show
