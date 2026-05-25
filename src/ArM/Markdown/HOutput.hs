@@ -32,7 +32,6 @@ import Control.Monad.State.Lazy
 import Data.Maybe
 import ArM.Debug.Trace
 
-
 -- * The class
 
 -- | `HOutput` provides the API to render objects in Markdown using the `HList`
@@ -145,6 +144,71 @@ sheetSheetH c = HList ( "## Character Sheet " ++ (show $ gameSeason c) )
 combatSheetH  :: Character -> Saga -> HList
 combatSheetH  c saga = printCombatH saga c
 
+instance HOutput CharacterConcept where
+   printH = conceptPrintH "../images/"
+   printS cov = get >>= return . fromMaybe "../images/" . baseURL 
+                    >>= ( \ x -> return ( conceptPrintH x cov ) )
+
+conceptPrintH :: String -> CharacterConcept -> Maybe HList
+conceptPrintH dir c = Just $ HList ("# " ++ nm )
+               [ img
+               , hlist ""
+               , dlMaybeH (show (charType c)) ( briefConcept c )
+               , dlMaybeH "Quirk" (  quirk c )
+               , dlMaybeH "Appearance" (  appearance c )
+               , dlMaybeH "Born" ( fmap show $ born c )
+               , dlMaybeH "Player" ( player c )
+               , fromMaybe (hlist "") ( printH $ charGlance c ) 
+               , fromMaybe (hlist "") ( printH $ charData c )
+               ]
+          where img | isNothing (portrait c) = hlist ""
+                    | otherwise = hlist imgfn
+                imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
+                nm = fullConceptName c 
+
+--
+-- | Render the char gen design.
+-- This is a list of all the pregame advancement objects.
+chargenH :: Character -> Maybe HList
+chargenH c | as == [] = Nothing
+           | otherwise = Just $ HList "## Char Gen Advancements"
+                              $ filterNothing $ map printH as
+           where as = pregameAdvancement c
+
+-- ** Combat 
+
+-- | Set the Combat Stats of the Character as an 'OList'
+printCombatH :: Saga -> Character -> HList
+printCombatH saga cs = HList "" (map hlist $ combatTable tab)
+    where tab = computeCombatStats ( weaponsDB saga ) cs
+
+combatTable :: [CombatLine] -> [String]
+combatTable xs = combatHead1:combatHead2:combatBody0 xs
+
+-- | Set the table body for 'printCombatMD'
+combatBody0 :: [CombatLine] -> [String]
+combatBody0 = map combatLine
+
+-- | Set a single line for 'printCombatMD'
+combatLine :: CombatLine -> String
+combatLine c = "| " ++ (combatLabel c) ++ 
+               " | " ++ (show $ combatInit c) ++
+               " | " ++ (showstat $ combatAtk c) ++
+               " | " ++ (showstat $ combatDef c) ++
+               " | " ++ (showstat $ combatDam c) ++
+               " | " ++ (showstat $ combatRange c) ++
+               " | " ++ (show $ combatLoad c) ++
+               " | " ++ (combatComment c) ++
+               " |"
+
+-- | Set the header for 'printCombatMD'
+combatHead1 :: String 
+combatHead1 = "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
+combatHead2 :: String 
+combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
+
+-- ** Magus traits
+
 magusSheetH :: Character -> Saga -> Maybe HList
 magusSheetH c saga
    | isMagus c = Just $ HList "" 
@@ -181,37 +245,6 @@ printFullGrimoireH db xs = HList "## Grimoire"
          f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
-
-instance HOutput CharacterConcept where
-   printH = conceptPrintH "../images/"
-   printS cov = get >>= return . fromMaybe "../images/" . baseURL 
-                    >>= ( \ x -> return ( conceptPrintH x cov ) )
-
-conceptPrintH :: String -> CharacterConcept -> Maybe HList
-conceptPrintH dir c = Just $ HList ("# " ++ nm )
-               [ img
-               , hlist ""
-               , dlMaybeH (show (charType c)) ( briefConcept c )
-               , dlMaybeH "Quirk" (  quirk c )
-               , dlMaybeH "Appearance" (  appearance c )
-               , dlMaybeH "Born" ( fmap show $ born c )
-               , dlMaybeH "Player" ( player c )
-               , fromMaybe (hlist "") ( printH $ charGlance c ) 
-               , fromMaybe (hlist "") ( printH $ charData c )
-               ]
-          where img | isNothing (portrait c) = hlist ""
-                    | otherwise = hlist imgfn
-                imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
-                nm = fullConceptName c 
-
---
--- | Render the char gen design.
--- This is a list of all the pregame advancement objects.
-chargenH :: Character -> Maybe HList
-chargenH c | as == [] = Nothing
-           | otherwise = Just $ HList "## Char Gen Advancements"
-                              $ filterNothing $ map printH as
-           where as = pregameAdvancement c
 
 -- ** Covenant
 --
@@ -255,7 +288,7 @@ covconceptHelper cc = filterNothing
    , fmap  ("**Appearance** "++)  (covAppearance cc)
    ]
 
--- * More basic concepts
+-- * Traits and Possessions
 
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessionsH :: [ Possession ] -> HList
@@ -290,10 +323,6 @@ instance HOutput Enchantment  where
        ( filterNothing [ printH eff ] )
    printH MundaneItem = jhlist "Mundane Item" 
 
-
-
-
-
 instance HOutput Possession  where
    printH = Just . printPossessionH
 instance HOutput LabText where
@@ -309,7 +338,6 @@ instance HOutput ProtoTrait where
 instance HOutput Trait where
    printH (AgeTrait x) = printH  x
    printH x = jhlist $ show x
-
 
 instance HOutput Age where
    printH c = Just $ HList h lr
@@ -359,10 +387,6 @@ instance HOutput LabBonus where
    printH (LabBonus x "" z) = jhlist $ x ++ " " ++ showBonus z
    printH (LabBonus _ y z) = jhlist $ y ++ " " ++ showBonus z
 
-instance HOutput Validation where
-   printH (Validated x) = jhlist $ "Validated: " ++ x
-   printH (ValidationError x) = jhlist $ "**Error:** " ++ x
-   printH (ValidationWarning x) = jhlist $ "*Warning:* " ++ x
 
 instance HOutput Confidence where
    printH c = jhlist $
@@ -372,6 +396,8 @@ instance HOutput OtherTrait where
    printH c = jhlist $
              "+ **" ++ trait c ++ "**: " ++ show (otherScore c) ++ " ("
              ++ show (otherExcess c) ++ ")" 
+
+-- * Library
 
 -- | Set a header line followed by a bullet list
 bulletWithHeaderH :: HOutput a => String -> [a] -> Maybe HList
@@ -389,6 +415,13 @@ instance HOutput Library where
                        , bulletWithHeaderH "## spell lab texts" (spellTexts lib )
                        , bulletWithHeaderH "## enchantment lab texts" (itemTexts lib )
                        ]
+
+-- * Advancements
+
+instance HOutput Validation where
+   printH (Validated x) = jhlist $ "Validated: " ++ x
+   printH (ValidationError x) = jhlist $ "**Error:** " ++ x
+   printH (ValidationWarning x) = jhlist $ "*Warning:* " ++ x
 
 instance HOutput Advancement where
    printH a = Just $ indentList $ HList (name a) $ filterNothing
@@ -469,37 +502,6 @@ sagaStateH saga = HList ( "# " ++ name saga ++ " - " ++ show (gameSeason saga) )
         ]
 
 
--- ** Combat 
-
--- | Set the Combat Stats of the Character as an 'OList'
-printCombatH :: Saga -> Character -> HList
-printCombatH saga cs = HList "" (map hlist $ combatTable tab)
-    where tab = computeCombatStats ( weaponsDB saga ) cs
-
-combatTable :: [CombatLine] -> [String]
-combatTable xs = combatHead1:combatHead2:combatBody0 xs
-
--- | Set the table body for 'printCombatMD'
-combatBody0 :: [CombatLine] -> [String]
-combatBody0 = map combatLine
-
--- | Set a single line for 'printCombatMD'
-combatLine :: CombatLine -> String
-combatLine c = "| " ++ (combatLabel c) ++ 
-               " | " ++ (show $ combatInit c) ++
-               " | " ++ (showstat $ combatAtk c) ++
-               " | " ++ (showstat $ combatDef c) ++
-               " | " ++ (showstat $ combatDam c) ++
-               " | " ++ (showstat $ combatRange c) ++
-               " | " ++ (show $ combatLoad c) ++
-               " | " ++ (combatComment c) ++
-               " |"
-
--- | Set the header for 'printCombatMD'
-combatHead1 :: String 
-combatHead1 = "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
-combatHead2 :: String 
-combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
 
 -- * Errors
 
