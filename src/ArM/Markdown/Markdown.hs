@@ -403,15 +403,9 @@ printLabTotals c
           lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
 
 instance Markdown Confidence where
-   printMD c = OString $
-             "+ **" ++ cname c ++ "**: " ++ show (cscore c) ++ " ("
-             ++ show (cpoints c) ++ ")" 
+   printMD = defaultMD
 instance Markdown OtherTrait where
-   printMD c = OString $
-             "+ **" ++ trait c ++ "**: " ++ show (otherScore c) ++ " ("
-             ++ show (otherExcess c) ++ ")" 
-
-
+   printMD = defaultMD
 
 -- * Advancements
 

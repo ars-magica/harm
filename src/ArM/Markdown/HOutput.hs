@@ -165,6 +165,15 @@ instance HOutput Validation where
    printH (ValidationError x) = jhlist $ "**Error:** " ++ x
    printH (ValidationWarning x) = jhlist $ "*Warning:* " ++ x
 
+instance HOutput Confidence where
+   printH c = jhlist $
+             "+ **" ++ cname c ++ "**: " ++ show (cscore c) ++ " ("
+             ++ show (cpoints c) ++ ")" 
+instance HOutput OtherTrait where
+   printH c = jhlist $
+             "+ **" ++ trait c ++ "**: " ++ show (otherScore c) ++ " ("
+             ++ show (otherExcess c) ++ ")" 
+
 -- * Keypair
 
 instance HOutput FieldValue where
