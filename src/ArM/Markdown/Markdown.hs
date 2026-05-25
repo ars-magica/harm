@@ -35,7 +35,6 @@ import Data.Maybe
 
 import Data.OList
 import Data.HList
-import Data.KeyPair
 
 -- * The Markdown class
 
@@ -84,29 +83,7 @@ instance Markdown Covenant where
     printMD = defaultMD
     printSheetMD = defaultSheetMD
 
--- ** Lower-level concepts
 
-instance Markdown Trait where
-   printMD = defaultMD
-instance Markdown ProtoTrait where
-   printMD = defaultMD
-
--- ** Markdown for basic types
-
-instance Markdown a => Markdown (Maybe a) where
-   printMD Nothing = OList []
-   printMD (Just x) = printMD x
-   printSheetMD _ Nothing = OList []
-   printSheetMD saga (Just x) = printSheetMD saga x
-
-instance Markdown KeyPairList where
-   printMD = defaultMD
-
--- * Other Functions
-
-
-
- 
 -- * Markdown for the Character types
  
 instance Markdown MagicEffect  where
