@@ -763,7 +763,15 @@ data Staff = Specialist [ Trait ]
    deriving (Show, Generic, Eq, Ord)
 
 instance ToJSON Staff
-instance FromJSON Staff
+instance FromJSON Staff where
+    parseJSON (String v) = specialist $ unpack $ fromStrict v
+        where specialist "servant" = pure Servant
+              specialist "teamster" = pure Teamster
+              specialist "labourer" = pure Labourer
+              specialist _ = mzero
+    parseJSON (Object v) = (Specialist <$> v .: "specialist") 
+                         <|> (CovenGrog <$> fmap filterTrait ( v .: "grog" ) )
+    parseJSON _ = mzero
 
 instance Show Possession where
     show p = name p ++ cnt

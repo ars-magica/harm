@@ -21,25 +21,16 @@ import qualified Data.ByteString as B
 printB :: B.ByteString -> IO ()
 printB = B.hPut stdout 
 
-s :: SpellRecord 
-s = defaultSpellRecord { spellRecordName = "Invisible Hand"
-                , spellRecordTeFo = "ReTe"
-                , lvl = Just 5
-                , technique = "Rego"
-                , techniqueReq = []
-                , form = "Terram"
-                , formReq = []
-                , spellRange = "Voice"
-                , spellTarget = "Ind"
-                , specialSpell = []
-                , spellDescription = ""
-                , design = ""
-                , spellComment = "Example"
-                , cite = "core, I think"
-                }
-
-d :: LabText
-d = SpellText s
+ab :: Ability
+ab = Ability "Cattle Herd" Nothing 0 5 0 1 0
+tr :: Trait
+tr = AbilityTrait ab
+ab2 :: Ability
+ab2 = Ability "Single Weapon" Nothing 0 5 0 1 0
+sp1 :: Staff
+sp1 = Specialist [ tr ]
+sp2 :: Staff
+sp2 = CovenGrog [ ab2 ]
 
 -- | The program will read the given saga file and constituent files and
 -- generate all the character and covenant sheets requested by the saga file.
@@ -47,10 +38,10 @@ main :: IO ()
 main = do 
      putStrLn "Starting: yamltest ..."
      putStrLn ""
-     printB $ encode s
+     printB $ encode sp1
      putStrLn ""
-     printB $ encode d
+     printB $ encode ab
      putStrLn ""
-
-
+     printB $ encode sp2
+     putStrLn ""
 

@@ -26,7 +26,6 @@ import ArM.Types.Harm
 import ArM.Types.Advancement
 import ArM.Helper
 import Data.Maybe
-import Data.List
 
 -- * Advancement management
 

@@ -7,6 +7,11 @@ D=`find dist-newstyle -name doc | head`/html/harm/harm/
 
 run: .force
 	cabal run harm --allow-newer=base --allow-newer=template-haskell
+test: .force
+	cabal run yamltest --allow-newer=base --allow-newer=template-haskell
+
+repl: .force
+	cabal repl harm --allow-newer=base --allow-newer=template-haskell
 
 
 bin/harm: .force

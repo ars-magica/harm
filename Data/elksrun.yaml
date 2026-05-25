@@ -19,6 +19,15 @@ design:
   - type: Build Points
     bookcsv: Data/books.csv
     acquired:
+    - name: Labourers
+      staff: labourer
+      count: 3
+    - name: The cattle manager
+      specialist:
+        - ability: 'Profession: Cattle Herd'
+          abilityScore: 5
+        - ability: 'Leadership'
+          abilityScore: 4
     - name: Cattle
       income: 100
     - name: Savings
