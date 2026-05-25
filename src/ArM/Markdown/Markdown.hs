@@ -15,7 +15,6 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Markdown.Markdown ( Markdown(..)
-                    , artMD
                     , artVisMD
                     , italicOString
                     , storyOList
@@ -26,6 +25,7 @@ module ArM.Markdown.Markdown ( Markdown(..)
 import Data.Maybe 
 import Control.Monad
 
+import ArM.Markdown.Magus 
 import ArM.Markdown.HOutput 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
@@ -221,30 +221,6 @@ briefTraits = fromMaybe (OList []) . fmap fromHList . briefTraitsH
 instance Markdown Age where
    printMD = defaultMD
 
--- | Print a table of casting totals for every TeFo combination.
-printCastingTotals :: Character -> [String]
-printCastingTotals c 
-             | Magus /= characterType c = []
-             | otherwise = "":"| Casting Total | Creo | Intellego | Muto | Perdo | Rego |":
-                              "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
-                              lts
-      where
-          lts = [ "| " ++ fo ++ foldl (++) "" (map ( (" | "++) . show ) ts ) ++ " |" 
-                | (fo,ts) <- zip lforms (castingTotals c) ]
-          lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
-
--- | Print a table of casting totals for every TeFo combination.
-printLabTotals :: Character -> [String]
-printLabTotals c 
-             | Magus /= characterType c = []
-             | otherwise = "":"| Lab Total | Creo | Intellego | Muto | Perdo | Rego |":
-                              "|         :-    |  -:  |  -:       |  -:  |  -:   |  -:  |":
-                              lts
-      where
-          lts = [ "| " ++ fo ++ foldl (++) "" (map ( (" | "++) . show ) ts ) ++ " |" 
-                | (fo,ts) <- zip lforms (labTotals c) ]
-          lforms = [ "Animal", "Aquam", "Auram", "Corpus", "Herbam", "Ignem", "Imaginem", "Mentem", "Terram", "Vim" ]
-
 instance Markdown Confidence where
    printMD = defaultMD
 instance Markdown OtherTrait where
@@ -287,66 +263,6 @@ instance Markdown Advancement where
 
 -- ** Pretty print arts
 
--- | Render art scores as a table
-artMD :: Character
-      -> OList
-artMD c | isMagus c = toOList $ artMD' c
-        | otherwise = OList []
-
--- | Render art scores as a table
-artMD' :: Character
-      -> [ String ]
-artMD' = ("":) . (h1:) . (h2:) . map artLine . sortTraits . artList 
-   where h1 = "| Art  | Score | XP |" 
-         h2 = "| -: | -: | -: |"
-
-
--- | Auxiliary for 'artMD', rendering a single line in the table
-artLine :: Art -> String
-artLine ar = "| " ++ artName ar  ++ " | " ++ show (artScore ar) ++ " | " ++ showNum (artExcessXP ar) ++ " |"
-
--- | Render art scores and vis stocks as a table
-artVisMD :: Character
-      -> OList
-artVisMD c | isMagus c = toOList $ artVisMD' c
-        | otherwise = OList []
-
--- | Render art scores and vis stocks as a table
-artVisMD' :: Character
-          -> [ String ]
-artVisMD' = ("":) . (h1:) . (h2:) . artVisBody
-   where h1 = "| Art  | Score | XP | Vis |" 
-         h2 = "| -: | -: | -: | -: |"
-
--- | Auxiliar for 'artVisMD'' rendering the body of the table.
-artVisBody :: Character
-           -> [ String ]
-artVisBody cs = map artVisLine $ mergeArt as bs
-   where as = (map tupleArt . sortTraits . artList ) cs
-         bs = sheetVis cs
-         tupleArt a = (traitKey a,artName a, artScore a,artExcessXP a)
-
--- | Merge lists of art traits and vis possessions.
--- This is rather crude to say the least.
-mergeArt :: [(TraitKey,String,Int,XPType)] -> [(TraitKey,Int)] 
-         -> [(TraitKey,String,Int,XPType,Int)]
-mergeArt [] [] = []
-mergeArt [] ((y1,y2):ys) = (y1,f y1,0,0,y2):mergeArt [] ys
-     where f (ArtKey xn) = xn
-           f _ = trace "ERROR: Not an art in mergeArt." ""
-mergeArt ((x1,x2,x3,x4):xs) []  = (x1,x2,x3,x4,0):mergeArt xs [] 
-mergeArt ((x1,x2,x3,x4):xs) ((y1,y2):ys) 
-     | x1 == y1 = (x1,x2,x3,x4,y2):mergeArt xs ys
-     | x1 < y1 = (x1,x2,x3,x4,0):mergeArt xs ((y1,y2):ys) 
-     | otherwise = (y1,f y1,0,0,y2):mergeArt ((x1,x2,x3,x4):xs) ys
-     where f (ArtKey xn) = xn
-           f _ = trace "ERROR: Not an art in mergeArt." ""
-
-
--- | Auxiliary for 'artVisMD', rendering a single line in the table
-artVisLine :: (TraitKey,String,Int,XPType,Int) -> String
-artVisLine (_,s,i1,i2,i3) = 
-        "| " ++ s  ++ " | " ++ show i1 ++ " | " ++ showNum i2 ++ " | " ++ show i3 ++ " |"
 
 
 -- | Set a list of spells.
@@ -362,11 +278,6 @@ printFullGrimoire db xs = OList [ OString "## Grimoire"
                          ]
    where ys = [ (x,f x) | x <- xs ]
          f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
-
-
--- | Return the sum of levels in the list of spells.
-totalLevels :: [Spell] -> Int
-totalLevels = sum . map spellLevel
 
 
 -- | Set the Combat Stats of the Character as an 'OList'
