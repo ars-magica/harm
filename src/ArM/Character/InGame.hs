@@ -69,9 +69,10 @@ chgCurrentAdv :: Character -> Augmented Advancement
 chgCurrentAdv = fromMaybe noAdv . mhead . pastAdvancement
 
 chgStep :: Character -> Character
-chgStep ch' = setAdvancement aa ch
+chgStep ch' = trace trac $ setAdvancement aa ch
    where aa' = chgCurrentAdv ch'
          (aa,ch) = applyAdvancement aa' ch'
+         trac = show (nme ch) ++ " " ++ season aa
 
 -- | Infer source quality
 chgValidate :: Character -> Character
