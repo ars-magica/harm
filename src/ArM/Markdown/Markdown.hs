@@ -78,16 +78,7 @@ instance Markdown Saga where
     printMD = defaultMD
 
 instance Markdown Character where
-   printMD  c = OList
-            [ printMD $ concept  c 
-            , OString ""
-            , OString $ "## Sheet " ++ (show $ gameSeason c )
-            , OString ""
-            , sheetMD c
-            , designMD c
-            , chargenMD c
-            , advancementMD c
-            ]
+   printMD _ = error "Character printMD is not supported"
    printSheetMD saga c = OList
             [ printMD $ concept c
             , OString ""
@@ -96,7 +87,7 @@ instance Markdown Character where
             , sheetSheetMD saga c
             , adv
             ]
-        where adv | isGameStart c = chargenMD c
+        where adv | isGameStart c = designMD c
                   | otherwise =  advancementMD c
 instance Markdown Covenant where
     printMD = defaultMD
@@ -129,23 +120,11 @@ instance Markdown KeyPairList where
 
 -- | Render the char gen design.
 -- This is a list of all the pregame advancement objects.
+--
+-- This is usually empty, since pre-game characters are not usuall produced.
 designMD :: Character -> OList
 designMD = fromMaybe (OList []) . fmap fromHList . designH
 
-
--- | Render the char gen design, i.e. a list of any unprocessed 
--- pre-game advancement objects.
---
--- This is usually empty, since pre-game characters are not usuall produced.
-chargenMD :: Character -> OList
-chargenMD c | as == [] = OList []
-            | otherwise = OList
-              [ OString "## Char Gen Advancements"
-              , OString ""
-              , OList $ map printMD as
-              , OString ""
-              ]
-            where as = pregameAdvancement c
 
 -- | Render the advancement log.
 -- This is two lists of past and future advancement objects
@@ -197,27 +176,6 @@ instance Markdown Possession  where
 instance Markdown Library where
    printMD = defaultMD
 
-sheetMD :: Character -> OList
-sheetMD c = OList 
-               [ briefTraits c
-               , showlistMD "+ **Characteristics:** "  $ sortTraits $ charList c
-               , showlistMD "+ **Personality Traits:** "  $ sortTraits $ ptList c
-               , showlistMD "+ **Reputations:** "  $ sortTraits $ reputationList c
-               , showlistMD "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
-               , showlistMD "+ **Abilities:** "  $ sortTraits $ abilityList c
-               , showlistMD "+ **Arts:** "  $ sortTraits $ artList c
-               , showlistMD "+ **Spells:** "  $ sortTraits $ spellList c
-               , showlistMD "+ **Possessions:** "  $ sortTraits $ characterPossessions c
-               , toOList $ printCastingTotals c
-               , OString ""
-               , OString $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
-               , OString ""
-               , OString "## Laboratory"
-               , OString ""
-               , toOList $ printLabTotals c
-               , OString ""
-               , OString "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
-               ]
 sheetSheetMD :: Saga -> Character -> OList
 sheetSheetMD saga c = OList 
                [ briefTraits c
