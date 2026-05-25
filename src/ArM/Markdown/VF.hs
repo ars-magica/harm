@@ -13,7 +13,7 @@
 -----------------------------------------------------------------------------
 module ArM.Markdown.VF where
 
-import ArM.Markdown.HList
+import ArM.Markdown.HOutput
 import ArM.Trait
 import ArM.Story
 import ArM.Helper

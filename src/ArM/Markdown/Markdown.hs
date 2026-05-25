@@ -26,6 +26,7 @@ module ArM.Markdown.Markdown ( Markdown(..)
 import Data.Maybe 
 import Control.Monad
 
+import ArM.Markdown.HOutput 
 import ArM.Markdown.Possession 
 import ArM.Markdown.Spell
 import ArM.Markdown.VF
@@ -45,6 +46,151 @@ import Data.KeyPair
 
 import ArM.Debug.Trace
 
+
+-- * The Markdown class
+
+-- | Class defining 'printMD' to render in Markdown.
+class Markdown a where
+     -- | This is the basic function to render in Markdown
+     printMD :: a           -- ^ object to render
+             -> OList       -- ^ list of lines for output
+
+     -- | This is a hack to augment characters using extra resources
+     -- By default, it is identical to 'printMD'.
+     printSheetMD :: Saga      -- ^ Saga including databases for spells etc.
+                -> a         -- ^ object to render
+                -> OList     -- ^ list of lines for output
+     printSheetMD _ = printMD
+
+-- ** Top level entities
+--
+-- $markdown
+-- Top-level functions are entitites with their own pages:
+-- + Saga top level page $\to$ `sagaStateMD`
+-- + Saga state (per season) $\to$ `printSheetMD`
+-- + Character $\to$ `printSheetMD`
+-- + Covenatn $\to$ `printSheetMD`
+
+sagaStateMD :: Saga -> OList 
+sagaStateMD saga = OList 
+        [ OString $ "# " ++ name saga ++ " - " ++ show (gameSeason saga)
+        , OString ""
+        , characterIndex $ characterList saga
+        , OString ""
+        , covenantIndex $ covenantList saga
+        , OString ""
+        , OString "## Advancement Errors"
+        , OString ""
+        , indentOList $ foldOList $  advancementErrors saga
+        , OString ""
+        , OString "## Advancement Warnings"
+        , OString ""
+        , indentOList $ foldOList $ advancementWarnings saga
+        ]
+
+
+instance Markdown Saga where
+    printMD saga = OList 
+        [ OList [ OString $ "# " ++ name saga
+                , OString ""
+                , OList $ map italicOString $ narrative saga
+                , OList $ map OString $ comment saga
+                , OString ""
+                ]
+        , OList ( [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- advSeasons saga ] 
+                ++ [ OString $ "+ " ++ "[](" ++ showKey GameStart ++ "/index)" ] )
+        , OList [
+          OString "" 
+          , OString $ "+ " ++ "[](0001_Annals)"
+          , OString "" 
+        ]
+        ]
+
+
+-- |
+-- The 'CharacterConcept' is set as a description list.
+-- 
+-- This may cause problems with long text values.  It would be worth distinguishing
+-- between more fields and use a differfent formatting where long text is expected.
+instance Markdown Character where
+   printMD  c = OList
+            [ printMD $ concept  c 
+            , OString ""
+            , OString $ "## Sheet " ++ (show $ gameSeason c )
+            , OString ""
+            , sheetMD c
+            , designMD c
+            , chargenMD c
+            , advancementMD c
+            ]
+   printSheetMD saga c = OList
+            [ printMD $ concept c
+            , OString ""
+            , OString $ "## Character Sheet " ++ (show $ gameSeason c) 
+            , OString ""
+            , sheetSheetMD saga c
+            , adv
+            ]
+        where adv | isGameStart c = chargenMD c
+                  | otherwise =  advancementMD c
+instance Markdown Covenant where
+    printMD cov = OList 
+        [ OString $ "# " ++ (name cov )
+        , OString ""
+        , printMD $ covenantConcept cov
+        , OString ""
+        , OString $ "## Updated" ++ (show $ covTime cov)
+        , OString ""
+        , OString "### Boons and Hooks"
+        , OString ""
+        , OList $ map ( indentHList . vfH ) ( boonhook cov )
+        , OString ""
+        , OString "### Possessions"
+        , OString ""
+        , listPossessions $ possessions cov
+        , OString ""
+        ]
+    printSheetMD saga cov = OList 
+        [ OString $ "# " ++ (covName $ covenantConcept cov )
+        , OString ""
+        , printMD $ covenantConcept cov
+        , OString ""
+        , printCovenantStateMD saga cov
+        ]
+
+-- ** Lower-level concepts
+
+instance Markdown CharacterConcept where
+   printMD = conceptPrintMD "../images/"
+   printSheetMD saga = conceptPrintMD dir
+      where dir = fromMaybe "../images/" (baseURL saga)
+
+instance Markdown Trait where
+   printMD = defaultMD
+instance Markdown ProtoTrait where
+   printMD = defaultMD
+
+
+-- ** Markdown for basic types
+
+instance Markdown a => Markdown (Maybe a) where
+   printMD Nothing = OList []
+   printMD (Just x) = printMD x
+   printSheetMD _ Nothing = OList []
+   printSheetMD saga (Just x) = printSheetMD saga x
+
+instance Markdown FieldValue where
+   printMD  = OString . show
+
+instance Markdown KeyPair where
+   printMD (KeyPair x  y) = OList
+         [ OString x
+         , OString $ ':':' ':show y
+         , OString "" ]
+instance Markdown KeyPairList where
+   printMD (KeyPairList xs) = OList $ map printMD xs
+
+-- * Other Functions
 
 -- | Render the char gen design.
 -- This is a list of all the pregame advancement objects.
@@ -96,43 +242,6 @@ advancementMD c = OList [ ao, bo ]
                 ]
 
 
--- * The Markdown Class
-
--- | Class defining 'printMD' to render in Markdown.
-class Markdown a where
-
-     -- | This is the basic function to render in Markdown
-     printMD :: a           -- ^ object to render
-             -> OList       -- ^ list of lines for output
-
-     -- | This is a hack to augment characters using extra resources
-     -- By default, it is identical to 'printMD'.
-     printSheetMD :: Saga      -- ^ Saga including databases for spells etc.
-                -> a         -- ^ object to render
-                -> OList     -- ^ list of lines for output
-     printSheetMD _ = printMD
-
-instance Markdown a => Markdown (Maybe a) where
-   printMD Nothing = OList []
-   printMD (Just x) = printMD x
-   printSheetMD _ Nothing = OList []
-   printSheetMD saga (Just x) = printSheetMD saga x
-
-instance Markdown FieldValue where
-   printMD  = OString . show
-
-instance Markdown KeyPair where
-   printMD (KeyPair x  y) = OList
-         [ OString x
-         , OString $ ':':' ':show y
-         , OString "" ]
-instance Markdown KeyPairList where
-   printMD (KeyPairList xs) = OList $ map printMD xs
-instance Markdown Trait where
-   printMD (AgeTrait x) = printMD  x
-   printMD x = OString $ show  x
-instance Markdown ProtoTrait where
-   printMD = OString . show 
 
 -- | Render a list of objects as a comma-separated list on a single
 -- line/paragraph.  This works for any instance of 'Show'.
@@ -144,37 +253,6 @@ showlistMD s xs = OList [ OString s
  
 -- * Markdown for the Character types
  
--- |
--- The 'CharacterConcept' is set as a description list.
--- 
--- This may cause problems with long text values.  It would be worth distinguishing
--- between more fields and use a differfent formatting where long text is expected.
-instance Markdown Character where
-   printMD  c = OList
-            [ printMD $ concept  c 
-            , OString ""
-            , OString $ "## Sheet " ++ (show $ gameSeason c )
-            , OString ""
-            , sheetMD c
-            , designMD c
-            , chargenMD c
-            , advancementMD c
-            ]
-   printSheetMD saga c = OList
-            [ printMD $ concept c
-            , OString ""
-            , OString $ "## Character Sheet " ++ (show $ gameSeason c) 
-            , OString ""
-            , sheetSheetMD saga c
-            , adv
-            ]
-        where adv | isGameStart c = chargenMD c
-                  | otherwise =  advancementMD c
-
-instance Markdown CharacterConcept where
-   printMD = conceptPrintMD "../images/"
-   printSheetMD saga = conceptPrintMD dir
-      where dir = fromMaybe "../images/" (baseURL saga)
 
 conceptPrintMD :: String -> CharacterConcept -> OList
 conceptPrintMD dir c = OList
@@ -360,12 +438,7 @@ printAge c | isNothing ag' = OString "**Age** undefined"
          b = charAgingBonus c
 
 instance Markdown Age where
-   printMD c = OString $ "+ **Age:** " ++ show y ++ " years (apparent age " 
-            ++ show (y - apparentYounger c)  ++ ")" ++ lr
-      where y = ageYears c
-            lrs = longevityRitual c
-            lr | lrs < 0 = ""
-               | otherwise = " Longevity Ritual: " ++ show lrs
+   printMD = defaultMD
 
 -- | Print a table of casting totals for every TeFo combination.
 printCastingTotals :: Character -> [String]
@@ -573,68 +646,8 @@ combatHead = OList [ OString "| Weapon | Init | Atk | Def | Dam | Range | Load |
                    ]
 
 
--- * Saga Markdown
-
-instance Markdown Saga where
-    printMD saga = OList 
-        [ OList [ OString $ "# " ++ name saga
-                , OString ""
-                , OList $ map italicOString $ narrative saga
-                , OList $ map OString $ comment saga
-                , OString ""
-                ]
-        , OList ( [ OString $ "+ " ++ "[](" ++ (showKey x) ++ "/index)" | x <- advSeasons saga ] 
-                ++ [ OString $ "+ " ++ "[](" ++ showKey GameStart ++ "/index)" ] )
-        , OList [
-          OString "" 
-          , OString $ "+ " ++ "[](0001_Annals)"
-          , OString "" 
-        ]
-        ]
-
-sagaStateMD :: Saga -> OList 
-sagaStateMD saga = OList 
-        [ OString $ "# " ++ name saga ++ " - " ++ show (gameSeason saga)
-        , OString ""
-        , characterIndex $ characterList saga
-        , OString ""
-        , covenantIndex $ covenantList saga
-        , OString ""
-        , OString "## Advancement Errors"
-        , OString ""
-        , indentOList $ foldOList $  advancementErrors saga
-        , OString ""
-        , OString "## Advancement Warnings"
-        , OString ""
-        , indentOList $ foldOList $ advancementWarnings saga
-        ]
-
 -- * Covenant Markdown
 
-instance Markdown Covenant where
-    printMD cov = OList 
-        [ OString $ "# " ++ (name cov )
-        , OString ""
-        , printMD $ covenantConcept cov
-        , OString ""
-        , OString $ "## Updated" ++ (show $ covTime cov)
-        , OString ""
-        , OString "### Boons and Hooks"
-        , OString ""
-        , OList $ map ( indentHList . vfH ) ( boonhook cov )
-        , OString ""
-        , OString "### Possessions"
-        , OString ""
-        , listPossessions $ possessions cov
-        , OString ""
-        ]
-    printSheetMD saga cov = OList 
-        [ OString $ "# " ++ (covName $ covenantConcept cov )
-        , OString ""
-        , printMD $ covenantConcept cov
-        , OString ""
-        , printCovenantStateMD saga cov
-        ]
 
 instance Markdown CovenantConcept where
     printMD cc = OList $ bullets cc ++ fd (covDescription cc)
@@ -707,8 +720,7 @@ instance Markdown LabVirtue where
                    ]
         where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
 instance Markdown LabBonus where
-   printMD (LabBonus x "" z) = OString $ x ++ " " ++ showBonus z
-   printMD (LabBonus _ y z) = OString $ y ++ " " ++ showBonus z
+   printMD = defaultMD
 
 -- * Convenience Functions
 
