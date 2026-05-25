@@ -67,6 +67,29 @@ instance HOutput Saga where
                   ]
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
+instance HOutput CharacterConcept where
+   printH = conceptPrintH "../images/"
+   printS cov = get >>= return . fromMaybe "../images/" . baseURL 
+                    >>= ( \ x -> return ( conceptPrintH x cov ) )
+
+conceptPrintH :: String -> CharacterConcept -> Maybe HList
+conceptPrintH dir c = Just $ HList ("# " ++ nm )
+               [ img
+               , hlist ""
+               , dlMaybeH (show (charType c)) ( briefConcept c )
+               , dlMaybeH "Quirk" (  quirk c )
+               , dlMaybeH "Appearance" (  appearance c )
+               , dlMaybeH "Born" ( fmap show $ born c )
+               , dlMaybeH "Player" ( player c )
+               , fromMaybe (hlist "") ( printH $ charGlance c ) 
+               , fromMaybe (hlist "") ( printH $ charData c )
+               ]
+          where img | isNothing (portrait c) = hlist ""
+                    | otherwise = hlist imgfn
+                imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
+                nm = fullConceptName c 
+
+
 instance HOutput Covenant where
     printH cov = printCovenant cov Nothing
     printS cov = get >>= f cov >>= return . printCovenant cov
@@ -146,6 +169,7 @@ instance HOutput ProtoTrait where
 instance HOutput Trait where
    printH (AgeTrait x) = printH  x
    printH x = jhlist $ show x
+
 
 instance HOutput Age where
    printH c = Just $ HList h lr

@@ -144,9 +144,8 @@ instance Markdown Covenant where
 -- ** Lower-level concepts
 
 instance Markdown CharacterConcept where
-   printMD = conceptPrintMD "../images/"
-   printSheetMD saga = conceptPrintMD dir
-      where dir = fromMaybe "../images/" (baseURL saga)
+   printMD = defaultMD
+   printSheetMD = defaultSheetMD
 
 instance Markdown Trait where
    printMD = defaultMD
@@ -228,27 +227,6 @@ showlistMD s xs = OList [ OString s
  
 -- * Markdown for the Character types
  
-
-conceptPrintH :: String -> CharacterConcept -> HList
-conceptPrintH dir c = HList ("# " ++ nm )
-               [ img
-               , hlist ""
-               , dlMaybeH (show (charType c)) ( briefConcept c )
-               , dlMaybeH "Quirk" (  quirk c )
-               , dlMaybeH "Appearance" (  appearance c )
-               , dlMaybeH "Born" ( fmap show $ born c )
-               , dlMaybeH "Player" ( player c )
-               , fromMaybe (hlist "") ( printH $ charGlance c ) 
-               , fromMaybe (hlist "") ( printH $ charData c )
-               ]
-          where img | isNothing (portrait c) = hlist ""
-                    | otherwise = hlist imgfn
-                imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
-                nm = fullConceptName c 
-
-conceptPrintMD :: String -> CharacterConcept -> OList
-conceptPrintMD dir c = fromHList $ conceptPrintH dir c
-
 instance Markdown MagicEffect  where
    printMD = defaultMD 
 instance Markdown Enchantment  where
