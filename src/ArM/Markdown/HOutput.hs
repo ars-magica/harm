@@ -43,6 +43,14 @@ paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
 jhlist :: String -> Maybe HList
 jhlist = jhlist
 
+-- | Render a description list item
+dlH :: String -> String -> HList
+dlH x y = HList x [ hlist (':':' ':y), hlist "" ]
+
+-- | Render a description list item
+dlMaybeH :: String -> Maybe String -> HList
+dlMaybeH x y = HList x [ hlist (':':' ':fromMaybe "---" y), hlist "" ]
+
 -- * The class
 
 -- | `HOutput` provides the API to render objects in Markdown using the `HList`
@@ -108,3 +116,6 @@ instance HOutput KeyPairList where
 instance HOutput a => HOutput (Maybe a) where
    printH Nothing = Nothing
    printH (Just x) = printH x
+instance HOutput a => HOutput [a] where
+   printH [] = Nothing
+   printH x = Just $ HList "" $ filterNothing $  map printH x

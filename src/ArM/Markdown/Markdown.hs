@@ -226,36 +226,25 @@ showlistMD s xs = OList [ OString s
 -- * Markdown for the Character types
  
 
-conceptPrintMD :: String -> CharacterConcept -> OList
-conceptPrintMD dir c = OList
-               [ OString ("# " ++ nm )
-               , OString ""
-               , img
-               , OString $ show (charType c)
-               , OString $ ": " ++ ( fromMaybe "-" $ briefConcept c )
-               , OString ""
-               , OString "Quirk"
-               , OString $ ": " ++ ( fromMaybe "---" $ quirk c )
-               , OString ""
-               , OString "Appearance" 
-               , OString $ ": " ++ ( fromMaybe "---" $ appearance c )
-               , OString ""
-               , OString "Born" 
-               , OString brn
-               , OString ""
-               , OString "Player" 
-               , OString $ ": " ++ ( fromMaybe "-" $ player c )
-               , OString ""
-               , ( printMD $ charGlance c ) 
-               , ( printMD $ charData c )
+conceptPrintH :: String -> CharacterConcept -> HList
+conceptPrintH dir c = HList ("# " ++ nm )
+               [ img
+               , hlist ""
+               , dlMaybeH (show (charType c)) ( briefConcept c )
+               , dlMaybeH "Quirk" (  quirk c )
+               , dlMaybeH "Appearance" (  appearance c )
+               , dlMaybeH "Born" ( fmap show $ born c )
+               , dlMaybeH "Player" ( player c )
+               , fromMaybe (hlist "") ( printH $ charGlance c ) 
+               , fromMaybe (hlist "") ( printH $ charData c )
                ]
-          where brn | born c == Nothing = ": ??" 
-                    | otherwise = ": " ++ (show $ fromJust $ born c)
-                img | isNothing (portrait c) = OList []
-                    | otherwise = OList [ OString imgfn, OString "" ]
+          where img | isNothing (portrait c) = hlist ""
+                    | otherwise = hlist imgfn
                 imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
-                nm = fullConceptName c
+                nm = fullConceptName c 
 
+conceptPrintMD :: String -> CharacterConcept -> OList
+conceptPrintMD dir c = fromHList $ conceptPrintH dir c
 
 instance Markdown MagicEffect  where
    printMD = fromHList . effectH 
@@ -692,7 +681,7 @@ instance Markdown LabVirtue where
                    ]
         where ts = "Bonuses: " ++ commaList (labVirtueBonus v)
 instance Markdown LabBonus where
-   printMD = OString . show
+   printMD = defaultMD
 
 -- * Convenience Functions
 
