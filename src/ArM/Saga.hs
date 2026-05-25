@@ -12,20 +12,21 @@
 --
 --
 -----------------------------------------------------------------------------
-module ArM.Saga ( characterIndex
-                    , covenantIndex
-                    , advancementErrors
-                    , advancementWarnings
-                    , advancementErrorsLimit
-                    , covenFolk
-                    -- * Advancement
-                    , advanceSaga 
-                    , Advance(..)
-                    , Validation(..)
-                    -- * Convenience
-                    , characterList
-                    , covenantList
-                    ) where
+module ArM.Saga ( CharDB(..)
+                -- * Advancement
+                , advanceSaga 
+                , Advance(..)
+                , Validation(..)
+                -- * Convenience
+                , characterList
+                , covenantList
+                ) where
 
 import ArM.Saga.Advancement
-import ArM.Saga.Saga
+import ArM.Types.Harm
+import qualified Data.Map as M
+
+characterList :: Saga -> [Character]
+characterList = M.elems . characters
+covenantList :: Saga -> [Covenant]
+covenantList = M.elems . covenants

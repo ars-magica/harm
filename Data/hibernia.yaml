@@ -9,9 +9,14 @@ covenantFiles:
 description:
 - This is a sample saga set up with the harm character generator.
   The saga may have several covenants and characters.
+- Some of the contents is borrowed from a real saga that played for years.
+narrative:
+  - "In 1220, the founders at Elk's Run are approaching a century, and they 
+    see a need for fresh blood to take the covenant forward.
+    Three young magi join them straight out of gauntlet."
 rootDirectory: pages/
 seasons:
-- Spring 1220
+- Spring 1222
 - Spring 1221
 spellFile: Data/spells.csv
 title: Demo Saga

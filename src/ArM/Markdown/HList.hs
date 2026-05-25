@@ -17,8 +17,10 @@ module ArM.Markdown.HList where
 
 import Data.HList
 import ArM.Markdown.Spell
-import ArM.Trait
+import ArM.Types.Harm
 import ArM.Story
+import ArM.Helper
+import Data.Maybe
 
 -- | Render the narrative comment.
 narrativeH :: StoryObject a => a -> Maybe HList
@@ -28,14 +30,26 @@ narrativeH = effectMP "Background" . map italic . narrative
 commentH :: StoryObject a => a -> Maybe HList
 commentH = effectMP "Comment" . comment
 
-class HOutput h where
-   -- | Render an object in 'HList' format allowing markdown notation.
-   printH :: h -> HList
+paragraphsH :: [ String ] -> HList
+paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
 
-instance HOutput LabText where
-   printH = textH
+-- | Render a description list item
+dlH :: String -> String -> HList
+dlH x y = HList x [ hlist (':':' ':y), hlist "" ]
 
-instance HOutput SpellRecord where
-   printH = spellH
-instance HOutput MagicEffect where
-   printH = effectH
+-- | Render a description list item
+dlMaybeH :: String -> Maybe String -> HList
+dlMaybeH x y = HList x [ hlist (':':' ':fromMaybe "---" y), hlist "" ]
+
+-- | Write a bullet list of links for a list of characters
+characterIndexH :: [Character] -> HList
+characterIndexH = HList "+ Characters" . map f 
+    where f = hlist . ("    + "++) . pagesLink . stateName 
+-- | Write a bullet list of links for a list of characters
+covenantIndexH :: [Covenant] -> HList
+covenantIndexH = HList "+ Covenants" . map f 
+    where f = hlist . ("    + "++) . pagesLink . stateName 
+
+-- | Render a header as a Hlist
+hheader :: String -> Maybe HList
+hheader h = Just $ HList "" [ hlist h ]

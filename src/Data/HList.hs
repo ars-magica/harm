@@ -19,11 +19,15 @@ module Data.HList ( HList(..)
                   , maybeHList
                   , fromHList
                   , indentHList
+                  , indentList
                   , isEmptyHList 
                   , pushTitle
                   , appendToHList
+                  , italicHString
+                  , jhlist
        ) where
 
+import Data.Char
 import Data.OList
 import ArM.Debug.Trace
 
@@ -90,6 +94,12 @@ indentHList' s (HList x ys) = HList x' ys'
      where x' = s ++ x
            ys' = map (indentHList' ("    "++s)) ys
 
+
+-- | Render an OList as a hierarchical markdown list
+indentList :: HList -> HList
+indentList = indentHList' "+ "
+
+
 {-
 class ToOList a where
    -- | Convert to an OList object
@@ -101,3 +111,13 @@ instance ToOList HList where
 instance ToOList (Maybe HList) where
    toOList = fromHList . filterNothing 
 -}
+
+-- | Render a string in italics, as an HList
+italicHString :: String  -> HList
+italicHString c = hlist $ "*" ++ (f . f) c ++ "*"
+   where f = reverse . dropWhile isSpace
+
+-- | Make a Maybe HLIst from a string
+jhlist :: String -> Maybe HList
+jhlist = Just . hlist
+

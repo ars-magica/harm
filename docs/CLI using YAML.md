@@ -16,6 +16,7 @@ aliases:
 	+ [[Validation Rules]]
 	+ [[Books and Reading]]
 	+ [[Joint Advancement]]
+	+ [[Rendering in Markdown]]
 + Technical
 	+ [[Aeson]]
 

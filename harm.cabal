@@ -135,6 +135,7 @@ common deps
                        , uri-encode >= 1.5
                        , directory >= 1.3
                        , lists >= 0.4
+                       , mtl >= 2.3
   hs-source-dirs:      . , ./src
   default-language:    Haskell2010
 
@@ -175,12 +176,15 @@ common harm-deps
                        , ArM.Sheet
                        , ArM.Sheet.Library
                        , ArM.Markdown
+                       , ArM.Markdown.Magus
                        , ArM.Markdown.Markdown
                        , ArM.Markdown.VF
+                       , ArM.Markdown.HOutput
                        , ArM.Markdown.HList
                        , ArM.Markdown.Spell
                        , ArM.Markdown.Possession
                        , ArM.Markdown.SeasonDisplay
+                       , ArM.Markdown.Saga
                        , ArM.Covenant.CostBP
                        , ArM.Covenant.InGame
                        , ArM.Covenant.Validation
@@ -188,7 +192,6 @@ common harm-deps
                        , ArM.Covenant
                        , ArM.Saga
                        , ArM.Saga.Advancement
-                       , ArM.Saga.Saga
                        , ArM.Processing
                        , ArM.Trait.SpellRecord
                        , ArM.IO

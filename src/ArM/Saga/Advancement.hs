@@ -29,13 +29,13 @@
 module ArM.Saga.Advancement ( advanceSaga 
                        , Advance(..)
                        , Validation(..)
+                       , CharDB(..)
                        ) where
 
 import Data.Maybe 
 import Data.List 
 import qualified Data.Map as M
 
-import ArM.Saga.Saga
 import ArM.Character
 import ArM.Covenant
 import ArM.Processing
@@ -47,6 +47,20 @@ import ArM.Helper
 import ArM.Debug.Trace
 
 -- * Types
+
+class CharDB a where
+   -- |
+   -- List of covenFolk as `Character` objects at the covenant
+   covenFolk :: a -> Covenant -> [ Character ]
+   covenFolk saga cov = lookupCharacters s $ f cov
+       where f = covenFolkID 
+             s = saga
+   -- |
+   -- Find `Character` objects for a list of character IDs, from the given `Saga`.
+   lookupCharacters :: a -> [ HarmKey ] -> [ Character ]
+
+instance CharDB Saga where
+    lookupCharacters saga is = filterNothing $ map ( \ i -> harmLookup i saga ) is
 
 -- |
 -- The Advance class represents objects which change state from

@@ -164,3 +164,10 @@ mhead (x:_) = Just x
 prependString :: [String] -> String -> String
 prependString [] s = s
 prependString (x:xs) s = prependString xs (s ++ "\n\n" ++ x)
+
+-- | Enclose the string in asterixes, indicating italics in Markdown.
+-- The idea is to be able to override this function for other output formats.
+italic :: String -> String
+italic c = "*" ++ (f . f) c ++ "*"
+   where f = reverse . dropWhile isSpace
+

@@ -68,12 +68,6 @@ spellDetails :: SpellRecord -> [ String ]
 spellDetails sp = filter (/="") $ map ($ sp) ls
   where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
 
--- | Enclose the string in asterixes, indicating italics in Markdown.
--- The idea is to be able to override this function for other output formats.
-italic :: String -> String
-italic "" = ""
-italic x = "*" ++ x ++ "*"
-
 -- | List the spell stats, incl. range/duration/target and any
 -- special tags like ritual.
 spellStats :: SpellRecord -> String
@@ -110,6 +104,33 @@ spellDescMD (s,sr) = OList [ OString $ show s
      where f "" = OList [] 
            f x = OString x
 
+-- | Render a spell trait in Markdown
+-- The result should normally be subject to indentOList to make an hierarchical
+-- list.
+spellDescH :: (Spell,Maybe SpellRecord) -> HList
+spellDescH (s,sr) = HList "" $ filterNothing 
+                             [ Just $ HList ( show s ) $ filterNothing
+                               [ masteryH s
+                               , f $ spellTComment s ]
+                             , coreSpellRecordH sr
+                             ]
+     where f "" = Nothing
+           f x = jhlist x
+--
+-- | Render the spell record as an OList
+coreSpellRecordH :: Maybe SpellRecord -> Maybe HList
+coreSpellRecordH Nothing = Nothing
+coreSpellRecordH (Just sp) = Just $ HList "" $ map hlist $ spellDetails sp
+
+-- | Set all information from mastery on one line.
+-- This includes mastery score, xp, and mastery options.
+masteryH :: Spell -> Maybe HList
+masteryH s | 0 == masteryScore s && 0 == spellExcessXP s = Nothing
+           | otherwise = jhlist
+                          $ "Mastery: " ++ show (masteryScore s)
+                          ++ " (" ++ showNum (spellExcessXP s) ++ "xp) "
+                          ++ showStrList (masteryOptions s)
+
 -- | Set all information from mastery on one line.
 -- This includes mastery score, xp, and mastery options.
 masteryMD :: Spell -> OList
@@ -118,6 +139,4 @@ masteryMD s | 0 == masteryScore s && 0 == spellExcessXP s = OList []
                           $ "Mastery: " ++ show (masteryScore s)
                           ++ " (" ++ showNum (spellExcessXP s) ++ "xp) "
                           ++ showStrList (masteryOptions s)
-
-
 
