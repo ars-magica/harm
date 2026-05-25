@@ -122,42 +122,10 @@ instance Markdown Library where
 
 -- * Advancements
 
-instance (Markdown a, ContractAdvancement a) 
-      => Markdown (Augmented a) where
-   printMD = printMD . contractAdvancement
 instance Markdown CovAdvancement where
-   printMD ad = OList $ sls ++ f ch
-      where ch = printCovChanges ad
-            sls = foldl (++) [] ( map ( f . printMD ) $ caStory ad )
-            f (OList x) = x
-            f (OString "") = []
-            f (OString xs) = [OString xs]
-instance Markdown Story where
-   printMD story = OList 
-         [ OString $ storyTitle story ++ sq (storySQ story) 
-         , OList $ map italicOString ( storyNarrative story )
-         , OList $ map OString ( storyComment story )
-         ]
-      where sq Nothing = "(no source quality)"
-            sq (Just x) = " (SQ " ++ show x ++ ")"
-printCovChanges :: CovAdvancement -> OList
-printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
-     where j | joining a == [] = OList []
-             | otherwise = OString $  "joining: " ++ showStrList (map show $ joining a)
-           lv | leaving a == [] = OList []
-             | otherwise = OString $  "leaving: " ++ showStrList (map show $ leaving a)
-           acq | acquired a == [] = OList []
-             | otherwise = OString $  "acquired: " ++ showStrList (map name $ acquired a)
-           lst | lost a == [] = OList []
-             | otherwise = OString $  "lost: " ++ showStrList (map name $ lost a)
-
-instance Markdown Advancement where
-   printMD = defaultMD
+   printMD = defaultMD 
 
 -- * Covenant Markdown
-
-instance Markdown Book where
-    printMD = defaultMD
 
 instance Markdown Lab where
    printMD = defaultMD

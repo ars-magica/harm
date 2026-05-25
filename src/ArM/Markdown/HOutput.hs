@@ -512,3 +512,29 @@ warningsH = errorsH' isValError
     where isValError (ValidationWarning _) = True
           isValError _ = False
 
+-- * Advancements
+
+instance (HOutput a, ContractAdvancement a) 
+      => HOutput (Augmented a) where
+   printH = printH . contractAdvancement
+instance HOutput CovAdvancement where
+   printH ad = Just $ HList "" $ sls ++ f ch
+      where ch = printCovChangesH ad
+            sls = filterNothing $ map printH $ caStory ad 
+            f [] = []
+            f xs = [ HList "Changes" xs ]
+instance HOutput Story where
+   printH story = Just $ HList ( storyTitle story ++ sq (storySQ story) )
+                $ filterNothing [ narrativeH story, commentH story ]
+      where sq Nothing = "(no source quality)"
+            sq (Just x) = " (SQ " ++ show x ++ ")"
+printCovChangesH :: CovAdvancement -> [ HList ]
+printCovChangesH a =  filterNothing [ j, lv, acq, lst ] 
+     where j | joining a == [] = Nothing
+             | otherwise = jhlist $  "joining: " ++ showStrList (map show $ joining a)
+           lv | leaving a == [] = Nothing
+              | otherwise = jhlist $  "leaving: " ++ showStrList (map show $ leaving a)
+           acq | acquired a == [] = Nothing
+               | otherwise = jhlist $  "acquired: " ++ showStrList (map name $ acquired a)
+           lst | lost a == [] = Nothing
+               | otherwise = jhlist $  "lost: " ++ showStrList (map name $ lost a)
