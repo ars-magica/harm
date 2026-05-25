@@ -20,15 +20,12 @@
 -- + SagaA
 -- + Library
 --
+-- There are only four functions exported.  The other functions are
+-- internal.
+--
 -----------------------------------------------------------------------------
 module ArM.Markdown ( Markdown(..)
-                    , artMD
-                    , artVisMD
-                    , italicOString
-                    , storyOList
-                    , enchantedMD  -- Unused
                     , sagaStateMD
-                    -- * SeasonDisplay
                     , sagaAnnals
                     ) where
 

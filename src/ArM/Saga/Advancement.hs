@@ -46,7 +46,6 @@ import ArM.Helper
 
 import ArM.Debug.Trace
 
--- |
 -- * Types
 
 -- |
@@ -107,7 +106,6 @@ instance Advance Character where
              f (x:_) = season x
    prepare = prepareCharacter
 
--- |
 -- * Saga Advancement
 --
 -- | Advance the Saga according to timestamp in the SagaFile.
@@ -130,7 +128,10 @@ covenMap :: ( Covenant -> Covenant ) ->  Saga -> Saga
 covenMap f st = st { covenants = M.map f $ covenants st }
 -- | Map an advancement function on every covenant
 charMap :: ( Character -> Character ) ->  Saga -> Saga
-charMap f st = st { characters = M.map f $ characters st }
+charMap f st = st { characters = M.map g $ characters st }
+     where g c = h (mhead $ pastAdvancement c) c 
+           h Nothing = id
+           h _ = f
 
 -- ** Advancement step
 
@@ -231,8 +232,7 @@ stepBook = bookCollision . addBooks
 -- This will have to be extended to allow reading as a guest, and books
 -- borrowed from other characters or covenants.
 addBooks :: Saga -> Saga
-addBooks st = st { characters = M.map (chgBook st) $ characters st }
-
+addBooks st = charMap (chgBook st) st
 
 -- | Add validation errors to Character advancements where a book
 -- is oversubscribed.
