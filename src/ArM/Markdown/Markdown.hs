@@ -159,16 +159,8 @@ instance Markdown a => Markdown (Maybe a) where
    printSheetMD _ Nothing = OList []
    printSheetMD saga (Just x) = printSheetMD saga x
 
-instance Markdown FieldValue where
-   printMD  = defaultMD
-
-instance Markdown KeyPair where
-   printMD (KeyPair x  y) = OList
-         [ OString x
-         , OString $ ':':' ':show y
-         , OString "" ]
 instance Markdown KeyPairList where
-   printMD (KeyPairList xs) = OList $ map printMD xs
+   printMD = defaultMD
 
 -- * Other Functions
 

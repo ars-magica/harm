@@ -87,6 +87,11 @@ instance HOutput Saga where
                   ]
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
+instance HOutput KeyPair where
+   printH (KeyPair x y) = Just $ HList x [ hlist $ ':':' ':show y, hlist "" ]
+
+instance HOutput KeyPairList where
+   printH (KeyPairList xs) = Just $ HList "" $ filterNothing $ map printH xs
 
 -- ** Derived instances
 
