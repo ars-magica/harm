@@ -21,29 +21,31 @@ module ArM.Markdown.Markdown ( Markdown(..)
                     , enchantedMD  -- Unused
                     ) where
 
-import Data.Maybe 
-import Control.Monad
-
-import ArM.Markdown.Magus 
 import ArM.Markdown.HOutput 
 import ArM.Markdown.Possession 
-import ArM.Markdown.Spell
 import ArM.Character 
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Sheet
 import ArM.Trait
-import ArM.DB
-import ArM.GameRules
 import ArM.Helper
+
+import Control.Monad.State.Lazy
+import Data.Maybe
 
 import Data.OList
 import Data.HList
 import Data.KeyPair
 
-import ArM.Debug.Trace
-
 -- * The Markdown class
+
+-- | Default implementation of `printMD` in the markdown class.
+defaultMD :: HOutput h => h -> OList
+defaultMD = fromMaybe (OString "") . fmap fromHList . printH
+-- | Default implementation of `printSheetMD` in the markdown class.
+defaultSheetMD :: HOutput h => Saga -> h -> OList
+defaultSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
+                      $ evalState ( printS x ) saga
 
 -- | Class defining 'printMD' to render in Markdown.
 class Markdown a where
@@ -75,36 +77,19 @@ sagaStateMD = fromHList . sagaStateH
 
 instance Markdown Saga where
     printMD = defaultMD
-
 instance Markdown Character where
    printMD _ = error "Character printMD is not supported"
-   printSheetMD saga c = OList
-            [ printMD $ concept c
-            , OString ""
-            , OString $ "## Character Sheet " ++ (show $ gameSeason c) 
-            , OString ""
-            , sheetSheetMD saga c
-            -- , adv
-            , designMD c
-            , advancementMD c
-            ]
-        where adv | isGameStart c = designMD c
-                  | otherwise =  advancementMD c
+   printSheetMD = defaultSheetMD
 instance Markdown Covenant where
     printMD = defaultMD
     printSheetMD = defaultSheetMD
 
 -- ** Lower-level concepts
 
-instance Markdown CharacterConcept where
-   printMD = defaultMD
-   printSheetMD = defaultSheetMD
-
 instance Markdown Trait where
    printMD = defaultMD
 instance Markdown ProtoTrait where
    printMD = defaultMD
-
 
 -- ** Markdown for basic types
 
@@ -119,27 +104,8 @@ instance Markdown KeyPairList where
 
 -- * Other Functions
 
--- | Render the char gen design.
--- This is a list of all the pregame advancement objects.
---
--- This is usually empty, since pre-game characters are not usuall produced.
-designMD :: Character -> OList
-designMD = fromMaybe (OList []) . fmap fromHList . designH
 
 
--- | Render the advancement log.
--- This is two lists of past and future advancement objects
-advancementMD :: Character -> OList
-advancementMD = fromHList . advancementH
-
-
--- | Render a list of objects as a comma-separated list on a single
--- line/paragraph.  This works for any instance of 'Show'.
-showlistMD :: Show a => String -> [a] -> OList
-showlistMD _ [] = OList []
-showlistMD s xs = OList [ OString s
-                        , toOList $ (map (++", ") $ map show xs)
-                        ]
  
 -- * Markdown for the Character types
  
@@ -177,23 +143,6 @@ instance Markdown Possession  where
 instance Markdown Library where
    printMD = defaultMD
 
-sheetSheetMD :: Saga -> Character -> OList
-sheetSheetMD saga = fromHList . sheetSheetH saga
-
--- ** Markdown for Age, Confidence, Warping, and Decrepitude
-
--- | Print age, confidence, warping, and decrepitude as bullet points
-briefTraits :: Character -> OList
-briefTraits = fromMaybe (OList []) . fmap fromHList . briefTraitsH
-
-instance Markdown Age where
-   printMD = defaultMD
-
-instance Markdown Confidence where
-   printMD = defaultMD
-instance Markdown OtherTrait where
-   printMD = defaultMD
-
 -- * Advancements
 
 instance (Markdown a, ContractAdvancement a) 
@@ -227,26 +176,6 @@ printCovChanges a = OList [ OString "Changes", OList [ j, lv, acq, lst ] ]
 
 instance Markdown Advancement where
    printMD = defaultMD
-
-
--- ** Pretty print arts
-
-
-
--- | Set a list of spells.
--- Each spell is set using 'spellMD', and the result is indented as a
--- hierarchical list.
-printFullGrimoire :: SpellDB -> [Spell] -> OList
-printFullGrimoire db xs = OList [ OString "## Grimoire"
-                         , OString ""
-                         , OList $ map (indentOList . spellDescMD) ys 
-                         , OString ""
-                         , OString $ "Total: " ++show (totalLevels xs)  
-                            ++ " levels of spells."
-                         ]
-   where ys = [ (x,f x) | x <- xs ]
-         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
-
 
 -- * Covenant Markdown
 

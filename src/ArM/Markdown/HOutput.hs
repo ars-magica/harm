@@ -8,15 +8,10 @@
 --
 -- Description :  Rendering data as 'HList' objects.
 --
--- This will hopefully be easier to program than the existing
--- 'OList' approach.  The 'fromHList' function converts to 'OList',
--- so existing IO functions can be used.
---
 -----------------------------------------------------------------------------
 module ArM.Markdown.HOutput where
 
 import Data.HList
-import Data.OList
 import Data.KeyPair
 import ArM.DB
 import ArM.Markdown.Magus
@@ -28,7 +23,6 @@ import ArM.Markdown.VF
 import ArM.Sheet.Library
 import ArM.Trait
 import ArM.Character
-import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Saga
@@ -36,7 +30,7 @@ import ArM.Helper
 import Control.Monad
 import Control.Monad.State.Lazy
 import Data.Maybe
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 
 -- * The class
@@ -54,13 +48,6 @@ class HOutput h where
    -- The default implementation ignores the monad and is equivalent to `printH`.
    printS :: h -> State Saga (Maybe HList)
    printS = return . printH
-   -- | Default implementation of `printMD` in the markdown class.
-   defaultMD :: h -> OList
-   defaultMD = fromMaybe (OString "") . fmap fromHList . printH
-   -- | Default implementation of `printSheetMD` in the markdown class.
-   defaultSheetMD :: Saga -> h -> OList
-   defaultSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
-                         $ evalState ( printS x ) saga
 
 instance HOutput Saga where
    printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
@@ -72,14 +59,30 @@ instance HOutput Saga where
                   ]
             lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
+-- * Character
+
+
 instance HOutput Character where
-   printH  c = Just $ HList "" $ filterNothing
+   printH  c = trace "Unsupport - brief Character sheeet"
+            $ Just $ HList "" $ filterNothing
             [ printH $ concept  c 
             , hheader $ "## Sheet " ++ (show $ gameSeason c )
             , Just $ sheetH c
             , designH c
             , Just $ advancementH c
             ]
+   printS c = get >>= return . characterH c
+
+characterH :: Character -> Saga -> Maybe HList
+characterH c saga = Just $ HList "" $ filterNothing
+            [ printH $ concept c
+            , Just $ sheetSheetH c 
+            , adv
+            , Just $ combatSheetH c saga
+            , magusSheetH c saga
+            ]
+        where adv | isGameStart c = designH c
+                  | otherwise = Just $  advancementH c
 
 -- | Render a list of objects as a comma-separated list on a single
 -- line/paragraph.  This works for any instance of 'Show'.
@@ -126,36 +129,42 @@ sheetH c = HList "" $ filterNothing
                , jhlist "*Lab totals include aura, general quality, and lab art specialisations, but no activity bonuses, apprentices, or familiars.*"
                ]
 
+
 -- | Set a list of spells.
 -- Each spell is set using 'spellMD', and the result is indented as a
 -- hierarchical list.
-sheetSheetH :: Saga -> Character -> HList
-sheetSheetH saga c = HList  "" $ filterNothing
+sheetSheetH :: Character -> HList
+sheetSheetH c = HList ( "## Character Sheet " ++ (show $ gameSeason c) ) 
+               $ filterNothing
                [ briefTraitsH c
                , Just $ indentList $ HList "**Abilities:**"
                         (map (hlist . show) ( sortTraits $ abilityList c ))
                , Just $ listPossessionsH $ characterPossessions c
                , jhlist ""
-               , Just $ printCombatH saga c
-               , mag
                ]
-         where spellist = spellsWithScores (spells saga) c 
-               mag | isMagus c = Just $ HList "" 
-                       [ artVisH c
-                       , hlist ""
-                       , printFullGrimoireH (spells saga) $ sortTraits spellist
-                       , hlist ""
-                       , HList "" $ map hlist $ printCastingTotals c 
-                       , hlist ""
-                       , hlist $ "+ Ceremonial Casting Bonus: " ++ showSigned (ceremonialCastingBonus c)
-                       , hlist ""
-                       , hlist "## Laboratory"
-                       , hlist ""
-                       , HList "" $ map hlist $ printLabTotals c 
-                       , hlist ""
-                       , fromMaybe (hlist "") $ printH $ characterLab c
-                       ]
-                   | otherwise = Nothing 
+combatSheetH  :: Character -> Saga -> HList
+combatSheetH  c saga = printCombatH saga c
+
+magusSheetH :: Character -> Saga -> Maybe HList
+magusSheetH c saga
+   | isMagus c = Just $ HList "" 
+               [ artVisH c
+               , hlist ""
+               , printFullGrimoireH (spells saga) 
+                  $ sortTraits $ spellsWithScores (spells saga) c 
+               , hlist ""
+               , HList "" $ map hlist $ printCastingTotals c 
+               , hlist ""
+               , hlist $ "+ Ceremonial Casting Bonus: " 
+                       ++ showSigned (ceremonialCastingBonus c)
+               , hlist ""
+               , hlist "## Laboratory"
+               , hlist ""
+               , HList "" $ map hlist $ printLabTotals c 
+               , hlist ""
+               , fromMaybe (hlist "") $ printH $ characterLab c
+               ]
+   | otherwise = Nothing 
 
 -- | Set a list of spells.
 -- Each spell is set using 'spellMD', and the result is indented as a
@@ -195,7 +204,17 @@ conceptPrintH dir c = Just $ HList ("# " ++ nm )
                 imgfn = ("![" ++ nm ++ "](" ++ dir ++ fromJust (portrait c) ++ ")")
                 nm = fullConceptName c 
 
+--
+-- | Render the char gen design.
+-- This is a list of all the pregame advancement objects.
+chargenH :: Character -> Maybe HList
+chargenH c | as == [] = Nothing
+           | otherwise = Just $ HList "## Char Gen Advancements"
+                              $ filterNothing $ map printH as
+           where as = pregameAdvancement c
 
+-- ** Covenant
+--
 instance HOutput Covenant where
     printH cov = printCovenant cov Nothing
     printS cov = get >>= f cov >>= return . printCovenant cov
@@ -221,13 +240,22 @@ printCovenant cov idx = Just $ HList ( "# " ++ (name cov ) ) $ filterNothing
         , jhlist ""
         , Just $ listPossessionsH $ possessions cov
         ] 
---
 
 instance HOutput CovenantConcept where
     printH cc = Just $ HList "" $ hs1:hs2:hs
       where hs = ( map hlist . map ("+ "++) . covconceptHelper ) cc
             hs1 = paragraphsH $ map italic $ narrative cc
             hs2 = paragraphsH $ comment cc
+
+-- | Render some of the details for a `CovenantConcept`
+covconceptHelper :: CovenantConcept -> [ String ]
+covconceptHelper cc = filterNothing 
+   [ covConcept cc
+   , fmap ( ("**Founded** "++) . show ) (covFounded cc)
+   , fmap  ("**Appearance** "++)  (covAppearance cc)
+   ]
+
+-- * More basic concepts
 
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessionsH :: [ Possession ] -> HList
@@ -250,15 +278,7 @@ listPossessionsH ps = HList "### Possessions"
    where f = map indentList . filterNothing
 
 
--- | Render some of the details for a `CovenantConcept`
-covconceptHelper :: CovenantConcept -> [ String ]
-covconceptHelper cc = filterNothing 
-   [ covConcept cc
-   , fmap ( ("**Founded** "++) . show ) (covFounded cc)
-   , fmap  ("**Appearance** "++)  (covAppearance cc)
-   ]
 
--- * More basic concepts
 
 instance HOutput Possession  where
    printH = Just . printPossessionH
@@ -434,15 +454,6 @@ sagaStateH saga = HList ( "# " ++ name saga ++ " - " ++ show (gameSeason saga) )
         , warningsH  saga
         ]
 
--- * Character
-
--- | Render the char gen design.
--- This is a list of all the pregame advancement objects.
-chargenH :: Character -> Maybe HList
-chargenH c | as == [] = Nothing
-           | otherwise = Just $ HList "## Char Gen Advancements"
-                              $ filterNothing $ map printH as
-           where as = pregameAdvancement c
 
 -- ** Combat 
 
@@ -475,7 +486,6 @@ combatHead1 :: String
 combatHead1 = "| Weapon | Init | Atk | Def | Dam | Range | Load | Comment |"
 combatHead2 :: String 
 combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
-
 
 -- * Errors
 

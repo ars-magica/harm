@@ -6,32 +6,18 @@
 -- License     :  see LICENSE
 -- Maintainer  :  hg+gamer@schaathun.net
 --
--- Description :  Classes and instances to make MarkDown output.
---
--- The core of this module is the 'Markdown' class and its 'printMD'
--- function which renders an object in Markdown.  There is also 
--- a 'LongSheet' class with a 'printSheetMD' function for a more
--- verbose character sheet.
+-- Description :  The magus part of the character sheet.
 --
 -----------------------------------------------------------------------------
 module ArM.Markdown.Magus where
 
-import Data.Maybe 
-import Control.Monad
-
-import ArM.Markdown.Spell
 import ArM.Character 
 import ArM.Types.Harm
-import ArM.Story
-import ArM.Sheet
 import ArM.Trait
-import ArM.DB
 import ArM.GameRules
-import ArM.Helper
 
 import Data.OList
 import Data.HList
-import Data.KeyPair
 
 import ArM.Debug.Trace
 
