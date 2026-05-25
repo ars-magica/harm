@@ -43,6 +43,10 @@ paragraphsH = HList "" . map (\x -> HList "" [ hlist x ] )
 jhlist :: String -> Maybe HList
 jhlist = jhlist
 
+-- * The class
+
+-- | `HOutput` provides the API to render objects in Markdown using the `HList`
+-- representation.
 class HOutput h where
    -- | Render an object in 'HList' format allowing markdown notation.
    printH :: h -> Maybe HList
@@ -50,6 +54,18 @@ class HOutput h where
    printS = return . printH
    defaultMD :: h -> OList
    defaultMD = fromMaybe (OString "") . fmap fromHList . printH
+
+instance HOutput Saga where
+   printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
+      where hs1 = paragraphsH $ map italic $ narrative saga
+            hs2 = paragraphsH $ comment saga
+            ts1 = [ hlist $ lnk x | x <- advSeasons saga ] 
+            ts2 = [ hlist $ lnk GameStart 
+                  , hlist $ "+ " ++ "[](0001_Annals)"
+                  ]
+            lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
+
+-- * More basic concepts
 
 instance HOutput LabText where
    printH = Just . textH
@@ -77,26 +93,18 @@ instance HOutput LabBonus where
    printH (LabBonus x "" z) = jhlist $ x ++ " " ++ showBonus z
    printH (LabBonus _ y z) = jhlist $ y ++ " " ++ showBonus z
 
-instance HOutput Saga where
-   printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
-      where hs1 = paragraphsH $ map italic $ narrative saga
-            hs2 = paragraphsH $ comment saga
-            ts1 = [ hlist $ lnk x | x <- advSeasons saga ] 
-            ts2 = [ hlist $ lnk GameStart 
-                  , hlist $ "+ " ++ "[](0001_Annals)"
-                  ]
-            lnk x = "+ " ++ "[](" ++ (showKey x) ++ "/index)"
 
+-- * Keypair
+
+instance HOutput FieldValue where
+   printH = jhlist . show
 instance HOutput KeyPair where
    printH (KeyPair x y) = Just $ HList x [ hlist $ ':':' ':show y, hlist "" ]
-
 instance HOutput KeyPairList where
    printH (KeyPairList xs) = Just $ HList "" $ filterNothing $ map printH xs
 
--- ** Derived instances
+-- * Derived instances
 
 instance HOutput a => HOutput (Maybe a) where
    printH Nothing = Nothing
    printH (Just x) = printH x
-instance HOutput FieldValue where
-   printH = jhlist . show
