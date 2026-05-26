@@ -118,8 +118,13 @@ staffH' (Specialist xs) = jhlist $ "Specialist: " ++ staffHab xs
 
 staffHab :: [ Trait ] -> String
 staffHab [] = "No traits"
-staffHab xs = ( foldr (++) "" $ (map (++", ") $ map show xs) )
+staffHab xs = ( foldr (++) "" $ (map (++", ") $ map showTrait xs) )
 
+showTrait :: Trait -> String
+showTrait (AbilityTrait ab) = abilityName ab ++ " " ++ (show $ abilityScore ab)
+showTrait (CharacteristicTrait ab) = characteristicName ab ++ " " 
+                                   ++ (show $ charScore ab)
+showTrait t = show t
 
 -- | Render books in a possession.
 bookH :: Possession -> Maybe HList

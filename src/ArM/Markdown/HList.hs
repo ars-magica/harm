@@ -16,11 +16,16 @@
 module ArM.Markdown.HList where
 
 import Data.HList
-import ArM.Markdown.Spell
 import ArM.Types.Harm
 import ArM.Story
 import ArM.Helper
 import Data.Maybe
+
+-- | Render comment and narrative
+effectMP :: String -> [String] -> Maybe HList 
+effectMP _ [] = Nothing
+effectMP _ [x] = Just $ HList x []
+effectMP h xs = Just $ HList h $ map ( \ s -> HList s [] ) xs
 
 -- | Render the narrative comment.
 narrativeH :: StoryObject a => a -> Maybe HList

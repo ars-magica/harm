@@ -18,6 +18,7 @@ import ArM.Trait
 import ArM.Story
 import ArM.GameRules
 import ArM.Helper
+import ArM.Markdown.HList
 import Data.OList
 import Data.HList
 -- import Data.Maybe
@@ -56,17 +57,11 @@ effectDetails x = filter (not . isEmptyHList) $ filterNothing $ map ($ x ) ls
         trs "" = ""
         trs y = "Trigger: " ++ y
 
--- | Render comment and narrative of 'MagicEffect'
--- (auxiliary for 'effectDetails').
-effectMP :: String -> [String] -> Maybe HList 
-effectMP _ [] = Nothing
-effectMP _ [x] = Just $ HList x []
-effectMP h xs = Just $ HList h $ map ( \ s -> HList s [] ) xs
 
 -- | Render the details of a 'SpellRecord' (auxiliary for 'spellH').
 spellDetails :: SpellRecord -> [ String ]
 spellDetails sp = filter (/="") $ map ($ sp) ls
-  where ls = [ requirements, spellStats, spellDescription, spellComment, design, cite ]
+  where ls = [ requirements, spellStats, design, cite ]
 
 -- | List the spell stats, incl. range/duration/target and any
 -- special tags like ritual.
@@ -88,22 +83,6 @@ showRDT sp = "Range: " ++ r ++
              "; Target: " ++ t
    where (r,d,t) = rdt sp
 
--- | Render the spell record as an OList
-coreSpellRecordMD :: Maybe SpellRecord -> OList
-coreSpellRecordMD Nothing = OList []
-coreSpellRecordMD (Just sp) = OList $ map OString $ spellDetails sp
-
--- | Render a spell trait in Markdown
--- The result should normally be subject to indentOList to make an hierarchical
--- list.
-spellDescMD :: (Spell,Maybe SpellRecord) -> OList
-spellDescMD (s,sr) = OList [ OString $ show s
-                  , OList [ masteryMD s, f $ spellTComment s ]
-                  , coreSpellRecordMD sr
-                  ]
-     where f "" = OList [] 
-           f x = OString x
-
 -- | Render a spell trait in Markdown
 -- The result should normally be subject to indentOList to make an hierarchical
 -- list.
@@ -120,7 +99,10 @@ spellDescH (s,sr) = HList "" $ filterNothing
 -- | Render the spell record as an OList
 coreSpellRecordH :: Maybe SpellRecord -> Maybe HList
 coreSpellRecordH Nothing = Nothing
-coreSpellRecordH (Just sp) = Just $ HList "" $ map hlist $ spellDetails sp
+coreSpellRecordH (Just sp) = Just $ HList "" $ filterNothing hs
+    where hs = nh:ch:(map jhlist $ spellDetails sp)
+          nh = narrativeH sp
+          ch = commentH sp
 
 -- | Set all information from mastery on one line.
 -- This includes mastery score, xp, and mastery options.

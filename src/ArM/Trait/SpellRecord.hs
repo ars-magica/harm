@@ -17,7 +17,6 @@ module ArM.Trait.SpellRecord where
 
 import GHC.Generics
 import ArM.Story
-import ArM.Helper
 import Data.List
 import Data.Maybe
 import Data.Aeson
@@ -40,9 +39,9 @@ data SpellRecord = SpellRecord
     , spellDuration :: String
     , spellTarget :: String
     , specialSpell :: [String]        -- ^ Special tags, like Ritual or Mutantum.
-    , spellDescription :: String           -- ^ Freeform description of the effect
+    , spellDescription :: [ String ]  -- ^ Freeform description of the effect
     , design :: String                -- ^ Level calculation
-    , spellComment :: String          -- ^ Freeform remarks that do not fit elsewhere
+    , spellComment :: [ String ]      -- ^ Freeform remarks that do not fit elsewhere
     , cite :: String                  -- ^ Source reference
     } deriving (Ord, Eq, Generic, Show)
 defaultSpellRecord :: SpellRecord
@@ -57,9 +56,9 @@ defaultSpellRecord = SpellRecord
     , spellDuration = "Momentary"
     , spellTarget = "Ind"
     , specialSpell = []
-    , spellDescription = ""
+    , spellDescription = []
     , design = ""
-    , spellComment = ""
+    , spellComment = []
     , cite = ""
     } 
 
@@ -77,9 +76,9 @@ instance FromJSON SpellRecord where
         <*> v .:? "duration" .!= ""
         <*> v .:? "target" .!= ""
         <*> v .:? "specialSpell" .!= []
-        <*> v .:? "description" .!= ""
+        <*> v `parseCollapsedList` "description" 
         <*> v .:? "design" .!= ""
-        <*> v .:? "comment" .!= []
+        <*> v `parseCollapsedList` "comment" 
         <*> v .:? "cite" .!= ""
 
 
@@ -135,10 +134,10 @@ instance FromJSON MagicEffect where
 instance StoryObject SpellRecord where
    name ob = spellRecordName ob 
    setName n x = x { spellRecordName = n }
-   narrative ob = [ spellDescription ob ]
-   addNarrative s x = x { spellDescription = prependString (narrative x) s }
-   comment ob = [ spellComment ob ]
-   addComment s x = x { spellComment = prependString (comment x) s }
+   narrative ob = spellDescription ob
+   addNarrative s x = x { spellDescription = s:narrative x }
+   comment ob = spellComment ob 
+   addComment s x = x { spellComment = s:comment x }
 
 
 instance StoryObject MagicEffect where

@@ -53,9 +53,9 @@ instance ArMCSV SpellRecord where
                 , spellDuration = x9
                 , spellTarget = x10
                 , specialSpell =  filter (/="") $ splitOn ";" x11
-                , spellDescription = x12
+                , spellDescription = [ x12 ]
                 , design = x13
-                , spellComment = x14
+                , spellComment = [ x14 ]
                 , cite = x15
                 }
    fromCSVline _ = defaultObject
@@ -70,9 +70,9 @@ instance ArMCSV SpellRecord where
                    , spellDuration = "Mom"
                    , spellTarget = "Ind"
                    , specialSpell = []
-                   , spellDescription = ""
+                   , spellDescription = []
                    , design = ""
-                   , spellComment = ""
+                   , spellComment = []
                    , cite = ""
                    }
    getID = spellRecordName
