@@ -33,7 +33,7 @@ import Data.List
 import Control.Applicative
 import Control.Monad
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- | Initialise `Character` object for advancement
 initAdvancement :: SeasonTime -> Character -> Character
@@ -218,7 +218,11 @@ readingSQ2 (Just pt) xs = readingSQstat pt xs
 -- | Identify correct book stats for the trait being learnt
 readingSQstat :: ProtoTrait -> [BookStats] -> Augmented Advancement 
            -> Augmented Advancement 
-readingSQstat pt xs = f stat
+readingSQstat pt xs = trace "readingSQstat"
+                    $ trace ("Stat "++show stat)
+                    $ show (fmap topic $ mhead xs)
+                    $ trace ("PT "++show (protoTrait pt))
+                    $ f stat
     where stat = find ( ( (==) $ protoTrait pt ) . topic ) xs
           f Nothing = addValidation val
           f (Just bk) = readingSQ4 bk
