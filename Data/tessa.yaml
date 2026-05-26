@@ -30,6 +30,8 @@ futureAdvancement:
   changes:
   - ability: Carouse
     xp: 4
+  - aging:
+      die: 5
   mode: Practice
   narrative: The long Winter nights were spent in the alehouse.
 pregameAdvancement:
