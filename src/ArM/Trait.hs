@@ -86,6 +86,7 @@ module ArM.Trait (
          , isVis
          , isVisSrc
          , isAC
+         , isStaff
          , effectRDT
 
          -- ** Weapons and Mundane Equipment

@@ -21,6 +21,8 @@ import ArM.Helper
 import Data.List
 import Data.HList
 import Data.Maybe
+import Control.Monad
+import ArM.Debug.Trace
 
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
@@ -51,6 +53,7 @@ printPossessionH ob
     | isWeapon ob = hfm "Bogus weapon" $ weaponHsimple ob
     | silver ob /= 0 = hfm "Bogus silver" $ addGen silverH ob
     | silverYield ob /= 0 = hfm "Bogus income" $ addGen incomeH ob
+    | isStaff ob = hfm "Bogus staff" $ addGen staffH ob
     | otherwise = pH ob 
      -- hfm :: String -> Maybe HList -> HList
   where hfm s = fromMaybe (HList s [])
@@ -94,13 +97,29 @@ pName ob = name ob ++ cnt
 -- Each function in the list provides output for one kind of Possession.
 -- Count is not included as this is set in the possession header.
 pHlist :: [ Possession -> Maybe HList ]
-pHlist = [ bookH, labtextH, weaponH, armourH, silverH, incomeH, visH, visrcH, acH, narrativeH, commentH, dateH ]
+pHlist = [ staffH, bookH, labtextH, weaponH, armourH, silverH, incomeH, visH, visrcH, acH, narrativeH, commentH, dateH ]
 
 -- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
 pHgen ob = HList (pName ob) . filterNothing . map ($ ob) 
 
 -- * Individual pieces of information
+
+staffH :: Possession -> Maybe HList
+staffH = ttrace . join . fmap staffH' . staff
+
+staffH' :: Staff -> Maybe HList
+staffH' Servant = jhlist "Servant"
+staffH' Teamster = jhlist "Teamster"
+staffH' Labourer = jhlist "Labourer"
+staffH' (CovenGrog xs) = jhlist $ "Grog: " ++ staffHab xs
+staffH' (Specialist xs) = jhlist $ "Specialist: " ++ staffHab xs
+
+
+staffHab :: [ Trait ] -> String
+staffHab [] = "No traits"
+staffHab xs = ( foldr (++) "" $ (map (++", ") $ map show xs) )
+
 
 -- | Render books in a possession.
 bookH :: Possession -> Maybe HList

@@ -27,6 +27,7 @@ module ArM.Trait.Possession ( -- * Posessions
                             , isVis
                             , isVisSrc
                             , isAC
+                            , isStaff
                             , effectRDT
                             -- * Weapons and Mundane Equipment
                             , isComposite
@@ -132,13 +133,16 @@ isMagic p = enchantment p /= MundaneItem
 isAC :: Possession -> Bool
 isAC p = isJust $ acTo p
 
+isStaff :: Possession -> Bool
+isStaff = isJust . staff 
+
 isMundaneEquipment :: Possession -> Bool
 isMundaneEquipment p = isEquipment p && (not . isMagic) p && (
      silver p == 0 && silverYield p == 0 )
 
 isEquipment :: Possession -> Bool
 isEquipment p = not $ foldl (||) False [ f p | f <- fs ] 
-   where fs = [ isVis, isVisSrc, isWeapon, isArmour, isAC, isBook, isLabText ]
+   where fs = [ isVis, isVisSrc, isWeapon, isArmour, isAC, isBook, isLabText, isStaff ]
 
 -- ! Is the item a composite item with traits of more than one kind,
 -- such as an enchanted book, or a weapon that is an arcane connection?

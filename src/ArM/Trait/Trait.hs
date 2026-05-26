@@ -759,7 +759,7 @@ parseOtherPossession v = Possession
 
 data Staff = Specialist [ Trait ] 
            | Servant | Teamster | Labourer 
-           | CovenGrog [ Ability ]
+           | CovenGrog [ Trait ]
    deriving (Show, Generic, Eq, Ord)
 
 instance ToJSON Staff
@@ -770,7 +770,7 @@ instance FromJSON Staff where
               specialist "labourer" = pure Labourer
               specialist _ = mzero
     parseJSON (Object v) = (Specialist <$> v .: "specialist") 
-                         <|> (CovenGrog <$> fmap filterTrait ( v .: "grog" ) )
+                         <|> (CovenGrog <$> v .: "grog" )
     parseJSON _ = mzero
 
 instance Show Possession where
