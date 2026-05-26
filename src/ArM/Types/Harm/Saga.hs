@@ -80,7 +80,7 @@ data SagaFile = SagaFile
          , seasons :: [ SeasonTime ]
          , currentSeason :: SeasonTime
          , rootDirectory :: Maybe String
-         , sagaDescription :: [String]
+         , sagaComment :: [String]
          , sagaNarrative :: [String]
          , covenantFiles :: [String]
          , characterFiles :: [String]
@@ -108,9 +108,9 @@ instance StoryObject SagaFile where
    name = title
    setName n x = x { title = n }
    narrative = sagaNarrative
-   comment = sagaDescription
+   comment = sagaComment
    addNarrative s x = x { sagaNarrative = s:sagaNarrative x }
-   addComment s x = x { sagaDescription = s:sagaDescription x }
+   addComment s x = x { sagaComment = s:sagaComment x }
 
 instance StoryObject Saga where
    name = name . sagaFile

@@ -80,14 +80,18 @@ instance KeyObject Covenant where
     harmKey = CovenantKey . name
 
 instance HarmObject Covenant 
+
+-- | StoryObject features belong to the immutable `CovenantConcept`
+-- and thus the setters do nothing.
 instance StoryObject Covenant where
     name = name . covenantConcept
     narrative = narrative . covenantConcept
     comment = comment . covenantConcept
 
+-- | The concept is considered immutable and thus the setters do nothing.
 instance StoryObject CovenantConcept where
     name = covName 
-    narrative = covDescription 
+    narrative = covNarrative 
     comment = covComment 
 
 -- | The covenant concept is the timeless features of the covenant,
@@ -95,7 +99,7 @@ instance StoryObject CovenantConcept where
 data CovenantConcept = CovenantConcept 
          { covName :: String
          , covConcept :: Maybe String
-         , covDescription :: [ String ]
+         , covNarrative :: [ String ]
          , covComment :: [ String ]
          , covFounded :: Maybe Int
          , covAppearance :: Maybe String
