@@ -22,8 +22,7 @@ design:
   - type: Build Points
     bookcsv: Data/books.csv
     acquired:
-    - name: Labourers
-      staff: labourer
+    - staff: labourer
       count: 3
     - name: The cattle manager
       specialist:

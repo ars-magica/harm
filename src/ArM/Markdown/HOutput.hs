@@ -273,6 +273,7 @@ printCovenant cov idx = Just $ HList ( "# " ++ (name cov ) ) $ filterNothing
         , printH $ covenantConcept cov
         , hheader ( "## Updated " ++ (show $ season cov) ) 
         , idx 
+        , specH $ filter isStaff $ possessions cov
         , jhlist ""
         , jhlist (("+ "++) $ pagesLink $ stateName $ getLibrary cov)
         , hheader "### Boons and Hooks" 
@@ -280,7 +281,7 @@ printCovenant cov idx = Just $ HList ( "# " ++ (name cov ) ) $ filterNothing
         , jhlist ""
         , Just $ listPossessionsH $ possessions cov
         ] 
-
+       where specH = fmap indentList . printPossessionsH "Other covenfolk"  
 instance HOutput CovenantConcept where
     printH cc = Just $ HList "" $ hs1:hs2:hs
       where hs = ( map hlist . map ("+ "++) . covconceptHelper ) cc
