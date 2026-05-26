@@ -59,7 +59,7 @@ vl2 = [ ( "Puissant (art)",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingLimit = Just 50, agingBonus = Just 3 } } 
                      , defaultPT { protoTrait = AbilityKey $ "Second Sight", xp = Just 5 } 
                      , defaultPT { protoTrait = VFKey "Second Sight" "", cost = Just 0
-                                 , ptComment = Just "from Strong Faerie Blood" } 
+                                 , ptComment = [ "from Strong Faerie Blood" ] } 
                      ] )
      , ( "Faerie Blood",
               \ _ -> [ defaultPT { aging = Just $ defaultAging { agingBonus = Just 1 } } ] )

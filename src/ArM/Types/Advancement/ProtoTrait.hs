@@ -44,6 +44,7 @@ import ArM.Story
 import GHC.Generics
 import Data.Aeson
 import Data.Aeson.Types
+import Data.Aeson.Extra
 import Data.Maybe 
 import Data.List
 import Control.Monad
@@ -89,7 +90,7 @@ data ProtoTrait = ProtoTrait
     , multiplicity :: Maybe Int  -- ^ number of types a virtue/flaw is taken;
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
-    , ptComment :: Maybe String  -- ^ freeform comment
+    , ptComment :: [ String ]  -- ^ freeform comment
     } deriving (Eq,Generic)
 
 -- | Default ProtoTrait object, used internally for step-by-step construction of
@@ -115,7 +116,7 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , agingPts = Nothing
                              , charBonuses = []
                              , multiplicity = Nothing
-                             , ptComment = Nothing
+                             , ptComment = []
                              }
 
 -- | Parse an ability key from a JSON object
@@ -183,7 +184,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "agingPts"
         <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
-        <*> v .:?  "comment" 
+        <*> v `parseCollapsedList`  "comment" 
 
 showBonusScore :: ProtoTrait -> String
 showBonusScore pt | isNothing b = ""
@@ -212,12 +213,11 @@ showMastery (Just (x:xs)) = ' ':(foldl (++) x $ map (", "++) xs)
 
 instance StoryObject ProtoTrait where
    name = show . traitKey
-   comment = fromMaybe [] . fmap (:[]) . ptComment
+   comment = ptComment
 instance Show ProtoTrait  where
-   show p = showPT k p ++ cms
-      where cmt = (ptComment p)
-            cms | isNothing cmt = ""
-                | otherwise = " (" ++ fromJust cmt ++ ")"
+   show p = showPT k p ++ cms (ptComment p)
+      where cms [] = ""
+            cms xs = " (" ++ (foldr (++) "" xs) ++ ")"
             k = protoTrait p
 
 -- | Auxiliary for show
@@ -356,7 +356,7 @@ computeTrait' (SpellKey ft lv sn) p =  Just $ SpellTrait $
                       , spellExcessXP = y
                       , spellMultiplier = m
                       , spellCastingScore = Nothing
-                      , spellTComment = fromMaybe "" $ ptComment p
+                      , spellTComment = ptComment p
                       , spellTRecord = spellRecord p
                       }
          where  (s',y) = getAbilityScore (Just x)
@@ -374,7 +374,7 @@ computeVF (VFKey x d) p = Just $ VF
                     { vfname = x, vfcost = fromMaybe 0 (cost p), vfDetail = d
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
-                    , vfComment = fromMaybe "" $ ptComment p 
+                    , vfComment = ptComment p 
                     , vfNarrative = []
                     }
 computeVF _ _ = Nothing

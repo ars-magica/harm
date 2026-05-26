@@ -188,7 +188,7 @@ data Spell = Spell { spellName :: String
                    , spellMultiplier :: Float
                    , masteryOptions :: [String] 
                    , spellCastingScore :: Maybe Int
-                   , spellTComment :: String
+                   , spellTComment :: [ String ]
                    , spellTRecord :: Maybe SpellRecord
                    }
            deriving (Ord, Eq, Generic)
@@ -218,7 +218,7 @@ data VF = VF { vfname :: String    -- ^ name of the virtue/flaw
              , vfcost :: Int       -- ^ cost, should be zero for free/inferred virtues/flaws
              , vfAppliesTo :: Maybe TraitKey  -- ^ not used
              , vfMultiplicity :: Int          -- ^ number of times the virtue/flaw is take
-             , vfComment :: String            -- ^ freeform comment
+             , vfComment :: [ String ]         -- ^ freeform comment
              , vfNarrative :: [ String ]       -- ^ freeform story narration
              }
            deriving (Ord, Eq, Generic)
@@ -230,8 +230,8 @@ instance FromJSON VF where
         <*> v .:? "cost"  .!= 0
         <*> v .:? "appliesTo" 
         <*> v .:? "count" .!= 1
-        <*> v .:? "comment" .!= ""
-        <*> v .:? "narrative" .!= []
+        <*> v `parseCollapsedList` "comment" 
+        <*> v `parseCollapsedList` "narrative" 
 
 instance Countable VF where
     count = vfMultiplicity
@@ -243,10 +243,8 @@ instance StoryObject VF where
    setName n x = x { vfname = n }
    narrative ob = vfNarrative ob
    addNarrative s x = x { vfNarrative = s:narrative x }
-   comment ob = f $ vfComment ob
-       where f "" = []
-             f x = [x]
-   addComment s x = x { vfComment = prependString (comment x) s }
+   comment = vfComment 
+   addComment s x = x { vfComment = s:comment x }
 
 
 -- | The Confidence trait covers True Faith as well as Confidence,

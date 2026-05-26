@@ -78,6 +78,6 @@ winterEvents c a
 lrWarping :: ProtoTrait
 lrWarping = defaultPT { protoTrait = OtherTraitKey "Warping"
                       , points = Just 1
-                      , ptComment = Just "from Longevity Ritual" }
+                      , ptComment = [ "from Longevity Ritual" ] }
 
 

@@ -89,13 +89,10 @@ showRDT sp = "Range: " ++ r ++
 spellDescH :: (Spell,Maybe SpellRecord) -> HList
 spellDescH (s,sr) = HList "" $ filterNothing 
                              [ Just $ HList ( show s ) $ filterNothing
-                               [ masteryH s
-                               , f $ spellTComment s ]
+                               ( masteryH s:map jhlist ( spellTComment s ) )
                              , coreSpellRecordH sr
                              ]
-     where f "" = Nothing
-           f x = jhlist x
---
+
 -- | Render the spell record as an OList
 coreSpellRecordH :: Maybe SpellRecord -> Maybe HList
 coreSpellRecordH Nothing = Nothing
