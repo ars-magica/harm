@@ -22,7 +22,6 @@ import Data.List
 import Data.HList
 import Data.Maybe
 import Control.Monad
-import ArM.Debug.Trace
 
 -- | Render a possession in Markdown.
 -- This should be exposed as `printMD` from the Markdown class.
@@ -71,7 +70,7 @@ printBookH book = HList (name book) (map (\x->HList x []) lns)
    where
       lns = filter (/="") $ statline:keyline:lng:ans
       keyline = "**Key** " ++ bookID book
-      statline | "" /= (trim $ bookTitle book) =  ""
+      statline | "" == (trim $ bookTitle book) =  ""
                | otherwise = showStrList $ map show (bookStats book) 
       lng = trim $ fromMaybe "" $ bookLanguage book
       ans = map trim $ bookAnnotation book
@@ -106,7 +105,7 @@ pHgen ob = HList (pName ob) . filterNothing . map ($ ob)
 -- * Individual pieces of information
 
 staffH :: Possession -> Maybe HList
-staffH = ttrace . join . fmap staffH' . staff
+staffH = join . fmap staffH' . staff
 
 staffH' :: Staff -> Maybe HList
 staffH' Servant = jhlist "Servant"

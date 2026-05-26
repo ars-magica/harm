@@ -415,13 +415,13 @@ bulletWithHeaderH h xs = Just $ HList h $ filterNothing $ map ( fmap indentList 
 instance HOutput Library where
    printH lib = Just $ HList ("# " ++ name lib) $ filterNothing
                        [ Just $ hlist $ "+ Updated after " ++ (show $ season lib)
-                       , bulletWithHeaderH "## antologies" (antologies lib )
-                       , bulletWithHeaderH "## arts" (artBooks lib )
-                       , bulletWithHeaderH "## abilities" (abilityBooks lib )
-                       , bulletWithHeaderH "## other works" (otherBooks lib )
-                       , bulletWithHeaderH "## grimoires" (grimoires lib )
-                       , bulletWithHeaderH "## spell lab texts" (spellTexts lib )
-                       , bulletWithHeaderH "## enchantment lab texts" (itemTexts lib )
+                       , bulletWithHeaderH "## Antologies" (antologies lib )
+                       , bulletWithHeaderH "## Arts" (artBooks lib )
+                       , bulletWithHeaderH "## Abilities" (abilityBooks lib )
+                       , bulletWithHeaderH "## Other works" (otherBooks lib )
+                       , bulletWithHeaderH "## Grimoires" (grimoires lib )
+                       , bulletWithHeaderH "## Spell lab texts" (spellTexts lib )
+                       , bulletWithHeaderH "## Enchantment lab texts" (itemTexts lib )
                        ]
 
 -- * Advancements

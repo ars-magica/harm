@@ -67,11 +67,11 @@ readMaybeInt :: String -> Int
 readMaybeInt = fromMaybe (-1) . readMaybe
 
 readTopic :: String -> String -> TraitKey
-readTopic x = readTopic' (trim x)
+readTopic x y = readTopic' (trim x) (trim y)
 readTopic' :: String -> String -> TraitKey
-readTopic' "Art" y  = ArtKey $ trim y
-readTopic' "Ability" y  = AbilityKey $ trim y
--- readTopic' "Spell" y  = SpellKey $ trim y
+readTopic' "Art" y  = ArtKey y
+readTopic' "Ability" y  = AbilityKey y
+-- readTopic' "Spell" y  = SpellKey y
 readTopic' _ y  = AbilityKey $ trim y
 
 
@@ -79,10 +79,15 @@ makeBookStats :: String   -- ^ trait type
               -> String   -- ^ trait label
               -> String   -- ^ Stat String
               -> BookStats -- ^ Book stat object
-makeBookStats x y z = BookStats 
-         { topic = readTopic x y
-         , quality = q
-         , bookLevel = l
+makeBookStats x y z = trace "makeBookStats"
+         $ trace x
+         $ trace y
+         $ trace z
+         $ ttrace
+         $ BookStats 
+         { topic = ttrace $ readTopic x y
+         , quality = ttrace $ q
+         , bookLevel = ttrace $ l
          , reread = 1
          } where (l,q) = readStats z
 

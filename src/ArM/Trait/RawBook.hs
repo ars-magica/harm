@@ -36,7 +36,7 @@ data RawBook = RawBook
              , comment :: !String
              , copies :: !Int
              , language :: !String
-             }
+             } deriving ( Show )
 
 
 -- | Vanilla parser based on the cassava library.
