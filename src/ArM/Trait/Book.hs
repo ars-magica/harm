@@ -79,11 +79,10 @@ makeBookStats :: String   -- ^ trait type
               -> String   -- ^ trait label
               -> String   -- ^ Stat String
               -> BookStats -- ^ Book stat object
-makeBookStats x y z = trace ("makeBookStats "++show (x,y,z)) $ ttrace
-         $ BookStats 
-         { topic = ttrace $ readTopic x y
-         , quality = ttrace $ q
-         , bookLevel = ttrace $ l
+makeBookStats x y z = BookStats 
+         { topic =  readTopic x y
+         , quality = q
+         , bookLevel = l
          , reread = 1
          } where (l,q) = readStats z
 

@@ -18,17 +18,17 @@
 --
 -----------------------------------------------------------------------------
 module ArM.Trait.Aging ( Age(..)
-                       , Aging
+                       , Aging, addYears
                        , advanceAge
                        , toAge
                        , agingLimit
                        , agingBonus
                        , defaultAging
-                       , addYears
                        , agingRoll
                        ) where
 
 import ArM.Helper
+import ArM.Debug.Trace
 
 import GHC.Generics
 import Data.Aeson
@@ -111,10 +111,13 @@ instance Show Aging where
              f xs = " [" ++ showStrList xs ++ "]"
 
 advanceAge :: Aging -> Age -> Age
-advanceAge ag x = updateLR (longevity ag ) 
-                     $ updateABonus ( agingBonus ag )
-                     $ updateAge ( addYears ag )
-                     $ x { apparentYounger = apparentYounger x + del }
+advanceAge ag x = trace "Aging"
+                $ trace (show ag) 
+                $ trace (show x)
+                $ updateLR (longevity ag ) 
+                $ updateABonus ( agingBonus ag )
+                $ updateAge ( addYears ag )
+                $ x { apparentYounger = apparentYounger x + del }
           where updateLR Nothing y = y
                 updateLR (Just lr) y = y { longevityRitual = lr }
                 updateABonus Nothing y = y

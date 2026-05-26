@@ -496,12 +496,7 @@ instance Show BookStats where
                 | otherwise = 'Q':show (fromJust $ quality b)
               l | isNothing (bookLevel b) = ""
                 | otherwise = 'L':show (fromJust $ bookLevel b)
-{-
-instance Ord BookStats where
-    compare a b | topic a /= topic b = compare (topic a) (topic b)
-                | bookLevel a /= bookLevel b = compare (bookLevel a) (bookLevel b)
-                | otherwise  = compare (quality a) (quality b)
--}
+
 -- | A book is an original manuscript.  Antologies and copies are
 -- handled as Possession objects.
 --

@@ -502,7 +502,7 @@ instance TraitType Lab where
 instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ combat p
 instance TraitType Age where
-    advanceTrait p = advanceAge ag
+    advanceTrait p = trace (show ag) $ trace (show p) $ advanceAge ag
           where ag = fromJust $ aging p
 
 -- |
@@ -521,9 +521,9 @@ advanceTraitList' :: [ ProtoTrait ] -> [ Trait ] -> [ Trait ]
 advanceTraitList' [] ys = ys
 advanceTraitList' (x:xs) [] = advanceTraitList xs [toTrait x]
 advanceTraitList' (x:xs) (y:ys) 
-    | x <: y = advanceTraitList xs (toTrait x:y:ys)
-    | y <: x = y:advanceTraitList (x:xs) ys
-    | otherwise = advanceTraitList xs (advanceTrait x y:ys)
+    | x <: y = trace (show x ++ "/" ++ show (traitKey x) ++ " <: " ++ show y) $ advanceTraitList xs (toTrait x:y:ys)
+    | y <: x = trace (show x ++ "/" ++ show (traitKey x) ++ " >: " ++ show y) $ y:advanceTraitList (x:xs) ys
+    | otherwise = trace (show x ++ " =: " ++ show y) $ advanceTraitList xs (advanceTrait x y:ys)
 
 -- ** Auxiliary update functions
 
