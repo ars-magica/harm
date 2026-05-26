@@ -55,12 +55,27 @@ data TraitKey = AbilityKey String
            | CombatKey String
            | AgeKey
            | NoTrait
-           deriving ( Eq, Generic )
+           deriving ( Generic )
 
+instance Eq TraitKey where
+           (==) (CharacteristicKey x) (CharacteristicKey y) = x == y
+           (==) (AbilityKey x) (AbilityKey y) = x == y
+           (==) (ArtKey x) (ArtKey y) = take 2 x == take 2 y
+           (==) (SpellKey x y z) (SpellKey x' y' z') = x==x' && y==y' && z==z'
+           (==) (PTraitKey x) (PTraitKey y) = x == y
+           (==) (ReputationKey x y) (ReputationKey x' y') = x==x' && y==y'
+           (==) (VFKey x y) (VFKey x' y') = x==x' && y==y'
+           (==) (ConfidenceKey x) (ConfidenceKey y) = x == y
+           (==) (OtherTraitKey x) (OtherTraitKey y) = x == y
+           (==) (PossessionKey x) (PossessionKey y) = x==y
+           (==) (EstateKey x) (EstateKey y) = x==y
+           (==) (CombatKey x) (CombatKey y)  = x==y
+           (==) AgeKey AgeKey = True
+           (==) _ _ = False
 instance Show TraitKey where
            show (CharacteristicKey x) = x
            show (AbilityKey x) = x
-           show (ArtKey x) = artLongName x
+           show (ArtKey x) = x
            show (SpellKey x y z) = fote x ++ show y ++ " " ++ z
            show (PTraitKey x) = "Personality Trait: " ++ x
            show (ReputationKey x y) = x ++ " [" ++ y ++ "]"

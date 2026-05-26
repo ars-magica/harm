@@ -26,7 +26,6 @@ import ArM.Trait
 import ArM.Processing
 import ArM.GameRules
 import ArM.Helper
-import ArM.Debug.Trace
 
 import Data.Maybe
 import Data.List
@@ -218,12 +217,11 @@ readingSQ2 (Just pt) xs = readingSQstat pt xs
 -- | Identify correct book stats for the trait being learnt
 readingSQstat :: ProtoTrait -> [BookStats] -> Augmented Advancement 
            -> Augmented Advancement 
-readingSQstat pt xs = trace "readingSQstat"
-                    $ trace ("Stat "++show stat)
-                    $ show (fmap topic $ mhead xs)
-                    $ trace ("PT "++show (protoTrait pt))
+readingSQstat pt xs = trace ("readingSQstat "++show (stat,show $ protoTrait pt,
+                            (fmap show $ fmap topic $ mhead xs)))
+                    $ trace (show $ mhead xs)
                     $ f stat
-    where stat = find ( ( (==) $ protoTrait pt ) . topic ) xs
+    where stat = find ( (==protoTrait pt) . topic ) xs
           f Nothing = addValidation val
           f (Just bk) = readingSQ4 bk
           val = [ ValidationError $ "Book does not cover the topic " ++ show (protoTrait pt) ]
