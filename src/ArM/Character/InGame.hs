@@ -37,11 +37,12 @@ import Control.Monad
 
 -- | Initialise `Character` object for advancement
 initAdvancement :: SeasonTime -> Character -> Character
-initAdvancement t c = c { pastAdvancement = x:pastAdvancement c
-                        , futureAdvancement = xs 
-                        , charTime = t
-                        }
-     where (x,xs) = iaHead t c $ futureAdvancement c
+initAdvancement t c = f $ iaHead t c $ futureAdvancement c
+     where f Nothing = c
+           f (Just (x,xs)) = c { pastAdvancement = x:pastAdvancement c
+                               , futureAdvancement = xs 
+                               , charTime = t
+                               }
 
 -- | Empty augmented advancement object with the given time stamp
 noAdvT :: SeasonTime -> Augmented Advancement
@@ -54,10 +55,11 @@ noAdv = noAdvT NoTime
 
 -- | Take the head off the future advancement if the time is right.
 iaHead :: SeasonTime -> Character 
-       -> [Advancement] -> (Augmented Advancement,[Advancement])
-iaHead t _ [] = (noAdvT t,[])
-iaHead t st (x:xs) | season x == t = (prepareAdvancement st x,xs)
-                   | otherwise = (noAdvT t,xs)
+       -> [Advancement]
+       -> Maybe (Augmented Advancement,[Advancement])
+iaHead _ _ [] = Nothing
+iaHead t st (x:xs) | season x == t = Just (prepareAdvancement st x,xs)
+                   | otherwise = Nothing
 
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: Character -> Advancement -> Augmented Advancement
