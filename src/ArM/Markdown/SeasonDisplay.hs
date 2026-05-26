@@ -90,7 +90,7 @@ instance HOutput CharAug where
        $ appendToHList ( filterNothing $ bk:( map printH $ validation a' ) )
        $ storyHList (CharAug c a') 
        where a = contractAdvancement a'
-             bk = fmap (hlist . ("Uses "++) . show ) $ bookRead  a
+             bk = fmap (hlist . ("Reads "++) . name ) $ bookRead  a
 instance HOutput CovAug where
    printH (CovAug c a') = f $ filterNothing [ printH a ]
      where a = contractAdvancement a'

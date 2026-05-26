@@ -29,6 +29,17 @@ pregameAdvancement:
     - cost: 1
       detail: Mentem
       virtue: Affinity with (art)
+    - cost: 1
+      virtue: Venus' Blessing
+    - cost: 1
+      virtue: Quiet Magic
+    - cost: -3
+      flaw: Study Requirement
+    - cost: -3
+      detail: the bishop
+      flaw: Enemies
+    - cost: -1
+      flaw: Offensive to Animals
 - mode: Characteristics
   changes:
   - characteristic: Int
@@ -92,7 +103,7 @@ pregameAdvancement:
   - art: Perdo
     xp: 0
   - art: Rego
-    xp: 15
+    xp: 36
   - art: Animal
     xp: 0
   - art: Aquam
@@ -100,7 +111,7 @@ pregameAdvancement:
   - art: Auram
     xp: 0
   - art: Corpus
-    xp: 1
+    xp: 0
   - art: Herbam
     xp: 0
   - art: Ignem
@@ -131,12 +142,6 @@ pregameAdvancement:
   - ability: Penetration
     spec: Rego
     xp: 5
-  - level: 20
-    spell: Wound without Cause
-    tefo: PeCo
-  - level: 5
-    spell: Spasms of the Uncontrolled Body
-    tefo: ReCo
   - level: 15
     spell: Lamp till Morning without Flame
     tefo: CrIg
@@ -154,9 +159,6 @@ pregameAdvancement:
     tefo: PeMe
   - level: 15
     spell: Arrow of Peaceful Slumber
-    tefo: ReMe
-  - level: 5
-    spell: Touch of Slumber
     tefo: ReMe
   - level: 20
     spell: Obliteration of the Metallic Barrier
@@ -181,154 +183,41 @@ futureAdvancement:
 - season: Spring 1220
   mode: Reading
   changes:
+  - art: Mentem
+    levelCap: 16
+    xp: 13
+  narrative: Studies Mentem L16Q13 +3
+  reads:
+    - book:  MentemL16Q13
+- season: Summer 1220
+  mode: Reading
+  sourceQuality: 21
+  reads:
+    book: RootHerbam
+  changes:
   - art: Herbam
     levelCap: 6
     xp: 24
   narrative: Studies *Root of Herbam* L6 Q21 +3
-  sourceQuality: 21
-  reads:
-    book: RootHerbam
-- changes:
-  - art: Mentem
-    levelCap: 16
-    xp: 16
-  mode: Reading
-  narrative: Studies Mentem L16Q13 +3
-  season: Summer 1220
-  sourceQuality: 13
-  reads:
-    - book:  MentemL16Q13
-- changes:
-  - art: Terram
-    levelCap: 8
-    xp: 18
-  - lab:
-      name: Cieran's Workshop
-      narrative: A large house in the village, with living quarters and a workshop
-        serving both as an Hermetic lab and a fletcher's workshop.
-      state:
-        aura: 8
-        virtues:
-        - bonus:
-          - name: Aestetics
-            score: 1
-          - name: Upkeep
-            score: 1
-          - name: Art
-            score: 1
-            specialisation: Re
-          name: Dedicated Building
-        - bonus:
-          - name: Aestetics
-            score: 1
-          - name: Safety
-            score: 1
-          - name: Art
-            score: 1
-            specialisation: Me
-          name: Servant
-          narrative: Originally, one of the Brigands from Clon mac Noise. Selected
-            the most Intelligent one.
-        - bonus:
-          - name: General Quality
-            score: 1
-          - name: Activity
-            score: 1
-            specialisation: Experimentation
-          comment: Magic Item from Folio-1109 installed Spring 1227
-          name: Safe Cauldron
-        - bonus:
-          - name: General Quality
-            score: 1
-          - name: Upkeep
-            score: 2
-          comment:
-          - From 1227
-          - The virtue grants +1 Longevity ritual, but this is suspended to allow
-            for use of the Bookstand of Hespera.
-          name: Precious Ingredients
-        - bonus:
-          - name: Aestetics
-            score: 2
-          - name: Activity
-            score: 3
-            specialisation: Spells
-          comment: From 1228
-          name: 'Major Feature: Antechamber'
-          narrative: The Antechamber is actually a small courtyard which can be accessed
-            only through the sanctum.
-        - bonus:
-          - name: General Quality
-            score: -2
-          - name: Activity
-            score: 4
-            specialisation: Spells
-          comment: From 1228
-          name: 'Major Focus: Antechamber'
-        - bonus:
-          - name: Health
-            score: 1
-          comment: From 1235
-          name: Hermetic Chamber Pot
-        - bonus:
-          - name: Warping
-            score: 1
-          - name: General Quality
-            score: 1
-          - name: Upkeep
-            score: -1
-          - name: Activity
-            score: 2
-            specialisation: Experimentation
-          comment:
-          - From 1238
-          - Provides +1 Experimentation and +1 appropriate specialisation, which is
-            also taken for experimentation.
-          name: Faerie Ingredients
-        - bonus:
-          - name: Health
-            score: 1
-          - name: Aestetics
-            score: 1
-          - name: Art
-            score: 1
-            specialisation: Ig
-          name: Magical Heating
-          narrative: Fan of Summer Breezes
-  mode: Reading
-  narrative: Studies *Root of Terram* L8Q15 +3
-  season: Autumn 1220
+- season: Autumn 1220
   sourceQuality: 15
   reads: 
      book: RootTerram
-- changes:
-  - ability: Infernal Lore
-    spec: Undead
-    xp: 5
-  - ability: Parma Magica
-    xp: 5
-  - ability: Second Sight
-    xp: 4
-  - possession:
-      art: Re
-      count: 3
-      name: Rego Vis from Jerome's body
-  - possession:
-      art: Pe
-      count: 1
-      name: Perdo Vis from Jerome's body
-  mode: Adventure
-  narrative: Jerome's Tower - covenant service
-  season: Winter 1220
+  changes:
+  - art: Terram
+    levelCap: 8
+    xp: 18
+  narrative: Studies *Root of Terram* L8Q15 +3
+- season: Winter 1220
   sourceQuality: 14
-- changes:
+  changes:
   - ability: SOCP Lore
     levelCap: 4
     spec: Self initiation
     xp: 17
   mode: Reading
   narrative: Studies book found in Jerome's Tower
-  season: Spring 1221
+- season: Spring 1221
   sourceQuality: 14
   reads:
       book: socpL4Q14
