@@ -276,4 +276,7 @@ inferSQ cs ad = ad { inferredAdv = aa { sourceQuality = sq, bonusSQ = vfBonusSQ 
 -- | Get source quality.  Auxiliary for `inferSQ`.
 getSQ :: Augmented Advancement -> (Maybe XPType,Maybe Int)
 getSQ a | isExposure a = (Just 2,Nothing)
+        | (mode $ explicitAdv a) == Practice 
+          && (isNothing $ sourceQuality $ explicitAdv a)
+          = (Just 4,Nothing)
         | otherwise = (Nothing,Nothing)
