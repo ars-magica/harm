@@ -197,7 +197,7 @@ futureAdvancement:
   changes:
   - art: Herbam
     levelCap: 6
-    xp: 24
+    xp: 21
   narrative: Studies *Root of Herbam* L6 Q21 +3
 - season: Autumn 1220
   sourceQuality: 15
@@ -205,17 +205,16 @@ futureAdvancement:
      book: RootTerram
   changes:
   - art: Terram
-    levelCap: 8
-    xp: 18
   narrative: Studies *Root of Terram* L8Q15 +3
 - season: Winter 1220
   sourceQuality: 14
   changes:
-  - ability: SOCP Lore
+  - ability: Magic Theory
     levelCap: 4
     spec: Self initiation
-    xp: 17
+    xp: 14
   mode: Reading
+  reads: MagicTheoryL5Q12
   narrative: Studies book found in Jerome's Tower
 - season: Spring 1221
   sourceQuality: 14
