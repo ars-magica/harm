@@ -269,20 +269,18 @@ futureAdvancement:
   sourceQuality: 21
   reads:
     book: RootHerbam
+  comment: 'This should be a straight-forward reading season with everything specified.'
 - changes:
   - art: Mentem
-    levelCap: 16
-    xp: 16
   mode: Reading
   narrative: Studies Mentem L16Q13 +3
   season: Summer 1220
   sourceQuality: 13
   reads:
     - book:  MentemL16Q13
+  comment: 'Here we try to infer the xp gain from the book.' 
 - changes:
-  - art: Terram
-    levelCap: 8
-    xp: 18
+  - ability: Magic Theory
   - lab:
       name: Cieran's Workshop
       narrative: A large house in the village, with living quarters and a workshop
@@ -376,12 +374,10 @@ futureAdvancement:
             specialisation: Ig
           name: Magical Heating
           narrative: Fan of Summer Breezes
-  mode: Reading
-  narrative: Studies *Root of Terram* L8Q15 +3
+  mode: Exposure Work
+  narrative: 'Cieran completes the lab setup.  One season suffices because he could move into
+      an existing, abandoned lab.'
   season: Autumn 1220
-  sourceQuality: 15
-  reads: 
-     book: RootTerram
 - changes:
   - ability: Infernal Lore
     spec: Undead
