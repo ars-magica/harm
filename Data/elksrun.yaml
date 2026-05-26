@@ -25,11 +25,12 @@ design:
     - staff: labourer
       count: 3
     - name: The cattle manager
-      specialist:
+      staff:
+        specialist:
         - ability: 'Profession: Cattle Herd'
-          abilityScore: 5
+          score: 5
         - ability: 'Leadership'
-          abilityScore: 4
+          score: 4
     - name: Cattle
       income: 100
     - name: Savings

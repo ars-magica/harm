@@ -109,6 +109,22 @@ data Trait = AbilityTrait Ability
 instance Ord Trait where
      compare x y = compare (traitKey x) (traitKey y)
 
+instance FromJSON Trait where
+    parseJSON (Object v) = AbilityTrait <$> parseJSON (Object v)
+                         <|> ArtTrait <$> v .: "art"
+                         <|> SpellTrait <$> v .: "spell"
+                         <|> PTraitTrait <$> v .: "personality"
+                         <|> ReputationTrait <$> v .: "reputation"
+                         <|> VFTrait <$> v .: "virtue"
+                         <|> VFTrait <$> v .: "flaw"
+                         <|> ConfidenceTrait <$> v .: "confidence"
+                         <|> OtherTraitTrait <$> v .: "othertrait"
+                         <|> PossessionTrait <$> v .: "possession"
+                         <|> EstateTrait <$> v .: "estate"
+                         <|> CombatOptionTrait <$> v .: "combat"
+                         <|> AgeTrait <$> v .: "age"
+    parseJSON _ = mzero
+
 -- | Is the trait included with a zero count?
 isNone :: Trait -> Bool
 isNone (VFTrait x) = count x == 0
@@ -126,12 +142,30 @@ data Ability = Ability { abilityName :: String
                        , abilityExcessXP :: XPType 
                        }
            deriving (Ord, Eq, Generic)
+
+instance FromJSON Ability where
+    parseJSON = withObject "Ability" $ \v -> Ability
+        <$> v .: "ability"
+        <*> v .:? "speciality"
+        <*> v .:? "totalxp" .!= 0
+        <*> v .:? "score" .!= 0
+        <*> v .:? "bonus" .!= 0
+        <*> v .:? "multiplier" .!= 1
+        <*> v .:? "xp" .!= 0
+    
 data Characteristic = Characteristic { characteristicName :: String
                                      , charScore :: Int
                                      , agingPoints :: Int 
                                      , charBonusList :: [(Int,Int)] 
                                      }
            deriving (Eq, Generic)
+instance FromJSON Characteristic where
+    parseJSON = withObject "Characteristic" $ \v -> Characteristic
+        <$> v .: "name"
+        <*> v .:? "score" .!= 0
+        <*> v .:? "aging" .!= 0
+        <*> v `parseCollapsedList` "bonus" 
+
 instance Ord Characteristic where
      compare x y = compare (traitKey x) (traitKey y)
 data Art = Art { artName :: String
@@ -417,15 +451,12 @@ instance TraitClass CombatOption where
 
 -- ** Class instances
 
-instance FromJSON Ability
-instance FromJSON Characteristic 
 instance FromJSON Art 
 instance FromJSON Spell 
 instance FromJSON PTrait 
 instance FromJSON Reputation 
 instance FromJSON Confidence 
 instance FromJSON OtherTrait 
-instance FromJSON Trait  
 instance ToJSON Ability
 instance ToJSON Characteristic 
 instance ToJSON Art 
@@ -768,10 +799,10 @@ instance FromJSON Staff where
         where specialist "servant" = pure Servant
               specialist "teamster" = pure Teamster
               specialist "labourer" = pure Labourer
-              specialist _ = mzero
+              specialist x = trace ("Unrecognised staff " ++ x ) mzero
     parseJSON (Object v) = (Specialist <$> v .: "specialist") 
                          <|> (CovenGrog <$> v .: "grog" )
-    parseJSON _ = mzero
+    parseJSON _ = trace "Staff JSON fallback" mzero
 
 instance Show Possession where
     show p = name p ++ cnt
