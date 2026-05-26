@@ -542,11 +542,14 @@ instance (HOutput a, ContractAdvancement a)
       => HOutput (Augmented a) where
    printH = printH . contractAdvancement
 instance HOutput CovAdvancement where
-   printH ad = Just $ HList "" $ sls ++ f ch
+   printH ad = g $ sls ++ f ch
       where ch = printCovChangesH ad
             sls = filterNothing $ map printH $ caStory ad 
             f [] = []
             f xs = [ HList "Changes" xs ]
+            g [] = Nothing
+            g xs = Just $ HList "" xs
+
 instance HOutput Story where
    printH story = Just $ HList ( storyTitle story ++ sq (storySQ story) )
                 $ filterNothing [ narrativeH story, commentH story ]

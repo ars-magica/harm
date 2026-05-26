@@ -36,7 +36,8 @@ instance Timed AnnalSeason where
    season (AnnalSeason t _) = t
 
 instance HOutput AnnalSeason where
-   printH (AnnalSeason t xs) = Just $ indentList $ HList h $ filterNothing $ map printH xs
+   printH (AnnalSeason t xs) = Just $ indentList $ HList h 
+                             $ filterNothing $ map printH xs
       where h = "## " ++ show t
 
 getSeasonAnnals :: [ EitherAug ] -> [ AnnalSeason ]
@@ -91,8 +92,10 @@ instance HOutput CharAug where
        where a = contractAdvancement a'
              bk = (hlist . ("Uses "++) . show ) $ bookRead  a
 instance HOutput CovAug where
-   printH (CovAug c a') = Just $ HList (name c) $ filterNothing [ printH a ]
+   printH (CovAug c a') = f $ filterNothing [ printH a ]
      where a = contractAdvancement a'
+           f [] = Nothing
+           f xs = Just $ HList (name c) xs
 instance HOutput EitherAug where
    printH (ECov x) = printH x
    printH (EChar x) = printH x
