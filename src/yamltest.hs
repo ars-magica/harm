@@ -29,8 +29,6 @@ ab2 :: Ability
 ab2 = Ability "Single Weapon" Nothing 0 5 0 1 0
 sp1 :: Staff
 sp1 = Specialist [ tr ]
-sp2 :: Staff
-sp2 = CovenGrog [ ab2 ]
 
 -- | The program will read the given saga file and constituent files and
 -- generate all the character and covenant sheets requested by the saga file.
@@ -42,6 +40,3 @@ main = do
      putStrLn ""
      printB $ encode ab
      putStrLn ""
-     printB $ encode sp2
-     putStrLn ""
-
