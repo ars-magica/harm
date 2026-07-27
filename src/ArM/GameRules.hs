@@ -49,6 +49,8 @@ class Show a => GenericXPType a where
     -- | Show XP count.
     showNum :: a -> String
     showNum = show
+    -- | Convert the XP type to Float.
+    fromXP :: a -> Float
 instance GenericXPType Int where
     getAbilityScore x' = (s,y) 
          where y = x - 5*pyramidScore s
@@ -58,6 +60,7 @@ instance GenericXPType Int where
         where x = fromIntegral y  :: Double
     calcXP m x y = x + round ( m*fromIntegral ( fromMaybe 0 y ) )
     xpround = round
+    fromXP = fromIntegral
 instance GenericXPType Float where
     getAbilityScore x' = (s,y) 
          where y = x - 5*pyramidScore s
@@ -69,3 +72,4 @@ instance GenericXPType Float where
     showNum x | isInt x = show ( round x :: Int )
               | otherwise = show x
         where isInt i = i == fromInteger (round i)
+    fromXP = id

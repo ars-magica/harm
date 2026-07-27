@@ -27,3 +27,6 @@ oldinstall: bin/harm
 
 wc:
 	find src -name "*.hs" | xargs wc
+
+clean:
+	cabal clean
