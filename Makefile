@@ -1,18 +1,27 @@
 
-I=$(HOME)/Hobby/github/hibernia/
+I=$(HOME)/bin/
+H=$(HOME)/Hobby/github/hibernia/
 J=$(HOME)/Hobby/github/ars-magica.github.io/
 D=`find dist-newstyle -name doc | head`/html/harm/harm/
 
 .force:
 
-bin/harm: .force
-	cabal install harm  --overwrite-policy=always --installdir=./bin
+run: .force
+	cabal run harm --allow-newer=base --allow-newer=template-haskell
+test: .force
+	cabal run yamltest --allow-newer=base --allow-newer=template-haskell
+
+repl: .force
+	cabal repl harm --allow-newer=base --allow-newer=template-haskell
+
+
+install: .force
+	cabal install harm  --overwrite-policy=always --installdir=$I
 doc: .force
 	cabal haddock harm  
 
-install: bin/harm doc
-	cp --copy-contents $< $I/bin
-	ls -l $J
-	rsync -av $D $J/doc/
+oldinstall: bin/harm 
+	cp --copy-contents $< $H/bin
 
-		
+wc:
+	find src -name "*.hs" | xargs wc
