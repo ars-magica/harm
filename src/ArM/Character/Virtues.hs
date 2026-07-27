@@ -188,21 +188,3 @@ getCharAllowance = (+7) . sum . map ( chLookup . vfname )
            chLookup "Weak Characteristics" = -3
            chLookup _  = 0
 
-elementalMagic :: [ VF ] -> [ ProtoTrait ] -> [ ProtoTrait ]
-elementalMagic [] = id
-elementalMagic (x:xs) | vfname x == "Elemenetal Magic" = elementalMagic'
-                      | otherwise = id
-elementalMagic' :: [ ProtoTrait ] -> [ ProtoTrait ]
-elementalMagic' (x:xs) | isEl "Te" x = mk "Ig" x:mk "Au" x:mk "Aq" x:elementalMagic' xs
-                       | isEl "Ig" x = mk "Te" x:mk "Au" x:mk "Aq" x:elementalMagic' xs
-                       | isEl "Au" x = mk "Te" x:mk "Ig" x:mk "Aq" x:elementalMagic' xs
-                       | isEl "Ag" x = mk "Te" x:mk "Ig" x:mk "Au" x:elementalMagic' xs
-                       | otherwise = elementalMagic' xs
-elementalMagic' [] = [] 
-
-isEl :: String -> ProtoTrait -> Bool
-isEl s x = protoTrait x == ArtKey s && isJust (xp x)
-mk s x = defaultPT { protoTrait = ArtKey "Te"
-                   , bonusXP = Just $ xpround $ fromXP (fromMaybe 0 $ xp x) / 2.0
-                   }
-

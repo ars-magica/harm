@@ -59,7 +59,7 @@ instance GenericXPType Int where
     scoreFromXP y = floor $ (-1+sqrt (1+8*x))/2
         where x = fromIntegral y  :: Double
     calcXP m x y = x + round ( m*fromIntegral ( fromMaybe 0 y ) )
-    xpround = round
+    xpround = ceiling
     fromXP = fromIntegral
 instance GenericXPType Float where
     getAbilityScore x' = (s,y) 

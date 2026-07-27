@@ -22,10 +22,11 @@ import ArM.Character.CharacterSheet
 import ArM.Story
 import ArM.Trait
 import ArM.Character.Virtues
+import ArM.GameRules
 
 import Data.Maybe 
 
--- import ArM.Debug.Trace
+import ArM.Debug.Trace
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `Character`.
@@ -55,10 +56,10 @@ augmentAdvancement cs a = defaultAdvancement
               | otherwise = Nothing
 
 inferProtoTraits :: Character -> [ProtoTrait] -> [ProtoTrait]
-inferProtoTraits cs xs = g xs ++ f xs  ++ h xs
+inferProtoTraits cs xs = trace "inferProtoTraits" $ g xs ++ f xs  ++ h xs
      where f =  inferTraits . getVF 
            g =  inferDecrepitude 
-           h =  flawlessSpells cs 
+           h =  trace "vfInference" $ vfInference $ vfList cs 
 
 
 -- |
@@ -72,18 +73,13 @@ inferDecrepitude (x:xs)
          apts = fromMaybe 0 $ agingPts x
 
 
--- | Inferred spell traits if Flawless Magic applies
-flawlessSpells :: Character -> [ProtoTrait] -> [ProtoTrait]
-flawlessSpells sheet xs | hasFlawless sheet = flawlessSpells' xs
-                        | otherwise = []
-
 -- | Inferred spell traits implementing Flawless Magic.
 -- Auxiliary for `flawlessSpells`
-flawlessSpells' :: [ProtoTrait] -> [ProtoTrait]
-flawlessSpells' [] = []
-flawlessSpells' (x:xs) | isSpell (protoTrait x) = y:ys
+flawlessSpells :: [ProtoTrait] -> [ProtoTrait]
+flawlessSpells [] = []
+flawlessSpells (x:xs) | isSpell (protoTrait x) = y:ys
                        | otherwise = ys
-    where ys = flawlessSpells' xs
+    where ys = flawlessSpells xs
           y = defaultPT { protoTrait = protoTrait x, flawless = Just True }
 
 -- | Does the character have Flawless Magic?
@@ -92,4 +88,26 @@ hasFlawless c | fms == [] = False
               | otherwise = True
     where ts = vfList c
           fms = filter ((=="Flawless Magic") . vfname ) ts
+
+
+vfInference :: [ VF ] -> [ ProtoTrait ] -> [ ProtoTrait ]
+vfInference [] _ = []
+vfInference (x:xs) ys
+       | vfname x == "Elemental Magic" = trace "Elemental" $ elementalMagic ys ++ vfInference xs ys
+       | vfname x == "Flawless Magic" = flawlessSpells ys ++ vfInference xs ys
+       | otherwise = vfInference xs ys
+
+elementalMagic :: [ ProtoTrait ] -> [ ProtoTrait ]
+elementalMagic (x:xs) | isEl "Te" x = mk "Ig" x:mk "Au" x:mk "Aq" x:elementalMagic xs
+                      | isEl "Ig" x = mk "Te" x:mk "Au" x:mk "Aq" x:elementalMagic xs
+                      | isEl "Au" x = mk "Te" x:mk "Ig" x:mk "Aq" x:elementalMagic xs
+                      | isEl "Aq" x = mk "Te" x:mk "Ig" x:mk "Au" x:elementalMagic xs
+                      | otherwise = elementalMagic xs
+elementalMagic [] = [] 
+
+isEl :: String -> ProtoTrait -> Bool
+isEl s x = protoTrait x == ArtKey s && isJust (xp x)
+mk s x = defaultPT { protoTrait = ArtKey s
+                   , bonusXP = Just $ trace "mk" $ ttrace $ xpround $ fromXP (fromMaybe 0 $ xp x) / 2.0
+                   }
 
