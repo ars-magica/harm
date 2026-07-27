@@ -1,5 +1,6 @@
 
-I=$(HOME)/Hobby/github/hibernia/
+I=$(HOME)/bin/
+H=$(HOME)/Hobby/github/hibernia/
 J=$(HOME)/Hobby/github/ars-magica.github.io/
 D=`find dist-newstyle -name doc | head`/html/harm/harm/
 
@@ -14,13 +15,13 @@ repl: .force
 	cabal repl harm --allow-newer=base --allow-newer=template-haskell
 
 
-bin/harm: .force
-	cabal install harm  --overwrite-policy=always --installdir=./bin
+install: .force
+	cabal install harm  --overwrite-policy=always --installdir=$I
 doc: .force
 	cabal haddock harm  
 
-install: bin/harm 
-	cp --copy-contents $< $I/bin
+oldinstall: bin/harm 
+	cp --copy-contents $< $H/bin
 
 wc:
 	find src -name "*.hs" | xargs wc
