@@ -27,12 +27,12 @@ futureAdvancement:
   mode: Exposure Work
   narrative: Tessa was foraging and hunting to prepare for Winter.
 - season: Winter 1220
+  mode: Practice
   changes:
   - ability: Carouse
     xp: 4
   - aging:
       die: 5
-  mode: Practice
   narrative: The long Winter nights were spent in the alehouse.
 pregameAdvancement:
 - changes:
