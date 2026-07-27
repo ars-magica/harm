@@ -4,19 +4,21 @@ H=$(HOME)/Hobby/github/hibernia/
 J=$(HOME)/Hobby/github/ars-magica.github.io/
 D=`find dist-newstyle -name doc | head`/html/harm/harm/
 
+O=--allow-newer=base --allow-newer=template-haskell
+
 .force:
 
 run: .force
-	cabal run harm --allow-newer=base --allow-newer=template-haskell
+	cabal run harm  $O
 test: .force
-	cabal run yamltest --allow-newer=base --allow-newer=template-haskell
+	cabal run yamltest $O
 
 repl: .force
-	cabal repl harm --allow-newer=base --allow-newer=template-haskell
+	cabal repl harm $O
 
 
 install: .force
-	cabal install harm  --overwrite-policy=always --installdir=$I
+	cabal install harm  $O --overwrite-policy=always --installdir=$I
 doc: .force
 	cabal haddock harm  
 
