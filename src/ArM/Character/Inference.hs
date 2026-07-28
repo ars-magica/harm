@@ -73,8 +73,9 @@ inferDecrepitude (x:xs)
          apts = fromMaybe 0 $ agingPts x
 
 
--- | Inferred spell traits implementing Flawless Magic.
--- Auxiliary for `flawlessSpells`
+-- | Apply the effects of *Flawless  Magic` to the `ProtoTrait`s.
+-- `ProtoTrait`s are added setting `flawless` to `True` for every
+-- spell in the input list.
 flawlessSpells :: [ProtoTrait] -> [ProtoTrait]
 flawlessSpells [] = []
 flawlessSpells (x:xs) | isSpell (protoTrait x) = y:ys
@@ -82,14 +83,9 @@ flawlessSpells (x:xs) | isSpell (protoTrait x) = y:ys
     where ys = flawlessSpells xs
           y = defaultPT { protoTrait = protoTrait x, flawless = Just True }
 
--- | Does the character have Flawless Magic?
-hasFlawless :: Character -> Bool
-hasFlawless c | fms == [] = False
-              | otherwise = True
-    where ts = vfList c
-          fms = filter ((=="Flawless Magic") . vfname ) ts
-
-
+-- | Infer prototraits from virtues and flaws.
+-- Each virtue/flaw should have a `[ ProtoTrait ] -> [ ProtoTrait ]` function
+-- which is applied when the virtue/flaw is found in the `[ VF ]` argument. 
 vfInference :: [ VF ] -> [ ProtoTrait ] -> [ ProtoTrait ]
 vfInference [] _ = []
 vfInference (x:xs) ys
@@ -97,17 +93,17 @@ vfInference (x:xs) ys
        | vfname x == "Flawless Magic" = flawlessSpells ys ++ vfInference xs ys
        | otherwise = vfInference xs ys
 
+-- | Apply the effects of *Elemental Magic` to the `ProtoTrait`s.
 elementalMagic :: [ ProtoTrait ] -> [ ProtoTrait ]
+elementalMagic [] = [] 
 elementalMagic (x:xs) | isEl "Te" x = mk "Ig" x:mk "Au" x:mk "Aq" x:elementalMagic xs
                       | isEl "Ig" x = mk "Te" x:mk "Au" x:mk "Aq" x:elementalMagic xs
                       | isEl "Au" x = mk "Te" x:mk "Ig" x:mk "Aq" x:elementalMagic xs
                       | isEl "Aq" x = mk "Te" x:mk "Ig" x:mk "Au" x:elementalMagic xs
                       | otherwise = elementalMagic xs
-elementalMagic [] = [] 
-
-isEl :: String -> ProtoTrait -> Bool
-isEl s x = protoTrait x == ArtKey s && isJust (xp x)
-mk s x = defaultPT { protoTrait = ArtKey s
-                   , bonusXP = Just $ trace "mk" $ ttrace $ xpround $ fromXP (fromMaybe 0 $ xp x) / 2.0
+  where mk s x = defaultPT { protoTrait = ArtKey s
+                   , bonusXP = Just $ xpround $ fromXP (fromMaybe 0 $ xp x) / 2.0
                    }
+        isEl s x = protoTrait x == ArtKey s && isJust (xp x)
+
 
