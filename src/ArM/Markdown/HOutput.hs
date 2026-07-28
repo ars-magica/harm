@@ -241,8 +241,6 @@ magusSheetH c saga
    | otherwise = Nothing 
 
 -- | Set a list of spells.
--- Each spell is set using 'spellMD', and the result is indented as a
--- hierarchical list.
 printFullGrimoireH :: SpellDB -> [Spell] -> HList
 printFullGrimoireH db xs = HList "## Grimoire" 
                          [ hlist ""

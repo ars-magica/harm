@@ -66,7 +66,7 @@ defaultSpellRecord = SpellRecord
 instance ToJSON SpellRecord
 instance FromJSON SpellRecord where
     parseJSON = withObject "SpellRecord" $ \v -> SpellRecord
-        <$> v .: "name"
+        <$> v .: "spell"
         <*> v .:? "level"
         <*> fmap (take 2) (v .: "technique")
         <*> v `parseCollapsedList` "techniqueReq" 

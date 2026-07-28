@@ -26,8 +26,6 @@ import ArM.GameRules
 
 import Data.Maybe 
 
-import ArM.Debug.Trace
-
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `Character`.
 --
@@ -56,10 +54,10 @@ augmentAdvancement cs a = defaultAdvancement
               | otherwise = Nothing
 
 inferProtoTraits :: Character -> [ProtoTrait] -> [ProtoTrait]
-inferProtoTraits cs xs = trace "inferProtoTraits" $ g xs ++ f xs  ++ h xs
+inferProtoTraits cs xs =  g xs ++ f xs  ++ h xs
      where f =  inferTraits . getVF 
            g =  inferDecrepitude 
-           h =  trace "vfInference" $ vfInference $ vfList cs 
+           h =   vfInference $ vfList cs 
 
 
 -- |
@@ -89,7 +87,7 @@ flawlessSpells (x:xs) | isSpell (protoTrait x) = y:ys
 vfInference :: [ VF ] -> [ ProtoTrait ] -> [ ProtoTrait ]
 vfInference [] _ = []
 vfInference (x:xs) ys
-       | vfname x == "Elemental Magic" = trace "Elemental" $ elementalMagic ys ++ vfInference xs ys
+       | vfname x == "Elemental Magic" =  elementalMagic ys ++ vfInference xs ys
        | vfname x == "Flawless Magic" = flawlessSpells ys ++ vfInference xs ys
        | otherwise = vfInference xs ys
 
@@ -101,9 +99,9 @@ elementalMagic (x:xs) | isEl "Te" x = mk "Ig" x:mk "Au" x:mk "Aq" x:elementalMag
                       | isEl "Au" x = mk "Te" x:mk "Ig" x:mk "Aq" x:elementalMagic xs
                       | isEl "Aq" x = mk "Te" x:mk "Ig" x:mk "Au" x:elementalMagic xs
                       | otherwise = elementalMagic xs
-  where mk s x = defaultPT { protoTrait = ArtKey s
-                   , bonusXP = Just $ xpround $ fromXP (fromMaybe 0 $ xp x) / 2.0
+  where mk s y = defaultPT { protoTrait = ArtKey s
+                   , bonusXP = Just $ xpround $ fromXP (fromMaybe 0 $ xp y) / 2.0
                    }
-        isEl s x = protoTrait x == ArtKey s && isJust (xp x)
+        isEl s y = protoTrait y == ArtKey s && isJust (xp y)
 
 

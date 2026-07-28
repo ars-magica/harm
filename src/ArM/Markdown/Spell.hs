@@ -84,19 +84,18 @@ showRDT sp = "Range: " ++ r ++
    where (r,d,t) = rdt sp
 
 -- | Render a spell trait in Markdown
--- The result should normally be subject to indentOList to make an hierarchical
+-- The result should normally be subject to indentList to make an hierarchical
 -- list.
 spellDescH :: (Spell,Maybe SpellRecord) -> HList
-spellDescH (s,sr) = HList "" $ filterNothing 
-                             [ Just $ HList ( show s ) $ filterNothing
-                               ( masteryH s:map jhlist ( spellTComment s ) )
-                             , coreSpellRecordH sr
-                             ]
+spellDescH (s,Nothing) = spellDescH' s
+spellDescH (s,Just y) = HList "" [ spellDescH' s, coreSpellRecordH y ]
+spellDescH' :: Spell -> HList
+spellDescH' s = HList ( show s ) 
+             $ filterNothing ( masteryH s:map jhlist ( spellTComment s ) )
 
--- | Render the spell record as an OList
-coreSpellRecordH :: Maybe SpellRecord -> Maybe HList
-coreSpellRecordH Nothing = Nothing
-coreSpellRecordH (Just sp) = Just $ HList "" $ filterNothing hs
+-- | Render the spell record as an HList
+coreSpellRecordH :: SpellRecord -> HList
+coreSpellRecordH sp = HList "" $ filterNothing hs
     where hs = nh:ch:(map jhlist $ spellDetails sp)
           nh = narrativeH sp
           ch = commentH sp
