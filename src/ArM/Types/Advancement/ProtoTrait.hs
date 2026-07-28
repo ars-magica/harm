@@ -91,6 +91,7 @@ data ProtoTrait = ProtoTrait
                                  -- could be negative to remove an existing, but
                                  -- this is not yet implemented
     , ptComment :: [ String ]  -- ^ freeform comment
+    , ptNarrative :: [ String ]  -- ^ freeform narrative
     } deriving (Eq,Generic)
 
 -- | Default ProtoTrait object, used internally for step-by-step construction of
@@ -117,6 +118,7 @@ defaultPT = ProtoTrait { protoTrait = NoTrait
                              , charBonuses = []
                              , multiplicity = Nothing
                              , ptComment = []
+                             , ptNarrative = []
                              }
 
 -- | Parse an ability key from a JSON object
@@ -185,6 +187,7 @@ instance FromJSON ProtoTrait where
         <*> v .:?  "charBonus"  .!= []
         <*> v .:?  "multiplicity"
         <*> v `parseCollapsedList`  "comment" 
+        <*> v `parseCollapsedList`  "narrative" 
 
 showBonusScore :: ProtoTrait -> String
 showBonusScore pt | isNothing b = ""
@@ -214,6 +217,7 @@ showMastery (Just (x:xs)) = ' ':(foldl (++) x $ map (", "++) xs)
 instance StoryObject ProtoTrait where
    name = show . traitKey
    comment = ptComment
+   narrative = ptNarrative
 instance Show ProtoTrait  where
    show p = showPT k p ++ cms (ptComment p)
       where cms [] = ""
@@ -375,7 +379,7 @@ computeVF (VFKey x d) p = Just $ VF
                     , vfAppliesTo = Nothing
                     , vfMultiplicity = fromMaybe 1 $ multiplicity p
                     , vfComment = ptComment p 
-                    , vfNarrative = []
+                    , vfNarrative = ptNarrative p
                     }
 computeVF _ _ = Nothing
 

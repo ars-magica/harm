@@ -122,6 +122,7 @@ briefTraitsH c = Just $ HList "" $ filterNothing
 sheetH :: Character -> HList
 sheetH c = HList "" $ filterNothing
                [ briefTraitsH c
+               , showlistH "+ **Virtues and Flaws:** "  $ sortTraits $ vfList c
                , showlistH "+ **Abilities:** "  $ sortTraits $ abilityList c
                , showlistH "+ **Arts:** "  $ sortTraits $ artList c
                , showlistH "+ **Spells:** "  $ sortTraits $ spellList c
@@ -145,6 +146,8 @@ sheetSheetH c = HList ( "## Character Sheet " ++ (show $ gameSeason c) )
                [ briefTraitsH c
                , Just $ indentList $ HList "**Abilities:**"
                         (map (hlist . show) ( sortTraits $ abilityList c ))
+               -- , Just $ HList "" $ map ( indentList . vfH ) ( boonhook cov )
+               , Just $ listVFH $ vfList c
                , Just $ listPossessionsH $ characterPossessions c
                , jhlist ""
                ]
@@ -297,6 +300,10 @@ covconceptHelper cc = filterNothing
    ]
 
 -- * Traits and Possessions
+
+-- | Make a list of virtues and flaws
+listVFH :: [ VF ] -> HList
+listVFH = HList "### Virtues and Flaws" . map indentList . map vfH 
 
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessionsH :: [ Possession ] -> HList

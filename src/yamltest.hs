@@ -25,8 +25,6 @@ ab :: Ability
 ab = Ability "Cattle Herd" Nothing 0 5 0 1 0
 tr :: Trait
 tr = AbilityTrait ab
-ab2 :: Ability
-ab2 = Ability "Single Weapon" Nothing 0 5 0 1 0
 sp1 :: Staff
 sp1 = Specialist [ tr ]
 
