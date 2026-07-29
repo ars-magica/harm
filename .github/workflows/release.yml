@@ -1,26 +1,46 @@
-name: build
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
+# (C) 2025: Hans Georg Schaathun <georg@schaathun.net> 
 
-# INFO: The following configuration block ensures that only one build runs per branch,
-# which may be desirable for projects with a costly build process.
-# Remove this block from the CI workflow to let each CI job run to completion.
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
+name: Release on github
+
+description: |
+  Distribute a release on github.
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+    - 'workflow/release'
+
 
 jobs:
-  build:
-    name: GHC ${{ matrix.ghc-version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build sdist
+        run: cabal sdist 
+        # O=--allow-newer=base --allow-newer=template-haskell
+
+      - name: Listing for debugging
+        run: ls -l
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: harm-source
+          path: dist-newstyle/sdist/harm-*.tar.gz
+
+  build_binary:
+    name: Build binaries 
     strategy:
-      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest ]
         ghc-version: ['9.8' ]
-
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
@@ -77,15 +97,37 @@ jobs:
           name: harm-${{ matrix.os }}
           path: dist-${{ matrix.os }}
 
-      - name: Run tests
-        run: cabal test all
+  release:
+    permissions: write-all
+    name: Release and Upload Assets
+    runs-on: ubuntu-latest
+    strategy:
+       fail-fast: false
 
-      - name: Check cabal file
-        run: cabal check
+    needs:
+      - build_sdist
+      - build_binary
 
-      - name: Build documentation
-        run:
-          cabal haddock all --disable-documentation
-          # --disable-documentation disables building documentation for dependencies.
-          # The package's own documentation is still built,
-          # yet contains no links to the documentation of the dependencies.
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+      - name: Display artifacts
+        run: ls -lR
+        working-directory: dist
+      - name: Rename macos binary
+        run: mv harm-macos-latest/harm harm-macos
+        working-directory: dist
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          draft: false
+          files: |
+             dist/harm-source/*.tar.gz
+             dist/harm-source/*.zip
+             dist/harm-*/harm.exe
+             dist/harm-ubuntu-*/harm
+             dist/harm-macos
