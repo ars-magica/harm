@@ -117,11 +117,17 @@ jobs:
       - name: Display artifacts
         run: ls -lR
         working-directory: dist
+      - name: Rename macos binary
+        run: mv harm-macos-latest/harm harm-macos
+        working-directory: dist
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: false
           files: |
-             dist/*.tar.gz
-             dist/*.zip
+             dist/harm-source/*.tar.gz
+             dist/harm-source/*.zip
+             dist/harm-*/harm.exe
+             dist/harm-ubuntu-*/harm
+             dist/harm-macos
