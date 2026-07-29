@@ -18,6 +18,7 @@ repl: .force
 
 
 install: .force
+	mkdir -p $I
 	cabal install harm  $O --overwrite-policy=always --installdir=$I
 doc: .force
 	cabal haddock harm  
