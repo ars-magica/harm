@@ -24,7 +24,7 @@ jobs:
 
       - name: Build sdist
         run: cabal sdist 
-        O=--allow-newer=base --allow-newer=template-haskell
+        # O=--allow-newer=base --allow-newer=template-haskell
 
       - uses: actions/upload-artifact@v4
         with:
