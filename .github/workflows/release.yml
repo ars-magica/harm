@@ -36,7 +36,7 @@ jobs:
     runs-on: 
       - ubuntu-2024
       - windows-latest
-      - maxos-latest
+      - macos-latest
     steps:
       - uses: actions/checkout@v4
 
