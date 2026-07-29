@@ -17,6 +17,9 @@ module ArM.IO (readSaga,writeSaga) where
 import ArM.IO.Read
 import ArM.IO.Write
 
+import System.Directory
+import System.FilePath
+
 import ArM.Markdown
 import ArM.Saga
 import ArM.Types.Harm
@@ -37,7 +40,9 @@ readSaga fn = readSagaFile fn >>= passMaybe loadSaga
 -- Write markdown files for the saga and all its covenants and characters.
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
-      writeOList (rootDir saga ++ "/index.md") $ printMD saga
+      let dir = rootDir saga
+      createDirectoryIfMissing True dir 
+      writeOList (dir </> "index.md") $ printMD saga
 
       let sagas = advanceSaga saga
 

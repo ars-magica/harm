@@ -16,6 +16,7 @@
 module ArM.IO.Write where
 
 import System.Directory
+import System.FilePath
 
 import ArM.Markdown
 import ArM.Sheet
@@ -40,7 +41,7 @@ writeObjects dir saga cs = mapM wf  cs >> return ()
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
    createDirectoryIfMissing True dir >>
-   writeOList (dir ++ "index.md") (sagaStateMD saga) >>
+   writeOList (dir </> "index.md") (sagaStateMD saga) >>
    writeObjects dir saga (characterList saga) >>
    writeObjects dir saga (covenantList saga) >>
    writeObjects dir saga (map getLibrary $ covenantList saga)
