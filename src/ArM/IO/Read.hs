@@ -15,8 +15,6 @@ module ArM.IO.Read where
 import Data.Aeson (FromJSON)
 import Data.Aeson.Generic (readObject)
 
-import qualified Data.Map as M
-
 import Data.Maybe 
 
 import ArM.Story
