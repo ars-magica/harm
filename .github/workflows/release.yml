@@ -10,6 +10,9 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
     - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+    - 'workflow/release'
+
 
 jobs:
 
@@ -19,23 +22,80 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Project
-        uses: ./.github/actions/build-linux
-
       - name: Build sdist
         run: cabal sdist 
+        # O=--allow-newer=base --allow-newer=template-haskell
+
+      - name: Listing for debugging
+        run: ls -l
 
       - uses: actions/upload-artifact@v4
         with:
           name: harm-source
-          path: dist/*.tar.gz
+          path: dist-newstyle/sdist/harm-*.tar.gz
 
   build_binary:
     name: Build binaries 
-    runs-on: 
-      - ubuntu-latest
-      - windows-latest
-      - maxos-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest ]
+        ghc-version: ['9.8' ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up GHC ${{ matrix.ghc-version }}
+        uses: haskell-actions/setup@v2
+        id: setup
+        with:
+          ghc-version: ${{ matrix.ghc-version }}
+          # Defaults, added for clarity:
+          cabal-version: 'latest'
+          cabal-update: true
+
+      - name: Configure the build
+        run: |
+          cabal configure --enable-tests --enable-benchmarks --disable-documentation
+          cabal build all --dry-run
+        # The last step generates dist-newstyle/cache/plan.json for the cache key.
+
+      - name: Restore cached dependencies
+        uses: actions/cache/restore@v4
+        id: cache
+        env:
+          key: ${{ runner.os }}-ghc-${{ steps.setup.outputs.ghc-version }}-cabal-${{ steps.setup.outputs.cabal-version }}
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ env.key }}-plan-${{ hashFiles('**/plan.json') }}
+          restore-keys: ${{ env.key }}-
+
+      - name: Install dependencies
+        # If we had an exact cache hit, the dependencies will be up to date.
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: cabal build all --only-dependencies
+
+      # Cache dependencies already here, so that we do not have to rebuild them should the subsequent steps fail.
+      - name: Save cached dependencies
+        uses: actions/cache/save@v4
+        # If we had an exact cache hit, trying to save the cache would error because of key clash.
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.setup.outputs.cabal-store }}
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+
+      - name: Build
+        run: cabal build all
+
+      - name: Install
+        run: |
+          mkdir dist-${{ matrix.os }}
+          cabal install harm --install-method=copy --overwrite-policy=always --installdir=dist-${{ matrix.os }}
+          ls -l dist-${{ matrix.os }}
+      - name: Archive Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: harm-${{ matrix.os }}
+          path: dist-${{ matrix.os }}
 
   release:
     permissions: write-all
@@ -50,7 +110,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Download a all artifact
+      - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
           path: dist
