@@ -75,7 +75,7 @@ instance FromJSON SpellRecord where
         <*> v .:? "range" .!= ""
         <*> v .:? "duration" .!= ""
         <*> v .:? "target" .!= ""
-        <*> v .:? "specialSpell" .!= []
+        <*> v `parseCollapsedList` "specialSpell"
         <*> v `parseCollapsedList` "description" 
         <*> v .:? "design" .!= ""
         <*> v `parseCollapsedList` "comment" 

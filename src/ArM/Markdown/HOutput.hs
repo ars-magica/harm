@@ -250,7 +250,7 @@ printFullGrimoireH db xs = HList "## Grimoire"
                             ++ " levels of spells."
                          ]
    where ys = [ (x,f x) | x <- xs ]
-         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
+         f x = trace (show $ traitKey x) $ spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
 

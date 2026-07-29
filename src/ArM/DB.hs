@@ -20,11 +20,17 @@ module ArM.DB ( mkArmourDB
               , WeaponDB
               , ArmourDB
               , ArMCSV(..)
+              , readYaml
+              , readDB
               ) where
 
-import ArM.DB.CSV
 import qualified Data.Map as M
+import Data.Aeson (FromJSON)
+import Data.Aeson.Generic (readObject)
+import Data.Maybe
+import System.FilePath
 
+import ArM.DB.CSV
 import ArM.Trait
 
 type WeaponDB = M.Map String Weapon
@@ -48,3 +54,23 @@ spellDB = M.fromList . map ( \ x -> (spellRecordName x,x) ) . map fromCSVline
 
 spellLookup :: TraitKey -> SpellDB -> Maybe SpellRecord
 spellLookup = M.lookup . spellKeyName
+
+-- | Load a DB from a YAML/JSON file.
+readYaml :: (ArMCSV t,FromJSON t) 
+         => String -- ^ Filename
+            -> IO ( Maybe ( M.Map String t ) )
+readYaml fn = readObject fn >>= return . fmap mkDB 
+   where mkDB = M.fromList . map ( \ x -> (getID x,x) ) 
+
+-- | Load a DB from either YAML/JSON or CSV.
+--
+-- If he filename ends in ".csv", CSV is assumed.
+-- Otherwise the file has to be in either YAML or JSON format.
+readDB :: (ArMCSV t,FromJSON t) 
+         => String -- ^ Filename
+            -> IO ( M.Map String t )
+readDB f = readDB' (takeExtension f) f
+   where readDB' ".csv" = fmap fm . readCSV
+         readDB' _ = fmap fm . readYaml
+         fm Nothing = error ("Failed to read DB file: " ++ f)
+         fm (Just x) = x

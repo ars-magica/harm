@@ -15,6 +15,8 @@ module ArM.IO.Read where
 import Data.Aeson (FromJSON)
 import Data.Aeson.Generic (readObject)
 
+import qualified Data.Map as M
+
 import Data.Maybe 
 
 import ArM.Story
@@ -39,8 +41,8 @@ readSagaFile = readObject
 loadSaga :: SagaFile -> IO Saga
 loadSaga saga = do
    db <- readDB $ spellFile saga
-   wdb <- readDB $ weaponFile saga
-   adb <- readDB $ armourFile saga
+   wdb <- readCSV $ weaponFile saga
+   adb <- readCSV $ armourFile saga
    cs <- mapM readArM $ characterFiles saga
    cov <- mapM readArM ( covenantFiles saga )
    return $ trace "Saga" $ Saga
@@ -49,10 +51,11 @@ loadSaga saga = do
           , covenants = toDB $ filterNothing cov 
           , characters = toDB $ filterNothing cs 
           , baseURL = Nothing
-          , spells = fromJust db 
+          , spells = db 
           , weaponsDB = fromJust wdb
           , armourDB = fromJust adb
           }
+
 
 
 -- ** Read Character and Covenant Data

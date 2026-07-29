@@ -23,7 +23,7 @@ import Data.OList
 import Data.HList
 -- import Data.Maybe
 
-
+import ArM.Debug.Trace
 
 -- | Render the lab text in markdown HList format.
 textH :: LabText -> HList
@@ -87,7 +87,7 @@ showRDT sp = "Range: " ++ r ++
 -- The result should normally be subject to indentList to make an hierarchical
 -- list.
 spellDescH :: (Spell,Maybe SpellRecord) -> HList
-spellDescH (s,Nothing) = spellDescH' s
+spellDescH (s,Nothing) = trace "No SpellRecord" $ spellDescH' s
 spellDescH (s,Just y) = HList "" [ spellDescH' s, coreSpellRecordH y ]
 spellDescH' :: Spell -> HList
 spellDescH' s = HList ( show s ) 

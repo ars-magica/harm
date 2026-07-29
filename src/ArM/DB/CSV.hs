@@ -35,9 +35,9 @@ class ArMCSV t where
     getDB = M.fromList . map ( \ x -> (getID x,x) ) . map fromCSVline
 
     -- | Read spells from CSV.  Return Maybe SpellDB.
-    readDB :: String -- ^ Filename
+    readCSV :: String -- ^ Filename
               -> IO (Maybe (M.Map String t))
-    readDB fn = parseFromFile CSV.csvFile fn >>= return . Just . getDB . g
+    readCSV fn = parseFromFile CSV.csvFile fn >>= return . Just . getDB . g
       where g (Left _) = [[]]
             g (Right x) = x
 
