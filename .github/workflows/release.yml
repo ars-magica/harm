@@ -26,17 +26,20 @@ jobs:
         run: cabal sdist 
         # O=--allow-newer=base --allow-newer=template-haskell
 
+      - name: Listing for debugging
+        run: ls -l
+
       - uses: actions/upload-artifact@v4
         with:
           name: harm-source
-          path: dist/*.tar.gz
+          path: dist-newstyle/sdist/harm-*.tar.gz
 
   build_binary:
     name: Build binaries 
-    runs-on: 
-      - ubuntu-2024
-      - windows-latest
-      - macos-latest
+    matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest ]
+        ghc-version: ['9.8' ]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
