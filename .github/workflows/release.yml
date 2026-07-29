@@ -36,7 +36,8 @@ jobs:
 
   build_binary:
     name: Build binaries 
-    matrix:
+    strategy:
+      matrix:
         os: [ubuntu-latest, windows-latest, macos-latest ]
         ghc-version: ['9.8' ]
     runs-on: ${{ matrix.os }}
