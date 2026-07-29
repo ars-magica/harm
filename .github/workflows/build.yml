@@ -2,7 +2,7 @@ name: build
 on:
   workflow_dispatch:
   push:
-    branches: [main,release/*]
+    branches: [main]
 
 # INFO: The following configuration block ensures that only one build runs per branch,
 # which may be desirable for projects with a costly build process.
@@ -20,7 +20,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest ]
         ghc-version: ['9.8' ]
-
 
     steps:
       - uses: actions/checkout@v4
