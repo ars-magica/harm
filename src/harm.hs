@@ -44,7 +44,7 @@ import Data.Maybe (fromJust)
 data Options = Options 
   { sagaFile :: Maybe String
   , outFile  :: Maybe String
-  , jsonFile :: Maybe String
+  , charFile :: Maybe String
   , spellDBFile :: Maybe String
   , debugFile  :: Maybe String
   , seasonFile  :: Maybe String
@@ -52,9 +52,9 @@ data Options = Options
 } deriving (Show)
 defaultOptions :: Options
 defaultOptions = Options 
-  { sagaFile = Just "Data/hibernia.yaml"
+  { sagaFile = Nothung
   , outFile  = Nothing
-  , jsonFile  = Nothing
+  , charFile  = Nothing
   , spellDBFile = Nothing
   , debugFile  = Nothing
   , seasonFile  = Nothing
@@ -64,7 +64,7 @@ defaultOptions = Options
 
 options :: [ OptDescr (Options -> Options) ]
 options =
-    [ Option ['j']     ["json"] (ReqArg 
+    [ Option ['c']     ["char"] (ReqArg 
             (\arg opt -> opt { jsonFile = Just arg })
             "FILE") "JSON output file"
     , Option ['o']     ["output"]  (ReqArg 
