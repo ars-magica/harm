@@ -49,7 +49,6 @@ module ArM.Character (
                           , CombatLine(..)
                           , computeCombatStats
                           -- * Aging
-                          , agePT
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions

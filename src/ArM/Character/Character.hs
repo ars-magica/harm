@@ -24,7 +24,6 @@
 module ArM.Character.Character (
                           applyAdvancement 
                           -- * Aging
-                          , agePT
                           , charAgingBonusList
                           , charAgingBonus
                           -- * Convenience Functions
@@ -40,10 +39,6 @@ import ArM.Trait
 import ArM.Helper
 import ArM.Types.Harm
 
-
--- |
--- = Convenience Functions for Character Properties
-
 charAgingBonus :: Character -> Int
 charAgingBonus c = ag - sum ( map snd (charAgingBonusList c) )
     where ag = age c // 10
@@ -58,10 +53,6 @@ charAgingBonusList c = [ ( "Longevity Ritual", af longevityRitual )
           lh = (`div`2) $ fromMaybe 0 $ fmap health (characterLab c) -- lab health bonus
           af f = fromMaybe 0 $ fmap f $ ageObject c       -- get stat from ageobject
 
--- | Return a `ProtoTrait` for aging advancing a number of years.
-agePT :: Int -- ^ Number of years
-      ->  ProtoTrait -- ^ Resulting ProtoTrait
-agePT x = defaultPT { aging = Just $ defaultAging { addYears = Just x } }
 
 -- | Apply advancement
 -- This function is generic, and used for both chargen and ingame 
@@ -77,5 +68,4 @@ applyAdvancement a cs = (a,cs')
           change = sortTraits $ changes $ explicitAdv a
           inferred = sortTraits $ changes $ inferredAdv a
           old = sortTraits $ traits cs
-
 

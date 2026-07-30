@@ -215,11 +215,3 @@ executable harm
     -threaded
     "-with-rtsopts=-N -s -hT -i0.1"
 
-executable yamltest
-  import:      harm-deps
-  main-is:     yamltest.hs
-  ghc-options:
-    -O2
-    -Wall
-    -threaded
-    "-with-rtsopts=-N -s -hT -i0.1"

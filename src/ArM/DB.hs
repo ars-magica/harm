@@ -27,7 +27,7 @@ module ArM.DB ( mkArmourDB
 import qualified Data.Map as M
 import Data.Aeson (FromJSON)
 import Data.Aeson.Generic (readObject)
-import Data.Maybe
+-- import Data.Maybe
 import System.FilePath
 
 import ArM.DB.CSV

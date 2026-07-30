@@ -16,6 +16,7 @@
 -----------------------------------------------------------------------------
 module ArM.Character.Inference (addInference) where
 
+import ArM.Character.Advancement
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Character.CharacterSheet
@@ -24,41 +25,69 @@ import ArM.Trait
 import ArM.Character.Virtues
 import ArM.GameRules
 
+import ArM.Debug.Trace
+
 import Data.Maybe 
+import Data.List 
 
 -- | Infer traits a range of other traits, both from the new advancement
 -- and the existing `Character`.
 --
 -- Currently included
--- 1. Increasing age by 1 in Winter
--- 2. Infer traits from virtues and flaws
--- 3. Infer decrepitude from aging points
--- 4. Infer the effects of Flawless magic
+-- 1. Inference of Decrepitude from Aging objects
+-- 2. Inference from new Virtues and Flaws
+-- 3. Inference from existing Virtues and Flaws
+-- 4. Adding duration in years if required, including +1 in Winter.
+-- 5. Winter Events, including
+--     + Warping from the Longevity Ritual
+--     + Validating Aging
 addInference :: Character -> Advancement -> Augmented Advancement
-addInference cs a = Adv { explicitAdv = a
-                        , inferredAdv = augmentAdvancement cs a 
+addInference cs = winterEvents cs . inferAge . augmentAdvancement cs 
+
+-- | Make the Augmented Advancement, by making inferences.
+augmentAdvancement :: Character -> Advancement -> Augmented Advancement
+augmentAdvancement cs a = Adv { explicitAdv = a
+                        , inferredAdv = augmentAdvancement' cs a 
                         , validation = []
                         }
 
--- | Infer traits from new virtues and flaws and add them to the advancement.
--- This typically applies to virtues providing supernatural abilities.
--- The ability is inferred and should not be added manually.
-augmentAdvancement :: Character -> Advancement -> Advancement
-augmentAdvancement cs a = defaultAdvancement 
+-- | Infer traits from other traits, returning an additional, inferred
+-- Advancement object, adding also the duration in years, if necessary.
+-- 
+-- The trait inferences are made by the `inferProtoTraits` function.
+augmentAdvancement' :: Character -> Advancement -> Advancement
+augmentAdvancement' cs a = defaultAdvancement 
         { changes = inferProtoTraits cs xs
         , advSeason = season a
         , mode = mode a
         , years = yf }
      where xs = changes a
-           yf | isWinter $ season a = Just 1
-              | otherwise = Nothing
+           yf | years a > 0 = years a
+              | mode a == CharGen "Apprenticeship" = 15
+              | mode a == CharGen "Early Childhood" = 5
+              | isWinter $ season a = 1
+              | otherwise = 0
 
+-- | Infer additional ProtoTraits from a list of ProtoTrait objects.
+-- This includes
+-- 1. Inference of Decrepitude from Aging objects
+-- 2. Inference from new Virtues and Flaws
+-- 3. Inference from existing Virtues and Flaws
 inferProtoTraits :: Character -> [ProtoTrait] -> [ProtoTrait]
 inferProtoTraits cs xs =  g xs ++ f xs  ++ h xs
      where f =  inferTraits . getVF 
            g =  inferDecrepitude 
            h =   vfInference $ vfList cs 
 
+inferAge :: Augmented Advancement -> Augmented Advancement
+inferAge ad 
+     | yr == 0 = ad
+     | isJust ag = ad
+     | otherwise = addChange a ad
+     where ag = find ( (AgeKey ==) . traitKey ) $ changes cntad
+           yr = years cntad 
+           cntad = contractAdvancement ad
+           a = trace ("[inferAge] " ++ show (agePT yr) ++ " [" ++ show (traitKey $ agePT yr) ++ "]") $ agePT yr
 
 -- |
 -- Infer Decrepitude points from aging points on characteristics
@@ -105,3 +134,7 @@ elementalMagic (x:xs) | isEl "Te" x = mk "Ig" x:mk "Au" x:mk "Aq" x:elementalMag
         isEl s y = protoTrait y == ArtKey s && isJust (xp y)
 
 
+-- | Return a `ProtoTrait` for aging advancing a number of years.
+agePT :: Int -- ^ Number of years
+      ->  ProtoTrait -- ^ Resulting ProtoTrait
+agePT x = defaultPT { aging = Just $ defaultAging { addYears = x } }

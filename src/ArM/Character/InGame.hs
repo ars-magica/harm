@@ -16,7 +16,6 @@ module ArM.Character.InGame where
 
 import ArM.Types.Harm
 import ArM.Types.Advancement
-import ArM.Character.Advancement
 import ArM.Character.Character
 import ArM.Character.Validation
 import ArM.Character.Inference
@@ -63,7 +62,6 @@ iaHead t st (x:xs) | season x == t = Just (prepareAdvancement st x,xs)
 -- | Augment and amend the advancements based on current virtues and flaws.
 prepareAdvancement :: Character -> Advancement -> Augmented Advancement
 prepareAdvancement c = sortAdvTraits   -- sort inferred traits
-                     . winterEvents c  -- aging
                      . addInference c  -- source quality inference
 
 -- | Get the current contracted advancement being processed.

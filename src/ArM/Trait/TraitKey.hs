@@ -71,6 +71,7 @@ instance Eq TraitKey where
            (==) (EstateKey x) (EstateKey y) = x==y
            (==) (CombatKey x) (CombatKey y)  = x==y
            (==) AgeKey AgeKey = True
+           (==) NoTrait NoTrait = True
            (==) _ _ = False
 instance Show TraitKey where
            show (CharacteristicKey x) = x

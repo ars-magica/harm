@@ -143,9 +143,8 @@ laterLifeXP' (vf:vfs) (x,y) = laterLifeXP' vfs $ (x'+x,f y y')
 laterLifeSQ' :: Augmented Advancement -> (XPType,XPType) -> XPType
 laterLifeSQ' a (x,y) = t
    where t | isJust (sourceQuality ad) = fromJust (sourceQuality ad)
-           | isJust (years ad) = x+y*yy
-           | otherwise = x
-         yy = fromIntegral $ fromMaybe 0 (years ad)
+           | otherwise = x+y*yy
+         yy = fromIntegral (years ad)
          ad = contractAdvancement a
 
 -- | Get XP total for Later Life

@@ -46,6 +46,7 @@ module ArM.Types.Advancement ( Advancement(..)
                              , AdvancementType(..) 
                              , PostProcessor(..)
                              , BonusSQ(..)
+                             , addChange
                              -- * Covenant Advancement
                              , CovAdvancement(..)
                              , noCovAdvancement
@@ -174,7 +175,7 @@ dropWord (x:xs) | isSpace x = trim xs
 data Advancement = Advancement
      { mode :: AdvancementType    -- ^ mode of study
      , advSeason :: SeasonTime    -- ^ season or development stage
-     , years :: Maybe Int         -- ^ number of years advanced
+     , years :: Int               -- ^ number of years advanced
      , advNarrative :: [ String ]    -- ^ narrative description of the activities
      , advComment :: [ String ]      -- ^ freeform description of the activities
      , requires :: [ HarmKey ]    -- ^ possessions required for exclusive use
@@ -196,7 +197,7 @@ defaultAdvancement :: Advancement
 defaultAdvancement = Advancement
      { mode = Exposure (OtherExposure "Undefined")
      , advSeason = NoTime
-     , years = Nothing
+     , years = 0
      , advNarrative = []
      , advComment = []
      , requires = []
@@ -219,7 +220,7 @@ instance FromJSON Advancement where
     parseJSON = withObject "Advancement" $ \v -> Advancement
         <$> v .:? "mode" .!= CharGen "Nothing"
         <*> fmap parseSeasonTime ( v .:? "season" )
-        <*> v .:? "years"
+        <*> v .:? "years" .!= 0
         <*> v `parseCollapsedList` "narrative" 
         <*> v `parseCollapsedList` "comment" 
         <*> v `parseCollapsedList` "requires"
@@ -243,14 +244,14 @@ instance StoryObject Advancement where
      addComment s x = x { advComment = s:comment x }
 
 -- | Render the season and mode of an advancement
-showTime :: String -> SeasonTime -> AdvancementType -> Maybe Int -> String
+showTime :: String -> SeasonTime -> AdvancementType -> Int -> String
 showTime xps NoTime tp y = (show tp ++ xps ++ showYears y)
 showTime xps x tp y = (show x ++ xps ++ showYears y ++ " " ++ show tp)
 
 -- | Render the duration of an advancement
-showYears :: Maybe Int -> String
-showYears Nothing = ""
-showYears (Just x) = " (" ++ show x ++ " years)"
+showYears :: Int -> String
+showYears 0 = ""
+showYears x = " (" ++ show x ++ " years)"
 
 -- | A Bonus with a description
 data BonusSQ = BonusSQ 
@@ -272,7 +273,7 @@ instance ContractAdvancement Advancement where
     contractAdvancement ad = Advancement 
           { mode = ( mode . explicitAdv ) ad
           , advSeason = season ad
-          , years = ( fmlx years ) ad
+          , years = ( fmlmax years ) ad
           , advNarrative = ( fmls narrative ) ad
           , advComment = ( fmls comment ) ad
           , requires = ( fmls requires ) ad
@@ -402,6 +403,10 @@ fmlx :: Show b => (a -> Maybe b) -> Augmented a -> Maybe b
 fmlx f aa = inf `mplus` exa
    where exa =  f (explicitAdv aa)
          inf =  f (inferredAdv aa)
+fmlmax :: (a -> Int) -> Augmented a -> Int
+fmlmax f aa = inf `max` exa
+   where exa =  f (explicitAdv aa)
+         inf =  f (inferredAdv aa)
 
 -- ** Validation
 
@@ -486,3 +491,9 @@ instance GenAdvancement CovAdvancement where
 instance (GenAdvancement a,ContractAdvancement a)
         => GenAdvancement (Augmented a) where
     advancementmode = advancementmode . contractAdvancement
+
+addChange :: ProtoTrait  -- ^ ProtoTrait to add
+             -> Augmented Advancement -- ^ Advancement 
+             -> Augmented Advancement -- ^ modified Advancement
+addChange pt ad = ad { explicitAdv = ad' { changes = pt:changes ad' } }
+    where ad' = explicitAdv ad

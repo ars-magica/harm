@@ -56,8 +56,8 @@ instance FromJSON Age where
 
 defaultAging :: Aging
 defaultAging = Aging
-    { addYears       = Nothing
-    , deltaYounger   = Nothing
+    { addYears       = 0
+    , deltaYounger   = 0
     , agingRollDie   = Nothing
     , agingRoll      = Nothing
     , agingLimit     = Nothing
@@ -68,8 +68,8 @@ defaultAging = Aging
 -- | The `Aging` is a `ProtoTrait` representing changes to the
 -- `Age` trait.
 data Aging = Aging
-    { addYears       :: Maybe Int
-    , deltaYounger   :: Maybe Int   
+    { addYears       :: Int
+    , deltaYounger   :: Int   
         -- ^ Should be 1 when age changes and apparent age does not, otherwise 0
     , agingRollDie   :: Maybe Int    -- ^ aging roll die result
     , agingRoll      :: Maybe Int    -- ^ aging roll total
@@ -81,8 +81,8 @@ data Aging = Aging
 instance ToJSON Aging
 instance FromJSON Aging where
     parseJSON = withObject "Aging" $ \v -> Aging
-        <$> v .:? "years" 
-        <*> v .:? "apparentYounger"  
+        <$> v .:? "years"  .!= 0
+        <*> v .:? "apparentYounger"  .!= 0
         <*> v .:? "die"  
         <*> v .:? "roll"  
         <*> v .:? "longevity"  
@@ -93,11 +93,11 @@ instance FromJSON Aging where
 instance Show Aging where
     show x = "Aging " ++ y ++ lr ++ roll ++ lim ++ b 
        ++ f (agingComment x)
-       where y | isNothing (addYears x) = ""
+       where y | 0 == yr = ""
                | otherwise = show yr ++ " years; apparent " 
                     ++ show (yr-del) ++ " years."
-             yr = fromJust $ addYears x
-             del = fromMaybe 0 $ deltaYounger x
+             yr = addYears x
+             del = deltaYounger x
              lr | isNothing (longevity x) = ""
                | otherwise = " LR " ++ show (fromJust $ longevity x) ++ "; "
              lim | isNothing (agingLimit x) = ""
@@ -111,7 +111,7 @@ instance Show Aging where
              f xs = " [" ++ showStrList xs ++ "]"
 
 advanceAge :: Aging -> Age -> Age
-advanceAge ag x = trace "Aging"
+advanceAge ag x = trace "[advanceAge]"
                 $ trace (show ag) 
                 $ trace (show x)
                 $ updateLR (longevity ag ) 
@@ -122,14 +122,13 @@ advanceAge ag x = trace "Aging"
                 updateLR (Just lr) y = y { longevityRitual = lr }
                 updateABonus Nothing y = y
                 updateABonus (Just b) y = y { agingRollBonus = agingRollBonus y + b }
-                updateAge Nothing y = y
-                updateAge (Just b) y = y { ageYears = ageYears y + b }
-                del = fromMaybe 0 $ deltaYounger ag
+                updateAge b y = y { ageYears = ageYears y + b }
+                del = deltaYounger ag
 
 toAge :: Aging -> Age
-toAge ag = Age { ageYears = fromMaybe 0 $ addYears ag
+toAge ag = Age { ageYears = addYears ag
                 , ageLimit = fromMaybe 35 $ agingLimit ag
-                , apparentYounger = fromMaybe 0 $ deltaYounger ag
+                , apparentYounger = deltaYounger ag
                 , longevityRitual = (fromMaybe 0 $ longevity ag)
                 , agingRollBonus = ( fromMaybe 0 $ agingBonus ag ) 
                 , ageComment = agingComment ag }

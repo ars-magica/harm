@@ -31,38 +31,30 @@ import ArM.Debug.Trace
 import Data.Maybe
 import Data.List
 
--- * Preparing the Advancement
-
 -- | Handle aging and some warping for Winter advancements.
 -- Non-winter advancements are left unmodified.
 winterEvents :: Character             -- ^ Current Character State
              -> Augmented Advancement -- ^ Advancement 
              -> Augmented Advancement -- ^ modified Advancement
-winterEvents c a 
-    | isWinter a = addVal $ a { inferredAdv = addAug $ inferredAdv a }
+winterEvents c = addWarping c . ageValidation c
+
+ageValidation :: Character             -- ^ Current Character State
+             -> Augmented Advancement -- ^ Advancement 
+             -> Augmented Advancement -- ^ modified Advancement
+ageValidation c a 
+    | years ad > 0 = addVal a
     | otherwise = a
     where ageOb = ageObject c
           y = age c
-          ad = explicitAdv a
+          ad = contractAdvancement a
           -- check for aging roll is made if required
           pt = find ( (AgeKey ==) . traitKey ) $ changes ad
           -- Update stats
-          addAug = addYear agingOb                -- add a yer of aging
-                 . warpingLR                      -- add warping point for LR
           agingOb | isNothing pt = Nothing
                       | otherwise = aging $ fromJust pt
-          lr | ageOb == Nothing = 0
-             | otherwise = longevityRitual $ fromJust ageOb
           yl | ageOb == Nothing = trace "No age object" 35
              | otherwise = ageLimit $ fromJust ageOb
-          warpingLR x | lr <= 0 = x
-                      | otherwise = x { changes = lrWarping:changes x }
-          addYear o x | addsYear o = x
-                      | otherwise = x { changes = agePT 1:changes x }
-          addsYear Nothing = False
-          addsYear (Just x) | isNothing (addYears x) = False
-                            | fromJust (addYears  x) <= 0 = False
-                            | otherwise = True
+
           -- Validation
           addVal = validateAging (y >* yl) agingOb  
           validateAging False _ =  id
@@ -72,6 +64,15 @@ winterEvents c a
                    | otherwise =  addValidation [val]
           err = ValidationError $ "Older than " ++ show yl ++ ". Aging roll required."
           val = Validated $ "Aging roll made"
+
+getLR :: Character -> Int
+getLR = fromMaybe 0 . fmap longevityRitual . ageObject
+
+addWarping :: Character             -- ^ Current Character State
+             -> Augmented Advancement -- ^ Advancement 
+             -> Augmented Advancement -- ^ modified Advancement
+addWarping c | getLR c <= 0 = id 
+             | otherwise = addChange lrWarping
 
 
 -- | ProtoTrait representing the warping point from Longevity Ritual.

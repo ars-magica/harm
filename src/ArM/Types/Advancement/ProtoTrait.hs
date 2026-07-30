@@ -291,7 +291,7 @@ computeList = [ computeTrait
               , fmap CombatOptionTrait . combat
               , fmap EstateTrait . lab
               , fmap PossessionTrait . possession
-              , fmap (AgeTrait . toAge) . aging
+              , fmap (AgeTrait . toAge . ttrace ) . aging
               ]
 
 -- | Compute Trait from ProtoTrait if possible.
@@ -506,7 +506,7 @@ instance TraitType Lab where
 instance TraitType CombatOption where
     advanceTrait p _ = fromJust $ combat p
 instance TraitType Age where
-    advanceTrait p = advanceAge ag
+    advanceTrait p = advanceAge $ ttrace ag
           where ag = fromJust $ aging p
 
 -- |

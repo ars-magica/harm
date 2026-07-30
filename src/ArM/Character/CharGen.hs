@@ -82,7 +82,6 @@ prepareCharGen :: Character -> Advancement -> Augmented Advancement
 prepareCharGen cs 
    = validateCharGen cs      -- Validate integrity of the advancement
    . sortAdvTraits           -- Restore sort order on inferred traits
-   . agingYears              -- add years of aging as an inferred trait
    . initialLimits cs        -- infer additional properties on the advancement
    . addInference cs         -- infer additional traits 
 
@@ -97,17 +96,10 @@ initialLimits sheet ad
             | otherwise = ad 
       where m = mode $ contractAdvancement ad
             sq x a = a { inferredAdv = (inferredAdv a) { sourceQuality = Just x } }
-            yr x a = a { inferredAdv = (inferredAdv a) { years = Just x } }
+            yr x a = a { inferredAdv = (inferredAdv a) { years = x } }
             lv x a = a { inferredAdv = (inferredAdv a) { spellLevels = Just x } }
             (app1,app2) = appSQ vfs
             vfs = vfList sheet
-
--- | Infer an aging trait advancing the age according to the advancement
-agingYears :: Augmented Advancement -> Augmented Advancement
-agingYears x | y > 0 = addProtoTrait [ agePT y ] x
-             | otherwise = x
-   where y = fromMaybe 0 $ years $ contractAdvancement x
-
 
 -- | Add the Confidence trait to the character state.
 --
