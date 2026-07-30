@@ -43,48 +43,23 @@ import Data.Maybe (fromJust)
 
 data Options = Options 
   { sagaFile :: Maybe String
-  , outFile  :: Maybe String
-  , charFile :: Maybe String
   , spellDBFile :: Maybe String
-  , debugFile  :: Maybe String
-  , seasonFile  :: Maybe String
-  , advanceSeason  :: Maybe String
 } deriving (Show)
 defaultOptions :: Options
 defaultOptions = Options 
-  { sagaFile = Nothung
-  , outFile  = Nothing
-  , charFile  = Nothing
+  { sagaFile = Nothing
   , spellDBFile = Nothing
-  , debugFile  = Nothing
-  , seasonFile  = Nothing
-  , advanceSeason  = Nothing
 }
 
 
 options :: [ OptDescr (Options -> Options) ]
 options =
-    [ Option ['c']     ["char"] (ReqArg 
-            (\arg opt -> opt { jsonFile = Just arg })
-            "FILE") "JSON output file"
-    , Option ['o']     ["output"]  (ReqArg 
-            (\arg opt -> opt { outFile = Just arg })
-            "FILE") "output file"
-    , Option ['O']     ["debug-output"] (ReqArg 
-            (\arg opt -> opt { debugFile = Just arg })
-            "FILE") "debug output"
-    , Option ['s']     ["saga"] (ReqArg 
+    [ Option ['s']     ["saga"] (ReqArg 
             (\arg opt -> opt { sagaFile = Just arg })
             "FILE") "saga file"
     , Option ['S']     ["spells"] (ReqArg 
             (\arg opt -> opt { spellDBFile = Just arg })
             "FILE") "input file for spell database"
-    , Option ['t']     ["advance-to"] (ReqArg 
-            (\arg opt -> opt { advanceSeason = Just arg })
-            "SEASON") "advance to "
-    , Option ['T']     ["sheet"] (ReqArg 
-            (\arg opt -> opt { seasonFile = Just arg })
-            "FILE") "output file for current character sheet"
     ]
 
 armcharOpts :: [String] -> IO (Options, [String])
