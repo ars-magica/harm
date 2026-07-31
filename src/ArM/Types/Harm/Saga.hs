@@ -39,7 +39,7 @@ import ArM.DB
 -- Multiple files have to be loaded to generate a Saga object from a `SagaFile`.
 data Saga = Saga 
          { sagaFile :: SagaFile
-         , baseURL :: Maybe String
+         , imagePath :: Maybe String
          , seasonTime :: SeasonTime
          , covenants :: M.Map String Covenant
          , characters :: M.Map String Character
@@ -84,6 +84,7 @@ data SagaFile = SagaFile
          , sagaNarrative :: [String]
          , covenantFiles :: [String]
          , characterFiles :: [String]
+         , imageDir :: Maybe String
          , spellFile :: String
          , weaponFile :: String
          , armourFile :: String
@@ -100,6 +101,7 @@ instance FromJSON SagaFile where
        <*> v .:? "narrative"  .!= []
        <*> v .:? "covenantFiles" .!= []
        <*> v .:? "characterFiles" .!= []
+       <*> v .:? "imageDir"
        <*> v .:? "spellFile" .!= "spells.csv"
        <*> v .:? "weaponFile" .!= "weapons.csv"
        <*> v .:? "armourFile" .!= "armour.csv"

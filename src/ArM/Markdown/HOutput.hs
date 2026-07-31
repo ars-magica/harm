@@ -155,8 +155,8 @@ combatSheetH  :: Character -> Saga -> HList
 combatSheetH  c saga = printCombatH saga c
 
 instance HOutput CharacterConcept where
-   printH = conceptPrintH "../images/"
-   printS cov = get >>= return . fromMaybe "../images/" . baseURL 
+   printH = conceptPrintH "/images/"
+   printS cov = get >>= return . fromMaybe "/images/" . imagePath 
                     >>= ( \ x -> return ( conceptPrintH x cov ) )
 
 conceptPrintH :: String -> CharacterConcept -> Maybe HList
