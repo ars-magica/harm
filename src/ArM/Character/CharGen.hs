@@ -115,10 +115,11 @@ addConfidence cs = cs { traits = sortTraits $ ct:traits cs }
 -- | Apply CharGen advancement
 applyCharGenAdv :: Advancement -> Character 
                 -> (Augmented Advancement,Character)
-applyCharGenAdv a cs = (a',f cs')
+applyCharGenAdv a cs = (a'',cs'')
    where (a',cs') = applyAdvancement ( prepareCharGen cs a ) cs
          (PostProcessor g) = postprocessTrait $ contractAdvancement a'
-         f x = x { traits = map g $ traits x }
+         cs'' = cs' { traits = map g $ traits cs' }
+         a'' = postValidation cs'' a'  -- ^ validation applied after advancement
 
 -- * CharGen Validation
 -- 
@@ -130,6 +131,44 @@ applyCharGenAdv a cs = (a',f cs')
 -- | validate an advancement, adding results to the validation field
 validateCharGen :: Character -> Augmented Advancement -> Augmented Advancement
 validateCharGen sheet = validateLevels . validateXP . validateCharGen' sheet 
+
+-- | Make validation tests after application of the advancement, where
+-- the advanced character stats can be used in the test.
+-- This includes validation of maximal spell levels.
+postValidation :: Character  -- ^ Character
+               -> Augmented Advancement -- ^ Advancement already applied to Character
+               -> Augmented Advancement
+postValidation = validateSpells
+
+-- | Validate maximum spell levels at CharGen
+validateSpells :: Character -> Augmented Advancement -> Augmented Advancement
+validateSpells ch ad = addValidation xs ad
+   where spells = filter ( isSpell . protoTrait ) $ changes $ contractAdvancement ad
+         xs = valSpells ch spells
+
+valSpells :: Character -> [ ProtoTrait ] -> [ Validation ]
+valSpells ch = filterNothing . valSpells' ch
+
+valSpells' :: Character -> [ ProtoTrait ] -> [ Maybe Validation ]
+valSpells' ch [] = []
+valSpells' ch (x:xs) =  valSpell ch x:valSpells' ch xs
+
+valSpell :: Character -> ProtoTrait -> Maybe Validation
+valSpell ch x = valSpell' ch (protoTrait x)
+
+valSpell' :: Character -> TraitKey -> Maybe Validation
+valSpell' ch (SpellKey ft lvl sp) 
+    | lvl > limit = Just $ ValidationError err
+    | otherwise = Just $ Validated ok
+   where (mt,spec) = sheetAbilityScore ch (AbilityKey "Magic Theory")
+         int = sheetCharacteristicScore ch (CharacteristicKey "Int")
+         te = sheetArtScore ch (ArtKey $ drop 2 ft)
+         fo = sheetArtScore ch (ArtKey $ take 2 ft)
+         limit | spec == Just "Spells" = fo + te + mt + int + 4
+               | otherwise = fo + te + mt + int + 3
+         st = ft ++ show lvl ++ " " ++ sp
+         err = st ++ " exceeds limit of " ++ show limit ++ "."
+         ok = st ++ " within limit of " ++ show limit ++ "."
 
 validateCharGen' :: Character -> Augmented Advancement -> Augmented Advancement
 validateCharGen' cs a 
