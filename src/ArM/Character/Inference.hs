@@ -16,7 +16,7 @@
 -----------------------------------------------------------------------------
 module ArM.Character.Inference (addInference) where
 
-import ArM.Character.Advancement
+import ArM.Character.Winter
 import ArM.Types.Advancement
 import ArM.Types.Harm
 import ArM.Character.CharacterSheet

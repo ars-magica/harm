@@ -17,7 +17,7 @@
 -- and in-game advancement.  Functions that are specific for one or the other requires
 -- the import of
 -- + `ArM.Character.CharGen` for character generation
--- + `ArM.Character.Advancement` for in-game ddvancement
+-- + `ArM.Character.InGame` for in-game ddvancement
 --
 --
 -----------------------------------------------------------------------------

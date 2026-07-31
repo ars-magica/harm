@@ -148,7 +148,7 @@ common harm-deps
                        , ArM.Story
                        , ArM.Character.Character
                        , ArM.Character.CharacterSheet
-                       , ArM.Character.Advancement
+                       , ArM.Character.Winter
                        , ArM.Types.Harm
                        , ArM.Types.Harm.Character
                        , ArM.Types.Harm.Saga

@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 -----------------------------------------------------------------------------
 -- |
--- Module      :  ArM.Character.Advancement
+-- Module      :  ArM.Character.Winter
 -- Copyright   :  (c) Hans Georg Schaathun <hg+gamer@schaathun.net>
 -- License     :  see LICENSE
 --
@@ -12,13 +12,8 @@
 --
 -- The only function exported is `winterEvents`.
 --
--- In game, it is used by `ArM.Character.InGame.prepareAdvancement`.
--- 
--- It is not directly applicable to `CharGen` but the functionality
--- should be added also there.
---
 -----------------------------------------------------------------------------
-module ArM.Character.Advancement (winterEvents) where
+module ArM.Character.Winter (winterEvents) where
 
 import ArM.Character.Character
 import ArM.Types.Harm
