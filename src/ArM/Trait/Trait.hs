@@ -700,7 +700,7 @@ parseGreater v = GreaterDevice
         <$> v .: "viscapacity" 
         <*> v `parseCollapsedList` "effects" 
 parseTalisman :: Object -> Parser Enchantment
-parseTalisman v = GreaterDevice
+parseTalisman v = Talisman
         <$> v .: "talisman" 
         <*> v `parseCollapsedList` "effects" 
 parseCharged :: Object -> Parser Enchantment
