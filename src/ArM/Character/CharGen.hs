@@ -155,15 +155,15 @@ valSpells :: Character -> [ ProtoTrait ] -> [ Validation ]
 valSpells ch = filterNothing . valSpells' ch
 
 valSpells' :: Character -> [ ProtoTrait ] -> [ Maybe Validation ]
-valSpells' ch [] = []
+valSpells' _ [] = []
 valSpells' ch (x:xs) =  valSpell ch x:valSpells' ch xs
 
 valSpell :: Character -> ProtoTrait -> Maybe Validation
 valSpell ch x = valSpell' ch (protoTrait x)
 
 valSpell' :: Character -> TraitKey -> Maybe Validation
-valSpell' ch (SpellKey ft lvl sp) 
-    | lvl > limit = Just $ ValidationError err
+valSpell' ch (SpellKey ft lv sp) 
+    | lv > limit = Just $ ValidationError err
     | otherwise = Just $ Validated ok
    where (mt,spc) = sheetAbilityScore ch (AbilityKey "Magic Theory")
          int = sheetCharacteristicScore ch (CharacteristicKey "Int")
@@ -171,9 +171,10 @@ valSpell' ch (SpellKey ft lvl sp)
          fo = sheetArtScore ch (ArtKey $ take 2 ft)
          limit | spc == Just "Spells" = fo + te + mt + int + 4
                | otherwise = fo + te + mt + int + 3
-         st = ft ++ show lvl ++ " " ++ sp
+         st = ft ++ show lv ++ " " ++ sp
          err = st ++ " exceeds limit of " ++ show limit ++ "."
          ok = st ++ " within limit of " ++ show limit ++ "."
+valSpell' _ _ = Nothing
 
 validateCharGen' :: Character -> Augmented Advancement -> Augmented Advancement
 validateCharGen' cs a 

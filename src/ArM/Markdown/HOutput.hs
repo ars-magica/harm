@@ -324,18 +324,7 @@ listPossessionsH ps = HList "### Possessions"
    where f = map indentList . filterNothing
 
 instance HOutput Enchantment  where
-   printH (LesserItem eff) = printH eff 
-   printH (GreaterDevice vn eff) = Just $ HList 
-       ( "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)" )
-       ( filterNothing $ map printH eff )
-   printH (Talisman vn eff) = Just $ HList 
-       ( "Talisman (opened with " ++ show vn ++ "p vis)" )
-       ( filterNothing $ map printH eff )
-   printH (ChargedItem vn eff) = Just $ HList 
-       ( "Charged Item (" ++ show vn ++ "charges)" )
-       ( filterNothing [ printH eff ] )
-   printH MundaneItem = jhlist "Mundane Item" 
-
+   printH = printEnchantedH
 instance HOutput Possession  where
    printH = Just . printPossessionH
 instance HOutput LabText where

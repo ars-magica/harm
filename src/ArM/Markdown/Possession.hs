@@ -96,11 +96,27 @@ pName ob = name ob ++ cnt
 -- Each function in the list provides output for one kind of Possession.
 -- Count is not included as this is set in the possession header.
 pHlist :: [ Possession -> Maybe HList ]
-pHlist = [ staffH, bookH, labtextH, weaponH, armourH, silverH, incomeH, visH, visrcH, acH, narrativeH, commentH, dateH ]
+pHlist = [ staffH, bookH, labtextH, weaponH, armourH, enchantedH, silverH, incomeH, visH, visrcH, acH, narrativeH, commentH, dateH ]
 
 -- | Render a composite item using the functions provided.
 pHgen :: Possession -> [Possession -> Maybe HList] -> HList
 pHgen ob = HList (pName ob) . filterNothing . map ($ ob) 
+
+enchantedH :: Possession -> Maybe HList
+enchantedH = printEnchantedH . enchantment
+
+printEnchantedH :: Enchantment -> Maybe HList
+printEnchantedH (LesserItem eff) = Just $ effectH eff 
+printEnchantedH (GreaterDevice vn eff) = Just $ HList 
+       ( "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)" )
+       ( map effectH eff )
+printEnchantedH (Talisman vn eff) = Just $ HList 
+       ( "Talisman (opened with " ++ show vn ++ "p vis)" )
+       ( map effectH eff )
+printEnchantedH (ChargedItem vn eff) = Just $ HList 
+       ( "Charged Item (" ++ show vn ++ "charges)" ) [ effectH eff ]
+printEnchantedH MundaneItem = Nothing
+
 
 -- * Individual pieces of information
 
