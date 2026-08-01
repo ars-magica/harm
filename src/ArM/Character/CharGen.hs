@@ -92,9 +92,14 @@ initialLimits sheet ad
             -- 120 xp includes native language
             | m == CharGen "Apprenticeship" = sq app1 $ lv app2 $ yr 15 ad
             | m == CharGen "Characteristics" = sq 0 ad
-            | m == CharGen "Later Life" = sq (laterLifeSQ vfs ad) ad
+            | m == CharGen "Later Life" &&
+              isNothing (sourceQuality aa) = sq (laterLifeSQ vfs ad) ad
+            | m == CharGen "Post Gauntlet" &&
+              isNothing (sourceQuality aa) = sq (30 * y) ad
             | otherwise = ad 
-      where m = mode $ contractAdvancement ad
+      where m = mode aa
+            y = years aa
+            aa = contractAdvancement ad
             sq x a = a { inferredAdv = (inferredAdv a) { sourceQuality = Just x } }
             yr x a = a { inferredAdv = (inferredAdv a) { years = x } }
             lv x a = a { inferredAdv = (inferredAdv a) { spellLevels = Just x } }
