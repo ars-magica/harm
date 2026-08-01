@@ -684,13 +684,6 @@ enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _) = "Talisman"
 enchantmentName _ = ""
 
-{-
-parseLesser :: Object -> Parser Enchantment
-parseLesser = fmap LesserItem . f . KM.lookup "lesseritem"
-    where f Nothing = mzero
-          f (Just x) = parseJSON x
--}
-
 parseLesser :: Object -> Parser Enchantment
 parseLesser v = LesserItem
         <$> v .: "lesseritem" 
