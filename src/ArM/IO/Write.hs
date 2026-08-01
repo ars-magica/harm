@@ -24,18 +24,21 @@ import ArM.Types.Harm
 import ArM.Story
 import ArM.Saga
 
+import ArM.Debug.Trace
+
 import Data.OList
 
 -- | Write charactersheets in MarkDown
 -- File name is derived from the character name.
+-- Each character/covenant is rendered by `printSheetMD`.
 writeObjects :: (HarmObject h, HOutput h) 
              => String  -- ^ Directory for the output files
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
              -> IO ()
 writeObjects dir saga cs = putStrLn "[writeObjects]" >> mapM wf  cs >> return ()
-         where wf c = (writeOList (fn c) $ printSheetMD saga c)
-               fn c = dir ++ "/" ++ stateName c ++ ".md"
+         where wf c = writeOList (fn c) $ printSheetMD saga c
+               fn c = dir </> stateName c <.> ".md"
 
 -- | Write the sheets for the current season. 
 writeSagaState :: Saga -> IO ()

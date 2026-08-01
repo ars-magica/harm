@@ -143,8 +143,8 @@ postValidation = validateSpells
 -- | Validate maximum spell levels at CharGen
 validateSpells :: Character -> Augmented Advancement -> Augmented Advancement
 validateSpells ch ad = addValidation xs ad
-   where spells = filter ( isSpell . protoTrait ) $ changes $ contractAdvancement ad
-         xs = valSpells ch spells
+   where ss = filter ( isSpell . protoTrait ) $ changes $ contractAdvancement ad
+         xs = valSpells ch ss
 
 valSpells :: Character -> [ ProtoTrait ] -> [ Validation ]
 valSpells ch = filterNothing . valSpells' ch
@@ -160,11 +160,11 @@ valSpell' :: Character -> TraitKey -> Maybe Validation
 valSpell' ch (SpellKey ft lvl sp) 
     | lvl > limit = Just $ ValidationError err
     | otherwise = Just $ Validated ok
-   where (mt,spec) = sheetAbilityScore ch (AbilityKey "Magic Theory")
+   where (mt,spc) = sheetAbilityScore ch (AbilityKey "Magic Theory")
          int = sheetCharacteristicScore ch (CharacteristicKey "Int")
          te = sheetArtScore ch (ArtKey $ drop 2 ft)
          fo = sheetArtScore ch (ArtKey $ take 2 ft)
-         limit | spec == Just "Spells" = fo + te + mt + int + 4
+         limit | spc == Just "Spells" = fo + te + mt + int + 4
                | otherwise = fo + te + mt + int + 3
          st = ft ++ show lvl ++ " " ++ sp
          err = st ++ " exceeds limit of " ++ show limit ++ "."

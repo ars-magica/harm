@@ -23,6 +23,12 @@
 -- There are only four functions exported.  The other functions are
 -- internal.
 --
+-- Top-level functions are entitites with their own pages:
+-- + Saga top level page $\to$ `printSheetMD`
+-- + Saga state (per season) $\to$ `sagaStateMD`
+-- + Character $\to$ `printSheetMD`
+-- + Covenatn $\to$ `printSheetMD`
+--
 -----------------------------------------------------------------------------
 module ArM.Markdown ( printMD, printSheetMD
                     , sagaStateMD
@@ -39,6 +45,8 @@ import ArM.Types.Harm
 import ArM.Trait
 import ArM.Helper
 
+import ArM.Debug.Trace
+
 import Control.Monad.State.Lazy
 import Data.Maybe
 
@@ -50,21 +58,13 @@ import Data.HList
 -- | This is the basic function to render in Markdown
 printMD :: HOutput h => h -> OList
 printMD = fromMaybe (OString "") . fmap fromHList . printH
+
 -- | This is a hack to augment characters using extra resources
 -- By default, it is identical to 'printMD'.
 printSheetMD :: HOutput h => Saga -> h -> OList
-printSheetMD saga x = fromMaybe (OList []) $ fmap fromHList 
-                      $ evalState ( printS x ) saga
-
--- ** Top level entities
---
--- $markdown
--- Top-level functions are entitites with their own pages:
--- + Saga top level page $\to$ `printSheetMD`
--- + Saga state (per season) $\to$ `sagaStateMD`
--- + Character $\to$ `printSheetMD`
--- + Covenatn $\to$ `printSheetMD`
---
+printSheetMD saga x = fromMaybe (OList []) 
+                    $ fmap fromHList 
+                    $ evalState ( printS x ) saga
 
 -- | Render the state page for the Saga
 sagaStateMD :: Saga -> OList 

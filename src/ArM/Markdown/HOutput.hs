@@ -147,7 +147,6 @@ sheetSheetH c = HList ( "## Character Sheet " ++ (show $ gameSeason c) )
                [ briefTraitsH c
                , Just $ indentList $ HList "**Abilities:**"
                         (map (hlist . show) ( sortTraits $ abilityList c ))
-               -- , Just $ HList "" $ map ( indentList . vfH ) ( boonhook cov )
                , Just $ listVFH $ vfList c
                , Just $ listPossessionsH $ characterPossessions c
                , jhlist ""
@@ -190,7 +189,7 @@ chargenH c | as == [] = Nothing
 
 -- | Set the Combat Stats of the Character as an 'OList'
 printCombatH :: Saga -> Character -> HList
-printCombatH saga cs = HList "" (map hlist $ combatTable tab)
+printCombatH saga cs = HList "## Combat" (map hlist $ combatTable tab)
     where tab = computeCombatStats ( weaponsDB saga ) cs
 
 combatTable :: [CombatLine] -> [String]
@@ -222,8 +221,7 @@ combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
 
 magusSheetH :: Character -> Saga -> Maybe HList
 magusSheetH c saga
-   | isMagus c = trace "[magusSheetH]"
-               $ Just $ HList "" 
+   | isMagus c = Just $ HList "## Hermetic traits"
                [ artVisH c
                , hlist ""
                , printFullGrimoireH (spells saga) 
@@ -244,7 +242,7 @@ magusSheetH c saga
 
 -- | Set a list of spells.
 printFullGrimoireH :: SpellDB -> [Spell] -> HList
-printFullGrimoireH db xs = HList "## Grimoire" 
+printFullGrimoireH db xs = HList "## Spells" 
                          [ hlist ""
                          , HList "" $ map (indentList . spellDescH) ys 
                          , hlist ""
