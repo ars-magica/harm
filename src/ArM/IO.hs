@@ -40,6 +40,7 @@ readSaga fn = readSagaFile fn >>= passMaybe loadSaga
 -- Write markdown files for the saga and all its covenants and characters.
 writeSaga :: Saga -> IO ()
 writeSaga saga = do
+      putStrLn "[writeSaga]"
       let dir = rootDir saga
       createDirectoryIfMissing True dir 
       writeOList (dir </> "index.md") $ printMD saga

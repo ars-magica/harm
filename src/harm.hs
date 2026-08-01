@@ -74,6 +74,7 @@ armcharOpts argv =
 main :: IO ()
 main = do 
      putStrLn "Starting: harm ..."
+     putStrLn "Testing 1 Aug 2026"
      printTime
      args <- getArgs
      (opt,n) <- armcharOpts args

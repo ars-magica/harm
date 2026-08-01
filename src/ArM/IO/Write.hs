@@ -33,13 +33,14 @@ writeObjects :: (HarmObject h, HOutput h)
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
              -> IO ()
-writeObjects dir saga cs = mapM wf  cs >> return ()
+writeObjects dir saga cs = putStrLn "[writeObjects]" >> mapM wf  cs >> return ()
          where wf c = (writeOList (fn c) $ printSheetMD saga c)
                fn c = dir ++ "/" ++ stateName c ++ ".md"
 
 -- | Write the sheets for the current season. 
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
+   putStrLn "[writeSagaState]" >>
    createDirectoryIfMissing True dir >>
    writeOList (dir </> "index.md") (sagaStateMD saga) >>
    writeObjects dir saga (characterList saga) >>
@@ -51,7 +52,8 @@ writeSagaState saga =
 -- | Write the sheets for each season recorded. 
 writeSagaStates :: [Saga] -> IO ()
 writeSagaStates [] = return ()
-writeSagaStates (x:xs) = writeSagaState x >> writeSagaStates xs
+writeSagaStates (x:xs) = putStrLn "[writeSagaStates]" 
+                      >> writeSagaState x >> writeSagaStates xs
 
 -- | Write the annals, which summarise the events per season.
 writeSagaAnnals :: Saga -> IO ()

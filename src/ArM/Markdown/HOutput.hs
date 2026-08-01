@@ -46,7 +46,7 @@ class HOutput h where
    --
    -- The default implementation ignores the monad and is equivalent to `printH`.
    printS :: h -> State Saga (Maybe HList)
-   printS = return . printH
+   printS = trace "[printS]" $ return . printH 
 
 instance HOutput Saga where
    printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
@@ -79,15 +79,16 @@ instance HOutput Character where
    printS c = get >>= return . characterH c
 
 characterH :: Character -> Saga -> Maybe HList
-characterH c saga = Just $ HList "" $ filterNothing
+characterH c saga = trace ("[characterH] "++name c)
+            $ Just $ HList "" $ filterNothing
             [ printH $ concept c
             , Just $ sheetSheetH c 
-            , sheetAdv c
             , Just $ combatSheetH c saga
             , magusSheetH c saga
+            , sheetAdv c
             ]
 sheetAdv :: Character -> Maybe HList
-sheetAdv c | isGameStart c = designH c
+sheetAdv c | isGameStart c = trace ("[sheetAdv] designH "++name c) $ designH c
       | otherwise = Just $  advancementH c
 
 -- | Render a list of objects as a comma-separated list on a single
@@ -221,7 +222,8 @@ combatHead2 = "|  :- |  -: |  -: |  -: |  -: |  -: |  -: | :- |"
 
 magusSheetH :: Character -> Saga -> Maybe HList
 magusSheetH c saga
-   | isMagus c = Just $ HList "" 
+   | isMagus c = trace "[magusSheetH]"
+               $ Just $ HList "" 
                [ artVisH c
                , hlist ""
                , printFullGrimoireH (spells saga) 
@@ -561,7 +563,7 @@ instance HOutput Story where
       where sq Nothing = "(no source quality)"
             sq (Just x) = " (SQ " ++ show x ++ ")"
 printCovChangesH :: CovAdvancement -> [ HList ]
-printCovChangesH a =  filterNothing [ j, lv, acq, lst ] 
+printCovChangesH a = filterNothing [ j, lv, acq, lst ] 
      where j | joining a == [] = Nothing
              | otherwise = jhlist $  "joining: " ++ showStrList (map show $ joining a)
            lv | leaving a == [] = Nothing
