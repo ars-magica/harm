@@ -641,6 +641,7 @@ data Possession = Possession
      , itemCount :: Int              -- ^ Number of items possessed, default 1.
      , staff :: Maybe Staff
      , itemDate :: SeasonTime        -- ^ Time of creation
+     , uniqueItem :: Bool
      }
     deriving ( Ord, Eq, Generic )
 defaultPossession :: Possession 
@@ -666,6 +667,7 @@ defaultPossession = Possession
      , staff = Nothing
      , itemCount = 1
      , itemDate = NoTime
+     , uniqueItem = False
      }
 
 data Enchantment = LesserItem MagicEffect
@@ -777,6 +779,7 @@ parseOtherPossession v = Possession
        <*> v .:? "count" .!= 1
        <*> v .:? "staff" 
        <*> v .:? "date"  .!= NoTime
+       <*> v .:? "unique"  .!= False
 
 data Staff = Specialist [ Trait ] 
            | Servant | Teamster | Labourer 

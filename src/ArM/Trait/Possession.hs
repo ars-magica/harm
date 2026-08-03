@@ -29,6 +29,7 @@ module ArM.Trait.Possession ( -- * Posessions
                             , isAC
                             , isStaff
                             , effectRDT
+                            , advanceEnchantment
                             -- * Weapons and Mundane Equipment
                             , isComposite
                             , isMundaneEquipment
@@ -66,6 +67,8 @@ import Control.Monad
 import Control.Applicative ((<|>))
 import Data.Maybe
 
+import ArM.Debug.Trace
+
 -- | A 'RawPossession' distinguishes between different kinds of possession,
 -- representing easier syntax patterns for the YAML files.
 -- It is was introduced to simplify parsing, but is not currently used.
@@ -97,6 +100,21 @@ enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
 enchantmentName (Talisman _ _ _) = "Talisman"
 enchantmentName _ = ""
+
+-- | Advance an enchantment by adding new effects to greater invested devices
+-- or attunenemnts and vis preparation to talismans.
+advanceEnchantment :: Enchantment  -- ^ Old enchantment
+                   -> Enchantment  -- ^ New enchantment
+                   -> Enchantment
+advanceEnchantment new MundaneItem = trace "[advanceEnchantment] does not disenchant" new
+advanceEnchantment MundaneItem old = old
+advanceEnchantment (GreaterDevice x1 e1) (GreaterDevice x2 e2)
+     = GreaterDevice (x1+x2) (e1++e2)
+advanceEnchantment (Talisman x1 e1 a1) (Talisman x2 e2 a2)
+     = Talisman (x1+x2) (e1++e2) (a1++a2)
+advanceEnchantment (Talisman x1 e1 a1) (GreaterDevice x2 e2)
+     = Talisman (x1+x2) (e1++e2) a1
+advanceEnchantment new _ = trace "[advanceEnchantment] replacing enchantment" new
 
 parseLesser :: Object -> Parser Enchantment
 parseLesser v = LesserItem

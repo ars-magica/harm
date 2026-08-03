@@ -39,6 +39,7 @@ module ArM.Types.Advancement.ProtoTrait ( ProtoTrait(..)
 import ArM.GameRules
 import ArM.Helper
 import ArM.Trait
+import ArM.Trait
 import ArM.Story
 
 import GHC.Generics
@@ -498,8 +499,36 @@ instance TraitType Trait where
     advanceTrait a (AgeTrait x) = AgeTrait $ advanceTrait a x
 
 instance TraitType Possession where
-    advanceTrait p x = addCount x ( fromMaybe 1 m )
-        where  m = fmap count $ possession  p
+    advanceTrait p x 
+       | isNothing mp = error "Advancing possession with no possession given"
+       | uniqueItem x = advanceItem it x
+       | uniqueItem it && count x > 1 = error "Cannot make a non-unique item unique"
+       | otherwise = addCount x ( count it )
+        where  mp = possession p
+               it = fromJust mp
+advanceItem :: Possession -> Possession -> Possession
+advanceItem new old = old
+     { bookTexts = bookTexts new ++ bookTexts old
+     , qualityBonus = qualityBonus new
+     , labTexts = labTexts new ++ labTexts old
+     , weaponStats = weaponStats new ++ weaponStats old
+     , weapon = weapon new ++ weapon old
+     , armourStats = armourStats new ++ armourStats old
+     , armour = armour new ++ armour old
+     , enchantment = advanceEnchantment (enchantment new) (enchantment old)
+     , itemDescription = itemDescription new ++ itemDescription old
+     , itemComment = itemComment new ++ itemComment old
+     , itemArt = itemArt new
+     , pawns = pawns old + pawns new
+     , visTime = visTime new
+     , visYield = visYield old + visYield new
+     , acTo = acTo new
+     , silver = silver old + silver new
+     , silverYield = silverYield old + silverYield new
+     , staff = staff new
+     , itemDate = itemDate new
+     }
+
 instance TraitType Lab where
     advanceTrait p x = fromMaybe x $ lab p
 

@@ -88,6 +88,7 @@ module ArM.Trait (
          , isAC
          , isStaff
          , effectRDT
+         , advanceEnchantment
 
          -- ** Weapons and Mundane Equipment
          , isComposite
