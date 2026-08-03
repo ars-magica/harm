@@ -95,7 +95,7 @@ enchantmentName :: Enchantment -> String
 enchantmentName (LesserItem e) = effectName e
 enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
-enchantmentName (Talisman _ _) = "Talisman"
+enchantmentName (Talisman _ _ _) = "Talisman"
 enchantmentName _ = ""
 
 parseLesser :: Object -> Parser Enchantment

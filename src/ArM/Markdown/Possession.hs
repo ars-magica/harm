@@ -110,13 +110,12 @@ printEnchantedH (LesserItem eff) = Just $ effectH eff
 printEnchantedH (GreaterDevice vn eff) = Just $ HList 
        ( "Greater Enchanted Device (opened with " ++ show vn ++ "p vis)" )
        ( map effectH eff )
-printEnchantedH (Talisman vn eff) = Just $ HList 
+printEnchantedH (Talisman vn eff ats) = Just $ HList 
        ( "Talisman (opened with " ++ show vn ++ "p vis)" )
-       ( map effectH eff )
+       $ hlist ( "**Attunements:** " ++ showStrList ats ):map effectH eff 
 printEnchantedH (ChargedItem vn eff) = Just $ HList 
        ( "Charged Item (" ++ show vn ++ "charges)" ) [ effectH eff ]
 printEnchantedH MundaneItem = Nothing
-
 
 -- * Individual pieces of information
 

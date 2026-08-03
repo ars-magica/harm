@@ -670,7 +670,10 @@ defaultPossession = Possession
 
 data Enchantment = LesserItem MagicEffect
                  | GreaterDevice Int [ MagicEffect ]
-                 | Talisman Int [ MagicEffect ]
+                 | Talisman { talismanCapacity :: Int
+                            , talismanEffects :: [ MagicEffect ]
+                            , talismanAttunements :: [ String ]
+                            }
                  | ChargedItem Int MagicEffect
                  | MundaneItem
     deriving ( Ord, Eq, Generic )
@@ -681,7 +684,7 @@ enchantmentName :: Enchantment -> String
 enchantmentName (LesserItem e) = effectName e
 enchantmentName (ChargedItem _ e) = effectName e
 enchantmentName (GreaterDevice _ (e:_)) = effectName e
-enchantmentName (Talisman _ _) = "Talisman"
+enchantmentName (Talisman _ _ _) = "Talisman"
 enchantmentName _ = ""
 
 parseLesser :: Object -> Parser Enchantment
@@ -696,6 +699,7 @@ parseTalisman :: Object -> Parser Enchantment
 parseTalisman v = Talisman
         <$> v .: "talisman" 
         <*> v `parseCollapsedList` "effects" 
+        <*> v `parseCollapsedList` "attunements" 
 parseCharged :: Object -> Parser Enchantment
 parseCharged v = ChargedItem
         <$> v .: "charged" 

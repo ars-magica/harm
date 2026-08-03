@@ -44,7 +44,7 @@ instance CostBP Enchantment where
       where mag = (effectLevel eff + 1) // 5
    costBP (GreaterDevice _ eff) = 2*(mag eff + 1) // 5
       where mag = sum . map effectLevel 
-   costBP (Talisman _ eff) = 2*(mag eff + 1) // 5
+   costBP (Talisman _ eff _) = 2*(mag eff + 1) // 5
       where mag = sum . map effectLevel 
    costBP _ = error "Not implemented"
 
