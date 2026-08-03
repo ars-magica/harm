@@ -30,7 +30,7 @@ import Data.OList
 -- | Write charactersheets in MarkDown
 -- File name is derived from the character name.
 -- Each character/covenant is rendered by `printSheetMD`.
-writeObjects :: (Frontmatter h, HOutput h) 
+writeObjects :: (HarmObject h, HOutput h) 
              => String  -- ^ Directory for the output files
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
@@ -45,7 +45,7 @@ writeListH h [] = return ()
 writeListH h (x:xs) = IO.hPutStrLn h x >> writeListH h xs
 
 -- | Write charactersheet and frontmatter to handle
-writeSheetH :: (Frontmatter h, HOutput h) => Saga -> h -> Handle -> IO ()
+writeSheetH :: (HarmObject h, HOutput h) => Saga -> h -> Handle -> IO ()
 writeSheetH saga cs h = writeListH h (frontmatter cs)
                      >> writeOListH h (printSheetMD saga cs)
 

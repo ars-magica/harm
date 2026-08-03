@@ -34,7 +34,7 @@ module ArM.Markdown ( printMD, printSheetMD
                     , sagaStateMD
                     , sagaAnnals
                     , HOutput
-                    , Frontmatter(..)
+                    , frontmatter
                     ) where
 
 

@@ -17,21 +17,22 @@ import ArM.Types.Harm
 import ArM.Story
 import ArM.Sheet
 
-class HarmObject h => Frontmatter h where
-   frontmatter :: h -> [ String ]
-   frontmatter _ = []
-instance Frontmatter Character where
-   frontmatter x = [ "---"
-                   , "title: " ++ name x
-                   , "---"
-                   , "" ]
-instance Frontmatter Covenant where
-   frontmatter x = [ "---"
-                   , "title: " ++ name x
-                   , "---"
-                   , "" ]
-instance Frontmatter Library where
-   frontmatter x = [ "---"
-                   , "title: " ++ name x
-                   , "---"
-                   , "" ]
+frontmatter :: HarmObject h => h -> [ String ]
+frontmatter x = [ "---"
+                , "title: " ++ stateName x
+                , "authors:"
+                , "- name: hArM"
+                , "exports:"
+                , "- format: pdf"
+                , "  template: plain_latex"
+                , "  output: " ++ fn ++ ".pdf"
+                , "---"
+                , "" ]
+    where fn = fnFix $ stateName x
+
+fnFix :: String -> String
+fnFix = map f
+   where f '(' = '-'
+         f ')' = '-'
+         f ' ' = '-'
+         f x = x
