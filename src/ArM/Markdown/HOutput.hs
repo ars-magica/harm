@@ -360,10 +360,8 @@ instance HOutput Lab where
          , jhlist $ "Traits: " ++ commaList ts
          , jhlist $ "Art Specialisations: " ++ commaList arsp
          , jhlist $ "Activity Specialisations: " ++ commaList acsp
-         , jhlist "Description"
          , narrativeH lb
          , commentH lb
-         , jhlist ""
          , Just $ HList "Virtues and Flaws" 
                 $ filterNothing $ map printH $ labVirtues $ labState lb
          ]
@@ -461,7 +459,7 @@ augAdvH a' = indentList $ HList ( name a ) $ filterNothing
            , fmap (hlist . ("Reads "++) . name ) $ bookRead a
            , chnl
            , infl
-           , Just $ HList "" $ filterNothing $ map printH $ validation a'
+           , Just $ HList "Validation" $ filterNothing $ map printH $ validation a'
            ]
       where inf = sortTraits $ changes $ inferredAdv a'
             chn = sortTraits $ changes $ explicitAdv a'
