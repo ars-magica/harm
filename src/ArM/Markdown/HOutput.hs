@@ -68,8 +68,7 @@ instance HOutput Saga where
 -- The monadic `printS` should be used whenever possible.
 --
 instance HOutput Character where
-   printH  c = trace "Unsupport - brief Character sheeet"
-            $ Just $ HList "" $ filterNothing
+   printH  c = Just $ HList "" $ filterNothing
             [ printH $ concept  c 
             , Just $ sheetH c
             , sheetAdv c
@@ -79,8 +78,7 @@ instance HOutput Character where
    printS c = get >>= return . characterH c
 
 characterH :: Character -> Saga -> Maybe HList
-characterH c saga = trace ("[characterH] "++name c)
-            $ Just $ HList "" $ filterNothing
+characterH c saga = Just $ HList "" $ filterNothing
             [ printH $ concept c
             , Just $ sheetSheetH c 
             , Just $ combatSheetH c saga

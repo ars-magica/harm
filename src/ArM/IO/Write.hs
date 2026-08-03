@@ -17,6 +17,7 @@ module ArM.IO.Write where
 
 import System.Directory
 import System.FilePath
+import System.IO as IO -- for file IO
 
 import ArM.Markdown
 import ArM.Sheet
@@ -24,21 +25,30 @@ import ArM.Types.Harm
 import ArM.Story
 import ArM.Saga
 
-import ArM.Debug.Trace
-
 import Data.OList
 
 -- | Write charactersheets in MarkDown
 -- File name is derived from the character name.
 -- Each character/covenant is rendered by `printSheetMD`.
-writeObjects :: (HarmObject h, HOutput h) 
+writeObjects :: (Frontmatter h, HOutput h) 
              => String  -- ^ Directory for the output files
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
              -> IO ()
-writeObjects dir saga cs = putStrLn "[writeObjects]" >> mapM wf  cs >> return ()
-         where wf c = writeOList (fn c) $ printSheetMD saga c
+writeObjects dir saga cs = putStrLn "[writeObjects]" >> mapM wf cs >> return ()
+         where wf c = openFile (fn c) WriteMode >>= writeSheetH saga c
                fn c = dir </> stateName c <.> ".md"
+
+-- | Write a list of strings to a file handle
+writeListH :: Handle -> [ String ] -> IO ()
+writeListH h [] = return ()
+writeListH h (x:xs) = IO.hPutStrLn h x >> writeListH h xs
+
+-- | Write charactersheet and frontmatter to handle
+writeSheetH :: (Frontmatter h, HOutput h) => Saga -> h -> Handle -> IO ()
+writeSheetH saga cs h = writeListH h (frontmatter cs)
+                     >> writeOListH h (printSheetMD saga cs)
+
 
 -- | Write the sheets for the current season. 
 writeSagaState :: Saga -> IO ()

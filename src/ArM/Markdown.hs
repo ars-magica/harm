@@ -34,18 +34,15 @@ module ArM.Markdown ( printMD, printSheetMD
                     , sagaStateMD
                     , sagaAnnals
                     , HOutput
+                    , Frontmatter(..)
                     ) where
 
 
 import ArM.Markdown.HOutput 
+import ArM.Markdown.Frontmatter 
 import ArM.Markdown.SeasonDisplay
 
-import ArM.Markdown.Possession 
 import ArM.Types.Harm
-import ArM.Trait
-import ArM.Helper
-
-import ArM.Debug.Trace
 
 import Control.Monad.State.Lazy
 import Data.Maybe

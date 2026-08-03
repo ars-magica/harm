@@ -38,7 +38,7 @@ module ArM.Types.Advancement.ProtoTrait ( ProtoTrait(..)
 
 import ArM.GameRules
 import ArM.Helper
-import ArM.Trait
+-- import ArM.Trait
 import ArM.Trait
 import ArM.Story
 

@@ -91,11 +91,13 @@ isEmptyOList _ = False
 -- | 
 -- == Writing OList to file
 
+-- | Write an OList structure to a file given by handle.
 writeOListH :: Handle -> OList -> IO ()
 writeOListH h (OString x) = IO.hPutStrLn h x
 writeOListH _ (OList []) = return ()
 writeOListH h (OList (x:xs)) = writeOListH h x  >> writeOListH h (OList xs)
 
+-- | Write an OList structure to a file given by filename.
 writeOList :: String -> OList -> IO ()
 writeOList fn x = do
      handle <- openFile fn WriteMode

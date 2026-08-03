@@ -176,6 +176,7 @@ common harm-deps
                        , ArM.Sheet
                        , ArM.Sheet.Library
                        , ArM.Markdown
+                       , ArM.Markdown.Frontmatter
                        , ArM.Markdown.Magus
                        , ArM.Markdown.VF
                        , ArM.Markdown.HOutput
