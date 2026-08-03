@@ -312,14 +312,16 @@ listPossessionsH ps = HList "### Possessions"
           , printPossessionsH "Armour" $ filter isArmour ps
           , printPossessionsH "Equipment" $ filter isMundaneEquipment ps
           ]
+      , ff $ printPossessionsH "Magic Items" $ filter isMagic ps
       , HList "#### Magic Gadgets" 
       $ f [ printPossessionsH "Vis" $ filter isVis ps
           , printPossessionsH "Vis sources" $ filter isVisSrc ps
           , printPossessionsH "Arcane Connections" $ filter isAC ps
-          , printPossessionsH "Magic Items" $ filter isMagic ps
           ]
       ]
    where f = map indentList . filterNothing
+         ff Nothing = hlist ""
+         ff (Just (HList s xs)) = HList ("#### "++s) (map indentList xs)
 
 instance HOutput Enchantment  where
    printH = printEnchantedH

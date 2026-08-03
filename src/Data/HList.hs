@@ -99,19 +99,6 @@ indentHList' s (HList x ys) = HList x' ys'
 indentList :: HList -> HList
 indentList = indentHList' "+ "
 
-
-{-
-class ToOList a where
-   -- | Convert to an OList object
-   toOList :: a -> OList
-instance ToOList a => ToOList [a] where
-   toOList = OList . map toOList 
-instance ToOList HList where
-   toOList = fromHList
-instance ToOList (Maybe HList) where
-   toOList = fromHList . filterNothing 
--}
-
 -- | Render a string in italics, as an HList
 italicHString :: String  -> HList
 italicHString c = hlist $ "*" ++ (f . f) c ++ "*"
