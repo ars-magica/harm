@@ -35,7 +35,7 @@ writeObjects :: (HarmObject h, HOutput h)
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
              -> IO ()
-writeObjects dir saga cs = mapM wf cs >> return ()
+writeObjects dir saga cs = mapM (putStrLn . fn) cs >> mapM wf cs >> return ()
          where wf c = putStrLn ("[writeObjects] "++fn c)
                     >> openFile (fn c) WriteMode 
                     >>= writeSheetH saga c

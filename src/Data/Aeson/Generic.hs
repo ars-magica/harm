@@ -34,15 +34,15 @@ readObject fn = trace fn $ readObject' $ typedFile fn
 -- | Read and parse an object from a JSON or YAML file.
 -- This is a helper for `readObject`
 readObject' :: A.FromJSON t => TypedFileName -> IO (Maybe t)
-readObject' (YAML fn) = B.readFile fn >>= return . maybeError fn . Y.decode
-readObject' (JSON fn) = LB.readFile fn >>= return . maybeError fn . A.decode
-readObject' (UnknownType fn) = 
-    trace ("[readObject] Unknown file extension: " ++ fn) $ return Nothing
+readObject' (YAML fn) = B.readFile fn >>= maybeError fn . Y.decode
+readObject' (JSON fn) = LB.readFile fn >>= maybeError fn . A.decode
+readObject' (UnknownType fn) = putStrLn ("ERROR [readObject] Unknown file extension: " ++ fn) 
+                             >> return Nothing
 
-maybeError :: String -> Maybe t -> Maybe t
-maybeError _ = id
--- maybeError fn Nothing = trace ("[readObject] Failed to read file: " ++ fn) $ Nothing
--- maybeError _ x = x
+maybeError :: String -> Maybe t -> IO (Maybe t)
+maybeError fn Nothing = putStrLn  ("ERROR [readObject] Failed to read file: " ++ fn) 
+                      >> return Nothing
+maybeError _ x = return x
 
 
 -- | Typed filename to distinguish YAML and JSON files. 
