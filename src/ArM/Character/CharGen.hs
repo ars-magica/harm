@@ -64,7 +64,7 @@ prepareCharacter c
 finaliseCharGen :: Character -> Character
 finaliseCharGen c
    | charTime c /= NoTime = trace ("No pregame design for "++name c) c
-   | otherwise = trace ("CharGen: "++name c) $ addConfidence $ setEntryTime c
+   | otherwise = trace ("[CharGen] "++name c) $ addConfidence $ setEntryTime c
 
 -- | Set entry time and current time of the character
 setEntryTime :: Character -> Character

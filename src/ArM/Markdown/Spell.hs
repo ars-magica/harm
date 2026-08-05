@@ -87,7 +87,7 @@ showRDT sp = "Range: " ++ r ++
 -- The result should normally be subject to indentList to make an hierarchical
 -- list.
 spellDescH :: (Spell,Maybe SpellRecord) -> HList
-spellDescH (s,Nothing) = trace "No SpellRecord" 
+spellDescH (s,Nothing) = trace ("No SpellRecord " ++ show s)
    $ HList ( show s ) $ spellDescH' s
 spellDescH (s,Just y) = HList (show s) $ spellDescH' s ++ coreSpellRecordH y
 spellDescH' :: Spell -> [ HList ]

@@ -35,8 +35,10 @@ writeObjects :: (HarmObject h, HOutput h)
              -> Saga    -- ^ Saga whose objects are written
              -> [ h ]   -- ^ List of objects to write
              -> IO ()
-writeObjects dir saga cs = putStrLn "[writeObjects]" >> mapM wf cs >> return ()
-         where wf c = openFile (fn c) WriteMode >>= writeSheetH saga c
+writeObjects dir saga cs = mapM wf cs >> return ()
+         where wf c = putStrLn ("[writeObjects] "++fn c)
+                    >> openFile (fn c) WriteMode 
+                    >>= writeSheetH saga c
                fn c = dir </> stateName c <.> ".md"
 
 -- | Write a list of strings to a file handle
@@ -53,11 +55,14 @@ writeSheetH saga cs h = writeListH h (frontmatter cs)
 -- | Write the sheets for the current season. 
 writeSagaState :: Saga -> IO ()
 writeSagaState saga = 
-   putStrLn "[writeSagaState]" >>
+   putStrLn ("[writeSagaState] "++dir) >>
    createDirectoryIfMissing True dir >>
    writeOList (dir </> "index.md") (sagaStateMD saga) >>
+   putStrLn ("[writeSagaState] "++dir++" (Characters)") >>
    writeObjects dir saga (characterList saga) >>
+   putStrLn "[writeSagaState] Covenants" >>
    writeObjects dir saga (covenantList saga) >>
+   putStrLn "[writeSagaState] Libraries" >>
    writeObjects dir saga (map getLibrary $ covenantList saga)
        where dir = rootDir saga ++ fn ++ "/"
              fn = showKey saga

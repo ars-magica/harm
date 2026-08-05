@@ -168,7 +168,8 @@ stepSaga = stepValCov          -- validate covenants individually
 
 -- | Advance the saga forward by one season.
 bumpSagaSeason :: Saga -> Saga
-bumpSagaSeason saga = saga { seasonTime = nextSeason saga }
+bumpSagaSeason saga = trace ("[bumpSagaSeason] "++show s) $ saga { seasonTime = s }
+   where s = nextSeason saga
 
 -- | Initialise characters
 stepInit :: Saga -> Saga

@@ -46,7 +46,7 @@ class HOutput h where
    --
    -- The default implementation ignores the monad and is equivalent to `printH`.
    printS :: h -> State Saga (Maybe HList)
-   printS = trace "[printS]" $ return . printH 
+   printS = return . printH 
 
 instance HOutput Saga where
    printH saga = Just $ HList ( "# " ++ name saga ) ( hs1:hs2:(ts1 ++ ts2) )
@@ -248,7 +248,7 @@ printFullGrimoireH db xs = HList "## Spells"
                             ++ " levels of spells."
                          ]
    where ys = [ (x,f x) | x <- xs ]
-         f x = trace (show $ traitKey x) $ spellTRecord x `mplus` spellLookup (traitKey x) db 
+         f x = spellTRecord x `mplus` spellLookup (traitKey x) db 
 
 
 
