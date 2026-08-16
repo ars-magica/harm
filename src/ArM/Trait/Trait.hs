@@ -140,6 +140,8 @@ data Ability = Ability { abilityName :: String
                        , abilityBonus :: Int 
                        , abilityMultiplier :: Float
                        , abilityExcessXP :: XPType 
+                       , abilityNarrative :: [ String ]
+                       , abilityComment :: [ String ]
                        }
            deriving (Ord, Eq, Generic)
 
@@ -152,6 +154,16 @@ instance FromJSON Ability where
         <*> v .:? "bonus" .!= 0
         <*> v .:? "multiplier" .!= 1
         <*> v .:? "xp" .!= 0
+        <*> v `parseCollapsedList` "narrative" 
+        <*> v `parseCollapsedList` "comment" 
+
+instance StoryObject Ability where
+   name = abilityName
+   setName n x = x { abilityName = n }
+   narrative = abilityNarrative
+   addNarrative s x = x { abilityNarrative = s:narrative x }
+   comment = abilityComment 
+   addComment s x = x { abilityComment = s:comment x }
     
 data Characteristic = Characteristic { characteristicName :: String
                                      , charScore :: Int

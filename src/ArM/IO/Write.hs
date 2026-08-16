@@ -43,7 +43,7 @@ writeObjects dir saga cs = mapM (putStrLn . fn) cs >> mapM wf cs >> return ()
 
 -- | Write a list of strings to a file handle
 writeListH :: Handle -> [ String ] -> IO ()
-writeListH h [] = return ()
+writeListH _ [] = return ()
 writeListH h (x:xs) = IO.hPutStrLn h x >> writeListH h xs
 
 -- | Write charactersheet and frontmatter to handle

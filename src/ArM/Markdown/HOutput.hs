@@ -144,7 +144,7 @@ sheetSheetH c = HList ( "## Character Sheet " ++ (show $ gameSeason c) )
                $ filterNothing
                [ briefTraitsH c
                , Just $ indentList $ HList "**Abilities:**"
-                        (map (hlist . show) ( sortTraits $ abilityList c ))
+                        (map traitH ( sortTraits $ abilityList c ))
                , Just $ listVFH $ vfList c
                , Just $ listPossessionsH $ characterPossessions c
                , jhlist ""
@@ -300,6 +300,11 @@ covconceptHelper cc = filterNothing
 -- | Make a list of virtues and flaws
 listVFH :: [ VF ] -> HList
 listVFH = HList "### Virtues and Flaws" . map indentList . map vfH 
+
+-- | Render a StoryObject
+traitH :: (Show t, StoryObject t) => t -> HList 
+traitH ob = HList (show ob) hs
+   where hs = filterNothing [ narrativeH ob , commentH ob ]
 
 -- | Make a list of possessions excluding books and labtexts in Markdown.
 listPossessionsH :: [ Possession ] -> HList

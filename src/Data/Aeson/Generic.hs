@@ -20,7 +20,6 @@ module Data.Aeson.Generic (readObject) where
 import qualified Data.Aeson as A
 import qualified Data.Yaml as Y
 import qualified Data.ByteString.Lazy as LB
-import qualified Data.ByteString as B
 
 import System.FilePath (splitExtension)
 
@@ -34,16 +33,15 @@ readObject fn = trace fn $ readObject' $ typedFile fn
 -- | Read and parse an object from a JSON or YAML file.
 -- This is a helper for `readObject`
 readObject' :: A.FromJSON t => TypedFileName -> IO (Maybe t)
-readObject' (YAML fn) = B.readFile fn >>= maybeError fn . Y.decode
-readObject' (JSON fn) = LB.readFile fn >>= maybeError fn . A.decode
+readObject' (YAML fn) =  Y.decodeFileEither fn >>= ydecode fn
+readObject' (JSON fn) = LB.readFile fn >>= return . A.decode
 readObject' (UnknownType fn) = putStrLn ("ERROR [readObject] Unknown file extension: " ++ fn) 
                              >> return Nothing
 
-maybeError :: String -> Maybe t -> IO (Maybe t)
-maybeError fn Nothing = putStrLn  ("ERROR [readObject] Failed to read file: " ++ fn) 
-                      >> return Nothing
-maybeError _ x = return x
-
+ydecode :: A.FromJSON t => String ->  Either Y.ParseException t -> IO (Maybe t)
+ydecode fn (Left x) = putStrLn ("ERROR [readObject] Failed to read file: "++fn)
+                    >> putStrLn (show x) >> return Nothing
+ydecode _ (Right x) =  return $ Just x
 
 -- | Typed filename to distinguish YAML and JSON files. 
 data TypedFileName = YAML String | JSON String | UnknownType String

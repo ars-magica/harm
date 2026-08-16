@@ -13,9 +13,7 @@
 -----------------------------------------------------------------------------
 module ArM.Markdown.Frontmatter where
 
-import ArM.Types.Harm
 import ArM.Story
-import ArM.Sheet
 
 frontmatter :: HarmObject h => h -> [ String ]
 frontmatter x = [ "---"

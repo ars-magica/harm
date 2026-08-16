@@ -312,6 +312,8 @@ computeTrait' (AbilityKey nm) p = Just $ AbilityTrait $
                 , abilityExcessXP = y
                 , abilityBonus = fromMaybe 0 $ bonusScore p
                 , abilityMultiplier = fromMaybe 1.0 $ multiplyXP p
+                , abilityNarrative = ptNarrative p
+                , abilityComment =  ptComment p
                 }
       where (s,y) = getAbilityScore (Just x)
             x = fromMaybe 0 (xp p) + fromMaybe 0 (bonusXP p)
